@@ -1,0 +1,26 @@
+<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+   <fieldset>
+      <legend><?=literal('Temas actual',3)?></legend>
+      <?php if ( !empty($temas_proyecto) ) { ?>
+      <select name="tema_actual" onchange="this.form.submit();">
+         <option value=""><?=literal('Selecciona tema',3)?></option>
+         <?php foreach ( $temas_proyecto as $tema ) { ?>
+         <option value="<?=$tema?>" 
+         <?php if ( $tema == $this->tema_actual ) echo ' selected="1"' ?>>
+         <?=$tema?>
+         </option>
+         <?php } ?>
+      <?php } ?>
+      </select>
+   <input type='hidden' name='m' value='temas'/>
+   <input type='hidden' name='a' value='seleccionar_tema'/>
+   </fieldset>
+</form>
+<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+   <fieldset>
+         <legend>Nuevo tema</legend>
+         <input type="text" name="nuevo_tema" />
+         <button type='submit' name='a' title="<?=literal('Creación de un tema nuevo',3)?>" value="nuevo_tema"><?=literal('Nuevo tema',3)?></button>
+   <input type='hidden' name='m' value='temas'/>
+   </fieldset>
+</form>

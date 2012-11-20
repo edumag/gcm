@@ -1,0 +1,17 @@
+#pie {
+   color: <?=$this->color("2")?>;
+   background: <?=$this->color("3")?>;
+   border: 1px solid <?=$this->color("20")?>;
+   }
+#pie img	{
+   float: left;
+   width: 40px:
+   height: 40px;
+   vertical-align: middle;
+   margin: 0px;
+   margin-right: 5px;
+   border: 0;
+   }
+#pie a {
+   color: <?=$this->color("2")?>;
+   }

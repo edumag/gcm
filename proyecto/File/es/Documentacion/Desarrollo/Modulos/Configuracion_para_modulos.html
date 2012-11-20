@@ -1,0 +1,10 @@
+<p>Generar archivos de configuraci&oacute;n de m&oacute;dulos en la carpeta del mismo:</p>
+<p>&lt;modulo&gt;/config</p>
+<p>Crear archivo config.php, ejemplo:</p>
+<pre>&lt;?php<br />$config['variable']='valor';<br />$config['array'][]='valor1';<br />$config['array'][]='valor2';<br />?&gt;<br /></pre>
+<p>Crear archivo de descripciones para los idiomas, como minimo el que es por defecto, ejemplo:</p>
+<p>Archivo: &lt;m&oacute;dulo&gt;/config/config_es.php</p>
+<pre>&lt;?php<br />$config_DESC['variable']='Valor para la variable';<br />$config_DESC['array']='Listado de valores para el array';<br />?&gt;<br /></pre>
+<p>Ahora desde el m&oacute;dulo podremos ir a buscar los valores, ejemplo:</p>
+<pre>$tema_conf = $this-&gt;config('tema_actual');</pre>
+<p>y el administrador podra configurarlos llamando al modulo desde el navegador: &lt;proyecto&gt;/&lt;m&oacute;dulo&gt;/configuracion</p>

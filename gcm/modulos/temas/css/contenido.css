@@ -1,0 +1,21 @@
+
+#contenido h2 {
+margin: 2px;
+}
+
+#listar_dir_recur {
+font-size: 120%;
+}
+
+#listar_dir_recur .detalles_fichero {
+font-size: 60%;
+}
+
+#contenido img {
+margin: 8px;
+}
+
+#listar_dir_recur li {
+list-style: none;
+padding: 3px 0px 5px 17px;
+}

@@ -1,0 +1,58 @@
+<!-- Menu administratico -->
+
+<div id="mainMenu">
+
+<ul id="navmenu-h">
+
+<?php
+if (is_array($menuAdmin)) {
+
+    foreach ( $menuAdmin as $keySeccion => $seccion ) {
+
+      if ( is_array($seccion) ) {
+
+         $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ;
+         $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#';
+
+         echo "\n\t<li>";
+         echo "\n\t\t<a ";
+         if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' ";
+         echo '> ',literal($keySeccion,3),' </a>';
+
+         echo "\n\t\t\t<ul>";
+
+         if ( isset($seccion['boton']) ) {
+
+            foreach ($seccion['boton'] as $keyBoton => $boton) {
+
+               $GCM_DEV[]='menuAdmin::'.$keySeccion.'::'.$keyBoton;
+
+               if ( $boton['activado'] == 0 ) {
+                  echo "\n\t\t\t<li class='ma_off' ><a title='".literal($boton['title'],3)."' >".literal($keyBoton)."</a></li>";
+               } else {
+                  echo "\n\t\t\t<li class='ma_on' ><a title='".literal($boton['title'],3)."' href='".$boton['link']."'>".literal($keyBoton)."</a></li>";
+                  }
+               }
+            }
+         echo "\n\t\t\t</ul>";
+         }
+         echo "\n\t</li>";
+      }
+}
+
+   //  <li>
+   //  <a  title="Salir de sessión" href="<?=modificarGet('salir','1')? >" 
+   //     id="salirActuator"
+   //     class="actuator"
+   //     accesskey="s">
+   //     Salir de sesión
+   //     </a>
+   //  </li>
+?>
+
+</ul>
+
+</div>
+<?php
+
+

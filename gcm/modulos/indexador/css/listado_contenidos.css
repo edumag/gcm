@@ -1,0 +1,36 @@
+
+.elemento_lista_hide {
+margin: 5px;
+padding: 5px;
+background: <?=$this->color("2")?>;
+color: <?=$this->color("4")?>;
+/* Esquinas redondeadas */
+-moz-border-radius: 10px 10px 5px 5px ;
+-webkit-border-radius: 10px 10px 5px 5px ;
+}
+.elemento_lista_off {
+margin: 5px;
+padding: 5px;
+color: <?=$this->color("4")?>;
+/* Esquinas redondeadas */
+-moz-border-radius: 10px 10px 5px 5px ;
+-webkit-border-radius: 10px 10px 5px 5px ;
+}
+.elemento_lista_on {
+margin: 5px;
+padding: 5px;
+background: <?=$this->color("18")?>;
+color: <?=$this->color("19")?>;
+/* Esquinas redondeadas */
+-moz-border-radius: 10px 10px 5px 5px ;
+-webkit-border-radius: 10px 10px 5px 5px ;
+}
+.elemento_lista_off a {
+color: <?=$this->color("4")?>;
+}
+.elemento_lista_on a {
+color: <?=$this->color("19")?>;
+}
+#lateral .contenidoListado {
+font-size: 80%;
+}

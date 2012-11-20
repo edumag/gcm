@@ -1,0 +1,23 @@
+<script>
+function expandir_lista() { $(".toggle").show("slow"); }
+function contraer_lista() { $(".toggle").fadeOut(); }
+</script>
+
+<br />
+<a class="boton" href="#" onclick="javascript:expandir_lista();" >Expandir todo</a>
+<a class="boton" href="#" onclick="javascript:contraer_lista();" >Contraer todo</a>
+<br />
+
+<form action='' method='post'>
+   <div id='listar_dir_recur'>
+      <?php $this->mostrarSecciones($path, $path_seleccionado,TRUE); ?>
+   </div>
+   <br /><br />
+   <fieldset>
+      <legend><?php echo literal('Acciones sobre contenidos',3);?></legend>
+      <input type="hidden" name="accion" value="<?php echo $accion ?>"  />
+      <button type='submit' name="e" value='borrar'><?=literal('Borrar',3)?></button>
+      <button type='submit' name="e" value='mover'><?=literal('Cambiar nombre',3)?></button>
+   </fieldset>
+</form>
+

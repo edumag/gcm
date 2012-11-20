@@ -1,0 +1,5 @@
+<p>Hacer un include desde el m&oacute;dulo con una plantilla.</p>
+<pre>include($gcm-&gt;event-&gt;instancias['temas']-&gt;ruta('admin','html','menuAdmin.html'));</pre>
+<p>Tenemos que haber globalizado $gcm desde el metodo.</p>
+<p>$gcm guarda la lista de todas las instancias que ha realizado Eventos y podemos llegar a ella para pedirle la realizaci&oacute;n de una acci&oacute;n de otro m&oacute;dulo.</p>
+<p>As&iacute; la instancia de temas nos sirve para a&ntilde;adir la plantilla, siendo recogida la del tema que estemos utilizando o por su defecto la del mismo m&oacute;dulo.</p>

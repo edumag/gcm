@@ -1,0 +1,11 @@
+<div id="caja_form_editar">
+   <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" id="formularioTexto" name="formularioTexto" method="post">
+      <textarea class='editor_completo' id="<?php echo $nom_textarea;?>"  name="<?php echo $nom_textarea;?>" style='width: 100%;' rows="35"><?php echo $contingut_inicial ?></textarea>
+      <input style='width: 100%; display: none;' title='Posa un nom al document' type="text" name="documento" value="<?php echo $url_archivo ?>" />
+      <br />
+      <input type='submit' name='guardar'/>
+      <input type='hidden' name='m' value='temas'/>
+      <input type='hidden' name='a' value='administrar'/>
+      &nbsp;
+   </form>
+</div>

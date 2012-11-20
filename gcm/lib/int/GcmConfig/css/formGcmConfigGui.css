@@ -1,0 +1,14 @@
+.GcmConfigCajaForm input {
+   width: 100%;
+   display: block;
+}
+
+.GcmConfigCajaForm textarea {
+   width: 100%;
+}
+
+.GcmConfigCajaForm .cajaElemento {
+   border: 1px solid #eee;
+   padding: 2px;
+   margin: 5px;
+}

@@ -1,0 +1,13 @@
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+   <fieldset>
+      <legend  accesskey="s">Nombre del nuevo tema</legend>
+      <input type="text" name="tema" size="30" />
+   </fieldset>
+   <fieldset>
+      <legend  accesskey="s">Seleccionar una acción</legend>
+      <button name="a" value="nuevo_tema">Nuevo tema vacio</button>
+      <button name="a" value="copia_tema">Nuevo tema basado en actual</button>
+      <input type="hidden" name="m" value="temas" />
+   </fieldset>
+</form>
+

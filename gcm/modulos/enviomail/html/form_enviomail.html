@@ -1,0 +1,15 @@
+<form action="" method="post">
+   <fieldset>
+      <legend><?php echo literal('Informar de error',3);?></legend>
+      <?php echo literal('Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error',3);?>
+      <br />
+      <?php echo literal('Gracias',3);?>
+      <br />
+      <textarea style="width: 100%;" name="comentario_usuario" id="comentario_usuario"></textarea>
+      <br />
+      <input type='hidden' name="e" value="enviar_email_error" />
+      <br />
+      <button type="submit" ><?=literal('Enviar error',3)?></button>
+   </fieldset>
+</form>
+

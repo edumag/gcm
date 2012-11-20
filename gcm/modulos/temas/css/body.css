@@ -1,0 +1,235 @@
+
+body {
+background-color: <?=$this->color("0")?>;
+color: <?=$this->color("1")?>;
+font-family: Palatino, 'Book Antiqua', serif;
+line-height: 20px;
+padding: 0;
+margin: 0;
+}
+#wrap{
+width: 100%;
+margin:0 auto;
+}
+#contenedor {
+width: 70%;
+float:left;
+padding: 20px 10px 10px 10px;
+min-height: 400px;
+height: auto !important;
+}
+#contenido {
+   padding: 10px;
+}
+
+#lateral {
+width: 27%;
+color: #6F6137;
+float:right;
+padding-top: 30px;
+}
+#lateral p{
+padding: 0 25px 25px 25px;
+}
+#cabecera{
+color: <?=$this->color("2")?>;
+background: <?=$this->color("3")?>;
+font-size: 300%;
+padding: 15px;
+overflow: hidden;
+}
+#cabecera form, #cabecera div {
+display: inline;
+}
+#cabecera a {
+color: <?=$this->color("2")?>;
+}
+#cabeceraDerecha {
+float: right;
+width: 60%;
+text-align:right;
+}
+#subcabecera {
+background: #FBFBFB
+}
+#pie {
+float: left;
+width: 100%;
+margin-top:10px;
+margin-bottom:10px;
+}
+#scripts {
+float: left;
+width: 100%;
+}
+#lateral p, #lateral2 p{
+margin:0;
+padding: 0 15px 15px 15px;
+}
+a{
+text-decoration: none;
+color: <?=$this->color("3")?>;
+font-style: italic;
+text-shadow: 0 1px 0 #fff;
+}
+a:hover{
+color: #6F6137;
+}
+#contenido :focus {
+outline: 0;
+}
+.boton{
+-moz-border-radius:50px;
+-webkit-border-radius:50px;
+border-radius:50px;
+-moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+-webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+box-shadow:0 1px 0 rgba(0,0,0,0.3);
+background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+color:#4A4A4A;
+float:left;
+font-family:helvetica,sans-serif;
+padding:0px 8px 0px 8px;
+margin: 2px;
+text-shadow:1px 1px 0 rgba(255, 255, 255, 0.7);
+}
+.boton:hover{
+background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
+background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D6D6D6));
+}
+/** Título del contenido **/
+.titulo_principal {
+    margin: 10px 0 0 10px;
+    padding: 0px;
+}
+
+#titulo {
+color: <?=$this->color("3")?>;
+font-style: italic;
+line-height: 40px;
+margin-bottom: 10px;
+text-shadow: 2px 1px 1px #FFFFFF;
+}
+#camino a, #camino {
+color: <?=$this->color("4")?>;
+font-size: 100%;
+}
+textarea {
+border-bottom:1px solid <?=$this->color("5")?>;
+border-left:1px solid <?=$this->color("6")?>;
+border-right:1px solid <?=$this->color("6")?>;
+border-top:1px solid <?=$this->color("7")?>;
+}
+/* class para bloques de codigo, por ejemplo */
+pre {
+border: 1px solid <?=$this->color("2")?>;
+border-left: 3px solid <?=$this->color("2")?>;
+background-color: <?=$this->color("4")?>;
+color: <?=$this->color("2")?>; 
+margin-left: 10px;
+margin-right: 30px;
+padding: 3px;
+overflow: auto;
+max-height: 450px;
+}
+
+/* Cajas de aviso */
+
+.aviso , .error, .admin, .normal, .debug  {
+padding: 0;
+background: transparent;
+border: 0;
+/* Esquinas redondeadas */
+border-radius: 5px 5px 5px 5px ;
+-moz-border-radius: 5px 5px 5px 5px ;
+-webkit-border-radius: 5px 5px 5px 5px;
+}
+.aviso li, .error li, .admin li, .normal li , .debug li  {
+list-style: none ;
+border: 2px;
+padding: 8px;
+margin-top: 2px;
+}
+.error , .error a {
+background: red ;
+color: white;
+}
+.aviso , .aviso a {
+background: #5F6C5B ;
+color: #fff !IMPORTANT;
+}
+.admin , .admin a {
+background: #5F6C5B ;
+color: #fff !IMPORTANT;
+}
+.normal , .normal a {
+background: #5F6C5B ;
+color: #fff !IMPORTANT;
+}
+.debug , .debug a {
+background: #5F6C5B ;
+color: #fff !IMPORTANT;
+}
+
+
+/* Clases para generar símbolos */
+
+.simb_arriba {
+   vertical-align:middle;
+   border: 0px solid #000;
+   border-radius: 15px 15px 0 0 ;
+   -moz-border-radius: 15px 15px 0 0 ;
+   -webkit-border-radius: 15px 15px 0 0 ;
+   }
+.simb_abajo {
+   vertical-align:middle;
+   border: 0px solid #000;
+   border-radius: 0 0 15px 15px ;
+   -moz-border-radius: 0 0 15px 15px ;
+   -webkit-border-radius: 0 0 15px 15px;
+   }
+.simb_neutro {
+   padding: 3px;
+   color: #000;
+   border-color: #000;
+   background: #dd0;
+   font-style:oblique;
+   }
+
+/* Comportamiento para diferentes resoluciones
+ *
+ * ipad 740px x 
+ */
+@media screen and (max-width: 1160px){
+#contenedor{
+width: 65%;
+}
+#lateral {
+width: 33%;
+}
+}
+@media screen and (max-width: 940px){
+#contenedor{
+width: 60%;
+}
+#lateral {
+width: 39%;
+}
+}
+@media screen and (max-width: 640px){
+#contenedor{
+width: 55%;
+}
+#lateral {
+width: 43%;
+}
+}
+/* iphone */
+@media screen and (max-width: 500px){
+#lateral, #contenedor {
+float: none;
+margin: 0 auto;
+width: 100%;
+}
+}

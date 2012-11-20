@@ -1,0 +1,15 @@
+<div id="caja_form_editar">
+   <form action="<?=$_SERVER['PHP_SELF']?>" id="formularioTexto" name="formularioTexto" method="post">
+      <?php if ( $evento == 'ejecutar_traducir' ) include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_titulo.html')); ?>
+      <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_contenido.html')); ?>
+      <fieldset>
+         <legend><?=literal('Acciones',3)?></legend>
+         <button title="<?=literal('Guardar',3)?>" type='submit' name='e' value='<?=$evento?>'><?=literal($boton,3)?></button>
+         <?php if ( substr_count(Router::$c,".btml") != 0) { ?>
+         <button title="<?=literal('Guardar',3)?>" type='submit' name='e' value='publicar_borrador'><?=literal('Publicar',3)?></button>
+         <?php } ?>
+         <input type="hidden" name="s" value="<?=Router::$s?>" />
+         <input type="hidden" name="c" value="<?=Router::$c?>" />
+      </fieldset>
+   </form>
+</div>

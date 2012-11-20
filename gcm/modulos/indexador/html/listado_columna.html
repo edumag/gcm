@@ -1,0 +1,40 @@
+<?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
+
+<?php $caminos = explode('/',$fila->url); ?>
+<?php $camino = ''; ?>
+<?php for ( $s=0; $s<count($caminos)-1; $s++ ) { ?>
+
+<?php if ( $caminos[$s] != "" ) { ?>
+
+<?php $camino .= ' / '.literal($caminos[$s]); ?>
+
+<?php } ?>
+<?php } ?>
+
+<?php if ( $fila->nombre == 'index' ) { ?>
+<?php $titulo = literal(dirname($fila->url)); ?>
+
+<?php } else { ?>
+<?php $titulo = literal(trim($fila->nombre)); ?>
+<?php } ?>
+
+<div class='cajaListado'>
+   <div class="titulo_articulo">
+      <a href="<?=htmlentities(GUtil::gcm_generar_url($fila->url));?>" ><?php echo $titulo; ?>
+      </a>
+      <?php /* Listado más limpio ?>
+      <div class='doc_info'>
+      <?php if ( $fila->fecha_actualizacion_in )  { ?>
+      <h3><?=presentarFecha($fila->fecha_actualizacion_in,1,'mysql'); ?></h3>
+      <?php } ?>
+      <?php if ( !empty($camino)  ) echo '<h3>'.$camino.'</h3>'; ?>
+      </div>
+      <?php */ ?>
+   </div>
+   <div class='contenidoListado'>
+      <?php echo stripslashes($fila->descripcion); ?>
+   </div> <!-- Acaba contenidoListado -->
+</div> <!-- Acaba cajaListado -->
+
+<?php } ?>
+

@@ -1,0 +1,26 @@
+
+.paginador {
+/** border:1px solid <?=$this->color("16")?>; */
+margin:10px;
+padding:10px;
+color: <?=$this->color("4")?>;
+}
+.info_botonera{
+font-weight:bold;
+}
+.botonera_paginador {
+text-align: right;
+float: right;
+}
+.botonera_paginador a, .botonera_paginador .pag_actual {
+/* Esquinas redondeadas */
+-moz-border-radius:50%;
+-webkit-border-radius:50%;
+border: 1px solid <?=$this->color("16")?>;
+padding: 2px;
+text-decoration: none;
+color: <?=$this->color("4")?>;
+border: 1px solid <?=$this->color("16")?>;
+}
+.botonera_paginador .pag_actual {
+}

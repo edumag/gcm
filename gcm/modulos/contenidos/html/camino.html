@@ -1,0 +1,13 @@
+<?php $inicio = Router::$enlace_relativo.Router::$dir;?>
+<div id='camino'>
+   |-> <a href='<?php echo $inicio;  ?>' ><?=literal('inicio')?></a>
+   <?php if ( !empty($camino) ) {
+   foreach ( $camino as $seccion ) {
+   if ( $seccion != "" ) { 
+   $inicio .= '/'.$seccion;
+   $inicio = str_replace('//','/',$inicio);
+   ?>
+      / <a href='<?=$inicio?>' ><?=literal($seccion)?></a>
+   <?php } 
+   } } ?>
+</div> <!-- Acaba camino -->

@@ -1,0 +1,6 @@
+Options +FollowSymLinks
+#RewriteEngine on
+#Rewriterule ^(.*)\|\|\|_(.*)_\|\|_(.*)\.html$ index.php?s=$2&c=$3.html
+
+
+AddDefaultCharset utf-8

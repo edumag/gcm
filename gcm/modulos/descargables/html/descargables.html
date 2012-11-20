@@ -1,0 +1,47 @@
+<h2><?=literal('Archivos')?></h2>
+<div id='descargables' >
+<table>
+
+   <tr>
+      <th><?=literal('Nombre')?></th>
+      <th><?=literal('Tamaño')?></th>
+      <th><?=literal('Fecha')?></th>
+      <th>MIME</th>
+      <th><?=literal('código')?></th>
+      <th><?php echo '<img height="16px" width="16px" border="0" src="'.$gcm->event->instancias['temas']->icono('16/descargar').'" alt="V"/>'; ?></th>
+   </tr>
+
+   <?php foreach ( $salida as $archivo ) { ?>
+
+      <tr>
+         <td><a href='<?=$archivo["url"]?>' ><?=$archivo['nombre']?></a></td>
+         <td><?=$archivo['tamanyo']?></td>
+         <td><?=$archivo['fecha']?></td>
+         <td><?=$archivo['tipo']?></td>
+         <td>
+            <?php 
+            if ( $archivo['codigo'] === 1 ) { 
+               ?>
+               <a href='<?echo Router::$dir.$archivo["url"]; ?>' class='boton_codigo' id='cod_<?=$archivo["url"]?>' >
+                  <img height="16px" width="16px" border="0" 
+                  src="<?php echo $gcm->event->instancias['temas']->icono('16/codigo'); ?>"
+                  alt="[Ver]"/>
+               </a>
+               <?php
+               }
+            ?>
+         </td>
+         <td>
+            <a title='<?=literal("Descargar")?>' href='<?echo Router::$dir.$archivo["url"]; ?>'>
+               <img height="16px" width="16px" border="0" 
+               src="<?php echo $gcm->event->instancias['temas']->icono('16/descargar'); ?>" 
+               alt="[V]"/>
+            </a>
+         </td>
+      </tr>
+
+      <?php } ?>
+
+</table>
+<div id='caja_codigo'></div>
+</div>

@@ -1,0 +1,26 @@
+<div id='listado_de_contenido' >
+   <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
+   <?php $url = GUtil::gcm_generar_url($fila->url) ?>
+   <?php $fecha = $fila->fecha_actualizacion_in ?>
+   <?php $caminos = explode('/',$fila->url); ?>
+   <?php $camino = ''; ?>
+   <?php for ( $s=0; $s<count($caminos)-1; $s++ ) { ?>
+   <?php if ( $caminos[$s] != "" ) { ?>
+   <?php $camino .= ' / '.literal($caminos[$s]); ?>
+   <?php } ?>
+   <?php } ?>
+   <?php $camino = GUtil::camino($url,TRUE, FALSE); ?>
+   <?php if ( $fila->nombre == 'index' ) { ?>
+   <?php $titulo = literal(dirname($fila->url)); ?>
+   <?php } else { ?>
+   <?php $titulo = literal(trim($fila->nombre)); ?>
+   <?php } ?>
+   <?php $titulo = '<a href="'.str_replace(' ','%20',$url).'" ondblclick="location.href=\''.str_replace(' ','%20',$url).'\'">'.$titulo.'</a>'; ?>
+   <div  class="elemento_lista_off" id="elemento_<?=htmlentities(GUtil::gcm_generar_url($fila->url))?>">
+      <?php include(dirname(__FILE__).'/../../contenidos/html/titulo_articulo.html');?>
+      <div class='contenido_articulo'>
+         <?php echo stripslashes($fila->descripcion); ?>
+      </div> <!-- Acaba contenidoListado -->
+   </div> <!-- Acaba cajaListado -->
+   <?php } ?>
+</div> <!-- Acaba listado -->

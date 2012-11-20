@@ -1,0 +1,23 @@
+
+/* Listado de ultimas entradas */
+.contenido_articulo {
+   margin: 10px;
+}
+#listado_de_contenido {
+}
+.titulo_articulo {
+line-height: 30px;
+}
+.titulo_articulo .doc_info {
+}
+.titulo_articulo .botonera {
+   font-size: xx-small;
+}
+/* solo para columna */
+.cajaListado h3 {
+   margin: 4px;
+   display: block;
+}
+#lateral .titulo_articulo a {
+font-size:130%;
+}

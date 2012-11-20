@@ -1,0 +1,14 @@
+
+#descargables table{
+margin: 5px;
+}
+#descargables td {
+background: #EED8AE ;
+color: <?=$this->color("4")?>;
+padding-left: 5px;
+}
+#descargables th {
+background: <?=$this->color("4")?> ;
+color: <?=$this->color("2")?>;
+padding: 5px;
+}

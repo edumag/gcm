@@ -1,0 +1,4 @@
+<p>Para la creaci&oacute;n de test en los m&oacute;dulos que vayamos creando, tenemos un metodo heredado de Modulos que nos facilita la tarea.</p>
+<pre>   /**<br />    * Comprobar funcionamiento<br />    */<br /><br />   function test() {<br /><br />      $this-&gt;ejecuta_test('Conexi&oacute;n con base de datos', $this-&gt;pdo-&gt;getAttribute(constant("PDO::ATTR_DRIVER_NAME")), 'mysql' );<br /><br />      }<br /><br /></pre>
+<p>Si creamos un metodo test en el m&oacute;dulo, automaticamente sera llamado desde el evento test que podemos llamar desde el men&uacute; de administraci&oacute;n.</p>
+<p>El metodo ejecuta_test solo comprueba que el segundo parametro y el tercero coincidan sino es as&iacute; nos mostrara mensaje de error.</p>

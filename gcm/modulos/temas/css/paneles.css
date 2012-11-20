@@ -1,0 +1,13 @@
+.panel {
+margin-bottom: 20px;
+}
+.panel_titulo { 
+font-size: 150%;
+margin-bottom: 10px;
+}
+/* subpanel */
+.subpanel_visible {
+margin-top: 4px;
+padding: 2px;
+text-align:left
+}

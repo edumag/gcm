@@ -1,0 +1,13 @@
+Los literales se encuentran en los archivos LG_es.php, LG_ca.php, etc...
+
+El programa detecta los que hay y los propone, leyendo el predeterminado por defecto.      
+
+El formato del archivo es de un archivo de php::
+
+   <?php
+   $LG_es['inicio']='inicio';
+   $LG_es['iniciot']='Pagina de inicio';
+   $LG_es['sin_traduccion']='No se ha encontrado traducción de este documento, le presentamos el original';
+   ?>
+
+Tambien hay una imagen con el mismo nombre del idioma por si se quiere utilizar la imagen en vez de un texto

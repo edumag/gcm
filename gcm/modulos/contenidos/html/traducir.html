@@ -1,0 +1,27 @@
+<!-- @deprecated -->
+
+<script language='javascript'>
+
+   function validaSelectConTitulo(theList){
+      if (theList.selectedIndex > 1) {
+               theList.form.submit();
+            }
+      }
+
+</script>
+<select name='traducirIdioma' onChange='validaSelectConTitulo(this);' >
+   <option>Traducir a:</option>
+   <option>-----------</option>
+   <?php
+      // Buscar idiomas posibles en los que no haya traducción
+      include("DATOS/idiomas/idiomas.php");
+      include("DATOS/idiomas/desactivados.php");
+      $idiomasPosibles = array_merge($i_activados, $desactivados);
+      foreach ( $idiomasPosibles as $key => $idioma ) {
+         $archivoBuscar = "File/".$key."/".Router::$s.Router::$c ;
+         if ( ! is_file($archivoBuscar) ) {
+            echo '<option value="',$key,'" >',$idioma,'</option>';
+            }
+         }
+   ?>
+</select>

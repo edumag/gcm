@@ -1,0 +1,87 @@
+<fieldset>
+   <legend><?=literal('Idiomas Activados',3)?></legend>
+
+   <?php foreach($i_activados as $key => $idioma) { $imagen=$this->dir_idiomas.$key.'.gif'; ?>
+
+   <div>
+      <a style="cursor: pointer;" title="Modificar imágen" onclick="javascript:visualizar('caja-<?=$key?>');" >
+         <img src="<?=$imagen?>" >
+         <?=$idioma?>(<?=$key?>)
+      </a>
+      <div style='display:none' id="caja-<?=$key ?>">
+         <br /><br />
+         <form method="post">
+            Idioma: <input type="text" name="idiomaNombre" value="<?=$idioma ?>"/>
+            <input type="hidden" name="codIdioma" value="<?=$key?>" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+            <br /><br />Imagen: <input type="file" name="imagenIdioma" />
+            <br /><br /><input type="submit" name="modificarIdioma" value="Modificar" /> 
+         </form>
+         <form method="post">
+            <input type="hidden" name="codIdioma" value="<?=$key?>" />
+            <input type="hidden" name="nameIdioma" value="<?=$idioma?>" />
+            <p>Desactivar un idioma permite tener el contenido y administrarlo pero sin presentarlo</p>
+            <input type="submit" name="desactivarIdioma" value="Desactivar idioma" /> 
+            <p>Eliminar un idioma hara que todo el contenido de ese idioma sea eliminado.</p>
+            <input type="submit" name="eliminarIdioma" value="Eliminar" /> 
+         </form>
+      </div>
+   </div>
+
+   <?php } ?>
+
+</fieldset>
+
+
+<?php if ( isset($desactivados) ) {         // Solo presentamos si hay alguno ?>
+
+<fieldset>
+   <legend><?=literal('Idiomas desactivados',3)?></legend>
+
+   <?php foreach($desactivados as $key => $idioma) { $imagen=$this->dir_idiomas.$key.'.gif'; ?>
+
+   <span>
+      <a style="cursor: pointer;" title="Modificar imágen" onclick="javascript:visualizar('caja-<?=$key?>');" >
+         <img src="<?=$imagen?>" >
+         <?=$idioma?>(<?=$key?>)
+      </a>
+      <div style='display:none' id="caja-<?=$key ?>">
+         <br /><br />
+         <form method="post">
+            Idioma: <input type="text" name="idiomaNombre" value="<?=$idioma ?>"/>
+            <input type="hidden" name="codIdioma" value="<?=$key?>" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+            <br /><br />Imagen: <input type="file" name="imagenIdioma" />
+            <br /><br /><input type="submit" name="modificarIdioma" value="Modificar" /> 
+         </form>
+         <form method="post">
+            <input type="hidden" name="codIdioma" value="<?=$key?>" />
+            <input type="hidden" name="nameIdioma" value="<?=$idioma?>" />
+            <br />
+            <input type="submit" name="activarIdioma" value="Activar idioma" /> 
+            <p>Eliminar un idioma hara que todo el contenido de ese idioma sea eliminado.</p>
+            <input type="submit" name="eliminarIdioma" value="Eliminar" /> 
+         </form>
+      </div>
+   </span>
+
+   <?php } ?>
+
+</fieldset>
+    
+<?php } ?>
+      <?php // Formulario de entrada para un nuevo idioma ?>
+
+<form method="post" enctype="multipart/form-data" >
+   <fieldset>
+      <legend><?=literal('Nuevo idioma',3)?></legend>
+      Idioma: <input type="text" name="idiomaNombre" />
+      <input type="hidden" name="MAX_FILE_SIZE" value="50000000"  />
+      Imagen(gif): 
+      <input name="imagenIdioma" type="file" size="18" />
+      <br />
+      <input type="submit" name="nuevoIdioma" value="Añadir idioma" />
+   </fieldset>
+</form>
+
+

@@ -1,0 +1,8 @@
+<form method="post" action="">
+   <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_secciones.html'))?>
+   <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_titulo_seccion.html'))?>
+   <fieldset>
+      <legend><?=literal('Acciones',3)?></legend>
+      <button type="submit" name="e" value="ejecutar_mover_seccion"><?=literal('Ejecutar',3)?></button>
+   </fieldset>
+</form>

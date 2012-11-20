@@ -1,0 +1,73 @@
+/* Root = Horizontal, Secondary = Vertical */
+ul#menu_botones_horizontal {
+   margin: 0;
+   border: 0 none;
+   padding: 0;
+   list-style: none;
+   height: 24px;
+	display: inline-block;
+	white-space: nowrap;
+}
+ul#menu_botones_horizontal li {
+   font-family: Corbel, Arial, Helvetica, "Nimbus Sans L", "Liberation Sans", sans-serif;
+   margin: 0;
+   border: 0 none;
+   padding: 0;
+   float: left; /*For Gecko*/
+   display: inline;
+   list-style: none;
+   position: relative;
+   height: 24px;
+   z-index:100;
+	position: relative;
+	display: inline-block;
+
+}
+ul#menu_botones_horizontal ul {
+   line-height: 26px; /* Asegurarnos que tienen espacio */
+   z-index: -1;
+   border: 3px solid #B28B09;
+   padding: 10px;
+   top: 64px;
+   left: 0;
+   list-style: none;
+   display: none;
+   background: #CE142B;
+   color: white;
+   /* Esquinas redondeadas */
+   border-radius: 5px 5px 5px 5px ;
+   -moz-border-radius: 5px 5px 5px 5px ;
+   -webkit-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px;
+}
+ul#menu_botones_horizontal ul li {
+   color: #B28B09;
+   font-style: normal;
+   display: block;
+}
+ul#menu_botones_horizontal a {
+   font-style: normal;
+   color: white;
+   padding: 0 6px 0 0;
+   background: transparent;
+   text-decoration: none;
+}
+ul#menu_botones_horizontal li:hover ul {
+	display: block;
+	position: absolute;
+}
+
+ul#menu_botones_horizontal ul ul {
+   display: none;
+}
+ul#menu_botones_horizontal ul li:hover ul {
+	display: block;
+	position: absolute;
+}
+ul#menu_botones_horizontal li:hover ul ul {
+   display: none;
+}
+ul#menu_botones_horizontal li ul li a {
+   display: block;
+   width: 100%;
+}
+

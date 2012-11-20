@@ -1,0 +1,5 @@
+<p>Para modificar el titulo de la pagina al igual que cualquier secci&oacute;n de la plantilla general el procedimiento es el siguiente:</p>
+<pre>// A&ntilde;adimos contenido a t&iacute;tulo<br />$gcm-&gt;titulo = 'Generar contenido';<br />// Anulamos eventos que son llamados para generar el t&iacute;tulo<br />$gcm-&gt;event-&gt;anular('titulo','contenido');<br /></pre>
+<p>Esto da contenido a titulo en Gcm y le dice que no lance los eventos sobre titulo. As&iacute; la plantilla rellenar&aacute; la parte de t&iacute;tulo con el contenido que hallamos definido.</p>
+<p>Esta t&eacute;cnica sirve para cualquier secci&oacute;n definida en la plantilla general. ( contenido, titulo, pie, cabecera, etc...).</p>
+<p>&nbsp;</p>

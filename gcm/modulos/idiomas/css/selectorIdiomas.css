@@ -1,0 +1,9 @@
+
+#idiomas {
+   text-align: right;
+   width: 100%;
+   padding: 2px;
+   padding-right: 5px; /* Firefox */
+   .padding: 2px;      /* IE6 e IE7 */
+   _padding: 2px;      /* solo IE 6 */
+}

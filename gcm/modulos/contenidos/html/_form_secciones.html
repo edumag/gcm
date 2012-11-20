@@ -1,0 +1,6 @@
+<?php $seccion_seleccionada = ( isset($seccion_seleccionada) ) ? $seccion_seleccionada : Router::$dd.Router::$s ;  ?>
+<fieldset>
+   <legend  accesskey="s">Seleccionar sección padre</legend>
+   <?php $this->mostrarSecciones(Router::$dd,Router::$s,FALSE,TRUE,FALSE,TRUE,$seccion_seleccionada,FALSE); ?>
+</fieldset>
+

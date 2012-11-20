@@ -1,0 +1,15 @@
+<ul>
+<?php foreach ( $subsecciones as $subseccion ) { ?>
+
+<li><h3><a href='<?php echo Router::$enlace_relativo.$subseccion.'/'; ?>'><?php echo literal(comprobar_barra($subseccion,'eliminar')).'/'; ?></a></h3></li>
+
+<?php } ?>
+
+<?php foreach ( $documentos as $documento ) { ?>
+
+<li><h4><a href='<?php echo Router::$enlace_relativo.$documento; ?>'><?php echo literal(str_replace('.html','',$documento)); ?></a></h4></li>
+
+<?php } ?>
+
+</ul>
+

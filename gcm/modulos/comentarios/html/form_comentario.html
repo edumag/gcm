@@ -1,0 +1,18 @@
+<form method='post' action="<?=Router::$dir.Router::$url?>" >
+<?=anyadirCaptcha();?>
+<input style='display: none;' type='hidden' name='a' value='<?=$accion?>' />
+<input style='display: none;' type='hidden' name='m' value='comentarios' />
+<?php if ( $id ) { ?>
+<input style='display: none;' type='hidden' name='id' value='<?=$id?>' />
+<?php } ?>
+<label for='usuario' ><?=literal('Nombre')?>: </label>
+<input maxlength='60' type='text' name='usuario' value="<?=$usuario?>" />
+<label for='mail'>*Email: </label>
+<input maxlength='40' type='text' name='mail' value="<?=$mail?>"/>
+<label for='texto'>Comentario: </label>
+<textarea class='editor_simple' maxlength='50' name='texto'><?=$texto?></textarea>
+<input type='submit' />
+<br />
+* El email es opcional.
+</form>
+

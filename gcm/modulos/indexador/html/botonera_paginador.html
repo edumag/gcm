@@ -1,0 +1,24 @@
+<?php if ($this->total_de_paginas > 1) { ?>
+<div id="paginador">
+   <span id="info_botonera">
+      <?php echo literal('Página');?>: <?=$this->pagina;?>/<?=$this->total_de_paginas;?>
+   </span>
+   <span id="botonera_paginador">
+      <?php if($this->pagina>1) { ?>
+         <a href='<?php echo $this->url_base.$simbolo; ?>pagina=1'><<</a>
+         <a href='<?php echo $this->url_base.$simbolo; ?>pagina=<?php echo ($this->pagina-1)?>'><</a>
+      <?php } ?>
+      <?php for ($i=$this->elemento_inicio;(($i<=$this->total_de_paginas)&&($i<=$this->elemento_final));$i++){ ?>
+         <?php if ($this->pagina == $i) { ?>
+         <span class='pag_actual'><b><?php echo $this->pagina; ?></b></span>
+         <?php } else { ?>
+            <a href='<?php echo $this->url_base.$simbolo; ?>pagina=<?php echo $i; ?>'><?php echo $i; ?></a>
+         <?php } ?>
+      <?php } ?>
+      <?php if($this->pagina < $this->total_de_paginas){ ?>
+      <a href='<?php echo $this->url_base.$simbolo; ?>pagina=<?php echo ($this->pagina+1); ?>'>></a>
+         <a href='<?php echo $this->url_base.$simbolo; ?>pagina=<?php echo $this->total_de_paginas; ?>'>>></a>
+      <?php } ?>
+   </span>
+</div>
+<?php } ?>

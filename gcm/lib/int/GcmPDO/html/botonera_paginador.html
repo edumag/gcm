@@ -1,0 +1,26 @@
+<?php if ($this->total_de_paginas > 1) { ?>
+
+<div class="paginador">
+   <span class="info_botonera">
+      <?php echo literal('Pàgina');?> <?=$this->pagina;?> de <?=$this->total_de_paginas;?> - 
+      <?php echo $this->num_total_registros.' '.literal('resultats'); ?>
+   </span>
+   <span class="botonera_paginador">
+      <?php if($this->pagina>1) { ?>
+      <a href='<?php echo $this->url_base.$simbolo.$this->sufijo; ?>pagina=1'>&lt;&lt;</a>
+         <a href='<?php echo $this->url_base.$simbolo.$this->sufijo; ?>pagina=<?php echo ($this->pagina-1)?>'>&lt;</a>
+      <?php } ?>
+      <?php for ($i=$this->elemento_inicio;(($i<=$this->total_de_paginas)&&($i<=$this->elemento_final));$i++){ ?>
+         <?php if ($this->pagina == $i) { ?>
+         <span class='pag_actual'><b><?php echo $this->pagina; ?></b></span>
+         <?php } else { ?>
+            <a href='<?php echo $this->url_base.$simbolo.$this->sufijo; ?>pagina=<?php echo $i; ?>'><?php echo $i; ?></a>
+         <?php } ?>
+      <?php } ?>
+      <?php if($this->pagina < $this->total_de_paginas){ ?>
+      <a href='<?php echo $this->url_base.$simbolo.$this->sufijo; ?>pagina=<?php echo ($this->pagina+1); ?>'>></a>
+         <a href='<?php echo $this->url_base.$simbolo.$this->sufijo; ?>pagina=<?php echo $this->total_de_paginas; ?>'>>></a>
+      <?php } ?>
+   </span>
+</div>
+<?php } ?>

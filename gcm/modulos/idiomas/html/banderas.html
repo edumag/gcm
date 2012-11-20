@@ -1,0 +1,16 @@
+<?php if ( count($this->idiomas_activados) > 1 ) { ?>
+
+<div id="banderas">
+
+   <?php foreach($this->idiomas_activados as $idioma) { ?>
+
+      <?php $bandera = ( file_exists($this->dir_idiomas.''.$idioma.'.png') ) ? $this->dir_idiomas.''.$idioma.'.png' : Router::$base.GCM_DIR.'lib/int/idiomas/img/'.$idioma.'.png' ; ?>
+
+      <?php if ($idioma != $_SESSION[$this->proyecto."-idioma"]) { ?>
+         <a href="?idioma='.$idioma.'" ><img alt="'.$idioma.'" src="'.$bandera.'" /></a> 
+      <?php } else { ?>
+         <a class="idioma_activado" href="?idioma='.$idioma.'" ><img alt="'.$idioma.'" src="'.$bandera.'" /></a>
+      <?php } ?>
+   <?php } ?>
+</div>
+<?php } ?>

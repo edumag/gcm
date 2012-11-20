@@ -1,0 +1,12 @@
+	<p>Para evitar acciones repetidas al actualizar una pagina, esta puede ser una<br />solución.</p>
+<pre>if ( enviaMailHtml('Error en gcm', $contenido_mail, 'Eduardo', $mail_dev, 'Robot de gcm', 'admin@mamedu.com') ) {
+   header ("Location:".$_PHP_SELF.'?mens=El error ha sido enviado correctamente, gracias');
+   return TRUE;
+} else {
+   return FALSE;
+   }
+</pre>
+<p>ejemplo sacado de gcm/modulos/gcm/enviomail/index.php linea 87.</p>
+<p>Otro ejemplo puede ser cuando hemos borrado o cambiado el nombre de un contenido, para evitar el error de intentar cargar el mismo contenido, podemos modificar los datos de Router y enrutar al nuevo contenido.</p>
+<pre>// Realizamos la acción del cambio de nombre<br />...<br /><br />// Actualizamos los datos de Router con la ruta del contenido modificado<br />Router::inicia($ruta_destino);<br /><br />// Enrutamos hacia el nuevo contenido y enviamos mensaje.<br />$men = literal('Cambio de nobre realizado');<br />header ("Location:".Router::$dir.Router::$url.'?mens='.$men);<br />exit();</pre>
+<p> </p>

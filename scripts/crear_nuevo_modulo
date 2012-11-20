@@ -1,0 +1,26 @@
+#!/bin/bash
+
+## Crear nuevo módulo en base a plantilla
+
+dir_plantilla='plantillas/modulos/'
+dir_modulos='gcm/modulos/'
+
+echo
+echo Creamos carpeto con su contenido para módulo nuevo.
+echo
+echo La primera letra del nombre del módulo ponla en minuscula, para que gcm
+echo pueda reconocerlo.
+echo
+
+read -p 'Nombre del módulo: ' MODULO
+
+[[ "$MODULO" = "" ]] && exit
+
+mayuscula=$(echo $MODULO | awk ' { out = out" "toupper(substr($0,1,1))substr($0,2) } END{ print substr(out,2) } ')
+
+dir_modulo="${dir_modulos}$MODULO"
+
+svn copy $dir_plantilla $dir_modulos
+
+mv "${dir_modulos}modulos" "${dir_modulos}$MODULO"
+mv "${dir_modulos}$MODULO/lib/modulo.php" "${dir_modulos}${MODULO}/lib/${mayuscula}.php"

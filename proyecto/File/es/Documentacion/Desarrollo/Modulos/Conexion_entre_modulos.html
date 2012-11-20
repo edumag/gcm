@@ -1,0 +1,3 @@
+<p>Mediante Eventos podemos interactuar entre los m&oacute;dulos.</p>
+<p>Un ejemplo de como desde un m&oacute;dulo enviamos un email con el m&oacute;dulo enviomail</p>
+<pre>$args['cuerpo']  = "\nUsuario: ".$resultado['usuario'];<br />$args['cuerpo'] .= "\nMail: ".$resultado['mail'];<br />$args['cuerpo'] .= "\nTexto: ";<br />$args['cuerpo'] .= "\n".$resultado['texto'];<br />$args['asunto'] = 'Comentario a&ntilde;adido';<br /><br />$gcm-&gt;event-&gt;lanzar_accion_modulo('enviomail','enviar_email','comentario_a&ntilde;adido',$args);<br /></pre>

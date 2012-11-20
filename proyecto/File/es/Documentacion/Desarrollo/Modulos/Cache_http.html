@@ -1,0 +1,5 @@
+<p>Se genera cache para las paginas que nos permite presentarlas m&aacute;s rapidamente.</p>
+<p>Es importante que si se genera una modificaci&oacute;n sea notificado al m&oacute;dulo cache_http para borrar los archivos relacionados.</p>
+<p>Ejemplo al a&ntilde;adir un comentario en el m&oacute;dulo comentarios, insertamos la siguiente linea para que se borre el cache y se presenta la p&aacute;gina ctualizada la proxima vez que se presente.</p>
+<pre>$gcm-&gt;event-&gt;lanzar_accion_modulo('cache_http','borrar','comentario_insertado',Router::$url);</pre>
+<p>&nbsp;</p>

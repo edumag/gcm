@@ -1,0 +1,17 @@
+<form method="post" action="<?=$_SERVER['PHP_SELF'] ?>" >
+   <fieldset>
+      <legend><?php echo literal('Confirmar borrado',3);?></legend>
+      <?php foreach ( $contenidos_borrar as $apartado => $cont ) { ?>
+      <b><?=$apartado?></b>
+      <?php array_lista($contenidos_borrar[$apartado],NULL,TRUE); ?>
+      <?php  } ?>
+   </fieldset>
+   <fieldset>
+      <legend><?php echo literal('Acciones',3);?></legend>
+      <button type="submit" name="e" value="ejecutar_borrar"><?=literal('Confirmar')?></button>
+      <button type="submit" name="e" value="cancelar"><?=literal('Cancelar')?></button>
+      <input type="hidden" name="s" value="<?=Router::$s?>" />
+      <input type="hidden" name="c" value="<?=Router::$c?>" />
+   </fieldset>
+</form>
+

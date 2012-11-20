@@ -1,0 +1,13 @@
+.caja_campo_titulo {
+display: inline-block;
+width: 120px;
+text-align: right;
+vertical-align: middle;
+}
+.caja_campo_error {
+display: inline;
+text-align: middle;
+color: red;
+background: white;
+}
+

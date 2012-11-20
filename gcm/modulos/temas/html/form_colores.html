@@ -1,0 +1,38 @@
+<h2>Colores</h3>
+
+<form method="post" action="<?=$_SERVER['PHP_SELF']?>" style="width: 500px;">
+<div id="picker"></div>
+
+<div id="selector_colores">
+<?php $nivel=FALSE ; ?>
+<?php foreach ( $colores as $key => $color ) { ?>
+<?php if ( $key == $nivel  ) { $nivel++ ; ?>
+</table>
+<table>
+<thead>
+<td colspan="2">Colores: <?=$nivel-1?></td>
+</thead>
+<?php } ?>
+<tr class="form-item">
+   <td><?=$key?></td>
+   <td><input type="text" id="<?=$key?>" name="colores[<?=$key?>]" class="colorwell" value="<?=$this->rgb2html($color)?>" /></td>
+</tr>
+<?php } ?>
+</table>
+</div>
+<br /><br />
+<input type="hidden" name="m" value="temas" />
+<input type="hidden" name="a" value="administrar" />
+<button type="submit" name="accion" value="guardar_colores"><?=literal('Guardar colores',3)?></button>
+</form>
+<br />
+<form method="post" action="<?=$_SERVER['PHP_SELF']?>" style="width: 500px;">
+<fieldset>
+<legend><?=literal('Añadir un color',3)?></legend>
+<input type="text" name="color" cols="15" value="1-fuenteb"/>
+<input type="hidden" name="m" value="temas" />
+<input type="hidden" name="a" value="administrar" />
+<button type="submit" name="accion" value="anyadir_color"><?=literal('Añadir',3)?></button>
+</fieldset>
+</form>
+

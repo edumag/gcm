@@ -1,0 +1,21 @@
+
+/* Registro de la aplizaciýn */
+#caja_registro {
+border: 1px solid #68573D;
+width: 100%;
+overflow: auto;
+margin-top: 10px;
+}
+#caja_registro tr :hover {
+background: <?=$this->color("4")?>;
+color: <?=$this->color("2")?>;
+padding: 2px;
+}
+#caja_registro thead {
+background: <?=$this->color("4")?>;
+color: <?=$this->color("2")?>;
+padding: 2px;
+}
+.registros_sesion {
+overflow: auto;
+}

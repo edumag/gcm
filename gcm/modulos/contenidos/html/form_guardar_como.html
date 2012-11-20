@@ -1,0 +1,14 @@
+<h2><?=literal('Seleccionar sección y título',3)?></h2>
+<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+   <fieldset>
+      <legend><?=literal('Guardar como',3)?></legend>
+      <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_secciones.html'));?>
+      <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_titulo.html'));?>
+      <textarea style="display: none;" name="areaTexto">	<?=limpiarContenido($contenido)?></textarea>
+      <fieldset>
+         <legend><?=literal('Acciones',3)?></legend>
+         <button type='submit' name="e" value='ejecutar_nuevo' ><?=literal('Guardar')?></button>
+         <button type="submit" name="e" value="guardar_como_borrador"><?=literal('Guardar como borrador')?></button>
+      </fieldset>
+   </fieldset>
+</form>

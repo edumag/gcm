@@ -1,0 +1,50 @@
+<fieldset>
+   <legend  accesskey="n"><?=literal('Datos de usuario');?>:</legend>
+   <table>
+      <tr>
+         <td>
+            <?=literal('Usuario')?>
+         </td>
+         <td>
+            <input id='usuario' type="text" name="usuario" value="<?=$resultado['usuario']?>">
+         </td>
+      </tr>
+   </table>
+</fieldset>
+<fieldset>
+   <legend  accesskey="s"><?=literal('Datos personales');?>:</legend>
+   <table>
+      <tr>
+         <td>
+            <?=literal('Nombre')?>
+         </td>
+         <td>
+            <input id='nombre' type="text" name="nombre" value="<?=$resultado['nombre']?>">
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <?=literal('Apellidos')?>
+         </td>
+         <td>
+            <input id='apellidos' type="text" name="apellidos" value="<?=$resultado['apellidos']?>">
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <?=literal('Correo electronico')?>
+         </td>
+         <td>
+            <input id='mail' type="text" name="mail" value="<?=$resultado['mail']?>">
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <?=literal('Teléfono')?>
+         </td>
+         <td>
+            <input id='telefono' type="text" name="telefono" value="<?=$resultado['telefono']?>">
+         </td>
+      </tr>
+   </table>
+</fieldset>

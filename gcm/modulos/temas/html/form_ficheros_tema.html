@@ -1,0 +1,31 @@
+<form method="post">
+<fieldset>
+   <legend><?=literal('Editar ficheros de tema',3)?></legend>
+   <select name="editar_xdfecto" onchange="this.form.submit();">
+      <option value=""><?=literal('Ficheros por defecto',3)?></option>
+      <?php 
+      foreach($tipos as $tipo) {
+         if ( !empty($this->ficheros_xdefecto[$tipo]) ) {
+            foreach($this->ficheros_xdefecto[$tipo] as $key => $val) { ?>
+               <option title="<?=$val?>" value="<?=$key?>" ><?=$key?></option>
+               <?php }
+            }
+         }
+      ?>
+   </select>
+   <select name="editar_tema" onchange="this.form.submit();">
+      <option value=""><?=literal('Ficheros de tema',3)?></option>
+      <?php 
+      foreach($tipos as $tipo) {
+         if ( !empty($this->ficheros_tema[$tipo]) ) {
+            foreach($this->ficheros_tema[$tipo] as $key => $val) { ?>
+               <option title="<?=$val?>" value="<?=$key?>" ><?=$key?></option>
+               <?php }
+            }
+         }
+      ?>
+   </select>
+   <input type="hidden" name="m" value="temas" />
+   <input type="hidden" name="a" value="editar_fichero" />
+</fieldset>
+</form>'

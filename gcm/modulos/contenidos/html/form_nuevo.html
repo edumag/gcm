@@ -1,0 +1,13 @@
+<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+   <fieldset>
+      <legend><?=literal('Contenido nuevo',3)?></legend>
+      <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_secciones.html'))?>
+      <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_titulo.html'))?>
+      <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_contenido.html'))?>
+      <fieldset>
+         <legend><?=literal('Acciones',3)?></legend>
+         <button type="submit" name="e" value="ejecutar_nuevo"><?=literal('Guardar',3)?></button>
+         <button type="submit" name="e" value="guardar_como_borrador"><?=literal('Guardar como borrador')?></button>
+      </fieldset>
+   </fieldset>
+</form>

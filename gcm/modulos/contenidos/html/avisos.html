@@ -1,0 +1,14 @@
+<!-- contenidos/html/avisos.html -->
+<div class="<?php echo strtolower($tipo); ?>">
+   <ul>
+      <?php foreach( $registros as $registro ) { ?>
+      <li>
+      <?php if ( GCM_DEBUG ) { ?>
+      <a href="vim://<?=$registro[4].'@'.$registro[5]?>"><?=nl2br($registro[6])?></a>
+      <?php } else { ?>
+      <?=nl2br($registro[6])?>
+      <?php } ?>
+      </li>
+   <?php } ?>
+   </ul>
+</div>
