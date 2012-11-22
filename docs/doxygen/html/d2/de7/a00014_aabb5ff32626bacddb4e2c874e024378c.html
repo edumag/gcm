@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: DataBoundObject\__call</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../d4/d31/a00069.html">Usuarios</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td valign="top">
+      <div class="navtab">
+        <table>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/d31/a00069_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf">__construct</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/d31/a00069_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76">DefineTableName</a></td></tr>
+        </table>
+      </div>
+   </td>
+   <td valign="top" class="mempage">
+<a class="anchor" id="aabb5ff32626bacddb4e2c874e024378c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/de7/a00014_aabb5ff32626bacddb4e2c874e024378c.html#aabb5ff32626bacddb4e2c874e024378c">__call</a> </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>strFunction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>arArguments</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Para acceder o modificar los valores de los campos. </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../df/d73/a00358.html#_deprecated000001">Obsoleto:</a></b></dt><dd></dd></dl>
+
+<p>Definición en la línea <a class="el" href="../../d1/d84/a00097_source.html#l00244">244</a> del archivo <a class="el" href="../../d1/d84/a00097_source.html">DataBoundObject.php</a>.</p>
+
+<p>Hace referencia a <a class="el" href="../../d1/d84/a00097_source.html#l00276">DataBoundObject\GetAccessor()</a> y <a class="el" href="../../d1/d84/a00097_source.html#l00265">DataBoundObject\SetAccessor()</a>.</p>
+<div class="fragment"><pre class="fragment">                                                      {
+
+      $strMethodType = substr($strFunction, 0, 3);
+      $strMethodMember = substr($strFunction, 3);
+      <span class="keywordflow">switch</span> ($strMethodType) {
+         <span class="keywordflow">case</span> <span class="stringliteral">&quot;set&quot;</span>:
+            <span class="keywordflow">return</span>($this-&gt;<a class="code" href="../../d2/de7/a00014_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($strMethodMember, $arArguments[0]));
+            <span class="keywordflow">break</span>;
+         <span class="keywordflow">case</span> <span class="stringliteral">&quot;get&quot;</span>:
+            <span class="keywordflow">return</span>($this-&gt;<a class="code" href="../../d2/de7/a00014_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($strMethodMember));   
+      };
+      <span class="keywordflow">return</span>(<span class="keyword">false</span>);   
+      }
+</pre></div>
+</div>
+</div>
+    </td>
+  </tr>
+</table>
+</div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Jueves, 22 de Noviembre de 2012 18:21:37 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

@@ -1,7 +1,15 @@
 <?php
 
 /**
- * Gcm - Gestor de contenido mamedu
+ * @file Gcm.php
+ * @brief Clase que inicia y conecta todos los elementos del framework
+ *
+ * @author    Eduardo Magrané eduardo.mamedu.com
+ * licencia: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
+ */
+
+/**
+ * @defgroup gcm_api Gestión de contenido MamEdu
  *
  * Frameworks que nos permite acelerar el proceso de construcción de una aplicación web
  *
@@ -15,17 +23,9 @@
  * En producción solo se debera comentar la linea en proyecto/index.php y se anula la posibilidad 
  * de debug
  *
+ * @author    Eduardo Magrané eduardo.mamedu.com
  * licencia: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  *
- * @bug Al mostrar pagina no encontrada se muestra formulario de registro
- *
- * @author    Eduardo Magrané eduardo.mamedu.com
- * @version   SVN $Id: Gcm.php 464 2011-02-02 16:12:12Z eduardo $ 
- */
-
-/** 
- * @defgroup Gcm Gestión de contenido MamEdu
- * 
  * @{
  */
 

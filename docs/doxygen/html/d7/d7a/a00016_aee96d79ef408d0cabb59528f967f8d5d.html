@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: Config\config</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../d7/d7a/a00016.html">Config</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td valign="top">
+      <div class="navtab">
+        <table>
+          <tr><td class="navtab"><a class="qindex" href="../../d7/d7a/a00016_a3e4a1c5a27f1b6f28b1fd51594cf5a2a.html#a3e4a1c5a27f1b6f28b1fd51594cf5a2a">__construct</a></td></tr>
+          <tr><td class="navtab"><a class="qindexHL" href="../../d7/d7a/a00016_aee96d79ef408d0cabb59528f967f8d5d.html#aee96d79ef408d0cabb59528f967f8d5d">config</a></td></tr>
+        </table>
+      </div>
+   </td>
+   <td valign="top" class="mempage">
+<a class="anchor" id="aee96d79ef408d0cabb59528f967f8d5d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d7a/a00016_aee96d79ef408d0cabb59528f967f8d5d.html#aee96d79ef408d0cabb59528f967f8d5d">config</a> </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>nombre_variable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>valor</em> = <code>FALSE</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Configuración. </p>
+<p>Si se nos da un valor para una variable, siempre la colocamos en el archivo de configuración del proyecto.</p>
+<p>El archivo llevara la variable $config[&lt;variable&gt;][&lt;valor&gt;];</p>
+<p>Para acelerar el proceso guardamos en cache</p>
+<dl class="params"><dt><b>Parámetros:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$nombre_variable</td><td>Nombre de la variable </td></tr>
+    <tr><td class="paramname">$valor</td><td>Valor para la variable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve:</dt><dd>En caso de pedir valor de variable: False en caso de no encontrar o su valor En caso de darnos un valor TRUE o FALSE dependiendo del exito de la operación </dd></dl>
+
+<p>Definición en la línea <a class="el" href="../../df/d6a/a00119_source.html#l00054">54</a> del archivo <a class="el" href="../../df/d6a/a00119_source.html">Config.php</a>.</p>
+<div class="fragment"><pre class="fragment">                                                   {
+
+      <span class="comment">// Si se pide un valor y ya lo tenemos recogido lo devolvemos</span>
+      <span class="keywordflow">if</span> ( !$valor &amp;&amp; isset($this-&gt;configuracion[$nombre_variable]) ) <span class="keywordflow">return</span> $this-&gt;configuracion[$nombre_variable];
+
+      <span class="keywordflow">if</span> ( $valor ) {                  <span class="comment">// Guardar valor de variable</span>
+
+         $arr = GcmConfigFactory::GetGcmConfig($$this-&gt;archivo_configuracion);
+
+         $arr-&gt;set($nombre_variable,$valor);
+         $arr-&gt;guardar_variables();
+         $this-&gt;configuracion[$nombre_variable] = $valor;
+
+      } <span class="keywordflow">else</span> {                         <span class="comment">// Devoler valor de variable</span>
+
+         <span class="keywordflow">if</span> ( !file_exists($this-&gt;archivo_configuracion) ) {
+            die (<span class="stringliteral">&#39;Archivo de configuración no existe: [&#39;</span>.$this-&gt;archivo_configuracion.<span class="charliteral">&#39;]&#39;</span>);
+            <span class="keywordflow">return</span> FALSE;
+            }
+
+         $arr = GcmConfigFactory::GetGcmConfig($this-&gt;archivo_configuracion);
+         $valor = $arr-&gt;get($nombre_variable);
+         $this-&gt;configuracion[$nombre_variable] = $valor;
+         <span class="keywordflow">return</span> $valor;
+
+         }
+
+      }
+</pre></div>
+</div>
+</div>
+    </td>
+  </tr>
+</table>
+</div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Jueves, 22 de Noviembre de 2012 18:21:36 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

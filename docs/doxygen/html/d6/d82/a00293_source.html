@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: Fichero Fuente gcm/modulos/indexador/html/listado_columna.html</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_9b052a3440b154b2392779948b3a8c54.html">indexador</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1417f59272386799b39d2b0614ce1793.html">html</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">listado_columna.html</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php <span class="keywordflow">while</span>($fila = $this-&gt;resultado-&gt;fetch(PDO::FETCH_OBJ)) { ?&gt;
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 &lt;?php $caminos = explode(<span class="charliteral">&#39;/&#39;</span>,$fila-&gt;url); ?&gt;
+<a name="l00004"></a>00004 &lt;?php $camino = <span class="stringliteral">&#39;&#39;</span>; ?&gt;
+<a name="l00005"></a>00005 &lt;?php <span class="keywordflow">for</span> ( $s=0; $s&lt;count($caminos)-1; $s++ ) { ?&gt;
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 &lt;?php <span class="keywordflow">if</span> ( $caminos[$s] != <span class="stringliteral">&quot;&quot;</span> ) { ?&gt;
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 &lt;?php $camino .= <span class="stringliteral">&#39; / &#39;</span>.literal($caminos[$s]); ?&gt;
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 &lt;?php } ?&gt;
+<a name="l00012"></a>00012 &lt;?php } ?&gt;
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 &lt;?php <span class="keywordflow">if</span> ( $fila-&gt;nombre == <span class="stringliteral">&#39;index&#39;</span> ) { ?&gt;
+<a name="l00015"></a>00015 &lt;?php $titulo = literal(dirname($fila-&gt;url)); ?&gt;
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 &lt;?php } <span class="keywordflow">else</span> { ?&gt;
+<a name="l00018"></a>00018 &lt;?php $titulo = literal(trim($fila-&gt;nombre)); ?&gt;
+<a name="l00019"></a>00019 &lt;?php } ?&gt;
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;cajaListado&#39;</span>&gt;
+<a name="l00022"></a>00022    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;titulo_articulo&quot;</span>&gt;
+<a name="l00023"></a>00023       &lt;a href=<span class="stringliteral">&quot;&lt;?=htmlentities(GUtil::gcm_generar_url($fila-&gt;url));?&gt;&quot;</span> &gt;&lt;?php echo $titulo; ?&gt;
+<a name="l00024"></a>00024       &lt;/a&gt;
+<a name="l00025"></a>00025       &lt;?php <span class="comment">/* Listado más limpio ?&gt;</span>
+<a name="l00026"></a>00026 <span class="comment">      &lt;div class=&#39;doc_info&#39;&gt;</span>
+<a name="l00027"></a>00027 <span class="comment">      &lt;?php if ( $fila-&gt;fecha_actualizacion_in )  { ?&gt;</span>
+<a name="l00028"></a>00028 <span class="comment">      &lt;h3&gt;&lt;?=presentarFecha($fila-&gt;fecha_actualizacion_in,1,&#39;mysql&#39;); ?&gt;&lt;/h3&gt;</span>
+<a name="l00029"></a>00029 <span class="comment">      &lt;?php } ?&gt;</span>
+<a name="l00030"></a>00030 <span class="comment">      &lt;?php if ( !empty($camino)  ) echo &#39;&lt;h3&gt;&#39;.$camino.&#39;&lt;/h3&gt;&#39;; ?&gt;</span>
+<a name="l00031"></a>00031 <span class="comment">      &lt;/div&gt;</span>
+<a name="l00032"></a>00032 <span class="comment">      &lt;?php */</span> ?&gt;
+<a name="l00033"></a>00033    &lt;/div&gt;
+<a name="l00034"></a>00034    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;contenidoListado&#39;</span>&gt;
+<a name="l00035"></a>00035       &lt;?php echo stripslashes($fila-&gt;descripcion); ?&gt;
+<a name="l00036"></a>00036    &lt;/div&gt; &lt;!-- Acaba contenidoListado --&gt;
+<a name="l00037"></a>00037 &lt;/div&gt; &lt;!-- Acaba cajaListado --&gt;
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 &lt;?php } ?&gt;
+<a name="l00040"></a>00040 
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: Fichero Fuente gcm/lib/int/registro/RegistroFactory.php</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_f936d10d5cef60c660b4cee12b5fb202.html">registro</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="headertitle">
+<div class="title">RegistroFactory.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d5/d5b/a00135.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/**</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file      RegistroFactory.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Patron Factory para la clase Registro</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  22/01/10</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: RegistroFactory.php 478 2011-02-28 08:31:31Z eduardo $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="comment"></span>
+<a name="l00019"></a>00019 <span class="comment">/**</span>
+<a name="l00020"></a>00020 <span class="comment"> * @class RegistroFactory</span>
+<a name="l00021"></a>00021 <span class="comment"> * @brief Patron Factory para la clase Registro</span>
+<a name="l00022"></a>00022 <span class="comment"> *</span>
+<a name="l00023"></a>00023 <span class="comment"> * Para asegurarnos que recogemos la misma instancia para cada fichero de </span>
+<a name="l00024"></a>00024 <span class="comment"> * configuración</span>
+<a name="l00025"></a>00025 <span class="comment"> *</span>
+<a name="l00026"></a>00026 <span class="comment"> * @version 0.1</span>
+<a name="l00027"></a>00027 <span class="comment"> */</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/Registro.php&#39;</span>);
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="../../d1/dea/a00054.html">00031</a> <span class="keyword">class </span><a class="code" href="../../d1/dea/a00054.html" title="Patron Factory para la clase Registro.">RegistroFactory</a> {
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> getRegistro($base_datos=NULL,$sufijo=<span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035       $key = md5(serialize($base_datos));
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037       <span class="keywordflow">if</span> ( ! isset($GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>]) || ! ($GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>][$key] instanceof <a class="code" href="../../dc/dee/a00053.html" title="Modulo para el registro de los mensajes de la aplizació">Registro</a>) ) {
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039          $GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>][$key] = <span class="keyword">new</span> Registro($base_datos,$sufijo);
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041          }
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043       <span class="keywordflow">return</span> $GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>][$key];
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045       }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047    }
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 ?&gt;
+</pre></div></div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

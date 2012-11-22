@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: EventosTest\setUp</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../d6/d5b/a00026.html">EventosTest</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td valign="top">
+      <div class="navtab">
+        <table>
+          <tr><td class="navtab"><a class="qindex" href="../../d6/d5b/a00026_a36f43c36e6b3288e6bfb8244ce59073e.html#a36f43c36e6b3288e6bfb8244ce59073e">main</a></td></tr>
+          <tr><td class="navtab"><a class="qindexHL" href="../../d6/d5b/a00026_a0bc688732d2b3b162ffebaf7812e78da.html#a0bc688732d2b3b162ffebaf7812e78da">setUp</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d6/d5b/a00026_a80fe3d17e658907fc75346a0ec9d6fc7.html#a80fe3d17e658907fc75346a0ec9d6fc7">tearDown</a></td></tr>
+        </table>
+      </div>
+   </td>
+   <td valign="top" class="mempage">
+<a class="anchor" id="a0bc688732d2b3b162ffebaf7812e78da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d6/d5b/a00026_a0bc688732d2b3b162ffebaf7812e78da.html#a0bc688732d2b3b162ffebaf7812e78da">setUp</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets up the fixture, for example, open a network connection. </p>
+<p>This method is called before a test is executed.</p>
+<p>protected </p>
+
+<p>Definición en la línea <a class="el" href="../../d3/d00/a00113_source.html#l00048">48</a> del archivo <a class="el" href="../../d3/d00/a00113_source.html">EventosTest.php</a>.</p>
+<div class="fragment"><pre class="fragment">                              {
+
+      <span class="comment">/* Creamos archivos en /tmp para simular archivos de eventos */</span>
+
+      $dir_ejemplo = <span class="stringliteral">&#39;/tmp/test_eventos/&#39;</span>;
+      <span class="keywordflow">if</span> ( is_dir($dir_ejemplo)  ) `rm -fr $dir_ejemplo.<span class="stringliteral">&#39;/*&#39;</span>`; 
+      <span class="keywordflow">if</span> ( !is_dir($dir_ejemplo)  ) mkdir($dir_ejemplo);
+      <span class="keywordflow">if</span> ( !is_dir($dir_ejemplo.<span class="stringliteral">&#39;modulo1&#39;</span>)  ) mkdir($dir_ejemplo.<span class="stringliteral">&#39;modulo1&#39;</span>);
+      <span class="keywordflow">if</span> ( !is_dir($dir_ejemplo.<span class="stringliteral">&#39;modulo2&#39;</span>)  ) mkdir($dir_ejemplo.<span class="stringliteral">&#39;modulo2&#39;</span>);
+      <span class="keywordflow">if</span> ( !is_dir($dir_ejemplo.<span class="stringliteral">&#39;modulo1/lib&#39;</span>)  ) mkdir($dir_ejemplo.<span class="stringliteral">&#39;modulo1/lib&#39;</span>);
+      <span class="keywordflow">if</span> ( !is_dir($dir_ejemplo.<span class="stringliteral">&#39;modulo2/lib&#39;</span>)  ) mkdir($dir_ejemplo.<span class="stringliteral">&#39;modulo2/lib&#39;</span>);
+
+      <span class="comment">/* construimos archivo para pruebas */</span>
+
+      $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento1&#39;][&#39;accion1&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento2&#39;][&#39;accion2&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento3&#39;][&#39;accion3&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
+      file_put_contents($dir_ejemplo.<span class="stringliteral">&#39;modulo1/eventos_admin.php&#39;</span>, $contenido);
+
+      $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento4&#39;][&#39;accion1&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento5&#39;][&#39;accion2&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento6&#39;][&#39;accion3&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$cEventos[&#39;evento6&#39;]=&#39;unico&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
+      file_put_contents($dir_ejemplo.<span class="stringliteral">&#39;modulo1/eventos_usuario.php&#39;</span>, $contenido);
+
+      $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento1&#39;][&#39;accion1&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento2&#39;][&#39;accion2&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento3&#39;][&#39;accion3&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
+      file_put_contents($dir_ejemplo.<span class="stringliteral">&#39;modulo2/eventos_admin.php&#39;</span>, $contenido);
+
+      $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento4&#39;][&#39;accion1&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento5&#39;][&#39;accion2&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$eventos[&#39;evento6&#39;][&#39;accion3&#39;][1]=&#39;&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
+      file_put_contents($dir_ejemplo.<span class="stringliteral">&#39;modulo2/eventos_usuario.php&#39;</span>, $contenido);
+
+      $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nclass modulo1 {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nfunction accion1(\$e) {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nglobal \$_GLOBALS;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$_GLOBALS[&#39;eventos&#39;][\$e][&#39;Modulo1&#39;] = &#39;accion1&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nfunction accion2(\$e) {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nglobal \$_GLOBALS;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$_GLOBALS[&#39;eventos&#39;][\$e][&#39;Modulo1&#39;] = &#39;accion2&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nfunction accion3(\$e) {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nglobal \$_GLOBALS;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$_GLOBALS[&#39;eventos&#39;][\$e][&#39;Modulo1&#39;] = &#39;accion3&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
+      file_put_contents($dir_ejemplo.<span class="stringliteral">&#39;modulo1/lib/Modulo1.php&#39;</span>, $contenido);
+
+      $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nclass modulo2 {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nfunction accion1(\$e) {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nglobal \$_GLOBALS;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$_GLOBALS[&#39;eventos&#39;][\$e][&#39;Modulo2&#39;] = &#39;accion1&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nfunction accion2(\$e) {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nglobal \$_GLOBALS;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$_GLOBALS[&#39;eventos&#39;][\$e][&#39;Modulo2&#39;] = &#39;accion2&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nfunction accion3(\$e) {&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\nglobal \$_GLOBALS;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n\$_GLOBALS[&#39;eventos&#39;][\$e][&#39;Modulo2&#39;] = &#39;accion3&#39;;&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n}&quot;</span>;
+      $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
+      file_put_contents($dir_ejemplo.<span class="stringliteral">&#39;modulo2/lib/Modulo2.php&#39;</span>, $contenido);
+
+      $this-&gt;e = <span class="keyword">new</span> <a class="code" href="../../d3/dfe/a00025.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a>($dir_ejemplo,FALSE); <span class="comment">// Solo eventos de usuario</span>
+      $this-&gt;a = <span class="keyword">new</span> <a class="code" href="../../d3/dfe/a00025.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a>($dir_ejemplo,TRUE);  <span class="comment">// Con eventos de administrador</span>
+   }
+</pre></div>
+</div>
+</div>
+    </td>
+  </tr>
+</table>
+</div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Jueves, 22 de Noviembre de 2012 18:21:36 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>
