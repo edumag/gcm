@@ -121,14 +121,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00028"></a>00028 <span class="comment"> * @todo Crear mecanismo para eliminar literal de todos los idiomas no solo del que estamos.</span>
 <a name="l00029"></a>00029 <span class="comment"> */</span>
 <a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../d3/dea/a00046.html">00031</a> <span class="keyword">class </span><a class="code" href="../../d3/dea/a00046.html" title="Manejo de literales.">Literales</a> <span class="keyword">extends</span> <a class="code" href="../../d4/dca/a00048.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00031"></a><a class="code" href="../../d6/d97/a00045.html">00031</a> <span class="keyword">class </span><a class="code" href="../../d6/d97/a00045.html" title="Manejo de literales.">Literales</a> <span class="keyword">extends</span> <a class="code" href="../../d6/d2d/a00047.html" title="Interface para los módulos.">Modulos</a> {
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033    <span class="keyword">private</span> $etiqueta_inicio;           <span class="comment">///&lt; Formato de etiqueta (Inicio)</span>
 <a name="l00034"></a>00034 <span class="comment"></span>   <span class="keyword">private</span> $etiqueta_final;            <span class="comment">///&lt; Formato de etiqueta (Final)</span>
 <a name="l00035"></a>00035 <span class="comment"></span>
-<a name="l00036"></a><a class="code" href="../../d3/dea/a00046_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00036</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dea/a00046_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() {
+<a name="l00036"></a><a class="code" href="../../d6/d97/a00045_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00036</a>    <span class="keyword">function</span> <a class="code" href="../../d6/d97/a00045_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() {
 <a name="l00037"></a>00037 
-<a name="l00038"></a>00038       <a class="code" href="../../d3/dea/a00046_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">parent::__construct</a>();
+<a name="l00038"></a>00038       <a class="code" href="../../d6/d97/a00045_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">parent::__construct</a>();
 <a name="l00039"></a>00039 
 <a name="l00040"></a>00040       $this-&gt;etiqueta_inicio = <span class="stringliteral">&#39;{L{&#39;</span>;
 <a name="l00041"></a>00041       $this-&gt;etiqueta_final  = <span class="stringliteral">&#39;}}&#39;</span>;
@@ -140,9 +140,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00047"></a>00047 <span class="comment">    * contenido del archivo</span>
 <a name="l00048"></a>00048 <span class="comment">    */</span>
 <a name="l00049"></a>00049 
-<a name="l00050"></a><a class="code" href="../../d3/dea/a00046_a3cd3a99350686722b55cdede643b1da5.html#a3cd3a99350686722b55cdede643b1da5">00050</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dea/a00046_a3cd3a99350686722b55cdede643b1da5.html#a3cd3a99350686722b55cdede643b1da5" title="Procesar texto para identificar etiqueta {Lit{&lt;archivo&gt;}} y presentar contenido del archivo...">procesar_texto</a>() {
+<a name="l00050"></a><a class="code" href="../../d6/d97/a00045_a3cd3a99350686722b55cdede643b1da5.html#a3cd3a99350686722b55cdede643b1da5">00050</a>    <span class="keyword">function</span> <a class="code" href="../../d6/d97/a00045_a3cd3a99350686722b55cdede643b1da5.html#a3cd3a99350686722b55cdede643b1da5" title="Procesar texto para identificar etiqueta {Lit{&lt;archivo&gt;}} y presentar contenido del archivo...">procesar_texto</a>() {
 <a name="l00051"></a>00051 
-<a name="l00052"></a>00052       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>; <a class="code" href="../../d4/d63/a00082_ace04dd6b8f596ad496608240dc47c0de.html#ace04dd6b8f596ad496608240dc47c0de" title="Literales de proyecto.">$LG</a> ;
+<a name="l00052"></a>00052       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>; <a class="code" href="../../d8/d53/a00081_ace04dd6b8f596ad496608240dc47c0de.html#ace04dd6b8f596ad496608240dc47c0de" title="Literales de proyecto.">$LG</a> ;
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054       $buffer = $gcm-&gt;contenido;
 <a name="l00055"></a>00055 
@@ -162,7 +162,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00069"></a>00069 
 <a name="l00070"></a>00070          <span class="keywordflow">if</span> ( $pos1 &amp;&amp; $pos2 &amp;&amp; $etiqueta &amp;&amp; $remplazar ) {
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072             $etiqueta = $this-&gt;<a class="code" href="../../d3/dea/a00046_aa88fe8040d5b85b6e9918ff0d570452c.html#aa88fe8040d5b85b6e9918ff0d570452c" title="Procesar la etiqueta.">procesa_etiqueta</a>($etiqueta);
+<a name="l00072"></a>00072             $etiqueta = $this-&gt;<a class="code" href="../../d6/d97/a00045_aa88fe8040d5b85b6e9918ff0d570452c.html#aa88fe8040d5b85b6e9918ff0d570452c" title="Procesar la etiqueta.">procesa_etiqueta</a>($etiqueta);
 <a name="l00073"></a>00073 
 <a name="l00074"></a>00074             $buffer = str_replace($remplazar,$etiqueta,$buffer);
 <a name="l00075"></a>00075 
@@ -184,7 +184,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00091"></a>00091 <span class="comment">    * @param $etiqueta Etiqueta a modificar.</span>
 <a name="l00092"></a>00092 <span class="comment">    */</span>
 <a name="l00093"></a>00093 
-<a name="l00094"></a><a class="code" href="../../d3/dea/a00046_aa88fe8040d5b85b6e9918ff0d570452c.html#aa88fe8040d5b85b6e9918ff0d570452c">00094</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dea/a00046_aa88fe8040d5b85b6e9918ff0d570452c.html#aa88fe8040d5b85b6e9918ff0d570452c" title="Procesar la etiqueta.">procesa_etiqueta</a>($etiqueta) {
+<a name="l00094"></a><a class="code" href="../../d6/d97/a00045_aa88fe8040d5b85b6e9918ff0d570452c.html#aa88fe8040d5b85b6e9918ff0d570452c">00094</a>    <span class="keyword">function</span> <a class="code" href="../../d6/d97/a00045_aa88fe8040d5b85b6e9918ff0d570452c.html#aa88fe8040d5b85b6e9918ff0d570452c" title="Procesar la etiqueta.">procesa_etiqueta</a>($etiqueta) {
 <a name="l00095"></a>00095 
 <a name="l00096"></a>00096       <span class="keywordflow">return</span> literal($etiqueta,1) ;
 <a name="l00097"></a>00097 
@@ -200,24 +200,24 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00107"></a>00107 <span class="comment">    *</span>
 <a name="l00108"></a>00108 <span class="comment">    */</span>
 <a name="l00109"></a>00109 
-<a name="l00110"></a><a class="code" href="../../d3/dea/a00046_ac2e930f979b8067745da704cdf39397e.html#ac2e930f979b8067745da704cdf39397e">00110</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dea/a00046_ac2e930f979b8067745da704cdf39397e.html#ac2e930f979b8067745da704cdf39397e" title="Presentar panel de literales.">panel_literales</a>($e,$args=<span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00110"></a><a class="code" href="../../d6/d97/a00045_ac2e930f979b8067745da704cdf39397e.html#ac2e930f979b8067745da704cdf39397e">00110</a>    <span class="keyword">function</span> <a class="code" href="../../d6/d97/a00045_ac2e930f979b8067745da704cdf39397e.html#ac2e930f979b8067745da704cdf39397e" title="Presentar panel de literales.">panel_literales</a>($e,$args=<span class="stringliteral">&#39;&#39;</span>) {
 <a name="l00111"></a>00111 
-<a name="l00112"></a>00112       $this-&gt;<a class="code" href="../../d4/dca/a00048_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;literales.js&#39;</span>);
+<a name="l00112"></a>00112       $this-&gt;<a class="code" href="../../d6/d2d/a00047_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;literales.js&#39;</span>);
 <a name="l00113"></a>00113 
 <a name="l00114"></a>00114       ob_start(); 
 <a name="l00115"></a>00115       echo <span class="stringliteral">&#39;&lt;div id=&quot;panelLiterales&quot;&gt;&#39;</span>;
-<a name="l00116"></a>00116       $this-&gt;<a class="code" href="../../d3/dea/a00046_a0d2afbfa15447100ad20e47d7c1281f6.html#a0d2afbfa15447100ad20e47d7c1281f6" title="Devolvemos lista con formato json para javascript con el contenido del array especificado.">devolverLiterales</a>(); 
+<a name="l00116"></a>00116       $this-&gt;<a class="code" href="../../d6/d97/a00045_a0d2afbfa15447100ad20e47d7c1281f6.html#a0d2afbfa15447100ad20e47d7c1281f6" title="Devolvemos lista con formato json para javascript con el contenido del array especificado.">devolverLiterales</a>(); 
 <a name="l00117"></a>00117       echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
 <a name="l00118"></a>00118       $salida = ob_get_contents() ; ob_end_clean();
 <a name="l00119"></a>00119 
 <a name="l00120"></a>00120       $panel = array();
-<a name="l00121"></a>00121       $panel[<span class="stringliteral">&#39;titulo&#39;</span>] = literal(<span class="stringliteral">&#39;Literales&#39;</span>,3).<span class="charliteral">&#39;[&#39;</span>.<a class="code" href="../../d9/d73/a00060_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">Router::$i</a>.<span class="charliteral">&#39;]&#39;</span>;
+<a name="l00121"></a>00121       $panel[<span class="stringliteral">&#39;titulo&#39;</span>] = literal(<span class="stringliteral">&#39;Literales&#39;</span>,3).<span class="charliteral">&#39;[&#39;</span>.<a class="code" href="../../d3/d8b/a00059_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">Router::$i</a>.<span class="charliteral">&#39;]&#39;</span>;
 <a name="l00122"></a>00122       $panel[<span class="stringliteral">&#39;oculto&#39;</span>] = TRUE;
 <a name="l00123"></a>00123       $panel[<span class="stringliteral">&#39;href&#39;</span>] = <span class="stringliteral">&#39;javascript:visualizar(\&#39;panelLiterales\&#39;);&#39;</span>;
 <a name="l00124"></a>00124       $panel[<span class="stringliteral">&#39;subpanel&#39;</span>] =<span class="stringliteral">&#39;panelLiterales&#39;</span>;
 <a name="l00125"></a>00125       $panel[<span class="stringliteral">&#39;contenido&#39;</span>] = $salida; 
 <a name="l00126"></a>00126          
-<a name="l00127"></a>00127       <a class="code" href="../../d9/db3/a00066_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>($panel);
+<a name="l00127"></a>00127       <a class="code" href="../../de/de1/a00065_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>($panel);
 <a name="l00128"></a>00128 
 <a name="l00129"></a>00129       }
 <a name="l00130"></a>00130 <span class="comment"></span>
@@ -230,10 +230,10 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00137"></a>00137 <span class="comment">    *</span>
 <a name="l00138"></a>00138 <span class="comment">    */</span>
 <a name="l00139"></a>00139 
-<a name="l00140"></a><a class="code" href="../../d3/dea/a00046_a38526449b86de00e1e6309a0800f8462.html#a38526449b86de00e1e6309a0800f8462">00140</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dea/a00046_a38526449b86de00e1e6309a0800f8462.html#a38526449b86de00e1e6309a0800f8462" title="Eliminar literal.">eliminarLiteral</a>() {
+<a name="l00140"></a><a class="code" href="../../d6/d97/a00045_a38526449b86de00e1e6309a0800f8462.html#a38526449b86de00e1e6309a0800f8462">00140</a>    <span class="keyword">function</span> <a class="code" href="../../d6/d97/a00045_a38526449b86de00e1e6309a0800f8462.html#a38526449b86de00e1e6309a0800f8462" title="Eliminar literal.">eliminarLiteral</a>() {
 <a name="l00141"></a>00141 
-<a name="l00142"></a>00142       $idioma = <a class="code" href="../../d9/d73/a00060_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">Router::$i</a>;
-<a name="l00143"></a>00143       $file=<a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Directorio idiomas&#39;</span>).<span class="stringliteral">&quot;LG_&quot;</span>.$idioma.<span class="stringliteral">&quot;.php&quot;</span>;
+<a name="l00142"></a>00142       $idioma = <a class="code" href="../../d3/d8b/a00059_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">Router::$i</a>;
+<a name="l00143"></a>00143       $file=<a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Directorio idiomas&#39;</span>).<span class="stringliteral">&quot;LG_&quot;</span>.$idioma.<span class="stringliteral">&quot;.php&quot;</span>;
 <a name="l00144"></a>00144 
 <a name="l00145"></a>00145       $arr = GcmConfigFactory::GetGcmConfig($file);
 <a name="l00146"></a>00146       $arr-&gt;del($_GET[<span class="stringliteral">&#39;elemento&#39;</span>]);
@@ -254,11 +254,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00161"></a>00161 <span class="comment">   *</span>
 <a name="l00162"></a>00162 <span class="comment">   */</span>
 <a name="l00163"></a>00163 
-<a name="l00164"></a><a class="code" href="../../d3/dea/a00046_a0d2afbfa15447100ad20e47d7c1281f6.html#a0d2afbfa15447100ad20e47d7c1281f6">00164</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dea/a00046_a0d2afbfa15447100ad20e47d7c1281f6.html#a0d2afbfa15447100ad20e47d7c1281f6" title="Devolvemos lista con formato json para javascript con el contenido del array especificado.">devolverLiterales</a>($file=NULL) {
+<a name="l00164"></a><a class="code" href="../../d6/d97/a00045_a0d2afbfa15447100ad20e47d7c1281f6.html#a0d2afbfa15447100ad20e47d7c1281f6">00164</a>    <span class="keyword">function</span> <a class="code" href="../../d6/d97/a00045_a0d2afbfa15447100ad20e47d7c1281f6.html#a0d2afbfa15447100ad20e47d7c1281f6" title="Devolvemos lista con formato json para javascript con el contenido del array especificado.">devolverLiterales</a>($file=NULL) {
 <a name="l00165"></a>00165 
-<a name="l00166"></a>00166       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00166"></a>00166       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00167"></a>00167 
-<a name="l00168"></a>00168       $file = $gcm-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Directorio idiomas&#39;</span>).<span class="stringliteral">&quot;LG_&quot;</span>.<a class="code" href="../../d9/d73/a00060_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">Router::$i</a>.<span class="stringliteral">&quot;.php&quot;</span>;
+<a name="l00168"></a>00168       $file = $gcm-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Directorio idiomas&#39;</span>).<span class="stringliteral">&quot;LG_&quot;</span>.<a class="code" href="../../d3/d8b/a00059_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">Router::$i</a>.<span class="stringliteral">&quot;.php&quot;</span>;
 <a name="l00169"></a>00169 
 <a name="l00170"></a>00170       <span class="keywordflow">if</span> ( !file_exists($file) ) {
 <a name="l00171"></a>00171          trigger_error(<span class="stringliteral">&#39;Archivo de idiomas [&#39;</span>.$file.<span class="stringliteral">&#39;] no existe&#39;</span>, E_USER_ERROR);
@@ -293,7 +293,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00200"></a>00200 <span class="stringliteral">                  [X]</span>
 <a name="l00201"></a>00201 <span class="stringliteral">               &lt;/a&gt;</span>
 <a name="l00202"></a>00202 <span class="stringliteral">               &lt;a style=&quot;</span>font-size: smaller;<span class="stringliteral">&quot; title=&quot;</span>Modificar<span class="stringliteral">&quot; </span>
-<a name="l00203"></a>00203 <span class="stringliteral">                  href=&quot;</span>javascript:;<span class="stringliteral">&quot; onmousedown=&quot;</span><a class="code" href="../../d3/dea/a00046_a7e905bca85dbb8058ea5e855e41fc324.html#a7e905bca85dbb8058ea5e855e41fc324" title="Modificar array.">modificarLiteral</a>(\<span class="stringliteral">&#39;&#39;</span>.$key.<span class="charliteral">&#39;\&#39;</span>,\<span class="stringliteral">&#39;&#39;</span>.$valor.<span class="charliteral">&#39;\&#39;</span>)<span class="stringliteral">&quot; &gt;</span>
+<a name="l00203"></a>00203 <span class="stringliteral">                  href=&quot;</span>javascript:;<span class="stringliteral">&quot; onmousedown=&quot;</span><a class="code" href="../../d6/d97/a00045_a7e905bca85dbb8058ea5e855e41fc324.html#a7e905bca85dbb8058ea5e855e41fc324" title="Modificar array.">modificarLiteral</a>(\<span class="stringliteral">&#39;&#39;</span>.$key.<span class="charliteral">&#39;\&#39;</span>,\<span class="stringliteral">&#39;&#39;</span>.$valor.<span class="charliteral">&#39;\&#39;</span>)<span class="stringliteral">&quot; &gt;</span>
 <a name="l00204"></a>00204 <span class="stringliteral">                  [M]</span>
 <a name="l00205"></a>00205 <span class="stringliteral">               &lt;/a&gt;</span>
 <a name="l00206"></a>00206 <span class="stringliteral">               &lt;/p&gt;&#39;;</span>
@@ -315,7 +315,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00222"></a>00222 <span class="comment">    *                    En caso de no haberlo cogemos el del idioma actual</span>
 <a name="l00223"></a>00223 <span class="comment">    */</span>
 <a name="l00224"></a>00224 
-<a name="l00225"></a><a class="code" href="../../d3/dea/a00046_a74a58ec7db1c1e64b512f5177bc3c709.html#a74a58ec7db1c1e64b512f5177bc3c709">00225</a>    function anyadirLiteral() {
+<a name="l00225"></a><a class="code" href="../../d6/d97/a00045_a74a58ec7db1c1e64b512f5177bc3c709.html#a74a58ec7db1c1e64b512f5177bc3c709">00225</a>    function anyadirLiteral() {
 <a name="l00226"></a>00226       
 <a name="l00227"></a>00227       global $gcm;
 <a name="l00228"></a>00228 
@@ -342,7 +342,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00249"></a>00249 <span class="comment">    * @see GcmConfig</span>
 <a name="l00250"></a>00250 <span class="comment">    */</span>
 <a name="l00251"></a>00251 
-<a name="l00252"></a><a class="code" href="../../d3/dea/a00046_a7e905bca85dbb8058ea5e855e41fc324.html#a7e905bca85dbb8058ea5e855e41fc324">00252</a>    function modificarLiteral() {
+<a name="l00252"></a><a class="code" href="../../d6/d97/a00045_a7e905bca85dbb8058ea5e855e41fc324.html#a7e905bca85dbb8058ea5e855e41fc324">00252</a>    function modificarLiteral() {
 <a name="l00253"></a>00253 
 <a name="l00254"></a>00254       global $gcm;
 <a name="l00255"></a>00255 
@@ -368,7 +368,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00275"></a>00275 <span class="comment">    * @see GcmConfig</span>
 <a name="l00276"></a>00276 <span class="comment">    */</span>
 <a name="l00277"></a>00277 
-<a name="l00278"></a><a class="code" href="../../d3/dea/a00046_ab3fa98b73579107303a2c9165b761453.html#ab3fa98b73579107303a2c9165b761453">00278</a>    function contenido_nuevo($e, $args=&#39;&#39;) {
+<a name="l00278"></a><a class="code" href="../../d6/d97/a00045_ab3fa98b73579107303a2c9165b761453.html#ab3fa98b73579107303a2c9165b761453">00278</a>    function contenido_nuevo($e, $args=&#39;&#39;) {
 <a name="l00279"></a>00279 
 <a name="l00280"></a>00280       $extension = ( $e == &quot;postGuardar<span class="stringliteral">&quot; ) ? &#39;.html&#39; : &#39;.btml&#39; ;</span>
 <a name="l00281"></a>00281 <span class="stringliteral"></span>
@@ -410,7 +410,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

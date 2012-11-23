@@ -116,18 +116,18 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00022"></a>00022 <span class="comment"> * @version 0.1</span>
 <a name="l00023"></a>00023 <span class="comment"> */</span>
 <a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="../../de/d8c/a00036.html">00025</a> <span class="keyword">class </span><a class="code" href="../../de/d8c/a00036.html" title="Extensión para PDO.">GcmPDO</a> {
+<a name="l00025"></a><a class="code" href="../../d4/d8c/a00035.html">00025</a> <span class="keyword">class </span><a class="code" href="../../d4/d8c/a00035.html" title="Extensión para PDO.">GcmPDO</a> {
 <a name="l00026"></a>00026 
-<a name="l00027"></a><a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58">00027</a>    <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$resultado</a>;                    <span class="comment">///&lt; Recorset con el resultado</span>
-<a name="l00028"></a><a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525">00028</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;                          <span class="comment">///&lt; sql generado</span>
-<a name="l00029"></a><a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e">00029</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;                          <span class="comment">///&lt; Instancia de PDO</span>
-<a name="l00030"></a><a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b">00030</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$num_total_registros</a>;          <span class="comment">///&lt; Número total de registro</span>
+<a name="l00027"></a><a class="code" href="../../d4/d8c/a00035_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58">00027</a>    <span class="keyword">protected</span> <a class="code" href="../../d4/d8c/a00035_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$resultado</a>;                    <span class="comment">///&lt; Recorset con el resultado</span>
+<a name="l00028"></a><a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525">00028</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;                          <span class="comment">///&lt; sql generado</span>
+<a name="l00029"></a><a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e">00029</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;                          <span class="comment">///&lt; Instancia de PDO</span>
+<a name="l00030"></a><a class="code" href="../../d4/d8c/a00035_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b">00030</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d4/d8c/a00035_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$num_total_registros</a>;          <span class="comment">///&lt; Número total de registro</span>
 <a name="l00031"></a>00031 <span class="comment"></span>
-<a name="l00032"></a>00032    <span class="keyword">function</span> __construct (PDO <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>) {
+<a name="l00032"></a>00032    <span class="keyword">function</span> __construct (PDO <a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>) {
 <a name="l00033"></a>00033 
 <a name="l00034"></a>00034       $this-&gt;num_total_registros = 0;
-<a name="l00035"></a>00035       $this-&gt;pdo = <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;
-<a name="l00036"></a>00036       $this-&gt;sql = <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;
+<a name="l00035"></a>00035       $this-&gt;pdo = <a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;
+<a name="l00036"></a>00036       $this-&gt;sql = <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;
 <a name="l00037"></a>00037 
 <a name="l00038"></a>00038       $consulta_count = <span class="stringliteral">&quot;SELECT COUNT(*) FROM ($this-&gt;sql) as conta&quot;</span>;
 <a name="l00039"></a>00039 
@@ -157,15 +157,15 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00063"></a>00063 <span class="comment">    * Devolver el numero total de registros</span>
 <a name="l00064"></a>00064 <span class="comment">    */</span>
 <a name="l00065"></a>00065 
-<a name="l00066"></a><a class="code" href="../../de/d8c/a00036_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8">00066</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8" title="Devolver el numero total de registros.">numero_registros</a>() {
-<a name="l00067"></a>00067       <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$this-&gt;num_total_registros</a>;
+<a name="l00066"></a><a class="code" href="../../d4/d8c/a00035_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8">00066</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d8c/a00035_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8" title="Devolver el numero total de registros.">numero_registros</a>() {
+<a name="l00067"></a>00067       <span class="keywordflow">return</span> <a class="code" href="../../d4/d8c/a00035_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$this-&gt;num_total_registros</a>;
 <a name="l00068"></a>00068       }
 <a name="l00069"></a>00069 <span class="comment"></span>
 <a name="l00070"></a>00070 <span class="comment">   /**</span>
 <a name="l00071"></a>00071 <span class="comment">    * Validar que hemos obtenido resultados</span>
 <a name="l00072"></a>00072 <span class="comment">    */</span>
 <a name="l00073"></a>00073 
-<a name="l00074"></a><a class="code" href="../../de/d8c/a00036_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7">00074</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7" title="Validar que hemos obtenido resultados.">validar</a>() {
+<a name="l00074"></a><a class="code" href="../../d4/d8c/a00035_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7">00074</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d8c/a00035_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7" title="Validar que hemos obtenido resultados.">validar</a>() {
 <a name="l00075"></a>00075 
 <a name="l00076"></a>00076       <span class="keywordflow">if</span> ( $this-&gt;num_total_registros &gt; 0 ) {
 <a name="l00077"></a>00077          <span class="keywordflow">return</span> TRUE;
@@ -178,14 +178,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00084"></a>00084 <span class="comment">    * Devolver recordset con el resultado</span>
 <a name="l00085"></a>00085 <span class="comment">    */</span>
 <a name="l00086"></a>00086 
-<a name="l00087"></a><a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b">00087</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>() {
+<a name="l00087"></a><a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b">00087</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>() {
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
+<a name="l00089"></a>00089       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) <span class="keywordflow">return</span> <a class="code" href="../../d4/d8c/a00035_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
 <a name="l00090"></a>00090 
 <a name="l00091"></a>00091       <span class="keywordflow">try</span> {
 <a name="l00092"></a>00092 
-<a name="l00093"></a>00093          $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>=$this-&gt;pdo-&gt;prepare($this-&gt;sql);
-<a name="l00094"></a>00094          $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;execute();
+<a name="l00093"></a>00093          $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>=$this-&gt;pdo-&gt;prepare($this-&gt;sql);
+<a name="l00094"></a>00094          $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;execute();
 <a name="l00095"></a>00095 
 <a name="l00096"></a>00096          } <span class="keywordflow">catch</span> (Exception $ex) {
 <a name="l00097"></a>00097             registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Error con la base de datos&quot;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
@@ -193,7 +193,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00099"></a>00099             <span class="keywordflow">return</span> FALSE;
 <a name="l00100"></a>00100             }
 <a name="l00101"></a>00101 
-<a name="l00102"></a>00102       <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
+<a name="l00102"></a>00102       <span class="keywordflow">return</span> <a class="code" href="../../d4/d8c/a00035_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
 <a name="l00103"></a>00103 
 <a name="l00104"></a>00104       }
 <a name="l00105"></a>00105 <span class="comment"></span>
@@ -201,13 +201,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00107"></a>00107 <span class="comment">    * Devolver resultado como array</span>
 <a name="l00108"></a>00108 <span class="comment">    */</span>
 <a name="l00109"></a>00109 
-<a name="l00110"></a><a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf">00110</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>() {
+<a name="l00110"></a><a class="code" href="../../d4/d8c/a00035_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf">00110</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d8c/a00035_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>() {
 <a name="l00111"></a>00111 
-<a name="l00112"></a>00112       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
+<a name="l00112"></a>00112       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
 <a name="l00113"></a>00113 
 <a name="l00114"></a>00114       $retorno = array();
 <a name="l00115"></a>00115 
-<a name="l00116"></a>00116       $arAll = $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;fetchAll(PDO::FETCH_ASSOC);
+<a name="l00116"></a>00116       $arAll = $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;fetchAll(PDO::FETCH_ASSOC);
 <a name="l00117"></a>00117 
 <a name="l00118"></a>00118       $conta = 0;
 <a name="l00119"></a>00119       <span class="keywordflow">foreach</span> ( $arAll as $arRow ) {
@@ -227,7 +227,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

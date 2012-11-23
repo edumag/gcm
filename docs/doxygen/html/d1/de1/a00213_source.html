@@ -121,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00028"></a>00028 <span class="comment"> * @version 0.1</span>
 <a name="l00029"></a>00029 <span class="comment"> */</span>
 <a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../da/da0/a00009.html">00031</a> <span class="keyword">class </span><a class="code" href="../../da/da0/a00009.html" title="Cache http.">Cache_http</a> <span class="keyword">extends</span> <a class="code" href="../../d4/dca/a00048.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00031"></a><a class="code" href="../../d4/dee/a00008.html">00031</a> <span class="keyword">class </span><a class="code" href="../../d4/dee/a00008.html" title="Cache http.">Cache_http</a> <span class="keyword">extends</span> <a class="code" href="../../d6/d2d/a00047.html" title="Interface para los módulos.">Modulos</a> {
 <a name="l00032"></a>00032 <span class="comment"></span>
 <a name="l00033"></a>00033 <span class="comment">   /**</span>
 <a name="l00034"></a>00034 <span class="comment">    * Directorio donde se guarda la cache</span>
@@ -157,9 +157,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00064"></a>00064 <span class="comment"></span>
 <a name="l00065"></a>00065 <span class="comment">   /** Constructor */</span>
 <a name="l00066"></a>00066 
-<a name="l00067"></a><a class="code" href="../../da/da0/a00009_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00067</a>    <span class="keyword">function</span> <a class="code" href="../../da/da0/a00009_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">__construct</a>() {
+<a name="l00067"></a><a class="code" href="../../d4/dee/a00008_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00067</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dee/a00008_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">__construct</a>() {
 <a name="l00068"></a>00068 
-<a name="l00069"></a>00069       <a class="code" href="../../da/da0/a00009_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
+<a name="l00069"></a>00069       <a class="code" href="../../d4/dee/a00008_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
 <a name="l00070"></a>00070 
 <a name="l00071"></a>00071       $this-&gt;dir_cache = <span class="stringliteral">&#39;cache/&#39;</span>;
 <a name="l00072"></a>00072       $this-&gt;duracion  = 60*60*2;
@@ -174,8 +174,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00081"></a>00081 
 <a name="l00082"></a>00082    <span class="keyword">function</span> test() {
 <a name="l00083"></a>00083 
-<a name="l00084"></a>00084       $this-&gt;<a class="code" href="../../d4/dca/a00048_a73d09724ce888beae9c3fe1d4b57327e.html#a73d09724ce888beae9c3fe1d4b57327e" title="Test de módulos.">ejecuta_test</a>(<span class="stringliteral">&#39;Directorio para cache: &#39;</span>.$this-&gt;dir_cache, file_exists($this-&gt;dir_cache), TRUE);
-<a name="l00085"></a>00085       $this-&gt;<a class="code" href="../../d4/dca/a00048_a73d09724ce888beae9c3fe1d4b57327e.html#a73d09724ce888beae9c3fe1d4b57327e" title="Test de módulos.">ejecuta_test</a>(<span class="stringliteral">&#39;Permisos de directorio: &#39;</span>.$this-&gt;dir_cache,is_readable($this-&gt;dir_cache), TRUE);
+<a name="l00084"></a>00084       $this-&gt;<a class="code" href="../../d6/d2d/a00047_a73d09724ce888beae9c3fe1d4b57327e.html#a73d09724ce888beae9c3fe1d4b57327e" title="Test de módulos.">ejecuta_test</a>(<span class="stringliteral">&#39;Directorio para cache: &#39;</span>.$this-&gt;dir_cache, file_exists($this-&gt;dir_cache), TRUE);
+<a name="l00085"></a>00085       $this-&gt;<a class="code" href="../../d6/d2d/a00047_a73d09724ce888beae9c3fe1d4b57327e.html#a73d09724ce888beae9c3fe1d4b57327e" title="Test de módulos.">ejecuta_test</a>(<span class="stringliteral">&#39;Permisos de directorio: &#39;</span>.$this-&gt;dir_cache,is_readable($this-&gt;dir_cache), TRUE);
 <a name="l00086"></a>00086 
 <a name="l00087"></a>00087       }
 <a name="l00088"></a>00088 <span class="comment"></span>
@@ -193,12 +193,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00100"></a>00100 <span class="comment">    * @return TRUE/FALSE</span>
 <a name="l00101"></a>00101 <span class="comment">    */</span>
 <a name="l00102"></a>00102 
-<a name="l00103"></a><a class="code" href="../../da/da0/a00009_a43f1f1bb1208124dc282efda5d2e96ba.html#a43f1f1bb1208124dc282efda5d2e96ba">00103</a>    <span class="keyword">function</span> <a class="code" href="../../da/da0/a00009_a43f1f1bb1208124dc282efda5d2e96ba.html#a43f1f1bb1208124dc282efda5d2e96ba" title="Comprobar cache.">alInicio</a>() {
+<a name="l00103"></a><a class="code" href="../../d4/dee/a00008_a43f1f1bb1208124dc282efda5d2e96ba.html#a43f1f1bb1208124dc282efda5d2e96ba">00103</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dee/a00008_a43f1f1bb1208124dc282efda5d2e96ba.html#a43f1f1bb1208124dc282efda5d2e96ba" title="Comprobar cache.">alInicio</a>() {
 <a name="l00104"></a>00104 
-<a name="l00105"></a>00105       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00105"></a>00105       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00106"></a>00106 
 <a name="l00107"></a>00107       <span class="comment">/* Añadimos javascript por si se apreta el boton de borrar cache en menu administrativo */</span>
-<a name="l00108"></a>00108       <span class="keywordflow">if</span> ( $gcm-&gt;au-&gt;logeado() ) $this-&gt;<a class="code" href="../../d4/dca/a00048_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;cache_http.js&#39;</span>);
+<a name="l00108"></a>00108       <span class="keywordflow">if</span> ( $gcm-&gt;au-&gt;logeado() ) $this-&gt;<a class="code" href="../../d6/d2d/a00047_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;cache_http.js&#39;</span>);
 <a name="l00109"></a>00109 
 <a name="l00110"></a>00110       <span class="keywordflow">if</span> ( $gcm-&gt;au-&gt;logeado() ) {
 <a name="l00111"></a>00111          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="stringliteral">&#39;() En modo debug no cacheamos&#39;</span>);
@@ -232,7 +232,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00139"></a>00139       $aDirname  = explode(<span class="charliteral">&#39;?&#39;</span>,$url);
 <a name="l00140"></a>00140       $basename = basename($aBasename[0]);
 <a name="l00141"></a>00141       $dirname = $this-&gt;dir_cache.dirname($aDirname[0]);
-<a name="l00142"></a>00142       <a class="code" href="../../dd/d42/a00109_a64a0dcf7a28d2b6acb2ee72e6b9b27b9.html#a64a0dcf7a28d2b6acb2ee72e6b9b27b9" title="Creación de un directorio y sus subdirectorios si es necesario.">mkdir_recursivo</a>($dirname);
+<a name="l00142"></a>00142       <a class="code" href="../../d1/dd6/a00108_a64a0dcf7a28d2b6acb2ee72e6b9b27b9.html#a64a0dcf7a28d2b6acb2ee72e6b9b27b9" title="Creación de un directorio y sus subdirectorios si es necesario.">mkdir_recursivo</a>($dirname);
 <a name="l00143"></a>00143 
 <a name="l00144"></a>00144       $this-&gt;archivo_cache = $dirname.<span class="charliteral">&#39;/&#39;</span>.$basename.<span class="charliteral">&#39;_&#39;</span>.
 <a name="l00145"></a>00145          $plataforma.<span class="charliteral">&#39;_&#39;</span>.$navegador.<span class="charliteral">&#39;_&#39;</span>.$version.<span class="charliteral">&#39;_&#39;</span>.
@@ -251,7 +251,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00158"></a>00158       <span class="keywordflow">if</span> (time() - $this-&gt;duracion &lt; $fecha_cache) {
 <a name="l00159"></a>00159          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Archivo en cache: &#39;</span>.$this-&gt;archivo_cache,<span class="stringliteral">&#39;ADMIN&#39;</span>);
 <a name="l00160"></a>00160          <span class="comment">/* Cabeceras de archivo */</span>
-<a name="l00161"></a>00161          $aExt = explode(<span class="charliteral">&#39;.&#39;</span>,<a class="code" href="../../d9/d73/a00060_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">Router::$url</a>);
+<a name="l00161"></a>00161          $aExt = explode(<span class="charliteral">&#39;.&#39;</span>,<a class="code" href="../../d3/d8b/a00059_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">Router::$url</a>);
 <a name="l00162"></a>00162          $ext = end($aExt);
 <a name="l00163"></a>00163          <span class="keywordflow">switch</span>($ext) {
 <a name="l00164"></a>00164          <span class="keywordflow">case</span> <span class="stringliteral">&#39;css&#39;</span>:
@@ -284,9 +284,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00191"></a>00191 <span class="comment">    * @return TRUE/FALSE</span>
 <a name="l00192"></a>00192 <span class="comment">    */</span>
 <a name="l00193"></a>00193 
-<a name="l00194"></a><a class="code" href="../../da/da0/a00009_aad29922e988ede98901ab4bb0ba59ae9.html#aad29922e988ede98901ab4bb0ba59ae9">00194</a>    <span class="keyword">function</span> <a class="code" href="../../da/da0/a00009_aad29922e988ede98901ab4bb0ba59ae9.html#aad29922e988ede98901ab4bb0ba59ae9" title="Al final creamos archivo en cache con la salida de la página.">alFinal</a>() {
+<a name="l00194"></a><a class="code" href="../../d4/dee/a00008_aad29922e988ede98901ab4bb0ba59ae9.html#aad29922e988ede98901ab4bb0ba59ae9">00194</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dee/a00008_aad29922e988ede98901ab4bb0ba59ae9.html#aad29922e988ede98901ab4bb0ba59ae9" title="Al final creamos archivo en cache con la salida de la página.">alFinal</a>() {
 <a name="l00195"></a>00195 
-<a name="l00196"></a>00196       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00196"></a>00196       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00197"></a>00197 
 <a name="l00198"></a>00198       <span class="keywordflow">if</span> ( isset($_SESSION[$gcm-&gt;sufijo.<span class="stringliteral">&#39;registros&#39;</span>]) || $gcm-&gt;reg-&gt;errores() || $gcm-&gt;au-&gt;logeado() || GCM_DEBUG ) <span class="keywordflow">return</span>;
 <a name="l00199"></a>00199 
@@ -321,9 +321,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00228"></a>00228 <span class="comment">    * @param $args Argumentos</span>
 <a name="l00229"></a>00229 <span class="comment">    */</span>
 <a name="l00230"></a>00230 
-<a name="l00231"></a><a class="code" href="../../da/da0/a00009_a4cd208bd5924186bcd702e52b81b0004.html#a4cd208bd5924186bcd702e52b81b0004">00231</a>    <span class="keyword">function</span> <a class="code" href="../../da/da0/a00009_a4cd208bd5924186bcd702e52b81b0004.html#a4cd208bd5924186bcd702e52b81b0004" title="Borrar cache sobre el contenido especificado.">borrar</a>($e, $args) {
+<a name="l00231"></a><a class="code" href="../../d4/dee/a00008_a4cd208bd5924186bcd702e52b81b0004.html#a4cd208bd5924186bcd702e52b81b0004">00231</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dee/a00008_a4cd208bd5924186bcd702e52b81b0004.html#a4cd208bd5924186bcd702e52b81b0004" title="Borrar cache sobre el contenido especificado.">borrar</a>($e, $args) {
 <a name="l00232"></a>00232 
-<a name="l00233"></a>00233       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00233"></a>00233       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00234"></a>00234 
 <a name="l00235"></a>00235       <span class="keywordflow">if</span> ( $args != <span class="stringliteral">&#39;todo&#39;</span> &amp;&amp; !empty($args) ) {
 <a name="l00236"></a>00236          $url = str_replace(<span class="charliteral">&#39;/&#39;</span>,<span class="charliteral">&#39;_&#39;</span>,$args);
@@ -333,13 +333,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00240"></a>00240          }
 <a name="l00241"></a>00241 
 <a name="l00242"></a>00242       registrar(__FILE__,__LINE__,
-<a name="l00243"></a>00243          __CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) Archivos a borrar: &#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($archivos));
+<a name="l00243"></a>00243          __CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) Archivos a borrar: &#39;</span>.<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($archivos));
 <a name="l00244"></a>00244 
 <a name="l00245"></a>00245       <span class="keywordflow">if</span> ( !isset($archivos) || empty($archivos) ) <span class="keywordflow">return</span>;
 <a name="l00246"></a>00246 
 <a name="l00247"></a>00247       <span class="keywordflow">foreach</span> ( $archivos as $archivo ) {
 <a name="l00248"></a>00248          <span class="keywordflow">if</span> ( is_dir($archivo) ) {
-<a name="l00249"></a>00249             <a class="code" href="../../dd/d42/a00109_ab0649acc2779d4332d86926091dfc518.html#ab0649acc2779d4332d86926091dfc518" title="Borrar directorio recursivamente.">rmdir_recursivo</a>($archivo);
+<a name="l00249"></a>00249             <a class="code" href="../../d1/dd6/a00108_ab0649acc2779d4332d86926091dfc518.html#ab0649acc2779d4332d86926091dfc518" title="Borrar directorio recursivamente.">rmdir_recursivo</a>($archivo);
 <a name="l00250"></a>00250          } <span class="keywordflow">else</span> {
 <a name="l00251"></a>00251             @unlink($archivo);
 <a name="l00252"></a>00252             }
@@ -370,7 +370,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00277"></a>00277 <span class="comment">    * @return Contenido de variable o FALSE en caso de no existir o exceder tiempo</span>
 <a name="l00278"></a>00278 <span class="comment">    */</span>
 <a name="l00279"></a>00279 
-<a name="l00280"></a><a class="code" href="../../da/da0/a00009_a54e3c6b5e83cdad328b636c39dea2e03.html#a54e3c6b5e83cdad328b636c39dea2e03">00280</a>    <span class="keyword">function</span> <a class="code" href="../../da/da0/a00009_a54e3c6b5e83cdad328b636c39dea2e03.html#a54e3c6b5e83cdad328b636c39dea2e03" title="Recuperar variable en cache.">recuperar_variable</a>($nombre_variable, $tiempo_expiracion=NULL) {
+<a name="l00280"></a><a class="code" href="../../d4/dee/a00008_a54e3c6b5e83cdad328b636c39dea2e03.html#a54e3c6b5e83cdad328b636c39dea2e03">00280</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dee/a00008_a54e3c6b5e83cdad328b636c39dea2e03.html#a54e3c6b5e83cdad328b636c39dea2e03" title="Recuperar variable en cache.">recuperar_variable</a>($nombre_variable, $tiempo_expiracion=NULL) {
 <a name="l00281"></a>00281 
 <a name="l00282"></a>00282       $tiempo_expiracion = ( $tiempo_expiracion ) ? $tiempo_expiracion : $this-&gt;duracion_variables;
 <a name="l00283"></a>00283 
@@ -400,7 +400,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00307"></a>00307 <span class="comment">    * Guardar variable en cache</span>
 <a name="l00308"></a>00308 <span class="comment">    */</span>
 <a name="l00309"></a>00309 
-<a name="l00310"></a><a class="code" href="../../da/da0/a00009_a07e264f3011a453a5ad4b42419238f76.html#a07e264f3011a453a5ad4b42419238f76">00310</a>    <span class="keyword">function</span> <a class="code" href="../../da/da0/a00009_a07e264f3011a453a5ad4b42419238f76.html#a07e264f3011a453a5ad4b42419238f76" title="Guardar variable en cache.">guardar_variable</a>($nombre_variable,$valor) {
+<a name="l00310"></a><a class="code" href="../../d4/dee/a00008_a07e264f3011a453a5ad4b42419238f76.html#a07e264f3011a453a5ad4b42419238f76">00310</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dee/a00008_a07e264f3011a453a5ad4b42419238f76.html#a07e264f3011a453a5ad4b42419238f76" title="Guardar variable en cache.">guardar_variable</a>($nombre_variable,$valor) {
 <a name="l00311"></a>00311 
 <a name="l00312"></a>00312       $archivo_variable = $nombre_variable.$this-&gt;extension;
 <a name="l00313"></a>00313 
@@ -418,7 +418,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

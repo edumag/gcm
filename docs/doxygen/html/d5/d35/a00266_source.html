@@ -115,7 +115,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00022"></a>00022 <span class="comment"> *</span>
 <a name="l00023"></a>00023 <span class="comment"> */</span>
 <a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="../../dc/de2/a00024.html">00025</a> <span class="keyword">class </span><a class="code" href="../../dc/de2/a00024.html" title="funciones para el envio de emails desde proyecto">Enviomail</a> <span class="keyword">extends</span> <a class="code" href="../../d4/dca/a00048.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00025"></a><a class="code" href="../../d3/d52/a00023.html">00025</a> <span class="keyword">class </span><a class="code" href="../../d3/d52/a00023.html" title="funciones para el envio de emails desde proyecto">Enviomail</a> <span class="keyword">extends</span> <a class="code" href="../../d6/d2d/a00047.html" title="Interface para los módulos.">Modulos</a> {
 <a name="l00026"></a>00026 <span class="comment"></span>
 <a name="l00027"></a>00027 <span class="comment">   /** enviaMailHtml</span>
 <a name="l00028"></a>00028 <span class="comment">    *</span>
@@ -135,9 +135,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00042"></a>00042 <span class="comment">    *</span>
 <a name="l00043"></a>00043 <span class="comment">    */</span>
 <a name="l00044"></a>00044 
-<a name="l00045"></a><a class="code" href="../../dc/de2/a00024_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b">00045</a>    <span class="keyword">function</span> <a class="code" href="../../dc/de2/a00024_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b" title="enviaMailHtml">enviaMailHtml</a>($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL,$html=<span class="stringliteral">&#39;true&#39;</span>){
+<a name="l00045"></a><a class="code" href="../../d3/d52/a00023_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b">00045</a>    <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b" title="enviaMailHtml">enviaMailHtml</a>($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL,$html=<span class="stringliteral">&#39;true&#39;</span>){
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00047"></a>00047       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049       $proyecto = $gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>);
 <a name="l00050"></a>00050 
@@ -145,17 +145,17 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00052"></a>00052       
 <a name="l00053"></a>00053          $plantilla[<span class="stringliteral">&#39;url_absoluta&#39;</span>] = <span class="stringliteral">&#39;http://&#39;</span>.$_SERVER[<span class="stringliteral">&#39;HTTP_HOST&#39;</span>].dirname($_SERVER[<span class="stringliteral">&#39;REQUEST_URI&#39;</span>]).<span class="charliteral">&#39;/&#39;</span>;
 <a name="l00054"></a>00054          $plantilla[<span class="stringliteral">&#39;titulo&#39;</span>] = literal($proyecto,1);
-<a name="l00055"></a>00055          $plantilla[<span class="stringliteral">&#39;fecha&#39;</span>] = <a class="code" href="../../dd/d42/a00109_ab944511ceeabc802c80f4943fbd6e0e2.html#ab944511ceeabc802c80f4943fbd6e0e2" title="presentarFecha">presentarFecha</a>(time());
+<a name="l00055"></a>00055          $plantilla[<span class="stringliteral">&#39;fecha&#39;</span>] = <a class="code" href="../../d1/dd6/a00108_ab944511ceeabc802c80f4943fbd6e0e2.html#ab944511ceeabc802c80f4943fbd6e0e2" title="presentarFecha">presentarFecha</a>(time());
 <a name="l00056"></a>00056          $plantilla[<span class="stringliteral">&#39;contenido&#39;</span>] = $contenidoMail;
 <a name="l00057"></a>00057 
-<a name="l00058"></a>00058          $contenido = <a class="code" href="../../dd/d42/a00109_a9b1e4ea03d0215dc686ab558f2f7e05e.html#a9b1e4ea03d0215dc686ab558f2f7e05e" title="Devolver la salida de un include.">get_include_contents</a>($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;enviomail&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;mail.html&#39;</span>),$plantilla);
+<a name="l00058"></a>00058          $contenido = <a class="code" href="../../d1/dd6/a00108_a9b1e4ea03d0215dc686ab558f2f7e05e.html#a9b1e4ea03d0215dc686ab558f2f7e05e" title="Devolver la salida de un include.">get_include_contents</a>($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;enviomail&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;mail.html&#39;</span>),$plantilla);
 <a name="l00059"></a>00059 
 <a name="l00060"></a>00060       } <span class="keywordflow">else</span> {
 <a name="l00061"></a>00061          
 <a name="l00062"></a>00062          $contenido = $contenidoMail;
 <a name="l00063"></a>00063       }
 <a name="l00064"></a>00064 
-<a name="l00065"></a>00065       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../dc/de2/a00024_a614e5cf28931dd4bb0f6d195ac7f0eac.html#a614e5cf28931dd4bb0f6d195ac7f0eac" title="procesaEnvioMail">procesaEnvioMail</a>($asunto,$contenido,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos,$html) ) {
+<a name="l00065"></a>00065       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/d52/a00023_a614e5cf28931dd4bb0f6d195ac7f0eac.html#a614e5cf28931dd4bb0f6d195ac7f0eac" title="procesaEnvioMail">procesaEnvioMail</a>($asunto,$contenido,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos,$html) ) {
 <a name="l00066"></a>00066          <span class="keywordflow">return</span> TRUE;
 <a name="l00067"></a>00067       } <span class="keywordflow">else</span> {
 <a name="l00068"></a>00068          <span class="keywordflow">return</span> FALSE;
@@ -180,9 +180,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00087"></a>00087 <span class="comment">    *</span>
 <a name="l00088"></a>00088 <span class="comment">    */</span>
 <a name="l00089"></a>00089 
-<a name="l00090"></a><a class="code" href="../../dc/de2/a00024_a614e5cf28931dd4bb0f6d195ac7f0eac.html#a614e5cf28931dd4bb0f6d195ac7f0eac">00090</a>    <span class="keyword">function</span> <a class="code" href="../../dc/de2/a00024_a614e5cf28931dd4bb0f6d195ac7f0eac.html#a614e5cf28931dd4bb0f6d195ac7f0eac" title="procesaEnvioMail">procesaEnvioMail</a>($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL, $html=<span class="stringliteral">&#39;true&#39;</span>){
+<a name="l00090"></a><a class="code" href="../../d3/d52/a00023_a614e5cf28931dd4bb0f6d195ac7f0eac.html#a614e5cf28931dd4bb0f6d195ac7f0eac">00090</a>    <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023_a614e5cf28931dd4bb0f6d195ac7f0eac.html#a614e5cf28931dd4bb0f6d195ac7f0eac" title="procesaEnvioMail">procesaEnvioMail</a>($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL, $html=<span class="stringliteral">&#39;true&#39;</span>){
 <a name="l00091"></a>00091 
-<a name="l00092"></a>00092       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00092"></a>00092       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00093"></a>00093 
 <a name="l00094"></a>00094       <span class="comment">// Idioma de sessión o el predeterminado del proyecto</span>
 <a name="l00095"></a>00095       $idioma = ($_SESSION[$gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>).<span class="stringliteral">&quot;-idioma&quot;</span>]) ? $_SESSION[$gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>).<span class="stringliteral">&quot;-idioma&quot;</span>] : LG_PRE;
@@ -250,7 +250,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00157"></a>00157 <span class="comment"></span>
 <a name="l00158"></a>00158 <span class="comment">   /** Formulario */</span>
 <a name="l00159"></a>00159 
-<a name="l00160"></a><a class="code" href="../../dc/de2/a00024_ae8ad9595a633bf580f8c9ff14434d420.html#ae8ad9595a633bf580f8c9ff14434d420">00160</a>    <span class="keyword">function</span> <a class="code" href="../../dc/de2/a00024_ae8ad9595a633bf580f8c9ff14434d420.html#ae8ad9595a633bf580f8c9ff14434d420" title="Formulario.">formulario</a>() {
+<a name="l00160"></a><a class="code" href="../../d3/d52/a00023_ae8ad9595a633bf580f8c9ff14434d420.html#ae8ad9595a633bf580f8c9ff14434d420">00160</a>    <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023_ae8ad9595a633bf580f8c9ff14434d420.html#ae8ad9595a633bf580f8c9ff14434d420" title="Formulario.">formulario</a>() {
 <a name="l00161"></a>00161       ob_start();
 <a name="l00162"></a>00162       include(dirname(__FILE__).<span class="stringliteral">&#39;/../html/form_enviomail.html&#39;</span>);
 <a name="l00163"></a>00163       $salida = ob_get_contents();
@@ -261,7 +261,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00168"></a>00168       $panel[<span class="stringliteral">&#39;oculto&#39;</span>] = TRUE;
 <a name="l00169"></a>00169       $panel[<span class="stringliteral">&#39;contenido&#39;</span>] =$salida;
 <a name="l00170"></a>00170 
-<a name="l00171"></a>00171       <a class="code" href="../../d9/db3/a00066_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>($panel);
+<a name="l00171"></a>00171       <a class="code" href="../../de/de1/a00065_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>($panel);
 <a name="l00172"></a>00172 
 <a name="l00173"></a>00173 
 <a name="l00174"></a>00174 
@@ -272,9 +272,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00179"></a>00179 <span class="comment">    * @todo Configurar email local o sevidor</span>
 <a name="l00180"></a>00180 <span class="comment">   */</span>
 <a name="l00181"></a>00181 
-<a name="l00182"></a><a class="code" href="../../dc/de2/a00024_a9c92c8c2c1bdd033e3f7645475d74151.html#a9c92c8c2c1bdd033e3f7645475d74151">00182</a>    <span class="keyword">function</span> <a class="code" href="../../dc/de2/a00024_a9c92c8c2c1bdd033e3f7645475d74151.html#a9c92c8c2c1bdd033e3f7645475d74151" title="Envio de email.">enviar_email_error</a>() {
+<a name="l00182"></a><a class="code" href="../../d3/d52/a00023_a9c92c8c2c1bdd033e3f7645475d74151.html#a9c92c8c2c1bdd033e3f7645475d74151">00182</a>    <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023_a9c92c8c2c1bdd033e3f7645475d74151.html#a9c92c8c2c1bdd033e3f7645475d74151" title="Envio de email.">enviar_email_error</a>() {
 <a name="l00183"></a>00183    
-<a name="l00184"></a>00184       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00184"></a>00184       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00185"></a>00185 
 <a name="l00186"></a>00186       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Enviando mail de usuario con error&#39;</span>);
 <a name="l00187"></a>00187 
@@ -306,7 +306,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00213"></a>00213 
 <a name="l00214"></a>00214          $contenido_mail .= <span class="stringliteral">&quot;\n&quot;</span>.$salida;
 <a name="l00215"></a>00215 
-<a name="l00216"></a>00216          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../dc/de2/a00024_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b" title="enviaMailHtml">enviaMailHtml</a>(<span class="stringliteral">&#39;Error en gcm&#39;</span>, $contenido_mail, <span class="stringliteral">&#39;Eduardo&#39;</span>, $mail_dev, <span class="stringliteral">&#39;Robot de gcm&#39;</span>, <span class="stringliteral">&#39;admin@mamedu.com&#39;</span>,NULL,<span class="stringliteral">&#39;false&#39;</span>) ) {
+<a name="l00216"></a>00216          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/d52/a00023_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b" title="enviaMailHtml">enviaMailHtml</a>(<span class="stringliteral">&#39;Error en gcm&#39;</span>, $contenido_mail, <span class="stringliteral">&#39;Eduardo&#39;</span>, $mail_dev, <span class="stringliteral">&#39;Robot de gcm&#39;</span>, <span class="stringliteral">&#39;admin@mamedu.com&#39;</span>,NULL,<span class="stringliteral">&#39;false&#39;</span>) ) {
 <a name="l00217"></a>00217 
 <a name="l00218"></a>00218             registrar(__FILE__,__LINE__,literal(<span class="stringliteral">&#39;El email a sido enviado&#39;</span>,3).<span class="charliteral">&#39; &#39;</span>.literal(<span class="stringliteral">&#39;Gracias&#39;</span>,3),<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00219"></a>00219             <span class="keywordflow">return</span> TRUE;
@@ -320,11 +320,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00227"></a>00227 <span class="comment"></span>
 <a name="l00228"></a>00228 <span class="comment">   /** Envio de email */</span>
 <a name="l00229"></a>00229 
-<a name="l00230"></a><a class="code" href="../../dc/de2/a00024_aeb1846eb7df1b85cd1c0d72f34dc075a.html#aeb1846eb7df1b85cd1c0d72f34dc075a">00230</a>    <span class="keyword">function</span> <a class="code" href="../../dc/de2/a00024_aeb1846eb7df1b85cd1c0d72f34dc075a.html#aeb1846eb7df1b85cd1c0d72f34dc075a" title="Envio de email.">enviar_email</a>($e, $args) {
+<a name="l00230"></a><a class="code" href="../../d3/d52/a00023_aeb1846eb7df1b85cd1c0d72f34dc075a.html#aeb1846eb7df1b85cd1c0d72f34dc075a">00230</a>    <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023_aeb1846eb7df1b85cd1c0d72f34dc075a.html#aeb1846eb7df1b85cd1c0d72f34dc075a" title="Envio de email.">enviar_email</a>($e, $args) {
 <a name="l00231"></a>00231    
-<a name="l00232"></a>00232       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00232"></a>00232       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00233"></a>00233 
-<a name="l00234"></a>00234       registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) &#39;</span>);
+<a name="l00234"></a>00234       registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) &#39;</span>);
 <a name="l00235"></a>00235 
 <a name="l00236"></a>00236       <span class="keywordflow">if</span> ( isset($args[<span class="stringliteral">&#39;mail&#39;</span>]) ) {
 <a name="l00237"></a>00237          $mail = $args[<span class="stringliteral">&#39;mail&#39;</span>];
@@ -338,7 +338,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00245"></a>00245          }
 <a name="l00246"></a>00246 
 <a name="l00247"></a>00247       <span class="keywordflow">if</span> ( !isset($args[<span class="stringliteral">&#39;cuerpo&#39;</span>]) ) {
-<a name="l00248"></a>00248          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) </span>
+<a name="l00248"></a>00248          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) </span>
 <a name="l00249"></a>00249 <span class="stringliteral">            Sin contenido para enviar&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
 <a name="l00250"></a>00250          <span class="keywordflow">return</span> FALSE;
 <a name="l00251"></a>00251          }
@@ -365,7 +365,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00272"></a>00272       $contenido_mail =  $args[<span class="stringliteral">&#39;cuerpo&#39;</span>];
 <a name="l00273"></a>00273       $asunto_mail    =  $args[<span class="stringliteral">&#39;asunto&#39;</span>];
 <a name="l00274"></a>00274 
-<a name="l00275"></a>00275       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../dc/de2/a00024_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b" title="enviaMailHtml">enviaMailHtml</a>($asunto_mail, $contenido_mail, $nombre_destinatario, $mail, $nombre_remitente, $mail_remitente,NULL,TRUE) ) {
+<a name="l00275"></a>00275       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/d52/a00023_a3ec3b9788fc6f473ba4146114e1ef03b.html#a3ec3b9788fc6f473ba4146114e1ef03b" title="enviaMailHtml">enviaMailHtml</a>($asunto_mail, $contenido_mail, $nombre_destinatario, $mail, $nombre_remitente, $mail_remitente,NULL,TRUE) ) {
 <a name="l00276"></a>00276 
 <a name="l00277"></a>00277          <span class="keywordflow">return</span> TRUE;
 <a name="l00278"></a>00278       } <span class="keywordflow">else</span> {
@@ -380,7 +380,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

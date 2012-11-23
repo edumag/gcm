@@ -126,11 +126,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00032"></a>00032 <span class="comment"> * @version 0.1</span>
 <a name="l00033"></a>00033 <span class="comment"> */</span>
 <a name="l00034"></a>00034 
-<a name="l00035"></a><a class="code" href="../../d0/dc0/a00033.html">00035</a> <span class="keyword">class </span><a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a> <span class="keyword">extends</span> <a class="code" href="../../d5/d79/a00030.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a> {
+<a name="l00035"></a><a class="code" href="../../dc/d87/a00032.html">00035</a> <span class="keyword">class </span><a class="code" href="../../dc/d87/a00032.html">GcmConfigGui</a> <span class="keyword">extends</span> <a class="code" href="../../d5/d16/a00029.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a> {
 <a name="l00036"></a>00036 
-<a name="l00037"></a>00037    <span class="keyword">function</span> __construct(<a class="code" href="../../d5/d79/a00030_afe5220b1741764b7daf40c2bbe3faff4.html#afe5220b1741764b7daf40c2bbe3faff4" title="Ruta de archivo que contiene el array con las variables.">$archivo</a>) {
+<a name="l00037"></a>00037    <span class="keyword">function</span> __construct(<a class="code" href="../../d5/d16/a00029_afe5220b1741764b7daf40c2bbe3faff4.html#afe5220b1741764b7daf40c2bbe3faff4" title="Ruta de archivo que contiene el array con las variables.">$archivo</a>) {
 <a name="l00038"></a>00038 
-<a name="l00039"></a>00039       parent::__construct(<a class="code" href="../../d5/d79/a00030_afe5220b1741764b7daf40c2bbe3faff4.html#afe5220b1741764b7daf40c2bbe3faff4" title="Ruta de archivo que contiene el array con las variables.">$archivo</a>);
+<a name="l00039"></a>00039       parent::__construct(<a class="code" href="../../d5/d16/a00029_afe5220b1741764b7daf40c2bbe3faff4.html#afe5220b1741764b7daf40c2bbe3faff4" title="Ruta de archivo que contiene el array con las variables.">$archivo</a>);
 <a name="l00040"></a>00040 
 <a name="l00041"></a>00041       }
 <a name="l00042"></a>00042 
@@ -151,7 +151,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00057"></a>00057 <span class="comment">    *        css                       Archivo con los css a utilizar, por defecto los del módulo.</span>
 <a name="l00058"></a>00058 <span class="comment">    */</span>
 <a name="l00059"></a>00059 
-<a name="l00060"></a><a class="code" href="../../d0/dc0/a00033_ad8522e201c913cbbdd1355354bf0f530.html#ad8522e201c913cbbdd1355354bf0f530">00060</a>    <span class="keyword">function</span> <a class="code" href="../../d0/dc0/a00033_ad8522e201c913cbbdd1355354bf0f530.html#ad8522e201c913cbbdd1355354bf0f530" title="Presentamos formulario con las variables a modificar.">formulario</a>($args = NULL) {
+<a name="l00060"></a><a class="code" href="../../dc/d87/a00032_ad8522e201c913cbbdd1355354bf0f530.html#ad8522e201c913cbbdd1355354bf0f530">00060</a>    <span class="keyword">function</span> <a class="code" href="../../dc/d87/a00032_ad8522e201c913cbbdd1355354bf0f530.html#ad8522e201c913cbbdd1355354bf0f530" title="Presentamos formulario con las variables a modificar.">formulario</a>($args = NULL) {
 <a name="l00061"></a>00061 
 <a name="l00062"></a>00062       $ampliar   = ( isset($args[<span class="stringliteral">&#39;ampliar&#39;</span>]) ) ? $args[<span class="stringliteral">&#39;ampliar&#39;</span>] : FALSE;
 <a name="l00063"></a>00063       $eliminar  = ( isset($args[<span class="stringliteral">&#39;eliminar&#39;</span>]) ) ? $args[<span class="stringliteral">&#39;eliminar&#39;</span>] : FALSE;
@@ -190,23 +190,23 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00096"></a>00096 <span class="comment">    * @return FALSE/TRUE</span>
 <a name="l00097"></a>00097 <span class="comment">    */</span>
 <a name="l00098"></a>00098 
-<a name="l00099"></a><a class="code" href="../../d0/dc0/a00033_a41ba3a489a0779c86a5956ac3ea42dd0.html#a41ba3a489a0779c86a5956ac3ea42dd0">00099</a>    <span class="keyword">function</span> <a class="code" href="../../d0/dc0/a00033_a41ba3a489a0779c86a5956ac3ea42dd0.html#a41ba3a489a0779c86a5956ac3ea42dd0" title="Escribimos en el archivo que contiene el array la nueva información que recibimos del formulario...">escribir_desde_post</a>() {
+<a name="l00099"></a><a class="code" href="../../dc/d87/a00032_a41ba3a489a0779c86a5956ac3ea42dd0.html#a41ba3a489a0779c86a5956ac3ea42dd0">00099</a>    <span class="keyword">function</span> <a class="code" href="../../dc/d87/a00032_a41ba3a489a0779c86a5956ac3ea42dd0.html#a41ba3a489a0779c86a5956ac3ea42dd0" title="Escribimos en el archivo que contiene el array la nueva información que recibimos del formulario...">escribir_desde_post</a>() {
 <a name="l00100"></a>00100 
 <a name="l00101"></a>00101       global $HTTP_POST_VARS;
 <a name="l00102"></a>00102 
-<a name="l00103"></a>00103       <a class="code" href="../../d5/d79/a00030_a9f7ca24786e24b62c75101dbc55583e8.html#a9f7ca24786e24b62c75101dbc55583e8" title="Idioma de las descripciones por defecto.">$idioma</a>  = $_POST[<span class="stringliteral">&#39;idioma&#39;</span>];
-<a name="l00104"></a>00104       <a class="code" href="../../d5/d79/a00030_afe5220b1741764b7daf40c2bbe3faff4.html#afe5220b1741764b7daf40c2bbe3faff4" title="Ruta de archivo que contiene el array con las variables.">$archivo</a> = $_POST[<span class="stringliteral">&#39;archivo&#39;</span>];
+<a name="l00103"></a>00103       <a class="code" href="../../d5/d16/a00029_a9f7ca24786e24b62c75101dbc55583e8.html#a9f7ca24786e24b62c75101dbc55583e8" title="Idioma de las descripciones por defecto.">$idioma</a>  = $_POST[<span class="stringliteral">&#39;idioma&#39;</span>];
+<a name="l00104"></a>00104       <a class="code" href="../../d5/d16/a00029_afe5220b1741764b7daf40c2bbe3faff4.html#afe5220b1741764b7daf40c2bbe3faff4" title="Ruta de archivo que contiene el array con las variables.">$archivo</a> = $_POST[<span class="stringliteral">&#39;archivo&#39;</span>];
 <a name="l00105"></a>00105 
 <a name="l00106"></a>00106       <span class="comment">/* Comprobar la existencia de contenido en las variables */</span>
 <a name="l00107"></a>00107 
-<a name="l00108"></a>00108       <span class="keywordflow">if</span> ( count($_POST[<span class="stringliteral">&#39;escribir_&#39;</span>.<a class="code" href="../../d5/d79/a00030_a9f7ca24786e24b62c75101dbc55583e8.html#a9f7ca24786e24b62c75101dbc55583e8" title="Idioma de las descripciones por defecto.">$idioma</a>]) &lt;= 0 ) {
+<a name="l00108"></a>00108       <span class="keywordflow">if</span> ( count($_POST[<span class="stringliteral">&#39;escribir_&#39;</span>.<a class="code" href="../../d5/d16/a00029_a9f7ca24786e24b62c75101dbc55583e8.html#a9f7ca24786e24b62c75101dbc55583e8" title="Idioma de las descripciones por defecto.">$idioma</a>]) &lt;= 0 ) {
 <a name="l00109"></a>00109          trigger_error(<span class="stringliteral">&#39;Sin valores validos en GET&#39;</span>);
 <a name="l00110"></a>00110          <span class="keywordflow">return</span> FALSE;
 <a name="l00111"></a>00111          }
 <a name="l00112"></a>00112 
 <a name="l00113"></a>00113       <span class="comment">/* Variables a cero */</span>
 <a name="l00114"></a>00114 
-<a name="l00115"></a>00115       $this-&gt;<a class="code" href="../../d5/d79/a00030_a0ae19d82784cb0104e68cdb971f59b71.html#a0ae19d82784cb0104e68cdb971f59b71" title="Devolver array con las variables.">variables</a> = array();
+<a name="l00115"></a>00115       $this-&gt;<a class="code" href="../../d5/d16/a00029_a0ae19d82784cb0104e68cdb971f59b71.html#a0ae19d82784cb0104e68cdb971f59b71" title="Devolver array con las variables.">variables</a> = array();
 <a name="l00116"></a>00116 
 <a name="l00117"></a>00117       <span class="keywordflow">foreach</span>( $_POST[<span class="stringliteral">&#39;escribir_&#39;</span>.$idioma] as $clave =&gt; $valor ) {
 <a name="l00118"></a>00118 
@@ -218,13 +218,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00124"></a>00124 
 <a name="l00125"></a>00125       <span class="keywordflow">if</span> ( count($_POST[<span class="stringliteral">&#39;descripcion_&#39;</span>.$idioma]) &gt; 0 ) {
 <a name="l00126"></a>00126 
-<a name="l00127"></a>00127          $this-&gt;<a class="code" href="../../d5/d79/a00030_a1f74ba6fffb38601522689660a1664e4.html#a1f74ba6fffb38601522689660a1664e4" title="Devolver array con las descripciones.">descripciones</a>[<a class="code" href="../../d5/d79/a00030_a9f7ca24786e24b62c75101dbc55583e8.html#a9f7ca24786e24b62c75101dbc55583e8" title="Idioma de las descripciones por defecto.">$idioma</a>] = array();
+<a name="l00127"></a>00127          $this-&gt;<a class="code" href="../../d5/d16/a00029_a1f74ba6fffb38601522689660a1664e4.html#a1f74ba6fffb38601522689660a1664e4" title="Devolver array con las descripciones.">descripciones</a>[<a class="code" href="../../d5/d16/a00029_a9f7ca24786e24b62c75101dbc55583e8.html#a9f7ca24786e24b62c75101dbc55583e8" title="Idioma de las descripciones por defecto.">$idioma</a>] = array();
 <a name="l00128"></a>00128 
 <a name="l00129"></a>00129          $this-&gt;descripciones_recogidas = TRUE;
 <a name="l00130"></a>00130 
 <a name="l00131"></a>00131          <span class="keywordflow">foreach</span>( $_POST[<span class="stringliteral">&#39;descripcion_&#39;</span>.$idioma] as $clave =&gt; $valor ) {
 <a name="l00132"></a>00132 
-<a name="l00133"></a>00133             $this-&gt;<a class="code" href="../../d5/d79/a00030_a7ed1ea5090caf55138ed48360bf3fdd9.html#a7ed1ea5090caf55138ed48360bf3fdd9" title="Guardar valor para descripción.">setDescripcion</a>($clave,$valor, $idioma);
+<a name="l00133"></a>00133             $this-&gt;<a class="code" href="../../d5/d16/a00029_a7ed1ea5090caf55138ed48360bf3fdd9.html#a7ed1ea5090caf55138ed48360bf3fdd9" title="Guardar valor para descripción.">setDescripcion</a>($clave,$valor, $idioma);
 <a name="l00134"></a>00134 
 <a name="l00135"></a>00135             }
 <a name="l00136"></a>00136 
@@ -241,7 +241,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

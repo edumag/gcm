@@ -128,13 +128,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00034"></a>00034 <span class="comment"> * @version 0.1</span>
 <a name="l00035"></a>00035 <span class="comment"> */</span>
 <a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="../../df/d61/a00031.html">00037</a> <span class="keyword">class </span><a class="code" href="../../df/d61/a00031.html" title="Añadimos GcmConfig.">GcmConfigFactory</a> {
+<a name="l00037"></a><a class="code" href="../../d5/d79/a00030.html">00037</a> <span class="keyword">class </span><a class="code" href="../../d5/d79/a00030.html" title="Añadimos GcmConfig.">GcmConfigFactory</a> {
 <a name="l00038"></a>00038 
 <a name="l00039"></a>00039    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> GetGcmConfig($archivo) {
 <a name="l00040"></a>00040 
 <a name="l00041"></a>00041       $key = md5(serialize($archivo));
 <a name="l00042"></a>00042 
-<a name="l00043"></a>00043       <span class="keywordflow">if</span> ( ! isset($GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key]) || ! ($GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key] instanceof <a class="code" href="../../d5/d79/a00030.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a>) ) {
+<a name="l00043"></a>00043       <span class="keywordflow">if</span> ( ! isset($GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key]) || ! ($GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key] instanceof <a class="code" href="../../d5/d16/a00029.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a>) ) {
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045          $GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key] = <span class="keyword">new</span> GcmConfig($archivo);
 <a name="l00046"></a>00046 
@@ -151,7 +151,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

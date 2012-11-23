@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Referencia de la Clase Eventos</title>
+<title>gcm: Referencia de la Clase EventosTest</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -83,84 +83,52 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Métodos públicos</a> &#124;
-<a href="#pub-attribs">Campos de datos</a>  </div>
+<a href="#pub-static-methods">Métodos públicos estáticos</a> &#124;
+<a href="#pro-methods">Métodos protegidos</a>  </div>
   <div class="headertitle">
-<div class="title">Referencia de la Clase Eventos</div>  </div>
+<div class="title">Referencia de la Clase EventosTest</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Módulo <a class="el" href="../../d3/dfe/a00025.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a> para conectar acciones con los módulos.  
+<p>Test class for <a class="el" href="../../dc/de2/a00024.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a>.  
  <a href="../../d3/dfe/a00025.html#details">Más...</a></p>
+
+<p>Herencias <a class="el" href="../../d2/dee/a00049.html">PHPUnit_Framework_TestCase</a>.</p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Métodos públicos</h2></td></tr>
-<tr class="memitem:a1015a2e5fbc6cbba40f48dad8d26942b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a1015a2e5fbc6cbba40f48dad8d26942b.html#a1015a2e5fbc6cbba40f48dad8d26942b">__construct</a> ($dir_modulos, $bAdmin=FALSE, $eProyecto=TRUE, $visualizar=FALSE)</td></tr>
-<tr class="memdesc:a1015a2e5fbc6cbba40f48dad8d26942b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Llenamos el array eventos con la información de los archivos de eventos de cada modulo.  <a href="#a1015a2e5fbc6cbba40f48dad8d26942b"></a><br/></td></tr>
-<tr class="memitem:a3f5870edb9b40af1d3a3b1a9096c512e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a3f5870edb9b40af1d3a3b1a9096c512e.html#a3f5870edb9b40af1d3a3b1a9096c512e">accion2evento</a> ($evento, $modulo, $metodo, $prioridad, $args='')</td></tr>
-<tr class="memdesc:a3f5870edb9b40af1d3a3b1a9096c512e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Añadir una acción a un evento en tiempo de ejecución.  <a href="#a3f5870edb9b40af1d3a3b1a9096c512e"></a><br/></td></tr>
-<tr class="memitem:a681b9faef2a7086bf765decbfa5cf8a1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a681b9faef2a7086bf765decbfa5cf8a1.html#a681b9faef2a7086bf765decbfa5cf8a1">anulado</a> ($e)</td></tr>
-<tr class="memdesc:a681b9faef2a7086bf765decbfa5cf8a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comprobar si un evento esta anula o no.  <a href="#a681b9faef2a7086bf765decbfa5cf8a1"></a><br/></td></tr>
-<tr class="memitem:a70e8eaee58e0486e5f6d836e77970bba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a70e8eaee58e0486e5f6d836e77970bba.html#a70e8eaee58e0486e5f6d836e77970bba">anular</a> ($evento, $modulo)</td></tr>
-<tr class="memdesc:a70e8eaee58e0486e5f6d836e77970bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anular evento, eliminamos conexiones de evento.  <a href="#a70e8eaee58e0486e5f6d836e77970bba"></a><br/></td></tr>
-<tr class="memitem:adb1ccbd69ccbaaaf5738c01b1479d379"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379">instancia_modulo</a> ($m)</td></tr>
-<tr class="memdesc:adb1ccbd69ccbaaaf5738c01b1479d379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Devolver instancia de un módulo, nos permite interactuar entre componentes sin reacrgar la aplicación.  <a href="#adb1ccbd69ccbaaaf5738c01b1479d379"></a><br/></td></tr>
-<tr class="memitem:ac0f6494f05fd5e760a8bcb2d59cbee55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55">lanzar_accion_modulo</a> ($m, $a, $e=NULL, $args=NULL)</td></tr>
-<tr class="memdesc:ac0f6494f05fd5e760a8bcb2d59cbee55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lanzar acción de módulo.  <a href="#ac0f6494f05fd5e760a8bcb2d59cbee55"></a><br/></td></tr>
-<tr class="memitem:ae42fa28f97b04414d7993d3a10cacebb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb">lanzarEvento</a> ($e, $args='')</td></tr>
-<tr class="memdesc:ae42fa28f97b04414d7993d3a10cacebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">lanzarEvento  <a href="#ae42fa28f97b04414d7993d3a10cacebb"></a><br/></td></tr>
-<tr class="memitem:af726f87bbae5dbe4cb1954f280583fa1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1">leer_eventos</a> ($nivel, $directorio=NULL)</td></tr>
-<tr class="memdesc:af726f87bbae5dbe4cb1954f280583fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la información del módulo.  <a href="#af726f87bbae5dbe4cb1954f280583fa1"></a><br/></td></tr>
-<tr class="memitem:aac004003985747d7fa1b96565fc2f57d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_aac004003985747d7fa1b96565fc2f57d.html#aac004003985747d7fa1b96565fc2f57d">unico</a> ($evento, $modulo)</td></tr>
-<tr class="memdesc:aac004003985747d7fa1b96565fc2f57d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evento unico, eliminamos conexiones de evento que no sean las del módulo que se especifica.  <a href="#aac004003985747d7fa1b96565fc2f57d"></a><br/></td></tr>
-<tr class="memitem:a609fcdfe8f696ed933a9ee68c930e8b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1">verificar_evento</a> ($e)</td></tr>
-<tr class="memdesc:a609fcdfe8f696ed933a9ee68c930e8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verificar la existencia de un evento.  <a href="#a609fcdfe8f696ed933a9ee68c930e8b1"></a><br/></td></tr>
-<tr><td colspan="2"><h2><a name="pub-attribs"></a>
-Campos de datos</h2></td></tr>
-<tr class="memitem:a0449466b42e888dd50c0ba6942883e82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82">$cEventos</a></td></tr>
-<tr class="memdesc:a0449466b42e888dd50c0ba6942883e82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comportamientos de los eventos.  <a href="#a0449466b42e888dd50c0ba6942883e82"></a><br/></td></tr>
-<tr class="memitem:a2d59e92ea67edd94958634ecc6d75e0f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f">$eventos</a></td></tr>
-<tr class="memdesc:a2d59e92ea67edd94958634ecc6d75e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array con los eventos de la aplicación.  <a href="#a2d59e92ea67edd94958634ecc6d75e0f"></a><br/></td></tr>
-<tr class="memitem:a770d8c96395831a1bcd81e155322dc6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a770d8c96395831a1bcd81e155322dc6b.html#a770d8c96395831a1bcd81e155322dc6b">$instancias</a> = array()</td></tr>
-<tr class="memdesc:a770d8c96395831a1bcd81e155322dc6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancias de módulos.  <a href="#a770d8c96395831a1bcd81e155322dc6b"></a><br/></td></tr>
-<tr class="memitem:ab560df5656d57dea3fda225bd593d77d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_ab560df5656d57dea3fda225bd593d77d.html#ab560df5656d57dea3fda225bd593d77d">$ubicaciones</a></td></tr>
-<tr class="memdesc:ab560df5656d57dea3fda225bd593d77d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ubicación de los módulos.  <a href="#ab560df5656d57dea3fda225bd593d77d"></a><br/></td></tr>
+<tr class="memitem:a98301b9edbc39ec83b5bcc5c18faae62"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98301b9edbc39ec83b5bcc5c18faae62"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>testComportamientos</b> ()</td></tr>
+<tr class="memitem:a16c58a158cad43af195979d0baca7485"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16c58a158cad43af195979d0baca7485"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>testLanzarEvento</b> ()</td></tr>
+<tr class="memitem:a7f459059c3d140c2c9b1238d6f3ae26b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f459059c3d140c2c9b1238d6f3ae26b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>testLeer_eventos</b> ()</td></tr>
+<tr class="memitem:ad0764a144714dcbbae1f27475d80e1bc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0764a144714dcbbae1f27475d80e1bc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>testVerificar_evento</b> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Métodos públicos estáticos</h2></td></tr>
+<tr class="memitem:a36f43c36e6b3288e6bfb8244ce59073e"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a36f43c36e6b3288e6bfb8244ce59073e.html#a36f43c36e6b3288e6bfb8244ce59073e">main</a> ()</td></tr>
+<tr class="memdesc:a36f43c36e6b3288e6bfb8244ce59073e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the test methods of this class.  <a href="#a36f43c36e6b3288e6bfb8244ce59073e"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pro-methods"></a>
+Métodos protegidos</h2></td></tr>
+<tr class="memitem:a0bc688732d2b3b162ffebaf7812e78da"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a0bc688732d2b3b162ffebaf7812e78da.html#a0bc688732d2b3b162ffebaf7812e78da">setUp</a> ()</td></tr>
+<tr class="memdesc:a0bc688732d2b3b162ffebaf7812e78da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the fixture, for example, open a network connection.  <a href="#a0bc688732d2b3b162ffebaf7812e78da"></a><br/></td></tr>
+<tr class="memitem:a80fe3d17e658907fc75346a0ec9d6fc7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/dfe/a00025_a80fe3d17e658907fc75346a0ec9d6fc7.html#a80fe3d17e658907fc75346a0ec9d6fc7">tearDown</a> ()</td></tr>
+<tr class="memdesc:a80fe3d17e658907fc75346a0ec9d6fc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tears down the fixture, for example, close a network connection.  <a href="#a80fe3d17e658907fc75346a0ec9d6fc7"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Descripción detallada</h2>
-<div class="textblock"><p>Módulo <a class="el" href="../../d3/dfe/a00025.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a> para conectar acciones con los módulos. </p>
-<p>Utilizamos los archivos eventos_usuario.php y eventos_admin.php de cada módulo para interconectar a los módulos.</p>
-<p>A parte de los módulos de la misma aplicación buscamos dentro de cada proyecto la carpeta modulos para utilizarlos.</p>
-<p>Comportamiento de eventos:</p>
-<p>Podemos configurar diferentes comportamientos</p>
-<ul>
-<li>unico: Deja de ejecutarse acciones para el mismo evento.<ul>
-<li>anular: Se anula cualquier acción de evento.</li>
-</ul>
-</li>
-</ul>
-<p>Ejemplo de fichero de eventos de un módulo.</p>
-<pre>
- $eventos['cabecerad']['formulario_busqueda'][1]='';
- $eventos['columna']['ultimas_entradas'][2]="num=7&amp;seccion=".<a class="el" href="../../d9/d73/a00060_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a>."&amp;formato=1";
- $eventos['contenido_dinamico']['contenido_dinamico'][1]='';
- $eventos['precarga']['presentar_busquedas'][3]='';</pre><pre>// Comportamiento de eventos
- $cEventos['&lt;evento&gt;']['unico'] = '&lt;nombre del="" modulo&gt;=""&gt;';
- $cEventos['&lt;evento&gt;']['anular'] = '&lt;nombre del="" modulo&gt;=""&gt;';
- </pre><p>Tambien se puede especificar comportamientos en tiempo de ejecución:</p>
-<pre>
- $gcm-&gt;event-&gt;anular('contenido','contenidos');
- $gcm-&gt;event-&gt;unico('titulo','contenidos');
- </pre><dl class="section see"><dt>Ver también:</dt><dd>modulos/contenido/eventos_usuario.php</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../df/df1/a00357.html#_todo000008">Tareas pendientes:</a></b></dt><dd>Cachear array de eventos </dd></dl>
+<div class="textblock"><p>Test class for <a class="el" href="../../dc/de2/a00024.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a>. </p>
+<p>Generated by PHPUnit_Util_Skeleton on 2010-03-05 at 11:13:16. </p>
 
-<p>Definición en la línea <a class="el" href="../../d7/d70/a00106_source.html#l00059">59</a> del archivo <a class="el" href="../../d7/d70/a00106_source.html">Eventos.php</a>.</p>
+<p>Definición en la línea <a class="el" href="../../db/d57/a00112_source.html#l00022">22</a> del archivo <a class="el" href="../../db/d57/a00112_source.html">EventosTest.php</a>.</p>
 </div><hr/>La documentación para esta clase fue generada a partir del siguiente fichero:<ul>
-<li>gcm/lib/int/gcm/lib/<a class="el" href="../../d7/d70/a00106_source.html">Eventos.php</a></li>
+<li>gcm/lib/int/gcm/test/<a class="el" href="../../db/d57/a00112_source.html">EventosTest.php</a></li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:36 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:07 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

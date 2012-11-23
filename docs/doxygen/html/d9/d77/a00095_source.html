@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/databoundobject/js/validate.js</title>
+<title>gcm: Fichero Fuente gcm/lib/int/databoundobject/lib/Crud.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -83,407 +83,1097 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_51ca47410462d70e7dcc718aceb9ca3e.html">databoundobject</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_60253dfa0314753ba57e68e99be9b3f5.html">js</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_7f6ce904377affabd4d1ffca66ef4223.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">validate.js</div>  </div>
+<div class="title">Crud.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
-<a name="l00002"></a>00002 <span class="comment"> * validate.js 1.0.2</span>
-<a name="l00003"></a>00003 <span class="comment"> * Copyright (c) 2011 Rick Harrison, http://rickharrison.me</span>
-<a name="l00004"></a>00004 <span class="comment"> * validate.js is open sourced under the MIT license.</span>
-<a name="l00005"></a>00005 <span class="comment"> * Portions of validate.js are inspired by CodeIgniter.</span>
-<a name="l00006"></a>00006 <span class="comment"> * http://rickharrison.github.com/validate.js</span>
-<a name="l00007"></a>00007 <span class="comment"> */</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 (<span class="keyword">function</span>(window, document, undefined) {
-<a name="l00010"></a>00010     <span class="comment">/*</span>
-<a name="l00011"></a>00011 <span class="comment">     * If you would like an application-wide config, change these defaults.</span>
-<a name="l00012"></a>00012 <span class="comment">     * Otherwise, use the setMessage() function to configure form specific messages.</span>
-<a name="l00013"></a>00013 <span class="comment">     */</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015     var defaults = {
-<a name="l00016"></a>00016         messages: {
-<a name="l00017"></a>00017             required: <span class="stringliteral">&#39;The %s field is required.&#39;</span>,
-<a name="l00018"></a>00018             matches: <span class="stringliteral">&#39;The %s field does not match the %s field.&#39;</span>,
-<a name="l00019"></a>00019             valid_email: <span class="stringliteral">&#39;The %s field must contain a valid email address.&#39;</span>,
-<a name="l00020"></a>00020             valid_emails: <span class="stringliteral">&#39;The %s field must contain all valid email addresses.&#39;</span>,
-<a name="l00021"></a>00021             min_length: <span class="stringliteral">&#39;The %s field must be at least %s characters in length.&#39;</span>,
-<a name="l00022"></a>00022             max_length: <span class="stringliteral">&#39;The %s field must not exceed %s characters in length.&#39;</span>,
-<a name="l00023"></a>00023             exact_length: <span class="stringliteral">&#39;The %s field must be exactly %s characters in length.&#39;</span>,
-<a name="l00024"></a>00024             greater_than: <span class="stringliteral">&#39;The %s field must contain a number greater than %s.&#39;</span>,
-<a name="l00025"></a>00025             less_than: <span class="stringliteral">&#39;The %s field must contain a number less than %s.&#39;</span>,
-<a name="l00026"></a>00026             alpha: <span class="stringliteral">&#39;The %s field must only contain alphabetical characters.&#39;</span>,
-<a name="l00027"></a>00027             alpha_numeric: <span class="stringliteral">&#39;The %s field must only contain alpha-numeric characters.&#39;</span>,
-<a name="l00028"></a>00028             alpha_dash: <span class="stringliteral">&#39;The %s field must only contain alpha-numeric characters, underscores, and dashes.&#39;</span>,
-<a name="l00029"></a>00029             numeric: <span class="stringliteral">&#39;The %s field must contain only numbers.&#39;</span>,
-<a name="l00030"></a>00030             integer: <span class="stringliteral">&#39;The %s field must contain an integer.&#39;</span>,
-<a name="l00031"></a>00031             decimal: <span class="stringliteral">&#39;The %s field must contain a decimal number.&#39;</span>,
-<a name="l00032"></a>00032             is_natural: <span class="stringliteral">&#39;The %s field must contain only positive numbers.&#39;</span>,
-<a name="l00033"></a>00033             is_natural_no_zero: <span class="stringliteral">&#39;The %s field must contain a number greater than zero.&#39;</span>,
-<a name="l00034"></a>00034             valid_ip: <span class="stringliteral">&#39;The %s field must contain a valid IP.&#39;</span>,
-<a name="l00035"></a>00035             valid_base64: <span class="stringliteral">&#39;The %s field must contain a base64 string.&#39;</span>
-<a name="l00036"></a>00036         },
-<a name="l00037"></a>00037         callback: <span class="keyword">function</span>(errors) {
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039         }
-<a name="l00040"></a>00040     };
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <span class="comment">/*</span>
-<a name="l00043"></a>00043 <span class="comment">     * Define the regular expressions that will be used</span>
-<a name="l00044"></a>00044 <span class="comment">     */</span>
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046     var ruleRegex = /^(.+)\[(.+)\]$/,
-<a name="l00047"></a>00047         numericRegex = /^[0-9]+$/,
-<a name="l00048"></a>00048         integerRegex = /^\-?[0-9]+$/,
-<a name="l00049"></a>00049         decimalRegex = /^\-?[0-9]*\.?[0-9]+$/,
-<a name="l00050"></a>00050         emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$/i,
-<a name="l00051"></a>00051         alphaRegex = /^[a-z]+$/i,
-<a name="l00052"></a>00052         alphaNumericRegex = /^[a-z0-9]+$/i,
-<a name="l00053"></a>00053         alphaDashRegex = /^[a-z0-9_-]+$/i,
-<a name="l00054"></a>00054         naturalRegex = /^[0-9]+$/i,
-<a name="l00055"></a>00055         naturalNoZeroRegex = /^[1-9][0-9]*$/i,
-<a name="l00056"></a>00056         ipRegex = /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})$/i,
-<a name="l00057"></a>00057         base64Regex = /[^a-zA-Z0-9\/\+=]/i;
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     <span class="comment">/*</span>
-<a name="l00060"></a>00060 <span class="comment">     * The exposed public object to validate a form:</span>
-<a name="l00061"></a>00061 <span class="comment">     *</span>
-<a name="l00062"></a>00062 <span class="comment">     * @param formName - String - The name attribute of the form (i.e. &lt;form name=&quot;myForm&quot;&gt;&lt;/form&gt;)</span>
-<a name="l00063"></a>00063 <span class="comment">     * @param fields - Array - [{</span>
-<a name="l00064"></a>00064 <span class="comment">     *     name: The name of the element (i.e. &lt;input name=&quot;myField&quot; /&gt;)</span>
-<a name="l00065"></a>00065 <span class="comment">     *     display: &#39;Field Name&#39;</span>
-<a name="l00066"></a>00066 <span class="comment">     *     rules: required|matches[password_confirm]</span>
-<a name="l00067"></a>00067 <span class="comment">     * }]</span>
-<a name="l00068"></a>00068 <span class="comment">     * @param callback - Function - The callback after validation has been performed.</span>
-<a name="l00069"></a>00069 <span class="comment">     *     @argument errors - An array of validation errors</span>
-<a name="l00070"></a>00070 <span class="comment">     *     @argument event - The javascript event</span>
-<a name="l00071"></a>00071 <span class="comment">     */</span>
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073     var FormValidator = <span class="keyword">function</span>(formName, fields, callback) {
-<a name="l00074"></a>00074         this.callback = callback || defaults.callback;
-<a name="l00075"></a>00075         this.errors = [];
-<a name="l00076"></a>00076         this.fields = {};
-<a name="l00077"></a>00077         this.form = document.forms[formName] || {};
-<a name="l00078"></a>00078         this.messages = {};
-<a name="l00079"></a>00079         this.handlers = {};
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081         <span class="keywordflow">for</span> (var i = 0, fieldLength = fields.length; i &lt; fieldLength; i++) {
-<a name="l00082"></a>00082             var field = fields[i];
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084             <span class="comment">// If passed in incorrectly, we need to skip the field.</span>
-<a name="l00085"></a>00085             <span class="keywordflow">if</span> (!field.name || !field.rules) {
-<a name="l00086"></a>00086                 <span class="keywordflow">continue</span>;
-<a name="l00087"></a>00087             }
+<a href="../../d9/d77/a00095.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/**</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file      Crud.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Automatización de manipulación de base de datos</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  09/02/11</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2011, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/DataBoundObject.php&#39;</span>);
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/solicitud/lib/Solicitud.php&#39;</span>);
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 <span class="comment">// require_once(GCM_DIR.&#39;lib/int/galeria/lib/Galeria.php&#39;);</span>
+<a name="l00023"></a>00023 <span class="comment"></span>
+<a name="l00024"></a>00024 <span class="comment">/**</span>
+<a name="l00025"></a>00025 <span class="comment"> * Extendemos DataBoundObject para automatizar los procesos de insertar,</span>
+<a name="l00026"></a>00026 <span class="comment"> * modificar, y borrar registros de la base de datos.</span>
+<a name="l00027"></a>00027 <span class="comment"> *</span>
+<a name="l00028"></a>00028 <span class="comment"> * Convenciones para facilitar el trabajo y poder automatizar:</span>
+<a name="l00029"></a>00029 <span class="comment"> *</span>
+<a name="l00030"></a>00030 <span class="comment"> * - id: Necesario en cada tabla como identifiador unico</span>
+<a name="l00031"></a>00031 <span class="comment"> * - nombre: Campo con el nombre</span>
+<a name="l00032"></a>00032 <span class="comment"> * - &lt;tabla&gt;_id: Para relaciones con otras tablas, esto nos permite por ejemplo</span>
+<a name="l00033"></a>00033 <span class="comment"> *   presentar automáticamente un select con las opciones de los registros de la</span>
+<a name="l00034"></a>00034 <span class="comment"> *   tabla relacionada.</span>
+<a name="l00035"></a>00035 <span class="comment"> * - fecha_creacion como timestamp.</span>
+<a name="l00036"></a>00036 <span class="comment"> * - fecha_modificacion como datetime</span>
+<a name="l00037"></a>00037 <span class="comment"> * - imagen_url Campo para url de imagen.</span>
+<a name="l00038"></a>00038 <span class="comment"> *</span>
+<a name="l00039"></a>00039 <span class="comment"> * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por</span>
+<a name="l00040"></a>00040 <span class="comment"> * tener campos relacionados debemos hacer un require_once() con ellos.</span>
+<a name="l00041"></a>00041 <span class="comment"> */</span>
+<a name="l00042"></a>00042 
+<a name="l00043"></a><a class="code" href="../../db/db2/a00020.html">00043</a> <span class="keyword">class </span><a class="code" href="../../db/db2/a00020.html" title="Extendemos DataBoundObject para automatizar los procesos de insertar, modificar, y borrar registros d...">Crud</a> <span class="keyword">extends</span> <a class="code" href="../../d7/dd4/a00013.html" title="Abstracción para manipilación de datos con PDO.">DataBoundObject</a> {
+<a name="l00044"></a>00044 
+<a name="l00045"></a><a class="code" href="../../db/db2/a00020_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576">00045</a>    <span class="keyword">public</span> <a class="code" href="../../db/db2/a00020_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por página en listado, por defecto los de paginarPDO.">$elementos_pagina</a> = 10;         <span class="comment">///&lt; Número de elementos por página en listado, por defecto los de paginarPDO</span>
+<a name="l00046"></a>00046 <span class="comment"></span>
+<a name="l00047"></a><a class="code" href="../../db/db2/a00020_a30bc21ee8b3b30cf79348188cc449cfa.html#a30bc21ee8b3b30cf79348188cc449cfa">00047</a>    <span class="keyword">public</span> <a class="code" href="../../db/db2/a00020_a30bc21ee8b3b30cf79348188cc449cfa.html#a30bc21ee8b3b30cf79348188cc449cfa" title="Añadimos css para Formulario o no.">$css_formulario</a>   = FALSE ;     <span class="comment">///&lt; Añadimos css para Formulario o no.</span>
+<a name="l00048"></a>00048 <span class="comment"></span>
+<a name="l00049"></a><a class="code" href="../../db/db2/a00020_a919b86ddfa98cbb5ae9811c84139e0e4.html#a919b86ddfa98cbb5ae9811c84139e0e4">00049</a>    <span class="keyword">public</span> <a class="code" href="../../db/db2/a00020_a919b86ddfa98cbb5ae9811c84139e0e4.html#a919b86ddfa98cbb5ae9811c84139e0e4" title="Si se utiliza ajax es necesaria la url a enviar.">$url_ajax</a>;                      <span class="comment">///&lt; Si se utiliza ajax es necesaria la url a enviar</span>
+<a name="l00050"></a>00050 <span class="comment"></span><span class="comment"></span>
+<a name="l00051"></a>00051 <span class="comment">   /**</span>
+<a name="l00052"></a>00052 <span class="comment">    * Podemos definir un metodo personalizado para la visualización de los registros </span>
+<a name="l00053"></a>00053 <span class="comment">    * individuales, en caso de no tenerlo se presentara el formulario en versión</span>
+<a name="l00054"></a>00054 <span class="comment">    * de solo lectura</span>
+<a name="l00055"></a>00055 <span class="comment">    */</span>
+<a name="l00056"></a>00056 
+<a name="l00057"></a><a class="code" href="../../db/db2/a00020_a0aa031aed9bfcfdb364da58a8cf0ec6f.html#a0aa031aed9bfcfdb364da58a8cf0ec6f">00057</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a0aa031aed9bfcfdb364da58a8cf0ec6f.html#a0aa031aed9bfcfdb364da58a8cf0ec6f" title="Podemos definir un metodo personalizado para la visualización de los registros individuales, en caso de no tenerlo se presentara el formulario en versión de solo lectura.">visualizando_registro</a>() { <span class="keywordflow">return</span> FALSE ; }
+<a name="l00058"></a>00058 <span class="comment"></span>
+<a name="l00059"></a>00059 <span class="comment">   /**</span>
+<a name="l00060"></a>00060 <span class="comment">    * Opciones de presentación para el listado</span>
+<a name="l00061"></a>00061 <span class="comment">    *</span>
+<a name="l00062"></a>00062 <span class="comment">    * Array con:</span>
+<a name="l00063"></a>00063 <span class="comment">    *</span>
+<a name="l00064"></a>00064 <span class="comment">    * $opciones_array2table = array(</span>
+<a name="l00065"></a>00065 <span class="comment">    * &#39;presentacion&#39; =&gt; &#39;TinyTable&#39; // Extensión de array2table,</span>
+<a name="l00066"></a>00066 <span class="comment">    * &#39;args&#39; =&gt; array ( &#39;dir_tinytable&#39; =&gt; GCM_DIR.&#39;lib/ext/TinyTable/&#39;,</span>
+<a name="l00067"></a>00067 <span class="comment">    *                   &#39;cargar_srcipt&#39; =&gt; TRUE ),</span>
+<a name="l00068"></a>00068 <span class="comment">    *                   );</span>
+<a name="l00069"></a>00069 <span class="comment">    *</span>
+<a name="l00070"></a>00070 <span class="comment">    * El nombre de la presentación es el nombre de la clase que extiende</span>
+<a name="l00071"></a>00071 <span class="comment">    * a array2table.</span>
+<a name="l00072"></a>00072 <span class="comment">    *</span>
+<a name="l00073"></a>00073 <span class="comment">    * Los argumentos seran los requeridos por la extensión.</span>
+<a name="l00074"></a>00074 <span class="comment">    *</span>
+<a name="l00075"></a>00075 <span class="comment">    * @see Array2Table</span>
+<a name="l00076"></a>00076 <span class="comment">    * @see TinyTable</span>
+<a name="l00077"></a>00077 <span class="comment">    */</span>
+<a name="l00078"></a>00078 
+<a name="l00079"></a><a class="code" href="../../db/db2/a00020_a1ffe9fd402c74b6a3f5bb1dfcbb13ffe.html#a1ffe9fd402c74b6a3f5bb1dfcbb13ffe">00079</a>    <span class="keyword">public</span> <a class="code" href="../../db/db2/a00020_a1ffe9fd402c74b6a3f5bb1dfcbb13ffe.html#a1ffe9fd402c74b6a3f5bb1dfcbb13ffe" title="Opciones de presentación para el listado.">$opciones_array2table</a> = FALSE;
+<a name="l00080"></a>00080 <span class="comment"></span>
+<a name="l00081"></a>00081 <span class="comment">   /**</span>
+<a name="l00082"></a>00082 <span class="comment">    * Array con los atributos publicos que deamos pasar a paginador</span>
+<a name="l00083"></a>00083 <span class="comment">    *</span>
+<a name="l00084"></a>00084 <span class="comment">    * Para ver las posibilidades @see paginadorPDO</span>
+<a name="l00085"></a>00085 <span class="comment">    */</span>
+<a name="l00086"></a>00086 
+<a name="l00087"></a><a class="code" href="../../db/db2/a00020_a61e1b4c1ccc517060dade73304d691b6.html#a61e1b4c1ccc517060dade73304d691b6">00087</a>    <span class="keyword">public</span> <a class="code" href="../../db/db2/a00020_a61e1b4c1ccc517060dade73304d691b6.html#a61e1b4c1ccc517060dade73304d691b6" title="Array con los atributos publicos que deamos pasar a paginador.">$conf_paginador</a> = FALSE;        
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089             <span class="comment">/*</span>
-<a name="l00090"></a>00090 <span class="comment">             * Build the master fields array that has all the information needed to validate</span>
-<a name="l00091"></a>00091 <span class="comment">             */</span>
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093             this.fields[field.name] = {
-<a name="l00094"></a>00094                 name: field.name,
-<a name="l00095"></a>00095                 display: field.display || field.name,
-<a name="l00096"></a>00096                 rules: field.rules,
-<a name="l00097"></a>00097                 type: null,
-<a name="l00098"></a>00098                 value: null,
-<a name="l00099"></a>00099                 checked: null
-<a name="l00100"></a>00100             };
-<a name="l00101"></a>00101         }
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103         <span class="comment">/*</span>
-<a name="l00104"></a>00104 <span class="comment">         * Attach an event callback for the form submission</span>
-<a name="l00105"></a>00105 <span class="comment">         */</span>
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107         this.form.onsubmit = (<span class="keyword">function</span>(that) {
-<a name="l00108"></a>00108             <span class="keywordflow">return</span> <span class="keyword">function</span>(event) {
-<a name="l00109"></a>00109                 <span class="keywordflow">try</span> {
-<a name="l00110"></a>00110                     <span class="keywordflow">return</span> that._validateForm(event);
-<a name="l00111"></a>00111                 } <span class="keywordflow">catch</span>(e) {}
-<a name="l00112"></a>00112             }
-<a name="l00113"></a>00113         })(<span class="keyword">this</span>);
-<a name="l00114"></a>00114     };
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116     <span class="comment">/*</span>
-<a name="l00117"></a>00117 <span class="comment">     * @public</span>
-<a name="l00118"></a>00118 <span class="comment">     * Sets a custom message for one of the rules</span>
-<a name="l00119"></a>00119 <span class="comment">     */</span>
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121     FormValidator.prototype.setMessage = <span class="keyword">function</span>(rule, message) {
-<a name="l00122"></a>00122         this.messages[rule] = message;
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124         <span class="comment">// return this for chaining</span>
-<a name="l00125"></a>00125         <span class="keywordflow">return</span> <span class="keyword">this</span>;
-<a name="l00126"></a>00126     };
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128     <span class="comment">/*</span>
-<a name="l00129"></a>00129 <span class="comment">     * @public</span>
-<a name="l00130"></a>00130 <span class="comment">     * Registers a callback for a custom rule (i.e. callback_username_check)</span>
-<a name="l00131"></a>00131 <span class="comment">     */</span>
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133     FormValidator.prototype.registerCallback = <span class="keyword">function</span>(name, handler) {
-<a name="l00134"></a>00134         <span class="keywordflow">if</span> (name &amp;&amp; typeof name === <span class="stringliteral">&#39;string&#39;</span> &amp;&amp; handler &amp;&amp; typeof handler === <span class="stringliteral">&#39;function&#39;</span>) {
-<a name="l00135"></a>00135             this.handlers[name] = handler;
-<a name="l00136"></a>00136         }
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138         <span class="comment">// return this for chaining</span>
-<a name="l00139"></a>00139         <span class="keywordflow">return</span> <span class="keyword">this</span>;
-<a name="l00140"></a>00140     };
+<a name="l00089"></a><a class="code" href="../../db/db2/a00020_a466997e82fbbcf7d775ae152055763e0.html#a466997e82fbbcf7d775ae152055763e0">00089</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a466997e82fbbcf7d775ae152055763e0.html#a466997e82fbbcf7d775ae152055763e0" title="Metodo a lanzar al guardar registro.">$evento_guardar</a> = FALSE;     <span class="comment">///&lt; Metodo a lanzar al guardar registro</span>
+<a name="l00090"></a><a class="code" href="../../db/db2/a00020_afb914213a9067568422a87f37a56a235.html#afb914213a9067568422a87f37a56a235">00090</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_afb914213a9067568422a87f37a56a235.html#afb914213a9067568422a87f37a56a235" title="Metodo a lanzar al modificar registro.">$evento_modificar</a> = FALSE;   <span class="comment">///&lt; Metodo a lanzar al modificar registro</span>
+<a name="l00091"></a><a class="code" href="../../db/db2/a00020_a4ed60cd68e2b823f684463c328c20025.html#a4ed60cd68e2b823f684463c328c20025">00091</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a4ed60cd68e2b823f684463c328c20025.html#a4ed60cd68e2b823f684463c328c20025" title="Metodo a lanzar al borrar registro.">$evento_borrar</a>  = FALSE;     <span class="comment">///&lt; Metodo a lanzar al borrar registro</span>
+<a name="l00092"></a>00092 <span class="comment"></span>
+<a name="l00093"></a><a class="code" href="../../db/db2/a00020_a2ae50f73698dfe8746437b33a4d662ce.html#a2ae50f73698dfe8746437b33a4d662ce">00093</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a2ae50f73698dfe8746437b33a4d662ce.html#a2ae50f73698dfe8746437b33a4d662ce" title="Restricciones para Solicitud.">$restricciones</a>;              <span class="comment">///&lt; Restricciones para Solicitud</span>
+<a name="l00094"></a><a class="code" href="../../db/db2/a00020_aaa02cf2ff21ac3e5cb6909cbd066999e.html#aaa02cf2ff21ac3e5cb6909cbd066999e">00094</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_aaa02cf2ff21ac3e5cb6909cbd066999e.html#aaa02cf2ff21ac3e5cb6909cbd066999e" title="Mensajes de respuesta a fallos de restricciones.">$mensajes</a>;                   <span class="comment">///&lt; Mensajes de respuesta a fallos de restricciones</span>
+<a name="l00095"></a>00095 <span class="comment"></span><span class="comment"></span>
+<a name="l00096"></a>00096 <span class="comment">   /**</span>
+<a name="l00097"></a>00097 <span class="comment">    * Desde los modelos podemos definir los tipos campos para Formulario.</span>
+<a name="l00098"></a>00098 <span class="comment">    *</span>
+<a name="l00099"></a>00099 <span class="comment">    * Ejemplo: protected $tipos_formulario = array( &#39;nIdLocalitzacio&#39; =&gt; array(&#39;oculto_form&#39; =&gt; 1));</span>
+<a name="l00100"></a>00100 <span class="comment">    */</span>
+<a name="l00101"></a>00101 
+<a name="l00102"></a><a class="code" href="../../db/db2/a00020_a297e626d759cbbe4973aca432cd66ee5.html#a297e626d759cbbe4973aca432cd66ee5">00102</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a297e626d759cbbe4973aca432cd66ee5.html#a297e626d759cbbe4973aca432cd66ee5" title="Desde los modelos podemos definir los tipos campos para Formulario.">$tipos_formulario</a>;
+<a name="l00103"></a>00103 <span class="comment"></span>
+<a name="l00104"></a>00104 <span class="comment">   /**</span>
+<a name="l00105"></a>00105 <span class="comment">    * Marca dentro del nombre del campo de BD que nos indica, la relacion con otra tabla</span>
+<a name="l00106"></a>00106 <span class="comment">    *</span>
+<a name="l00107"></a>00107 <span class="comment">    * Ejemplo: categoria_id, el nombre de la tabla sera categoria</span>
+<a name="l00108"></a>00108 <span class="comment">    */</span>
+<a name="l00109"></a>00109 
+<a name="l00110"></a><a class="code" href="../../db/db2/a00020_aa5df5d4f0a832cc8c977924f6c844ead.html#aa5df5d4f0a832cc8c977924f6c844ead">00110</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_aa5df5d4f0a832cc8c977924f6c844ead.html#aa5df5d4f0a832cc8c977924f6c844ead" title="Marca dentro del nombre del campo de BD que nos indica, la relacion con otra tabla.">$id_relacion</a> = <span class="stringliteral">&#39;_id&#39;</span>;
+<a name="l00111"></a>00111 <span class="comment"></span>
+<a name="l00112"></a>00112 <span class="comment">   /** Plantilla para presentar formulario de registro */</span>
+<a name="l00113"></a>00113 
+<a name="l00114"></a><a class="code" href="../../db/db2/a00020_a765d2c042ce638668a1a6a380c585fc4.html#a765d2c042ce638668a1a6a380c585fc4">00114</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a765d2c042ce638668a1a6a380c585fc4.html#a765d2c042ce638668a1a6a380c585fc4" title="Plantilla para presentar formulario de registro.">$plantilla</a>;
+<a name="l00115"></a>00115 <span class="comment"></span>
+<a name="l00116"></a>00116 <span class="comment">   /** Archivo css para los estilos */</span>
+<a name="l00117"></a>00117 
+<a name="l00118"></a><a class="code" href="../../db/db2/a00020_a909ed1c38fe75839cd0977a332b47802.html#a909ed1c38fe75839cd0977a332b47802">00118</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a909ed1c38fe75839cd0977a332b47802.html#a909ed1c38fe75839cd0977a332b47802" title="Archivo css para los estilos.">$fichero_css</a>;
+<a name="l00119"></a>00119 <span class="comment"></span>
+<a name="l00120"></a>00120 <span class="comment">   /**</span>
+<a name="l00121"></a>00121 <span class="comment">    * SQL para generar listado, por defecto &#39;SELECT * FROM &lt;tabla&gt; ORDER BY id desc&#39; </span>
+<a name="l00122"></a>00122 <span class="comment">    *</span>
+<a name="l00123"></a>00123 <span class="comment">    * Nos permite tener un listado personalizado desde los modelos, para evitar un exceso</span>
+<a name="l00124"></a>00124 <span class="comment">    * de campos no necesarios en los lidtados.</span>
+<a name="l00125"></a>00125 <span class="comment">    *</span>
+<a name="l00126"></a>00126 <span class="comment">    * uso:</span>
+<a name="l00127"></a>00127 <span class="comment">    * &lt;pre&gt;</span>
+<a name="l00128"></a>00128 <span class="comment">    * class Tareas extends Crud {</span>
+<a name="l00129"></a>00129 <span class="comment">    * </span>
+<a name="l00130"></a>00130 <span class="comment">    *    function __construct(PDO $objPDO, $id=NULL) {</span>
+<a name="l00131"></a>00131 <span class="comment">    * </span>
+<a name="l00132"></a>00132 <span class="comment">    *       $this-&gt;sql_listado = &#39;SELECT id, nombre as Nombre, fechaInicio as Inicio FROM tareas ORDER BY id desc&#39;;</span>
+<a name="l00133"></a>00133 <span class="comment">    * </span>
+<a name="l00134"></a>00134 <span class="comment">    *       parent::__construct($objPDO, $id);</span>
+<a name="l00135"></a>00135 <span class="comment">    * </span>
+<a name="l00136"></a>00136 <span class="comment">    *       }</span>
+<a name="l00137"></a>00137 <span class="comment">    * </span>
+<a name="l00138"></a>00138 <span class="comment">    *    }</span>
+<a name="l00139"></a>00139 <span class="comment">    * &lt;/pre&gt;</span>
+<a name="l00140"></a>00140 <span class="comment">    */</span>
 <a name="l00141"></a>00141 
-<a name="l00142"></a>00142     <span class="comment">/*</span>
-<a name="l00143"></a>00143 <span class="comment">     * @private</span>
-<a name="l00144"></a>00144 <span class="comment">     * Runs the validation when the form is submitted.</span>
-<a name="l00145"></a>00145 <span class="comment">     */</span>
-<a name="l00146"></a>00146 
-<a name="l00147"></a>00147     FormValidator.prototype._validateForm = <span class="keyword">function</span>(event) {
-<a name="l00148"></a>00148         this.errors = [];
+<a name="l00142"></a><a class="code" href="../../db/db2/a00020_a99c0fc790ca4484be2f0617bc6e26208.html#a99c0fc790ca4484be2f0617bc6e26208">00142</a>    <span class="keyword">public</span> <a class="code" href="../../db/db2/a00020_a99c0fc790ca4484be2f0617bc6e26208.html#a99c0fc790ca4484be2f0617bc6e26208" title="SQL para generar listado, por defecto &#39;SELECT * FROM &lt;tabla&gt; ORDER BY id desc&#39;.">$sql_listado</a>;
+<a name="l00143"></a>00143 <span class="comment"></span>
+<a name="l00144"></a>00144 <span class="comment">   /**</span>
+<a name="l00145"></a>00145 <span class="comment">    * Parte FROM de la sql que genera el listado, por defecto $this-&gt;strTableName</span>
+<a name="l00146"></a>00146 <span class="comment">    */</span>
+<a name="l00147"></a>00147 
+<a name="l00148"></a><a class="code" href="../../db/db2/a00020_af98c7b2997ea24d0caa41443548d7cac.html#af98c7b2997ea24d0caa41443548d7cac">00148</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_af98c7b2997ea24d0caa41443548d7cac.html#af98c7b2997ea24d0caa41443548d7cac" title="Parte FROM de la sql que genera el listado, por defecto $this-&gt;strTableName.">$from_listado</a>;
 <a name="l00149"></a>00149 
-<a name="l00150"></a>00150         <span class="keywordflow">for</span> (var key in this.fields) {
-<a name="l00151"></a>00151             <span class="keywordflow">if</span> (this.fields.hasOwnProperty(key)) {
-<a name="l00152"></a>00152                 var field = this.fields[key] || {},
-<a name="l00153"></a>00153                     element = this.form[field.name];
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155                 <span class="keywordflow">if</span> (element &amp;&amp; element !== undefined) {
-<a name="l00156"></a>00156                     field.type = element.type;
-<a name="l00157"></a>00157                     field.value = element.value;
-<a name="l00158"></a>00158                     field.checked = element.checked;
-<a name="l00159"></a>00159                 }
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161                 <span class="comment">/*</span>
-<a name="l00162"></a>00162 <span class="comment">                 * Run through the rules for each field.</span>
-<a name="l00163"></a>00163 <span class="comment">                 */</span>
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165                 this._validateField(field);
-<a name="l00166"></a>00166             }
-<a name="l00167"></a>00167         }
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169         <span class="keywordflow">if</span> (typeof this.callback === <span class="stringliteral">&#39;function&#39;</span>) {
-<a name="l00170"></a>00170             this.callback(this.errors, event);
-<a name="l00171"></a>00171         }
-<a name="l00172"></a>00172 
-<a name="l00173"></a>00173         <span class="keywordflow">if</span> (this.errors.length &gt; 0) {
-<a name="l00174"></a>00174             <span class="keywordflow">if</span> (event &amp;&amp; event.preventDefault) {
-<a name="l00175"></a>00175                 <span class="keyword">event</span>.preventDefault();
-<a name="l00176"></a>00176             } <span class="keywordflow">else</span> {
-<a name="l00177"></a>00177                 <span class="comment">// IE6 doesn&#39;t pass in an event parameter so return false</span>
-<a name="l00178"></a>00178                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00179"></a>00179             }
-<a name="l00180"></a>00180         }
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00183"></a>00183     };
-<a name="l00184"></a>00184 
-<a name="l00185"></a>00185     <span class="comment">/*</span>
-<a name="l00186"></a>00186 <span class="comment">     * @private</span>
-<a name="l00187"></a>00187 <span class="comment">     * Looks at the fields value and evaluates it against the given rules</span>
-<a name="l00188"></a>00188 <span class="comment">     */</span>
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190     FormValidator.prototype._validateField = <span class="keyword">function</span>(field) {
-<a name="l00191"></a>00191         var rules = field.rules.split(<span class="charliteral">&#39;|&#39;</span>);
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193         <span class="comment">/*</span>
-<a name="l00194"></a>00194 <span class="comment">         * If the value is null and not required, we don&#39;t need to run through validation</span>
-<a name="l00195"></a>00195 <span class="comment">         */</span>
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197         <span class="keywordflow">if</span> (field.rules.indexOf(<span class="stringliteral">&#39;required&#39;</span>) === -1 &amp;&amp; (!field.value || field.value === <span class="stringliteral">&#39;&#39;</span> || field.value === undefined)) {
-<a name="l00198"></a>00198             <span class="keywordflow">return</span>;
-<a name="l00199"></a>00199         }
+<a name="l00150"></a><a class="code" href="../../db/db2/a00020_a40f9b1a21c6cd6caf04806c3f8758b4d.html#a40f9b1a21c6cd6caf04806c3f8758b4d">00150</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a40f9b1a21c6cd6caf04806c3f8758b4d.html#a40f9b1a21c6cd6caf04806c3f8758b4d" title="Instancia de Galeria, para las imágenes, en caso de ser TRUE en modelo.">$galeria</a> = FALSE;            <span class="comment">///&lt; Instancia de Galeria, para las imágenes, en caso de ser TRUE en modelo</span>
+<a name="l00151"></a>00151 <span class="comment"></span>
+<a name="l00152"></a><a class="code" href="../../db/db2/a00020_af189ce14c1dab144f51a2e58c72559b1.html#af189ce14c1dab144f51a2e58c72559b1">00152</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_af189ce14c1dab144f51a2e58c72559b1.html#af189ce14c1dab144f51a2e58c72559b1" title="Especificaciones de los campos de la tabla.">$tipos_campos</a>;               <span class="comment">///&lt; Especificaciones de los campos de la tabla</span>
+<a name="l00153"></a>00153 <span class="comment"></span>
+<a name="l00154"></a><a class="code" href="../../db/db2/a00020_afcfc2b797b45ecd8f7483e44c7cde108.html#afcfc2b797b45ecd8f7483e44c7cde108">00154</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_afcfc2b797b45ecd8f7483e44c7cde108.html#afcfc2b797b45ecd8f7483e44c7cde108" title="Tenemos permisos de edición (T/F)">$permisos</a> = FALSE;           <span class="comment">///&lt; Tenemos permisos de edición (T/F)  </span>
+<a name="l00155"></a>00155 <span class="comment"></span>
+<a name="l00156"></a><a class="code" href="../../db/db2/a00020_ab72ee2fc8baee210bbf369702d14040e.html#ab72ee2fc8baee210bbf369702d14040e">00156</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_ab72ee2fc8baee210bbf369702d14040e.html#ab72ee2fc8baee210bbf369702d14040e" title="Acción que se esta realizando.">$accion</a> = <span class="stringliteral">&#39;ver&#39;</span>;             <span class="comment">///&lt; Acción que se esta realizando</span>
+<a name="l00157"></a>00157 <span class="comment"></span><span class="comment"></span>
+<a name="l00158"></a>00158 <span class="comment">   /**</span>
+<a name="l00159"></a>00159 <span class="comment">    * Directorio de imagenes utilizadas por @see Array2Table</span>
+<a name="l00160"></a>00160 <span class="comment">    */</span>
+<a name="l00161"></a>00161 
+<a name="l00162"></a><a class="code" href="../../db/db2/a00020_a5dd39825a0f6fa870133d8c138e623b7.html#a5dd39825a0f6fa870133d8c138e623b7">00162</a>    <span class="keyword">protected</span> <a class="code" href="../../db/db2/a00020_a5dd39825a0f6fa870133d8c138e623b7.html#a5dd39825a0f6fa870133d8c138e623b7" title="Directorio de imagenes utilizadas por.">$dir_img_array2table</a> = FALSE;
+<a name="l00163"></a>00163 <span class="comment"></span>
+<a name="l00164"></a>00164 <span class="comment">   /** </span>
+<a name="l00165"></a>00165 <span class="comment">    * Constructor</span>
+<a name="l00166"></a>00166 <span class="comment">    */</span>
+<a name="l00167"></a>00167 
+<a name="l00168"></a><a class="code" href="../../db/db2/a00020_ae5f524bd83cdd54ec1d82bc58861799f.html#ae5f524bd83cdd54ec1d82bc58861799f">00168</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_ae5f524bd83cdd54ec1d82bc58861799f.html#ae5f524bd83cdd54ec1d82bc58861799f" title="Constructor.">__construct</a>(PDO $objPdo, $id = NULL) {
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170       <a class="code" href="../../db/db2/a00020_ae5f524bd83cdd54ec1d82bc58861799f.html#ae5f524bd83cdd54ec1d82bc58861799f" title="Constructor.">parent::__construct</a>($objPdo, $id);
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172       $this-&gt;<a class="code" href="../../db/db2/a00020_a7f25084ea5cc0331b7ce82a47e80fe3f.html#a7f25084ea5cc0331b7ce82a47e80fe3f" title="Restricciones automaticas, añadimos longitud maxima según información de la base de datos...">restricciones_automaticas</a>();
+<a name="l00173"></a>00173       $this-&gt;<a class="code" href="../../db/db2/a00020_aabaa9f21f2ac38604817ee7ecb3ef46b.html#aabaa9f21f2ac38604817ee7ecb3ef46b" title="Mensajes automáticos, en caso de tener el mensaje definido ya no lo chafamos.">mensajes_automaticos</a>();
+<a name="l00174"></a>00174       <span class="comment">//$this-&gt;plantilla   = dirname(__FILE__).&#39;/../html/form_registro.html&#39;;</span>
+<a name="l00175"></a>00175       <span class="comment">//$this-&gt;fichero_css = dirname(__FILE__).&#39;/../css/crud.css&#39;;</span>
+<a name="l00176"></a>00176 <span class="comment"></span>
+<a name="l00177"></a>00177 <span class="comment">      /** @todo Revisar tema de galeria da errores al intentar cargarla */</span>
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179       <span class="comment">// if ( $this-&gt;galeria ) {</span>
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181       <span class="comment">//    $conf_galeria = array(</span>
+<a name="l00182"></a>00182       <span class="comment">//         &#39;tipo&#39;         =&gt; &#39;tabla-archivo&#39;</span>
+<a name="l00183"></a>00183       <span class="comment">//       , &#39;pdo&#39;          =&gt; $this-&gt;objPDO</span>
+<a name="l00184"></a>00184       <span class="comment">//       , &#39;tabla&#39;        =&gt; $this-&gt;strTableName</span>
+<a name="l00185"></a>00185       <span class="comment">//       , &#39;dir_imagenes&#39; =&gt; $this-&gt;galeria</span>
+<a name="l00186"></a>00186       <span class="comment">//       , &#39;dir_tmp&#39;      =&gt; &#39;tmp/&#39;</span>
+<a name="l00187"></a>00187       <span class="comment">//       );</span>
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189       <span class="comment">//    $this-&gt;galeria = new Galeria($conf_galeria, $this-&gt;ID);</span>
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191       <span class="comment">//    $this-&gt;galeria-&gt;limit_imatges = 1;</span>
+<a name="l00192"></a>00192       <span class="comment">//    $this-&gt;galeria-&gt;amplaria_max = 640;</span>
+<a name="l00193"></a>00193       <span class="comment">//    $this-&gt;galeria-&gt;imatge_espera = GCM_DIR.&#39;/lib/int/galeria/img/30.gif&#39;;</span>
+<a name="l00194"></a>00194       <span class="comment">//    $this-&gt;galeria-&gt;contingut_enllac_borrar = &#39;[x]&#39;; </span>
+<a name="l00195"></a>00195       <span class="comment">//    $this-&gt;galeria-&gt;amplada_presentacio = 100;</span>
+<a name="l00196"></a>00196       <span class="comment">//    $this-&gt;galeria-&gt;sufijo = $this-&gt;strTableName;</span>
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199       <span class="comment">//    }</span>
 <a name="l00200"></a>00200 
-<a name="l00201"></a>00201         <span class="comment">/*</span>
-<a name="l00202"></a>00202 <span class="comment">         * Run through the rules and execute the validation methods as needed</span>
-<a name="l00203"></a>00203 <span class="comment">         */</span>
-<a name="l00204"></a>00204 
-<a name="l00205"></a>00205         <span class="keywordflow">for</span> (var i = 0, ruleLength = rules.length; i &lt; ruleLength; i++) {
-<a name="l00206"></a>00206             var method = rules[i],
-<a name="l00207"></a>00207                 param = null,
-<a name="l00208"></a>00208                 failed = <span class="keyword">false</span>;
-<a name="l00209"></a>00209 
-<a name="l00210"></a>00210             <span class="comment">/*</span>
-<a name="l00211"></a>00211 <span class="comment">             * If the rule has a parameter (i.e. matches[param]) split it out</span>
-<a name="l00212"></a>00212 <span class="comment">             */</span>
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214             <span class="keywordflow">if</span> (parts = ruleRegex.exec(method)) {
-<a name="l00215"></a>00215                 method = parts[1];
-<a name="l00216"></a>00216                 param = parts[2];
-<a name="l00217"></a>00217             }
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219             <span class="comment">/*</span>
-<a name="l00220"></a>00220 <span class="comment">             * If the hook is defined, run it to find any validation errors</span>
-<a name="l00221"></a>00221 <span class="comment">             */</span>
+<a name="l00201"></a>00201       }
+<a name="l00202"></a>00202 <span class="comment"></span>
+<a name="l00203"></a>00203 <span class="comment">   /**</span>
+<a name="l00204"></a>00204 <span class="comment">    * devolver array con las restricciones</span>
+<a name="l00205"></a>00205 <span class="comment">    */</span>
+<a name="l00206"></a>00206 
+<a name="l00207"></a><a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d">00207</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>() {
+<a name="l00208"></a>00208       <span class="keywordflow">return</span> <a class="code" href="../../db/db2/a00020_a2ae50f73698dfe8746437b33a4d662ce.html#a2ae50f73698dfe8746437b33a4d662ce" title="Restricciones para Solicitud.">$this-&gt;restricciones</a>;
+<a name="l00209"></a>00209       }
+<a name="l00210"></a>00210 <span class="comment"></span>
+<a name="l00211"></a>00211 <span class="comment">   /**</span>
+<a name="l00212"></a>00212 <span class="comment">    * Devolver array con los mensajes </span>
+<a name="l00213"></a>00213 <span class="comment">    */</span>
+<a name="l00214"></a>00214 
+<a name="l00215"></a><a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695">00215</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>() {
+<a name="l00216"></a>00216       <span class="keywordflow">return</span> <a class="code" href="../../db/db2/a00020_aaa02cf2ff21ac3e5cb6909cbd066999e.html#aaa02cf2ff21ac3e5cb6909cbd066999e" title="Mensajes de respuesta a fallos de restricciones.">$this-&gt;mensajes</a>;
+<a name="l00217"></a>00217       }
+<a name="l00218"></a>00218 <span class="comment"></span>
+<a name="l00219"></a>00219 <span class="comment">   /**</span>
+<a name="l00220"></a>00220 <span class="comment">    * Nombre de tabla</span>
+<a name="l00221"></a>00221 <span class="comment">    */</span>
 <a name="l00222"></a>00222 
-<a name="l00223"></a>00223             <span class="keywordflow">if</span> (typeof this._hooks[method] === <span class="stringliteral">&#39;function&#39;</span>) {
-<a name="l00224"></a>00224                 <span class="keywordflow">if</span> (!this._hooks[method].apply(<span class="keyword">this</span>, [field, param])) {
-<a name="l00225"></a>00225                     failed = <span class="keyword">true</span>;
-<a name="l00226"></a>00226                 }
-<a name="l00227"></a>00227             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (method.substring(0, 9) === <span class="stringliteral">&#39;callback_&#39;</span>) {
-<a name="l00228"></a>00228                 <span class="comment">// Custom method. Execute the handler if it was registered</span>
-<a name="l00229"></a>00229                 method = method.substring(9, method.length);
-<a name="l00230"></a>00230 
-<a name="l00231"></a>00231                 <span class="keywordflow">if</span> (typeof this.handlers[method] === <span class="stringliteral">&#39;function&#39;</span>) {
-<a name="l00232"></a>00232                     <span class="keywordflow">if</span> (this.handlers[method].apply(<span class="keyword">this</span>, [field.value]) === <span class="keyword">false</span>) {
-<a name="l00233"></a>00233                         failed = <span class="keyword">true</span>;
-<a name="l00234"></a>00234                     }
-<a name="l00235"></a>00235                 }
-<a name="l00236"></a>00236             }
-<a name="l00237"></a>00237 
-<a name="l00238"></a>00238             <span class="comment">/*</span>
-<a name="l00239"></a>00239 <span class="comment">             * If the hook failed, add a message to the errors array</span>
-<a name="l00240"></a>00240 <span class="comment">             */</span>
-<a name="l00241"></a>00241 
-<a name="l00242"></a>00242             <span class="keywordflow">if</span> (failed) {
-<a name="l00243"></a>00243                 <span class="comment">// Make sure we have a message for this rule</span>
-<a name="l00244"></a>00244                 var source = this.messages[method] || defaults.messages[method];
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246                 <span class="keywordflow">if</span> (source) {
-<a name="l00247"></a>00247                     var message = source.replace(<span class="stringliteral">&#39;%s&#39;</span>, field.display);
+<a name="l00223"></a><a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76">00223</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>() {
+<a name="l00224"></a>00224       <span class="keywordflow">return</span> strtolower(get_class($this));
+<a name="l00225"></a>00225       }
+<a name="l00226"></a>00226 <span class="comment"></span>
+<a name="l00227"></a>00227 <span class="comment">   /**</span>
+<a name="l00228"></a>00228 <span class="comment">    * Relación entre campos de la tabla y variables a utilizar en el dominio, a la vez</span>
+<a name="l00229"></a>00229 <span class="comment">    * aprovechamos para ver los tipos de campo y definirlos junto con los </span>
+<a name="l00230"></a>00230 <span class="comment">    * tipos_formulario</span>
+<a name="l00231"></a>00231 <span class="comment">    */</span>
+<a name="l00232"></a>00232 
+<a name="l00233"></a><a class="code" href="../../db/db2/a00020_a3e5fff704a80b583de8be2158b9d60f8.html#a3e5fff704a80b583de8be2158b9d60f8">00233</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a3e5fff704a80b583de8be2158b9d60f8.html#a3e5fff704a80b583de8be2158b9d60f8" title="Relación entre campos de la tabla y variables a utilizar en el dominio, a la vez aprovechamos para ve...">DefineRelationMap</a>(<a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>) {
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235       $referencia_campos = array();
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237       $driver = <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>-&gt;getAttribute(constant(<span class="stringliteral">&quot;PDO::ATTR_DRIVER_NAME&quot;</span>));
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239       <span class="keywordflow">switch</span>($driver) {
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241          <span class="keywordflow">case</span> <span class="stringliteral">&#39;sqlite&#39;</span>:
+<a name="l00242"></a>00242 
+<a name="l00243"></a>00243             $sql = sprintf(<span class="stringliteral">&quot;pragma table_info(&#39;%s&#39;)&quot;</span>,$this-&gt;strTableName);
+<a name="l00244"></a>00244 
+<a name="l00245"></a>00245             $rst = <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>-&gt;query($sql) or die(<span class="stringliteral">&#39;Error al buscar información en la tabla &#39;</span>.$this-&gt;strTableName);
+<a name="l00246"></a>00246 
+<a name="l00247"></a>00247             <span class="keywordflow">while</span> ( $row = $rst-&gt;fetch() ) {
 <a name="l00248"></a>00248 
-<a name="l00249"></a>00249                     <span class="keywordflow">if</span> (param) {
-<a name="l00250"></a>00250                         message = message.replace(<span class="stringliteral">&#39;%s&#39;</span>, (this.fields[param]) ? this.fields[param].display : param);
-<a name="l00251"></a>00251                     }
+<a name="l00249"></a>00249                <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;name&#39;</span>] == <span class="stringliteral">&#39;id&#39;</span> ) {
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251                   $referencia_campos[<span class="stringliteral">&#39;id&#39;</span>] = <span class="stringliteral">&#39;ID&#39;</span>;
 <a name="l00252"></a>00252 
-<a name="l00253"></a>00253                     this.errors.push(message);
-<a name="l00254"></a>00254                 } <span class="keywordflow">else</span> {
-<a name="l00255"></a>00255                     this.errors.push(<span class="stringliteral">&#39;An error has occurred with the &#39;</span> + field.display + <span class="stringliteral">&#39; field.&#39;</span>);
-<a name="l00256"></a>00256                 }
-<a name="l00257"></a>00257 
-<a name="l00258"></a>00258                 <span class="comment">// Break out so as to not spam with validation errors (i.e. required and valid_email)</span>
-<a name="l00259"></a>00259                 <span class="keywordflow">break</span>;
-<a name="l00260"></a>00260             }
-<a name="l00261"></a>00261         }
-<a name="l00262"></a>00262     };
-<a name="l00263"></a>00263 
-<a name="l00264"></a>00264     <span class="comment">/*</span>
-<a name="l00265"></a>00265 <span class="comment">     * @private</span>
-<a name="l00266"></a>00266 <span class="comment">     * Object containing all of the validation hooks</span>
-<a name="l00267"></a>00267 <span class="comment">     */</span>
-<a name="l00268"></a>00268 
-<a name="l00269"></a>00269     FormValidator.prototype._hooks = {
-<a name="l00270"></a>00270         required: <span class="keyword">function</span>(field) {
-<a name="l00271"></a>00271             var value = field.value;
-<a name="l00272"></a>00272 
-<a name="l00273"></a>00273             <span class="keywordflow">if</span> (field.type === <span class="stringliteral">&#39;checkbox&#39;</span>) {
-<a name="l00274"></a>00274                 <span class="keywordflow">return</span> (field.checked === <span class="keyword">true</span>);
-<a name="l00275"></a>00275             }
-<a name="l00276"></a>00276 
-<a name="l00277"></a>00277             <span class="keywordflow">return</span> (value !== null &amp;&amp; value !== <span class="stringliteral">&#39;&#39;</span>);
-<a name="l00278"></a>00278         },
+<a name="l00253"></a>00253                } <span class="keywordflow">else</span> {
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255                   $referencia_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]] = ucfirst($row[<span class="stringliteral">&#39;name&#39;</span>]);
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257                   $this-&gt;<a class="code" href="../../db/db2/a00020_ac8285e062d49e1238daae965ab297c2c.html#ac8285e062d49e1238daae965ab297c2c" title="Definir tipos de campo especificado.">definir_tipos_campo</a>($row, <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>);
+<a name="l00258"></a>00258                   $this-&gt;<a class="code" href="../../db/db2/a00020_a0ff2aa81534d033c5db3db8daa58c6e6.html#a0ff2aa81534d033c5db3db8daa58c6e6" title="Definir tipos de formulario para el campo especificado.">definir_tipos_formulario</a>($row, <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>);
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260                   }
+<a name="l00261"></a>00261 
+<a name="l00262"></a>00262             }
+<a name="l00263"></a>00263          
+<a name="l00264"></a>00264             <span class="keywordflow">break</span>;
+<a name="l00265"></a>00265 
+<a name="l00266"></a>00266          <span class="keywordflow">case</span> <span class="stringliteral">&#39;mysql&#39;</span>:
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268             $sql = sprintf( <span class="stringliteral">&quot;SHOW FIELDS FROM `%s`&quot;</span>, $this-&gt;strTableName );
+<a name="l00269"></a>00269 
+<a name="l00270"></a>00270             $rst = <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>-&gt;query($sql) or die(<span class="stringliteral">&#39;Error al buscar información en la tabla &#39;</span>.$this-&gt;strTableName);
+<a name="l00271"></a>00271 
+<a name="l00272"></a>00272             <span class="keywordflow">while</span> ( $row = $rst-&gt;fetch() ) {
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274                <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Field&#39;</span>] == <span class="stringliteral">&#39;id&#39;</span> ) {
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276                   $referencia_campos[<span class="stringliteral">&#39;id&#39;</span>] = <span class="stringliteral">&#39;ID&#39;</span>;
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278                } <span class="keywordflow">else</span> {
 <a name="l00279"></a>00279 
-<a name="l00280"></a>00280         matches: <span class="keyword">function</span>(field, matchName) {
-<a name="l00281"></a>00281             <span class="keywordflow">if</span> (el = this.form[matchName]) {
-<a name="l00282"></a>00282                 <span class="keywordflow">return</span> field.value === el.value;
-<a name="l00283"></a>00283             }
+<a name="l00280"></a>00280                   $referencia_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]] = ucfirst($row[<span class="stringliteral">&#39;Field&#39;</span>]);
+<a name="l00281"></a>00281 
+<a name="l00282"></a>00282                   $this-&gt;<a class="code" href="../../db/db2/a00020_ac8285e062d49e1238daae965ab297c2c.html#ac8285e062d49e1238daae965ab297c2c" title="Definir tipos de campo especificado.">definir_tipos_campo</a>($row, <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>);
+<a name="l00283"></a>00283                   $this-&gt;<a class="code" href="../../db/db2/a00020_a0ff2aa81534d033c5db3db8daa58c6e6.html#a0ff2aa81534d033c5db3db8daa58c6e6" title="Definir tipos de formulario para el campo especificado.">definir_tipos_formulario</a>($row, <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>);
 <a name="l00284"></a>00284 
-<a name="l00285"></a>00285             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00286"></a>00286         },
+<a name="l00285"></a>00285                   }
+<a name="l00286"></a>00286             }
 <a name="l00287"></a>00287 
-<a name="l00288"></a>00288         valid_email: <span class="keyword">function</span>(field) {
-<a name="l00289"></a>00289             <span class="keywordflow">return</span> emailRegex.test(field.value);
-<a name="l00290"></a>00290         },
+<a name="l00288"></a>00288             <span class="keywordflow">break</span>;
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290        }
 <a name="l00291"></a>00291 
-<a name="l00292"></a>00292         valid_emails: <span class="keyword">function</span>(field) {
-<a name="l00293"></a>00293             var result = field.value.split(<span class="stringliteral">&quot;,&quot;</span>);
-<a name="l00294"></a>00294             
-<a name="l00295"></a>00295             <span class="keywordflow">for</span> (var i = 0; i &lt; result.length; i++) {
-<a name="l00296"></a>00296                 <span class="keywordflow">if</span> (!emailRegex.test(result[i])) {
-<a name="l00297"></a>00297                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00298"></a>00298                 }
-<a name="l00299"></a>00299             }
-<a name="l00300"></a>00300             
-<a name="l00301"></a>00301             <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00302"></a>00302         },
+<a name="l00292"></a>00292       <span class="keywordflow">return</span> $referencia_campos;
+<a name="l00293"></a>00293 
+<a name="l00294"></a>00294       }
+<a name="l00295"></a>00295 <span class="comment"></span>
+<a name="l00296"></a>00296 <span class="comment">   /**</span>
+<a name="l00297"></a>00297 <span class="comment">    * Definir tipos de campo especificado</span>
+<a name="l00298"></a>00298 <span class="comment">    *</span>
+<a name="l00299"></a>00299 <span class="comment">    * Las carateristicas de los campos definidas en el modelo no se chafan con las automaticas</span>
+<a name="l00300"></a>00300 <span class="comment">    *</span>
+<a name="l00301"></a>00301 <span class="comment">    * @param $row Array con los datos del campo de la base de datos</span>
+<a name="l00302"></a>00302 <span class="comment">    */</span>
 <a name="l00303"></a>00303 
-<a name="l00304"></a>00304         min_length: <span class="keyword">function</span>(field, length) {
-<a name="l00305"></a>00305             <span class="keywordflow">if</span> (!numericRegex.test(length)) {
-<a name="l00306"></a>00306                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00307"></a>00307             }
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309             <span class="keywordflow">return</span> (field.value.length &gt;= length);
-<a name="l00310"></a>00310         },
-<a name="l00311"></a>00311 
-<a name="l00312"></a>00312         max_length: <span class="keyword">function</span>(field, length) {
-<a name="l00313"></a>00313             <span class="keywordflow">if</span> (!numericRegex.test(length)) {
-<a name="l00314"></a>00314                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00315"></a>00315             }
+<a name="l00304"></a><a class="code" href="../../db/db2/a00020_ac8285e062d49e1238daae965ab297c2c.html#ac8285e062d49e1238daae965ab297c2c">00304</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_ac8285e062d49e1238daae965ab297c2c.html#ac8285e062d49e1238daae965ab297c2c" title="Definir tipos de campo especificado.">definir_tipos_campo</a>($row, <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>) {
+<a name="l00305"></a>00305 
+<a name="l00306"></a>00306       $driver = <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>-&gt;getAttribute(constant(<span class="stringliteral">&quot;PDO::ATTR_DRIVER_NAME&quot;</span>));
+<a name="l00307"></a>00307 
+<a name="l00308"></a>00308       <span class="keywordflow">if</span> ( $driver == <span class="stringliteral">&#39;sqlite&#39;</span> ) {
+<a name="l00309"></a>00309 
+<a name="l00310"></a>00310          <span class="keywordflow">if</span> ( ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>]) )                               $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = $row[<span class="stringliteral">&#39;type&#39;</span>];
+<a name="l00311"></a>00311          <span class="keywordflow">if</span> ( ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;null&#39;</span>]) ) $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;null&#39;</span>] = ( $row[<span class="stringliteral">&#39;notnull&#39;</span>] == 0 ) ? 1 : 0;
+<a name="l00312"></a>00312          <span class="keywordflow">if</span> ( !empty($row[<span class="stringliteral">&#39;Default&#39;</span>]) &amp;&amp; ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;default&#39;</span>]) ) $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;default&#39;</span>] = $row[<span class="stringliteral">&#39;dflt_value&#39;</span>];
+<a name="l00313"></a>00313          <span class="keywordflow">if</span> ( !empty($row[<span class="stringliteral">&#39;Extra&#39;</span>]) &amp;&amp; ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;extra&#39;</span>]) )     $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;extra&#39;</span>] = $row[<span class="stringliteral">&#39;extra&#39;</span>];
+<a name="l00314"></a>00314 
+<a name="l00315"></a>00315          <span class="comment">// Buscamos valor maximo para campo</span>
 <a name="l00316"></a>00316 
-<a name="l00317"></a>00317             <span class="keywordflow">return</span> (field.value.length &lt;= length);
-<a name="l00318"></a>00318         },
-<a name="l00319"></a>00319 
-<a name="l00320"></a>00320         exact_length: <span class="keyword">function</span>(field, length) {
-<a name="l00321"></a>00321             <span class="keywordflow">if</span> (!numericRegex.test(length)) {
-<a name="l00322"></a>00322                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00323"></a>00323             }
-<a name="l00324"></a>00324             
-<a name="l00325"></a>00325             <span class="keywordflow">return</span> (field.value.length === length);
-<a name="l00326"></a>00326         },
+<a name="l00317"></a>00317          preg_match(<span class="stringliteral">&quot;/\((.*)\)/&quot;</span>,$row[<span class="stringliteral">&#39;type&#39;</span>],$coincidencias);
+<a name="l00318"></a>00318          $max = FALSE;
+<a name="l00319"></a>00319          <span class="keywordflow">if</span> ( isset($coincidencias[1]) ) {
+<a name="l00320"></a>00320             $max = $coincidencias[1];
+<a name="l00321"></a>00321             <span class="keywordflow">if</span> ( strpos($max,<span class="charliteral">&#39;,&#39;</span>)  ) {
+<a name="l00322"></a>00322                $maxs = explode(<span class="charliteral">&#39;,&#39;</span>,$max);
+<a name="l00323"></a>00323                $max = $maxs[0] + $maxs[1] + 1;
+<a name="l00324"></a>00324                }
+<a name="l00325"></a>00325             $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] = $max;
+<a name="l00326"></a>00326          } <span class="keywordflow">else</span> {
 <a name="l00327"></a>00327 
-<a name="l00328"></a>00328         greater_than: <span class="keyword">function</span>(field, param) {
-<a name="l00329"></a>00329             <span class="keywordflow">if</span> (!decimalRegex.test(field.value)) {
-<a name="l00330"></a>00330                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00331"></a>00331             }
+<a name="l00328"></a>00328             <span class="comment">// timestamp</span>
+<a name="l00329"></a>00329             <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;timestamp&#39;</span> || $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;datetime&#39;</span> ) {
+<a name="l00330"></a>00330                $max=20;
+<a name="l00331"></a>00331                $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] = $max;
 <a name="l00332"></a>00332 
-<a name="l00333"></a>00333             <span class="keywordflow">return</span> (parseFloat(field.value) &gt; parseFloat(param));
-<a name="l00334"></a>00334         },
-<a name="l00335"></a>00335 
-<a name="l00336"></a>00336         less_than: <span class="keyword">function</span>(field, param) {
-<a name="l00337"></a>00337             <span class="keywordflow">if</span> (!decimalRegex.test(field.value)) {
-<a name="l00338"></a>00338                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00339"></a>00339             }
-<a name="l00340"></a>00340 
-<a name="l00341"></a>00341             <span class="keywordflow">return</span> (parseFloat(field.value) &lt; parseFloat(param));
-<a name="l00342"></a>00342         },
+<a name="l00333"></a>00333             <span class="comment">// date</span>
+<a name="l00334"></a>00334             } elseif ( $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;date&#39;</span> ) {
+<a name="l00335"></a>00335                $max=10;
+<a name="l00336"></a>00336                $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] = $max;
+<a name="l00337"></a>00337 
+<a name="l00338"></a>00338                }
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340             }
+<a name="l00341"></a>00341 
+<a name="l00342"></a>00342       } <span class="keywordflow">else</span> {
 <a name="l00343"></a>00343 
-<a name="l00344"></a>00344         alpha: <span class="keyword">function</span>(field) {
-<a name="l00345"></a>00345             <span class="keywordflow">return</span> (alphaRegex.test(field.value));
-<a name="l00346"></a>00346         },
-<a name="l00347"></a>00347 
-<a name="l00348"></a>00348         alpha_numeric: <span class="keyword">function</span>(field) {
-<a name="l00349"></a>00349             <span class="keywordflow">return</span> (alphaNumericRegex.test(field.value));
-<a name="l00350"></a>00350         },
-<a name="l00351"></a>00351 
-<a name="l00352"></a>00352         alpha_dash: <span class="keyword">function</span>(field) {
-<a name="l00353"></a>00353             <span class="keywordflow">return</span> (alphaDashRegex.test(field.value));
-<a name="l00354"></a>00354         },
-<a name="l00355"></a>00355 
-<a name="l00356"></a>00356         numeric: <span class="keyword">function</span>(field) {
-<a name="l00357"></a>00357             <span class="keywordflow">return</span> (decimalRegex.test(field.value));
-<a name="l00358"></a>00358         },
-<a name="l00359"></a>00359 
-<a name="l00360"></a>00360         integer: <span class="keyword">function</span>(field) {
-<a name="l00361"></a>00361             <span class="keywordflow">return</span> (integerRegex.test(field.value));
-<a name="l00362"></a>00362         },
-<a name="l00363"></a>00363 
-<a name="l00364"></a>00364         decimal: <span class="keyword">function</span>(field) {
-<a name="l00365"></a>00365             <span class="keywordflow">return</span> (decimalRegex.test(field.value));
-<a name="l00366"></a>00366         },
-<a name="l00367"></a>00367 
-<a name="l00368"></a>00368         is_natural: <span class="keyword">function</span>(field) {
-<a name="l00369"></a>00369             <span class="keywordflow">return</span> (naturalRegex.test(field.value));
-<a name="l00370"></a>00370         },
+<a name="l00344"></a>00344          <span class="keywordflow">if</span> ( ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>]) )                               $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = $row[<span class="stringliteral">&#39;Type&#39;</span>];
+<a name="l00345"></a>00345          <span class="keywordflow">if</span> ( ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;null&#39;</span>]) )                               $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;null&#39;</span>] = $row[<span class="stringliteral">&#39;Null&#39;</span>];
+<a name="l00346"></a>00346          <span class="keywordflow">if</span> ( !empty($row[<span class="stringliteral">&#39;Default&#39;</span>]) &amp;&amp; ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;default&#39;</span>]) ) $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;default&#39;</span>] = $row[<span class="stringliteral">&#39;Default&#39;</span>];
+<a name="l00347"></a>00347          <span class="keywordflow">if</span> ( !empty($row[<span class="stringliteral">&#39;Extra&#39;</span>]) &amp;&amp; ! isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;extra&#39;</span>]) )     $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;extra&#39;</span>] = $row[<span class="stringliteral">&#39;Extra&#39;</span>];
+<a name="l00348"></a>00348 
+<a name="l00349"></a>00349          <span class="comment">// Buscamos valor maximo para campo</span>
+<a name="l00350"></a>00350 
+<a name="l00351"></a>00351          preg_match(<span class="stringliteral">&quot;/\((.*)\)/&quot;</span>,$row[<span class="stringliteral">&#39;Type&#39;</span>],$coincidencias);
+<a name="l00352"></a>00352          $max = FALSE;
+<a name="l00353"></a>00353          <span class="keywordflow">if</span> ( isset($coincidencias[1]) ) {
+<a name="l00354"></a>00354             $max = $coincidencias[1];
+<a name="l00355"></a>00355             <span class="keywordflow">if</span> ( strpos($max,<span class="charliteral">&#39;,&#39;</span>)  ) {
+<a name="l00356"></a>00356                $maxs = explode(<span class="charliteral">&#39;,&#39;</span>,$max);
+<a name="l00357"></a>00357                $max = $maxs[0] + $maxs[1] + 1;
+<a name="l00358"></a>00358                }
+<a name="l00359"></a>00359             $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] = $max;
+<a name="l00360"></a>00360          } <span class="keywordflow">else</span> {
+<a name="l00361"></a>00361 
+<a name="l00362"></a>00362             <span class="comment">// timestamp</span>
+<a name="l00363"></a>00363             <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;timestamp&#39;</span> || $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;datetime&#39;</span> ) {
+<a name="l00364"></a>00364                $max=20;
+<a name="l00365"></a>00365                $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] = $max;
+<a name="l00366"></a>00366 
+<a name="l00367"></a>00367             <span class="comment">// date</span>
+<a name="l00368"></a>00368             } elseif ( $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;date&#39;</span> ) {
+<a name="l00369"></a>00369                $max=10;
+<a name="l00370"></a>00370                $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] = $max;
 <a name="l00371"></a>00371 
-<a name="l00372"></a>00372         is_natural_no_zero: <span class="keyword">function</span>(field) {
-<a name="l00373"></a>00373             <span class="keywordflow">return</span> (naturalNoZeroRegex.test(field.value));
-<a name="l00374"></a>00374         },
+<a name="l00372"></a>00372                }
+<a name="l00373"></a>00373 
+<a name="l00374"></a>00374             }
 <a name="l00375"></a>00375 
-<a name="l00376"></a>00376         valid_ip: <span class="keyword">function</span>(field) {
-<a name="l00377"></a>00377             <span class="keywordflow">return</span> (ipRegex.test(field.value));
-<a name="l00378"></a>00378         },
-<a name="l00379"></a>00379 
-<a name="l00380"></a>00380         valid_base64: <span class="keyword">function</span>(field) {
-<a name="l00381"></a>00381             <span class="keywordflow">return</span> (base64Regex.test(field.value));
-<a name="l00382"></a>00382         }
-<a name="l00383"></a>00383     };
-<a name="l00384"></a>00384 
-<a name="l00385"></a>00385     window.FormValidator = FormValidator;
-<a name="l00386"></a>00386 
-<a name="l00387"></a>00387 })(window, document);
+<a name="l00376"></a>00376          }
+<a name="l00377"></a>00377 
+<a name="l00378"></a>00378       }
+<a name="l00379"></a>00379 <span class="comment"></span>
+<a name="l00380"></a>00380 <span class="comment">   /**</span>
+<a name="l00381"></a>00381 <span class="comment">    * Definir tipos de formulario para el campo especificado</span>
+<a name="l00382"></a>00382 <span class="comment">    *</span>
+<a name="l00383"></a>00383 <span class="comment">    * Si un campo ya tiene definido un valor desde el modelo no se chafa</span>
+<a name="l00384"></a>00384 <span class="comment">    *</span>
+<a name="l00385"></a>00385 <span class="comment">    * @param $row Array con los datos del campo en la base de datos</span>
+<a name="l00386"></a>00386 <span class="comment">    */</span>
+<a name="l00387"></a>00387 
+<a name="l00388"></a><a class="code" href="../../db/db2/a00020_a0ff2aa81534d033c5db3db8daa58c6e6.html#a0ff2aa81534d033c5db3db8daa58c6e6">00388</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a0ff2aa81534d033c5db3db8daa58c6e6.html#a0ff2aa81534d033c5db3db8daa58c6e6" title="Definir tipos de formulario para el campo especificado.">definir_tipos_formulario</a>($row, <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>) {
+<a name="l00389"></a>00389 
+<a name="l00390"></a>00390       $driver = <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>-&gt;getAttribute(constant(<span class="stringliteral">&quot;PDO::ATTR_DRIVER_NAME&quot;</span>));
+<a name="l00391"></a>00391 
+<a name="l00392"></a>00392       <span class="keywordflow">if</span> ( $driver == <span class="stringliteral">&#39;sqlite&#39;</span> ) {
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>]) ) return ;
+<a name="l00395"></a>00395 
+<a name="l00396"></a>00396          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>]) ) {
+<a name="l00397"></a>00397             <span class="keywordflow">if</span> ( $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] &gt; 150 ) {
+<a name="l00398"></a>00398                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;textarea&#39;</span>;
+<a name="l00399"></a>00399                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;cols&#39;</span>] = <span class="stringliteral">&#39;30&#39;</span>;
+<a name="l00400"></a>00400                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;rows&#39;</span>] = <span class="charliteral">&#39;3&#39;</span>;
+<a name="l00401"></a>00401             } <span class="keywordflow">else</span> {
+<a name="l00402"></a>00402                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;text&#39;</span>;
+<a name="l00403"></a>00403                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;maxlength&#39;</span>] = $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>];
+<a name="l00404"></a>00404                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;size&#39;</span>] = ($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] &gt; 30) ? 30 : $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>];
+<a name="l00405"></a>00405                }
+<a name="l00406"></a>00406          } <span class="keywordflow">else</span> {
+<a name="l00407"></a>00407             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;text&#39;</span>;
+<a name="l00408"></a>00408             }
+<a name="l00409"></a>00409 
+<a name="l00410"></a>00410          <span class="comment">/* Realciones entre tablas */</span>
+<a name="l00411"></a>00411 
+<a name="l00412"></a>00412          <span class="keywordflow">if</span> ( strpos($row[<span class="stringliteral">&#39;name&#39;</span>],$this-&gt;id_relacion ) !== FALSE ) {
+<a name="l00413"></a>00413 
+<a name="l00414"></a>00414             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;relacion&#39;</span>;
+<a name="l00415"></a>00415             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tabla&#39;</span>] = str_replace($this-&gt;id_relacion,<span class="stringliteral">&#39;&#39;</span>,$row[<span class="stringliteral">&#39;name&#39;</span>]);
+<a name="l00416"></a>00416 
+<a name="l00417"></a>00417             }
+<a name="l00418"></a>00418 
+<a name="l00419"></a>00419          <span class="comment">/* Para campos mail */</span>
+<a name="l00420"></a>00420 
+<a name="l00421"></a>00421          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;name&#39;</span>] == <span class="stringliteral">&#39;mail&#39;</span>  ) {
+<a name="l00422"></a>00422             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;mail&#39;</span>;
+<a name="l00423"></a>00423             }
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425          <span class="comment">/* Para campos imagen_url */</span>
+<a name="l00426"></a>00426 
+<a name="l00427"></a>00427          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;name&#39;</span>] == <span class="stringliteral">&#39;imagen_url&#39;</span>  ) {
+<a name="l00428"></a>00428             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;imagen_url&#39;</span>;
+<a name="l00429"></a>00429             }
+<a name="l00430"></a>00430 
+<a name="l00431"></a>00431          <span class="comment">// Campos &#39;text&#39; seran &#39;textarea&#39;</span>
+<a name="l00432"></a>00432          
+<a name="l00433"></a>00433          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;text&#39;</span> ) {
+<a name="l00434"></a>00434 
+<a name="l00435"></a>00435             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;textarea&#39;</span>;
+<a name="l00436"></a>00436             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;cols&#39;</span>] = <span class="stringliteral">&#39;30&#39;</span>;
+<a name="l00437"></a>00437             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;rows&#39;</span>] = <span class="charliteral">&#39;3&#39;</span>;
+<a name="l00438"></a>00438 
+<a name="l00439"></a>00439             }
+<a name="l00440"></a>00440 
+<a name="l00441"></a>00441          <span class="comment">// Campos &#39;date&#39; seran &#39;fecha&#39;</span>
+<a name="l00442"></a>00442          
+<a name="l00443"></a>00443          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;date&#39;</span> ) {
+<a name="l00444"></a>00444 
+<a name="l00445"></a>00445             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;fecha&#39;</span>;
+<a name="l00446"></a>00446 
+<a name="l00447"></a>00447             }
+<a name="l00448"></a>00448 
+<a name="l00449"></a>00449          <span class="comment">// Campos &#39;timestamp&#39; seran &#39;fecha_hora&#39;</span>
+<a name="l00450"></a>00450          
+<a name="l00451"></a>00451          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;timestamp&#39;</span> || $row[<span class="stringliteral">&#39;type&#39;</span>] == <span class="stringliteral">&#39;datetime&#39;</span> ) {
+<a name="l00452"></a>00452 
+<a name="l00453"></a>00453             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;name&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;fecha_hora&#39;</span>;
+<a name="l00454"></a>00454 
+<a name="l00455"></a>00455             }
+<a name="l00456"></a>00456 
+<a name="l00457"></a>00457       } <span class="keywordflow">else</span> {
+<a name="l00458"></a>00458 
+<a name="l00459"></a>00459          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>]) ) return ;
+<a name="l00460"></a>00460 
+<a name="l00461"></a>00461          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>]) ) {
+<a name="l00462"></a>00462             <span class="keywordflow">if</span> ( $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] &gt; 150 ) {
+<a name="l00463"></a>00463                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;textarea&#39;</span>;
+<a name="l00464"></a>00464                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;cols&#39;</span>] = <span class="stringliteral">&#39;30&#39;</span>;
+<a name="l00465"></a>00465                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;rows&#39;</span>] = <span class="charliteral">&#39;3&#39;</span>;
+<a name="l00466"></a>00466             } <span class="keywordflow">else</span> {
+<a name="l00467"></a>00467                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;text&#39;</span>;
+<a name="l00468"></a>00468                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;maxlength&#39;</span>] = $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>];
+<a name="l00469"></a>00469                $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;size&#39;</span>] = ($this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>] &gt; 30) ? 30 : $this-&gt;tipos_campos[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;max&#39;</span>];
+<a name="l00470"></a>00470                }
+<a name="l00471"></a>00471          } <span class="keywordflow">else</span> {
+<a name="l00472"></a>00472             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;text&#39;</span>;
+<a name="l00473"></a>00473             }
+<a name="l00474"></a>00474 
+<a name="l00475"></a>00475          <span class="comment">/* Realciones entre tablas */</span>
+<a name="l00476"></a>00476 
+<a name="l00477"></a>00477          <span class="keywordflow">if</span> ( strpos($row[<span class="stringliteral">&#39;Field&#39;</span>],$this-&gt;id_relacion ) !== FALSE ) {
+<a name="l00478"></a>00478 
+<a name="l00479"></a>00479             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;relacion&#39;</span>;
+<a name="l00480"></a>00480             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tabla&#39;</span>] = str_replace($this-&gt;id_relacion,<span class="stringliteral">&#39;&#39;</span>,$row[<span class="stringliteral">&#39;Field&#39;</span>]);
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482             }
+<a name="l00483"></a>00483 
+<a name="l00484"></a>00484          <span class="comment">/* Para campos mail */</span>
+<a name="l00485"></a>00485 
+<a name="l00486"></a>00486          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Field&#39;</span>] == <span class="stringliteral">&#39;mail&#39;</span>  ) {
+<a name="l00487"></a>00487             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;mail&#39;</span>;
+<a name="l00488"></a>00488             }
+<a name="l00489"></a>00489 
+<a name="l00490"></a>00490          <span class="comment">/* Para campos imagen_url */</span>
+<a name="l00491"></a>00491 
+<a name="l00492"></a>00492          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Field&#39;</span>] == <span class="stringliteral">&#39;imagen_url&#39;</span>  ) {
+<a name="l00493"></a>00493             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;imagen_url&#39;</span>;
+<a name="l00494"></a>00494             }
+<a name="l00495"></a>00495 
+<a name="l00496"></a>00496          <span class="comment">// Campos &#39;text&#39; seran &#39;textarea&#39;</span>
+<a name="l00497"></a>00497          
+<a name="l00498"></a>00498          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;text&#39;</span> ) {
+<a name="l00499"></a>00499 
+<a name="l00500"></a>00500             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;textarea&#39;</span>;
+<a name="l00501"></a>00501             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;cols&#39;</span>] = <span class="stringliteral">&#39;30&#39;</span>;
+<a name="l00502"></a>00502             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;rows&#39;</span>] = <span class="charliteral">&#39;3&#39;</span>;
+<a name="l00503"></a>00503 
+<a name="l00504"></a>00504             }
+<a name="l00505"></a>00505 
+<a name="l00506"></a>00506          <span class="comment">// Campos &#39;date&#39; seran &#39;fecha&#39;</span>
+<a name="l00507"></a>00507          
+<a name="l00508"></a>00508          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;date&#39;</span> ) {
+<a name="l00509"></a>00509 
+<a name="l00510"></a>00510             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;fecha&#39;</span>;
+<a name="l00511"></a>00511 
+<a name="l00512"></a>00512             }
+<a name="l00513"></a>00513 
+<a name="l00514"></a>00514          <span class="comment">// Campos &#39;timestamp&#39; seran &#39;fecha_hora&#39;</span>
+<a name="l00515"></a>00515          
+<a name="l00516"></a>00516          <span class="keywordflow">if</span> ( $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;timestamp&#39;</span> || $row[<span class="stringliteral">&#39;Type&#39;</span>] == <span class="stringliteral">&#39;datetime&#39;</span> ) {
+<a name="l00517"></a>00517 
+<a name="l00518"></a>00518             $this-&gt;tipos_formulario[$row[<span class="stringliteral">&#39;Field&#39;</span>]][<span class="stringliteral">&#39;tipo&#39;</span>] = <span class="stringliteral">&#39;fecha_hora&#39;</span>;
+<a name="l00519"></a>00519 
+<a name="l00520"></a>00520             }
+<a name="l00521"></a>00521 
+<a name="l00522"></a>00522          }
+<a name="l00523"></a>00523       }
+<a name="l00524"></a>00524 <span class="comment"></span>
+<a name="l00525"></a>00525 <span class="comment">   /**</span>
+<a name="l00526"></a>00526 <span class="comment">    * Restricciones automaticas, añadimos longitud maxima según información </span>
+<a name="l00527"></a>00527 <span class="comment">    * de la base de datos, en caso de no permitir null se añade minima </span>
+<a name="l00528"></a>00528 <span class="comment">    * longitud 1. Si ya tenemos una restricción añadida no la generamos así </span>
+<a name="l00529"></a>00529 <span class="comment">    * permitimos añadir restricciones personalizadas sin que las automaticas </span>
+<a name="l00530"></a>00530 <span class="comment">    * las chafen.</span>
+<a name="l00531"></a>00531 <span class="comment">    */</span>
+<a name="l00532"></a>00532 
+<a name="l00533"></a><a class="code" href="../../db/db2/a00020_a7f25084ea5cc0331b7ce82a47e80fe3f.html#a7f25084ea5cc0331b7ce82a47e80fe3f">00533</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a7f25084ea5cc0331b7ce82a47e80fe3f.html#a7f25084ea5cc0331b7ce82a47e80fe3f" title="Restricciones automaticas, añadimos longitud maxima según información de la base de datos...">restricciones_automaticas</a>() {
+<a name="l00534"></a>00534 
+<a name="l00535"></a>00535       <span class="keywordflow">foreach</span> ( $this-&gt;arRelationMap as $campo =&gt; $referencia) {
+<a name="l00536"></a>00536 
+<a name="l00537"></a>00537          <span class="keywordflow">if</span> ( $campo == <span class="stringliteral">&#39;mail&#39;</span> ) $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>[$campo][RT_MAIL] = 1;
+<a name="l00538"></a>00538 
+<a name="l00539"></a>00539          <span class="keywordflow">if</span> ( $campo == <span class="stringliteral">&#39;fecha_creacion&#39;</span> || $campo == <span class="stringliteral">&#39;fecha_modificacion&#39;</span>  ) <span class="keywordflow">continue</span>;
+<a name="l00540"></a>00540 
+<a name="l00541"></a>00541          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;oculto_form&#39;</span>]) &amp;&amp; $this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;oculto_form&#39;</span>] == 1 ) <span class="keywordflow">continue</span>;
+<a name="l00542"></a>00542 
+<a name="l00543"></a>00543          <span class="comment">// Buscamos longitud maxima</span>
+<a name="l00544"></a>00544          <span class="keywordflow">if</span> ( ! isset($this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>[$campo][RT_LONG_MAX]) &amp;&amp; isset($this-&gt;tipos_campos[$campo][<span class="stringliteral">&#39;max&#39;</span>])  ) {
+<a name="l00545"></a>00545             $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>[$campo][RT_LONG_MAX] = $this-&gt;tipos_campos[$campo][<span class="stringliteral">&#39;max&#39;</span>];
+<a name="l00546"></a>00546             }
+<a name="l00547"></a>00547 
+<a name="l00548"></a>00548          <span class="comment">// Si un campo no permite null es requerido</span>
+<a name="l00549"></a>00549          <span class="keywordflow">if</span> ( ! isset($this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>[$campo][RT_REQUERIDO]) &amp;&amp; 
+<a name="l00550"></a>00550             isset($this-&gt;tipos_campos[$campo][<span class="stringliteral">&#39;null&#39;</span>]) &amp;&amp; 
+<a name="l00551"></a>00551             $this-&gt;tipos_campos[$campo][<span class="stringliteral">&#39;null&#39;</span>] == <span class="stringliteral">&#39;NO&#39;</span> &amp;&amp; 
+<a name="l00552"></a>00552             !isset($this-&gt;tipos_campos[$campo][<span class="stringliteral">&#39;Default&#39;</span>]) ) {
+<a name="l00553"></a>00553 
+<a name="l00554"></a>00554                $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>[$campo][RT_REQUERIDO] = 1;
+<a name="l00555"></a>00555                $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][RT_REQUERIDO] = literal(<span class="stringliteral">&#39;Campo obligatorio&#39;</span>,3);
+<a name="l00556"></a>00556 
+<a name="l00557"></a>00557             }
+<a name="l00558"></a>00558 
+<a name="l00559"></a>00559          }
+<a name="l00560"></a>00560 
+<a name="l00561"></a>00561       }
+<a name="l00562"></a>00562 <span class="comment"></span>
+<a name="l00563"></a>00563 <span class="comment">   /**</span>
+<a name="l00564"></a>00564 <span class="comment">    * Mensajes automáticos, en caso de tener el mensaje definido ya no lo chafamos</span>
+<a name="l00565"></a>00565 <span class="comment">    */</span>
+<a name="l00566"></a>00566 
+<a name="l00567"></a><a class="code" href="../../db/db2/a00020_aabaa9f21f2ac38604817ee7ecb3ef46b.html#aabaa9f21f2ac38604817ee7ecb3ef46b">00567</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_aabaa9f21f2ac38604817ee7ecb3ef46b.html#aabaa9f21f2ac38604817ee7ecb3ef46b" title="Mensajes automáticos, en caso de tener el mensaje definido ya no lo chafamos.">mensajes_automaticos</a>() {
+<a name="l00568"></a>00568 
+<a name="l00569"></a>00569       <span class="keywordflow">if</span> ( isset($this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>) ) {
+<a name="l00570"></a>00570 
+<a name="l00571"></a>00571          <span class="keywordflow">foreach</span> ( $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a> as $campo =&gt; $restriccion ) {
+<a name="l00572"></a>00572 
+<a name="l00573"></a>00573             <span class="keywordflow">foreach</span> ( $restriccion as $tipo =&gt; $valor) {
+<a name="l00574"></a>00574 
+<a name="l00575"></a>00575                <span class="keywordflow">if</span> ( ! isset($this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo]) ) {
+<a name="l00576"></a>00576 
+<a name="l00577"></a>00577                   <span class="keywordflow">switch</span> ($tipo) {
+<a name="l00578"></a>00578 
+<a name="l00579"></a>00579                      <span class="keywordflow">case</span> RT_MAIL:
+<a name="l00580"></a>00580                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;El correo no parece valido&#39;</span>,3);
+<a name="l00581"></a>00581                         <span class="keywordflow">break</span>;
+<a name="l00582"></a>00582 
+<a name="l00583"></a>00583                      <span class="keywordflow">case</span> <a class="code" href="../../d5/d4e/a00141_ab78166469618b355c2fa7ae4fb5682a4.html#ab78166469618b355c2fa7ae4fb5682a4" title="Restricciones.">RT_LONG_MIN</a>:
+<a name="l00584"></a>00584                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Longitud minima&#39;</span>,3);
+<a name="l00585"></a>00585                         <span class="keywordflow">break</span>;
+<a name="l00586"></a>00586 
+<a name="l00587"></a>00587                      <span class="keywordflow">case</span> RT_LONG_MAX:
+<a name="l00588"></a>00588                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Longitud máxima&#39;</span>,3)
+<a name="l00589"></a>00589                            .<span class="charliteral">&#39; &#39;</span>.$this-&gt;tipos_campos[$campo][<span class="stringliteral">&#39;max&#39;</span>];
+<a name="l00590"></a>00590                         <span class="keywordflow">break</span>;
+<a name="l00591"></a>00591 
+<a name="l00592"></a>00592                      <span class="keywordflow">case</span> RT_CARACTERES_PERMITIDOS:
+<a name="l00593"></a>00593                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Caracteres no permitidos&#39;</span>,3);
+<a name="l00594"></a>00594                         <span class="keywordflow">break</span>;
+<a name="l00595"></a>00595 
+<a name="l00596"></a>00596                      <span class="keywordflow">case</span> RT_CARACTERES_NO_PERMITIDOS:
+<a name="l00597"></a>00597                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Caracteres no permitidos&#39;</span>,3);
+<a name="l00598"></a>00598                         <span class="keywordflow">break</span>;
+<a name="l00599"></a>00599 
+<a name="l00600"></a>00600                      <span class="keywordflow">case</span> RT_MENOR_QUE:
+<a name="l00601"></a>00601                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Demasiado pequeño&#39;</span>,3);
+<a name="l00602"></a>00602                         <span class="keywordflow">break</span>;
+<a name="l00603"></a>00603 
+<a name="l00604"></a>00604                      <span class="keywordflow">case</span> RT_MAYOR_QUE:
+<a name="l00605"></a>00605                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Demasiado grande&#39;</span>,3);
+<a name="l00606"></a>00606                         <span class="keywordflow">break</span>;
+<a name="l00607"></a>00607 
+<a name="l00608"></a>00608                      <span class="keywordflow">case</span> RT_IGUAL_QUE:
+<a name="l00609"></a>00609                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;No coincide&#39;</span>,3);
+<a name="l00610"></a>00610                         <span class="keywordflow">break</span>;
+<a name="l00611"></a>00611 
+<a name="l00612"></a>00612                      <span class="keywordflow">case</span> RT_NO_IGUAL:
+<a name="l00613"></a>00613                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;No coincide&#39;</span>,3);
+<a name="l00614"></a>00614                         <span class="keywordflow">break</span>;
+<a name="l00615"></a>00615 
+<a name="l00616"></a>00616                      <span class="keywordflow">case</span> RT_PASA_EXPRESION_REGULAR:
+<a name="l00617"></a>00617                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Contenido no permitido&#39;</span>,3);
+<a name="l00618"></a>00618                         <span class="keywordflow">break</span>;
+<a name="l00619"></a>00619 
+<a name="l00620"></a>00620                      <span class="keywordflow">case</span> RT_NO_PASA_EXPRESION_REGULAR:
+<a name="l00621"></a>00621                         $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>[$campo][$tipo] = literal(<span class="stringliteral">&#39;Contenido no permitido&#39;</span>,3);
+<a name="l00622"></a>00622                         <span class="keywordflow">break</span>;
+<a name="l00623"></a>00623 
+<a name="l00624"></a>00624                      }
+<a name="l00625"></a>00625 
+<a name="l00626"></a>00626                   }
+<a name="l00627"></a>00627                }
+<a name="l00628"></a>00628 
+<a name="l00629"></a>00629             }
+<a name="l00630"></a>00630          }
+<a name="l00631"></a>00631 
+<a name="l00632"></a>00632       }
+<a name="l00633"></a>00633 <span class="comment"></span>
+<a name="l00634"></a>00634 <span class="comment">   /**</span>
+<a name="l00635"></a>00635 <span class="comment">    * Devolver valor dentro del array pasado, en caso de no haberlo</span>
+<a name="l00636"></a>00636 <span class="comment">    * pasar el valor en base de datos, o en caso de no tener FALSE</span>
+<a name="l00637"></a>00637 <span class="comment">    */</span>
+<a name="l00638"></a>00638 
+<a name="l00639"></a><a class="code" href="../../db/db2/a00020_a687b30cb96c7d3b72ecf25605bcfa803.html#a687b30cb96c7d3b72ecf25605bcfa803">00639</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a687b30cb96c7d3b72ecf25605bcfa803.html#a687b30cb96c7d3b72ecf25605bcfa803" title="Devolver valor dentro del array pasado, en caso de no haberlo pasar el valor en base de datos...">valores</a>($campo,$displayHash=NULL) {
+<a name="l00640"></a>00640 
+<a name="l00641"></a>00641       <span class="keywordflow">if</span> ( isset($displayHash[<span class="stringliteral">&#39;VALORES&#39;</span>][$campo])  ) {
+<a name="l00642"></a>00642          <span class="keywordflow">return</span> $displayHash[<span class="stringliteral">&#39;VALORES&#39;</span>][$campo];
+<a name="l00643"></a>00643          }
+<a name="l00644"></a>00644 
+<a name="l00645"></a>00645 
+<a name="l00646"></a>00646       <span class="keywordflow">if</span> (isset($this-&gt;ID)) {
+<a name="l00647"></a>00647 
+<a name="l00648"></a>00648          $strRetVal = $this-&gt;<a class="code" href="../../d7/dd4/a00013_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>(ucfirst($campo));
+<a name="l00649"></a>00649          <span class="comment">//$strRetVal = $this-&gt;GetAccessor($campo);</span>
+<a name="l00650"></a>00650          <span class="keywordflow">if</span> ( $strRetVal ) <span class="keywordflow">return</span> $strRetVal;
+<a name="l00651"></a>00651          }
+<a name="l00652"></a>00652 
+<a name="l00653"></a>00653       <span class="comment">// En caso de un valor definido expresamente en el modelo</span>
+<a name="l00654"></a>00654       <span class="keywordflow">if</span> ( isset($this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;valor&#39;</span>] ) ) 
+<a name="l00655"></a>00655          <span class="keywordflow">return</span> $this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;valor&#39;</span>];
+<a name="l00656"></a>00656 
+<a name="l00657"></a>00657       <span class="keywordflow">return</span> FALSE;
+<a name="l00658"></a>00658 
+<a name="l00659"></a>00659       }
+<a name="l00660"></a>00660 
+<a name="l00661"></a>00661    <span class="comment"></span>
+<a name="l00662"></a>00662 <span class="comment">   /**</span>
+<a name="l00663"></a>00663 <span class="comment">    * Visualizar registro</span>
+<a name="l00664"></a>00664 <span class="comment">    *</span>
+<a name="l00665"></a>00665 <span class="comment">    * @return TRUE/FALSE</span>
+<a name="l00666"></a>00666 <span class="comment">    */</span>
+<a name="l00667"></a>00667    
+<a name="l00668"></a><a class="code" href="../../db/db2/a00020_a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb.html#a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb">00668</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb.html#a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb" title="Visualizar registro.">visualizar_registro</a>() {
+<a name="l00669"></a>00669    
+<a name="l00670"></a>00670       <span class="comment">// Si tenemos definida una acción para visualizar el registro la lanzamos y nos vamos</span>
+<a name="l00671"></a>00671 
+<a name="l00672"></a>00672       $salida = $this-&gt;<a class="code" href="../../db/db2/a00020_a0aa031aed9bfcfdb364da58a8cf0ec6f.html#a0aa031aed9bfcfdb364da58a8cf0ec6f" title="Podemos definir un metodo personalizado para la visualización de los registros individuales, en caso de no tenerlo se presentara el formulario en versión de solo lectura.">visualizando_registro</a>() ;
+<a name="l00673"></a>00673 
+<a name="l00674"></a>00674       <span class="keywordflow">if</span> ( $salida ) { 
+<a name="l00675"></a>00675          echo $salida;
+<a name="l00676"></a>00676          <span class="keywordflow">return</span>;
+<a name="l00677"></a>00677          }
+<a name="l00678"></a>00678 
+<a name="l00679"></a>00679       require_once(dirname(__FILE__).<span class="stringliteral">&#39;/Formulario.php&#39;</span>);
+<a name="l00680"></a>00680 
+<a name="l00681"></a>00681       $displayHash = ( isset($displayHash) ) ? $displayHash : NULL;
+<a name="l00682"></a>00682 
+<a name="l00683"></a>00683       <span class="comment">/* Rellenamos datos para Formulario */</span>
+<a name="l00684"></a>00684 
+<a name="l00685"></a>00685       <span class="keywordflow">foreach</span> ( $this-&gt;arRelationMap as $campo =&gt; $R ) {
+<a name="l00686"></a>00686 
+<a name="l00687"></a>00687          <span class="keywordflow">if</span> ( $campo != <span class="stringliteral">&#39;id&#39;</span> ) $this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;valor&#39;</span>] = $this-&gt;<a class="code" href="../../db/db2/a00020_a687b30cb96c7d3b72ecf25605bcfa803.html#a687b30cb96c7d3b72ecf25605bcfa803" title="Devolver valor dentro del array pasado, en caso de no haberlo pasar el valor en base de datos...">valores</a>($campo, $displayHash);
+<a name="l00688"></a>00688 
+<a name="l00689"></a>00689          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;tabla&#39;</span>])  ) {
+<a name="l00690"></a>00690             $modelo_relacionado = ucfirst($this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;tabla&#39;</span>]);
+<a name="l00691"></a>00691             $id_relacionado = $this-&gt;<a class="code" href="../../d7/dd4/a00013_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($campo);
+<a name="l00692"></a>00692             $relacion = <span class="keyword">new</span> $modelo_relacionado($this-&gt;objPDO,$id_relacionado);
+<a name="l00693"></a>00693             $this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;opciones&#39;</span>] = $relacion-&gt;listado_para_select();
+<a name="l00694"></a>00694             }
+<a name="l00695"></a>00695 
+<a name="l00696"></a>00696          }
+<a name="l00697"></a>00697 
+<a name="l00698"></a>00698       $form = <span class="keyword">new</span> <a class="code" href="../../d6/d5b/a00026.html" title="Formulario.">Formulario</a>($this-&gt;tipos_formulario, $displayHash, $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>, $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>);
+<a name="l00699"></a>00699 
+<a name="l00700"></a>00700       $form-&gt;css = <a class="code" href="../../db/db2/a00020_a30bc21ee8b3b30cf79348188cc449cfa.html#a30bc21ee8b3b30cf79348188cc449cfa" title="Añadimos css para Formulario o no.">$this-&gt;css_formulario</a>;
+<a name="l00701"></a>00701 
+<a name="l00702"></a>00702       <span class="comment">// Si tenemos plantilla para visualizar desde el modelo se la pasamos a Formulario</span>
+<a name="l00703"></a>00703       <span class="keywordflow">if</span> ( isset($this-&gt;plantilla_visualizar) ) {
+<a name="l00704"></a>00704          $form-&gt;plantilla_visualizar = $this-&gt;plantilla_visualizar;
+<a name="l00705"></a>00705          }
+<a name="l00706"></a>00706 
+<a name="l00707"></a>00707       $form-&gt;genera_formulario(TRUE, $this-&gt;accion);
+<a name="l00708"></a>00708 
+<a name="l00709"></a>00709       <span class="keywordflow">if</span> ( $this-&gt;galeria ) $this-&gt;galeria-&gt;inicia();
+<a name="l00710"></a>00710 
+<a name="l00711"></a>00711       }
+<a name="l00712"></a>00712    
+<a name="l00713"></a>00713 <span class="comment"></span>
+<a name="l00714"></a>00714 <span class="comment">   /**</span>
+<a name="l00715"></a>00715 <span class="comment">    * Generar formulario</span>
+<a name="l00716"></a>00716 <span class="comment">    */</span>
+<a name="l00717"></a>00717 
+<a name="l00718"></a><a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120">00718</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>($displayHash=NULL) {
+<a name="l00719"></a>00719 
+<a name="l00720"></a>00720       require_once(dirname(__FILE__).<span class="stringliteral">&#39;/Formulario.php&#39;</span>);
+<a name="l00721"></a>00721 
+<a name="l00722"></a>00722       <span class="comment">/* Rellenamos datos para Formulario */</span>
+<a name="l00723"></a>00723 
+<a name="l00724"></a>00724       <span class="keywordflow">foreach</span> ( $this-&gt;arRelationMap as $campo =&gt; $R ) {
+<a name="l00725"></a>00725 
+<a name="l00726"></a>00726          <span class="comment">// Si tenemos identificador lo añadimos oculto</span>
+<a name="l00727"></a>00727          <span class="keywordflow">if</span> ( $this-&gt;ID ) {
+<a name="l00728"></a>00728             $this-&gt;tipos_formulario[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id&#39;</span>][<span class="stringliteral">&#39;valor&#39;</span>] = $this-&gt;ID;
+<a name="l00729"></a>00729             $this-&gt;tipos_formulario[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id&#39;</span>][<span class="stringliteral">&#39;oculto_form&#39;</span>] = 1;
+<a name="l00730"></a>00730             }
+<a name="l00731"></a>00731 
+<a name="l00732"></a>00732          <span class="keywordflow">if</span> ( $campo != <span class="stringliteral">&#39;id&#39;</span> ) $this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;valor&#39;</span>] = $this-&gt;<a class="code" href="../../db/db2/a00020_a687b30cb96c7d3b72ecf25605bcfa803.html#a687b30cb96c7d3b72ecf25605bcfa803" title="Devolver valor dentro del array pasado, en caso de no haberlo pasar el valor en base de datos...">valores</a>($campo, $displayHash);
+<a name="l00733"></a>00733 
+<a name="l00734"></a>00734          <span class="keywordflow">if</span> ( isset($this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;tabla&#39;</span>])  ) {
+<a name="l00735"></a>00735             $modelo_relacionado = ucfirst($this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;tabla&#39;</span>]);
+<a name="l00736"></a>00736             $id_relacionado = $this-&gt;<a class="code" href="../../d7/dd4/a00013_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($campo);
+<a name="l00737"></a>00737             $relacion = <span class="keyword">new</span> $modelo_relacionado($this-&gt;objPDO,$id_relacionado);
+<a name="l00738"></a>00738             $this-&gt;tipos_formulario[$campo][<span class="stringliteral">&#39;opciones&#39;</span>] = $relacion-&gt;listado_para_select();
+<a name="l00739"></a>00739             }
+<a name="l00740"></a>00740 
+<a name="l00741"></a>00741          }
+<a name="l00742"></a>00742 
+<a name="l00743"></a>00743       $form = <span class="keyword">new</span> <a class="code" href="../../d6/d5b/a00026.html" title="Formulario.">Formulario</a>($this-&gt;tipos_formulario, $displayHash, $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>, $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>);
+<a name="l00744"></a>00744 
+<a name="l00745"></a>00745       <span class="keywordflow">if</span> ( $this-&gt;css_formulario ) $form-&gt;css = <a class="code" href="../../db/db2/a00020_a30bc21ee8b3b30cf79348188cc449cfa.html#a30bc21ee8b3b30cf79348188cc449cfa" title="Añadimos css para Formulario o no.">$this-&gt;css_formulario</a>;
+<a name="l00746"></a>00746 
+<a name="l00747"></a>00747       <span class="comment">// Si tenemos plantilla desde el modelo se la pasamos a Formulario</span>
+<a name="l00748"></a>00748       <span class="keywordflow">if</span> ( isset($this-&gt;plantilla_editar) ) $form-&gt;plantilla = $this-&gt;plantilla_editar;
+<a name="l00749"></a>00749 
+<a name="l00750"></a>00750       ?&gt;
+<a name="l00751"></a>00751          &lt;form name=<span class="stringliteral">&quot;crud&quot;</span> action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;REDIRECT_URL&#39;]?&gt;&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00752"></a>00752       &lt;?php
+<a name="l00753"></a>00753 
+<a name="l00754"></a>00754       $form-&gt;genera_formulario(FALSE, $this-&gt;accion);
+<a name="l00755"></a>00755 
+<a name="l00756"></a>00756       <span class="keywordflow">if</span> ( $this-&gt;galeria ) $this-&gt;galeria-&gt;inicia();
+<a name="l00757"></a>00757 
+<a name="l00758"></a>00758       ?&gt;
+<a name="l00759"></a>00759          &lt;p <span class="keyword">class</span>=<span class="stringliteral">&quot;botonera_crud&quot;</span>&gt;&lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;&lt;?php echo $this-&gt;DefineTableName(); ?&gt;_guardar&quot;</span> value=<span class="stringliteral">&quot;Guardar&quot;</span>&gt;&lt;/p&gt;
+<a name="l00760"></a>00760       &lt;/form&gt;
+<a name="l00761"></a>00761       &lt;?php
+<a name="l00762"></a>00762       }
+<a name="l00763"></a>00763 <span class="comment"></span>
+<a name="l00764"></a>00764 <span class="comment">   /**</span>
+<a name="l00765"></a>00765 <span class="comment">    * Administrar </span>
+<a name="l00766"></a>00766 <span class="comment">    *</span>
+<a name="l00767"></a>00767 <span class="comment">    * @param $condicion  Condicion para el listado</span>
+<a name="l00768"></a>00768 <span class="comment">    * @param $order      Orden para presentar el listado</span>
+<a name="l00769"></a>00769 <span class="comment">    * @param $dir_img    Directorio de las imagenes de iconos</span>
+<a name="l00770"></a>00770 <span class="comment">    */</span>
+<a name="l00771"></a>00771 
+<a name="l00772"></a><a class="code" href="../../db/db2/a00020_a7171167f9b38a6f098dafe00bf359182.html#a7171167f9b38a6f098dafe00bf359182">00772</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a7171167f9b38a6f098dafe00bf359182.html#a7171167f9b38a6f098dafe00bf359182" title="Administrar.">administrar</a>($condicion = FALSE, $order = FALSE, $dir_img = <span class="stringliteral">&#39;&#39;</span>, <a class="code" href="../../db/db2/a00020_afcfc2b797b45ecd8f7483e44c7cde108.html#afcfc2b797b45ecd8f7483e44c7cde108" title="Tenemos permisos de edición (T/F)">$permisos</a> = FALSE) {
+<a name="l00773"></a>00773 
+<a name="l00774"></a>00774       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00775"></a>00775 
+<a name="l00776"></a>00776       $this-&gt;permisos = <a class="code" href="../../db/db2/a00020_afcfc2b797b45ecd8f7483e44c7cde108.html#afcfc2b797b45ecd8f7483e44c7cde108" title="Tenemos permisos de edición (T/F)">$permisos</a>;
+<a name="l00777"></a>00777 
+<a name="l00778"></a>00778       $displayHash = array();
+<a name="l00779"></a>00779 
+<a name="l00780"></a>00780       <span class="keywordflow">if</span> ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id&#39;</span>]) ) $this-&gt;ID = $_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id&#39;</span>];
+<a name="l00781"></a>00781 
+<a name="l00782"></a>00782       <span class="comment">// Determinar acción actual</span>
+<a name="l00783"></a>00783 
+<a name="l00784"></a>00784       <span class="keywordflow">if</span> ( isset($_POST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_guardar&#39;</span>]) ) {
+<a name="l00785"></a>00785          $this-&gt;accion = <span class="stringliteral">&#39;guardando&#39;</span>;
+<a name="l00786"></a>00786       } elseif ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_insertar&#39;</span>]) &amp;&amp; $this-&gt;permisos ) {
+<a name="l00787"></a>00787          $this-&gt;accion = <span class="stringliteral">&#39;insertar&#39;</span>;
+<a name="l00788"></a>00788       } elseif ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accio_galeria&#39;</span>]) &amp;&amp; $_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accio_galeria&#39;</span>] == <span class="stringliteral">&#39;agafa_imatge&#39;</span> ) {
+<a name="l00789"></a>00789          $this-&gt;accion = <span class="stringliteral">&#39;agafa_imatge&#39;</span>;
+<a name="l00790"></a>00790       } elseif ( isset($_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>]) || isset($_POST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_formulario&#39;</span>])) {
+<a name="l00791"></a>00791          $this-&gt;accion = <span class="stringliteral">&#39;con_errores&#39;</span>;
+<a name="l00792"></a>00792       } elseif ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>]) &amp;&amp; $_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>] == <span class="stringliteral">&#39;ver&#39;</span>) {
+<a name="l00793"></a>00793          $this-&gt;accion = <span class="stringliteral">&#39;ver&#39;</span>;
+<a name="l00794"></a>00794       } elseif ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>]) &amp;&amp; $_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>] == <span class="stringliteral">&#39;eliminar&#39;</span>) {
+<a name="l00795"></a>00795          $this-&gt;accion = <span class="stringliteral">&#39;eliminar&#39;</span>;
+<a name="l00796"></a>00796       } elseif ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>]) &amp;&amp; $_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>] == <span class="stringliteral">&#39;editar&#39;</span>) {
+<a name="l00797"></a>00797          $this-&gt;accion = <span class="stringliteral">&#39;editar&#39;</span>;
+<a name="l00798"></a>00798       } <span class="keywordflow">else</span> {
+<a name="l00799"></a>00799          <span class="keywordflow">if</span> ( isset($_REQUEST[$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id&#39;</span>]) ) {
+<a name="l00800"></a>00800             $this-&gt;accion = <span class="stringliteral">&#39;ver&#39;</span>;
+<a name="l00801"></a>00801          } <span class="keywordflow">else</span> {
+<a name="l00802"></a>00802             $this-&gt;accion = <span class="stringliteral">&#39;inicio&#39;</span>;
+<a name="l00803"></a>00803             }
+<a name="l00804"></a>00804          }
+<a name="l00805"></a>00805 
+<a name="l00806"></a>00806       <span class="comment">// Permisos para la acción</span>
+<a name="l00807"></a>00807       <span class="comment">// Lanzar eventos si los hay para las acciones</span>
+<a name="l00808"></a>00808 <span class="comment"></span>
+<a name="l00809"></a>00809 <span class="comment">      /** Acciones */</span>
+<a name="l00810"></a>00810 
+<a name="l00811"></a>00811       <span class="comment">// echo &quot;Acción: &quot;.$this-&gt;accion; // DEV</span>
+<a name="l00812"></a>00812 
+<a name="l00813"></a>00813       <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&#39;agafa_imatge&#39;</span> ) $this-&gt;galeria-&gt;inicia();
+<a name="l00814"></a>00814 
+<a name="l00815"></a>00815       <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&#39;guardando&#39;</span> ) {
+<a name="l00816"></a>00816 
+<a name="l00817"></a>00817          $solicitud = <span class="keyword">new</span> <a class="code" href="../../df/d03/a00062.html" title="Recoger solicitud venga de GET, POST o Cookies.">Solicitud</a>();
+<a name="l00818"></a>00818          $solicitud-&gt;SetRedirectOnConstraintFailure(<span class="keyword">true</span>);
+<a name="l00819"></a>00819          $_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>] = $solicitud-&gt;GetParameters();
+<a name="l00820"></a>00820 
+<a name="l00821"></a>00821          $conta=0;
+<a name="l00822"></a>00822          <span class="keywordflow">foreach</span> ( $this-&gt;<a class="code" href="../../db/db2/a00020_a20dae503625cccea4fc9df3e3ac7b58d.html#a20dae503625cccea4fc9df3e3ac7b58d" title="devolver array con las restricciones">restricciones</a>() as $campo =&gt; $restriccion ) {
+<a name="l00823"></a>00823             <span class="keywordflow">foreach</span> ( $restriccion as $tipo =&gt; $valor ) {
+<a name="l00824"></a>00824                <a class="code" href="../../db/db2/a00020_a2ae50f73698dfe8746437b33a4d662ce.html#a2ae50f73698dfe8746437b33a4d662ce" title="Restricciones para Solicitud.">$restricciones</a>[$conta] = <span class="keyword">new</span> <a class="code" href="../../d9/d2e/a00056.html">Restricciones</a>($tipo, $valor);
+<a name="l00825"></a>00825                $solicitud-&gt;AddConstraint($campo, ENTRADAS_POST, <a class="code" href="../../db/db2/a00020_a2ae50f73698dfe8746437b33a4d662ce.html#a2ae50f73698dfe8746437b33a4d662ce" title="Restricciones para Solicitud.">$restricciones</a>[$conta]);
+<a name="l00826"></a>00826                $conta++;
+<a name="l00827"></a>00827                }
+<a name="l00828"></a>00828             }
+<a name="l00829"></a>00829 
+<a name="l00830"></a>00830          $solicitud-&gt;TestConstraints();
+<a name="l00831"></a>00831 
+<a name="l00832"></a>00832          <span class="comment">// Si hemos llegado aquí hemos pasado las pruebas</span>
+<a name="l00833"></a>00833 
+<a name="l00834"></a>00834          <span class="comment">/* Comprobamos datos que nos llegan */</span>
+<a name="l00835"></a>00835 
+<a name="l00836"></a>00836             $resultado = $_POST;
+<a name="l00837"></a>00837 
+<a name="l00838"></a>00838             <span class="keywordflow">if</span> ( $resultado ) {
+<a name="l00839"></a>00839 
+<a name="l00840"></a>00840                <span class="keywordflow">foreach</span> ( $this-&gt;arRelationMap as $campo =&gt; $rCampo ) {
+<a name="l00841"></a>00841 
+<a name="l00842"></a>00842                   <span class="keywordflow">if</span> ( isset($this-&gt;ID) &amp;&amp; $campo == <span class="stringliteral">&#39;fecha_creacion&#39;</span>  ) {
+<a name="l00843"></a>00843                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, date(<span class="stringliteral">&quot;Y-m-d H:i:s&quot;</span>));
+<a name="l00844"></a>00844                      <span class="keywordflow">continue</span>;
+<a name="l00845"></a>00845                      }
+<a name="l00846"></a>00846 
+<a name="l00847"></a>00847                   <span class="keywordflow">if</span> ( $campo == <span class="stringliteral">&#39;fecha_modificacion&#39;</span>  ) {
+<a name="l00848"></a>00848                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, date(<span class="stringliteral">&quot;Y-m-d H:i:s&quot;</span>));
+<a name="l00849"></a>00849                      <span class="keywordflow">continue</span>;
+<a name="l00850"></a>00850                      }
+<a name="l00851"></a>00851 
+<a name="l00852"></a>00852                   <span class="keywordflow">if</span> ( $campo != <span class="stringliteral">&#39;id&#39;</span>  ) {
+<a name="l00853"></a>00853                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, $resultado[$campo]);
+<a name="l00854"></a>00854                      }
+<a name="l00855"></a>00855 
+<a name="l00856"></a>00856                   }
+<a name="l00857"></a>00857 
+<a name="l00858"></a>00858                <span class="keywordflow">if</span> ( $this-&gt;save() ) {
+<a name="l00859"></a>00859 
+<a name="l00860"></a>00860                   <span class="comment">/* Si utilizamos galería hay que guardar imagenes */</span>
+<a name="l00861"></a>00861 
+<a name="l00862"></a>00862                   $this-&gt;accion = ( isset($this-&gt;ID) ) ? <span class="stringliteral">&#39;modificando&#39;</span> : <span class="stringliteral">&#39;insertando&#39;</span>;
+<a name="l00863"></a>00863 
+<a name="l00864"></a>00864                   $this-&gt;ID = ( isset($this-&gt;ID) ) ? $this-&gt;ID : $this-&gt;<a class="code" href="../../d7/dd4/a00013_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>();
+<a name="l00865"></a>00865 
+<a name="l00866"></a>00866                   <span class="comment">/* Si tenemos eventos los lanzamos */</span>
+<a name="l00867"></a>00867 
+<a name="l00868"></a>00868                   <span class="keywordflow">if</span> ( $this-&gt;evento_guardar &amp;&amp; $this-&gt;accion == <span class="stringliteral">&#39;insertando&#39;</span> ) {
+<a name="l00869"></a>00869                      $metodo = <a class="code" href="../../db/db2/a00020_a466997e82fbbcf7d775ae152055763e0.html#a466997e82fbbcf7d775ae152055763e0" title="Metodo a lanzar al guardar registro.">$this-&gt;evento_guardar</a>;
+<a name="l00870"></a>00870                      $this-&gt;$metodo($this-&gt;ID);
+<a name="l00871"></a>00871                      }
+<a name="l00872"></a>00872                   <span class="keywordflow">if</span> ( $this-&gt;evento_modificar &amp;&amp; $this-&gt;accion == <span class="stringliteral">&#39;modificando&#39;</span> ) {
+<a name="l00873"></a>00873                      $metodo = <a class="code" href="../../db/db2/a00020_afb914213a9067568422a87f37a56a235.html#afb914213a9067568422a87f37a56a235" title="Metodo a lanzar al modificar registro.">$this-&gt;evento_modificar</a>;
+<a name="l00874"></a>00874                      $this-&gt;$metodo($this-&gt;ID);
+<a name="l00875"></a>00875                      }
+<a name="l00876"></a>00876 
+<a name="l00877"></a>00877                   <span class="keywordflow">if</span> ( $this-&gt;galeria ) $this-&gt;galeria-&gt;guardar($this-&gt;ID);
+<a name="l00878"></a>00878 
+<a name="l00879"></a>00879                   $mens = ( $this-&gt;accion == <span class="stringliteral">&#39;modificando&#39;</span> ) ? <span class="stringliteral">&#39;Registro modificado&#39;</span> : <span class="stringliteral">&#39;Registro incluido&#39;</span>;
+<a name="l00880"></a>00880                   registrar(__FILE__,__LINE__,literal($mens,3),<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00881"></a>00881                } <span class="keywordflow">else</span> {
+<a name="l00882"></a>00882                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;ERROR al añadir o modificar registro&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00883"></a>00883                   }
+<a name="l00884"></a>00884 
+<a name="l00885"></a>00885             }
+<a name="l00886"></a>00886 
+<a name="l00887"></a>00887          $_SESSION[<span class="stringliteral">&#39;dh&#39;</span>] = $displayHash;
+<a name="l00888"></a>00888          $_SESSION[<span class="stringliteral">&#39;mens&#39;</span>] = $gcm-&gt;reg-&gt;sesion;
+<a name="l00889"></a>00889          header(<span class="stringliteral">&quot;Location: &quot;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]);
+<a name="l00890"></a>00890          exit(0);
+<a name="l00891"></a>00891 
+<a name="l00892"></a>00892       <span class="comment">/* LLega con errores de formulario o se esta insertando */</span>
+<a name="l00893"></a>00893 
+<a name="l00894"></a>00894       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;con_errores&#39;</span> ) {
+<a name="l00895"></a>00895 
+<a name="l00896"></a>00896          $solicitud = <span class="keyword">new</span> <a class="code" href="../../df/d03/a00062.html" title="Recoger solicitud venga de GET, POST o Cookies.">Solicitud</a>();
+<a name="l00897"></a>00897          $problemas = ($solicitud-&gt;IsRedirectFollowingConstraintFailure());
+<a name="l00898"></a>00898          $displayHash[<span class="stringliteral">&#39;HADPROBLEMS&#39;</span>] = $problemas;
+<a name="l00899"></a>00899 
+<a name="l00900"></a>00900          <span class="keywordflow">if</span> ( $problemas  ) {
+<a name="l00901"></a>00901 
+<a name="l00902"></a>00902             $objFailingRequest = $solicitud-&gt;GetOriginalRequestObjectFollowingConstraintFailure();
+<a name="l00903"></a>00903             $arConstraintFailures = $objFailingRequest-&gt;GetConstraintFailures();
+<a name="l00904"></a>00904 
+<a name="l00905"></a>00905             $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>] = Array();
+<a name="l00906"></a>00906 
+<a name="l00907"></a>00907             $mensajes_error = $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>();
+<a name="l00908"></a>00908 
+<a name="l00909"></a>00909             <span class="keywordflow">for</span> ($i=0; $i&lt;=<span class="keyword">sizeof</span>($arConstraintFailures)-1; $i++) {
+<a name="l00910"></a>00910 
+<a name="l00911"></a>00911                $objThisConstraintFailure = &amp;$arConstraintFailures[$i];
+<a name="l00912"></a>00912                $objThisFailingConstraintObject = $objThisConstraintFailure-&gt;GetFailedConstraintObject();
+<a name="l00913"></a>00913                $intTypeOfFailure = $objThisFailingConstraintObject-&gt;GetConstraintType();
+<a name="l00914"></a>00914                $nombre_parametro = $arConstraintFailures[$i]-&gt;GetParameterName();
+<a name="l00915"></a>00915 
+<a name="l00916"></a>00916                <span class="keywordflow">if</span> ( isset($mensajes_error[$nombre_parametro][$intTypeOfFailure])  ) {
+<a name="l00917"></a>00917                   $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>][$nombre_parametro] = $mensajes_error[$nombre_parametro][$intTypeOfFailure];
+<a name="l00918"></a>00918                } <span class="keywordflow">else</span> {
+<a name="l00919"></a>00919                   $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>][$nombre_parametro] = <span class="stringliteral">&quot;Error sin definir&quot;</span>;
+<a name="l00920"></a>00920                   }
+<a name="l00921"></a>00921 
+<a name="l00922"></a>00922                }
+<a name="l00923"></a>00923 
+<a name="l00924"></a>00924             <span class="keywordflow">if</span> ( isset($_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>]) ) {
+<a name="l00925"></a>00925                $displayHash[<span class="stringliteral">&#39;VALORES&#39;</span>] = $_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>];
+<a name="l00926"></a>00926                unset($_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>]);
+<a name="l00927"></a>00927                }
+<a name="l00928"></a>00928 
+<a name="l00929"></a>00929             }
+<a name="l00930"></a>00930 
+<a name="l00931"></a>00931          $this-&gt;<a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>($displayHash);
+<a name="l00932"></a>00932          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00933"></a>00933 
+<a name="l00934"></a>00934       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;ver&#39;</span> ) {
+<a name="l00935"></a>00935 
+<a name="l00936"></a>00936          $this-&gt;<a class="code" href="../../db/db2/a00020_a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb.html#a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb" title="Visualizar registro.">visualizar_registro</a>();
+<a name="l00937"></a>00937          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00938"></a>00938 
+<a name="l00939"></a>00939       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;eliminar&#39;</span> ) {
+<a name="l00940"></a>00940 
+<a name="l00941"></a>00941          <span class="comment">/* Si tenemos evento_guardar lo lanzamos */</span>
+<a name="l00942"></a>00942          <span class="keywordflow">if</span> ( $this-&gt;evento_borrar ) {
+<a name="l00943"></a>00943             $metodo = <a class="code" href="../../db/db2/a00020_a4ed60cd68e2b823f684463c328c20025.html#a4ed60cd68e2b823f684463c328c20025" title="Metodo a lanzar al borrar registro.">$this-&gt;evento_borrar</a>;
+<a name="l00944"></a>00944             $this-&gt;$metodo($this-&gt;ID);
+<a name="l00945"></a>00945             }
+<a name="l00946"></a>00946 
+<a name="l00947"></a>00947          $this-&gt;<a class="code" href="../../d7/dd4/a00013_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804" title="Marcar registro para ser borrado.">MarkForDeletion</a>();
+<a name="l00948"></a>00948          $this-&gt;<a class="code" href="../../d7/dd4/a00013_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758" title="Destructor borra los registros marcados para borrar, si queremos que lo haga al instante se le puede ...">__destruct</a>();
+<a name="l00949"></a>00949 
+<a name="l00950"></a>00950          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Registro eliminado&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00951"></a>00951          header(<span class="stringliteral">&quot;Location: &quot;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]);
+<a name="l00952"></a>00952          exit(0);
+<a name="l00953"></a>00953 
+<a name="l00954"></a>00954       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;editar&#39;</span> || $this-&gt;accion == <span class="stringliteral">&#39;insertar&#39;</span> ) {
+<a name="l00955"></a>00955 
+<a name="l00956"></a>00956          $this-&gt;<a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>();
+<a name="l00957"></a>00957          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00958"></a>00958 
+<a name="l00959"></a>00959       } <span class="keywordflow">else</span> {
+<a name="l00960"></a>00960 
+<a name="l00961"></a>00961          $this-&gt;<a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb" title="Listado.">listado</a>($condicion, $order);
+<a name="l00962"></a>00962          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00963"></a>00963 
+<a name="l00964"></a>00964          }
+<a name="l00965"></a>00965 
+<a name="l00966"></a>00966       }
+<a name="l00967"></a>00967 <span class="comment"></span>
+<a name="l00968"></a>00968 <span class="comment">   /**</span>
+<a name="l00969"></a>00969 <span class="comment">    * Botones para acciones</span>
+<a name="l00970"></a>00970 <span class="comment">    */</span>
+<a name="l00971"></a>00971 
+<a name="l00972"></a><a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788">00972</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>(<a class="code" href="../../db/db2/a00020_ab72ee2fc8baee210bbf369702d14040e.html#ab72ee2fc8baee210bbf369702d14040e" title="Acción que se esta realizando.">$accion</a>) {
+<a name="l00973"></a>00973 
+<a name="l00974"></a>00974       <span class="comment">// Si no tenemos permisos de edición volvemos</span>
+<a name="l00975"></a>00975       <span class="keywordflow">if</span> ( ! $this-&gt;permisos ) return ;
+<a name="l00976"></a>00976 
+<a name="l00977"></a>00977       <span class="comment">// Si estamos en formato ajax no se presentan botones</span>
+<a name="l00978"></a>00978       <span class="keywordflow">if</span> ( !isset($_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]) || $_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>] != <span class="stringliteral">&#39;ajax&#39;</span> ) {
+<a name="l00979"></a>00979 
+<a name="l00980"></a>00980          echo <span class="stringliteral">&#39;&lt;div class=&quot;botones_acciones&quot;&gt;&#39;</span>;
+<a name="l00981"></a>00981 
+<a name="l00982"></a>00982          <span class="comment">// Boton insertar</span>
+<a name="l00983"></a>00983          <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&quot;ver&quot;</span> || $this-&gt;accion == <span class="stringliteral">&quot;inicio&quot;</span> ) {
+<a name="l00984"></a>00984             echo <span class="stringliteral">&#39;&lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_insertar=1&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Insertar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
+<a name="l00985"></a>00985             }
+<a name="l00986"></a>00986 
+<a name="l00987"></a>00987          <span class="comment">// Boton editar</span>
+<a name="l00988"></a>00988          <span class="keywordflow">if</span> ( $this-&gt;accion != <span class="stringliteral">&quot;editar&quot;</span> &amp;&amp; $this-&gt;ID ) {
+<a name="l00989"></a>00989             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_accion=editar&amp;&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>.$this-&gt;ID.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Editar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
+<a name="l00990"></a>00990             }
+<a name="l00991"></a>00991 
+<a name="l00992"></a>00992          <span class="comment">// Boton borrar</span>
+<a name="l00993"></a>00993          <span class="keywordflow">if</span> (  $this-&gt;ID ) {
+<a name="l00994"></a>00994             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_accion=eliminar&amp;&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>.$this-&gt;ID.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Borrar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
+<a name="l00995"></a>00995             }
+<a name="l00996"></a>00996 
+<a name="l00997"></a>00997          <span class="comment">// Boton Cancelar</span>
+<a name="l00998"></a>00998          <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&quot;editar&quot;</span> || $this-&gt;accion == <span class="stringliteral">&#39;insertar&#39;</span> ) {
+<a name="l00999"></a>00999             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;&#39;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>].<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Cancelar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt; &#39;</span>;
+<a name="l01000"></a>01000             }
+<a name="l01001"></a>01001 
+<a name="l01002"></a>01002          echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
+<a name="l01003"></a>01003 
+<a name="l01004"></a>01004          }
+<a name="l01005"></a>01005       }
+<a name="l01006"></a>01006 <span class="comment"></span>
+<a name="l01007"></a>01007 <span class="comment">   /**</span>
+<a name="l01008"></a>01008 <span class="comment">    * Listado</span>
+<a name="l01009"></a>01009 <span class="comment">    * @param $condicion Condicion para el listado</span>
+<a name="l01010"></a>01010 <span class="comment">    * @param $order     Orden para presentar el listado, por defecto id desc</span>
+<a name="l01011"></a>01011 <span class="comment">    */</span>
+<a name="l01012"></a>01012 
+<a name="l01013"></a><a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb">01013</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb" title="Listado.">listado</a>($condicion = FALSE, $order = FALSE) {
+<a name="l01014"></a>01014 
+<a name="l01015"></a>01015       $sql = ( isset($this-&gt;sql_listado) ) ? $this-&gt;sql_listado : <span class="stringliteral">&#39;SELECT * FROM &#39;</span>.$this-&gt;strTableName;
+<a name="l01016"></a>01016       
+<a name="l01017"></a>01017       <span class="comment">// La condición debe añadirse antes de GROUP en caso de lo haya.</span>
+<a name="l01018"></a>01018 
+<a name="l01019"></a>01019       <span class="keywordflow">if</span> ( $condicion ) {
+<a name="l01020"></a>01020 
+<a name="l01021"></a>01021          <span class="keywordflow">if</span> ( stripos($sql,<span class="stringliteral">&#39;GROUP&#39;</span>) !== FALSE ) {
+<a name="l01022"></a>01022             $sql = str_ireplace(<span class="stringliteral">&#39;GROUP&#39;</span>,<span class="stringliteral">&#39; WHERE &#39;</span>.$condicion.<span class="stringliteral">&#39; GROUP&#39;</span>, $sql);
+<a name="l01023"></a>01023          } <span class="keywordflow">else</span> {
+<a name="l01024"></a>01024             $sql .= <span class="stringliteral">&#39; WHERE &#39;</span>.$condicion ;
+<a name="l01025"></a>01025             }
+<a name="l01026"></a>01026 
+<a name="l01027"></a>01027          }
+<a name="l01028"></a>01028 
+<a name="l01029"></a>01029       $order = ( $order ) ? <span class="stringliteral">&#39; ORDER BY &#39;</span>.$order : <span class="stringliteral">&#39; ORDER BY id desc&#39;</span>;
+<a name="l01030"></a>01030 
+<a name="l01031"></a>01031       require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/GcmPDO/lib/paginarPDO.php&#39;</span>);
+<a name="l01032"></a>01032 
+<a name="l01033"></a>01033       $this-&gt;elementos = ( <a class="code" href="../../db/db2/a00020_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por página en listado, por defecto los de paginarPDO.">$this-&gt;elementos_pagina</a> ) ? $this-&gt;elementos_pagina : NULL;
+<a name="l01034"></a>01034 
+<a name="l01035"></a>01035       $pd = <span class="keyword">new</span> <a class="code" href="../../d4/dca/a00048.html" title="Recogemos clase padre.">PaginarPDO</a>($this-&gt;objPDO, $sql, $this-&gt;strTableName.<span class="charliteral">&#39;_&#39;</span>, $this-&gt;elementos_pagina, $order);
+<a name="l01036"></a>01036 
+<a name="l01037"></a>01037       <span class="keywordflow">if</span> ( $this-&gt;conf_paginador ) {
+<a name="l01038"></a>01038          <span class="keywordflow">foreach</span>($this-&gt;conf_paginador as $atr =&gt; $valor ) {
+<a name="l01039"></a>01039             $pd-&gt;$atr = $valor;
+<a name="l01040"></a>01040          }
+<a name="l01041"></a>01041       }
+<a name="l01042"></a>01042 
+<a name="l01043"></a>01043       <span class="keywordflow">if</span> ( $pd-&gt;validar() ) {
+<a name="l01044"></a>01044 
+<a name="l01045"></a>01045          <span class="keywordflow">if</span> ( $this-&gt;permisos ) {
+<a name="l01046"></a>01046             $opciones = array(
+<a name="l01047"></a>01047                <span class="stringliteral">&#39;url&#39;</span>           =&gt; <span class="charliteral">&#39;?&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>
+<a name="l01048"></a>01048                ,<span class="stringliteral">&#39;identifiador&#39;</span> =&gt; <span class="stringliteral">&#39;id&#39;</span>
+<a name="l01049"></a>01049                ,<span class="stringliteral">&#39;modificar&#39;</span>    =&gt; <span class="stringliteral">&#39;editar&#39;</span>  
+<a name="l01050"></a>01050                ,<span class="stringliteral">&#39;eliminar&#39;</span>     =&gt; <span class="stringliteral">&#39;eliminar&#39;</span>
+<a name="l01051"></a>01051                <span class="comment">//,&#39;ver&#39;          =&gt; &#39;ver&#39;</span>
+<a name="l01052"></a>01052                ,<span class="stringliteral">&#39;accion&#39;</span>       =&gt; $this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>
+<a name="l01053"></a>01053                ,<span class="stringliteral">&#39;ocultar_id&#39;</span>   =&gt; 1
+<a name="l01054"></a>01054                ,<span class="stringliteral">&#39;dir_img&#39;</span>      =&gt; ( $this-&gt;dir_img_array2table ) ? $this-&gt;dir_img_array2table : NULL
+<a name="l01055"></a>01055                );
+<a name="l01056"></a>01056          } <span class="keywordflow">else</span> {
+<a name="l01057"></a>01057             $opciones = array(
+<a name="l01058"></a>01058                <span class="stringliteral">&#39;url&#39;</span>           =&gt; <span class="charliteral">&#39;?&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>
+<a name="l01059"></a>01059                ,<span class="stringliteral">&#39;identifiador&#39;</span> =&gt; <span class="stringliteral">&#39;id&#39;</span>
+<a name="l01060"></a>01060                <span class="comment">//,&#39;ver&#39;          =&gt; &#39;ver&#39;</span>
+<a name="l01061"></a>01061                ,<span class="stringliteral">&#39;accion&#39;</span>       =&gt; $this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>
+<a name="l01062"></a>01062                ,<span class="stringliteral">&#39;ocultar_id&#39;</span>   =&gt; 1
+<a name="l01063"></a>01063                ,<span class="stringliteral">&#39;dir_img&#39;</span>      =&gt; ( $this-&gt;dir_img_array2table ) ? $this-&gt;dir_img_array2table : NULL
+<a name="l01064"></a>01064                );
+<a name="l01065"></a>01065          }
+<a name="l01066"></a>01066 
+<a name="l01067"></a>01067          $pd-&gt;generar_pagina($this-&gt;url_ajax, $opciones, $this-&gt;opciones_array2table);
+<a name="l01068"></a>01068 
+<a name="l01069"></a>01069       } <span class="keywordflow">else</span> {
+<a name="l01070"></a>01070          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Tabla sin contenido&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l01071"></a>01071          }
+<a name="l01072"></a>01072 
+<a name="l01073"></a>01073       }
+<a name="l01074"></a>01074 
+<a name="l01075"></a>01075    }
+<a name="l01076"></a>01076 
+<a name="l01077"></a>01077 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
