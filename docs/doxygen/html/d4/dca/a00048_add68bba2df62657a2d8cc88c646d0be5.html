@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: PaginarPDO\__construct</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../d4/dca/a00048.html">PaginarPDO</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td valign="top">
+      <div class="navtab">
+        <table>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576">$elementos_pagina</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366">$paginas_agrupadas</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d">$plantilla_botonera</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3">$plantilla_resultados</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">$sufijo</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65">$url_base</a></td></tr>
+          <tr><td class="navtab"><a class="qindexHL" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">__construct</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87">botonera</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644">generar_pagina</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663">pagina</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9">script_ajax</a></td></tr>
+        </table>
+      </div>
+   </td>
+   <td valign="top" class="mempage">
+<a class="anchor" id="add68bba2df62657a2d8cc88c646d0be5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">__construct</a> </td>
+          <td>(</td>
+          <td class="paramtype">PDO $&#160;</td>
+          <td class="paramname"><em>pdo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>sql</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>sufijo</em> = <code>FALSE</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>elementos_pagina</em> = <code>8</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>order</em> = <code>FALSE</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="params"><dt><b>Parámetros:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$pdo</td><td>Instancia de PDO </td></tr>
+    <tr><td class="paramname">$sql</td><td>sql a paginar </td></tr>
+    <tr><td class="paramname">$sufijo</td><td>Sufijo para que no choquen cuando hay más de un paginador en una misma pagina. </td></tr>
+    <tr><td class="paramname">$orden</td><td>Orden por defecto de la sql </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="bug"><dt><b><a class="el" href="../../d4/def/a00359.html#_bug000001">Bug:</a></b></dt><dd>FALLO AL INTENTAR DETECTAR EL ORDEN, no debe tener espacios en el campo que ordena Da errores en sql como campo AS `Última modificación` </dd></dl>
+
+<p>Definición en la línea <a class="el" href="../../d7/d06/a00131_source.html#l00058">58</a> del archivo <a class="el" href="../../d7/d06/a00131_source.html">paginarPDO.php</a>.</p>
+
+<p>Hace referencia a <a class="el" href="../../d7/d06/a00131_source.html#l00031">$elementos_pagina</a>, <a class="el" href="../../d7/d06/a00131_source.html#l00035">$paginas_agrupadas</a>, <a class="el" href="../../d6/db3/a00130_source.html#l00028">GcmPDO\$sql</a>, <a class="el" href="../../d7/d06/a00131_source.html#l00036">$sufijo</a> y <a class="el" href="../../d7/d06/a00131_source.html#l00160">pagina()</a>.</p>
+<div class="fragment"><pre class="fragment">                                                                                             {
+
+       <a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">parent::__construct</a>(<a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>);
+
+      $this-&gt;sufijo = ( <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> ) ? <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> : <span class="stringliteral">&#39;&#39;</span>;
+
+      $this-&gt;elementos_pagina = ( <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> ) ? <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> : 10 ; 
+
+     <span class="comment">// Definimos orden si nos llega por GET o cogemos por defecto</span>
+
+      <span class="keywordflow">if</span> ( isset($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span>]) &amp;&amp; ! empty($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span>]) ) {
+
+         $this-&gt;as_orden = stripslashes($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span>]);
+
+         $this-&gt;tipo_orden = ( isset($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span>]) ) ? $_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span>] : <span class="stringliteral">&#39;asc&#39;</span>;
+
+         $order = <span class="stringliteral">&quot;ORDER BY &quot;</span>.$this-&gt;as_orden.<span class="stringliteral">&quot; &quot;</span>.$this-&gt;tipo_orden;
+
+      } elseif ( $order ) {
+
+         preg_match_all(<span class="stringliteral">&#39;/order by (.*?) (.*?)/i&#39;</span>, $order, $coincidencias);
+<span class="comment"></span>
+<span class="comment">         /** </span>
+<span class="comment">          * @bug FALLO AL INTENTAR DETECTAR EL ORDEN, no debe tener espacios en el campo que ordena</span>
+<span class="comment">          *      Da errores en sql como campo AS `Última modificación`</span>
+<span class="comment">          */</span>
+
+         $ordenadox = ( !empty($coincidencias[1][0]) ) ? trim($coincidencias[1][0],<span class="charliteral">&#39;,&#39;</span>) : FALSE ;
+
+         $this-&gt;tipo_orden = ( stripos($order,<span class="stringliteral">&#39;desc&#39;</span>) !== FALSE ) ? <span class="stringliteral">&#39;desc&#39;</span> : <span class="stringliteral">&#39;asc&#39;</span> ;
+
+         <span class="keywordflow">if</span> ( $ordenadox ) {
+
+            <span class="comment">// Buscar el alias del campo por el cual se ordena</span>
+            <span class="comment">// hay que tener cuidado aquí el resultado es un poco </span>
+            <span class="comment">// imprevisible.</span>
+
+            <span class="keywordflow">if</span> ( preg_match(<span class="charliteral">&#39;/&#39;</span>.$ordenadox.<span class="stringliteral">&#39;(.?) as (.*)/i&#39;</span>,<a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, $coincidencias) &amp;&amp; ! empty($coincidencias[2]) ) {
+
+               $this-&gt;as_orden = trim($coincidencias[2],<span class="charliteral">&#39;,&#39;</span>);
+
+            } <span class="keywordflow">else</span> {
+
+               $this-&gt;as_orden = $ordenadox;
+
+               }
+
+         } <span class="keywordflow">else</span> {
+            $this-&gt;as_orden = FALSE;
+            }
+
+      } <span class="keywordflow">else</span> {
+
+         $this-&gt;as_orden = FALSE;
+
+         }
+
+
+      $this-&gt;sql = <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>.<span class="stringliteral">&quot; &quot;</span>.$order;
+
+      <span class="comment">// if ( isset($ordenadox) ) echo &#39;&lt;br&gt;ordenadox: &#39;.$ordenadox;</span>
+      <span class="comment">// echo &#39;&lt;br&gt;as_orden: &#39;.$this-&gt;as_orden;</span>
+      <span class="comment">// echo &#39;&lt;br&gt;tipo_orden: &#39;.$this-&gt;tipo_orden;</span>
+      <span class="comment">// echo &quot;&lt;br&gt;sql: &lt;pre&gt;&quot; ; print_r($this-&gt;sql) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
+
+      <span class="keywordflow">if</span> (empty($_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>])) {
+         $inicio = 0;
+         $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>=1;
+
+      } <span class="keywordflow">else</span> {
+
+         $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> = $_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>];
+         $inicio = ($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> - 1) * $this-&gt;elementos_pagina;
+
+         }
+
+      $inicio = ( $inicio &gt; 0 ) ? $inicio : 0 ;
+
+      $this-&gt;total_de_paginas = ( $this-&gt;num_total_registros &gt; 1 ) ? ceil($this-&gt;num_total_registros / $this-&gt;elementos_pagina) : 1 ;
+
+      $this-&gt;sql=$this-&gt;sql.<span class="stringliteral">&quot; limit &quot;</span> . $inicio . <span class="stringliteral">&quot;,&quot;</span> . <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$this-&gt;elementos_pagina</a>;
+
+      $this-&gt;totalpp=ceil($this-&gt;total_de_paginas / $this-&gt;paginas_agrupadas);
+      <span class="comment">//$this-&gt;elemento_inicio=$this-&gt;pagina*$this-&gt;paginas_agrupadas-$this-&gt;paginas_agrupadas+1;</span>
+      <span class="comment">//$this-&gt;elemento_final=$this-&gt;elemento_inicio+$this-&gt;paginas_agrupadas-1;</span>
+      $this-&gt;elemento_inicio=($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>-<a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
+      $this-&gt;elemento_final=($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>+<a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
+
+      <span class="keywordflow">if</span> ( $this-&gt;elemento_inicio &lt; 1  ) $this-&gt;elemento_inicio=1;
+      <span class="keywordflow">if</span> ( $this-&gt;elemento_final &gt; $this-&gt;total_de_paginas  ) $this-&gt;elemento_final=$this-&gt;total_de_paginas;
+
+      <span class="comment">// echo &quot;&lt;pre&gt;sql: &quot; ; print_r($this-&gt;sql) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
+      }
+</pre></div>
+</div>
+</div>
+    </td>
+  </tr>
+</table>
+</div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Viernes, 23 de Noviembre de 2012 09:21:08 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>
