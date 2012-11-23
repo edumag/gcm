@@ -120,14 +120,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00026"></a>00026 <span class="comment"> * @todo Plantillas por defecto.</span>
 <a name="l00027"></a>00027 <span class="comment"> */</span>
 <a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="../../d2/dee/a00049.html">00029</a> <span class="keyword">class </span><a class="code" href="../../d2/dee/a00049.html" title="Recogemos clase padre.">PaginarPDO</a> <span class="keyword">extends</span> <a class="code" href="../../de/d8c/a00036.html" title="Extensión para PDO.">GcmPDO</a> {
+<a name="l00029"></a><a class="code" href="../../d4/dca/a00048.html">00029</a> <span class="keyword">class </span><a class="code" href="../../d4/dca/a00048.html" title="Recogemos clase padre.">PaginarPDO</a> <span class="keyword">extends</span> <a class="code" href="../../d4/d8c/a00035.html" title="Extensión para PDO.">GcmPDO</a> {
 <a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../d2/dee/a00049_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576">00031</a>    <span class="keyword">public</span> <a class="code" href="../../d2/dee/a00049_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a>;              <span class="comment">///&lt; Número de elementos por pagina</span>
-<a name="l00032"></a><a class="code" href="../../d2/dee/a00049_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65">00032</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d2/dee/a00049_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65" title="Url de enlace de botonera.">$url_base</a>=<span class="stringliteral">&#39;&#39;</span>;                   <span class="comment">///&lt; Url de enlace de botonera</span>
-<a name="l00033"></a><a class="code" href="../../d2/dee/a00049_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3">00033</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d2/dee/a00049_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3" title="Plantilla que presenta los resultados.">$plantilla_resultados</a>;          <span class="comment">///&lt; Plantilla que presenta los resultados</span>
-<a name="l00034"></a><a class="code" href="../../d2/dee/a00049_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d">00034</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d2/dee/a00049_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d" title="Plantilla que presenta los resultados.">$plantilla_botonera</a>;            <span class="comment">///&lt; Plantilla que presenta los resultados</span>
-<a name="l00035"></a><a class="code" href="../../d2/dee/a00049_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366">00035</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d2/dee/a00049_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$paginas_agrupadas</a>=2;           <span class="comment">///&lt; Número de botones de páginas que se presenta por alante y atras de la actual</span>
-<a name="l00036"></a><a class="code" href="../../d2/dee/a00049_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">00036</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d2/dee/a00049_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a>;                        <span class="comment">///&lt; Para diferenciar entre diferentes instancias</span>
+<a name="l00031"></a><a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576">00031</a>    <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a>;              <span class="comment">///&lt; Número de elementos por pagina</span>
+<a name="l00032"></a><a class="code" href="../../d4/dca/a00048_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65">00032</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65" title="Url de enlace de botonera.">$url_base</a>=<span class="stringliteral">&#39;&#39;</span>;                   <span class="comment">///&lt; Url de enlace de botonera</span>
+<a name="l00033"></a><a class="code" href="../../d4/dca/a00048_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3">00033</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3" title="Plantilla que presenta los resultados.">$plantilla_resultados</a>;          <span class="comment">///&lt; Plantilla que presenta los resultados</span>
+<a name="l00034"></a><a class="code" href="../../d4/dca/a00048_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d">00034</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d" title="Plantilla que presenta los resultados.">$plantilla_botonera</a>;            <span class="comment">///&lt; Plantilla que presenta los resultados</span>
+<a name="l00035"></a><a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366">00035</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$paginas_agrupadas</a>=2;           <span class="comment">///&lt; Número de botones de páginas que se presenta por alante y atras de la actual</span>
+<a name="l00036"></a><a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">00036</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a>;                        <span class="comment">///&lt; Para diferenciar entre diferentes instancias</span>
 <a name="l00037"></a>00037 <span class="comment"></span>
 <a name="l00038"></a>00038    <span class="keyword">private</span> $inicio;                       <span class="comment">///&lt; Inicio</span>
 <a name="l00039"></a>00039 <span class="comment"></span>   <span class="keyword">private</span> $pagina;                       <span class="comment">///&lt; Número de página</span>
@@ -149,13 +149,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00055"></a>00055 <span class="comment">    * @param $orden Orden por defecto de la sql</span>
 <a name="l00056"></a>00056 <span class="comment">    */</span>
 <a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="../../d2/dee/a00049_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">00058</a>    <span class="keyword">function</span> <a class="code" href="../../d2/dee/a00049_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">__construct</a> (PDO <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, <a class="code" href="../../d2/dee/a00049_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a>=FALSE, <a class="code" href="../../d2/dee/a00049_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a>=8, $order = FALSE) {
+<a name="l00058"></a><a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">00058</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">__construct</a> (PDO <a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a>=FALSE, <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a>=8, $order = FALSE) {
 <a name="l00059"></a>00059 
-<a name="l00060"></a>00060        <a class="code" href="../../d2/dee/a00049_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">parent::__construct</a>($pdo, <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>);
+<a name="l00060"></a>00060        <a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">parent::__construct</a>($pdo, <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>);
 <a name="l00061"></a>00061 
-<a name="l00062"></a>00062       $this-&gt;sufijo = ( <a class="code" href="../../d2/dee/a00049_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> ) ? <a class="code" href="../../d2/dee/a00049_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> : <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00062"></a>00062       $this-&gt;sufijo = ( <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> ) ? <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> : <span class="stringliteral">&#39;&#39;</span>;
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064       $this-&gt;elementos_pagina = ( <a class="code" href="../../d2/dee/a00049_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> ) ? <a class="code" href="../../d2/dee/a00049_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> : 10 ; 
+<a name="l00064"></a>00064       $this-&gt;elementos_pagina = ( <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> ) ? <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> : 10 ; 
 <a name="l00065"></a>00065 
 <a name="l00066"></a>00066      <span class="comment">// Definimos orden si nos llega por GET o cogemos por defecto</span>
 <a name="l00067"></a>00067 
@@ -186,7 +186,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00092"></a>00092             <span class="comment">// hay que tener cuidado aquí el resultado es un poco </span>
 <a name="l00093"></a>00093             <span class="comment">// imprevisible.</span>
 <a name="l00094"></a>00094 
-<a name="l00095"></a>00095             <span class="keywordflow">if</span> ( preg_match(<span class="charliteral">&#39;/&#39;</span>.$ordenadox.<span class="stringliteral">&#39;(.?) as (.*)/i&#39;</span>,<a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, $coincidencias) &amp;&amp; ! empty($coincidencias[2]) ) {
+<a name="l00095"></a>00095             <span class="keywordflow">if</span> ( preg_match(<span class="charliteral">&#39;/&#39;</span>.$ordenadox.<span class="stringliteral">&#39;(.?) as (.*)/i&#39;</span>,<a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, $coincidencias) &amp;&amp; ! empty($coincidencias[2]) ) {
 <a name="l00096"></a>00096 
 <a name="l00097"></a>00097                $this-&gt;as_orden = trim($coincidencias[2],<span class="charliteral">&#39;,&#39;</span>);
 <a name="l00098"></a>00098 
@@ -207,7 +207,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00113"></a>00113          }
 <a name="l00114"></a>00114 
 <a name="l00115"></a>00115 
-<a name="l00116"></a>00116       $this-&gt;sql = <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>.<span class="stringliteral">&quot; &quot;</span>.$order;
+<a name="l00116"></a>00116       $this-&gt;sql = <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>.<span class="stringliteral">&quot; &quot;</span>.$order;
 <a name="l00117"></a>00117 
 <a name="l00118"></a>00118       <span class="comment">// if ( isset($ordenadox) ) echo &#39;&lt;br&gt;ordenadox: &#39;.$ordenadox;</span>
 <a name="l00119"></a>00119       <span class="comment">// echo &#39;&lt;br&gt;as_orden: &#39;.$this-&gt;as_orden;</span>
@@ -216,12 +216,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123       <span class="keywordflow">if</span> (empty($_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>])) {
 <a name="l00124"></a>00124          $inicio = 0;
-<a name="l00125"></a>00125          $this-&gt;<a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>=1;
+<a name="l00125"></a>00125          $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>=1;
 <a name="l00126"></a>00126 
 <a name="l00127"></a>00127       } <span class="keywordflow">else</span> {
 <a name="l00128"></a>00128 
-<a name="l00129"></a>00129          $this-&gt;<a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> = $_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>];
-<a name="l00130"></a>00130          $inicio = ($this-&gt;<a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> - 1) * $this-&gt;elementos_pagina;
+<a name="l00129"></a>00129          $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> = $_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>];
+<a name="l00130"></a>00130          $inicio = ($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> - 1) * $this-&gt;elementos_pagina;
 <a name="l00131"></a>00131 
 <a name="l00132"></a>00132          }
 <a name="l00133"></a>00133 
@@ -229,13 +229,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00135"></a>00135 
 <a name="l00136"></a>00136       $this-&gt;total_de_paginas = ( $this-&gt;num_total_registros &gt; 1 ) ? ceil($this-&gt;num_total_registros / $this-&gt;elementos_pagina) : 1 ;
 <a name="l00137"></a>00137 
-<a name="l00138"></a>00138       $this-&gt;sql=$this-&gt;sql.<span class="stringliteral">&quot; limit &quot;</span> . $inicio . <span class="stringliteral">&quot;,&quot;</span> . <a class="code" href="../../d2/dee/a00049_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$this-&gt;elementos_pagina</a>;
+<a name="l00138"></a>00138       $this-&gt;sql=$this-&gt;sql.<span class="stringliteral">&quot; limit &quot;</span> . $inicio . <span class="stringliteral">&quot;,&quot;</span> . <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$this-&gt;elementos_pagina</a>;
 <a name="l00139"></a>00139 
 <a name="l00140"></a>00140       $this-&gt;totalpp=ceil($this-&gt;total_de_paginas / $this-&gt;paginas_agrupadas);
 <a name="l00141"></a>00141       <span class="comment">//$this-&gt;elemento_inicio=$this-&gt;pagina*$this-&gt;paginas_agrupadas-$this-&gt;paginas_agrupadas+1;</span>
 <a name="l00142"></a>00142       <span class="comment">//$this-&gt;elemento_final=$this-&gt;elemento_inicio+$this-&gt;paginas_agrupadas-1;</span>
-<a name="l00143"></a>00143       $this-&gt;elemento_inicio=($this-&gt;<a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>-<a class="code" href="../../d2/dee/a00049_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
-<a name="l00144"></a>00144       $this-&gt;elemento_final=($this-&gt;<a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>+<a class="code" href="../../d2/dee/a00049_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
+<a name="l00143"></a>00143       $this-&gt;elemento_inicio=($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>-<a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
+<a name="l00144"></a>00144       $this-&gt;elemento_final=($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>+<a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
 <a name="l00145"></a>00145 
 <a name="l00146"></a>00146       <span class="keywordflow">if</span> ( $this-&gt;elemento_inicio &lt; 1  ) $this-&gt;elemento_inicio=1;
 <a name="l00147"></a>00147       <span class="keywordflow">if</span> ( $this-&gt;elemento_final &gt; $this-&gt;total_de_paginas  ) $this-&gt;elemento_final=$this-&gt;total_de_paginas;
@@ -251,11 +251,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00157"></a>00157 <span class="comment">    *        tinytable para tener una tabla dinamica con javascript.</span>
 <a name="l00158"></a>00158 <span class="comment">    */</span>
 <a name="l00159"></a>00159 
-<a name="l00160"></a><a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663">00160</a>    <span class="keyword">function</span> <a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>($opciones=NULL, $opciones_array2table = FALSE) {
+<a name="l00160"></a><a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663">00160</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>($opciones=NULL, $opciones_array2table = FALSE) {
 <a name="l00161"></a>00161 
-<a name="l00162"></a>00162       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00162"></a>00162       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00163"></a>00163 
-<a name="l00164"></a>00164       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
+<a name="l00164"></a>00164       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
 <a name="l00165"></a>00165 
 <a name="l00166"></a>00166       <span class="comment">// echo &quot;&lt;pre&gt;resultado: &quot; ; print_r($this-&gt;resultado()) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
 <a name="l00167"></a>00167       <span class="comment">// echo &quot;&lt;pre&gt;array: &quot; ; print_r($this-&gt;to_array()) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
@@ -274,8 +274,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00180"></a>00180 
 <a name="l00181"></a>00181          require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../../array2table/lib/Array2table.php&#39;</span>);
 <a name="l00182"></a>00182 
-<a name="l00183"></a>00183          $array2table = <span class="keyword">new</span> <a class="code" href="../../de/d21/a00006.html">Array2table</a>($this-&gt;sufijo);
-<a name="l00184"></a>00184          $array2table-&gt;generar_tabla($this-&gt;<a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>(), $opciones, $this-&gt;as_orden, $this-&gt;tipo_orden);
+<a name="l00183"></a>00183          $array2table = <span class="keyword">new</span> <a class="code" href="../../dd/dad/a00005.html">Array2table</a>($this-&gt;sufijo);
+<a name="l00184"></a>00184          $array2table-&gt;generar_tabla($this-&gt;<a class="code" href="../../d4/d8c/a00035_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>(), $opciones, $this-&gt;as_orden, $this-&gt;tipo_orden);
 <a name="l00185"></a>00185 
 <a name="l00186"></a>00186       } <span class="keywordflow">else</span> {
 <a name="l00187"></a>00187 
@@ -286,7 +286,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00192"></a>00192          require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../../array2table/lib/&#39;</span>.$extension.<span class="stringliteral">&#39;.php&#39;</span>);
 <a name="l00193"></a>00193 
 <a name="l00194"></a>00194          $array2table = <span class="keyword">new</span> $extension($opciones_array2table[<span class="stringliteral">&#39;op&#39;</span>]);
-<a name="l00195"></a>00195          $array2table-&gt;generar_tabla($this-&gt;<a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>(), $opciones, $this-&gt;as_orden, $this-&gt;tipo_orden);
+<a name="l00195"></a>00195          $array2table-&gt;generar_tabla($this-&gt;<a class="code" href="../../d4/d8c/a00035_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>(), $opciones, $this-&gt;as_orden, $this-&gt;tipo_orden);
 <a name="l00196"></a>00196 
 <a name="l00197"></a>00197          }
 <a name="l00198"></a>00198 
@@ -296,13 +296,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00202"></a>00202 <span class="comment">    * Botonera</span>
 <a name="l00203"></a>00203 <span class="comment">    */</span>
 <a name="l00204"></a>00204 
-<a name="l00205"></a><a class="code" href="../../d2/dee/a00049_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87">00205</a>    <span class="keyword">function</span> <a class="code" href="../../d2/dee/a00049_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>() {
+<a name="l00205"></a><a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87">00205</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>() {
 <a name="l00206"></a>00206 
 <a name="l00207"></a>00207       require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../../gcm/lib/helpers.php&#39;</span>);
 <a name="l00208"></a>00208 
-<a name="l00209"></a>00209       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
+<a name="l00209"></a>00209       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
 <a name="l00210"></a>00210 
-<a name="l00211"></a>00211       $this-&gt;url_base = <a class="code" href="../../dd/d42/a00109_ab8443697c2560d5e86b5f6014a22864e.html#ab8443697c2560d5e86b5f6014a22864e" title="Generamos url segun las variables de GET que ya tenemos.">construir_get</a>( array(
+<a name="l00211"></a>00211       $this-&gt;url_base = <a class="code" href="../../d1/dd6/a00108_ab8443697c2560d5e86b5f6014a22864e.html#ab8443697c2560d5e86b5f6014a22864e" title="Generamos url segun las variables de GET que ya tenemos.">construir_get</a>( array(
 <a name="l00212"></a>00212          $this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span> =&gt; htmlspecialchars($this-&gt;as_orden,ENT_QUOTES)
 <a name="l00213"></a>00213          , $this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span> =&gt; $this-&gt;tipo_orden
 <a name="l00214"></a>00214       ));
@@ -333,21 +333,21 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00239"></a>00239 <span class="comment">    *        tinytable para tener una tabla dinamica con javascript. @see tinyTable</span>
 <a name="l00240"></a>00240 <span class="comment">    */</span>
 <a name="l00241"></a>00241 
-<a name="l00242"></a><a class="code" href="../../d2/dee/a00049_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644">00242</a>    <span class="keyword">function</span> <a class="code" href="../../d2/dee/a00049_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644" title="Generar página con contenido.">generar_pagina</a>($url_ajax=FALSE, $opciones=NULL, $opciones_array2table = FALSE) {
+<a name="l00242"></a><a class="code" href="../../d4/dca/a00048_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644">00242</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644" title="Generar página con contenido.">generar_pagina</a>($url_ajax=FALSE, $opciones=NULL, $opciones_array2table = FALSE) {
 <a name="l00243"></a>00243 
 <a name="l00244"></a>00244       <span class="comment">/* creamos caja con contenido que pueda ser sustituido con ajax */</span>
 <a name="l00245"></a>00245 
-<a name="l00246"></a>00246       $ident = <a class="code" href="../../d2/dee/a00049_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$this-&gt;sufijo</a>;
+<a name="l00246"></a>00246       $ident = <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$this-&gt;sufijo</a>;
 <a name="l00247"></a>00247       $div   = $ident.<span class="stringliteral">&#39;paginador&#39;</span>;
 <a name="l00248"></a>00248 
 <a name="l00249"></a>00249       echo <span class="stringliteral">&#39;&lt;div id=&quot;&#39;</span>.$div.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>;
-<a name="l00250"></a>00250       $this-&gt;<a class="code" href="../../d2/dee/a00049_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>();
-<a name="l00251"></a>00251       $this-&gt;<a class="code" href="../../d2/dee/a00049_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>($opciones, $opciones_array2table);
-<a name="l00252"></a>00252       $this-&gt;<a class="code" href="../../d2/dee/a00049_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>();
+<a name="l00250"></a>00250       $this-&gt;<a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>();
+<a name="l00251"></a>00251       $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>($opciones, $opciones_array2table);
+<a name="l00252"></a>00252       $this-&gt;<a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>();
 <a name="l00253"></a>00253       echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
 <a name="l00254"></a>00254       <span class="keywordflow">if</span> ($this-&gt;total_de_paginas &gt; 1) {
 <a name="l00255"></a>00255          <span class="keywordflow">if</span> ( $url_ajax &amp;&amp; $url_ajax != <span class="stringliteral">&#39;&#39;</span> ) {
-<a name="l00256"></a>00256             $this-&gt;<a class="code" href="../../d2/dee/a00049_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9" title="Javascript para botonera con ajax.">script_ajax</a>();
+<a name="l00256"></a>00256             $this-&gt;<a class="code" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9" title="Javascript para botonera con ajax.">script_ajax</a>();
 <a name="l00257"></a>00257             
 <a name="l00258"></a>00258             <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]) &amp;&amp; $_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>] == <span class="stringliteral">&#39;ajax&#39;</span> ) {
 <a name="l00259"></a>00259                ?&gt;
@@ -375,7 +375,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00281"></a>00281 <span class="comment">    * Esto nos servira pata las tablas ordenadas que funcione el ajax.</span>
 <a name="l00282"></a>00282 <span class="comment">    */</span>
 <a name="l00283"></a>00283 
-<a name="l00284"></a><a class="code" href="../../d2/dee/a00049_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9">00284</a>    <span class="keyword">function</span> <a class="code" href="../../d2/dee/a00049_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9" title="Javascript para botonera con ajax.">script_ajax</a>() {
+<a name="l00284"></a><a class="code" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9">00284</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9" title="Javascript para botonera con ajax.">script_ajax</a>() {
 <a name="l00285"></a>00285 
 <a name="l00286"></a>00286       <span class="keywordflow">if</span> ( self::$script_ajax_incluido  ) return ;
 <a name="l00287"></a>00287 
@@ -410,7 +410,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

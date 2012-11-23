@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Imagenes\__construct</title>
+<title>gcm: ImagenesAbstract\__construct</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -73,7 +73,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="../../dd/d32/a00041.html">Imagenes</a>      </li>
+      <li class="navelem"><a class="el" href="../../dd/d32/a00041.html">ImagenesAbstract</a>      </li>
     </ul>
   </div>
 </div>
@@ -83,57 +83,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
    <td valign="top">
       <div class="navtab">
         <table>
-          <tr><td class="navtab"><a class="qindexHL" href="../../dd/d32/a00041_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">__construct</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_af2c6896de381f7ae77574a4b52cdff58.html#af2c6896de381f7ae77574a4b52cdff58">administrar</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a6d77de5288535ba14eb8453039b4880c.html#a6d77de5288535ba14eb8453039b4880c">ajaxImg</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_af3f4c7e5d1f2287c45a1679706fb3606.html#af3f4c7e5d1f2287c45a1679706fb3606">borrarImg</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a1a4f26d45ca4b2a1b5e0068db1db5453.html#a1a4f26d45ca4b2a1b5e0068db1db5453">formConfPro</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_ae8ad9595a633bf580f8c9ff14434d420.html#ae8ad9595a633bf580f8c9ff14434d420">formulario</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_af469bb804d49834065daa95c54eb4d07.html#af469bb804d49834065daa95c54eb4d07">presentar_galeria</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_aed305d5ab88fa14b633a5dc46191fbcb.html#aed305d5ab88fa14b633a5dc46191fbcb">subirImagen</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a5210a84a3d6b41ca54b051b080ee9283.html#a5210a84a3d6b41ca54b051b080ee9283">$nombre_imagen</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a19ecce3d19e108b3bdfb5c8e74512062.html#a19ecce3d19e108b3bdfb5c8e74512062">getNombre</a></td></tr>
         </table>
       </div>
    </td>
    <td valign="top" class="mempage">
-<a class="anchor" id="a095c5d389db211932136b53f25f39685"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../dd/d32/a00041_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">__construct</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Constructor. </p>
-
-<p>Reimplementado de <a class="el" href="../../d4/dca/a00048_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">Modulos</a>.</p>
-
-<p>Definición en la línea <a class="el" href="../../db/dc3/a00284_source.html#l00047">47</a> del archivo <a class="el" href="../../db/dc3/a00284_source.html">Imagenes.php</a>.</p>
-
-<p>Hace referencia a <a class="el" href="../../d4/d63/a00082_source.html#l00027">$gcm</a> y <a class="el" href="../../d4/d81/a00110_source.html#l00143">Modulos\config()</a>.</p>
-<div class="fragment"><pre class="fragment">                          {
-
-      global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-
-      <a class="code" href="../../dd/d32/a00041_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
-
-      $this-&gt;altoMaxImg = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;altoMaxImg&#39;</span>);
-      $this-&gt;anchoMaxImg = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;anchoMaxImg&#39;</span>);
-      $this-&gt;altoMaxMiniatura = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;altoMaxMiniatura&#39;</span>);
-      $this-&gt;anchoMaxMiniatura = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;anchoMaxMiniatura&#39;</span>);
-
-      $this-&gt;proyecto = $gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>);
-      $this-&gt;idioma   = $gcm-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Idioma por defecto&#39;</span>);
-
-      }
-</pre></div>
-</div>
-</div>
     </td>
   </tr>
 </table>
@@ -141,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:36 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:07 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

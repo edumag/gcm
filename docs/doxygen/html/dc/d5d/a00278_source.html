@@ -130,15 +130,15 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00037"></a>00037 <span class="comment"> *</span>
 <a name="l00038"></a>00038 <span class="comment"> */</span>
 <a name="l00039"></a>00039 
-<a name="l00040"></a><a class="code" href="../../d3/de7/a00039.html">00040</a> <span class="keyword">class </span><a class="code" href="../../d3/de7/a00039.html" title="Modulo Idiomas para la administración de los idiomas.">Idiomas</a> <span class="keyword">extends</span> <a class="code" href="../../d4/dca/a00048.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00040"></a><a class="code" href="../../d8/d41/a00038.html">00040</a> <span class="keyword">class </span><a class="code" href="../../d8/d41/a00038.html" title="Modulo Idiomas para la administración de los idiomas.">Idiomas</a> <span class="keyword">extends</span> <a class="code" href="../../d6/d2d/a00047.html" title="Interface para los módulos.">Modulos</a> {
 <a name="l00041"></a>00041 
 <a name="l00042"></a>00042    <span class="keyword">private</span> $iIdiomas;      <span class="comment">///&lt; Isntancia de IdiomasCore</span>
 <a name="l00043"></a>00043 <span class="comment"></span>
-<a name="l00044"></a><a class="code" href="../../d3/de7/a00039_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00044</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() {
+<a name="l00044"></a><a class="code" href="../../d8/d41/a00038_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00044</a>    <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() {
 <a name="l00045"></a>00045 
-<a name="l00046"></a>00046       <a class="code" href="../../d3/de7/a00039_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">parent::__construct</a>();
+<a name="l00046"></a>00046       <a class="code" href="../../d8/d41/a00038_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">parent::__construct</a>();
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00048"></a>00048       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00049"></a>00049 
 <a name="l00050"></a>00050       $proyecto = $gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>);
 <a name="l00051"></a>00051 
@@ -154,7 +154,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00061"></a>00061                             , <span class="stringliteral">&#39;proyecto&#39;</span> =&gt; $proyecto
 <a name="l00062"></a>00062                             );
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064       $this-&gt;iIdiomas = <span class="keyword">new</span> <a class="code" href="../../db/d3a/a00040.html" title="Idiomas para la administración de los idiomas.">IdiomasCore</a>($configuracion);
+<a name="l00064"></a>00064       $this-&gt;iIdiomas = <span class="keyword">new</span> <a class="code" href="../../d3/de7/a00039.html" title="Idiomas para la administración de los idiomas.">IdiomasCore</a>($configuracion);
 <a name="l00065"></a>00065 
 <a name="l00066"></a>00066       }
 <a name="l00067"></a>00067 <span class="comment"></span>
@@ -164,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00071"></a>00071 <span class="comment">    * Creamos los directorios necesarios para el funcionamiento del módulo</span>
 <a name="l00072"></a>00072 <span class="comment">    */</span>
 <a name="l00073"></a>00073 
-<a name="l00074"></a><a class="code" href="../../d3/de7/a00039_a167f6fb58adbd4f8fa9a0143b0ba6e3d.html#a167f6fb58adbd4f8fa9a0143b0ba6e3d">00074</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a167f6fb58adbd4f8fa9a0143b0ba6e3d.html#a167f6fb58adbd4f8fa9a0143b0ba6e3d" title="Instalación.">instalacion</a>() { <span class="keywordflow">return</span> $this-&gt;iIdiomas-&gt;instalacion(); }
+<a name="l00074"></a><a class="code" href="../../d8/d41/a00038_a167f6fb58adbd4f8fa9a0143b0ba6e3d.html#a167f6fb58adbd4f8fa9a0143b0ba6e3d">00074</a>    <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_a167f6fb58adbd4f8fa9a0143b0ba6e3d.html#a167f6fb58adbd4f8fa9a0143b0ba6e3d" title="Instalación.">instalacion</a>() { <span class="keywordflow">return</span> $this-&gt;iIdiomas-&gt;instalacion(); }
 <a name="l00075"></a>00075 <span class="comment"></span>
 <a name="l00076"></a>00076 <span class="comment">   /**</span>
 <a name="l00077"></a>00077 <span class="comment">    * Acción que se realiza con el evento precarga, para comprobar la </span>
@@ -172,16 +172,16 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00079"></a>00079 <span class="comment">    *</span>
 <a name="l00080"></a>00080 <span class="comment">    */</span>
 <a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="../../d3/de7/a00039_a939f4d381007b7d859a95560c524b197.html#a939f4d381007b7d859a95560c524b197">00082</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a939f4d381007b7d859a95560c524b197.html#a939f4d381007b7d859a95560c524b197" title="Acción que se realiza con el evento precarga, para comprobar la existencia del contenido en el idioma...">definir_idioma</a>(){
+<a name="l00082"></a><a class="code" href="../../d8/d41/a00038_a939f4d381007b7d859a95560c524b197.html#a939f4d381007b7d859a95560c524b197">00082</a>    <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_a939f4d381007b7d859a95560c524b197.html#a939f4d381007b7d859a95560c524b197" title="Acción que se realiza con el evento precarga, para comprobar la existencia del contenido en el idioma...">definir_idioma</a>(){
 <a name="l00083"></a>00083 
-<a name="l00084"></a>00084       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00084"></a>00084       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00085"></a>00085 
-<a name="l00086"></a>00086       <span class="keywordflow">if</span> ( ! is_file(<a class="code" href="../../d9/d73/a00060_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) ) {
+<a name="l00086"></a>00086       <span class="keywordflow">if</span> ( ! is_file(<a class="code" href="../../d3/d8b/a00059_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) ) {
 <a name="l00087"></a>00087 <span class="comment"></span>
 <a name="l00088"></a>00088 <span class="comment">         /// Buscamos en idioma por defecto</span>
-<a name="l00089"></a>00089 <span class="comment"></span>         <a class="code" href="../../d9/d73/a00060_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>=<a class="code" href="../../d9/d73/a00060_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.Router::$s.Router::$c;
+<a name="l00089"></a>00089 <span class="comment"></span>         <a class="code" href="../../d3/d8b/a00059_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>=<a class="code" href="../../d3/d8b/a00059_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.Router::$s.Router::$c;
 <a name="l00090"></a>00090 
-<a name="l00091"></a>00091          <span class="keywordflow">if</span> ( ! is_file(<a class="code" href="../../d9/d73/a00060_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) ) {
+<a name="l00091"></a>00091          <span class="keywordflow">if</span> ( ! is_file(<a class="code" href="../../d3/d8b/a00059_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) ) {
 <a name="l00092"></a>00092 
 <a name="l00093"></a>00093             <span class="comment">// Si no existe archivo original puede ser que sea que se ha cambiado el</span>
 <a name="l00094"></a>00094             <span class="comment">// idioma predeterminado y no tenemos contenido por defecto</span>
@@ -199,25 +199,25 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00106"></a>00106 
 <a name="l00107"></a>00107             <span class="comment">// Si no tenemos ningun fichero posible presentamos contenido dinamicamente</span>
 <a name="l00108"></a>00108             <span class="keywordflow">if</span> ( ! isset($idiomas_posibles) ) {
-<a name="l00109"></a>00109                <a class="code" href="../../d9/d73/a00060_a4e25f7a540bfc9c6e5556abf6b8331f9.html#a4e25f7a540bfc9c6e5556abf6b8331f9" title="En caso de no encontrar contenido definimos variable a TRUE.">Router::$sin_contenido</a>=TRUE;
+<a name="l00109"></a>00109                <a class="code" href="../../d3/d8b/a00059_a4e25f7a540bfc9c6e5556abf6b8331f9.html#a4e25f7a540bfc9c6e5556abf6b8331f9" title="En caso de no encontrar contenido definimos variable a TRUE.">Router::$sin_contenido</a>=TRUE;
 <a name="l00110"></a>00110 
 <a name="l00111"></a>00111             <span class="comment">// Si solo hay una posibilidad la presentamos y avisamos que solo se encontro en ese idioma</span>
 <a name="l00112"></a>00112             } elseif ( count($idiomas_posibles) == 1 ) {
 <a name="l00113"></a>00113 
-<a name="l00114"></a>00114                list($idioma, <a class="code" href="../../d9/d73/a00060_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) = each($idiomas_posibles);
+<a name="l00114"></a>00114                list($idioma, <a class="code" href="../../d3/d8b/a00059_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) = each($idiomas_posibles);
 <a name="l00115"></a>00115                $gcm-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&quot;No se encontro contenido con el idioma predeterminado, se presenta en &quot;</span>.$idioma,<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00116"></a>00116 
 <a name="l00117"></a>00117             <span class="comment">// Si hay más de una posibilidad presentamos la primera que encontramos y colocamos</span>
 <a name="l00118"></a>00118             <span class="comment">// un select con los posibles idiomas y una explicación</span>
 <a name="l00119"></a>00119             } <span class="keywordflow">else</span> {
-<a name="l00120"></a>00120                list($idioma, <a class="code" href="../../d9/d73/a00060_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) = each($idiomas_posibles);
+<a name="l00120"></a>00120                list($idioma, <a class="code" href="../../d3/d8b/a00059_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">Router::$f</a>) = each($idiomas_posibles);
 <a name="l00121"></a>00121                }
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123          } <span class="keywordflow">else</span> {
 <a name="l00124"></a>00124 
 <a name="l00125"></a>00125             <span class="comment">/* Conutamos sin_traduccion a TRUE */</span>
 <a name="l00126"></a>00126 
-<a name="l00127"></a>00127             <a class="code" href="../../d9/d73/a00060_a8c1c864e7f0c6e71717c038396765bb8.html#a8c1c864e7f0c6e71717c038396765bb8" title="En caso de pedirse un texto en idioma no predeterminado y no tenerlo.">Router::$sin_traduccion</a> = TRUE;
+<a name="l00127"></a>00127             <a class="code" href="../../d3/d8b/a00059_a8c1c864e7f0c6e71717c038396765bb8.html#a8c1c864e7f0c6e71717c038396765bb8" title="En caso de pedirse un texto en idioma no predeterminado y no tenerlo.">Router::$sin_traduccion</a> = TRUE;
 <a name="l00128"></a>00128 
 <a name="l00129"></a>00129             }
 <a name="l00130"></a>00130          }
@@ -233,15 +233,15 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00140"></a>00140 <span class="comment">    * en la variable de sessión &#39;[proyecto]-idioma&#39;</span>
 <a name="l00141"></a>00141 <span class="comment">    */</span>
 <a name="l00142"></a>00142 
-<a name="l00143"></a><a class="code" href="../../d3/de7/a00039_afa28ebb12ea81b6085a3dab74b3bbdd6.html#afa28ebb12ea81b6085a3dab74b3bbdd6">00143</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_afa28ebb12ea81b6085a3dab74b3bbdd6.html#afa28ebb12ea81b6085a3dab74b3bbdd6" title="Seleccionamos idioma con el que se presenta la página.">seleccion_idioma</a>() { <span class="keywordflow">return</span> $this-&gt;iIdiomas-&gt;seleccion_idioma(); } 
+<a name="l00143"></a><a class="code" href="../../d8/d41/a00038_afa28ebb12ea81b6085a3dab74b3bbdd6.html#afa28ebb12ea81b6085a3dab74b3bbdd6">00143</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_afa28ebb12ea81b6085a3dab74b3bbdd6.html#afa28ebb12ea81b6085a3dab74b3bbdd6" title="Seleccionamos idioma con el que se presenta la página.">seleccion_idioma</a>() { <span class="keywordflow">return</span> $this-&gt;iIdiomas-&gt;seleccion_idioma(); } 
 <a name="l00144"></a>00144 <span class="comment"></span>
 <a name="l00145"></a>00145 <span class="comment">   /**</span>
 <a name="l00146"></a>00146 <span class="comment">   * Formulario de entrada</span>
 <a name="l00147"></a>00147 <span class="comment">   */</span>
 <a name="l00148"></a>00148 
-<a name="l00149"></a><a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5">00149</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>() {
+<a name="l00149"></a><a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5">00149</a>    <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>() {
 <a name="l00150"></a>00150 
-<a name="l00151"></a>00151       global $_POST, <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a> ;
+<a name="l00151"></a>00151       global $_POST, <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a> ;
 <a name="l00152"></a>00152 
 <a name="l00153"></a>00153       echo <span class="stringliteral">&#39;Módulo sin acabar&#39;</span>;
 <a name="l00154"></a>00154 
@@ -267,9 +267,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00174"></a>00174 <span class="comment">    *</span>
 <a name="l00175"></a>00175 <span class="comment">    */</span>
 <a name="l00176"></a>00176 
-<a name="l00177"></a><a class="code" href="../../d3/de7/a00039_af2c6896de381f7ae77574a4b52cdff58.html#af2c6896de381f7ae77574a4b52cdff58">00177</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_af2c6896de381f7ae77574a4b52cdff58.html#af2c6896de381f7ae77574a4b52cdff58" title="Administración de los idiomas disponibles en el proyecto.">administrar</a>() {
+<a name="l00177"></a><a class="code" href="../../d8/d41/a00038_af2c6896de381f7ae77574a4b52cdff58.html#af2c6896de381f7ae77574a4b52cdff58">00177</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_af2c6896de381f7ae77574a4b52cdff58.html#af2c6896de381f7ae77574a4b52cdff58" title="Administración de los idiomas disponibles en el proyecto.">administrar</a>() {
 <a name="l00178"></a>00178 
-<a name="l00179"></a>00179       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00179"></a>00179       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00180"></a>00180 
 <a name="l00181"></a>00181       <span class="comment">// No presentamos contenido</span>
 <a name="l00182"></a>00182       $presentar_contenido = FALSE;
@@ -294,7 +294,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00201"></a>00201          } <span class="keywordflow">else</span> {
 <a name="l00202"></a>00202             $gcm-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;Archivo modificado&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00203"></a>00203          }
-<a name="l00204"></a>00204          $this-&gt;<a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
+<a name="l00204"></a>00204          $this-&gt;<a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
 <a name="l00205"></a>00205          <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00206"></a>00206 
 <a name="l00207"></a>00207       } elseif ( isset($_POST[<span class="stringliteral">&#39;idioma&#39;</span>]) ) {
@@ -303,7 +303,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00210"></a>00210 
 <a name="l00211"></a>00211          $gcm-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Idioma por defecto&#39;</span>,$_POST[<span class="stringliteral">&#39;idioma&#39;</span>]);
 <a name="l00212"></a>00212 
-<a name="l00213"></a>00213          $this-&gt;<a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
+<a name="l00213"></a>00213          $this-&gt;<a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
 <a name="l00214"></a>00214 
 <a name="l00215"></a>00215       } elseif ( isset($_POST[<span class="stringliteral">&#39;nuevoIdioma&#39;</span>]) ) {
 <a name="l00216"></a>00216          $nombreIdioma=$_POST[<span class="stringliteral">&#39;idiomaNombre&#39;</span>];
@@ -323,7 +323,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00230"></a>00230          <span class="keywordflow">if</span> ( isset($_FILES[<span class="stringliteral">&#39;imagenIdioma&#39;</span>])) {
 <a name="l00231"></a>00231             include(GCM_DIR.<span class="stringliteral">&quot;lib/int/gcm_imagen.php&quot;</span>);
 <a name="l00232"></a>00232             echo <span class="stringliteral">&quot;Copiando imagen a DATOS/idiomas/&quot;</span>.$codIdioma.<span class="stringliteral">&quot;.gif&quot;</span>;
-<a name="l00233"></a>00233             <span class="keywordflow">if</span> ( ! <a class="code" href="../../d2/da3/a00115_a3a58f4a41a844643755e8de25b20e258.html#a3a58f4a41a844643755e8de25b20e258" title="Copiar imágen a una ubicación.">gcm_imagen_copiar</a>($_FILES[<span class="stringliteral">&quot;imagenIdioma&quot;</span>],$this-&gt;dir_idiomas.<span class="stringliteral">&quot;&quot;</span>.$codIdioma.<span class="stringliteral">&quot;.gif&quot;</span>) ) {
+<a name="l00233"></a>00233             <span class="keywordflow">if</span> ( ! <a class="code" href="../../d8/d17/a00114_a3a58f4a41a844643755e8de25b20e258.html#a3a58f4a41a844643755e8de25b20e258" title="Copiar imágen a una ubicación.">gcm_imagen_copiar</a>($_FILES[<span class="stringliteral">&quot;imagenIdioma&quot;</span>],$this-&gt;dir_idiomas.<span class="stringliteral">&quot;&quot;</span>.$codIdioma.<span class="stringliteral">&quot;.gif&quot;</span>) ) {
 <a name="l00234"></a>00234                $gcm-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;No se pudo subir imágen&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00235"></a>00235                }
 <a name="l00236"></a>00236             }
@@ -341,7 +341,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00248"></a>00248          <span class="keywordflow">if</span> ( isset($_FILES[<span class="stringliteral">&#39;imagenIdioma&#39;</span>])) {
 <a name="l00249"></a>00249             include(GCM_DIR.<span class="stringliteral">&quot;lib/int/gcm_imagen.php&quot;</span>);
 <a name="l00250"></a>00250             echo <span class="stringliteral">&quot;Copiando imagen a DATOS/idiomas/&quot;</span>.$codIdioma.<span class="stringliteral">&quot;.gif&quot;</span>;
-<a name="l00251"></a>00251             <span class="keywordflow">if</span> ( ! <a class="code" href="../../d2/da3/a00115_a3a58f4a41a844643755e8de25b20e258.html#a3a58f4a41a844643755e8de25b20e258" title="Copiar imágen a una ubicación.">gcm_imagen_copiar</a>($_FILES[<span class="stringliteral">&quot;imagenIdioma&quot;</span>],$this-&gt;dir_idiomas.<span class="stringliteral">&quot;&quot;</span>.$codIdioma.<span class="stringliteral">&quot;.gif&quot;</span>) ) {
+<a name="l00251"></a>00251             <span class="keywordflow">if</span> ( ! <a class="code" href="../../d8/d17/a00114_a3a58f4a41a844643755e8de25b20e258.html#a3a58f4a41a844643755e8de25b20e258" title="Copiar imágen a una ubicación.">gcm_imagen_copiar</a>($_FILES[<span class="stringliteral">&quot;imagenIdioma&quot;</span>],$this-&gt;dir_idiomas.<span class="stringliteral">&quot;&quot;</span>.$codIdioma.<span class="stringliteral">&quot;.gif&quot;</span>) ) {
 <a name="l00252"></a>00252                $gcm-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;No se pudo subir imágen&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00253"></a>00253                }
 <a name="l00254"></a>00254             }
@@ -351,7 +351,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00258"></a>00258             $GCM_ERROR[]=<span class="stringliteral">&quot;Mod:idiomas::No se pudo añadir idioma nuevo a DATOS/idiomas/idiomas.php&quot;</span>;
 <a name="l00259"></a>00259             }
 <a name="l00260"></a>00260          $gcm-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;Idioma modificado&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
-<a name="l00261"></a>00261          $this-&gt;<a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
+<a name="l00261"></a>00261          $this-&gt;<a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
 <a name="l00262"></a>00262 
 <a name="l00263"></a>00263       } elseif ( isset($_POST[<span class="stringliteral">&#39;eliminarIdioma&#39;</span>]) ) {
 <a name="l00264"></a>00264 
@@ -378,7 +378,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00285"></a>00285             gcm_eliminarElemento($fileIdiomas, $codIdioma);
 <a name="l00286"></a>00286             $gcm-&gt;registra(__FILE__, __LINE__, <span class="stringliteral">&#39;Idioma: &#39;</span>.$nameIdioma.<span class="stringliteral">&quot; desactivado&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00287"></a>00287             }
-<a name="l00288"></a>00288          $this-&gt;<a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
+<a name="l00288"></a>00288          $this-&gt;<a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
 <a name="l00289"></a>00289 
 <a name="l00290"></a>00290       } elseif ( isset($_POST[<span class="stringliteral">&#39;activarIdioma&#39;</span>]) ) {
 <a name="l00291"></a>00291 
@@ -397,11 +397,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00304"></a>00304             gcm_eliminarElemento($fileDesactivados, $codIdioma);
 <a name="l00305"></a>00305             $gcm-&gt;registra(__FILE__, __LINE__, <span class="stringliteral">&#39;Idioma: &#39;</span>.$nameIdioma.<span class="stringliteral">&quot; activado&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
 <a name="l00306"></a>00306             }
-<a name="l00307"></a>00307          $this-&gt;<a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
+<a name="l00307"></a>00307          $this-&gt;<a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
 <a name="l00308"></a>00308 
 <a name="l00309"></a>00309       } <span class="keywordflow">else</span> {
 <a name="l00310"></a>00310          
-<a name="l00311"></a>00311          $this-&gt;<a class="code" href="../../d3/de7/a00039_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
+<a name="l00311"></a>00311          $this-&gt;<a class="code" href="../../d8/d41/a00038_aa35bc0257237b209cfb9f34fe72caeb5.html#aa35bc0257237b209cfb9f34fe72caeb5" title="Formulario de entrada.">printForm</a>();
 <a name="l00312"></a>00312          
 <a name="l00313"></a>00313          }
 <a name="l00314"></a>00314 
@@ -413,16 +413,16 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00320"></a>00320 <span class="comment">    * @todo Añadir posibilidad de hacerlo con imágenes</span>
 <a name="l00321"></a>00321 <span class="comment">    */</span>
 <a name="l00322"></a>00322 
-<a name="l00323"></a><a class="code" href="../../d3/de7/a00039_ad01f3952df69fcfcd79a266a728f445c.html#ad01f3952df69fcfcd79a266a728f445c">00323</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_ad01f3952df69fcfcd79a266a728f445c.html#ad01f3952df69fcfcd79a266a728f445c" title="Formulario para selección de idioma.">selector_idiomas</a>() { $this-&gt;iIdiomas-&gt;selector_idiomas(); }
+<a name="l00323"></a><a class="code" href="../../d8/d41/a00038_ad01f3952df69fcfcd79a266a728f445c.html#ad01f3952df69fcfcd79a266a728f445c">00323</a>    <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_ad01f3952df69fcfcd79a266a728f445c.html#ad01f3952df69fcfcd79a266a728f445c" title="Formulario para selección de idioma.">selector_idiomas</a>() { $this-&gt;iIdiomas-&gt;selector_idiomas(); }
 <a name="l00324"></a>00324 <span class="comment"></span>
 <a name="l00325"></a>00325 <span class="comment">   /** </span>
 <a name="l00326"></a>00326 <span class="comment">    * lista_idiomas</span>
 <a name="l00327"></a>00327 <span class="comment">    *</span>
 <a name="l00328"></a>00328 <span class="comment">    */</span>
 <a name="l00329"></a>00329       
-<a name="l00330"></a><a class="code" href="../../d3/de7/a00039_a4f9f7ea695d87f187b43a20e63d66350.html#a4f9f7ea695d87f187b43a20e63d66350">00330</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a4f9f7ea695d87f187b43a20e63d66350.html#a4f9f7ea695d87f187b43a20e63d66350" title="lista_idiomas">banderas</a>() { 
+<a name="l00330"></a><a class="code" href="../../d8/d41/a00038_a4f9f7ea695d87f187b43a20e63d66350.html#a4f9f7ea695d87f187b43a20e63d66350">00330</a>    <span class="keyword">function</span> <a class="code" href="../../d8/d41/a00038_a4f9f7ea695d87f187b43a20e63d66350.html#a4f9f7ea695d87f187b43a20e63d66350" title="lista_idiomas">banderas</a>() { 
 <a name="l00331"></a>00331       
-<a name="l00332"></a>00332       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00332"></a>00332       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00333"></a>00333 
 <a name="l00334"></a>00334       $this-&gt;iIdiomas-&gt;banderas($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;banderas.html&#39;</span>)); 
 <a name="l00335"></a>00335       }
@@ -433,7 +433,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

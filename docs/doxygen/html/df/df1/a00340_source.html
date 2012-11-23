@@ -109,7 +109,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00016"></a>00016 <span class="comment"> * Modulo para presentar los registros de la aplizació</span>
 <a name="l00017"></a>00017 <span class="comment"> */</span>
 <a name="l00018"></a>00018 
-<a name="l00019"></a><a class="code" href="../../d0/d89/a00071.html">00019</a> <span class="keyword">class </span><a class="code" href="../../d0/d89/a00071.html" title="Modulo para presentar los registros de la aplizació">Ver_registros</a> <span class="keyword">extends</span> <a class="code" href="../../d4/dca/a00048.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00019"></a><a class="code" href="../../d2/db1/a00070.html">00019</a> <span class="keyword">class </span><a class="code" href="../../d2/db1/a00070.html" title="Modulo para presentar los registros de la aplizació">Ver_registros</a> <span class="keyword">extends</span> <a class="code" href="../../d6/d2d/a00047.html" title="Interface para los módulos.">Modulos</a> {
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021    <span class="comment">// Configurables</span>
 <a name="l00022"></a>00022    <span class="keyword">private</span> $nombre_envio_email;   <span class="comment">///&lt; Nombre del destinatario del email con registros</span>
@@ -119,18 +119,18 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00026"></a>00026 <span class="comment"></span>   <span class="keyword">private</span> $periocidad;           <span class="comment">///&lt; Cada cuantas horas enviamos el email</span>
 <a name="l00027"></a>00027 <span class="comment"></span>   <span class="keyword">private</span> $dias_borrado;         <span class="comment">///&lt; Se borran los registros con más de X días de antiguedad</span>
 <a name="l00028"></a>00028 <span class="comment"></span>
-<a name="l00029"></a><a class="code" href="../../d0/d89/a00071_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00029</a>    <span class="keyword">function</span> <a class="code" href="../../d0/d89/a00071_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() { 
+<a name="l00029"></a><a class="code" href="../../d2/db1/a00070_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00029</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() { 
 <a name="l00030"></a>00030 
-<a name="l00031"></a>00031       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00031"></a>00031       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00032"></a>00032 
-<a name="l00033"></a>00033       <a class="code" href="../../d0/d89/a00071_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">parent::__construct</a>(); 
+<a name="l00033"></a>00033       <a class="code" href="../../d2/db1/a00070_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">parent::__construct</a>(); 
 <a name="l00034"></a>00034 
-<a name="l00035"></a>00035       $this-&gt;nombre_envio_email = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Nombre envio registros&#39;</span>);
-<a name="l00036"></a>00036       $this-&gt;mail_envio         = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Mail envio registros&#39;</span>);        
-<a name="l00037"></a>00037       $this-&gt;nombre_remitente   = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Remitente&#39;</span>);  
-<a name="l00038"></a>00038       $this-&gt;mail_remitente     = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Mail remitente&#39;</span>);    
-<a name="l00039"></a>00039       $this-&gt;periocidad         = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Periocidad en horas&#39;</span>);        
-<a name="l00040"></a>00040       $this-&gt;dias_borrado       = $this-&gt;<a class="code" href="../../d4/dca/a00048_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Antiguedad de registros a borrar&#39;</span>);      
+<a name="l00035"></a>00035       $this-&gt;nombre_envio_email = $this-&gt;<a class="code" href="../../d6/d2d/a00047_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Nombre envio registros&#39;</span>);
+<a name="l00036"></a>00036       $this-&gt;mail_envio         = $this-&gt;<a class="code" href="../../d6/d2d/a00047_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Mail envio registros&#39;</span>);        
+<a name="l00037"></a>00037       $this-&gt;nombre_remitente   = $this-&gt;<a class="code" href="../../d6/d2d/a00047_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Remitente&#39;</span>);  
+<a name="l00038"></a>00038       $this-&gt;mail_remitente     = $this-&gt;<a class="code" href="../../d6/d2d/a00047_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Mail remitente&#39;</span>);    
+<a name="l00039"></a>00039       $this-&gt;periocidad         = $this-&gt;<a class="code" href="../../d6/d2d/a00047_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Periocidad en horas&#39;</span>);        
+<a name="l00040"></a>00040       $this-&gt;dias_borrado       = $this-&gt;<a class="code" href="../../d6/d2d/a00047_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;Antiguedad de registros a borrar&#39;</span>);      
 <a name="l00041"></a>00041       }
 <a name="l00042"></a>00042 <span class="comment"></span>
 <a name="l00043"></a>00043 <span class="comment">   /** </span>
@@ -143,9 +143,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00050"></a>00050 <span class="comment">    *</span>
 <a name="l00051"></a>00051 <span class="comment">    */</span>
 <a name="l00052"></a>00052 
-<a name="l00053"></a><a class="code" href="../../d0/d89/a00071_ac79c0ba97508909cb7d8b83531600c6e.html#ac79c0ba97508909cb7d8b83531600c6e">00053</a>    <span class="keyword">function</span> <a class="code" href="../../d0/d89/a00071_ac79c0ba97508909cb7d8b83531600c6e.html#ac79c0ba97508909cb7d8b83531600c6e" title="Presentar caja de avisos.">presentar_caja_de_avisos</a>() {
+<a name="l00053"></a><a class="code" href="../../d2/db1/a00070_ac79c0ba97508909cb7d8b83531600c6e.html#ac79c0ba97508909cb7d8b83531600c6e">00053</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_ac79c0ba97508909cb7d8b83531600c6e.html#ac79c0ba97508909cb7d8b83531600c6e" title="Presentar caja de avisos.">presentar_caja_de_avisos</a>() {
 <a name="l00054"></a>00054 
-<a name="l00055"></a>00055       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00055"></a>00055       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00056"></a>00056 
 <a name="l00057"></a>00057       $tipos = $gcm-&gt;reg-&gt;registros_sesion();
 <a name="l00058"></a>00058 
@@ -164,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00071"></a>00071       ?&gt;
 <a name="l00072"></a>00072       &lt;table <span class="keyword">class</span>=<span class="stringliteral">&#39;registro&#39;</span> summary=<span class="stringliteral">&#39;Registros de la aplicación&#39;</span>&gt;
 <a name="l00073"></a>00073           &lt;thead&gt;
-<a name="l00074"></a>00074              &lt;tr&gt;&lt;th <span class="keyword">class</span>=<span class="stringliteral">&quot;sesion&quot;</span> colspan=<span class="stringliteral">&quot;3&quot;</span>&gt;Sesion: &lt;strong&gt;&lt;?=<a class="code" href="../../dd/d42/a00109_ab944511ceeabc802c80f4943fbd6e0e2.html#ab944511ceeabc802c80f4943fbd6e0e2" title="presentarFecha">presentarFecha</a>($sesion,2);?&gt;&lt;/strong&gt;&lt;/th&gt;&lt;/tr&gt;
+<a name="l00074"></a>00074              &lt;tr&gt;&lt;th <span class="keyword">class</span>=<span class="stringliteral">&quot;sesion&quot;</span> colspan=<span class="stringliteral">&quot;3&quot;</span>&gt;Sesion: &lt;strong&gt;&lt;?=<a class="code" href="../../d1/dd6/a00108_ab944511ceeabc802c80f4943fbd6e0e2.html#ab944511ceeabc802c80f4943fbd6e0e2" title="presentarFecha">presentarFecha</a>($sesion,2);?&gt;&lt;/strong&gt;&lt;/th&gt;&lt;/tr&gt;
 <a name="l00075"></a>00075              &lt;tr&gt;
 <a name="l00076"></a>00076              &lt;th&gt;Fecha&lt;/th&gt;
 <a name="l00077"></a>00077              &lt;th&gt;Tipo&lt;/th&gt;
@@ -178,9 +178,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00085"></a>00085 <span class="comment"></span>
 <a name="l00086"></a>00086 <span class="comment">   /** Formulario para los regisstros */</span>
 <a name="l00087"></a>00087 
-<a name="l00088"></a><a class="code" href="../../d0/d89/a00071_a93c2019e73d03a2d7f77163f59792899.html#a93c2019e73d03a2d7f77163f59792899">00088</a>    <span class="keyword">function</span> <a class="code" href="../../d0/d89/a00071_a93c2019e73d03a2d7f77163f59792899.html#a93c2019e73d03a2d7f77163f59792899" title="Formulario para los regisstros.">formulario</a>($filtro=NULL) {
+<a name="l00088"></a><a class="code" href="../../d2/db1/a00070_a93c2019e73d03a2d7f77163f59792899.html#a93c2019e73d03a2d7f77163f59792899">00088</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a93c2019e73d03a2d7f77163f59792899.html#a93c2019e73d03a2d7f77163f59792899" title="Formulario para los regisstros.">formulario</a>($filtro=NULL) {
 <a name="l00089"></a>00089 
-<a name="l00090"></a>00090       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00090"></a>00090       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00091"></a>00091 
 <a name="l00092"></a>00092       $filtro = ( isset($_POST[<span class="stringliteral">&#39;filtro&#39;</span>]) ) ? $_POST[<span class="stringliteral">&#39;filtro&#39;</span>] : <span class="stringliteral">&#39;sesion=&#39;</span>.$gcm-&gt;reg-&gt;sesion;
 <a name="l00093"></a>00093 
@@ -236,7 +236,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00143"></a>00143 
 <a name="l00144"></a>00144    <span class="keyword">function</span> tabla_registros($filtro=NULL, $array=NULL) {
 <a name="l00145"></a>00145 
-<a name="l00146"></a>00146       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00146"></a>00146       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00147"></a>00147 
 <a name="l00148"></a>00148       <span class="keywordflow">if</span> ( GCM_DEBUG || $gcm-&gt;au-&gt;logeado()) {
 <a name="l00149"></a>00149 
@@ -329,9 +329,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00236"></a>00236 <span class="comment">    * Recogemos valores del formulario para crear el filtro</span>
 <a name="l00237"></a>00237 <span class="comment">    */</span>
 <a name="l00238"></a>00238 
-<a name="l00239"></a><a class="code" href="../../d0/d89/a00071_a7ad448923855719952d589b6b439de3c.html#a7ad448923855719952d589b6b439de3c">00239</a>    <span class="keyword">function</span> <a class="code" href="../../d0/d89/a00071_a7ad448923855719952d589b6b439de3c.html#a7ad448923855719952d589b6b439de3c" title="registros_ajax">registros_ajax</a>() {
+<a name="l00239"></a><a class="code" href="../../d2/db1/a00070_a7ad448923855719952d589b6b439de3c.html#a7ad448923855719952d589b6b439de3c">00239</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a7ad448923855719952d589b6b439de3c.html#a7ad448923855719952d589b6b439de3c" title="registros_ajax">registros_ajax</a>() {
 <a name="l00240"></a>00240 
-<a name="l00241"></a>00241       <span class="keywordflow">if</span> (  ! GCM_DEBUG &amp;&amp; !<a class="code" href="../../dd/d42/a00109_a5056a3ee6f23afd1d1585b8185b746f3.html#a5056a3ee6f23afd1d1585b8185b746f3" title="Determinar si se tienen los permisos especificados.">permiso</a>(3,NULL,FALSE,FALSE) ) {
+<a name="l00241"></a>00241       <span class="keywordflow">if</span> (  ! GCM_DEBUG &amp;&amp; !<a class="code" href="../../d1/dd6/a00108_a5056a3ee6f23afd1d1585b8185b746f3.html#a5056a3ee6f23afd1d1585b8185b746f3" title="Determinar si se tienen los permisos especificados.">permiso</a>(3,NULL,FALSE,FALSE) ) {
 <a name="l00242"></a>00242          echo <span class="stringliteral">&#39;&lt;p class=&quot;error&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Sin permisos&#39;</span>).<span class="stringliteral">&#39;&lt;/p&gt;&#39;</span>;
 <a name="l00243"></a>00243          <span class="keywordflow">return</span> FALSE;
 <a name="l00244"></a>00244          }
@@ -346,7 +346,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00253"></a>00253 
 <a name="l00254"></a>00254    <span class="keyword">function</span> debug() {
 <a name="l00255"></a>00255 
-<a name="l00256"></a>00256       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00256"></a>00256       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00257"></a>00257 
 <a name="l00258"></a>00258       <span class="keywordflow">if</span> ( ! GCM_DEBUG ) {
 <a name="l00259"></a>00259          <span class="comment">/* Añadimos algo de contenido para que no salga aviso en Plantilla de que falta */</span>
@@ -354,17 +354,17 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00261"></a>00261          <span class="keywordflow">return</span>;
 <a name="l00262"></a>00262          }
 <a name="l00263"></a>00263          
-<a name="l00264"></a>00264       $this-&gt;<a class="code" href="../../d4/dca/a00048_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;ver_registros.js&#39;</span>);
+<a name="l00264"></a>00264       $this-&gt;<a class="code" href="../../d6/d2d/a00047_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;ver_registros.js&#39;</span>);
 <a name="l00265"></a>00265 
 <a name="l00266"></a>00266       <span class="comment">/* Añadimos variables del sistema a los registros */</span>
 <a name="l00267"></a>00267 
-<a name="l00268"></a>00268       <span class="keywordflow">if</span> ( $_POST ) { $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_POST,<span class="stringliteral">&#39;Post&#39;</span>,<span class="stringliteral">&#39;POST&#39;</span>)); }
-<a name="l00269"></a>00269       <span class="keywordflow">if</span> ( $_GET ) { $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_GET,<span class="stringliteral">&#39;Get&#39;</span>,<span class="stringliteral">&#39;GET&#39;</span>)); }
-<a name="l00270"></a>00270       <span class="keywordflow">if</span> ( $_SESSION ) { $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_SESSION,<span class="stringliteral">&#39;Session&#39;</span>)); }
+<a name="l00268"></a>00268       <span class="keywordflow">if</span> ( $_POST ) { $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_POST,<span class="stringliteral">&#39;Post&#39;</span>,<span class="stringliteral">&#39;POST&#39;</span>)); }
+<a name="l00269"></a>00269       <span class="keywordflow">if</span> ( $_GET ) { $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_GET,<span class="stringliteral">&#39;Get&#39;</span>,<span class="stringliteral">&#39;GET&#39;</span>)); }
+<a name="l00270"></a>00270       <span class="keywordflow">if</span> ( $_SESSION ) { $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_SESSION,<span class="stringliteral">&#39;Session&#39;</span>)); }
 <a name="l00271"></a>00271       <span class="comment">//$gcm-&gt;registra(__FILE__,__LINE__,depurar(get_defined_constants(),&#39;Constantes&#39;));</span>
-<a name="l00272"></a>00272       $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_SERVER,<span class="stringliteral">&#39;SERVER&#39;</span>));
+<a name="l00272"></a>00272       $gcm-&gt;registra(__FILE__,__LINE__,<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($_SERVER,<span class="stringliteral">&#39;SERVER&#39;</span>));
 <a name="l00273"></a>00273       <span class="comment">// registrar(__FILE__,__LINE__,depurar($gcm-&gt;event-&gt;eventos,&#39;Eventos&#39;));</span>
-<a name="l00274"></a>00274       registrar(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($gcm-&gt;event-&gt;ubicaciones,<span class="stringliteral">&#39;Ubicaciones&#39;</span>));
+<a name="l00274"></a>00274       registrar(__FILE__,__LINE__,<a class="code" href="../../d1/dd6/a00108_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($gcm-&gt;event-&gt;ubicaciones,<span class="stringliteral">&#39;Ubicaciones&#39;</span>));
 <a name="l00275"></a>00275 
 <a name="l00276"></a>00276       <span class="comment">/* Panel de registros */</span>
 <a name="l00277"></a>00277       ob_start();
@@ -378,7 +378,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00285"></a>00285 
 <a name="l00286"></a>00286          require_once(GCM_DIR.<span class="stringliteral">&#39;/modulos/editar/lib/Editar.php&#39;</span>);
 <a name="l00287"></a>00287 
-<a name="l00288"></a>00288          <a class="code" href="../../d9/db3/a00066_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>( array( <span class="stringliteral">&#39;titulo&#39;</span> =&gt; literal(<span class="stringliteral">&#39;Registros&#39;</span>,3), 
+<a name="l00288"></a>00288          <a class="code" href="../../de/de1/a00065_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>( array( <span class="stringliteral">&#39;titulo&#39;</span> =&gt; literal(<span class="stringliteral">&#39;Registros&#39;</span>,3), 
 <a name="l00289"></a>00289                                  <span class="stringliteral">&#39;oculto&#39;</span> =&gt; TRUE, 
 <a name="l00290"></a>00290                                  <span class="stringliteral">&#39;href&#39;</span> =&gt; <span class="stringliteral">&#39;javascript:visualizar(\&#39;ver_registros_&#39;</span>.$gcm-&gt;reg-&gt;sesion.<span class="charliteral">&#39;\&#39;</span>);<span class="stringliteral">&#39;, </span>
 <a name="l00291"></a>00291 <span class="stringliteral">                                 &#39;</span>subpanel<span class="stringliteral">&#39; =&gt; &#39;</span>ver_registros_<span class="stringliteral">&#39;.$gcm-&gt;reg-&gt;sesion, </span>
@@ -394,7 +394,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00301"></a>00301 <span class="comment">    * paneles con javascript</span>
 <a name="l00302"></a>00302 <span class="comment">    */</span>
 <a name="l00303"></a>00303 
-<a name="l00304"></a><a class="code" href="../../d0/d89/a00071_a2f6ab8e1b1d480a12f93250e87da20ac.html#a2f6ab8e1b1d480a12f93250e87da20ac">00304</a>    function postcontenido_ajax($e, $args) {
+<a name="l00304"></a><a class="code" href="../../d2/db1/a00070_a2f6ab8e1b1d480a12f93250e87da20ac.html#a2f6ab8e1b1d480a12f93250e87da20ac">00304</a>    function postcontenido_ajax($e, $args) {
 <a name="l00305"></a>00305 
 <a name="l00306"></a>00306       ?&gt;
 <a name="l00307"></a>00307       &lt;script&gt;
@@ -410,7 +410,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00317"></a>00317 <span class="comment">    * Presentamos formulario de registros</span>
 <a name="l00318"></a>00318 <span class="comment">    */</span>
 <a name="l00319"></a>00319 
-<a name="l00320"></a><a class="code" href="../../d0/d89/a00071_a319bd5b755a2e56017f5d5787c0dae5e.html#a319bd5b755a2e56017f5d5787c0dae5e">00320</a>    function visualizar() {
+<a name="l00320"></a><a class="code" href="../../d2/db1/a00070_a319bd5b755a2e56017f5d5787c0dae5e.html#a319bd5b755a2e56017f5d5787c0dae5e">00320</a>    function visualizar() {
 <a name="l00321"></a>00321 
 <a name="l00322"></a>00322       global $gcm;
 <a name="l00323"></a>00323 
@@ -430,7 +430,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00337"></a>00337 <span class="comment">    * Utilizamos las variables configurables:</span>
 <a name="l00338"></a>00338 <span class="comment">    */</span>
 <a name="l00339"></a>00339 
-<a name="l00340"></a><a class="code" href="../../d0/d89/a00071_ab26318587d23982a214d67d4c8097d1d.html#ab26318587d23982a214d67d4c8097d1d">00340</a>    function envio_registros_mail($e, $args=FALSE) {
+<a name="l00340"></a><a class="code" href="../../d2/db1/a00070_ab26318587d23982a214d67d4c8097d1d.html#ab26318587d23982a214d67d4c8097d1d">00340</a>    function envio_registros_mail($e, $args=FALSE) {
 <a name="l00341"></a>00341 
 <a name="l00342"></a>00342       global $gcm;
 <a name="l00343"></a>00343 
@@ -477,7 +477,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00384"></a>00384 <span class="comment">    * Borrar registros antiguos</span>
 <a name="l00385"></a>00385 <span class="comment">    */</span>
 <a name="l00386"></a>00386 
-<a name="l00387"></a><a class="code" href="../../d0/d89/a00071_a4c7b52f325faafaefba33bc8ed000ff9.html#a4c7b52f325faafaefba33bc8ed000ff9">00387</a>    function borrar_registros_antiguos($e, $args=FALSE) {
+<a name="l00387"></a><a class="code" href="../../d2/db1/a00070_a4c7b52f325faafaefba33bc8ed000ff9.html#a4c7b52f325faafaefba33bc8ed000ff9">00387</a>    function borrar_registros_antiguos($e, $args=FALSE) {
 <a name="l00388"></a>00388 
 <a name="l00389"></a>00389       global $gcm;
 <a name="l00390"></a>00390 
@@ -499,7 +499,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -129,7 +129,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00035"></a>00035 
 <a name="l00036"></a>00036 require(dirname(__FILE__).<span class="stringliteral">&#39;/../lib/GcmConfig.php&#39;</span>);
 <a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="../../d4/d8c/a00035.html">00038</a> <span class="keyword">class </span><a class="code" href="../../d4/d8c/a00035.html">GcmConfigTest</a> <span class="keyword">extends</span> <a class="code" href="../../d5/de0/a00050.html">PHPUnit_Framework_TestCase</a>{
+<a name="l00038"></a><a class="code" href="../../db/df3/a00034.html">00038</a> <span class="keyword">class </span><a class="code" href="../../db/df3/a00034.html">GcmConfigTest</a> <span class="keyword">extends</span> <a class="code" href="../../d2/dee/a00049.html">PHPUnit_Framework_TestCase</a>{
 <a name="l00039"></a>00039 
 <a name="l00040"></a>00040    <span class="keyword">public</span> $config;
 <a name="l00041"></a>00041    <span class="keyword">public</span> $archivo;
@@ -140,13 +140,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00046"></a>00046       $this-&gt;archivo = ARCHIVO;
 <a name="l00047"></a>00047       $this-&gt;archivo_descripcion  = ARCHIVO_DESC; 
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049       $this-&gt;config = <span class="keyword">new</span> <a class="code" href="../../d5/d79/a00030.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a>($this-&gt;archivo);
+<a name="l00049"></a>00049       $this-&gt;config = <span class="keyword">new</span> <a class="code" href="../../d5/d16/a00029.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a>($this-&gt;archivo);
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051       }
 <a name="l00052"></a>00052 <span class="comment"></span>
 <a name="l00053"></a>00053 <span class="comment">   /** Comprobando valor de la primera variable */</span>
 <a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="../../d4/d8c/a00035_a9b50095563423ef0494805999672431a.html#a9b50095563423ef0494805999672431a">00055</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d8c/a00035_a9b50095563423ef0494805999672431a.html#a9b50095563423ef0494805999672431a" title="Comprobando valor de la primera variable.">testVerValores</a>() {
+<a name="l00055"></a><a class="code" href="../../db/df3/a00034_a9b50095563423ef0494805999672431a.html#a9b50095563423ef0494805999672431a">00055</a>    <span class="keyword">function</span> <a class="code" href="../../db/df3/a00034_a9b50095563423ef0494805999672431a.html#a9b50095563423ef0494805999672431a" title="Comprobando valor de la primera variable.">testVerValores</a>() {
 <a name="l00056"></a>00056 
 <a name="l00057"></a>00057       $this-&gt;assertEquals($this-&gt;config-&gt;get(<span class="stringliteral">&#39;v1&#39;</span>), <span class="stringliteral">&#39;variable1&#39;</span>);
 <a name="l00058"></a>00058       $this-&gt;assertEquals($this-&gt;config-&gt;getDescripcion(<span class="stringliteral">&#39;v6&#39;</span>), <span class="stringliteral">&#39;descripcion_variable6&#39;</span>);
@@ -174,7 +174,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

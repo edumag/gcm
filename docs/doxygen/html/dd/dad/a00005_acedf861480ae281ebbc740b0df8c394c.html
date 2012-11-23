@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<title>gcm: Array2table\generar_tabla</title>
+
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if ($('.searchresults').length > 0) { searchBox.DOMSearchField().focus(); }
+  });
+</script>
+<link rel="search" href="../../search-opensearch.php?v=opensearch.xml" type="application/opensearchdescription+xml" title="gcm"/>
+
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  
+  
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">gcm
+   &#160;<span id="projectnumber">3</span>
+   </div>
+   
+  </td>
+  
+  
+  
+ </tr>
+ </tbody>
+</table>
+</div>
+
+<!-- Generado por Doxygen 1.8.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="../../modules.html"><span>Módulos</span></a></li>
+      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="../../files.html"><span>Archivos</span></a></li>
+      <li><a href="../../dirs.html"><span>Directorios</span></a></li>
+      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+          <div class="left">
+            <form id="FSearchBox" action="../../search.php" method="get">
+              <img id="MSearchSelect" src="../../search/mag.png" alt=""/>
+              <input type="text" id="MSearchField" name="query" value="Buscar" size="20" accesskey="S" 
+                     onfocus="searchBox.OnSearchFieldFocus(true)" 
+                     onblur="searchBox.OnSearchFieldFocus(false)"/>
+            </form>
+          </div><div class="right"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="nav-path" class="navpath">
+    <ul>
+      <li class="navelem"><a class="el" href="../../dd/dad/a00005.html">Array2table</a>      </li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<table cellspacing="0" cellpadding="0" border="0">
+  <tr>
+   <td valign="top">
+      <div class="navtab">
+        <table>
+          <tr><td class="navtab"><a class="qindex" href="../../dd/dad/a00005_ad52b3f27065bd570a2f7cd6ba8bb4ad5.html#ad52b3f27065bd570a2f7cd6ba8bb4ad5">__construct</a></td></tr>
+          <tr><td class="navtab"><a class="qindexHL" href="../../dd/dad/a00005_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c">generar_tabla</a></td></tr>
+        </table>
+      </div>
+   </td>
+   <td valign="top" class="mempage">
+<a class="anchor" id="acedf861480ae281ebbc740b0df8c394c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dd/dad/a00005_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c">generar_tabla</a> </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>res</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>opciones</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>orden</em> = <code>FALSE</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>tipo_orden</em> = <code>FALSE</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Generar tabla. </p>
+<ul>
+<li>Si un campo se llama "%" se vera de forma grafica su contenido.</li>
+</ul>
+<ul>
+<li>Los enlaces de las acciones se pasaran mediante $url.$identificador&amp;accion=modificar Si se desea cambiar 'accion' por otra palabra se puede especificar en opciones.</li>
+</ul>
+<dl class="params"><dt><b>Parámetros:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$res</td><td>Array con el contenido Formato del array $resultado[0][columna]=valor</td></tr>
+    <tr><td class="paramname">$opciones</td><td>Array con las diferentes opciones identificador = '&lt;nombre columna="" que="" hace="" de="" identificador&gt;=""&gt;', por defecto 'id'. ver = '&lt;nombre de="" la="" acción="" para="" entrar="" en="" detalles="" de="" un="" registro&gt;=""&gt;' modificar = '&lt;nombre de="" la="" acción="" para="" modificar&gt;=""&gt;', es necesario tener identificador eliminar = '&lt;nombre de="" la="" acción="" para="" eliminar="" registro&gt;=""&gt;', Es necesario identificador ocultar_id = TRUE/FALSE Ocultar columna de identificador. url = 'Url para enlaces de registro' accion = 'Nombre de variable GET que se pasara en url, por defecto 'accion' dir_imag = 'Url del directorio donde se encuentran los iconos modificar, eliminar, etc...</td></tr>
+    <tr><td class="paramname">$orden</td><td>Nombre de la columna por la que se esta ordenando </td></tr>
+    <tr><td class="paramname">$tipo_orden</td><td>(asc/desc) </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>url base para enlaces</p>
+<p>Nombre de variable get que lleva la acción</p>
+<p>identificador base para enlaces</p>
+<p>ver base para enlaces</p>
+<p>modificar base para enlaces</p>
+<p>eliminar base para enlaces</p>
+<p>ocultar_id base para enlaces</p>
+<p>Url del directorio de los iconos </p>
+
+<p>Reimplementado en <a class="el" href="../../dc/ddf/a00067_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c">TinyTable</a>.</p>
+
+<p>Definición en la línea <a class="el" href="../../da/d2a/a00086_source.html#l00078">78</a> del archivo <a class="el" href="../../da/d2a/a00086_source.html">Array2table.php</a>.</p>
+
+<p>Hace referencia a <a class="el" href="../../d1/dd6/a00108_source.html#l00460">construir_get()</a>.</p>
+<div class="fragment"><pre class="fragment">                                                                                      {
+      
+      $num_registros = count($res);
+      $num_columnas  = count($res[0]);
+<span class="comment"></span>
+<span class="comment">      /** url base para enlaces */</span>
+      $url           = ( isset($opciones[<span class="stringliteral">&#39;url&#39;</span>]))           ? $opciones[<span class="stringliteral">&#39;url&#39;</span>]           : FALSE ;<span class="comment"></span>
+<span class="comment">      /** Nombre de variable get que lleva la acción */</span>
+      $accion        = ( isset($opciones[<span class="stringliteral">&#39;accion&#39;</span>]))        ? $opciones[<span class="stringliteral">&#39;accion&#39;</span>]        : FALSE ;<span class="comment"></span>
+<span class="comment">      /** identificador base para enlaces */</span>
+      $identificador = ( isset($opciones[<span class="stringliteral">&#39;identificador&#39;</span>])) ? $opciones[<span class="stringliteral">&#39;identificador&#39;</span>] : FALSE ;<span class="comment"></span>
+<span class="comment">      /** ver base para enlaces */</span>
+      $ver           = ( isset($opciones[<span class="stringliteral">&#39;ver&#39;</span>]))           ? $opciones[<span class="stringliteral">&#39;ver&#39;</span>]           : FALSE ;<span class="comment"></span>
+<span class="comment">      /** modificar base para enlaces */</span>
+      $modificar     = ( isset($opciones[<span class="stringliteral">&#39;modificar&#39;</span>]))     ? $opciones[<span class="stringliteral">&#39;modificar&#39;</span>]     : FALSE ;<span class="comment"></span>
+<span class="comment">      /** eliminar base para enlaces */</span>
+      $eliminar      = ( isset($opciones[<span class="stringliteral">&#39;eliminar&#39;</span>]))      ? $opciones[<span class="stringliteral">&#39;eliminar&#39;</span>]      : FALSE ;<span class="comment"></span>
+<span class="comment">      /** ocultar_id base para enlaces */</span>
+      $ocultar_id    = ( isset($opciones[<span class="stringliteral">&#39;ocultar_id&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;ocultar_id&#39;</span>]    : FALSE ;<span class="comment"></span>
+<span class="comment">      /** Url del directorio de los iconos */</span>
+      self::$base_imagenes = ( isset($opciones[<span class="stringliteral">&#39;dir_img&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;dir_img&#39;</span>]    : self::$base_imagenes ;
+
+      <span class="comment">/* Si no se indica el campo identificador cogemos id por defecto */</span>
+
+      $identificador = ( $identificador ) ? $identificador : <span class="stringliteral">&#39;id&#39;</span>;
+
+      $simbolo = ( strrpos($url,<span class="charliteral">&#39;?&#39;</span>) === FALSE ) ? <span class="charliteral">&#39;?&#39;</span> : <span class="charliteral">&#39;&amp;&#39;</span>;        <span class="comment">//&lt; Evitar colocar dos veces el interrogante en la url</span>
+
+      ?&gt;
+     &lt;table cellpadding=<span class="stringliteral">&quot;0&quot;</span> cellspacing=<span class="stringliteral">&quot;0&quot;</span> border=<span class="stringliteral">&quot;0&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;table&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;tinytable&quot;</span>&gt;
+         &lt;thead&gt;
+            &lt;tr&gt;
+      &lt;?php
+
+      <span class="keywordflow">if</span> ( $res ) {
+
+         <span class="keywordflow">foreach</span> ( $res[0] as $columna =&gt; $valor ) {
+
+            <span class="comment">/* Columna de identificador sin ordenación</span>
+<span class="comment"></span>
+<span class="comment">            if ( $columna == $identificador  ) {</span>
+<span class="comment">               $clase=&quot; class=&#39;nosort&#39;&quot;;</span>
+<span class="comment">            } else {</span>
+<span class="comment">               $clase=NULL;</span>
+<span class="comment">               }</span>
+<span class="comment"></span>
+<span class="comment">             */</span>
+
+            <span class="keywordflow">if</span> ( $columna == $identificador  &amp;&amp; $ocultar_id ) <span class="keywordflow">continue</span>;
+
+            $clase = ( $columna == $orden ) ? <span class="stringliteral">&#39; class=&quot;&#39;</span>.$tipo_orden.<span class="stringliteral">&#39;&quot; &#39;</span> : <span class="stringliteral">&#39; class=&quot;head&quot; &#39;</span>;
+
+            if ( $columna == $orden ) {
+
+               $tipo_orden2 = ( $tipo_orden == <span class="stringliteral">&#39;asc&#39;</span> ) ? <span class="stringliteral">&#39;desc&#39;</span> : <span class="stringliteral">&#39;asc&#39;</span>;
+            } <span class="keywordflow">else</span> {
+               $tipo_orden2 = <span class="stringliteral">&#39;asc&#39;</span>;
+               }
+
+            $url_orden = <a class="code" href="../../d1/dd6/a00108_ab8443697c2560d5e86b5f6014a22864e.html#ab8443697c2560d5e86b5f6014a22864e" title="Generamos url segun las variables de GET que ya tenemos.">construir_get</a>( array ($this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span> =&gt; $columna
+               , $this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span> =&gt; $tipo_orden2
+               , $this-&gt;sufijo.<span class="stringliteral">&#39;pagina&#39;</span> =&gt; 1)) ;
+
+            echo <span class="stringliteral">&quot;\n\t\t\t&quot;</span>;
+            echo <span class="stringliteral">&quot;&lt;th&quot;</span>.$clase.<span class="stringliteral">&quot;&gt;&quot;</span>;
+            echo <span class="stringliteral">&quot;&lt;a href=&#39;&quot;</span>.htmlspecialchars($url_orden,ENT_QUOTES).<span class="stringliteral">&quot;&#39;&gt;&quot;</span>;
+            echo <span class="stringliteral">&quot;&lt;h3&gt;&quot;</span>;
+            echo $columna;
+            echo <span class="stringliteral">&quot;&lt;/h3&gt;&quot;</span>;
+            echo <span class="stringliteral">&quot;&lt;/a&gt;&quot;</span>;
+            echo <span class="stringliteral">&quot;&lt;/th&gt;&quot;</span>;
+
+            }
+
+         }
+
+      <span class="keywordflow">if</span> ( $modificar ) {
+         ?&gt;
+         &lt;th&gt;
+            &lt;h3&gt;
+               &lt;img src=<span class="stringliteral">&#39;&lt;?=self::$base_imagenes.self::$img_modificar?&gt;&#39;</span>
+               width=<span class="stringliteral">&#39;16&#39;</span> height=<span class="stringliteral">&#39;16&#39;</span> border=<span class="charliteral">&#39;0&#39;</span> title=<span class="stringliteral">&#39;Modificar&#39;</span> 
+               alt=<span class="stringliteral">&#39;[#]&#39;</span> /&gt;
+            &lt;/h3&gt;
+         &lt;/th&gt;
+         &lt;?php
+         }
+
+      <span class="keywordflow">if</span> ( $eliminar ) {
+         ?&gt;
+         &lt;th&gt;
+            &lt;h3&gt;
+               &lt;img src=<span class="stringliteral">&#39;&lt;?=self::$base_imagenes.self::$img_borrar?&gt;&#39;</span>
+               width=<span class="stringliteral">&#39;16&#39;</span> height=<span class="stringliteral">&#39;16&#39;</span> border=<span class="charliteral">&#39;0&#39;</span> title=<span class="stringliteral">&#39;Eliminar&#39;</span> 
+               alt=<span class="stringliteral">&#39;[-]&#39;</span> /&gt;
+            &lt;/h3&gt;
+         &lt;/th&gt;
+         &lt;?php
+         }
+
+      <span class="keywordflow">if</span> ( $ver ) {
+         ?&gt;
+         &lt;th&gt;
+            &lt;h3&gt;
+               &lt;img src=<span class="stringliteral">&#39;&lt;?=self::$base_imagenes.self::$img_ver?&gt;&#39;</span>
+               width=<span class="stringliteral">&#39;16&#39;</span> height=<span class="stringliteral">&#39;16&#39;</span> border=<span class="charliteral">&#39;0&#39;</span> title=<span class="stringliteral">&#39;Visualizar&#39;</span> 
+               alt=<span class="stringliteral">&#39;[*]&#39;</span> /&gt;
+            &lt;/h3&gt;
+         &lt;/th&gt;
+         &lt;?php
+         }
+
+      <span class="comment">//echo &quot;\n\t\t&lt;/tr&gt;&quot;;</span>
+      echo <span class="stringliteral">&quot;\n\t&lt;/thead&gt;&quot;</span>;
+      echo <span class="stringliteral">&quot;\n\t&lt;tbody&gt;&quot;</span>;
+
+      $fpi = <span class="stringliteral">&#39;evenrow&#39;</span>;
+
+      <span class="keywordflow">foreach</span> ( $res as $fila ) {          <span class="comment">// filas del body de la tabla</span>
+
+         $enlace = NULL;
+
+         echo <span class="stringliteral">&quot;\n\t\t&lt;tr class=&#39;&quot;</span>.$fpi.<span class="stringliteral">&quot;&#39;&gt;&quot;</span>;
+
+         <span class="keywordflow">foreach</span> ( $fila as $key_columna =&gt; $columna ) {       <span class="comment">// columnas</span>
+
+            <span class="comment">// Si estamos en la columna que ordena añadimos clase especial</span>
+
+            $clase_columna =  ( $key_columna == $orden ) ? <span class="stringliteral">&#39; class=&quot;oddselected&quot; &#39;</span> : <span class="stringliteral">&#39;&#39;</span> ;
+
+            <span class="comment">/* Si estamos en la columna id definimos enlaces hacia el elemento */</span>
+
+            <span class="keywordflow">if</span> ( $identificador &amp;&amp; $key_columna == $identificador &amp;&amp; $url ) {
+
+               <span class="comment">/* Añadimos identificador a url */</span>
+               $enlace = $url.$columna;
+
+               }
+
+            <span class="comment">/* Si tenemos columna con % Añadimos efecto visual para representarlo */</span>
+
+            <span class="keywordflow">if</span> ( $key_columna == $identificador  &amp;&amp; $ocultar_id ) { <span class="comment">// id oculto</span>
+               echo <span class="stringliteral">&#39;&#39;</span>; 
+
+            } elseif ($key_columna == <span class="stringliteral">&quot;img&quot;</span> ) {
+               $DATO=trim($columna);
+               printf(<span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot;&gt; &lt;img width=&#39;60px&#39; src=&#39;%s&#39; /&gt;&lt;/td&gt;&quot;</span>,$DATO);
+               
+            } elseif ($key_columna == <span class="stringliteral">&quot;%&quot;</span>) {
+               $DATO=trim($columna);
+               printf(<span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot; style=&#39;border:0;&#39;&gt; &lt;div style=&#39;background-color: #5db02d; width: \</span>
+<span class="stringliteral">               %spx&#39;&gt;%s&lt;/div&gt;&lt;/td&gt;&quot;</span>,$DATO,$DATO,$DATO);
+               
+            } <span class="keywordflow">else</span> {
+
+               <span class="keywordflow">if</span> ( $enlace ) {
+                  echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot;&gt;&quot;</span>;
+                  echo <span class="stringliteral">&quot;&lt;a href=&#39;&quot;</span>.$enlace.<span class="stringliteral">&quot;&#39;&gt;&quot;</span>;
+                  echo $columna;
+                  echo <span class="stringliteral">&quot;&lt;/a&gt;&lt;/td&gt; &quot;</span> ;
+               } <span class="keywordflow">else</span> {
+                  echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot;&gt;&quot;</span>.$columna.<span class="stringliteral">&quot;&lt;/td&gt; &quot;</span> ;
+                  }
+
+               }
+
+            }
+
+         <span class="keywordflow">if</span> ($enlace)  {
+
+            <span class="keywordflow">if</span> ( $modificar ) {
+               echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&gt;&lt;a href=&#39;$enlace&amp;$accion=&quot;</span>.$modificar.<span class="stringliteral">&quot;&#39;&gt;</span>
+<span class="stringliteral">               &lt;img src=&#39;&quot;</span>.self::$base_imagenes.self::$img_modificar.<span class="stringliteral">&quot;&#39;</span>
+<span class="stringliteral">               width=&#39;16&#39; height=&#39;16&#39; border=&#39;0&#39; title=&#39;Modificar&#39; </span>
+<span class="stringliteral">               alt=&#39;[#]&#39; &gt;&lt;/a&gt;&lt;/td&gt;&quot;</span>;  
+               }
+
+            <span class="keywordflow">if</span> ( $eliminar ) {
+               echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&gt;&lt;a href=&#39;$enlace&amp;$accion=$eliminar&#39;&gt;</span>
+<span class="stringliteral">               &lt;img src=&#39;&quot;</span>.self::$base_imagenes.self::$img_borrar.<span class="stringliteral">&quot;&#39;</span>
+<span class="stringliteral">               width=&#39;16&#39; height=&#39;16&#39; border=&#39;0&#39; title=&#39;Eliminar&#39; </span>
+<span class="stringliteral">               alt=&#39;[-]&#39; &gt;&lt;/a&gt;&lt;/td&gt;&quot;</span>;
+               }
+
+            <span class="keywordflow">if</span> ( $ver ) {
+               echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&gt;&lt;a href=&#39;$enlace&amp;$accion=ver&#39;&gt;</span>
+<span class="stringliteral">               &lt;img src=&#39;&quot;</span>.self::$base_imagenes.self::$img_ver.<span class="stringliteral">&quot;&#39; </span>
+<span class="stringliteral">               width=&#39;16&#39; height=&#39;16&#39; border=&#39;0&#39; title=&#39;ver&#39; </span>
+<span class="stringliteral">               alt=&#39;[*]&#39; &gt;&lt;/a&gt;&lt;/td&gt;&quot;</span>;
+               }
+
+            $enlace = NULL;
+               
+            } 
+
+         echo <span class="stringliteral">&quot;\n\t\t&lt;/tr&gt;&quot;</span>;
+
+         $fpi = ( $fpi == <span class="stringliteral">&#39;evenrow&#39;</span> ) ? <span class="stringliteral">&#39;oddrow&#39;</span> : <span class="stringliteral">&#39;evenrow&#39;</span>;
+
+         }
+
+         echo <span class="stringliteral">&quot;\n\t&lt;/tbody&gt;&quot;</span>;
+         echo <span class="stringliteral">&quot;&lt;/table&gt;&quot;</span>;
+
+      }
+</pre></div>
+</div>
+</div>
+    </td>
+  </tr>
+</table>
+</div><!-- contents -->
+
+
+<hr class="footer"/><address class="footer"><small>
+Generado el Viernes, 23 de Noviembre de 2012 09:21:07 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.0
+</small></address>
+
+</body>
+</html>

@@ -121,13 +121,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/Registro.php&#39;</span>);
 <a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../d1/dea/a00054.html">00031</a> <span class="keyword">class </span><a class="code" href="../../d1/dea/a00054.html" title="Patron Factory para la clase Registro.">RegistroFactory</a> {
+<a name="l00031"></a><a class="code" href="../../dc/dee/a00053.html">00031</a> <span class="keyword">class </span><a class="code" href="../../dc/dee/a00053.html" title="Patron Factory para la clase Registro.">RegistroFactory</a> {
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> getRegistro($base_datos=NULL,$sufijo=<span class="stringliteral">&#39;&#39;</span>) {
 <a name="l00034"></a>00034 
 <a name="l00035"></a>00035       $key = md5(serialize($base_datos));
 <a name="l00036"></a>00036 
-<a name="l00037"></a>00037       <span class="keywordflow">if</span> ( ! isset($GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>]) || ! ($GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>][$key] instanceof <a class="code" href="../../dc/dee/a00053.html" title="Modulo para el registro de los mensajes de la aplizació">Registro</a>) ) {
+<a name="l00037"></a>00037       <span class="keywordflow">if</span> ( ! isset($GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>]) || ! ($GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>][$key] instanceof <a class="code" href="../../d1/d84/a00052.html" title="Modulo para el registro de los mensajes de la aplizació">Registro</a>) ) {
 <a name="l00038"></a>00038 
 <a name="l00039"></a>00039          $GLOBALS[<span class="stringliteral">&#39;Registro&#39;</span>][$key] = <span class="keyword">new</span> Registro($base_datos,$sufijo);
 <a name="l00040"></a>00040 
@@ -144,7 +144,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 22 de Noviembre de 2012 18:21:35 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
