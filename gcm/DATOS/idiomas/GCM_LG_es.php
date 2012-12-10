@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Mon Dec 10 11:36:29 CET 2012
+// Archivo generado automaticamente por GcmConfig Mon Dec 10 12:27:23 CET 2012
 $GCM_LG_es['Acciones']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
 $GCM_LG_es['Administracion de los diferentes idiomas']='';
@@ -141,4 +141,7 @@ $GCM_LG_es['Añadir email oculto a los spammers']='';
 $GCM_LG_es['Contenido añadido']='';
 $GCM_LG_es['Contenido actualizado']='';
 $GCM_LG_es['Guardar contenido']='';
+$GCM_LG_es['Últimas entradas en']='';
+$GCM_LG_es['Contenido [apuntes/programacion/Internet_explorer_9_desde_linux.html] no encontrado']='';
+$GCM_LG_es['Contenido [apuntes/programacion/Control_de_versiones/git/doxygen_y_github.html] no encontrado']='';
 ?>

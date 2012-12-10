@@ -382,7 +382,8 @@ function presentarBytes($bytes) {
 
 function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
-   //echo "<br>time: $time / formato_entrada: $formato_entrada / formato_salida: $formato_salida"; // DEV
+   registrar(__FILE__,__LINE__, "<br>time: $time / formato_entrada: $formato_entrada / formato_salida: $formato_salida");
+
    if ( $formato_entrada != 'unix' ) {
 
       switch($formato_entrada) {
