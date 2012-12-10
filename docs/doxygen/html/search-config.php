@@ -16,7 +16,7 @@ $translator = array(
   'search_matches' => "Coincidencias:",
   'search' => "Buscar",
   'split_bar' => "",
-  'logo' => "Generado el Viernes, 23 de Noviembre de 2012 09:21:08 para gcm por&#160;\n<a href=\"http://www.doxygen.org/index.html\">\n<img class=\"footer\" src=\"doxygen.png\" alt=\"doxygen\"/></a> 1.8.0 ",
+  'logo' => "Generado el Viernes, 23 de Noviembre de 2012 10:08:51 para gcm por&#160;\n<a href=\"http://www.doxygen.org/index.html\">\n<img class=\"footer\" src=\"doxygen.png\" alt=\"doxygen\"/></a> 1.8.0 ",
 );
 
 </script>

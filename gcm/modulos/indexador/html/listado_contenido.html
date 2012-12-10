@@ -1,7 +1,7 @@
 <div id='listado_de_contenido' >
    <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
    <?php $url = GUtil::gcm_generar_url($fila->url) ?>
-   <?php $fecha = $fila->fecha_actualizacion_in ?>
+   <?php $fecha = presentarFecha($fila->fecha_actualizacion_in ,1,'mysql')?>
    <?php $caminos = explode('/',$fila->url); ?>
    <?php $camino = ''; ?>
    <?php for ( $s=0; $s<count($caminos)-1; $s++ ) { ?>
