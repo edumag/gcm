@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/GcmPDO/lib/paginarPDO.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/GcmPDO/lib/GcmPDO.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -89,14 +89,14 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">paginarPDO.php</div>  </div>
+<div class="title">GcmPDO.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a href="../../d7/d06/a00131.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file      PaginarPDO.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief     Componente para la paginación de PDO</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file      GcmPDO.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Extensión para PDO</span>
 <a name="l00006"></a>00006 <span class="comment"> *</span>
 <a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
 <a name="l00008"></a>00008 <span class="comment"> *</span>
@@ -108,309 +108,126 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
 <a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
 <a name="l00016"></a>00016 <span class="comment"> */</span>
-<a name="l00017"></a>00017 <span class="comment"></span>
-<a name="l00018"></a>00018 <span class="comment">/** Recogemos clase padre */</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/GcmPDO.php&#39;</span>);
-<a name="l00021"></a>00021 <span class="comment"></span>
-<a name="l00022"></a>00022 <span class="comment">/**</span>
-<a name="l00023"></a>00023 <span class="comment"> * @class PaginarPDO</span>
-<a name="l00024"></a>00024 <span class="comment"> * @brief Componente para la paginación de PDO</span>
-<a name="l00025"></a>00025 <span class="comment"> * @version 0.1</span>
-<a name="l00026"></a>00026 <span class="comment"> * @todo Plantillas por defecto.</span>
-<a name="l00027"></a>00027 <span class="comment"> */</span>
-<a name="l00028"></a>00028 
-<a name="l00029"></a><a class="code" href="../../d4/dca/a00048.html">00029</a> <span class="keyword">class </span><a class="code" href="../../d4/dca/a00048.html" title="Recogemos clase padre.">PaginarPDO</a> <span class="keyword">extends</span> <a class="code" href="../../d4/d8c/a00035.html" title="Extensión para PDO.">GcmPDO</a> {
-<a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576">00031</a>    <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a>;              <span class="comment">///&lt; Número de elementos por pagina</span>
-<a name="l00032"></a><a class="code" href="../../d4/dca/a00048_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65">00032</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_aaf9b011136a40779f9af55eff7c33d65.html#aaf9b011136a40779f9af55eff7c33d65" title="Url de enlace de botonera.">$url_base</a>=<span class="stringliteral">&#39;&#39;</span>;                   <span class="comment">///&lt; Url de enlace de botonera</span>
-<a name="l00033"></a><a class="code" href="../../d4/dca/a00048_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3">00033</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a0acfdeceed1d39225f782354d22207c3.html#a0acfdeceed1d39225f782354d22207c3" title="Plantilla que presenta los resultados.">$plantilla_resultados</a>;          <span class="comment">///&lt; Plantilla que presenta los resultados</span>
-<a name="l00034"></a><a class="code" href="../../d4/dca/a00048_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d">00034</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a9f60410327265632f140eaa33fc2d87d.html#a9f60410327265632f140eaa33fc2d87d" title="Plantilla que presenta los resultados.">$plantilla_botonera</a>;            <span class="comment">///&lt; Plantilla que presenta los resultados</span>
-<a name="l00035"></a><a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366">00035</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$paginas_agrupadas</a>=2;           <span class="comment">///&lt; Número de botones de páginas que se presenta por alante y atras de la actual</span>
-<a name="l00036"></a><a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">00036</a> <span class="comment"></span>   <span class="keyword">public</span> <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a>;                        <span class="comment">///&lt; Para diferenciar entre diferentes instancias</span>
-<a name="l00037"></a>00037 <span class="comment"></span>
-<a name="l00038"></a>00038    <span class="keyword">private</span> $inicio;                       <span class="comment">///&lt; Inicio</span>
-<a name="l00039"></a>00039 <span class="comment"></span>   <span class="keyword">private</span> $pagina;                       <span class="comment">///&lt; Número de página</span>
-<a name="l00040"></a>00040 <span class="comment"></span>   <span class="keyword">private</span> $total_de_paginas;             <span class="comment">///&lt; Número total de páginas</span>
-<a name="l00041"></a>00041 <span class="comment"></span>   <span class="keyword">private</span> $elemento_inicio;              <span class="comment">///&lt; Número inicial de elemento</span>
-<a name="l00042"></a>00042 <span class="comment"></span>   <span class="keyword">private</span> $elemento_final;               <span class="comment">///&lt; Número de ultimo elemento</span>
-<a name="l00043"></a>00043 <span class="comment"></span>   <span class="keyword">private</span> $totalpp;                      <span class="comment">///&lt; PENDIENTE</span>
-<a name="l00044"></a>00044 <span class="comment"></span>
-<a name="l00045"></a>00045    <span class="keyword">private</span> $as_orden;                     <span class="comment">///&lt; Alias del campo por el que se ordena</span>
-<a name="l00046"></a>00046 <span class="comment"></span>   <span class="keyword">private</span> $tipo_orden;                   <span class="comment">///&lt; Tipo de orden (asc/desc)</span>
-<a name="l00047"></a>00047 <span class="comment"></span>
-<a name="l00048"></a>00048    <span class="keyword">private</span> <span class="keyword">static</span> $script_ajax_incluido = FALSE ;  <span class="comment">///&lt; Para saber si ya esta incluido el script para ajax</span>
-<a name="l00049"></a>00049 <span class="comment"></span><span class="comment"></span>
-<a name="l00050"></a>00050 <span class="comment">   /**</span>
-<a name="l00051"></a>00051 <span class="comment">    * @param $pdo Instancia de PDO</span>
-<a name="l00052"></a>00052 <span class="comment">    * @param $sql sql a paginar</span>
-<a name="l00053"></a>00053 <span class="comment">    * @param $sufijo Sufijo para que no choquen cuando hay más de un paginador en una</span>
-<a name="l00054"></a>00054 <span class="comment">    *                misma pagina.</span>
-<a name="l00055"></a>00055 <span class="comment">    * @param $orden Orden por defecto de la sql</span>
-<a name="l00056"></a>00056 <span class="comment">    */</span>
-<a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">00058</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">__construct</a> (PDO <a class="code" href="../../d4/d8c/a00035_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a>=FALSE, <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a>=8, $order = FALSE) {
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="comment"></span>
+<a name="l00019"></a>00019 <span class="comment">/**</span>
+<a name="l00020"></a>00020 <span class="comment"> * @class GcmPDO</span>
+<a name="l00021"></a>00021 <span class="comment"> * @brief Extensión para PDO</span>
+<a name="l00022"></a>00022 <span class="comment"> * @version 0.1</span>
+<a name="l00023"></a>00023 <span class="comment"> */</span>
+<a name="l00024"></a>00024 
+<a name="l00025"></a><a class="code" href="../../de/d8c/a00036.html">00025</a> <span class="keyword">class </span><a class="code" href="../../de/d8c/a00036.html" title="Extensión para PDO.">GcmPDO</a> {
+<a name="l00026"></a>00026 
+<a name="l00027"></a><a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58">00027</a>    <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$resultado</a>;                    <span class="comment">///&lt; Recorset con el resultado</span>
+<a name="l00028"></a><a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525">00028</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;                          <span class="comment">///&lt; sql generado</span>
+<a name="l00029"></a><a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e">00029</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;                          <span class="comment">///&lt; Instancia de PDO</span>
+<a name="l00030"></a><a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b">00030</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$num_total_registros</a>;          <span class="comment">///&lt; Número total de registro</span>
+<a name="l00031"></a>00031 <span class="comment"></span>
+<a name="l00032"></a>00032    <span class="keyword">function</span> __construct (PDO <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>) {
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034       $this-&gt;num_total_registros = 0;
+<a name="l00035"></a>00035       $this-&gt;pdo = <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;
+<a name="l00036"></a>00036       $this-&gt;sql = <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038       $consulta_count = <span class="stringliteral">&quot;SELECT COUNT(*) FROM ($this-&gt;sql) as conta&quot;</span>;
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040       <span class="comment">/* Mirar número de resultados */</span>
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042       <span class="keywordflow">if</span> ( ! $result = $this-&gt;pdo-&gt;prepare($consulta_count) ) {
+<a name="l00043"></a>00043          $error = $result-&gt;errorInfo();
+<a name="l00044"></a>00044          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;ERROR &quot;</span>.$error[2].<span class="stringliteral">&quot;\nsql:\n&quot;</span>.$consulta_count,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00045"></a>00045          <span class="keywordflow">return</span> FALSE;
+<a name="l00046"></a>00046          }
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048       <span class="keywordflow">if</span> ( ! $result-&gt;execute()  ) {
+<a name="l00049"></a>00049          $error = $result-&gt;errorInfo();
+<a name="l00050"></a>00050          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;ERROR &quot;</span>.$error[2].<span class="stringliteral">&quot;\nsql:\n&quot;</span>.$consulta_count,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00051"></a>00051          <span class="keywordflow">return</span> FALSE;
+<a name="l00052"></a>00052          }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054       $filas = $result-&gt;fetch();
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056       <span class="keywordflow">foreach</span>($filas as $key =&gt; $value) {
+<a name="l00057"></a>00057          $this-&gt;num_total_registros = $value;
+<a name="l00058"></a>00058          }
 <a name="l00059"></a>00059 
-<a name="l00060"></a>00060        <a class="code" href="../../d4/dca/a00048_add68bba2df62657a2d8cc88c646d0be5.html#add68bba2df62657a2d8cc88c646d0be5">parent::__construct</a>($pdo, <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>);
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062       $this-&gt;sufijo = ( <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> ) ? <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$sufijo</a> : <span class="stringliteral">&#39;&#39;</span>;
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064       $this-&gt;elementos_pagina = ( <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> ) ? <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$elementos_pagina</a> : 10 ; 
+<a name="l00060"></a>00060       }
+<a name="l00061"></a>00061 <span class="comment"></span>
+<a name="l00062"></a>00062 <span class="comment">   /**</span>
+<a name="l00063"></a>00063 <span class="comment">    * Devolver el numero total de registros</span>
+<a name="l00064"></a>00064 <span class="comment">    */</span>
 <a name="l00065"></a>00065 
-<a name="l00066"></a>00066      <span class="comment">// Definimos orden si nos llega por GET o cogemos por defecto</span>
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068       <span class="keywordflow">if</span> ( isset($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span>]) &amp;&amp; ! empty($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span>]) ) {
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070          $this-&gt;as_orden = stripslashes($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span>]);
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072          $this-&gt;tipo_orden = ( isset($_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span>]) ) ? $_GET[$this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span>] : <span class="stringliteral">&#39;asc&#39;</span>;
+<a name="l00066"></a><a class="code" href="../../de/d8c/a00036_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8">00066</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8" title="Devolver el numero total de registros.">numero_registros</a>() {
+<a name="l00067"></a>00067       <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$this-&gt;num_total_registros</a>;
+<a name="l00068"></a>00068       }
+<a name="l00069"></a>00069 <span class="comment"></span>
+<a name="l00070"></a>00070 <span class="comment">   /**</span>
+<a name="l00071"></a>00071 <span class="comment">    * Validar que hemos obtenido resultados</span>
+<a name="l00072"></a>00072 <span class="comment">    */</span>
 <a name="l00073"></a>00073 
-<a name="l00074"></a>00074          $order = <span class="stringliteral">&quot;ORDER BY &quot;</span>.$this-&gt;as_orden.<span class="stringliteral">&quot; &quot;</span>.$this-&gt;tipo_orden;
+<a name="l00074"></a><a class="code" href="../../de/d8c/a00036_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7">00074</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7" title="Validar que hemos obtenido resultados.">validar</a>() {
 <a name="l00075"></a>00075 
-<a name="l00076"></a>00076       } elseif ( $order ) {
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078          preg_match_all(<span class="stringliteral">&#39;/order by (.*?) (.*?)/i&#39;</span>, $order, $coincidencias);
-<a name="l00079"></a>00079 <span class="comment"></span>
-<a name="l00080"></a>00080 <span class="comment">         /** </span>
-<a name="l00081"></a>00081 <span class="comment">          * @bug FALLO AL INTENTAR DETECTAR EL ORDEN, no debe tener espacios en el campo que ordena</span>
-<a name="l00082"></a>00082 <span class="comment">          *      Da errores en sql como campo AS `Última modificación`</span>
-<a name="l00083"></a>00083 <span class="comment">          */</span>
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085          $ordenadox = ( !empty($coincidencias[1][0]) ) ? trim($coincidencias[1][0],<span class="charliteral">&#39;,&#39;</span>) : FALSE ;
+<a name="l00076"></a>00076       <span class="keywordflow">if</span> ( $this-&gt;num_total_registros &gt; 0 ) {
+<a name="l00077"></a>00077          <span class="keywordflow">return</span> TRUE;
+<a name="l00078"></a>00078       } <span class="keywordflow">else</span> {
+<a name="l00079"></a>00079          <span class="keywordflow">return</span> FALSE;
+<a name="l00080"></a>00080          }
+<a name="l00081"></a>00081       }
+<a name="l00082"></a>00082 <span class="comment"></span>
+<a name="l00083"></a>00083 <span class="comment">   /**</span>
+<a name="l00084"></a>00084 <span class="comment">    * Devolver recordset con el resultado</span>
+<a name="l00085"></a>00085 <span class="comment">    */</span>
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087          $this-&gt;tipo_orden = ( stripos($order,<span class="stringliteral">&#39;desc&#39;</span>) !== FALSE ) ? <span class="stringliteral">&#39;desc&#39;</span> : <span class="stringliteral">&#39;asc&#39;</span> ;
+<a name="l00087"></a><a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b">00087</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>() {
 <a name="l00088"></a>00088 
-<a name="l00089"></a>00089          <span class="keywordflow">if</span> ( $ordenadox ) {
+<a name="l00089"></a>00089       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
 <a name="l00090"></a>00090 
-<a name="l00091"></a>00091             <span class="comment">// Buscar el alias del campo por el cual se ordena</span>
-<a name="l00092"></a>00092             <span class="comment">// hay que tener cuidado aquí el resultado es un poco </span>
-<a name="l00093"></a>00093             <span class="comment">// imprevisible.</span>
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095             <span class="keywordflow">if</span> ( preg_match(<span class="charliteral">&#39;/&#39;</span>.$ordenadox.<span class="stringliteral">&#39;(.?) as (.*)/i&#39;</span>,<a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>, $coincidencias) &amp;&amp; ! empty($coincidencias[2]) ) {
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097                $this-&gt;as_orden = trim($coincidencias[2],<span class="charliteral">&#39;,&#39;</span>);
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099             } <span class="keywordflow">else</span> {
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101                $this-&gt;as_orden = $ordenadox;
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103                }
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105          } <span class="keywordflow">else</span> {
-<a name="l00106"></a>00106             $this-&gt;as_orden = FALSE;
-<a name="l00107"></a>00107             }
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109       } <span class="keywordflow">else</span> {
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111          $this-&gt;as_orden = FALSE;
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113          }
-<a name="l00114"></a>00114 
+<a name="l00091"></a>00091       <span class="keywordflow">try</span> {
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093          $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>=$this-&gt;pdo-&gt;prepare($this-&gt;sql);
+<a name="l00094"></a>00094          $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;execute();
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096          } <span class="keywordflow">catch</span> (Exception $ex) {
+<a name="l00097"></a>00097             registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Error con la base de datos&quot;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00098"></a>00098             registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;SQL: &quot;</span>.$this-&gt;sql.<span class="stringliteral">&quot;\n&quot;</span>.$ex-&gt;getMessage(),<span class="stringliteral">&#39;ADMIN&#39;</span>);
+<a name="l00099"></a>00099             <span class="keywordflow">return</span> FALSE;
+<a name="l00100"></a>00100             }
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102       <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104       }
+<a name="l00105"></a>00105 <span class="comment"></span>
+<a name="l00106"></a>00106 <span class="comment">   /**</span>
+<a name="l00107"></a>00107 <span class="comment">    * Devolver resultado como array</span>
+<a name="l00108"></a>00108 <span class="comment">    */</span>
+<a name="l00109"></a>00109 
+<a name="l00110"></a><a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf">00110</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>() {
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114       $retorno = array();
 <a name="l00115"></a>00115 
-<a name="l00116"></a>00116       $this-&gt;sql = <a class="code" href="../../d4/d8c/a00035_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>.<span class="stringliteral">&quot; &quot;</span>.$order;
+<a name="l00116"></a>00116       $arAll = $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;fetchAll(PDO::FETCH_ASSOC);
 <a name="l00117"></a>00117 
-<a name="l00118"></a>00118       <span class="comment">// if ( isset($ordenadox) ) echo &#39;&lt;br&gt;ordenadox: &#39;.$ordenadox;</span>
-<a name="l00119"></a>00119       <span class="comment">// echo &#39;&lt;br&gt;as_orden: &#39;.$this-&gt;as_orden;</span>
-<a name="l00120"></a>00120       <span class="comment">// echo &#39;&lt;br&gt;tipo_orden: &#39;.$this-&gt;tipo_orden;</span>
-<a name="l00121"></a>00121       <span class="comment">// echo &quot;&lt;br&gt;sql: &lt;pre&gt;&quot; ; print_r($this-&gt;sql) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123       <span class="keywordflow">if</span> (empty($_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>])) {
-<a name="l00124"></a>00124          $inicio = 0;
-<a name="l00125"></a>00125          $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>=1;
-<a name="l00126"></a>00126 
-<a name="l00127"></a>00127       } <span class="keywordflow">else</span> {
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129          $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> = $_GET[$this-&gt;sufijo.<span class="stringliteral">&quot;pagina&quot;</span>];
-<a name="l00130"></a>00130          $inicio = ($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a> - 1) * $this-&gt;elementos_pagina;
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132          }
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134       $inicio = ( $inicio &gt; 0 ) ? $inicio : 0 ;
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136       $this-&gt;total_de_paginas = ( $this-&gt;num_total_registros &gt; 1 ) ? ceil($this-&gt;num_total_registros / $this-&gt;elementos_pagina) : 1 ;
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138       $this-&gt;sql=$this-&gt;sql.<span class="stringliteral">&quot; limit &quot;</span> . $inicio . <span class="stringliteral">&quot;,&quot;</span> . <a class="code" href="../../d4/dca/a00048_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por pagina.">$this-&gt;elementos_pagina</a>;
-<a name="l00139"></a>00139 
-<a name="l00140"></a>00140       $this-&gt;totalpp=ceil($this-&gt;total_de_paginas / $this-&gt;paginas_agrupadas);
-<a name="l00141"></a>00141       <span class="comment">//$this-&gt;elemento_inicio=$this-&gt;pagina*$this-&gt;paginas_agrupadas-$this-&gt;paginas_agrupadas+1;</span>
-<a name="l00142"></a>00142       <span class="comment">//$this-&gt;elemento_final=$this-&gt;elemento_inicio+$this-&gt;paginas_agrupadas-1;</span>
-<a name="l00143"></a>00143       $this-&gt;elemento_inicio=($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>-<a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
-<a name="l00144"></a>00144       $this-&gt;elemento_final=($this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>+<a class="code" href="../../d4/dca/a00048_a9c20152710dabe90f6a3aecf3a7d2366.html#a9c20152710dabe90f6a3aecf3a7d2366" title="Número de botones de páginas que se presenta por alante y atras de la actual.">$this-&gt;paginas_agrupadas</a>);
-<a name="l00145"></a>00145 
-<a name="l00146"></a>00146       <span class="keywordflow">if</span> ( $this-&gt;elemento_inicio &lt; 1  ) $this-&gt;elemento_inicio=1;
-<a name="l00147"></a>00147       <span class="keywordflow">if</span> ( $this-&gt;elemento_final &gt; $this-&gt;total_de_paginas  ) $this-&gt;elemento_final=$this-&gt;total_de_paginas;
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149       <span class="comment">// echo &quot;&lt;pre&gt;sql: &quot; ; print_r($this-&gt;sql) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00150"></a>00150       }
-<a name="l00151"></a>00151 <span class="comment"></span>
-<a name="l00152"></a>00152 <span class="comment">   /** </span>
-<a name="l00153"></a>00153 <span class="comment">    * Presentamos contenido</span>
-<a name="l00154"></a>00154 <span class="comment">    *</span>
-<a name="l00155"></a>00155 <span class="comment">    * @param $opciones Opciones que pasamos a array2table</span>
-<a name="l00156"></a>00156 <span class="comment">    * @param $presentacion default por defecto pero podemos seleccionar</span>
-<a name="l00157"></a>00157 <span class="comment">    *        tinytable para tener una tabla dinamica con javascript.</span>
-<a name="l00158"></a>00158 <span class="comment">    */</span>
-<a name="l00159"></a>00159 
-<a name="l00160"></a><a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663">00160</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>($opciones=NULL, $opciones_array2table = FALSE) {
-<a name="l00161"></a>00161 
-<a name="l00162"></a>00162       global <a class="code" href="../../d8/d53/a00081_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
-<a name="l00165"></a>00165 
-<a name="l00166"></a>00166       <span class="comment">// echo &quot;&lt;pre&gt;resultado: &quot; ; print_r($this-&gt;resultado()) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00167"></a>00167       <span class="comment">// echo &quot;&lt;pre&gt;array: &quot; ; print_r($this-&gt;to_array()) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00168"></a>00168       <span class="comment">// echo &quot;&lt;pre&gt;opciones_array2table: &quot; ; print_r($opciones_array2table) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00169"></a>00169       <span class="comment">// echo &quot;&lt;pre&gt;opciones: &quot; ; print_r($opciones) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00170"></a>00170 
-<a name="l00171"></a>00171       <span class="keywordflow">if</span> ( $this-&gt;plantilla_resultados  ) {
-<a name="l00172"></a>00172 
-<a name="l00173"></a>00173          <span class="comment">// Plantilla personalizada</span>
-<a name="l00174"></a>00174 
-<a name="l00175"></a>00175          include($this-&gt;plantilla_resultados);
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177       } elseif ( ! $opciones_array2table ) {
-<a name="l00178"></a>00178 
-<a name="l00179"></a>00179          <span class="comment">// Utilizamos array2table si no se especifico plantilla</span>
-<a name="l00180"></a>00180 
-<a name="l00181"></a>00181          require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../../array2table/lib/Array2table.php&#39;</span>);
-<a name="l00182"></a>00182 
-<a name="l00183"></a>00183          $array2table = <span class="keyword">new</span> <a class="code" href="../../dd/dad/a00005.html">Array2table</a>($this-&gt;sufijo);
-<a name="l00184"></a>00184          $array2table-&gt;generar_tabla($this-&gt;<a class="code" href="../../d4/d8c/a00035_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>(), $opciones, $this-&gt;as_orden, $this-&gt;tipo_orden);
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186       } <span class="keywordflow">else</span> {
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188          <span class="comment">// Presentación con tinytable</span>
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190          $extension = $opciones_array2table[<span class="stringliteral">&#39;presentacion&#39;</span>];
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192          require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../../array2table/lib/&#39;</span>.$extension.<span class="stringliteral">&#39;.php&#39;</span>);
-<a name="l00193"></a>00193 
-<a name="l00194"></a>00194          $array2table = <span class="keyword">new</span> $extension($opciones_array2table[<span class="stringliteral">&#39;op&#39;</span>]);
-<a name="l00195"></a>00195          $array2table-&gt;generar_tabla($this-&gt;<a class="code" href="../../d4/d8c/a00035_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>(), $opciones, $this-&gt;as_orden, $this-&gt;tipo_orden);
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197          }
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199       }
-<a name="l00200"></a>00200 <span class="comment"></span>
-<a name="l00201"></a>00201 <span class="comment">   /** </span>
-<a name="l00202"></a>00202 <span class="comment">    * Botonera</span>
-<a name="l00203"></a>00203 <span class="comment">    */</span>
-<a name="l00204"></a>00204 
-<a name="l00205"></a><a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87">00205</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>() {
-<a name="l00206"></a>00206 
-<a name="l00207"></a>00207       require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../../gcm/lib/helpers.php&#39;</span>);
-<a name="l00208"></a>00208 
-<a name="l00209"></a>00209       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../d4/d8c/a00035_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
-<a name="l00210"></a>00210 
-<a name="l00211"></a>00211       $this-&gt;url_base = <a class="code" href="../../d1/dd6/a00108_ab8443697c2560d5e86b5f6014a22864e.html#ab8443697c2560d5e86b5f6014a22864e" title="Generamos url segun las variables de GET que ya tenemos.">construir_get</a>( array(
-<a name="l00212"></a>00212          $this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span> =&gt; htmlspecialchars($this-&gt;as_orden,ENT_QUOTES)
-<a name="l00213"></a>00213          , $this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span> =&gt; $this-&gt;tipo_orden
-<a name="l00214"></a>00214       ));
-<a name="l00215"></a>00215 
-<a name="l00216"></a>00216 
-<a name="l00217"></a>00217       <span class="comment">/* Mirar si la url ya viene con ? */</span>
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219       $simbolo = <span class="charliteral">&#39;&amp;&#39;</span>;
-<a name="l00220"></a>00220 
-<a name="l00221"></a>00221       <span class="keywordflow">if</span> ( ! $this-&gt;plantilla_botonera ) {
-<a name="l00222"></a>00222 
-<a name="l00223"></a>00223          include(dirname(__FILE__).<span class="stringliteral">&#39;/../html/botonera_paginador.html&#39;</span>);
-<a name="l00224"></a>00224 
-<a name="l00225"></a>00225       } <span class="keywordflow">else</span> {
-<a name="l00226"></a>00226 
-<a name="l00227"></a>00227          include($this-&gt;plantilla_botonera);
-<a name="l00228"></a>00228          
-<a name="l00229"></a>00229          }
-<a name="l00230"></a>00230       }
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232 <span class="comment"></span>
-<a name="l00233"></a>00233 <span class="comment">   /** </span>
-<a name="l00234"></a>00234 <span class="comment">    * Generar página con contenido</span>
-<a name="l00235"></a>00235 <span class="comment">    *</span>
-<a name="l00236"></a>00236 <span class="comment">    * @param $url_ajax Para indicar a la url que hacemos ajax, ejemplo: &#39;&amp;formato=ajax&#39;</span>
-<a name="l00237"></a>00237 <span class="comment">    * @param $opciones Opciones para generar la tabla con array2table</span>
-<a name="l00238"></a>00238 <span class="comment">    * @param $opciones_array2table default por defecto pero podemos seleccionar</span>
-<a name="l00239"></a>00239 <span class="comment">    *        tinytable para tener una tabla dinamica con javascript. @see tinyTable</span>
-<a name="l00240"></a>00240 <span class="comment">    */</span>
-<a name="l00241"></a>00241 
-<a name="l00242"></a><a class="code" href="../../d4/dca/a00048_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644">00242</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_a9172600b896a85cfda722cfc7dfcd644.html#a9172600b896a85cfda722cfc7dfcd644" title="Generar página con contenido.">generar_pagina</a>($url_ajax=FALSE, $opciones=NULL, $opciones_array2table = FALSE) {
-<a name="l00243"></a>00243 
-<a name="l00244"></a>00244       <span class="comment">/* creamos caja con contenido que pueda ser sustituido con ajax */</span>
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246       $ident = <a class="code" href="../../d4/dca/a00048_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Para diferenciar entre diferentes instancias.">$this-&gt;sufijo</a>;
-<a name="l00247"></a>00247       $div   = $ident.<span class="stringliteral">&#39;paginador&#39;</span>;
-<a name="l00248"></a>00248 
-<a name="l00249"></a>00249       echo <span class="stringliteral">&#39;&lt;div id=&quot;&#39;</span>.$div.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>;
-<a name="l00250"></a>00250       $this-&gt;<a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>();
-<a name="l00251"></a>00251       $this-&gt;<a class="code" href="../../d4/dca/a00048_a8e03f92e3de135d21e2bd3d0beb66663.html#a8e03f92e3de135d21e2bd3d0beb66663" title="Presentamos contenido.">pagina</a>($opciones, $opciones_array2table);
-<a name="l00252"></a>00252       $this-&gt;<a class="code" href="../../d4/dca/a00048_affa5d7ece77b78d40d038795bccfcb87.html#affa5d7ece77b78d40d038795bccfcb87" title="Botonera.">botonera</a>();
-<a name="l00253"></a>00253       echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
-<a name="l00254"></a>00254       <span class="keywordflow">if</span> ($this-&gt;total_de_paginas &gt; 1) {
-<a name="l00255"></a>00255          <span class="keywordflow">if</span> ( $url_ajax &amp;&amp; $url_ajax != <span class="stringliteral">&#39;&#39;</span> ) {
-<a name="l00256"></a>00256             $this-&gt;<a class="code" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9" title="Javascript para botonera con ajax.">script_ajax</a>();
-<a name="l00257"></a>00257             
-<a name="l00258"></a>00258             <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]) &amp;&amp; $_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>] == <span class="stringliteral">&#39;ajax&#39;</span> ) {
-<a name="l00259"></a>00259                ?&gt;
-<a name="l00260"></a>00260                &lt;script&gt;setTimeout(<span class="stringliteral">&#39;initPaginador(&quot;#&lt;?=$div?&gt;&quot;,&quot;&lt;?=$url_ajax?&gt;&quot;)&#39;</span>, 1000);&lt;/script&gt;
-<a name="l00261"></a>00261                &lt;?php
-<a name="l00262"></a>00262             } <span class="keywordflow">else</span> {
-<a name="l00263"></a>00263                ?&gt;
-<a name="l00264"></a>00264                &lt;script&gt;
-<a name="l00265"></a>00265                   addLoadEvent(<span class="keyword">function</span>(){
-<a name="l00266"></a>00266                      initPaginador(<span class="stringliteral">&quot;#&lt;?=$div?&gt;&quot;</span>,<span class="stringliteral">&quot;&lt;?=$url_ajax?&gt;&quot;</span>);
-<a name="l00267"></a>00267                   });
-<a name="l00268"></a>00268                &lt;/script&gt;
-<a name="l00269"></a>00269                &lt;?php
-<a name="l00270"></a>00270                }
-<a name="l00271"></a>00271             }
-<a name="l00272"></a>00272          }
-<a name="l00273"></a>00273       }
-<a name="l00274"></a>00274 <span class="comment"></span>
-<a name="l00275"></a>00275 <span class="comment">   /**</span>
-<a name="l00276"></a>00276 <span class="comment">    * Javascript para botonera con ajax</span>
-<a name="l00277"></a>00277 <span class="comment">    *</span>
-<a name="l00278"></a>00278 <span class="comment">    * En caso de encontrar enlaces dentro de la cabecera de la tabla tambien</span>
-<a name="l00279"></a>00279 <span class="comment">    * le aplicamos el ajax.</span>
-<a name="l00280"></a>00280 <span class="comment">    *</span>
-<a name="l00281"></a>00281 <span class="comment">    * Esto nos servira pata las tablas ordenadas que funcione el ajax.</span>
-<a name="l00282"></a>00282 <span class="comment">    */</span>
-<a name="l00283"></a>00283 
-<a name="l00284"></a><a class="code" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9">00284</a>    <span class="keyword">function</span> <a class="code" href="../../d4/dca/a00048_a97e544ef4496ba048a5d1aff99c6d6b9.html#a97e544ef4496ba048a5d1aff99c6d6b9" title="Javascript para botonera con ajax.">script_ajax</a>() {
-<a name="l00285"></a>00285 
-<a name="l00286"></a>00286       <span class="keywordflow">if</span> ( self::$script_ajax_incluido  ) return ;
-<a name="l00287"></a>00287 
-<a name="l00288"></a>00288       ?&gt;
-<a name="l00289"></a>00289       &lt;script&gt;
-<a name="l00290"></a>00290       <span class="keyword">function</span> initPaginador(div,url_ajax) {
-<a name="l00291"></a>00291          $(div).find(<span class="stringliteral">&quot;.botonera_paginador a&quot;</span>).click(<span class="keyword">function</span>() {
-<a name="l00292"></a>00292             var url = $(<span class="keyword">this</span>).attr(<span class="stringliteral">&quot;href&quot;</span>) + url_ajax;
-<a name="l00293"></a>00293             $.get(url,<span class="keyword">function</span>(data){
-<a name="l00294"></a>00294                $(div).replaceWith(data);
-<a name="l00295"></a>00295               });
-<a name="l00296"></a>00296             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00297"></a>00297          });
-<a name="l00298"></a>00298          $(div).find(<span class="stringliteral">&quot;table th a&quot;</span>).click(<span class="keyword">function</span>() {
-<a name="l00299"></a>00299             var url = $(<span class="keyword">this</span>).attr(<span class="stringliteral">&quot;href&quot;</span>) + url_ajax;
-<a name="l00300"></a>00300             $.get(url,<span class="keyword">function</span>(data){
-<a name="l00301"></a>00301                $(div).replaceWith(data);
-<a name="l00302"></a>00302               });
-<a name="l00303"></a>00303             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00304"></a>00304          });
-<a name="l00305"></a>00305        }
-<a name="l00306"></a>00306       &lt;/script&gt;
-<a name="l00307"></a>00307       &lt;?php
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309       self::$script_ajax_incluido = TRUE;
-<a name="l00310"></a>00310 
-<a name="l00311"></a>00311       }
-<a name="l00312"></a>00312 
-<a name="l00313"></a>00313    }
-<a name="l00314"></a>00314 ?&gt;
+<a name="l00118"></a>00118       $conta = 0;
+<a name="l00119"></a>00119       <span class="keywordflow">foreach</span> ( $arAll as $arRow ) {
+<a name="l00120"></a>00120          <span class="keywordflow">foreach</span>($arRow as $key =&gt; $value) {
+<a name="l00121"></a>00121             $retorno[$conta][$key] = $value;
+<a name="l00122"></a>00122             }
+<a name="l00123"></a>00123          $conta++;
+<a name="l00124"></a>00124          }
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126       <span class="keywordflow">return</span> $retorno;
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128       }
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130    }
+<a name="l00131"></a>00131 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 10:08:48 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/js/imagenes.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/imagenes/js/administrar_imagenes.js</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -88,215 +88,22 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">imagenes.js</div>  </div>
+<div class="title">administrar_imagenes.js</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/** imagenes.js.php </span>
-<a name="l00004"></a>00004 <span class="comment">*</span>
-<a name="l00005"></a>00005 <span class="comment">* javascript para la administración de imagenes</span>
-<a name="l00006"></a>00006 <span class="comment">*</span>
-<a name="l00007"></a>00007 <span class="comment">* @author Eduardo Magrané</span>
-<a name="l00008"></a>00008 <span class="comment">* @version 1.0</span>
-<a name="l00009"></a>00009 <span class="comment">*/</span>
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="comment">// vim:cal SetSyn(&quot;javascript&quot;) </span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 header(<span class="stringliteral">&#39;Content-Type: text/javascript&#39;</span>);
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 ?&gt;
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="comment">/*</span>
-<a name="l00018"></a>00018 <span class="comment">* Visualizar un imagen</span>
-<a name="l00019"></a>00019 <span class="comment">*</span>
-<a name="l00020"></a>00020 <span class="comment">* Abrimos una ventana emergente con la imagen</span>
-<a name="l00021"></a>00021 <span class="comment">*</span>
-<a name="l00022"></a>00022 <span class="comment">* @param img url de la imagen</span>
-<a name="l00023"></a>00023 <span class="comment">* @param ancho ancho de la imagen</span>
-<a name="l00024"></a>00024 <span class="comment">* @param alto alto de la imagen</span>
-<a name="l00025"></a>00025 <span class="comment">*/</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="keyword">function</span> verImagen(img, ancho, alto) {
-<a name="l00028"></a>00028    open(img,img,<span class="stringliteral">&#39;toolbar=no,scrollbars=no,width=&#39;</span>+ancho+<span class="stringliteral">&#39;px,height=&#39;</span>+alto+<span class="stringliteral">&#39;px&#39;</span>);
-<a name="l00029"></a>00029 }
-<a name="l00030"></a>00030 <span class="comment"></span>
-<a name="l00031"></a>00031 <span class="comment">/**</span>
-<a name="l00032"></a>00032 <span class="comment">* Presentar imagenes de la sección que estamos editando</span>
-<a name="l00033"></a>00033 <span class="comment">* en el administrador de imagenes</span>
-<a name="l00034"></a>00034 <span class="comment">*/</span>
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="keyword">function</span> editarImagenesAdmin(){
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038   <span class="keywordflow">if</span> (pedido.readyState == 4 ) {
-<a name="l00039"></a>00039    <span class="keywordflow">if</span> ( pedido.status == 200 ) {
-<a name="l00040"></a>00040      <span class="comment">// Imagenes del diectoio las tenemos en listaImg.js</span>
-<a name="l00041"></a>00041         var container = document.getElementById(<span class="stringliteral">&#39;thumbnails&#39;</span>);
-<a name="l00042"></a>00042         var salida = <span class="stringliteral">&#39;&#39;</span> ;
-<a name="l00043"></a>00043         <span class="comment">//var datos = eval(pedido.responseText);</span>
-<a name="l00044"></a>00044         var datos = eval(<span class="charliteral">&#39;(&#39;</span>+pedido.responseText+<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00045"></a>00045          <span class="keywordflow">if</span> ( datos ) {
-<a name="l00046"></a>00046            var conta=0;
-<a name="l00047"></a>00047            <span class="comment">//for ( var x=0; x&lt;datos.length ; x++ ) {</span>
-<a name="l00048"></a>00048            <span class="keywordflow">for</span> ( i in datos.imgs ) {
-<a name="l00049"></a>00049                var x = conta;
-<a name="l00050"></a>00050                conta++;
-<a name="l00051"></a>00051                <span class="comment">// presentar las imagenes que se encuentran en el arrray</span>
-<a name="l00052"></a>00052                salida = salida + <span class="stringliteral">&#39;&lt;p class=&quot;thumb&quot; &gt;&lt;tt&gt;&#39;</span>;
-<a name="l00053"></a>00053                salida = salida + <span class="stringliteral">&#39;&lt;a rel=&quot;thumbnail&quot; onclick=\&#39;open(&quot;&#39;</span> + datos.imgs[i][1] + <span class="stringliteral">&#39;&quot;,&quot;&#39;</span>+datos.imgs[i][0]+<span class="stringliteral">&#39;&quot;,&quot;toolbar=no,scrollbars=no,width=&#39;</span>+datos.imgs[i][3]+<span class="stringliteral">&#39;px,height=&#39;</span>+datos.imgs[i][4]+<span class="stringliteral">&#39;px&quot;)\&#39; &gt;&#39;</span>;
-<a name="l00054"></a>00054                salida = salida + <span class="stringliteral">&#39;&lt;img width=&quot;100px&quot; id=&quot;thumb_&#39;</span>+x+<span class="stringliteral">&#39;&quot; src=&quot;&#39;</span>+datos.imgs[i][2]+<span class="stringliteral">&#39;&quot; alt=&quot;imagen&quot; /&gt;&lt;/a&gt;&#39;</span>;
-<a name="l00055"></a>00055                salida = salida + <span class="stringliteral">&#39;&lt;br /&gt;&lt;span class=&quot;idim&quot;&gt;&lt;b&gt;&#39;</span>+datos.imgs[i][0]+<span class="stringliteral">&#39;&lt;/b&gt;&lt;br /&gt; [&#39;</span>+datos.imgs[i][3]+<span class="charliteral">&#39;x&#39;</span>+datos.imgs[i][4]+<span class="stringliteral">&#39;] &#39;</span>+datos.imgs[i][5];
-<a name="l00056"></a>00056                salida += <span class="stringliteral">&#39;  [&lt;a href=&quot;javascript:;&quot; onmousedown=&quot;pedirDatos(\&#39;?m=imagenes&amp;a=borrarImg&amp;img=&#39;</span>+datos.imgs[i][1]+<span class="charliteral">&#39;\&#39;</span>,\<span class="stringliteral">&#39;borrarImg\&#39;,\&#39;Borrar imágen\&#39;)&quot; &gt;X&lt;/a&gt;] &#39;</span>;
-<a name="l00057"></a>00057                <span class="keywordflow">if</span> ( datos.imgs[i][6]  ) {
-<a name="l00058"></a>00058                   salida += <span class="stringliteral">&#39;[&lt;a href=&quot;javascript:;&quot; onmousedown=&quot;visualizar(\&#39;exif_&#39;</span> + x + <span class="charliteral">&#39;\&#39;</span>);visualizar(\<span class="stringliteral">&#39;thumb_&#39;</span> + x + <span class="charliteral">&#39;\&#39;</span>)<span class="stringliteral">&quot; &gt;exif&lt;/a&gt;]&#39;;</span>
-<a name="l00059"></a>00059 <span class="stringliteral">                  salida += &#39;&lt;/span&gt;&lt;br /&gt;&#39;;</span>
-<a name="l00060"></a>00060 <span class="stringliteral">                  salida += &#39;&lt;span id=&quot;</span>exif_<span class="stringliteral">&#39;+x+&#39;</span><span class="stringliteral">&quot; class=&quot;</span>isize<span class="stringliteral">&quot; style=&quot;</span>display: none<span class="stringliteral">&quot; &gt;&lt;p&gt;&#39;;</span>
-<a name="l00061"></a>00061 <span class="stringliteral">                  for ( var elemento in datos.imgs[i][6] ) {</span>
-<a name="l00062"></a>00062 <span class="stringliteral">                     salida += elemento+&#39;&lt;br /&gt;&#39;;</span>
-<a name="l00063"></a>00063 <span class="stringliteral">                     for ( var subElemento in datos.imgs[i][6][elemento]) {</span>
-<a name="l00064"></a>00064 <span class="stringliteral">                        salida += &#39;&lt;b&gt;&#39;+subElemento+&#39;: &lt;/b&gt;&#39;+datos.imgs[i][6][elemento][subElemento]+&#39;&lt;br /&gt;&#39;;</span>
-<a name="l00065"></a>00065 <span class="stringliteral">                     }</span>
-<a name="l00066"></a>00066 <span class="stringliteral">                  }</span>
-<a name="l00067"></a>00067 <span class="stringliteral">               salida += &#39;&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;&#39;;</span>
-<a name="l00068"></a>00068 <span class="stringliteral">            } else {</span>
-<a name="l00069"></a>00069 <span class="stringliteral">               salida += &#39;&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;&#39;;</span>
-<a name="l00070"></a>00070 <span class="stringliteral">            }</span>
-<a name="l00071"></a>00071 <span class="stringliteral">           }</span>
-<a name="l00072"></a>00072 <span class="stringliteral">           container.innerHTML = salida ;</span>
-<a name="l00073"></a>00073 <span class="stringliteral"></span>
-<a name="l00074"></a>00074 <span class="stringliteral">           // Si tenemos una ventana abierta la cerramos</span>
-<a name="l00075"></a>00075 <span class="stringliteral">           var v = document.getElementById(&#39;ventana_subeImagen&#39;);</span>
-<a name="l00076"></a>00076 <span class="stringliteral">           if ( v ) v.parentNode.removeChild(v);</span>
-<a name="l00077"></a>00077 <span class="stringliteral">         } else {</span>
-<a name="l00078"></a>00078 <span class="stringliteral">            container.innerHTML = &quot;</span>&lt;p <span class="keyword">class</span>=<span class="stringliteral">&#39;aviso&#39;</span> style=<span class="stringliteral">&#39;width: 100px&#39;</span>&gt;Sin Imágenes&lt;/p&gt;<span class="stringliteral">&quot;;</span>
-<a name="l00079"></a>00079 <span class="stringliteral">         }</span>
-<a name="l00080"></a>00080 <span class="stringliteral">      } else {</span>
-<a name="l00081"></a>00081 <span class="stringliteral">         alert(&#39;Fallo&#39;);</span>
-<a name="l00082"></a>00082 <span class="stringliteral">      }</span>
-<a name="l00083"></a>00083 <span class="stringliteral">   }</span>
-<a name="l00084"></a>00084 <span class="stringliteral">}</span>
-<a name="l00085"></a>00085 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00086"></a>00086 <span class="comment">/**</span>
-<a name="l00087"></a>00087 <span class="comment">* Presentar imagenes de la sección que estamos editando</span>
-<a name="l00088"></a>00088 <span class="comment">*/</span>
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090 function editarImagenes(){
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092   // Imagenes del diectoio las tenemos en listaImg.js
-<a name="l00093"></a>00093   if (pedido.readyState == 4 ) {
-<a name="l00094"></a>00094    if ( pedido.status == 200 ) {
-<a name="l00095"></a>00095      var container = document.getElementById(&#39;imgEdit&#39;);
-<a name="l00096"></a>00096      // var container = document.getElementById(&#39;cajaImg&#39;);
-<a name="l00097"></a>00097      var salida = &#39;&#39; ;
-<a name="l00098"></a>00098       var datos = eval(&#39;(&#39;+pedido.responseText+&#39;)&#39;);
-<a name="l00099"></a>00099       if ( datos ) {
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101          // Recogemos otras secciones
-<a name="l00102"></a>00102          for ( i in datos.sec ) {
-<a name="l00103"></a>00103             if ( datos.sec[i][0] == &#39;actual&#39; ) { // sección actual
-<a name="l00104"></a>00104                salida = salida + &#39;&lt;br /&gt;&lt;a href=&quot;javascript:;<span class="stringliteral">&quot; onmousedown=&quot;</span>visualizar(\<span class="stringliteral">&#39;navegador\&#39;);&quot;&gt;&#39;</span> + datos.sec[i][1] + <span class="stringliteral">&#39;&lt;/a&gt;&#39;</span>;
-<a name="l00105"></a>00105                salida = salida + <span class="stringliteral">&#39;&lt;div id=&quot;navegador&quot; &gt;&#39;</span>;
-<a name="l00106"></a>00106             } <span class="keywordflow">else</span> {
-<a name="l00107"></a>00107                salida = salida + <span class="stringliteral">&#39;&lt;br /&gt;&lt;a href=&quot;javascript:;&quot; onmousedown=&quot;pedirDatos(\&#39;?m=imagenes&amp;a=ajaxImg&amp;s=&#39;</span>+ datos.sec[i][0] +<span class="charliteral">&#39;\&#39;</span>,\<span class="stringliteral">&#39;editarImagenes\&#39;);&quot; &gt;&#39;</span> + datos.sec[i][1] + <span class="stringliteral">&#39;&lt;/a&gt;&#39;</span>;
-<a name="l00108"></a>00108                }
-<a name="l00109"></a>00109             }
-<a name="l00110"></a>00110          salida = salida + <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112          conta = 0;
-<a name="l00113"></a>00113          <span class="comment">// Recogemos imagenes</span>
-<a name="l00114"></a>00114          salida = salida + <span class="stringliteral">&#39;&lt;div id=&quot;cajaImg&quot;&gt;&#39;</span>;
-<a name="l00115"></a>00115          <span class="keywordflow">for</span> ( i in datos.imgs ) {
-<a name="l00116"></a>00116             conta ++;
-<a name="l00117"></a>00117             <span class="comment">// presentar las imagenes que se encuentran en el arrray</span>
-<a name="l00118"></a>00118             <span class="comment">// Parece que tiny analiza el contenido y no inserta el class de &lt;a&gt;</span>
-<a name="l00119"></a>00119             salida = salida + <span class="stringliteral">&#39;&lt;img src=&quot;&#39;</span>+datos.imgs[i][1]+<span class="stringliteral">&#39;&quot; /&gt;&#39;</span>;
-<a name="l00120"></a>00120             salida = salida + <span class="stringliteral">&#39;&lt;br /&gt;&#39;</span>;
-<a name="l00121"></a>00121             salida = salida + <span class="stringliteral">&#39;&lt;a title=&quot;&lt;?=literal(&#39;</span>miniatura<span class="stringliteral">&#39;)?&gt;&quot; class=&quot;boton&quot; onclick=&quot;javascript:;&quot; onmousedown=&quot;tinyMCE.execCommand(\&#39;mceInsertContent\&#39;,\&#39;false\&#39;,\&#39;&lt;a href=\\\&#39;&#39;</span>+datos.imgs[i][1]+<span class="stringliteral">&#39;\\\&#39; class=\\\&#39;botonImg\\\&#39; &gt;&lt;img src=\\\&#39;&#39;</span>+datos.imgs[i][2]+<span class="stringliteral">&#39;\\\&#39; /&gt;&lt;/a&gt;\&#39;)&quot; &gt;&lt;-&lt;/a&gt;&#39;</span>;
-<a name="l00122"></a>00122             salida = salida + <span class="stringliteral">&#39;&lt;a title=&quot;&lt;?=literal(&#39;</span>Tamaño original<span class="stringliteral">&#39;)?&gt;&quot; class=&quot;boton&quot; href=&quot;javascript:;&quot; onmousedown=&quot;tinyMCE.execCommand(\&#39;mceInsertContent\&#39;,\&#39;false\&#39;,\&#39;&lt;img src=\\\&#39;&#39;</span>+datos.imgs[i][1]+<span class="stringliteral">&#39;\\\&#39; /&gt;\&#39;)&quot; &gt;&lt;-(&lt;/a&gt;&#39;</span>;
-<a name="l00123"></a>00123             salida = salida + <span class="stringliteral">&#39;&lt;a title=&quot;&lt;?=literal(&#39;</span>Eliminar<span class="stringliteral">&#39;)?&gt;&quot; class=&quot;boton&quot; href=&quot;javascript:;&quot; onmousedown=&quot;pedirDatos(\&#39;?m=imagenes&amp;a=borrarImg&amp;img=&#39;</span>+datos.imgs[i][1]+<span class="charliteral">&#39;\&#39;</span>,\<span class="stringliteral">&#39;borrarImg\&#39;,\&#39;Borrar imágen\&#39;)&quot; &gt;X&lt;/a&gt;&#39;</span>;
-<a name="l00124"></a>00124             salida = salida + <span class="stringliteral">&#39;&lt;br /&gt;&#39;</span>;
-<a name="l00125"></a>00125            }
-<a name="l00126"></a>00126          salida = salida + <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128          <span class="comment">// Si no tenemos imagenes presentamos mensaje</span>
-<a name="l00129"></a>00129          <span class="keywordflow">if</span> ( conta == 0 ) {
-<a name="l00130"></a>00130             salida  = salida + <span class="stringliteral">&quot;&lt;p class=&#39;aviso&#39; style=&#39;width: 100px&#39;&gt;Sin Imágenes&lt;/p&gt;&quot;</span>;
-<a name="l00131"></a>00131          }
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133          container.innerHTML = salida ;
-<a name="l00134"></a>00134 
-<a name="l00135"></a>00135         <span class="comment">// Si tenemos una ventana abierta la cerramos</span>
-<a name="l00136"></a>00136         var v = document.getElementById(<span class="stringliteral">&#39;ventana_subeImagen&#39;</span>);
-<a name="l00137"></a>00137         <span class="keywordflow">if</span> ( v ) v.parentNode.removeChild(v);
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139       } <span class="keywordflow">else</span> {
-<a name="l00140"></a>00140          container.innerHTML = <span class="stringliteral">&quot;&lt;p class=&#39;aviso&#39; style=&#39;width: 100px&#39;&gt;Sin Imágenes&lt;/p&gt;&quot;</span>;
-<a name="l00141"></a>00141       }
-<a name="l00142"></a>00142    }
-<a name="l00143"></a>00143   }
-<a name="l00144"></a>00144 }
-<a name="l00145"></a>00145 <span class="comment"></span>
-<a name="l00146"></a>00146 <span class="comment">/**</span>
-<a name="l00147"></a>00147 <span class="comment">* borrar imagen</span>
-<a name="l00148"></a>00148 <span class="comment">*/</span>
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150 <span class="keyword">function</span> borrarImg(img){
-<a name="l00151"></a>00151   <span class="keywordflow">if</span> (pedido.readyState == 4 ) {
-<a name="l00152"></a>00152    <span class="keywordflow">if</span> ( pedido.status == 200 ) {
-<a name="l00153"></a>00153       var estado = eval(pedido.responseText);
-<a name="l00154"></a>00154       <span class="keywordflow">if</span> ( estado[0] == 0 ) { <span class="comment">// la imagen se borro bien</span>
-<a name="l00155"></a>00155          <span class="comment">// actualizar caja de imagenes</span>
-<a name="l00156"></a>00156          <span class="keywordflow">if</span> ( document.getElementById(<span class="stringliteral">&#39;imgEdit&#39;</span>) ) {
-<a name="l00157"></a>00157             pedirDatos(<span class="stringliteral">&#39;?m=imagenes&amp;a=ajaxImg&amp;s=&#39;</span>+estado[1],<span class="stringliteral">&#39;editarImagenes&#39;</span>);
-<a name="l00158"></a>00158          }
-<a name="l00159"></a>00159          <span class="keywordflow">if</span> ( document.getElementById(<span class="stringliteral">&#39;thumbnails&#39;</span>) ) {
-<a name="l00160"></a>00160             pedirDatos(<span class="stringliteral">&#39;?m=imagenes&amp;a=ajaxImg&amp;s=&#39;</span>+estado[1],<span class="stringliteral">&#39;editarImagenesAdmin&#39;</span>);
-<a name="l00161"></a>00161          }
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163       } <span class="keywordflow">else</span> {
-<a name="l00164"></a>00164          var res = <span class="stringliteral">&quot;Error al borrar imágen&quot;</span>;
-<a name="l00165"></a>00165          <span class="keywordflow">for</span>(x=0;x&lt;estado.length;x++) {
-<a name="l00166"></a>00166             res += <span class="charliteral">&#39;\n&#39;</span>+estado[x];
-<a name="l00167"></a>00167          }
-<a name="l00168"></a>00168          <span class="comment">//res += estado[0];</span>
-<a name="l00169"></a>00169          alert(res);
-<a name="l00170"></a>00170       }
-<a name="l00171"></a>00171    }
-<a name="l00172"></a>00172   }
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174 }
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176 <span class="keyword">function</span> verImg(img){
-<a name="l00177"></a>00177 window.open(<span class="stringliteral">&#39;?m=imagenes&amp;a=presentar_galeria&amp;img=&#39;</span>+img,<span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&#39;toolbar=no,scrollbars=yes&#39;</span>)
-<a name="l00178"></a>00178 }<span class="comment"></span>
-<a name="l00179"></a>00179 <span class="comment">   /**</span>
-<a name="l00180"></a>00180 <span class="comment">   *</span>
-<a name="l00181"></a>00181 <span class="comment">   * Transformammos los links hacia imagenes directos a un link a la misma pagina con</span>
-<a name="l00182"></a>00182 <span class="comment">   * el argumento img=con el link, asi podemos enseñar las imagenes de forma más completa</span>
-<a name="l00183"></a>00183 <span class="comment">   *</span>
-<a name="l00184"></a>00184 <span class="comment">   * @author Eduardo Magrané</span>
-<a name="l00185"></a>00185 <span class="comment">   * @version 1.0</span>
-<a name="l00186"></a>00186 <span class="comment">   *</span>
-<a name="l00187"></a>00187 <span class="comment">   */</span>
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189 <span class="keyword">function</span> linksImgView() {
-<a name="l00190"></a>00190    var links = document.links;
-<a name="l00191"></a>00191    <span class="keywordflow">for</span> (var x=0 ; x&lt;links.length ; x++ ) {
-<a name="l00192"></a>00192       var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);
-<a name="l00193"></a>00193       <span class="keywordflow">if</span> ( tipo == <span class="stringliteral">&#39;.gif&#39;</span> || tipo == <span class="stringliteral">&#39;.jpg&#39;</span> || tipo == <span class="stringliteral">&#39;jpeg&#39;</span> || tipo == <span class="stringliteral">&#39;.png&#39;</span> || tipo == <span class="stringliteral">&#39;tiff&#39;</span> || tipo == <span class="stringliteral">&#39;.JPG&#39;</span> || tipo == <span class="stringliteral">&#39;.GIF&#39;</span>  ) {
-<a name="l00194"></a>00194          var ancla = links[x];
-<a name="l00195"></a>00195          ancla.setAttribute(<span class="stringliteral">&#39;onmousedown&#39;</span>,<span class="stringliteral">&#39;verImg(\&#39;&#39;</span>+links[x].href+<span class="charliteral">&#39;\&#39;</span>)<span class="stringliteral">&#39;);</span>
-<a name="l00196"></a>00196 <span class="stringliteral">         //alert(ancla);</span>
-<a name="l00197"></a>00197 <span class="stringliteral">         //ancla.onclick=verImg(links[x].href);</span>
-<a name="l00198"></a>00198 <span class="stringliteral">      }</span>
-<a name="l00199"></a>00199 <span class="stringliteral">   }</span>
-<a name="l00200"></a>00200 <span class="stringliteral">}</span>
-<a name="l00201"></a>00201 <span class="stringliteral"></span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/**</span>
+<a name="l00002"></a>00002 <span class="comment"> * Administración de imágenes</span>
+<a name="l00003"></a>00003 <span class="comment"> */</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="comment">//window.onload(pedirDatos(&#39;?m=imagenes&amp;a=ajaxImg&amp;s=&lt;?=$d ?&gt;&#39;,&#39;editarImagenesAdmin&#39;));</span>
+<a name="l00006"></a>00006 addLoadEvent(<span class="keyword">function</span>(){
+<a name="l00007"></a>00007    pedirDatos(<span class="stringliteral">&#39;?m=imagenes&amp;a=ajaxImg&amp;s=&lt;?=Router::$d ?&gt;&#39;</span>,<span class="stringliteral">&#39;editarImagenesAdmin&#39;</span>)
+<a name="l00008"></a>00008    });
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 10:08:49 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/indexador/html/elemento_lista_indexar.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/indexador/html/caja_buscar.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -88,22 +88,20 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">elemento_lista_indexar.html</div>  </div>
+<div class="title">caja_buscar.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;p <span class="keyword">class</span>=<span class="stringliteral">&quot;por_indexar&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;&lt;?=htmlentities($elemento)?&gt;&quot;</span>&gt;
-<a name="l00002"></a>00002 &lt;a href=<span class="stringliteral">&quot;javascript:&lt;?=$funcion_js_indexar?&gt;(&#39;&lt;?=htmlentities($elemento)?&gt;&#39;)&quot;</span>&gt;
-<a name="l00003"></a>00003    &lt;?=$camino?&gt;
-<a name="l00004"></a>00004 &lt;/a&gt;
-<a name="l00005"></a>00005 &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja_&lt;?=htmlentities($elemento)?&gt;&quot;</span>&gt;
-<a name="l00006"></a>00006 &lt;/span&gt;
-<a name="l00007"></a>00007 &lt;/p&gt;
-<a name="l00008"></a>00008 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&#39;form_busqueda&#39;</span>&gt;
+<a name="l00002"></a>00002 &lt;form method=<span class="stringliteral">&#39;get&#39;</span> action=<span class="stringliteral">&quot;&lt;?php echo $_SERVER[&#39;PHP_SELF&#39;]; ?&gt;&quot;</span> &gt;
+<a name="l00003"></a>00003 &lt;input onfocus=<span class="stringliteral">&#39;this.value=&quot;&quot;&#39;</span> type=<span class="stringliteral">&#39;text&#39;</span> name=<span class="stringliteral">&#39;buscar&#39;</span> value=<span class="stringliteral">&#39;buscar&#39;</span> /&gt;
+<a name="l00004"></a>00004 &lt;input style=<span class="stringliteral">&#39;display: none&#39;</span> type=<span class="stringliteral">&#39;submit&#39;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&#39;buscar_input&#39;</span> name=<span class="charliteral">&#39;e&#39;</span> value=<span class="stringliteral">&#39;buscar&#39;</span>/&gt;
+<a name="l00005"></a>00005 &lt;/form&gt;
+<a name="l00006"></a>00006 &lt;/div&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 10:08:49 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
