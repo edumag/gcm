@@ -8,5 +8,5 @@ $config['generator'] = 'vim';
 $config['language'] = 'spanish';
 $config['revisit'] = '1 day';
 $config['distribution'] = 'global';
-$config['Robots'] = 'all';
+$config['robots'] = 'all';
 ?>

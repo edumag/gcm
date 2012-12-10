@@ -889,7 +889,7 @@ abstract class ContenidosAbstract extends Modulos {
 
          try {
             if ($this->verificar_contenido(Router::$f) !== FALSE) {
-               $fecha = $this->getFechaActualizacion(Router::$f);
+               $fecha = presentarFecha($this->getFechaActualizacion(Router::$f),1,'unix');
             } else {
                throw new Exception('El contendo no existe [ '.Router::$f.' ]');
             }

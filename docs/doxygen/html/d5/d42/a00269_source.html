@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/gdoxygen/lib/search_doxygen.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/gdoxygen/lib/Gdoxygen.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -88,346 +88,298 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">search_doxygen.php</div>  </div>
+<div class="title">Gdoxygen.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 <span class="keyword">function</span> matches_text($num)
-<a name="l00004"></a>00004 {
-<a name="l00005"></a>00005   <span class="keywordflow">if</span> ($num==0)
-<a name="l00006"></a>00006   {
-<a name="l00007"></a>00007     <span class="keywordflow">return</span> <span class="stringliteral">&quot;Disculpe, no se encontraron documentos que coincidan con su búsqueda.&quot;</span>;
-<a name="l00008"></a>00008   }
-<a name="l00009"></a>00009   <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($num==1)
-<a name="l00010"></a>00010   {
-<a name="l00011"></a>00011     <span class="keywordflow">return</span> <span class="stringliteral">&quot;Se encontró &lt;b&gt;1&lt;/b&gt; documento que coincide con su búsqueda.&quot;</span>;
-<a name="l00012"></a>00012   }
-<a name="l00013"></a>00013   <span class="keywordflow">else</span> <span class="comment">// $num&gt;1</span>
-<a name="l00014"></a>00014   {
-<a name="l00015"></a>00015     <span class="keywordflow">return</span> <span class="stringliteral">&quot;Se encontraron &lt;b&gt;$num&lt;/b&gt; documentos que coinciden con su búsqueda. Se muestran los mejores resultados primero.&quot;</span>;
-<a name="l00016"></a>00016   }
-<a name="l00017"></a>00017 }
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="keyword">function</span> report_matches()
-<a name="l00020"></a>00020 {
-<a name="l00021"></a>00021   <span class="keywordflow">return</span> <span class="stringliteral">&quot;Coincidencias: &quot;</span>;
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 <span class="keyword">function</span> end_page()
-<a name="l00024"></a>00024 {
-<a name="l00025"></a>00025   <span class="comment">//echo &quot;&lt;/div&gt;\n\n&quot;;</span>
-<a name="l00026"></a>00026   echo <span class="stringliteral">&quot;\n\n&quot;</span>;
-<a name="l00027"></a>00027 }
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="keyword">function</span> readInt($file)
-<a name="l00030"></a>00030 {
-<a name="l00031"></a>00031   $b1 = ord(fgetc($file)); $b2 = ord(fgetc($file));
-<a name="l00032"></a>00032   $b3 = ord(fgetc($file)); $b4 = ord(fgetc($file));
-<a name="l00033"></a>00033   <span class="keywordflow">return</span> ($b1&lt;&lt;24)|($b2&lt;&lt;16)|($b3&lt;&lt;8)|$b4;
-<a name="l00034"></a>00034 }
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="keyword">function</span> readString($file)
-<a name="l00037"></a>00037 {
-<a name="l00038"></a>00038   $result=<span class="stringliteral">&quot;&quot;</span>;
-<a name="l00039"></a>00039   <span class="keywordflow">while</span> (ord($c=fgetc($file))) $result.=$c;
-<a name="l00040"></a>00040   <span class="keywordflow">return</span> $result;
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="keyword">function</span> computeIndex($word)
-<a name="l00044"></a>00044 {
-<a name="l00045"></a>00045   <span class="comment">// Simple hashing that allows for substring search</span>
-<a name="l00046"></a>00046   <span class="keywordflow">if</span> (strlen($word)&lt;2) <span class="keywordflow">return</span> -1;
-<a name="l00047"></a>00047   <span class="comment">// high char of the index</span>
-<a name="l00048"></a>00048   $hi = ord($word{0});
-<a name="l00049"></a>00049   <span class="keywordflow">if</span> ($hi==0) <span class="keywordflow">return</span> -1;
-<a name="l00050"></a>00050   <span class="comment">// low char of the index</span>
-<a name="l00051"></a>00051   $lo = ord($word{1});
-<a name="l00052"></a>00052   <span class="keywordflow">if</span> ($lo==0) <span class="keywordflow">return</span> -1;
-<a name="l00053"></a>00053   <span class="comment">// return index</span>
-<a name="l00054"></a>00054   <span class="keywordflow">return</span> $hi*256+$lo;
-<a name="l00055"></a>00055 }
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="keyword">function</span> search($file,$word,&amp;$statsList)
-<a name="l00058"></a>00058 {
-<a name="l00059"></a>00059   $index = computeIndex($word);
-<a name="l00060"></a>00060   <span class="keywordflow">if</span> ($index!=-1) <span class="comment">// found a valid index</span>
-<a name="l00061"></a>00061   {
-<a name="l00062"></a>00062     fseek($file,$index*4+4); <span class="comment">// 4 bytes per entry, skip header</span>
-<a name="l00063"></a>00063     $index = readInt($file);
-<a name="l00064"></a>00064     <span class="keywordflow">if</span> ($index) <span class="comment">// found words matching the hash key</span>
-<a name="l00065"></a>00065     {
-<a name="l00066"></a>00066       $start=<span class="keyword">sizeof</span>($statsList);
-<a name="l00067"></a>00067       $count=$start;
-<a name="l00068"></a>00068       fseek($file,$index);
-<a name="l00069"></a>00069       $w = readString($file);
-<a name="l00070"></a>00070       <span class="keywordflow">while</span> ($w)
-<a name="l00071"></a>00071       {
-<a name="l00072"></a>00072         $statIdx = readInt($file);
-<a name="l00073"></a>00073         <span class="keywordflow">if</span> ($word==substr($w,0,strlen($word)))
-<a name="l00074"></a>00074         { <span class="comment">// found word that matches (as substring)</span>
-<a name="l00075"></a>00075           $statsList[$count++]=array(
-<a name="l00076"></a>00076               <span class="stringliteral">&quot;word&quot;</span>=&gt;$word,
-<a name="l00077"></a>00077               <span class="stringliteral">&quot;match&quot;</span>=&gt;$w,
-<a name="l00078"></a>00078               <span class="stringliteral">&quot;index&quot;</span>=&gt;$statIdx,
-<a name="l00079"></a>00079               <span class="stringliteral">&quot;full&quot;</span>=&gt;strlen($w)==strlen($word),
-<a name="l00080"></a>00080               <span class="stringliteral">&quot;docs&quot;</span>=&gt;array()
-<a name="l00081"></a>00081               );
-<a name="l00082"></a>00082         }
-<a name="l00083"></a>00083         $w = readString($file);
-<a name="l00084"></a>00084       }
-<a name="l00085"></a>00085       $totalHi=0;
-<a name="l00086"></a>00086       $totalFreqHi=0;
-<a name="l00087"></a>00087       $totalFreqLo=0;
-<a name="l00088"></a>00088       <span class="keywordflow">for</span> ($count=$start;$count&lt;<span class="keyword">sizeof</span>($statsList);$count++)
-<a name="l00089"></a>00089       {
-<a name="l00090"></a>00090         $statInfo = &amp;$statsList[$count];
-<a name="l00091"></a>00091         $multiplier = 1;
-<a name="l00092"></a>00092         <span class="comment">// whole word matches have a double weight</span>
-<a name="l00093"></a>00093         <span class="keywordflow">if</span> ($statInfo[<span class="stringliteral">&quot;full&quot;</span>]) $multiplier=2;
-<a name="l00094"></a>00094         fseek($file,$statInfo[<span class="stringliteral">&quot;index&quot;</span>]); 
-<a name="l00095"></a>00095         $numDocs = readInt($file);
-<a name="l00096"></a>00096         $docInfo = array();
-<a name="l00097"></a>00097         <span class="comment">// read docs info + occurrence frequency of the word</span>
-<a name="l00098"></a>00098         <span class="keywordflow">for</span> ($i=0;$i&lt;$numDocs;$i++)
-<a name="l00099"></a>00099         {
-<a name="l00100"></a>00100           $idx=readInt($file); 
-<a name="l00101"></a>00101           $freq=readInt($file); 
-<a name="l00102"></a>00102           $docInfo[$i]=array(<span class="stringliteral">&quot;idx&quot;</span>  =&gt; $idx,
-<a name="l00103"></a>00103                              <span class="stringliteral">&quot;freq&quot;</span> =&gt; $freq&gt;&gt;1,
-<a name="l00104"></a>00104                              <span class="stringliteral">&quot;rank&quot;</span> =&gt; 0.0,
-<a name="l00105"></a>00105                              <span class="stringliteral">&quot;hi&quot;</span>   =&gt; $freq&amp;1
-<a name="l00106"></a>00106                             );
-<a name="l00107"></a>00107           <span class="keywordflow">if</span> ($freq&amp;1) <span class="comment">// word occurs in high priority doc</span>
-<a name="l00108"></a>00108           {
-<a name="l00109"></a>00109             $totalHi++;
-<a name="l00110"></a>00110             $totalFreqHi+=$freq*$multiplier;
-<a name="l00111"></a>00111           }
-<a name="l00112"></a>00112           <span class="keywordflow">else</span> <span class="comment">// word occurs in low priority doc</span>
-<a name="l00113"></a>00113           {
-<a name="l00114"></a>00114             $totalFreqLo+=$freq*$multiplier;
-<a name="l00115"></a>00115           }
-<a name="l00116"></a>00116         }
-<a name="l00117"></a>00117         <span class="comment">// read name and url info for the doc</span>
-<a name="l00118"></a>00118         <span class="keywordflow">for</span> ($i=0;$i&lt;$numDocs;$i++)
-<a name="l00119"></a>00119         {
-<a name="l00120"></a>00120           fseek($file,$docInfo[$i][<span class="stringliteral">&quot;idx&quot;</span>]);
-<a name="l00121"></a>00121           $docInfo[$i][<span class="stringliteral">&quot;name&quot;</span>]=readString($file);
-<a name="l00122"></a>00122           $docInfo[$i][<span class="stringliteral">&quot;url&quot;</span>]=readString($file);
-<a name="l00123"></a>00123         }
-<a name="l00124"></a>00124         $statInfo[<span class="stringliteral">&quot;docs&quot;</span>]=$docInfo;
-<a name="l00125"></a>00125       }
-<a name="l00126"></a>00126       $totalFreq=($totalHi+1)*$totalFreqLo + $totalFreqHi;
-<a name="l00127"></a>00127       <span class="keywordflow">for</span> ($count=$start;$count&lt;<span class="keyword">sizeof</span>($statsList);$count++)
-<a name="l00128"></a>00128       {
-<a name="l00129"></a>00129         $statInfo = &amp;$statsList[$count];
-<a name="l00130"></a>00130         $multiplier = 1;
-<a name="l00131"></a>00131         <span class="comment">// whole word matches have a double weight</span>
-<a name="l00132"></a>00132         <span class="keywordflow">if</span> ($statInfo[<span class="stringliteral">&quot;full&quot;</span>]) $multiplier=2;
-<a name="l00133"></a>00133         <span class="keywordflow">for</span> ($i=0;$i&lt;<span class="keyword">sizeof</span>($statInfo[<span class="stringliteral">&quot;docs&quot;</span>]);$i++)
-<a name="l00134"></a>00134         {
-<a name="l00135"></a>00135           $docInfo = &amp;$statInfo[<span class="stringliteral">&quot;docs&quot;</span>];
-<a name="l00136"></a>00136           <span class="comment">// compute frequency rank of the word in each doc</span>
-<a name="l00137"></a>00137           $freq=$docInfo[$i][<span class="stringliteral">&quot;freq&quot;</span>];
-<a name="l00138"></a>00138           <span class="keywordflow">if</span> ($docInfo[$i][<span class="stringliteral">&quot;hi&quot;</span>])
-<a name="l00139"></a>00139           {
-<a name="l00140"></a>00140             $statInfo[<span class="stringliteral">&quot;docs&quot;</span>][$i][<span class="stringliteral">&quot;rank&quot;</span>]=
-<a name="l00141"></a>00141               (float)($freq*$multiplier+$totalFreqLo)/$totalFreq;
-<a name="l00142"></a>00142           }
-<a name="l00143"></a>00143           <span class="keywordflow">else</span>
-<a name="l00144"></a>00144           {
-<a name="l00145"></a>00145             $statInfo[<span class="stringliteral">&quot;docs&quot;</span>][$i][<span class="stringliteral">&quot;rank&quot;</span>]=
-<a name="l00146"></a>00146               (float)($freq*$multiplier)/$totalFreq;
-<a name="l00147"></a>00147           }
-<a name="l00148"></a>00148         }
-<a name="l00149"></a>00149       }
-<a name="l00150"></a>00150     }
-<a name="l00151"></a>00151   }
-<a name="l00152"></a>00152   <span class="keywordflow">return</span> $statsList;
-<a name="l00153"></a>00153 }
+<a href="../../d5/d42/a00269.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/**</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file Gdoxygen.php</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * @category   Gcm</span>
+<a name="l00007"></a>00007 <span class="comment"> * @package    Modulos</span>
+<a name="l00008"></a>00008 <span class="comment"> * @subpackage Gdoxygen</span>
+<a name="l00009"></a>00009 <span class="comment"> * @author     Eduardo Magrané eduardo@mamedu.com</span>
+<a name="l00010"></a>00010 <span class="comment"> *</span>
+<a name="l00011"></a>00011 <span class="comment"> * @internal</span>
+<a name="l00012"></a>00012 <span class="comment"> *   Created  23/11/09</span>
+<a name="l00013"></a>00013 <span class="comment"> *  Revision  SVN $Id: modulo.php 464 2011-02-02 16:12:12Z eduardo $</span>
+<a name="l00014"></a>00014 <span class="comment"> * Copyright  Copyright (c) 2009, Eduardo Magrané</span>
+<a name="l00015"></a>00015 <span class="comment"> *</span>
+<a name="l00016"></a>00016 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00017"></a>00017 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00018"></a>00018 <span class="comment"> */</span>
+<a name="l00019"></a>00019 <span class="comment"></span>
+<a name="l00020"></a>00020 <span class="comment">/**</span>
+<a name="l00021"></a>00021 <span class="comment"> * @class Gdoxygen</span>
+<a name="l00022"></a>00022 <span class="comment"> * @brief Adaptar documentación de doxygen a gcm</span>
+<a name="l00023"></a>00023 <span class="comment"> *</span>
+<a name="l00024"></a>00024 <span class="comment"> * El título del proyecto se coge de carpeta padre de gdoxygen</span>
+<a name="l00025"></a>00025 <span class="comment"> *</span>
+<a name="l00026"></a>00026 <span class="comment"> * Para que el módulo funcione, en la configuración de doxygen debe estar:</span>
+<a name="l00027"></a>00027 <span class="comment"> *</span>
+<a name="l00028"></a>00028 <span class="comment"> * - CREATE_SUBDIRS         = NO</span>
+<a name="l00029"></a>00029 <span class="comment"> * - HTML_OUTPUT            = gdoxygen</span>
+<a name="l00030"></a>00030 <span class="comment"> * - HTML_FILE_EXTENSION    = .htm</span>
+<a name="l00031"></a>00031 <span class="comment"> * - HTML_HEADER            = /home/eduardo/.magtrabajos/proyectos/magtrabajos/doxygen_head.html </span>
+<a name="l00032"></a>00032 <span class="comment"> * - HTML_FOOTER            = /home/eduardo/.magtrabajos/proyectos/magtrabajos/doxygen_feed.html</span>
+<a name="l00033"></a>00033 <span class="comment"> *</span>
+<a name="l00034"></a>00034 <span class="comment"> * @version 0.1</span>
+<a name="l00035"></a>00035 <span class="comment"> */</span>
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="../../d1/dc6/a00037.html">00037</a> <span class="keyword">class </span><a class="code" href="../../d1/dc6/a00037.html" title="Adaptar documentación de doxygen a gcm.">Gdoxygen</a> <span class="keyword">extends</span> <a class="code" href="../../d4/dca/a00048.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00038"></a>00038 <span class="comment"></span>
+<a name="l00039"></a>00039 <span class="comment">   /**</span>
+<a name="l00040"></a>00040 <span class="comment">    * Nombre de las carpetas que contienen documentación</span>
+<a name="l00041"></a>00041 <span class="comment">    * generada por doxygen</span>
+<a name="l00042"></a>00042 <span class="comment">    */</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044    <span class="keyword">private</span> $nombre_carpetas_doxygen = <span class="stringliteral">&#39;gdoxygen&#39;</span>;
+<a name="l00045"></a>00045 <span class="comment"></span>
+<a name="l00046"></a>00046 <span class="comment">   /** Constructor */</span>
+<a name="l00047"></a>00047 
+<a name="l00048"></a><a class="code" href="../../d1/dc6/a00037_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00048</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">__construct</a>() {
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050       <a class="code" href="../../d1/dc6/a00037_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052       }
+<a name="l00053"></a>00053 <span class="comment"></span>
+<a name="l00054"></a>00054 <span class="comment">   /**</span>
+<a name="l00055"></a>00055 <span class="comment">    * Si estamos en una carpeta con documentación de doxygen</span>
+<a name="l00056"></a>00056 <span class="comment">    *</span>
+<a name="l00057"></a>00057 <span class="comment">    * Si estamos indexando contenido y es perteneciente a gdoxygen</span>
+<a name="l00058"></a>00058 <span class="comment">    * generamos nuestra propia indexación, antes que lo intente el </span>
+<a name="l00059"></a>00059 <span class="comment">    * modulo indexador</span>
+<a name="l00060"></a>00060 <span class="comment">    */</span>
+<a name="l00061"></a>00061 
+<a name="l00062"></a><a class="code" href="../../d1/dc6/a00037_aaadc4664725bfa351d7af2bfb215abed.html#aaadc4664725bfa351d7af2bfb215abed">00062</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_aaadc4664725bfa351d7af2bfb215abed.html#aaadc4664725bfa351d7af2bfb215abed" title="Si estamos en una carpeta con documentación de doxygen.">detectar_gdoxygen</a>($e, $args) {
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066       $inicio = <span class="stringliteral">&#39;index.htm&#39;</span>;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068       <span class="keywordflow">if</span> ( <a class="code" href="../../d9/d73/a00060_a65c95b6917e9fdcead66313c9faa5942.html#a65c95b6917e9fdcead66313c9faa5942" title="Nombre de la sección actual.">Router::$estamos</a> == $this-&gt;nombre_carpetas_doxygen ) {
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070          <span class="keywordflow">if</span> ( <a class="code" href="../../d9/d73/a00060_ab74076a9b7e1d23d12b9e8d65e60315a.html#ab74076a9b7e1d23d12b9e8d65e60315a" title="Evento que se desea realizar.">Router::$e</a> == <span class="stringliteral">&#39;indexar&#39;</span>  ) {
+<a name="l00071"></a>00071             $this-&gt;<a class="code" href="../../d4/dca/a00048_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2" title="anular evento">anularEvento</a>(<span class="stringliteral">&#39;indexar&#39;</span>);
+<a name="l00072"></a>00072             $this-&gt;<a class="code" href="../../d1/dc6/a00037_adad3287205c86dd7b74a3f9803bfdc27.html#adad3287205c86dd7b74a3f9803bfdc27" title="Indexar gdoxygen.">indexado</a>($_GET[<span class="stringliteral">&#39;url&#39;</span>]);
+<a name="l00073"></a>00073             <span class="keywordflow">if</span> ( <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;ajax&#39;</span>  ) <span class="keywordflow">return</span>;
+<a name="l00074"></a>00074             }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076          $this-&gt;<a class="code" href="../../d4/dca/a00048_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2" title="anular evento">anularEvento</a>(<span class="stringliteral">&#39;titulo&#39;</span>);
+<a name="l00077"></a>00077          $gcm-&gt;event-&gt;unico(<span class="stringliteral">&#39;contenido&#39;</span>,$this-&gt;nombre_carpetas_doxygen);
+<a name="l00078"></a>00078          $this-&gt;<a class="code" href="../../d4/dca/a00048_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2" title="anular evento">anularEvento</a>(<span class="stringliteral">&#39;columna&#39;</span>);
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080          <span class="keywordflow">if</span> ( file_exists(<a class="code" href="../../d9/d73/a00060_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">Router::$d</a>.<a class="code" href="../../d9/d73/a00060_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a>.<span class="stringliteral">&#39;index.htm&#39;</span>) === FALSE ) {
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082             $inicio = <span class="stringliteral">&#39;main.htm&#39;</span>;
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084             }
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086          <span class="keywordflow">if</span> ( <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> != <span class="stringliteral">&#39;ajax&#39;</span>  ) {
+<a name="l00087"></a>00087             echo <span class="stringliteral">&#39;&lt;style&gt;#contenedor { width: 100%;}&lt;/style&gt;&#39;</span>;
+<a name="l00088"></a>00088             }
+<a name="l00089"></a>00089          echo <span class="stringliteral">&#39;&lt;br /&gt;&lt;iframe scrolling=&quot;auto&quot; frameborder=&quot;0&quot; width=&quot;99%&quot; height=&quot;1000&quot; src=&quot;http://&#39;</span>.$_SERVER[<span class="stringliteral">&#39;HTTP_HOST&#39;</span>].<span class="charliteral">&#39;/&#39;</span>.dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]).<span class="charliteral">&#39;/&#39;</span>.<a class="code" href="../../d9/d73/a00060_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.Router::$s.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>;
+<a name="l00090"></a>00090          }
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092       }
+<a name="l00093"></a>00093 <span class="comment"></span>
+<a name="l00094"></a>00094 <span class="comment">   /**</span>
+<a name="l00095"></a>00095 <span class="comment">    * Reindexado completo</span>
+<a name="l00096"></a>00096 <span class="comment">    *</span>
+<a name="l00097"></a>00097 <span class="comment">    * Reindexamos todos los proyectos gdoxygen</span>
+<a name="l00098"></a>00098 <span class="comment">    */</span>
+<a name="l00099"></a>00099 
+<a name="l00100"></a><a class="code" href="../../d1/dc6/a00037_a6cbdc21b9a0613970009ed23ad13c9c7.html#a6cbdc21b9a0613970009ed23ad13c9c7">00100</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_a6cbdc21b9a0613970009ed23ad13c9c7.html#a6cbdc21b9a0613970009ed23ad13c9c7" title="Reindexado completo.">reindexado_completo</a>($e, $args=NULL) {
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102       $this-&gt;<a class="code" href="../../d1/dc6/a00037_a43cd79693000234c914bb9fc7dc75b03.html#a43cd79693000234c914bb9fc7dc75b03" title="Listar proyectos con gdoxygen para poder ser indexados individualmente.">listar_gdoxygen</a>();
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104       <span class="comment">// global $gcm;</span>
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106       <span class="comment">// $carpetas_doxygen = rglob(&#39;File/*/&#39;.$this-&gt;nombre_carpetas_doxygen);</span>
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108       <span class="comment">// if ( ! $carpetas_doxygen ) { return; }</span>
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110       <span class="comment">// foreach ( $carpetas_doxygen as $carpeta ) {</span>
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112       <span class="comment">//    $archivo  = $carpeta.&#39;/&#39;.&#39;main.htm&#39;;</span>
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114       <span class="comment">//    $this-&gt;indexado($archivo);</span>
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116       <span class="comment">//    }</span>
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118       }
+<a name="l00119"></a>00119 <span class="comment"></span>
+<a name="l00120"></a>00120 <span class="comment">   /**</span>
+<a name="l00121"></a>00121 <span class="comment">    * Reinexamos proyecto con doxygen</span>
+<a name="l00122"></a>00122 <span class="comment">    *</span>
+<a name="l00123"></a>00123 <span class="comment">    * - Buscar carpetas que contengan documentación de doxygen</span>
+<a name="l00124"></a>00124 <span class="comment">    * - Recoger todos los archivos acabados en .htm e indexarlos</span>
+<a name="l00125"></a>00125 <span class="comment">    */</span>
+<a name="l00126"></a>00126 
+<a name="l00127"></a><a class="code" href="../../d1/dc6/a00037_abbc9ea452f07d51d5a15e009564c6a97.html#abbc9ea452f07d51d5a15e009564c6a97">00127</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_abbc9ea452f07d51d5a15e009564c6a97.html#abbc9ea452f07d51d5a15e009564c6a97" title="Reinexamos proyecto con doxygen.">reindexar</a>($e, $args) {
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129       $this-&gt;<a class="code" href="../../d1/dc6/a00037_a43cd79693000234c914bb9fc7dc75b03.html#a43cd79693000234c914bb9fc7dc75b03" title="Listar proyectos con gdoxygen para poder ser indexados individualmente.">listar_gdoxygen</a>();
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131       }
+<a name="l00132"></a>00132 <span class="comment"></span>
+<a name="l00133"></a>00133 <span class="comment">   /**</span>
+<a name="l00134"></a>00134 <span class="comment">    * Indexar gdoxygen</span>
+<a name="l00135"></a>00135 <span class="comment">    *</span>
+<a name="l00136"></a>00136 <span class="comment">    * Si creamos la documentación con el arbol lateral descripción</span>
+<a name="l00137"></a>00137 <span class="comment">    * la cojemos del archivo main.htm sino del mismo index.htm</span>
+<a name="l00138"></a>00138 <span class="comment">    *</span>
+<a name="l00139"></a>00139 <span class="comment">    * $param $archivo Url de gdoxygen/index.htm</span>
+<a name="l00140"></a>00140 <span class="comment">    */</span>
+<a name="l00141"></a>00141 
+<a name="l00142"></a><a class="code" href="../../d1/dc6/a00037_adad3287205c86dd7b74a3f9803bfdc27.html#adad3287205c86dd7b74a3f9803bfdc27">00142</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_adad3287205c86dd7b74a3f9803bfdc27.html#adad3287205c86dd7b74a3f9803bfdc27" title="Indexar gdoxygen.">indexado</a>($archivo) {
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146       $carpeta  = dirname($archivo);
+<a name="l00147"></a>00147       $aCamino  = explode(<span class="charliteral">&#39;/&#39;</span>,$carpeta);
+<a name="l00148"></a>00148       $proyecto = $aCamino[count($aCamino)-2];
+<a name="l00149"></a>00149       $archivo_contenido = $carpeta.<span class="stringliteral">&#39;/main.htm&#39;</span>;
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151       <span class="keywordflow">if</span> ( file_exists($archivo_contenido) === FALSE ) {
+<a name="l00152"></a>00152          $archivo_contenido = $archivo;
+<a name="l00153"></a>00153          }
 <a name="l00154"></a>00154 
-<a name="l00155"></a>00155 <span class="keyword">function</span> combine_results($results,&amp;$docs)
-<a name="l00156"></a>00156 {
-<a name="l00157"></a>00157   <span class="keywordflow">foreach</span> ($results as $wordInfo)
-<a name="l00158"></a>00158   {
-<a name="l00159"></a>00159     $docsList = &amp;$wordInfo[<span class="stringliteral">&quot;docs&quot;</span>];
-<a name="l00160"></a>00160     <span class="keywordflow">foreach</span> ($docsList as $di)
-<a name="l00161"></a>00161     {
-<a name="l00162"></a>00162       $key=$di[<span class="stringliteral">&quot;url&quot;</span>];
-<a name="l00163"></a>00163       $rank=$di[<span class="stringliteral">&quot;rank&quot;</span>];
-<a name="l00164"></a>00164       <span class="keywordflow">if</span> (isset($docs[$key]))
-<a name="l00165"></a>00165       {
-<a name="l00166"></a>00166         $docs[$key][<span class="stringliteral">&quot;rank&quot;</span>]+=$rank;
-<a name="l00167"></a>00167       }
-<a name="l00168"></a>00168       <span class="keywordflow">else</span>
-<a name="l00169"></a>00169       {
-<a name="l00170"></a>00170         $docs[$key] = array(<span class="stringliteral">&quot;url&quot;</span>=&gt;$key,
-<a name="l00171"></a>00171             <span class="stringliteral">&quot;name&quot;</span>=&gt;$di[<span class="stringliteral">&quot;name&quot;</span>],
-<a name="l00172"></a>00172             <span class="stringliteral">&quot;rank&quot;</span>=&gt;$rank
-<a name="l00173"></a>00173             );
-<a name="l00174"></a>00174       }
-<a name="l00175"></a>00175       $docs[$key][<span class="stringliteral">&quot;words&quot;</span>][] = array(
-<a name="l00176"></a>00176                <span class="stringliteral">&quot;word&quot;</span>=&gt;$wordInfo[<span class="stringliteral">&quot;word&quot;</span>],
-<a name="l00177"></a>00177                <span class="stringliteral">&quot;match&quot;</span>=&gt;$wordInfo[<span class="stringliteral">&quot;match&quot;</span>],
-<a name="l00178"></a>00178                <span class="stringliteral">&quot;freq&quot;</span>=&gt;$di[<span class="stringliteral">&quot;freq&quot;</span>]
-<a name="l00179"></a>00179                );
-<a name="l00180"></a>00180     }
-<a name="l00181"></a>00181   }
-<a name="l00182"></a>00182   <span class="keywordflow">return</span> $docs;
-<a name="l00183"></a>00183 }
-<a name="l00184"></a>00184 
-<a name="l00185"></a>00185 <span class="keyword">function</span> filter_results($docs,&amp;$requiredWords,&amp;$forbiddenWords)
-<a name="l00186"></a>00186 {
-<a name="l00187"></a>00187   $filteredDocs=array();
-<a name="l00188"></a>00188   <span class="keywordflow">while</span> (list ($key, $val) = each ($docs)) 
-<a name="l00189"></a>00189   {
-<a name="l00190"></a>00190     $words = &amp;$docs[$key][<span class="stringliteral">&quot;words&quot;</span>];
-<a name="l00191"></a>00191     $copy=1; <span class="comment">// copy entry by default</span>
-<a name="l00192"></a>00192     <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>($requiredWords)&gt;0)
-<a name="l00193"></a>00193     {
-<a name="l00194"></a>00194       <span class="keywordflow">foreach</span> ($requiredWords as $reqWord)
-<a name="l00195"></a>00195       {
-<a name="l00196"></a>00196         $found=0;
-<a name="l00197"></a>00197         <span class="keywordflow">foreach</span> ($words as $wordInfo)
-<a name="l00198"></a>00198         { 
-<a name="l00199"></a>00199           $found = $wordInfo[<span class="stringliteral">&quot;word&quot;</span>]==$reqWord;
-<a name="l00200"></a>00200           <span class="keywordflow">if</span> ($found) <span class="keywordflow">break</span>;
-<a name="l00201"></a>00201         }
-<a name="l00202"></a>00202         <span class="keywordflow">if</span> (!$found) 
-<a name="l00203"></a>00203         {
-<a name="l00204"></a>00204           $copy=0; <span class="comment">// document contains none of the required words</span>
-<a name="l00205"></a>00205           <span class="keywordflow">break</span>;
-<a name="l00206"></a>00206         }
-<a name="l00207"></a>00207       }
-<a name="l00208"></a>00208     }
-<a name="l00209"></a>00209     <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>($forbiddenWords)&gt;0)
-<a name="l00210"></a>00210     {
-<a name="l00211"></a>00211       <span class="keywordflow">foreach</span> ($words as $wordInfo)
-<a name="l00212"></a>00212       {
-<a name="l00213"></a>00213         <span class="keywordflow">if</span> (in_array($wordInfo[<span class="stringliteral">&quot;word&quot;</span>],$forbiddenWords))
-<a name="l00214"></a>00214         {
-<a name="l00215"></a>00215           $copy=0; <span class="comment">// document contains a forbidden word</span>
-<a name="l00216"></a>00216           <span class="keywordflow">break</span>;
-<a name="l00217"></a>00217         }
-<a name="l00218"></a>00218       }
-<a name="l00219"></a>00219     }
-<a name="l00220"></a>00220     <span class="keywordflow">if</span> ($copy) $filteredDocs[$key]=$docs[$key];
-<a name="l00221"></a>00221   }
-<a name="l00222"></a>00222   <span class="keywordflow">return</span> $filteredDocs;
-<a name="l00223"></a>00223 }
-<a name="l00224"></a>00224 
-<a name="l00225"></a>00225 <span class="keyword">function</span> compare_rank($a,$b)
-<a name="l00226"></a>00226 {
-<a name="l00227"></a>00227   <span class="keywordflow">if</span> ($a[<span class="stringliteral">&quot;rank&quot;</span>] == $b[<span class="stringliteral">&quot;rank&quot;</span>]) 
-<a name="l00228"></a>00228   {
-<a name="l00229"></a>00229     <span class="keywordflow">return</span> 0;
-<a name="l00230"></a>00230   }
-<a name="l00231"></a>00231   <span class="keywordflow">return</span> ($a[<span class="stringliteral">&quot;rank&quot;</span>]&gt;$b[<span class="stringliteral">&quot;rank&quot;</span>]) ? -1 : 1; 
-<a name="l00232"></a>00232 }
+<a name="l00155"></a>00155       <span class="keywordflow">if</span> ( file_exists($archivo) === FALSE ) {
+<a name="l00156"></a>00156          $men = <span class="stringliteral">&quot;No se encuentra ni $archivo&quot;</span>;
+<a name="l00157"></a>00157          registrar(__FILE__,__LINE__,$men,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00158"></a>00158          <span class="keywordflow">return</span> FALSE;
+<a name="l00159"></a>00159          }
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161          $parametros  = <span class="stringliteral">&#39;url=&#39;</span>.$archivo;
+<a name="l00162"></a>00162          $parametros .= <span class="stringliteral">&#39;&amp;literal=Documentación &#39;</span>.$proyecto;
+<a name="l00163"></a>00163          $parametros .= <span class="stringliteral">&#39;&amp;sin_comprobar_extension=1&#39;</span>;
+<a name="l00164"></a>00164          $parametros .= <span class="stringliteral">&#39;&amp;archivo_descripcion=&#39;</span>.$archivo_contenido;
+<a name="l00165"></a>00165          $parametros .= <span class="stringliteral">&#39;&amp;inicio_descripcion=&quot;contents&quot;&gt;&#39;</span>;
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167       <span class="keywordflow">if</span> ( $gcm-&gt;event-&gt;lanzar_accion_modulo(<span class="stringliteral">&#39;indexador&#39;</span>,<span class="stringliteral">&#39;indexar_archivo_pdo&#39;</span>,<span class="stringliteral">&#39;gdoxygen&#39;</span>,$parametros) !== FALSE ) {
+<a name="l00168"></a>00168          $salida = <span class="stringliteral">&quot;Contenido reindexado: Documentación &quot;</span>.$proyecto;
+<a name="l00169"></a>00169       } <span class="keywordflow">else</span> {
+<a name="l00170"></a>00170          $salida  = <span class="stringliteral">&#39;&lt;p class=&quot;error&quot;&gt;&#39;</span>;
+<a name="l00171"></a>00171          $salida .= <span class="stringliteral">&#39;Error al indexar contenido&#39;</span>;
+<a name="l00172"></a>00172          $salida .= <span class="stringliteral">&#39;&lt;/p&gt;&#39;</span>;
+<a name="l00173"></a>00173          <span class="keywordflow">return</span> FALSE;
+<a name="l00174"></a>00174          }
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176       <span class="keywordflow">if</span> ( <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;ajax&#39;</span>  ) {
+<a name="l00177"></a>00177          echo $salida;
+<a name="l00178"></a>00178       } <span class="keywordflow">else</span> {
+<a name="l00179"></a>00179          registrar(__FILE__,__LINE__,$salida,<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00180"></a>00180          }
+<a name="l00181"></a>00181 
+<a name="l00182"></a>00182       }
+<a name="l00183"></a>00183 <span class="comment"></span>
+<a name="l00184"></a>00184 <span class="comment">   /**</span>
+<a name="l00185"></a>00185 <span class="comment">    * Listar proyectos con gdoxygen para poder ser indexados</span>
+<a name="l00186"></a>00186 <span class="comment">    * individualmente</span>
+<a name="l00187"></a>00187 <span class="comment">    */</span>
+<a name="l00188"></a>00188 
+<a name="l00189"></a><a class="code" href="../../d1/dc6/a00037_a43cd79693000234c914bb9fc7dc75b03.html#a43cd79693000234c914bb9fc7dc75b03">00189</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_a43cd79693000234c914bb9fc7dc75b03.html#a43cd79693000234c914bb9fc7dc75b03" title="Listar proyectos con gdoxygen para poder ser indexados individualmente.">listar_gdoxygen</a>() {
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193       $funcion_js_indexar = <span class="stringliteral">&#39;indexar&#39;</span>;
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195       $carpetas_doxygen = <a class="code" href="../../dd/d42/a00109_a3742de583a5155da04f84623d9d74944.html#a3742de583a5155da04f84623d9d74944" title="Glob recursiva ()">rglob</a>(<span class="stringliteral">&#39;File/*/&#39;</span>.$this-&gt;nombre_carpetas_doxygen);
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197       <span class="keywordflow">if</span> ( ! $carpetas_doxygen ) { <span class="keywordflow">return</span>; }
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199       echo <span class="stringliteral">&#39;&lt;h2&gt;Listado de gdoxygen&lt;/h2&gt;&#39;</span>;
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201       <span class="keywordflow">foreach</span> ( $carpetas_doxygen as $carpeta ) {
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203          $archivo  = $carpeta.<span class="charliteral">&#39;/&#39;</span>.<span class="stringliteral">&#39;index.htm&#39;</span>;
+<a name="l00204"></a>00204          $aCamino  = explode(<span class="charliteral">&#39;/&#39;</span>,$carpeta);
+<a name="l00205"></a>00205          $proyecto = $aCamino[count($aCamino)-2];
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207          $camino   = $archivo;
+<a name="l00208"></a>00208          $elemento = $archivo;
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210          include($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;indexador&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;elemento_lista_indexar.html&#39;</span>));
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212          }
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214       }
+<a name="l00215"></a>00215 <span class="comment"></span>
+<a name="l00216"></a>00216 <span class="comment">   /**</span>
+<a name="l00217"></a>00217 <span class="comment">    * Presentar resultados de gdoxygen</span>
+<a name="l00218"></a>00218 <span class="comment">    */</span>
+<a name="l00219"></a>00219 
+<a name="l00220"></a><a class="code" href="../../d1/dc6/a00037_ae1643e0fd9e52392cf43df2b63e0923a.html#ae1643e0fd9e52392cf43df2b63e0923a">00220</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dc6/a00037_ae1643e0fd9e52392cf43df2b63e0923a.html#ae1643e0fd9e52392cf43df2b63e0923a" title="Presentar resultados de gdoxygen.">presentar_busquedas</a>($e, $args) {
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222       <span class="keywordflow">if</span> ( isset($_GET[<span class="stringliteral">&#39;buscar&#39;</span>]) ) {
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224          $query = $_GET[<span class="stringliteral">&#39;buscar&#39;</span>];
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226          include(<span class="stringliteral">&#39;search_doxygen.php&#39;</span>);
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228          $carpetas_doxygen = <a class="code" href="../../dd/d42/a00109_a3742de583a5155da04f84623d9d74944.html#a3742de583a5155da04f84623d9d74944" title="Glob recursiva ()">rglob</a>(<span class="stringliteral">&#39;File/*/&#39;</span>.$this-&gt;nombre_carpetas_doxygen);
+<a name="l00229"></a>00229 
+<a name="l00230"></a>00230          <span class="keywordflow">if</span> ( ! $carpetas_doxygen ) { <span class="keywordflow">return</span>; }
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232          <span class="keywordflow">foreach</span> ( $carpetas_doxygen as $carpeta ) {
 <a name="l00233"></a>00233 
-<a name="l00234"></a>00234 <span class="keyword">function</span> sort_results($docs,&amp;$sorted)
-<a name="l00235"></a>00235 {
-<a name="l00236"></a>00236   $sorted = $docs;
-<a name="l00237"></a>00237   usort($sorted,<span class="stringliteral">&quot;compare_rank&quot;</span>);
-<a name="l00238"></a>00238   <span class="keywordflow">return</span> $sorted;
-<a name="l00239"></a>00239 }
-<a name="l00240"></a>00240 
-<a name="l00241"></a>00241 <span class="keyword">function</span> report_results(&amp;$docs)
-<a name="l00242"></a>00242 {
-<a name="l00243"></a>00243   echo <span class="stringliteral">&quot;&lt;div class=\&quot;searchresults\&quot;&gt;\n&quot;</span>;
-<a name="l00244"></a>00244   echo <span class="stringliteral">&quot;&lt;table cellspacing=\&quot;2\&quot;&gt;\n&quot;</span>;
-<a name="l00245"></a>00245   $numDocs = <span class="keyword">sizeof</span>($docs);
-<a name="l00246"></a>00246   <span class="keywordflow">if</span> ($numDocs==0)
-<a name="l00247"></a>00247   {
-<a name="l00248"></a>00248     echo <span class="stringliteral">&quot;  &lt;tr&gt;\n&quot;</span>;
-<a name="l00249"></a>00249     echo <span class="stringliteral">&quot;    &lt;td colspan=\&quot;2\&quot;&gt;&quot;</span>.matches_text(0).<span class="stringliteral">&quot;&lt;/td&gt;\n&quot;</span>;
-<a name="l00250"></a>00250     echo <span class="stringliteral">&quot;  &lt;/tr&gt;\n&quot;</span>;
-<a name="l00251"></a>00251   }
-<a name="l00252"></a>00252   <span class="keywordflow">else</span>
-<a name="l00253"></a>00253   {
-<a name="l00254"></a>00254     echo <span class="stringliteral">&quot;  &lt;tr&gt;\n&quot;</span>;
-<a name="l00255"></a>00255     echo <span class="stringliteral">&quot;    &lt;td colspan=\&quot;2\&quot;&gt;&quot;</span>.matches_text($numDocs);
-<a name="l00256"></a>00256     echo <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00257"></a>00257     echo <span class="stringliteral">&quot;    &lt;/td&gt;\n&quot;</span>;
-<a name="l00258"></a>00258     echo <span class="stringliteral">&quot;  &lt;/tr&gt;\n&quot;</span>;
-<a name="l00259"></a>00259     $num=1;
-<a name="l00260"></a>00260     <span class="keywordflow">foreach</span> ($docs as $doc)
-<a name="l00261"></a>00261     {
-<a name="l00262"></a>00262       echo <span class="stringliteral">&quot;  &lt;tr&gt;\n&quot;</span>;
-<a name="l00263"></a>00263       echo <span class="stringliteral">&quot;    &lt;td align=\&quot;right\&quot;&gt;$num.&lt;/td&gt;&quot;</span>;
-<a name="l00264"></a>00264       echo     <span class="stringliteral">&quot;&lt;td&gt;&lt;a class=\&quot;el\&quot; href=\&quot;&quot;</span>.$doc[<span class="stringliteral">&quot;url&quot;</span>].<span class="stringliteral">&quot;\&quot;&gt;&quot;</span>.$doc[<span class="stringliteral">&quot;name&quot;</span>].<span class="stringliteral">&quot;&lt;/a&gt;&lt;/td&gt;\n&quot;</span>;
-<a name="l00265"></a>00265       echo <span class="stringliteral">&quot;  &lt;tr&gt;\n&quot;</span>;
-<a name="l00266"></a>00266       echo <span class="stringliteral">&quot;    &lt;td&gt;&lt;/td&gt;&lt;td class=\&quot;tiny\&quot;&gt;&quot;</span>.report_matches().<span class="stringliteral">&quot; &quot;</span>;
-<a name="l00267"></a>00267       <span class="keywordflow">foreach</span> ($doc[<span class="stringliteral">&quot;words&quot;</span>] as $wordInfo)
-<a name="l00268"></a>00268       {
-<a name="l00269"></a>00269         $word = $wordInfo[<span class="stringliteral">&quot;word&quot;</span>];
-<a name="l00270"></a>00270         $matchRight = substr($wordInfo[<span class="stringliteral">&quot;match&quot;</span>],strlen($word));
-<a name="l00271"></a>00271         echo <span class="stringliteral">&quot;&lt;b&gt;$word&lt;/b&gt;$matchRight(&quot;</span>.$wordInfo[<span class="stringliteral">&quot;freq&quot;</span>].<span class="stringliteral">&quot;) &quot;</span>;
-<a name="l00272"></a>00272       }
-<a name="l00273"></a>00273       echo <span class="stringliteral">&quot;    &lt;/td&gt;\n&quot;</span>;
-<a name="l00274"></a>00274       echo <span class="stringliteral">&quot;  &lt;/tr&gt;\n&quot;</span>;
-<a name="l00275"></a>00275       $num++;
-<a name="l00276"></a>00276     }
-<a name="l00277"></a>00277   }
-<a name="l00278"></a>00278   echo <span class="stringliteral">&quot;&lt;/table&gt;\n&quot;</span>;
-<a name="l00279"></a>00279 }
+<a name="l00234"></a>00234             $proyectos = explode(<span class="charliteral">&#39;/&#39;</span>,$carpeta);
+<a name="l00235"></a>00235             $proyecto = $proyectos[3];
+<a name="l00236"></a>00236             echo <span class="stringliteral">&#39;&lt;h2&gt;Resultados en el código de &#39;</span>.$proyecto.<span class="stringliteral">&#39;&lt;/h2&gt;&#39;</span>;
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238             <span class="keywordflow">if</span> (!($file=fopen($carpeta.<span class="stringliteral">&quot;/search/search.idx&quot;</span>,<span class="stringliteral">&quot;rb&quot;</span>))) 
+<a name="l00239"></a>00239             {
+<a name="l00240"></a>00240                die(<span class="stringliteral">&quot;Error: Search index file could NOT be opened!&quot;</span>);
+<a name="l00241"></a>00241             }
+<a name="l00242"></a>00242             $results = array();
+<a name="l00243"></a>00243             $requiredWords = array();
+<a name="l00244"></a>00244             $forbiddenWords = array();
+<a name="l00245"></a>00245             $foundWords = array();
+<a name="l00246"></a>00246             $word=strtok($query,<span class="stringliteral">&quot; &quot;</span>);
+<a name="l00247"></a>00247             <span class="keywordflow">while</span> ($word) <span class="comment">// for each word in the search query</span>
+<a name="l00248"></a>00248             {
+<a name="l00249"></a>00249                <span class="keywordflow">if</span> (($word{0}==<span class="charliteral">&#39;+&#39;</span>)) { $word=substr($word,1); $requiredWords[]=$word; }
+<a name="l00250"></a>00250                   <span class="keywordflow">if</span> (($word{0}==<span class="charliteral">&#39;-&#39;</span>)) { $word=substr($word,1); $forbiddenWords[]=$word; }
+<a name="l00251"></a>00251                      <span class="keywordflow">if</span> (!in_array($word,$foundWords))
+<a name="l00252"></a>00252                      {
+<a name="l00253"></a>00253                         $foundWords[]=$word;
+<a name="l00254"></a>00254                         search($file,strtolower($word),$results);
+<a name="l00255"></a>00255                      }
+<a name="l00256"></a>00256                      $word=strtok(<span class="stringliteral">&quot; &quot;</span>);
+<a name="l00257"></a>00257             }
+<a name="l00258"></a>00258             $docs = array();
+<a name="l00259"></a>00259             combine_results($results,$docs);
+<a name="l00260"></a>00260             <span class="comment">// filter out documents with forbidden word or that do not contain</span>
+<a name="l00261"></a>00261             <span class="comment">// required words</span>
+<a name="l00262"></a>00262             $filteredDocs = filter_results($docs,$requiredWords,$forbiddenWords);
+<a name="l00263"></a>00263             <span class="comment">// sort the results based on rank</span>
+<a name="l00264"></a>00264             $sorted = array();
+<a name="l00265"></a>00265             sort_results($filteredDocs,$sorted);
+<a name="l00266"></a>00266             <span class="comment">// report results to the user</span>
+<a name="l00267"></a>00267             $prefijo_url = str_replace(<a class="code" href="../../d9/d73/a00060_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>,<span class="stringliteral">&#39;&#39;</span>,$carpeta);
+<a name="l00268"></a>00268             <span class="keywordflow">if</span> ( !empty($sorted) ) {
+<a name="l00269"></a>00269                <span class="keywordflow">for</span> ( $i=0; $i &lt; <span class="keyword">sizeof</span>($sorted); ++$i ) {
+<a name="l00270"></a>00270                   $sorted[$i][<span class="stringliteral">&#39;url&#39;</span>] = $prefijo_url.<span class="charliteral">&#39;/&#39;</span>.$sorted[$i][<span class="stringliteral">&#39;url&#39;</span>];
+<a name="l00271"></a>00271                   }
+<a name="l00272"></a>00272                }
+<a name="l00273"></a>00273             report_results($sorted);
+<a name="l00274"></a>00274             echo <span class="stringliteral">&quot;&lt;/div&gt;\n&quot;</span>;
+<a name="l00275"></a>00275             end_page();
+<a name="l00276"></a>00276             fclose($file);
+<a name="l00277"></a>00277          }
+<a name="l00278"></a>00278       }
+<a name="l00279"></a>00279    }
 <a name="l00280"></a>00280 
-<a name="l00281"></a>00281 <span class="keyword">function</span> main()
-<a name="l00282"></a>00282 {
-<a name="l00283"></a>00283   <span class="keywordflow">if</span>(strcmp(<span class="stringliteral">&#39;4.1.0&#39;</span>, phpversion()) &gt; 0) 
-<a name="l00284"></a>00284   {
-<a name="l00285"></a>00285     die(<span class="stringliteral">&quot;Error: PHP version 4.1.0 or above required!&quot;</span>);
-<a name="l00286"></a>00286   }
-<a name="l00287"></a>00287   <span class="keywordflow">if</span> (!($file=fopen(<span class="stringliteral">&quot;search/search.idx&quot;</span>,<span class="stringliteral">&quot;rb&quot;</span>))) 
-<a name="l00288"></a>00288   {
-<a name="l00289"></a>00289     die(<span class="stringliteral">&quot;Error: Search index file could NOT be opened!&quot;</span>);
-<a name="l00290"></a>00290   }
-<a name="l00291"></a>00291   <span class="keywordflow">if</span> (readHeader($file)!=<span class="stringliteral">&quot;DOXS&quot;</span>)
-<a name="l00292"></a>00292   {
-<a name="l00293"></a>00293     die(<span class="stringliteral">&quot;Error: Header of index file is invalid!&quot;</span>);
-<a name="l00294"></a>00294   }
-<a name="l00295"></a>00295   $query=<span class="stringliteral">&quot;&quot;</span>;
-<a name="l00296"></a>00296   <span class="keywordflow">if</span> (array_key_exists(<span class="stringliteral">&quot;query&quot;</span>, $_GET))
-<a name="l00297"></a>00297   {
-<a name="l00298"></a>00298     $query=$_GET[<span class="stringliteral">&quot;query&quot;</span>];
-<a name="l00299"></a>00299   }
-<a name="l00300"></a>00300   end_form(preg_replace(<span class="stringliteral">&quot;/[^a-zA-Z0-9\-\_\.]/i&quot;</span>, <span class="stringliteral">&quot; &quot;</span>, $query ));
-<a name="l00301"></a>00301   $results = array();
-<a name="l00302"></a>00302   $requiredWords = array();
-<a name="l00303"></a>00303   $forbiddenWords = array();
-<a name="l00304"></a>00304   $foundWords = array();
-<a name="l00305"></a>00305   $word=strtok($query,<span class="stringliteral">&quot; &quot;</span>);
-<a name="l00306"></a>00306   <span class="keywordflow">while</span> ($word) <span class="comment">// for each word in the search query</span>
-<a name="l00307"></a>00307   {
-<a name="l00308"></a>00308     <span class="keywordflow">if</span> (($word{0}==<span class="charliteral">&#39;+&#39;</span>)) { $word=substr($word,1); $requiredWords[]=$word; }
-<a name="l00309"></a>00309     <span class="keywordflow">if</span> (($word{0}==<span class="charliteral">&#39;-&#39;</span>)) { $word=substr($word,1); $forbiddenWords[]=$word; }
-<a name="l00310"></a>00310     <span class="keywordflow">if</span> (!in_array($word,$foundWords))
-<a name="l00311"></a>00311     {
-<a name="l00312"></a>00312       $foundWords[]=$word;
-<a name="l00313"></a>00313       search($file,strtolower($word),$results);
-<a name="l00314"></a>00314     }
-<a name="l00315"></a>00315     $word=strtok(<span class="stringliteral">&quot; &quot;</span>);
-<a name="l00316"></a>00316   }
-<a name="l00317"></a>00317   $docs = array();
-<a name="l00318"></a>00318   combine_results($results,$docs);
-<a name="l00319"></a>00319   <span class="comment">// filter out documents with forbidden word or that do not contain</span>
-<a name="l00320"></a>00320   <span class="comment">// required words</span>
-<a name="l00321"></a>00321   $filteredDocs = filter_results($docs,$requiredWords,$forbiddenWords);
-<a name="l00322"></a>00322   <span class="comment">// sort the results based on rank</span>
-<a name="l00323"></a>00323   $sorted = array();
-<a name="l00324"></a>00324   sort_results($filteredDocs,$sorted);
-<a name="l00325"></a>00325   <span class="comment">// report results to the user</span>
-<a name="l00326"></a>00326   report_results($sorted);
-<a name="l00327"></a>00327   echo <span class="stringliteral">&quot;&lt;/div&gt;\n&quot;</span>;
-<a name="l00328"></a>00328   end_page();
-<a name="l00329"></a>00329   fclose($file);
-<a name="l00330"></a>00330 }
-<a name="l00331"></a>00331 
-<a name="l00332"></a>00332 <span class="comment">// main();</span>
+<a name="l00281"></a>00281 
+<a name="l00282"></a>00282    }
+<a name="l00283"></a>00283 
+<a name="l00284"></a>00284 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 10:08:49 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

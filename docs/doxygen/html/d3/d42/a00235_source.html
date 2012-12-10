@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_existe_contenido.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/html/form_editar.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,39 +81,32 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_564572b1ce5d7fe7ca8c92124076e676.html">contenidos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_a845b7d6e636d33255f017612c18fb71.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e333815ca684251e94807f1625b54517.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_existe_contenido.html</div>  </div>
+<div class="title">form_editar.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
-<a name="l00002"></a>00002    &lt;fieldset&gt;
-<a name="l00003"></a>00003       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Contenido nuevo&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00004"></a>00004       &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;aviso&#39;</span>&gt;
-<a name="l00005"></a>00005          El archivo &lt;b&gt;&lt;?=$f; ?&gt;&lt;/b&gt; existe, ¿Que deseas hacer?
-<a name="l00006"></a>00006       &lt;/div&gt;
-<a name="l00007"></a>00007       &lt;textarea style=<span class="stringliteral">&quot;display: none;&quot;</span> name=<span class="stringliteral">&quot;areaTexto&quot;</span> &gt;&lt;?php echo $contenido ?&gt;&lt;/textarea&gt;
-<a name="l00008"></a>00008       &lt;input style=<span class="stringliteral">&quot;width: 100%;&quot;</span> type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;seleccionado[]&quot;</span>  value=<span class="stringliteral">&quot;&lt;?php echo $f; ?&gt;&quot;</span> /&gt;
-<a name="l00009"></a>00009       &lt;fieldset&gt;
-<a name="l00010"></a>00010          &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00011"></a>00011          &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;mover&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Cambiar nombre&#39;</span>)?&gt;&lt;/button&gt;
-<a name="l00012"></a>00012          &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;actualizar_contenido&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar&#39;</span>)?&gt;&lt;/button&gt;
-<a name="l00013"></a>00013          &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;cancela&quot;</span> value=<span class="stringliteral">&quot;Cancelar&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Cancelar&#39;</span>)?&gt;&lt;/button&gt;
-<a name="l00014"></a>00014       &lt;/fieldset&gt;
-<a name="l00015"></a>00015    &lt;/fieldset&gt;
-<a name="l00016"></a>00016 &lt;/form&gt;
-<a name="l00017"></a>00017 &lt;br /&gt;
-<a name="l00018"></a>00018 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja_form_editar&quot;</span>&gt;
+<a name="l00002"></a>00002    &lt;form action=<span class="stringliteral">&quot;&lt;?php echo $_SERVER[&#39;REQUEST_URI&#39;] ?&gt;&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;formularioTexto&quot;</span> name=<span class="stringliteral">&quot;formularioTexto&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00003"></a>00003       &lt;textarea <span class="keyword">class</span>=<span class="stringliteral">&#39;editor_completo&#39;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;&lt;?php echo $nom_textarea;?&gt;&quot;</span>  name=<span class="stringliteral">&quot;&lt;?php echo $nom_textarea;?&gt;&quot;</span> style=<span class="stringliteral">&#39;width: 100%;&#39;</span> rows=<span class="stringliteral">&quot;35&quot;</span>&gt;&lt;?php echo $contingut_inicial ?&gt;&lt;/textarea&gt;
+<a name="l00004"></a>00004       &lt;input style=<span class="stringliteral">&#39;width: 100%; display: none;&#39;</span> title=<span class="stringliteral">&#39;Posa un nom al document&#39;</span> type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;documento&quot;</span> value=<span class="stringliteral">&quot;&lt;?php echo $url_archivo ?&gt;&quot;</span> /&gt;
+<a name="l00005"></a>00005       &lt;br /&gt;
+<a name="l00006"></a>00006       &lt;input type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&#39;guardar&#39;</span>/&gt;
+<a name="l00007"></a>00007       &lt;input type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;m&#39;</span> value=<span class="stringliteral">&#39;temas&#39;</span>/&gt;
+<a name="l00008"></a>00008       &lt;input type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;a&#39;</span> value=<span class="stringliteral">&#39;administrar&#39;</span>/&gt;
+<a name="l00009"></a>00009       &amp;nbsp;
+<a name="l00010"></a>00010    &lt;/form&gt;
+<a name="l00011"></a>00011 &lt;/div&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 10:08:49 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

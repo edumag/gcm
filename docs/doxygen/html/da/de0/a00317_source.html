@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/html/form_colores.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/html/administrando.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -88,52 +88,55 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_colores.html</div>  </div>
+<div class="title">administrando.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;h2&gt;Colores&lt;/h3&gt;
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span> style=<span class="stringliteral">&quot;width: 500px;&quot;</span>&gt;
-<a name="l00004"></a>00004 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;picker&quot;</span>&gt;&lt;/div&gt;
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;selector_colores&quot;</span>&gt;
-<a name="l00007"></a>00007 &lt;?php $nivel=FALSE ; ?&gt;
-<a name="l00008"></a>00008 &lt;?php <span class="keywordflow">foreach</span> ( $colores as $key =&gt; $color ) { ?&gt;
-<a name="l00009"></a>00009 &lt;?php <span class="keywordflow">if</span> ( $key == $nivel  ) { $nivel++ ; ?&gt;
-<a name="l00010"></a>00010 &lt;/table&gt;
-<a name="l00011"></a>00011 &lt;table&gt;
-<a name="l00012"></a>00012 &lt;thead&gt;
-<a name="l00013"></a>00013 &lt;td colspan=<span class="stringliteral">&quot;2&quot;</span>&gt;Colores: &lt;?=$nivel-1?&gt;&lt;/td&gt;
-<a name="l00014"></a>00014 &lt;/thead&gt;
-<a name="l00015"></a>00015 &lt;?php } ?&gt;
-<a name="l00016"></a>00016 &lt;tr <span class="keyword">class</span>=<span class="stringliteral">&quot;form-item&quot;</span>&gt;
-<a name="l00017"></a>00017    &lt;td&gt;&lt;?=$key?&gt;&lt;/td&gt;
-<a name="l00018"></a>00018    &lt;td&gt;&lt;input type=<span class="stringliteral">&quot;text&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> name=<span class="stringliteral">&quot;colores[&lt;?=$key?&gt;]&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;colorwell&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$this-&gt;rgb2html($color)?&gt;&quot;</span> /&gt;&lt;/td&gt;
-<a name="l00019"></a>00019 &lt;/tr&gt;
-<a name="l00020"></a>00020 &lt;?php } ?&gt;
-<a name="l00021"></a>00021 &lt;/table&gt;
-<a name="l00022"></a>00022 &lt;/div&gt;
-<a name="l00023"></a>00023 &lt;br /&gt;&lt;br /&gt;
-<a name="l00024"></a>00024 &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;m&quot;</span> value=<span class="stringliteral">&quot;temas&quot;</span> /&gt;
-<a name="l00025"></a>00025 &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;a&quot;</span> value=<span class="stringliteral">&quot;administrar&quot;</span> /&gt;
-<a name="l00026"></a>00026 &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;accion&quot;</span> value=<span class="stringliteral">&quot;guardar_colores&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar colores&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00027"></a>00027 &lt;/form&gt;
-<a name="l00028"></a>00028 &lt;br /&gt;
-<a name="l00029"></a>00029 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span> style=<span class="stringliteral">&quot;width: 500px;&quot;</span>&gt;
-<a name="l00030"></a>00030 &lt;fieldset&gt;
-<a name="l00031"></a>00031 &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Añadir un color&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00032"></a>00032 &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;color&quot;</span> cols=<span class="stringliteral">&quot;15&quot;</span> value=<span class="stringliteral">&quot;1-fuenteb&quot;</span>/&gt;
-<a name="l00033"></a>00033 &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;m&quot;</span> value=<span class="stringliteral">&quot;temas&quot;</span> /&gt;
-<a name="l00034"></a>00034 &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;a&quot;</span> value=<span class="stringliteral">&quot;administrar&quot;</span> /&gt;
-<a name="l00035"></a>00035 &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;accion&quot;</span> value=<span class="stringliteral">&quot;anyadir_color&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Añadir&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00036"></a>00036 &lt;/fieldset&gt;
-<a name="l00037"></a>00037 &lt;/form&gt;
-<a name="l00038"></a>00038 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;!DOCTYPE HTML&gt;
+<a name="l00002"></a>00002 &lt;html lang=<span class="stringliteral">&quot;es&quot;</span>&gt;
+<a name="l00003"></a>00003    &lt;head&gt;
+<a name="l00004"></a>00004       &lt;meta charset=<span class="stringliteral">&quot;utf-8&quot;</span>&gt;
+<a name="l00005"></a>00005       &lt;!--autor: eduardo magrane--&gt;
+<a name="l00006"></a>00006       &lt;!--email: eduardo@mamedu.com--&gt;
+<a name="l00007"></a>00007       {heads}
+<a name="l00008"></a>00008    &lt;/head&gt;
+<a name="l00009"></a>00009    &lt;body&gt;
+<a name="l00010"></a>00010       {menuadmin}
+<a name="l00011"></a>00011       {avisos}
+<a name="l00012"></a>00012       &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;wrap&quot;</span>&gt;
+<a name="l00013"></a>00013          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;cabecera&quot;</span>&gt;
+<a name="l00014"></a>00014             &lt;a href=<span class="stringliteral">&quot;&quot;</span>&gt;Mamedu&lt;/a&gt;
+<a name="l00015"></a>00015             {cabecera}
+<a name="l00016"></a>00016             &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;cabeceraDerecha&quot;</span>&gt;
+<a name="l00017"></a>00017                {cabeceraDerecha}
+<a name="l00018"></a>00018             &lt;/div&gt;
+<a name="l00019"></a>00019          &lt;/div&gt;
+<a name="l00020"></a>00020          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;subcabecera&quot;</span>&gt;
+<a name="l00021"></a>00021             {subcabecera}
+<a name="l00022"></a>00022          &lt;/div&gt;
+<a name="l00023"></a>00023          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;contenedor&quot;</span>&gt;
+<a name="l00024"></a>00024             &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;titulo&quot;</span>&gt;
+<a name="l00025"></a>00025                {titulo}
+<a name="l00026"></a>00026             &lt;/div&gt;
+<a name="l00027"></a>00027             {contenido}
+<a name="l00028"></a>00028          &lt;/div&gt;
+<a name="l00029"></a>00029          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;lateral&quot;</span>&gt;
+<a name="l00030"></a>00030             {columna}
+<a name="l00031"></a>00031          &lt;/div&gt;
+<a name="l00032"></a>00032          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;pie&quot;</span>&gt;
+<a name="l00033"></a>00033             {pie}
+<a name="l00034"></a>00034          &lt;/div&gt;
+<a name="l00035"></a>00035          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;scripts&quot;</span>&gt;
+<a name="l00036"></a>00036             {debug}
+<a name="l00037"></a>00037             {scripts}
+<a name="l00038"></a>00038       &lt;/div&gt;
+<a name="l00039"></a>00039       &lt;/div&gt;
+<a name="l00040"></a>00040    &lt;/body&gt;
+<a name="l00041"></a>00041 &lt;/html&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 09:21:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 23 de Noviembre de 2012 10:08:49 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

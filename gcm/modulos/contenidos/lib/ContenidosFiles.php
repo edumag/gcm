@@ -550,7 +550,9 @@ class Contenidos extends ContenidosAbstract {
     */
 
    function getFechaActualizacion($ruta) {
-      return filemtime($ruta);
+      $fecha = filemtime($ruta);
+      registrar(__FILE__,__LINE__,'Recuperar fecha de contenido ['.$ruta.'] fecha: ['.$fecha.']');
+      return $fecha;
       }
 
 

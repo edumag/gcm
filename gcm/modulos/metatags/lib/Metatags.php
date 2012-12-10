@@ -77,6 +77,7 @@ class Metatags extends Modulos {
 
       // Recogemos archivo de configuración
       include(dirname(__FILE__).'/../config/config.php');
+      if ( is_file('DATOS/configuracion/metatags/config.php') ) include('DATOS/configuracion/metatags/config.php');
 
       // Recorremos variables configurables
       foreach ( $config as $name => $valor ) {
