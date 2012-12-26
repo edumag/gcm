@@ -281,7 +281,7 @@ class Cache_http extends Modulos {
 
       $tiempo_expiracion = ( $tiempo_expiracion ) ? $tiempo_expiracion : $this->duracion_variables;
 
-      $archivo_variable = $nombre_variable.$this->extension;
+      $archivo_variable = $this->dir_cache.$nombre_variable.$this->extension;
 
       if (@file_exists($archivo_variable)) {
           $fecha_cache = @filemtime($archivo_variable);
@@ -296,7 +296,9 @@ class Cache_http extends Modulos {
       if (time() - $tiempo_expiracion < $fecha_cache) {
          registrar(__FILE__,__LINE__,'Variable ['.$nombre.'] en cache','ADMIN');
          $contenido = file_get_contents($archivo_variable);
-         return unserialize($contenido);
+         $retorno = unserialize($contenido);
+         registrar(__FILE__,__LINE__,'Recuperamos variable en cache ['.$nombre_variable.'] '."\n".depurar($retorno));
+         return $retorno; 
          }
 
       return FALSE;
@@ -309,12 +311,13 @@ class Cache_http extends Modulos {
 
    function guardar_variable($nombre_variable,$valor) {
 
-      $archivo_variable = $nombre_variable.$this->extension;
+      $archivo_variable = $this->dir_cache.$nombre_variable.$this->extension;
 
       $fp = @fopen($archivo_variable, "w");
-      @fwrite($fp, unserialize($valor));
+      @fwrite($fp, serialize($valor));
       @fclose($fp);
       
+      registrar(__FILE__,__LINE__,'Guardamos variable en cache ['.$nombre_variable.'] '."\n".depurar($valor));
       }
 
    }

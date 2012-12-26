@@ -53,7 +53,8 @@
  *
  * @see modulos/contenido/eventos_usuario.php
  *
- * @todo Cachear array de eventos
+ * @todo El pasarle el directorio de los modulos no afecta al funcionamiento, 
+ *       hay un desfase entre el comportamiento antiguo y el actual.
  */
 
 class Eventos {
@@ -136,6 +137,11 @@ class Eventos {
       $this->dir_modulos_proyecto = 'modulos/';
       $this->bAdmin = $bAdmin;
 
+      /* Creamos una instancia de cache_http si esta activado para poder trabajar con ella */
+
+      $gcm->event->instancias['cache_http'] = new Cache_http();
+
+
       /* Comprobar directorio de eventos en proyecto */
 
       if ( ! file_exists($this->dir_eventos_proyecto)  ) {
@@ -168,6 +174,8 @@ class Eventos {
     * Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php
     * que tienen la información del módulo.
     *
+    * Construimos: $this->eventos, $this->cEventos, $this->ubicaciones
+    *
     * @param $nivel Usuario o Administración
     * @param $directorio Directorio donde se encuantran los módulos
     */
@@ -175,6 +183,21 @@ class Eventos {
    function leer_eventos($nivel, $directorio=NULL) {
 
       global $gcm;
+
+      registrar(__FILE__,__LINE__,__FUNCTION__.'('.$nivel.','.$directorio.')');
+
+      if ( isset($gcm->event->instancias['cache_http']) ) {
+
+         $eventos_en_cache = $gcm->event->instancias['cache_http']->recuperar_variable('eventos_'.$nivel) ;
+
+         if ( $eventos_en_cache ) { 
+            $this->eventos      = $eventos_en_cache['eventos'];
+            $this->cEventos     = $eventos_en_cache['cEventos'];
+            $this->ubicaciones  = $eventos_en_cache['ubicaciones'];
+            return;
+            }
+
+         }
 
       /**
        * Solo comprobamos modulos activados en caso de ser módulos de gcm
@@ -235,6 +258,16 @@ class Eventos {
          }
 
          registrar(__FILE__,__LINE__,'Numero de eventos en '.$directorio.': '.$n);
+
+         if ( isset($gcm->event->instancias['cache_http']) ) {
+
+            $eventos_en_cache['eventos']      = $this->eventos       ;
+            $eventos_en_cache['cEventos']     = $this->cEventos      ;
+            $eventos_en_cache['ubicaciones']  = $this->ubicaciones   ;
+            $gcm->event->instancias['cache_http']->guardar_variable('eventos_'.$nivel,$eventos_en_cache);
+
+            }
+
       }
 
    /** Verificar la existencia de un evento
