@@ -147,547 +147,580 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00053"></a>00053 <span class="comment"> *</span>
 <a name="l00054"></a>00054 <span class="comment"> * @see modulos/contenido/eventos_usuario.php</span>
 <a name="l00055"></a>00055 <span class="comment"> *</span>
-<a name="l00056"></a>00056 <span class="comment"> * @todo Cachear array de eventos</span>
-<a name="l00057"></a>00057 <span class="comment"> */</span>
-<a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="../../d3/dfe/a00025.html">00059</a> <span class="keyword">class </span><a class="code" href="../../d3/dfe/a00025.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a> {
-<a name="l00060"></a>00060 <span class="comment"></span>
-<a name="l00061"></a>00061 <span class="comment">   /**</span>
-<a name="l00062"></a>00062 <span class="comment">    * Array con los eventos de la aplicación</span>
-<a name="l00063"></a>00063 <span class="comment">    */</span>
-<a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f">00065</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>;
-<a name="l00066"></a>00066 <span class="comment"></span>
-<a name="l00067"></a>00067 <span class="comment">   /** Ubicación de los módulos */</span>
-<a name="l00068"></a>00068 
-<a name="l00069"></a><a class="code" href="../../d3/dfe/a00025_ab560df5656d57dea3fda225bd593d77d.html#ab560df5656d57dea3fda225bd593d77d">00069</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_ab560df5656d57dea3fda225bd593d77d.html#ab560df5656d57dea3fda225bd593d77d" title="Ubicación de los módulos.">$ubicaciones</a>;
-<a name="l00070"></a>00070 <span class="comment"></span>
-<a name="l00071"></a>00071 <span class="comment">   /** Comportamientos de los eventos</span>
-<a name="l00072"></a>00072 <span class="comment">    *</span>
-<a name="l00073"></a>00073 <span class="comment">    * Nos permite definir acciones para eventos desde los módulos</span>
-<a name="l00074"></a>00074 <span class="comment">    *</span>
-<a name="l00075"></a>00075 <span class="comment">    * Definidas hasta el momento:</span>
-<a name="l00076"></a>00076 <span class="comment">    *</span>
-<a name="l00077"></a>00077 <span class="comment">    * &#39;unico&#39;</span>
-<a name="l00078"></a>00078 <span class="comment">    *   Si un módulo define un evento como unico ej: </span>
-<a name="l00079"></a>00079 <span class="comment">    *   $cEvento[&#39;contenido_dinamico&#39;] = &#39;unico&#39;; proboca que</span>
-<a name="l00080"></a>00080 <span class="comment">    *   el bucle que recorre las acciones del evento salte depues de ejecutar</span>
-<a name="l00081"></a>00081 <span class="comment">    *   la propia acción.</span>
-<a name="l00082"></a>00082 <span class="comment">    *</span>
-<a name="l00083"></a>00083 <span class="comment">    */</span>
-<a name="l00084"></a>00084 
-<a name="l00085"></a><a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82">00085</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>;           
-<a name="l00086"></a>00086 <span class="comment"></span>
-<a name="l00087"></a>00087 <span class="comment">   /**</span>
-<a name="l00088"></a>00088 <span class="comment">    * Lista de módulos activos, que seran los basicos marcados por gcm</span>
-<a name="l00089"></a>00089 <span class="comment">    * y los que esten activados por el módulo admin</span>
-<a name="l00090"></a>00090 <span class="comment">    */</span>
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092    <span class="keyword">private</span> $modulos_activados;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094    <span class="keyword">private</span> $dir_modulos;               <span class="comment">///&lt; Directorio de módulos</span>
-<a name="l00095"></a>00095 <span class="comment"></span>   <span class="keyword">private</span> $dir_modulos_proyecto;      <span class="comment">///&lt; Directorio de módulos propios del proyecto</span>
-<a name="l00096"></a>00096 <span class="comment"></span>   <span class="keyword">private</span> $bAdmin;                    <span class="comment">///&lt; Recogemos eventos de administración T/F</span>
-<a name="l00097"></a>00097 <span class="comment"></span><span class="comment"></span>
-<a name="l00098"></a>00098 <span class="comment">   /** Directorio donde se guardan los ficheros de configuración de eventos del proyecto */</span>
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100    <span class="keyword">private</span> $dir_eventos_proyecto = <span class="stringliteral">&#39;DATOS/eventos/&#39;</span>;
-<a name="l00101"></a>00101 <span class="comment"></span>
-<a name="l00102"></a>00102 <span class="comment">   /** </span>
-<a name="l00103"></a>00103 <span class="comment">    * Visualizar eventos en vez de lanzarlos, util para vista previa</span>
-<a name="l00104"></a>00104 <span class="comment">    * de plantilla</span>
-<a name="l00105"></a>00105 <span class="comment">    */</span>
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107    <span class="keyword">private</span> $visualizar = FALSE;
-<a name="l00108"></a>00108 <span class="comment"></span>
-<a name="l00109"></a>00109 <span class="comment">   /**</span>
-<a name="l00110"></a>00110 <span class="comment">    * Instancias de módulos</span>
-<a name="l00111"></a>00111 <span class="comment">    */</span>
-<a name="l00112"></a>00112 
-<a name="l00113"></a><a class="code" href="../../d3/dfe/a00025_a770d8c96395831a1bcd81e155322dc6b.html#a770d8c96395831a1bcd81e155322dc6b">00113</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_a770d8c96395831a1bcd81e155322dc6b.html#a770d8c96395831a1bcd81e155322dc6b" title="Instancias de módulos.">$instancias</a> = array();
-<a name="l00114"></a>00114 <span class="comment"></span>
-<a name="l00115"></a>00115 <span class="comment">   /** </span>
-<a name="l00116"></a>00116 <span class="comment">    * Llenamos el array eventos con la información de los archivos</span>
-<a name="l00117"></a>00117 <span class="comment">    * de eventos de cada modulo</span>
-<a name="l00118"></a>00118 <span class="comment">    *</span>
-<a name="l00119"></a>00119 <span class="comment">    * @param $dir_modulos Directorio de módulos</span>
-<a name="l00120"></a>00120 <span class="comment">    * @param $bAdmin      Leer eventos de adminstración TRUE/FALSE</span>
-<a name="l00121"></a>00121 <span class="comment">    * @param $eProyecto    Leer eventos de proyecto TRUE/FALSE</span>
-<a name="l00122"></a>00122 <span class="comment">    * @param $visualizar  Mostramos acción a realizar sin realizarla </span>
-<a name="l00123"></a>00123 <span class="comment">    */</span>
-<a name="l00124"></a>00124 
-<a name="l00125"></a><a class="code" href="../../d3/dfe/a00025_a1015a2e5fbc6cbba40f48dad8d26942b.html#a1015a2e5fbc6cbba40f48dad8d26942b">00125</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a1015a2e5fbc6cbba40f48dad8d26942b.html#a1015a2e5fbc6cbba40f48dad8d26942b" title="Llenamos el array eventos con la información de los archivos de eventos de cada modulo.">__construct</a>($dir_modulos, $bAdmin=FALSE, $eProyecto=TRUE, $visualizar=FALSE) {
-<a name="l00126"></a>00126 
-<a name="l00127"></a>00127       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129       $this-&gt;modulos_activados = array_merge($gcm-&gt;modulos_basicos,$gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Módulos activados&#39;</span>));
-<a name="l00130"></a>00130 
-<a name="l00131"></a>00131       registrar(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($this-&gt;modulos_activados,<span class="stringliteral">&#39;Modulos activados&#39;</span>));
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133       $this-&gt;visualizar = $visualizar;
-<a name="l00134"></a>00134       $this-&gt;eventos = array();
-<a name="l00135"></a>00135       $this-&gt;dir_modulos = $dir_modulos;         <span class="comment">// GCM_DIR.&#39;modulos/&#39;</span>
-<a name="l00136"></a>00136       $this-&gt;dir_modulos_proyecto = <span class="stringliteral">&#39;modulos/&#39;</span>;
-<a name="l00137"></a>00137       $this-&gt;bAdmin = $bAdmin;
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139       <span class="comment">/* Comprobar directorio de eventos en proyecto */</span>
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141       <span class="keywordflow">if</span> ( ! file_exists($this-&gt;dir_eventos_proyecto)  ) {
-<a name="l00142"></a>00142          <span class="keywordflow">if</span> ( ! mkdir ($this-&gt;dir_eventos_proyecto) ) {
-<a name="l00143"></a>00143             <span class="keywordflow">return</span> FALSE;
-<a name="l00144"></a>00144             }
-<a name="l00145"></a>00145          }
+<a name="l00056"></a>00056 <span class="comment"> * @todo El pasarle el directorio de los modulos no afecta al funcionamiento, </span>
+<a name="l00057"></a>00057 <span class="comment"> *       hay un desfase entre el comportamiento antiguo y el actual.</span>
+<a name="l00058"></a>00058 <span class="comment"> */</span>
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="../../d3/dfe/a00025.html">00060</a> <span class="keyword">class </span><a class="code" href="../../d3/dfe/a00025.html" title="Módulo Eventos para conectar acciones con los módulos.">Eventos</a> {
+<a name="l00061"></a>00061 <span class="comment"></span>
+<a name="l00062"></a>00062 <span class="comment">   /**</span>
+<a name="l00063"></a>00063 <span class="comment">    * Array con los eventos de la aplicación</span>
+<a name="l00064"></a>00064 <span class="comment">    */</span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a><a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f">00066</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>;
+<a name="l00067"></a>00067 <span class="comment"></span>
+<a name="l00068"></a>00068 <span class="comment">   /** Ubicación de los módulos */</span>
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="../../d3/dfe/a00025_ab560df5656d57dea3fda225bd593d77d.html#ab560df5656d57dea3fda225bd593d77d">00070</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_ab560df5656d57dea3fda225bd593d77d.html#ab560df5656d57dea3fda225bd593d77d" title="Ubicación de los módulos.">$ubicaciones</a>;
+<a name="l00071"></a>00071 <span class="comment"></span>
+<a name="l00072"></a>00072 <span class="comment">   /** Comportamientos de los eventos</span>
+<a name="l00073"></a>00073 <span class="comment">    *</span>
+<a name="l00074"></a>00074 <span class="comment">    * Nos permite definir acciones para eventos desde los módulos</span>
+<a name="l00075"></a>00075 <span class="comment">    *</span>
+<a name="l00076"></a>00076 <span class="comment">    * Definidas hasta el momento:</span>
+<a name="l00077"></a>00077 <span class="comment">    *</span>
+<a name="l00078"></a>00078 <span class="comment">    * &#39;unico&#39;</span>
+<a name="l00079"></a>00079 <span class="comment">    *   Si un módulo define un evento como unico ej: </span>
+<a name="l00080"></a>00080 <span class="comment">    *   $cEvento[&#39;contenido_dinamico&#39;] = &#39;unico&#39;; proboca que</span>
+<a name="l00081"></a>00081 <span class="comment">    *   el bucle que recorre las acciones del evento salte depues de ejecutar</span>
+<a name="l00082"></a>00082 <span class="comment">    *   la propia acción.</span>
+<a name="l00083"></a>00083 <span class="comment">    *</span>
+<a name="l00084"></a>00084 <span class="comment">    */</span>
+<a name="l00085"></a>00085 
+<a name="l00086"></a><a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82">00086</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>;           
+<a name="l00087"></a>00087 <span class="comment"></span>
+<a name="l00088"></a>00088 <span class="comment">   /**</span>
+<a name="l00089"></a>00089 <span class="comment">    * Lista de módulos activos, que seran los basicos marcados por gcm</span>
+<a name="l00090"></a>00090 <span class="comment">    * y los que esten activados por el módulo admin</span>
+<a name="l00091"></a>00091 <span class="comment">    */</span>
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093    <span class="keyword">private</span> $modulos_activados;
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095    <span class="keyword">private</span> $dir_modulos;               <span class="comment">///&lt; Directorio de módulos</span>
+<a name="l00096"></a>00096 <span class="comment"></span>   <span class="keyword">private</span> $dir_modulos_proyecto;      <span class="comment">///&lt; Directorio de módulos propios del proyecto</span>
+<a name="l00097"></a>00097 <span class="comment"></span>   <span class="keyword">private</span> $bAdmin;                    <span class="comment">///&lt; Recogemos eventos de administración T/F</span>
+<a name="l00098"></a>00098 <span class="comment"></span><span class="comment"></span>
+<a name="l00099"></a>00099 <span class="comment">   /** Directorio donde se guardan los ficheros de configuración de eventos del proyecto */</span>
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101    <span class="keyword">private</span> $dir_eventos_proyecto = <span class="stringliteral">&#39;DATOS/eventos/&#39;</span>;
+<a name="l00102"></a>00102 <span class="comment"></span>
+<a name="l00103"></a>00103 <span class="comment">   /** </span>
+<a name="l00104"></a>00104 <span class="comment">    * Visualizar eventos en vez de lanzarlos, util para vista previa</span>
+<a name="l00105"></a>00105 <span class="comment">    * de plantilla</span>
+<a name="l00106"></a>00106 <span class="comment">    */</span>
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108    <span class="keyword">private</span> $visualizar = FALSE;
+<a name="l00109"></a>00109 <span class="comment"></span>
+<a name="l00110"></a>00110 <span class="comment">   /**</span>
+<a name="l00111"></a>00111 <span class="comment">    * Instancias de módulos</span>
+<a name="l00112"></a>00112 <span class="comment">    */</span>
+<a name="l00113"></a>00113 
+<a name="l00114"></a><a class="code" href="../../d3/dfe/a00025_a770d8c96395831a1bcd81e155322dc6b.html#a770d8c96395831a1bcd81e155322dc6b">00114</a>    <span class="keyword">public</span> <a class="code" href="../../d3/dfe/a00025_a770d8c96395831a1bcd81e155322dc6b.html#a770d8c96395831a1bcd81e155322dc6b" title="Instancias de módulos.">$instancias</a> = array();
+<a name="l00115"></a>00115 <span class="comment"></span>
+<a name="l00116"></a>00116 <span class="comment">   /** </span>
+<a name="l00117"></a>00117 <span class="comment">    * Llenamos el array eventos con la información de los archivos</span>
+<a name="l00118"></a>00118 <span class="comment">    * de eventos de cada modulo</span>
+<a name="l00119"></a>00119 <span class="comment">    *</span>
+<a name="l00120"></a>00120 <span class="comment">    * @param $dir_modulos Directorio de módulos</span>
+<a name="l00121"></a>00121 <span class="comment">    * @param $bAdmin      Leer eventos de adminstración TRUE/FALSE</span>
+<a name="l00122"></a>00122 <span class="comment">    * @param $eProyecto    Leer eventos de proyecto TRUE/FALSE</span>
+<a name="l00123"></a>00123 <span class="comment">    * @param $visualizar  Mostramos acción a realizar sin realizarla </span>
+<a name="l00124"></a>00124 <span class="comment">    */</span>
+<a name="l00125"></a>00125 
+<a name="l00126"></a><a class="code" href="../../d3/dfe/a00025_a1015a2e5fbc6cbba40f48dad8d26942b.html#a1015a2e5fbc6cbba40f48dad8d26942b">00126</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a1015a2e5fbc6cbba40f48dad8d26942b.html#a1015a2e5fbc6cbba40f48dad8d26942b" title="Llenamos el array eventos con la información de los archivos de eventos de cada modulo.">__construct</a>($dir_modulos, $bAdmin=FALSE, $eProyecto=TRUE, $visualizar=FALSE) {
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130       $this-&gt;modulos_activados = array_merge($gcm-&gt;modulos_basicos,$gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Módulos activados&#39;</span>));
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132       registrar(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($this-&gt;modulos_activados,<span class="stringliteral">&#39;Modulos activados&#39;</span>));
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134       $this-&gt;visualizar = $visualizar;
+<a name="l00135"></a>00135       $this-&gt;eventos = array();
+<a name="l00136"></a>00136       $this-&gt;dir_modulos = $dir_modulos;         <span class="comment">// GCM_DIR.&#39;modulos/&#39;</span>
+<a name="l00137"></a>00137       $this-&gt;dir_modulos_proyecto = <span class="stringliteral">&#39;modulos/&#39;</span>;
+<a name="l00138"></a>00138       $this-&gt;bAdmin = $bAdmin;
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140       <span class="comment">/* Creamos una instancia de cache_http si esta activado para poder trabajar con ella */</span>
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142       $gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;cache_http&#39;</span>] = <span class="keyword">new</span> <a class="code" href="../../da/da0/a00009.html" title="Cache http.">Cache_http</a>();
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145       <span class="comment">/* Comprobar directorio de eventos en proyecto */</span>
 <a name="l00146"></a>00146 
-<a name="l00147"></a>00147       <span class="comment">/* Si queremos eventos de administración */</span>
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149       <span class="keywordflow">if</span> ( $this-&gt;bAdmin ) {
-<a name="l00150"></a>00150          $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;admin&#39;</span>);
-<a name="l00151"></a>00151          <span class="keywordflow">if</span> ( $eProyecto  ) $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;admin&#39;</span>,$this-&gt;dir_modulos_proyecto);
-<a name="l00152"></a>00152          }
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154       $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;usuario&#39;</span>);
-<a name="l00155"></a>00155       <span class="keywordflow">if</span> ( $eProyecto  ) $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;usuario&#39;</span>,$this-&gt;dir_modulos_proyecto);
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157       registrar(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>(get_object_vars($this),<span class="stringliteral">&#39;Variables en eventos&#39;</span>));
-<a name="l00158"></a>00158 
-<a name="l00159"></a>00159       <span class="comment">// echo &#39;&lt;p&gt;Eventos&lt;/p&gt;&#39;;</span>
-<a name="l00160"></a>00160       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($this-&gt;eventos) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00161"></a>00161       <span class="comment">// echo &#39;&lt;p&gt;Comportamientos de eventos&lt;/p&gt;&#39;;</span>
-<a name="l00162"></a>00162       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($this-&gt;cEventos) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00163"></a>00163       <span class="comment">// echo &#39;&lt;p&gt;Ubicación de archivos de eventos&lt;/p&gt;&#39;;</span>
-<a name="l00164"></a>00164       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($this-&gt;ubicaciones) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
-<a name="l00165"></a>00165       }
-<a name="l00166"></a>00166 <span class="comment"></span>
-<a name="l00167"></a>00167 <span class="comment">   /**</span>
-<a name="l00168"></a>00168 <span class="comment">    * Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php</span>
-<a name="l00169"></a>00169 <span class="comment">    * que tienen la información del módulo.</span>
-<a name="l00170"></a>00170 <span class="comment">    *</span>
-<a name="l00171"></a>00171 <span class="comment">    * @param $nivel Usuario o Administración</span>
-<a name="l00172"></a>00172 <span class="comment">    * @param $directorio Directorio donde se encuantran los módulos</span>
-<a name="l00173"></a>00173 <span class="comment">    */</span>
-<a name="l00174"></a>00174 
-<a name="l00175"></a><a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1">00175</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>($nivel, $directorio=NULL) {
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00178"></a>00178 <span class="comment"></span>
-<a name="l00179"></a>00179 <span class="comment">      /**</span>
-<a name="l00180"></a>00180 <span class="comment">       * Solo comprobamos modulos activados en caso de ser módulos de gcm</span>
-<a name="l00181"></a>00181 <span class="comment">       * si son del mismo proyecto, la activación es inerente.</span>
-<a name="l00182"></a>00182 <span class="comment">       */</span>
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184       $comprobar_activados = FALSE;
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186       $n = 0;
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188       <span class="keywordflow">if</span> ( ! $directorio  ) {
-<a name="l00189"></a>00189          $directorio = $this-&gt;dir_modulos;
-<a name="l00190"></a>00190          $comprobar_activados = TRUE;
-<a name="l00191"></a>00191          }
+<a name="l00147"></a>00147       <span class="keywordflow">if</span> ( ! file_exists($this-&gt;dir_eventos_proyecto)  ) {
+<a name="l00148"></a>00148          <span class="keywordflow">if</span> ( ! mkdir ($this-&gt;dir_eventos_proyecto) ) {
+<a name="l00149"></a>00149             <span class="keywordflow">return</span> FALSE;
+<a name="l00150"></a>00150             }
+<a name="l00151"></a>00151          }
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153       <span class="comment">/* Si queremos eventos de administración */</span>
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155       <span class="keywordflow">if</span> ( $this-&gt;bAdmin ) {
+<a name="l00156"></a>00156          $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;admin&#39;</span>);
+<a name="l00157"></a>00157          <span class="keywordflow">if</span> ( $eProyecto  ) $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;admin&#39;</span>,$this-&gt;dir_modulos_proyecto);
+<a name="l00158"></a>00158          }
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160       $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;usuario&#39;</span>);
+<a name="l00161"></a>00161       <span class="keywordflow">if</span> ( $eProyecto  ) $this-&gt;<a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>(<span class="stringliteral">&#39;usuario&#39;</span>,$this-&gt;dir_modulos_proyecto);
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163       registrar(__FILE__,__LINE__,<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>(get_object_vars($this),<span class="stringliteral">&#39;Variables en eventos&#39;</span>));
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165       <span class="comment">// echo &#39;&lt;p&gt;Eventos&lt;/p&gt;&#39;;</span>
+<a name="l00166"></a>00166       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($this-&gt;eventos) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
+<a name="l00167"></a>00167       <span class="comment">// echo &#39;&lt;p&gt;Comportamientos de eventos&lt;/p&gt;&#39;;</span>
+<a name="l00168"></a>00168       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($this-&gt;cEventos) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
+<a name="l00169"></a>00169       <span class="comment">// echo &#39;&lt;p&gt;Ubicación de archivos de eventos&lt;/p&gt;&#39;;</span>
+<a name="l00170"></a>00170       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($this-&gt;ubicaciones) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
+<a name="l00171"></a>00171       }
+<a name="l00172"></a>00172 <span class="comment"></span>
+<a name="l00173"></a>00173 <span class="comment">   /**</span>
+<a name="l00174"></a>00174 <span class="comment">    * Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php</span>
+<a name="l00175"></a>00175 <span class="comment">    * que tienen la información del módulo.</span>
+<a name="l00176"></a>00176 <span class="comment">    *</span>
+<a name="l00177"></a>00177 <span class="comment">    * Construimos: $this-&gt;eventos, $this-&gt;cEventos, $this-&gt;ubicaciones</span>
+<a name="l00178"></a>00178 <span class="comment">    *</span>
+<a name="l00179"></a>00179 <span class="comment">    * @param $nivel Usuario o Administración</span>
+<a name="l00180"></a>00180 <span class="comment">    * @param $directorio Directorio donde se encuantran los módulos</span>
+<a name="l00181"></a>00181 <span class="comment">    */</span>
+<a name="l00182"></a>00182 
+<a name="l00183"></a><a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1">00183</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_af726f87bbae5dbe4cb1954f280583fa1.html#af726f87bbae5dbe4cb1954f280583fa1" title="Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php que tienen la informaci...">leer_eventos</a>($nivel, $directorio=NULL) {
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187       registrar(__FILE__,__LINE__,__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$nivel.<span class="charliteral">&#39;,&#39;</span>.$directorio.<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189       <span class="keywordflow">if</span> ( isset($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;cache_http&#39;</span>]) ) {
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191          $eventos_en_cache = $gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;cache_http&#39;</span>]-&gt;recuperar_variable(<span class="stringliteral">&#39;eventos_&#39;</span>.$nivel) ;
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193       <span class="keywordflow">if</span> ( ! file_exists($directorio) ) {
-<a name="l00194"></a>00194          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No tenemos directorio de modulos en &#39;</span>.$directorio);
-<a name="l00195"></a>00195          <span class="keywordflow">return</span> FALSE;
-<a name="l00196"></a>00196          }
-<a name="l00197"></a>00197 
-<a name="l00198"></a>00198       $directorio_modulos = dir($directorio);
+<a name="l00193"></a>00193          <span class="keywordflow">if</span> ( $eventos_en_cache ) { 
+<a name="l00194"></a>00194             $this-&gt;eventos      = $eventos_en_cache[<span class="stringliteral">&#39;eventos&#39;</span>];
+<a name="l00195"></a>00195             $this-&gt;cEventos     = $eventos_en_cache[<span class="stringliteral">&#39;cEventos&#39;</span>];
+<a name="l00196"></a>00196             $this-&gt;ubicaciones  = $eventos_en_cache[<span class="stringliteral">&#39;ubicaciones&#39;</span>];
+<a name="l00197"></a>00197             <span class="keywordflow">return</span>;
+<a name="l00198"></a>00198             }
 <a name="l00199"></a>00199 
-<a name="l00200"></a>00200       <span class="keywordflow">while</span> ($modulo = $directorio_modulos-&gt;read()) {
-<a name="l00201"></a>00201          <span class="keywordflow">if</span> ( $comprobar_activados &amp;&amp; ! in_array($modulo,$this-&gt;modulos_activados) ) <span class="keywordflow">continue</span>;
-<a name="l00202"></a>00202          $fichero_modulo = $directorio.$modulo.<span class="stringliteral">&#39;/eventos_&#39;</span>.$nivel.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00203"></a>00203          $fichero_evento = $this-&gt;dir_eventos_proyecto.$modulo.<span class="stringliteral">&#39;/eventos_&#39;</span>.$nivel.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00204"></a>00204          <span class="keywordflow">if</span> ( ! is_file($fichero_modulo) ) <span class="keywordflow">continue</span>;
-<a name="l00205"></a>00205          <span class="keywordflow">if</span> ( ! is_file($fichero_evento) ) {
-<a name="l00206"></a>00206             <span class="keywordflow">if</span> ( ! is_dir($this-&gt;dir_eventos_proyecto.$modulo)  ) {
-<a name="l00207"></a>00207                <span class="keywordflow">if</span> ( ! mkdir($this-&gt;dir_eventos_proyecto.$modulo)  ) {
-<a name="l00208"></a>00208                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No se pudo crear directorio de módulo en la configuración del proyecto [&#39;</span>.$modulo.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00209"></a>00209                   <span class="keywordflow">return</span> FALSE;
-<a name="l00210"></a>00210                   }
-<a name="l00211"></a>00211                }
-<a name="l00212"></a>00212             <span class="keywordflow">if</span> ( ! copy($fichero_modulo, $fichero_evento)  ) {
-<a name="l00213"></a>00213                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No se pudo copiar archivo de evento [&#39;</span>.$fichero_evento.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00214"></a>00214                <span class="keywordflow">return</span> FALSE;
-<a name="l00215"></a>00215                }
-<a name="l00216"></a>00216             }
-<a name="l00217"></a>00217          include($fichero_evento);
-<a name="l00218"></a>00218          <span class="keywordflow">if</span> ( isset(<a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>) &amp;&amp; is_array(<a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>) ) {
-<a name="l00219"></a>00219             <span class="keywordflow">foreach</span> ( <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a> as $e =&gt; $accion ) {
-<a name="l00220"></a>00220                <span class="keywordflow">foreach</span> ( $accion as $a =&gt; $valor ) {
-<a name="l00221"></a>00221                   <span class="keywordflow">foreach</span> ( $valor as $prioridad =&gt; $argumentos ) {
-<a name="l00222"></a>00222                      $this-&gt;eventos[$e][$modulo][$a][$prioridad] = $argumentos; 
-<a name="l00223"></a>00223                      $this-&gt;ubicaciones[$modulo] = $directorio.$modulo; 
-<a name="l00224"></a>00224                      $n++;
-<a name="l00225"></a>00225                      <span class="keywordflow">if</span> ( isset(<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>[$e]) ) {
-<a name="l00226"></a>00226                         $this-&gt;cEventos[$e][<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>[$e]] = $modulo;
-<a name="l00227"></a>00227                         }
-<a name="l00228"></a>00228                      }
-<a name="l00229"></a>00229                      unset($a);
-<a name="l00230"></a>00230                      <span class="keywordflow">if</span> ( isset(<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>)  ) unset(<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>[$e]);
-<a name="l00231"></a>00231                   }
-<a name="l00232"></a>00232                }
-<a name="l00233"></a>00233             unset(<a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>);
-<a name="l00234"></a>00234             }
-<a name="l00235"></a>00235          }
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Numero de eventos en &#39;</span>.$directorio.<span class="stringliteral">&#39;: &#39;</span>.$n);
-<a name="l00238"></a>00238       }
-<a name="l00239"></a>00239 <span class="comment"></span>
-<a name="l00240"></a>00240 <span class="comment">   /** Verificar la existencia de un evento</span>
-<a name="l00241"></a>00241 <span class="comment">    *</span>
-<a name="l00242"></a>00242 <span class="comment">    * @param $e Evento</span>
-<a name="l00243"></a>00243 <span class="comment">    *</span>
-<a name="l00244"></a>00244 <span class="comment">    * @return TRUE/FALSE</span>
-<a name="l00245"></a>00245 <span class="comment">    */</span>
-<a name="l00246"></a>00246 
-<a name="l00247"></a><a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1">00247</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>($e) {
-<a name="l00248"></a>00248 
-<a name="l00249"></a>00249       <span class="keywordflow">if</span> ( empty($this-&gt;eventos[$e]) ) {
-<a name="l00250"></a>00250          <span class="keywordflow">return</span> FALSE;
-<a name="l00251"></a>00251       } <span class="keywordflow">else</span> {
-<a name="l00252"></a>00252          <span class="keywordflow">return</span> TRUE;
-<a name="l00253"></a>00253          }
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255       }
-<a name="l00256"></a>00256 <span class="comment"></span>
-<a name="l00257"></a>00257 <span class="comment">   /** lanzarEvento </span>
-<a name="l00258"></a>00258 <span class="comment">    *</span>
-<a name="l00259"></a>00259 <span class="comment">    * Recogemos la información del arreglo eventos para ordenarla por orden</span>
-<a name="l00260"></a>00260 <span class="comment">    * de prioridad y lanzar los metodos especificados.</span>
-<a name="l00261"></a>00261 <span class="comment">    *</span>
-<a name="l00262"></a>00262 <span class="comment">    * @param e Evento que se lanza</span>
-<a name="l00263"></a>00263 <span class="comment">    * @param args Argumentos para el evento, estos argumentos son añadidos en tiempo de ejecución del evento y son sumados</span>
-<a name="l00264"></a>00264 <span class="comment">    *             a los predefinidos al momento de configurar el evento. @see recoger_parametros</span>
-<a name="l00265"></a>00265 <span class="comment">    *</span>
-<a name="l00266"></a>00266 <span class="comment">    * @return TRUE/FALSE</span>
-<a name="l00267"></a>00267 <span class="comment">    *</span>
-<a name="l00268"></a>00268 <span class="comment">    * @author Eduardo Magrané</span>
-<a name="l00269"></a>00269 <span class="comment">    * @version 1.0</span>
-<a name="l00270"></a>00270 <span class="comment">    *</span>
-<a name="l00271"></a>00271 <span class="comment">    */</span>
-<a name="l00272"></a>00272 
-<a name="l00273"></a><a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb">00273</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb" title="lanzarEvento">lanzarEvento</a>($e, $args=<span class="stringliteral">&#39;&#39;</span>){
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00276"></a>00276 
-<a name="l00277"></a>00277       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;lanzarEvento(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00278"></a>00278 
-<a name="l00279"></a>00279       $evento = $e;
-<a name="l00280"></a>00280 
-<a name="l00281"></a>00281       <span class="keywordflow">if</span> ( $this-&gt;visualizar ) echo <span class="stringliteral">&#39;&lt;div class=&quot;visualizar_evento&quot; style=&quot;background: yellow;&quot;&gt;&lt;p style=&quot;font-size: 12px; color: red;&quot;&gt;&#39;</span>.$e.<span class="stringliteral">&#39;&lt;/p&gt;&#39;</span>;
-<a name="l00282"></a>00282 
-<a name="l00283"></a>00283       $parametros_eventos = $args;
-<a name="l00284"></a>00284 
-<a name="l00285"></a>00285       <span class="comment">/* Comprobar que no se haya anulado el evento */</span>
-<a name="l00286"></a>00286 
-<a name="l00287"></a>00287       <span class="keywordflow">if</span> (  isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;anular&#39;</span>]) )   {
-<a name="l00288"></a>00288          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;lanzarEvento(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Evento anulado nos volvemos&#39;</span>);
-<a name="l00289"></a>00289          <span class="keywordflow">return</span>;
-<a name="l00290"></a>00290          }
-<a name="l00291"></a>00291 
-<a name="l00292"></a>00292       <span class="comment">/* Comprobar si hay subevento (pre&lt;evento&gt;) y lanzar subevento si lo hay */</span>
-<a name="l00293"></a>00293 
-<a name="l00294"></a>00294       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>(<span class="stringliteral">&#39;pre&#39;</span>.$evento) ) { $this-&gt;<a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb" title="lanzarEvento">lanzarEvento</a>(<span class="stringliteral">&#39;pre&#39;</span>.$evento); }
-<a name="l00295"></a>00295 
-<a name="l00296"></a>00296       <span class="keywordflow">try</span> {
-<a name="l00297"></a>00297 
-<a name="l00298"></a>00298          <span class="keywordflow">if</span> ( !$this-&gt;<a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>($evento) ) {
-<a name="l00299"></a>00299 
-<a name="l00300"></a>00300             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Sin eventos para [&#39;</span>.$evento.<span class="charliteral">&#39;]&#39;</span>);
-<a name="l00301"></a>00301 
-<a name="l00302"></a>00302          } <span class="keywordflow">else</span> {
-<a name="l00303"></a>00303             
-<a name="l00304"></a>00304             <span class="comment">/* Eventos ordenados por prioridad */</span>
+<a name="l00200"></a>00200          }
+<a name="l00201"></a>00201 <span class="comment"></span>
+<a name="l00202"></a>00202 <span class="comment">      /**</span>
+<a name="l00203"></a>00203 <span class="comment">       * Solo comprobamos modulos activados en caso de ser módulos de gcm</span>
+<a name="l00204"></a>00204 <span class="comment">       * si son del mismo proyecto, la activación es inerente.</span>
+<a name="l00205"></a>00205 <span class="comment">       */</span>
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207       $comprobar_activados = FALSE;
+<a name="l00208"></a>00208 
+<a name="l00209"></a>00209       $n = 0;
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211       <span class="keywordflow">if</span> ( ! $directorio  ) {
+<a name="l00212"></a>00212          $directorio = $this-&gt;dir_modulos;
+<a name="l00213"></a>00213          $comprobar_activados = TRUE;
+<a name="l00214"></a>00214          }
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216       <span class="keywordflow">if</span> ( ! file_exists($directorio) ) {
+<a name="l00217"></a>00217          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No tenemos directorio de modulos en &#39;</span>.$directorio);
+<a name="l00218"></a>00218          <span class="keywordflow">return</span> FALSE;
+<a name="l00219"></a>00219          }
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221       $directorio_modulos = dir($directorio);
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223       <span class="keywordflow">while</span> ($modulo = $directorio_modulos-&gt;read()) {
+<a name="l00224"></a>00224          <span class="keywordflow">if</span> ( $comprobar_activados &amp;&amp; ! in_array($modulo,$this-&gt;modulos_activados) ) <span class="keywordflow">continue</span>;
+<a name="l00225"></a>00225          $fichero_modulo = $directorio.$modulo.<span class="stringliteral">&#39;/eventos_&#39;</span>.$nivel.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00226"></a>00226          $fichero_evento = $this-&gt;dir_eventos_proyecto.$modulo.<span class="stringliteral">&#39;/eventos_&#39;</span>.$nivel.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00227"></a>00227          <span class="keywordflow">if</span> ( ! is_file($fichero_modulo) ) <span class="keywordflow">continue</span>;
+<a name="l00228"></a>00228          <span class="keywordflow">if</span> ( ! is_file($fichero_evento) ) {
+<a name="l00229"></a>00229             <span class="keywordflow">if</span> ( ! is_dir($this-&gt;dir_eventos_proyecto.$modulo)  ) {
+<a name="l00230"></a>00230                <span class="keywordflow">if</span> ( ! mkdir($this-&gt;dir_eventos_proyecto.$modulo)  ) {
+<a name="l00231"></a>00231                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No se pudo crear directorio de módulo en la configuración del proyecto [&#39;</span>.$modulo.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00232"></a>00232                   <span class="keywordflow">return</span> FALSE;
+<a name="l00233"></a>00233                   }
+<a name="l00234"></a>00234                }
+<a name="l00235"></a>00235             <span class="keywordflow">if</span> ( ! copy($fichero_modulo, $fichero_evento)  ) {
+<a name="l00236"></a>00236                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No se pudo copiar archivo de evento [&#39;</span>.$fichero_evento.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00237"></a>00237                <span class="keywordflow">return</span> FALSE;
+<a name="l00238"></a>00238                }
+<a name="l00239"></a>00239             }
+<a name="l00240"></a>00240          include($fichero_evento);
+<a name="l00241"></a>00241          <span class="keywordflow">if</span> ( isset(<a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>) &amp;&amp; is_array(<a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>) ) {
+<a name="l00242"></a>00242             <span class="keywordflow">foreach</span> ( <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a> as $e =&gt; $accion ) {
+<a name="l00243"></a>00243                <span class="keywordflow">foreach</span> ( $accion as $a =&gt; $valor ) {
+<a name="l00244"></a>00244                   <span class="keywordflow">foreach</span> ( $valor as $prioridad =&gt; $argumentos ) {
+<a name="l00245"></a>00245                      $this-&gt;eventos[$e][$modulo][$a][$prioridad] = $argumentos; 
+<a name="l00246"></a>00246                      $this-&gt;ubicaciones[$modulo] = $directorio.$modulo; 
+<a name="l00247"></a>00247                      $n++;
+<a name="l00248"></a>00248                      <span class="keywordflow">if</span> ( isset(<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>[$e]) ) {
+<a name="l00249"></a>00249                         $this-&gt;cEventos[$e][<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>[$e]] = $modulo;
+<a name="l00250"></a>00250                         }
+<a name="l00251"></a>00251                      }
+<a name="l00252"></a>00252                      unset($a);
+<a name="l00253"></a>00253                      <span class="keywordflow">if</span> ( isset(<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>)  ) unset(<a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$cEventos</a>[$e]);
+<a name="l00254"></a>00254                   }
+<a name="l00255"></a>00255                }
+<a name="l00256"></a>00256             unset(<a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a>);
+<a name="l00257"></a>00257             }
+<a name="l00258"></a>00258          }
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Numero de eventos en &#39;</span>.$directorio.<span class="stringliteral">&#39;: &#39;</span>.$n);
+<a name="l00261"></a>00261 
+<a name="l00262"></a>00262          <span class="keywordflow">if</span> ( isset($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;cache_http&#39;</span>]) ) {
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264             $eventos_en_cache[<span class="stringliteral">&#39;eventos&#39;</span>]      = <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$this-&gt;eventos</a>       ;
+<a name="l00265"></a>00265             $eventos_en_cache[<span class="stringliteral">&#39;cEventos&#39;</span>]     = <a class="code" href="../../d3/dfe/a00025_a0449466b42e888dd50c0ba6942883e82.html#a0449466b42e888dd50c0ba6942883e82" title="Comportamientos de los eventos.">$this-&gt;cEventos</a>      ;
+<a name="l00266"></a>00266             $eventos_en_cache[<span class="stringliteral">&#39;ubicaciones&#39;</span>]  = <a class="code" href="../../d3/dfe/a00025_ab560df5656d57dea3fda225bd593d77d.html#ab560df5656d57dea3fda225bd593d77d" title="Ubicación de los módulos.">$this-&gt;ubicaciones</a>   ;
+<a name="l00267"></a>00267             $gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;cache_http&#39;</span>]-&gt;guardar_variable(<span class="stringliteral">&#39;eventos_&#39;</span>.$nivel,$eventos_en_cache);
+<a name="l00268"></a>00268 
+<a name="l00269"></a>00269             }
+<a name="l00270"></a>00270 
+<a name="l00271"></a>00271       }
+<a name="l00272"></a>00272 <span class="comment"></span>
+<a name="l00273"></a>00273 <span class="comment">   /** Verificar la existencia de un evento</span>
+<a name="l00274"></a>00274 <span class="comment">    *</span>
+<a name="l00275"></a>00275 <span class="comment">    * @param $e Evento</span>
+<a name="l00276"></a>00276 <span class="comment">    *</span>
+<a name="l00277"></a>00277 <span class="comment">    * @return TRUE/FALSE</span>
+<a name="l00278"></a>00278 <span class="comment">    */</span>
+<a name="l00279"></a>00279 
+<a name="l00280"></a><a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1">00280</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>($e) {
+<a name="l00281"></a>00281 
+<a name="l00282"></a>00282       <span class="keywordflow">if</span> ( empty($this-&gt;eventos[$e]) ) {
+<a name="l00283"></a>00283          <span class="keywordflow">return</span> FALSE;
+<a name="l00284"></a>00284       } <span class="keywordflow">else</span> {
+<a name="l00285"></a>00285          <span class="keywordflow">return</span> TRUE;
+<a name="l00286"></a>00286          }
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288       }
+<a name="l00289"></a>00289 <span class="comment"></span>
+<a name="l00290"></a>00290 <span class="comment">   /** lanzarEvento </span>
+<a name="l00291"></a>00291 <span class="comment">    *</span>
+<a name="l00292"></a>00292 <span class="comment">    * Recogemos la información del arreglo eventos para ordenarla por orden</span>
+<a name="l00293"></a>00293 <span class="comment">    * de prioridad y lanzar los metodos especificados.</span>
+<a name="l00294"></a>00294 <span class="comment">    *</span>
+<a name="l00295"></a>00295 <span class="comment">    * @param e Evento que se lanza</span>
+<a name="l00296"></a>00296 <span class="comment">    * @param args Argumentos para el evento, estos argumentos son añadidos en tiempo de ejecución del evento y son sumados</span>
+<a name="l00297"></a>00297 <span class="comment">    *             a los predefinidos al momento de configurar el evento. @see recoger_parametros</span>
+<a name="l00298"></a>00298 <span class="comment">    *</span>
+<a name="l00299"></a>00299 <span class="comment">    * @return TRUE/FALSE</span>
+<a name="l00300"></a>00300 <span class="comment">    *</span>
+<a name="l00301"></a>00301 <span class="comment">    * @author Eduardo Magrané</span>
+<a name="l00302"></a>00302 <span class="comment">    * @version 1.0</span>
+<a name="l00303"></a>00303 <span class="comment">    *</span>
+<a name="l00304"></a>00304 <span class="comment">    */</span>
 <a name="l00305"></a>00305 
-<a name="l00306"></a>00306             $orden = $this-&gt;prioridad($e);
+<a name="l00306"></a><a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb">00306</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb" title="lanzarEvento">lanzarEvento</a>($e, $args=<span class="stringliteral">&#39;&#39;</span>){
 <a name="l00307"></a>00307 
-<a name="l00308"></a>00308             registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Acciones para evento [&#39;</span>.$evento.<span class="stringliteral">&#39;]: &#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($orden));
+<a name="l00308"></a>00308       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00309"></a>00309 
-<a name="l00310"></a>00310             <span class="comment">/* Lanzar eventos */</span>
+<a name="l00310"></a>00310       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;lanzarEvento(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="charliteral">&#39;)&#39;</span>);
 <a name="l00311"></a>00311 
-<a name="l00312"></a>00312             <span class="keywordflow">foreach</span> ( $orden as $accion =&gt; $prioridad ) {
+<a name="l00312"></a>00312       $evento = $e;
 <a name="l00313"></a>00313 
-<a name="l00314"></a>00314                <span class="comment">/* Comprobar que no se haya anulado el evento */</span>
+<a name="l00314"></a>00314       <span class="keywordflow">if</span> ( $this-&gt;visualizar ) echo <span class="stringliteral">&#39;&lt;div class=&quot;visualizar_evento&quot; style=&quot;background: yellow;&quot;&gt;&lt;p style=&quot;font-size: 12px; color: red;&quot;&gt;&#39;</span>.$e.<span class="stringliteral">&#39;&lt;/p&gt;&#39;</span>;
 <a name="l00315"></a>00315 
-<a name="l00316"></a>00316                <span class="keywordflow">if</span> (  isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;anular&#39;</span>]) )   {
-<a name="l00317"></a>00317                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;lanzarEvento(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Evento anulado nos volvemos&#39;</span>);
-<a name="l00318"></a>00318                   <span class="keywordflow">return</span>;
-<a name="l00319"></a>00319                   }
-<a name="l00320"></a>00320 
-<a name="l00321"></a>00321                list($m,$a,$parametros_metodo) = explode(<span class="charliteral">&#39;|&#39;</span>,$accion);
-<a name="l00322"></a>00322 
-<a name="l00323"></a>00323                <span class="keywordflow">if</span> ( !empty( $parametros_metodo) &amp;&amp; !empty($parametros_eventos) ) {
-<a name="l00324"></a>00324                   $parametros = $parametros_eventos.<span class="charliteral">&#39;&amp;&#39;</span>.$parametros_metodo;
-<a name="l00325"></a>00325                } elseif ( empty($parametros_eventos) ) {
-<a name="l00326"></a>00326                   $parametros = $parametros_metodo;
-<a name="l00327"></a>00327                } elseif ( empty($parametros_metodo) ) {
-<a name="l00328"></a>00328                   $parametros = $parametros_eventos;
-<a name="l00329"></a>00329                   }
+<a name="l00316"></a>00316       $parametros_eventos = $args;
+<a name="l00317"></a>00317 
+<a name="l00318"></a>00318       <span class="comment">/* Comprobar que no se haya anulado el evento */</span>
+<a name="l00319"></a>00319 
+<a name="l00320"></a>00320       <span class="keywordflow">if</span> (  isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;anular&#39;</span>]) )   {
+<a name="l00321"></a>00321          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;lanzarEvento(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Evento anulado nos volvemos&#39;</span>);
+<a name="l00322"></a>00322          <span class="keywordflow">return</span>;
+<a name="l00323"></a>00323          }
+<a name="l00324"></a>00324 
+<a name="l00325"></a>00325       <span class="comment">/* Comprobar si hay subevento (pre&lt;evento&gt;) y lanzar subevento si lo hay */</span>
+<a name="l00326"></a>00326 
+<a name="l00327"></a>00327       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>(<span class="stringliteral">&#39;pre&#39;</span>.$evento) ) { $this-&gt;<a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb" title="lanzarEvento">lanzarEvento</a>(<span class="stringliteral">&#39;pre&#39;</span>.$evento); }
+<a name="l00328"></a>00328 
+<a name="l00329"></a>00329       <span class="keywordflow">try</span> {
 <a name="l00330"></a>00330 
-<a name="l00331"></a>00331                <span class="comment">/* Comprovamos comportamiento de eventos */</span>
+<a name="l00331"></a>00331          <span class="keywordflow">if</span> ( !$this-&gt;<a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>($evento) ) {
 <a name="l00332"></a>00332 
-<a name="l00333"></a>00333                <span class="keywordflow">if</span> ( isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;unico&#39;</span>]) &amp;&amp; $this-&gt;cEventos[$e][<span class="stringliteral">&#39;unico&#39;</span>] != $m )   {          <span class="comment">// unico</span>
+<a name="l00333"></a>00333             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Sin eventos para [&#39;</span>.$evento.<span class="charliteral">&#39;]&#39;</span>);
 <a name="l00334"></a>00334 
-<a name="l00335"></a>00335                   <span class="comment">/* El evento tiene comportamiento de unico y no es para este modulo */</span>
-<a name="l00336"></a>00336 
-<a name="l00337"></a>00337                   registrar(__FILE__,__LINE__,
-<a name="l00338"></a>00338                      <span class="stringliteral">&#39;Comportamiento [ unico ] para evento [&#39;</span>.$e.<span class="stringliteral">&#39;] por parte de [ &#39;</span>.$this-&gt;cEventos[$e][<span class="stringliteral">&#39;unico&#39;</span>].<span class="stringliteral">&#39; ]&#39;</span>);
-<a name="l00339"></a>00339 
-<a name="l00340"></a>00340                } <span class="keywordflow">else</span> {
-<a name="l00341"></a>00341                   
-<a name="l00342"></a>00342                   <span class="comment">// Los eventos para cache no los comentamos en debug para que se muestren antes de la definición</span>
-<a name="l00343"></a>00343                   <span class="comment">// de doctype y despiste al navegador</span>
+<a name="l00335"></a>00335          } <span class="keywordflow">else</span> {
+<a name="l00336"></a>00336             
+<a name="l00337"></a>00337             <span class="comment">/* Eventos ordenados por prioridad */</span>
+<a name="l00338"></a>00338 
+<a name="l00339"></a>00339             $orden = $this-&gt;prioridad($e);
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341             registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Acciones para evento [&#39;</span>.$evento.<span class="stringliteral">&#39;]: &#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($orden));
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343             <span class="comment">/* Lanzar eventos */</span>
 <a name="l00344"></a>00344 
-<a name="l00345"></a>00345                   <span class="keywordflow">if</span> ( GCM_DEBUG &amp;&amp; <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;html&#39;</span> &amp;&amp; $m !== <span class="stringliteral">&#39;cache_http&#39;</span>) printf(<span class="stringliteral">&quot;\n&quot;</span>.<a class="code" href="../../d9/d73/a00060_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">Router::$forma_comentarios</a>.<span class="stringliteral">&quot;\n&quot;</span>,<span class="stringliteral">&#39;Eventos: &#39;</span>.$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$parametros.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00346"></a>00346                   <span class="keywordflow">if</span> ( $this-&gt;visualizar ) {
-<a name="l00347"></a>00347                      <span class="keywordflow">if</span> ( $m == <span class="stringliteral">&quot;temas&quot;</span>  ) $this-&gt;<a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55" title="Lanzar acción de módulo.">lanzar_accion_modulo</a>($m,$a,$e,$parametros);
-<a name="l00348"></a>00348                      echo <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;p style=&quot;font-size: 12px&quot;&gt;&lt;a href=&quot;?m=admin&amp;a=editar_conexion&amp;md=&#39;</span>.$m.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>,$m,<span class="stringliteral">&#39;-&gt;&#39;</span>,$a,<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$parametros.<span class="stringliteral">&#39;)&lt;/a&gt;&lt;/p&gt;&#39;</span>.<span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00349"></a>00349                   } <span class="keywordflow">else</span> {
-<a name="l00350"></a>00350                      $this-&gt;<a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55" title="Lanzar acción de módulo.">lanzar_accion_modulo</a>($m,$a,$e,$parametros);
-<a name="l00351"></a>00351                      }
-<a name="l00352"></a>00352 
-<a name="l00353"></a>00353                   <span class="keywordflow">if</span> ( GCM_DEBUG &amp;&amp; <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;html&#39;</span> &amp;&amp; $m !== <span class="stringliteral">&#39;cache_http&#39;</span>) printf(<span class="stringliteral">&quot;\n&quot;</span>.<a class="code" href="../../d9/d73/a00060_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">Router::$forma_comentarios</a>.<span class="stringliteral">&quot;\n&quot;</span>,<span class="stringliteral">&#39; / Eventos: &#39;</span>.$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$parametros.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00354"></a>00354                   }
+<a name="l00345"></a>00345             <span class="keywordflow">foreach</span> ( $orden as $accion =&gt; $prioridad ) {
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347                <span class="comment">/* Comprobar que no se haya anulado el evento */</span>
+<a name="l00348"></a>00348 
+<a name="l00349"></a>00349                <span class="keywordflow">if</span> (  isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;anular&#39;</span>]) )   {
+<a name="l00350"></a>00350                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;lanzarEvento(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Evento anulado nos volvemos&#39;</span>);
+<a name="l00351"></a>00351                   <span class="keywordflow">return</span>;
+<a name="l00352"></a>00352                   }
+<a name="l00353"></a>00353 
+<a name="l00354"></a>00354                list($m,$a,$parametros_metodo) = explode(<span class="charliteral">&#39;|&#39;</span>,$accion);
 <a name="l00355"></a>00355 
-<a name="l00356"></a>00356                }
-<a name="l00357"></a>00357             }
-<a name="l00358"></a>00358 
-<a name="l00359"></a>00359          } <span class="keywordflow">catch</span> (Exception $ex) {
-<a name="l00360"></a>00360 
-<a name="l00361"></a>00361             registrar($ex-&gt;getFile(),$ex-&gt;getLine(),<span class="stringliteral">&#39;Excepción en eventos [ &#39;</span>.$e.<span class="stringliteral">&#39; ] : &#39;</span>.$ex-&gt;getMessage(). <span class="stringliteral">&quot;\n&quot;</span>,<span class="stringliteral">&#39;ADMIN&#39;</span>);
-<a name="l00362"></a>00362 
-<a name="l00363"></a>00363             }
-<a name="l00364"></a>00364 <span class="comment"></span>
-<a name="l00365"></a>00365 <span class="comment">         /** Comprobar si hay eventos para post&lt;evento&gt; */</span>
-<a name="l00366"></a>00366 
-<a name="l00367"></a>00367          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>(<span class="stringliteral">&#39;post&#39;</span>.$evento) ) { $this-&gt;<a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb" title="lanzarEvento">lanzarEvento</a>(<span class="stringliteral">&#39;post&#39;</span>.$evento); }
-<a name="l00368"></a>00368 
-<a name="l00369"></a>00369          <span class="keywordflow">if</span> ( $this-&gt;visualizar ) echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
-<a name="l00370"></a>00370          <span class="keywordflow">return</span> TRUE;
-<a name="l00371"></a>00371       }
-<a name="l00372"></a>00372 <span class="comment"></span>
-<a name="l00373"></a>00373 <span class="comment">   /**</span>
-<a name="l00374"></a>00374 <span class="comment">    * Ordenar evento por prioridad</span>
-<a name="l00375"></a>00375 <span class="comment">    *</span>
-<a name="l00376"></a>00376 <span class="comment">    * @param $e Evento a inspeccionar</span>
-<a name="l00377"></a>00377 <span class="comment">    *</span>
-<a name="l00378"></a>00378 <span class="comment">    * @return Array en formato [modulos|acción|argumentos] = orden</span>
-<a name="l00379"></a>00379 <span class="comment">    */</span>
-<a name="l00380"></a>00380 
-<a name="l00381"></a>00381    <span class="keyword">private</span> <span class="keyword">function</span> prioridad($e) {
-<a name="l00382"></a>00382 
-<a name="l00383"></a>00383       $arreglo = array();              <span class="comment">///&lt; Array a devolver con las acciones ordenador por prioridad</span>
-<a name="l00384"></a>00384 <span class="comment"></span>      <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a> = $this-&gt;eventos[$e];   <span class="comment">///&lt; Contenido de las acciones del evento</span>
-<a name="l00385"></a>00385 <span class="comment"></span>      $args = NULL;                    <span class="comment">///&lt; Argumentos del evento</span>
-<a name="l00386"></a>00386 <span class="comment"></span>
-<a name="l00387"></a>00387       <span class="keywordflow">foreach</span> ( <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a> as $ee =&gt; $aa ) {
-<a name="l00388"></a>00388          $n_m = $ee;
-<a name="l00389"></a>00389          <span class="keywordflow">foreach</span>( $aa as $n_a =&gt; $valor ) {
-<a name="l00390"></a>00390 
-<a name="l00391"></a>00391             <span class="keywordflow">foreach</span> ( $valor as $prioridad =&gt; $argumentos ) {
-<a name="l00392"></a>00392 
-<a name="l00393"></a>00393                <span class="keywordflow">if</span> ( $prioridad &gt; 0 ) {
-<a name="l00394"></a>00394                   $arreglo[$n_m.<span class="charliteral">&#39;|&#39;</span>.$n_a.<span class="charliteral">&#39;|&#39;</span>.$argumentos] = $prioridad;
-<a name="l00395"></a>00395                   }
-<a name="l00396"></a>00396 
-<a name="l00397"></a>00397                }
-<a name="l00398"></a>00398             }
-<a name="l00399"></a>00399          unset($n_a, $mm);
-<a name="l00400"></a>00400          unset($n_e);
-<a name="l00401"></a>00401          }
-<a name="l00402"></a>00402       
-<a name="l00403"></a>00403       asort($arreglo);
-<a name="l00404"></a>00404       reset($arreglo);
-<a name="l00405"></a>00405       <span class="keywordflow">return</span> $arreglo;
-<a name="l00406"></a>00406    }
-<a name="l00407"></a>00407 <span class="comment"></span>
-<a name="l00408"></a>00408 <span class="comment">   /**</span>
-<a name="l00409"></a>00409 <span class="comment">    * Devolver instancia de un módulo, nos permite interactuar entre</span>
-<a name="l00410"></a>00410 <span class="comment">    * componentes sin reacrgar la aplicación</span>
-<a name="l00411"></a>00411 <span class="comment">    *</span>
-<a name="l00412"></a>00412 <span class="comment">    * @param $modulo Modulo a instanciar</span>
-<a name="l00413"></a>00413 <span class="comment">    */</span>
-<a name="l00414"></a>00414 
-<a name="l00415"></a><a class="code" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379">00415</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379" title="Devolver instancia de un módulo, nos permite interactuar entre componentes sin reacrgar la aplicación...">instancia_modulo</a>($m) {
-<a name="l00416"></a>00416 
-<a name="l00417"></a>00417       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00418"></a>00418 <span class="comment"></span>
-<a name="l00419"></a>00419 <span class="comment">      /**</span>
-<a name="l00420"></a>00420 <span class="comment">       * url del fichero que contiene la clase, ejemplo: temas/lib/Temas.php</span>
-<a name="l00421"></a>00421 <span class="comment">       */</span>
-<a name="l00422"></a>00422 
-<a name="l00423"></a>00423       $fm = NULL ;
-<a name="l00424"></a>00424 <span class="comment"></span>
-<a name="l00425"></a>00425 <span class="comment">      /** Nombre de la clase */</span>
-<a name="l00426"></a>00426 
-<a name="l00427"></a>00427       $M = ucfirst($m);
-<a name="l00428"></a>00428 <span class="comment"></span>
-<a name="l00429"></a>00429 <span class="comment">      /** Nombre de la clase administrativa */</span>
-<a name="l00430"></a>00430 
-<a name="l00431"></a>00431       $logeados = ( $gcm-&gt;au-&gt;logeado() ) ? TRUE : FALSE ;
-<a name="l00432"></a>00432 
-<a name="l00433"></a>00433       <span class="keywordflow">if</span> ( isset($this-&gt;ubicaciones[$m])  ) {
-<a name="l00434"></a>00434          <span class="keywordflow">if</span> ( $logeados &amp;&amp; file_exists($this-&gt;ubicaciones[$m].<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;Admin.php&#39;</span>)  ) {
-<a name="l00435"></a>00435             $MA = $M.<span class="stringliteral">&#39;Admin&#39;</span>;
-<a name="l00436"></a>00436             $fm = $this-&gt;ubicaciones[$m].<span class="stringliteral">&#39;/lib/&#39;</span>.$MA.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00437"></a>00437          } <span class="keywordflow">else</span> {
-<a name="l00438"></a>00438             $fm = $this-&gt;ubicaciones[$m].<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00439"></a>00439             $MA = FALSE;
-<a name="l00440"></a>00440             }
-<a name="l00441"></a>00441 
-<a name="l00442"></a>00442       } elseif ( $logeados &amp;&amp; file_exists($this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;Admin.php&#39;</span>) ) {
-<a name="l00443"></a>00443          $MA = $M.<span class="stringliteral">&#39;Admin&#39;</span>;
-<a name="l00444"></a>00444          $fm = $this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$MA.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00445"></a>00445       } elseif ( file_exists($this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>) ) {
-<a name="l00446"></a>00446          $fm = $this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00447"></a>00447          $MA = FALSE;
-<a name="l00448"></a>00448       } elseif ( $logeados &amp;&amp; file_exists($this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>) ) {
-<a name="l00449"></a>00449          $MA = $M.<span class="stringliteral">&#39;Admin&#39;</span>;
-<a name="l00450"></a>00450          $fm = $this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$MA.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00451"></a>00451       } elseif ( file_exists($this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>) ) {
-<a name="l00452"></a>00452          $MA = FALSE;
-<a name="l00453"></a>00453          $fm = $this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>;
-<a name="l00454"></a>00454       } <span class="keywordflow">else</span> {
-<a name="l00455"></a>00455          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Error al cargar módulo, Fichero de módulo no encontrado [&#39;</span>.$m.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00456"></a>00456          <span class="keywordflow">return</span> FALSE;
-<a name="l00457"></a>00457          }
-<a name="l00458"></a>00458 
-<a name="l00459"></a>00459       <span class="keywordflow">if</span> ( ! is_file($fm)  ) {
-<a name="l00460"></a>00460 
-<a name="l00461"></a>00461          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Error al cargar módulo, Fichero de módulo no encontrado [&#39;</span>.$fm.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00462"></a>00462          <span class="keywordflow">return</span> FALSE;
-<a name="l00463"></a>00463          }
-<a name="l00464"></a>00464 
-<a name="l00465"></a>00465       <span class="keywordflow">if</span> ( !isset($this-&gt;instancias[$m])  ) {
-<a name="l00466"></a>00466 
-<a name="l00467"></a>00467          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Instancia de módulo: [&#39;</span>.$m.<span class="charliteral">&#39;]&#39;</span>);
-<a name="l00468"></a>00468          require_once($fm);
-<a name="l00469"></a>00469 
-<a name="l00470"></a>00470          <span class="keywordflow">if</span> ( $MA ) {
-<a name="l00471"></a>00471             $this-&gt;instancias[$m] = <span class="keyword">new</span> $MA(); 
-<a name="l00472"></a>00472          } <span class="keywordflow">else</span> {
-<a name="l00473"></a>00473             $this-&gt;instancias[$m] = <span class="keyword">new</span> $M(); 
-<a name="l00474"></a>00474             }
-<a name="l00475"></a>00475 
-<a name="l00476"></a>00476          } 
-<a name="l00477"></a>00477 
-<a name="l00478"></a>00478       <span class="keywordflow">return</span> $this-&gt;instancias[$m];
-<a name="l00479"></a>00479 
-<a name="l00480"></a>00480       }
-<a name="l00481"></a>00481 <span class="comment"></span>
-<a name="l00482"></a>00482 <span class="comment">   /**</span>
-<a name="l00483"></a>00483 <span class="comment">    * Lanzar acción de módulo</span>
-<a name="l00484"></a>00484 <span class="comment">    *</span>
-<a name="l00485"></a>00485 <span class="comment">    * Buscamos módulo segun ubicacinoes encontradas desde los archivos de </span>
-<a name="l00486"></a>00486 <span class="comment">    * eventos_usuario y eventos_admin, pero como se puede dar el caso de </span>
-<a name="l00487"></a>00487 <span class="comment">    * que no exista tal ubicación registrada por no tener eventos prefijados, </span>
-<a name="l00488"></a>00488 <span class="comment">    * hacemos una comprobación antes, en caso de negación buscamos en módulos </span>
-<a name="l00489"></a>00489 <span class="comment">    * de proyectos y por último lugar en módulos de gcm.</span>
-<a name="l00490"></a>00490 <span class="comment">    *</span>
-<a name="l00491"></a>00491 <span class="comment">    * En caso de estar logeados se buscara si tenemos un archivo con nombre </span>
-<a name="l00492"></a>00492 <span class="comment">    * modulos/lib/ModuloAdmin.php, si es así lo  utilizamos, con ello </span>
-<a name="l00493"></a>00493 <span class="comment">    * conseguimos poder separar las clases segun usuario o administración </span>
-<a name="l00494"></a>00494 <span class="comment">    * reduciendo la carga de  la aplicación.</span>
-<a name="l00495"></a>00495 <span class="comment">    *</span>
-<a name="l00496"></a>00496 <span class="comment">    * @param $m Nombre del directorio del módulo</span>
-<a name="l00497"></a>00497 <span class="comment">    * @param $a Método de módulo</span>
-<a name="l00498"></a>00498 <span class="comment">    * @param $e Evento que lo llama</span>
-<a name="l00499"></a>00499 <span class="comment">    * @param $args Argumentos</span>
-<a name="l00500"></a>00500 <span class="comment">    */</span>
-<a name="l00501"></a>00501 
-<a name="l00502"></a><a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55">00502</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55" title="Lanzar acción de módulo.">lanzar_accion_modulo</a>($m, $a, $e=NULL, $args=NULL) {
-<a name="l00503"></a>00503 
-<a name="l00504"></a>00504       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00505"></a>00505 
-<a name="l00506"></a>00506       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379" title="Devolver instancia de un módulo, nos permite interactuar entre componentes sin reacrgar la aplicación...">instancia_modulo</a>($m) ) {
-<a name="l00507"></a>00507 
-<a name="l00508"></a>00508          <span class="keywordflow">if</span> ( method_exists($this-&gt;instancias[$m], $a ) ) {
-<a name="l00509"></a>00509 
-<a name="l00510"></a>00510             registrar(__FILE__,__LINE__,$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;);&#39;</span>);
-<a name="l00511"></a>00511             <span class="comment">/* Si estamos en debug calculamos tiempo de ejecución de la acción */</span>
-<a name="l00512"></a>00512             <span class="keywordflow">if</span> ( GCM_DEBUG ) $tiempo_inicio = microtime(TRUE);
-<a name="l00513"></a>00513             <span class="keywordflow">if</span> ( $this-&gt;instancias[$m]-&gt;$a($e,$args) === FALSE )  {
-<a name="l00514"></a>00514                trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Error al lanzar evento&#39;</span>, E_USER_ERROR);
-<a name="l00515"></a>00515                }
-<a name="l00516"></a>00516             <span class="keywordflow">if</span> ( GCM_DEBUG ) $tiempo_total = microtime(TRUE)-$tiempo_inicio;
-<a name="l00517"></a>00517             <span class="keywordflow">if</span> ( GCM_DEBUG ) registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Tiempo de ejecución de &#39;</span>.$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;): (&#39;</span>.$tiempo_total.<span class="charliteral">&#39;)&#39;</span>); 
-<a name="l00518"></a>00518 
-<a name="l00519"></a>00519 
-<a name="l00520"></a>00520          } <span class="keywordflow">else</span> {
-<a name="l00521"></a>00521             
-<a name="l00522"></a>00522             <span class="keywordflow">if</span> ( isset($a) &amp;&amp; !empty($a) ) {
-<a name="l00523"></a>00523                trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Acción no reconocida&#39;</span>);
-<a name="l00524"></a>00524             } <span class="keywordflow">else</span> {
-<a name="l00525"></a>00525                trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Sin acción definida&#39;</span>, E_USER_ERROR);
-<a name="l00526"></a>00526                }
-<a name="l00527"></a>00527 
-<a name="l00528"></a>00528             }
-<a name="l00529"></a>00529 
-<a name="l00530"></a>00530       } <span class="keywordflow">else</span> {
-<a name="l00531"></a>00531          trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Módulo no reconocido&#39;</span>, E_USER_ERROR);
-<a name="l00532"></a>00532          }
-<a name="l00533"></a>00533 
-<a name="l00534"></a>00534       }
-<a name="l00535"></a>00535 <span class="comment"></span>
-<a name="l00536"></a>00536 <span class="comment">   /**</span>
-<a name="l00537"></a>00537 <span class="comment">    * Anular evento, eliminamos conexiones de evento</span>
-<a name="l00538"></a>00538 <span class="comment">    *</span>
-<a name="l00539"></a>00539 <span class="comment">    * @param $evento Evento que se desea anular</span>
-<a name="l00540"></a>00540 <span class="comment">    * @param $modulo Módulo que pide la anulación.</span>
-<a name="l00541"></a>00541 <span class="comment">    */</span>
+<a name="l00356"></a>00356                <span class="keywordflow">if</span> ( !empty( $parametros_metodo) &amp;&amp; !empty($parametros_eventos) ) {
+<a name="l00357"></a>00357                   $parametros = $parametros_eventos.<span class="charliteral">&#39;&amp;&#39;</span>.$parametros_metodo;
+<a name="l00358"></a>00358                } elseif ( empty($parametros_eventos) ) {
+<a name="l00359"></a>00359                   $parametros = $parametros_metodo;
+<a name="l00360"></a>00360                } elseif ( empty($parametros_metodo) ) {
+<a name="l00361"></a>00361                   $parametros = $parametros_eventos;
+<a name="l00362"></a>00362                   }
+<a name="l00363"></a>00363 
+<a name="l00364"></a>00364                <span class="comment">/* Comprovamos comportamiento de eventos */</span>
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366                <span class="keywordflow">if</span> ( isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;unico&#39;</span>]) &amp;&amp; $this-&gt;cEventos[$e][<span class="stringliteral">&#39;unico&#39;</span>] != $m )   {          <span class="comment">// unico</span>
+<a name="l00367"></a>00367 
+<a name="l00368"></a>00368                   <span class="comment">/* El evento tiene comportamiento de unico y no es para este modulo */</span>
+<a name="l00369"></a>00369 
+<a name="l00370"></a>00370                   registrar(__FILE__,__LINE__,
+<a name="l00371"></a>00371                      <span class="stringliteral">&#39;Comportamiento [ unico ] para evento [&#39;</span>.$e.<span class="stringliteral">&#39;] por parte de [ &#39;</span>.$this-&gt;cEventos[$e][<span class="stringliteral">&#39;unico&#39;</span>].<span class="stringliteral">&#39; ]&#39;</span>);
+<a name="l00372"></a>00372 
+<a name="l00373"></a>00373                } <span class="keywordflow">else</span> {
+<a name="l00374"></a>00374                   
+<a name="l00375"></a>00375                   <span class="comment">// Los eventos para cache no los comentamos en debug para que se muestren antes de la definición</span>
+<a name="l00376"></a>00376                   <span class="comment">// de doctype y despiste al navegador</span>
+<a name="l00377"></a>00377 
+<a name="l00378"></a>00378                   <span class="keywordflow">if</span> ( GCM_DEBUG &amp;&amp; <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;html&#39;</span> &amp;&amp; $m !== <span class="stringliteral">&#39;cache_http&#39;</span>) printf(<span class="stringliteral">&quot;\n&quot;</span>.<a class="code" href="../../d9/d73/a00060_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">Router::$forma_comentarios</a>.<span class="stringliteral">&quot;\n&quot;</span>,<span class="stringliteral">&#39;Eventos: &#39;</span>.$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$parametros.<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00379"></a>00379                   <span class="keywordflow">if</span> ( $this-&gt;visualizar ) {
+<a name="l00380"></a>00380                      <span class="keywordflow">if</span> ( $m == <span class="stringliteral">&quot;temas&quot;</span>  ) $this-&gt;<a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55" title="Lanzar acción de módulo.">lanzar_accion_modulo</a>($m,$a,$e,$parametros);
+<a name="l00381"></a>00381                      echo <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;p style=&quot;font-size: 12px&quot;&gt;&lt;a href=&quot;?m=admin&amp;a=editar_conexion&amp;md=&#39;</span>.$m.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>,$m,<span class="stringliteral">&#39;-&gt;&#39;</span>,$a,<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$parametros.<span class="stringliteral">&#39;)&lt;/a&gt;&lt;/p&gt;&#39;</span>.<span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00382"></a>00382                   } <span class="keywordflow">else</span> {
+<a name="l00383"></a>00383                      $this-&gt;<a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55" title="Lanzar acción de módulo.">lanzar_accion_modulo</a>($m,$a,$e,$parametros);
+<a name="l00384"></a>00384                      }
+<a name="l00385"></a>00385 
+<a name="l00386"></a>00386                   <span class="keywordflow">if</span> ( GCM_DEBUG &amp;&amp; <a class="code" href="../../d9/d73/a00060_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;html&#39;</span> &amp;&amp; $m !== <span class="stringliteral">&#39;cache_http&#39;</span>) printf(<span class="stringliteral">&quot;\n&quot;</span>.<a class="code" href="../../d9/d73/a00060_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">Router::$forma_comentarios</a>.<span class="stringliteral">&quot;\n&quot;</span>,<span class="stringliteral">&#39; / Eventos: &#39;</span>.$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$parametros.<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00387"></a>00387                   }
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389                }
+<a name="l00390"></a>00390             }
+<a name="l00391"></a>00391 
+<a name="l00392"></a>00392          } <span class="keywordflow">catch</span> (Exception $ex) {
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394             registrar($ex-&gt;getFile(),$ex-&gt;getLine(),<span class="stringliteral">&#39;Excepción en eventos [ &#39;</span>.$e.<span class="stringliteral">&#39; ] : &#39;</span>.$ex-&gt;getMessage(). <span class="stringliteral">&quot;\n&quot;</span>,<span class="stringliteral">&#39;ADMIN&#39;</span>);
+<a name="l00395"></a>00395 
+<a name="l00396"></a>00396             }
+<a name="l00397"></a>00397 <span class="comment"></span>
+<a name="l00398"></a>00398 <span class="comment">         /** Comprobar si hay eventos para post&lt;evento&gt; */</span>
+<a name="l00399"></a>00399 
+<a name="l00400"></a>00400          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/dfe/a00025_a609fcdfe8f696ed933a9ee68c930e8b1.html#a609fcdfe8f696ed933a9ee68c930e8b1" title="Verificar la existencia de un evento.">verificar_evento</a>(<span class="stringliteral">&#39;post&#39;</span>.$evento) ) { $this-&gt;<a class="code" href="../../d3/dfe/a00025_ae42fa28f97b04414d7993d3a10cacebb.html#ae42fa28f97b04414d7993d3a10cacebb" title="lanzarEvento">lanzarEvento</a>(<span class="stringliteral">&#39;post&#39;</span>.$evento); }
+<a name="l00401"></a>00401 
+<a name="l00402"></a>00402          <span class="keywordflow">if</span> ( $this-&gt;visualizar ) echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
+<a name="l00403"></a>00403          <span class="keywordflow">return</span> TRUE;
+<a name="l00404"></a>00404       }
+<a name="l00405"></a>00405 <span class="comment"></span>
+<a name="l00406"></a>00406 <span class="comment">   /**</span>
+<a name="l00407"></a>00407 <span class="comment">    * Ordenar evento por prioridad</span>
+<a name="l00408"></a>00408 <span class="comment">    *</span>
+<a name="l00409"></a>00409 <span class="comment">    * @param $e Evento a inspeccionar</span>
+<a name="l00410"></a>00410 <span class="comment">    *</span>
+<a name="l00411"></a>00411 <span class="comment">    * @return Array en formato [modulos|acción|argumentos] = orden</span>
+<a name="l00412"></a>00412 <span class="comment">    */</span>
+<a name="l00413"></a>00413 
+<a name="l00414"></a>00414    <span class="keyword">private</span> <span class="keyword">function</span> prioridad($e) {
+<a name="l00415"></a>00415 
+<a name="l00416"></a>00416       $arreglo = array();              <span class="comment">///&lt; Array a devolver con las acciones ordenador por prioridad</span>
+<a name="l00417"></a>00417 <span class="comment"></span>      <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a> = $this-&gt;eventos[$e];   <span class="comment">///&lt; Contenido de las acciones del evento</span>
+<a name="l00418"></a>00418 <span class="comment"></span>      $args = NULL;                    <span class="comment">///&lt; Argumentos del evento</span>
+<a name="l00419"></a>00419 <span class="comment"></span>
+<a name="l00420"></a>00420       <span class="keywordflow">foreach</span> ( <a class="code" href="../../d3/dfe/a00025_a2d59e92ea67edd94958634ecc6d75e0f.html#a2d59e92ea67edd94958634ecc6d75e0f" title="Array con los eventos de la aplicación.">$eventos</a> as $ee =&gt; $aa ) {
+<a name="l00421"></a>00421          $n_m = $ee;
+<a name="l00422"></a>00422          <span class="keywordflow">foreach</span>( $aa as $n_a =&gt; $valor ) {
+<a name="l00423"></a>00423 
+<a name="l00424"></a>00424             <span class="keywordflow">foreach</span> ( $valor as $prioridad =&gt; $argumentos ) {
+<a name="l00425"></a>00425 
+<a name="l00426"></a>00426                <span class="keywordflow">if</span> ( $prioridad &gt; 0 ) {
+<a name="l00427"></a>00427                   $arreglo[$n_m.<span class="charliteral">&#39;|&#39;</span>.$n_a.<span class="charliteral">&#39;|&#39;</span>.$argumentos] = $prioridad;
+<a name="l00428"></a>00428                   }
+<a name="l00429"></a>00429 
+<a name="l00430"></a>00430                }
+<a name="l00431"></a>00431             }
+<a name="l00432"></a>00432          unset($n_a, $mm);
+<a name="l00433"></a>00433          unset($n_e);
+<a name="l00434"></a>00434          }
+<a name="l00435"></a>00435       
+<a name="l00436"></a>00436       asort($arreglo);
+<a name="l00437"></a>00437       reset($arreglo);
+<a name="l00438"></a>00438       <span class="keywordflow">return</span> $arreglo;
+<a name="l00439"></a>00439    }
+<a name="l00440"></a>00440 <span class="comment"></span>
+<a name="l00441"></a>00441 <span class="comment">   /**</span>
+<a name="l00442"></a>00442 <span class="comment">    * Devolver instancia de un módulo, nos permite interactuar entre</span>
+<a name="l00443"></a>00443 <span class="comment">    * componentes sin reacrgar la aplicación</span>
+<a name="l00444"></a>00444 <span class="comment">    *</span>
+<a name="l00445"></a>00445 <span class="comment">    * @param $modulo Modulo a instanciar</span>
+<a name="l00446"></a>00446 <span class="comment">    */</span>
+<a name="l00447"></a>00447 
+<a name="l00448"></a><a class="code" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379">00448</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379" title="Devolver instancia de un módulo, nos permite interactuar entre componentes sin reacrgar la aplicación...">instancia_modulo</a>($m) {
+<a name="l00449"></a>00449 
+<a name="l00450"></a>00450       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00451"></a>00451 <span class="comment"></span>
+<a name="l00452"></a>00452 <span class="comment">      /**</span>
+<a name="l00453"></a>00453 <span class="comment">       * url del fichero que contiene la clase, ejemplo: temas/lib/Temas.php</span>
+<a name="l00454"></a>00454 <span class="comment">       */</span>
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456       $fm = NULL ;
+<a name="l00457"></a>00457 <span class="comment"></span>
+<a name="l00458"></a>00458 <span class="comment">      /** Nombre de la clase */</span>
+<a name="l00459"></a>00459 
+<a name="l00460"></a>00460       $M = ucfirst($m);
+<a name="l00461"></a>00461 <span class="comment"></span>
+<a name="l00462"></a>00462 <span class="comment">      /** Nombre de la clase administrativa */</span>
+<a name="l00463"></a>00463 
+<a name="l00464"></a>00464       $logeados = ( $gcm-&gt;au-&gt;logeado() ) ? TRUE : FALSE ;
+<a name="l00465"></a>00465 
+<a name="l00466"></a>00466       <span class="keywordflow">if</span> ( isset($this-&gt;ubicaciones[$m])  ) {
+<a name="l00467"></a>00467          <span class="keywordflow">if</span> ( $logeados &amp;&amp; file_exists($this-&gt;ubicaciones[$m].<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;Admin.php&#39;</span>)  ) {
+<a name="l00468"></a>00468             $MA = $M.<span class="stringliteral">&#39;Admin&#39;</span>;
+<a name="l00469"></a>00469             $fm = $this-&gt;ubicaciones[$m].<span class="stringliteral">&#39;/lib/&#39;</span>.$MA.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00470"></a>00470          } <span class="keywordflow">else</span> {
+<a name="l00471"></a>00471             $fm = $this-&gt;ubicaciones[$m].<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00472"></a>00472             $MA = FALSE;
+<a name="l00473"></a>00473             }
+<a name="l00474"></a>00474 
+<a name="l00475"></a>00475       } elseif ( $logeados &amp;&amp; file_exists($this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;Admin.php&#39;</span>) ) {
+<a name="l00476"></a>00476          $MA = $M.<span class="stringliteral">&#39;Admin&#39;</span>;
+<a name="l00477"></a>00477          $fm = $this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$MA.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00478"></a>00478       } elseif ( file_exists($this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>) ) {
+<a name="l00479"></a>00479          $fm = $this-&gt;dir_modulos_proyecto.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00480"></a>00480          $MA = FALSE;
+<a name="l00481"></a>00481       } elseif ( $logeados &amp;&amp; file_exists($this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>) ) {
+<a name="l00482"></a>00482          $MA = $M.<span class="stringliteral">&#39;Admin&#39;</span>;
+<a name="l00483"></a>00483          $fm = $this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$MA.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00484"></a>00484       } elseif ( file_exists($this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>) ) {
+<a name="l00485"></a>00485          $MA = FALSE;
+<a name="l00486"></a>00486          $fm = $this-&gt;dir_modulos.$m.<span class="stringliteral">&#39;/lib/&#39;</span>.$M.<span class="stringliteral">&#39;.php&#39;</span>;
+<a name="l00487"></a>00487       } <span class="keywordflow">else</span> {
+<a name="l00488"></a>00488          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Error al cargar módulo, Fichero de módulo no encontrado [&#39;</span>.$m.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00489"></a>00489          <span class="keywordflow">return</span> FALSE;
+<a name="l00490"></a>00490          }
+<a name="l00491"></a>00491 
+<a name="l00492"></a>00492       <span class="keywordflow">if</span> ( ! is_file($fm)  ) {
+<a name="l00493"></a>00493 
+<a name="l00494"></a>00494          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Error al cargar módulo, Fichero de módulo no encontrado [&#39;</span>.$fm.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00495"></a>00495          <span class="keywordflow">return</span> FALSE;
+<a name="l00496"></a>00496          }
+<a name="l00497"></a>00497 
+<a name="l00498"></a>00498       <span class="keywordflow">if</span> ( !isset($this-&gt;instancias[$m])  ) {
+<a name="l00499"></a>00499 
+<a name="l00500"></a>00500          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Instancia de módulo: [&#39;</span>.$m.<span class="charliteral">&#39;]&#39;</span>);
+<a name="l00501"></a>00501          require_once($fm);
+<a name="l00502"></a>00502 
+<a name="l00503"></a>00503          <span class="keywordflow">if</span> ( $MA ) {
+<a name="l00504"></a>00504             $this-&gt;instancias[$m] = <span class="keyword">new</span> $MA(); 
+<a name="l00505"></a>00505          } <span class="keywordflow">else</span> {
+<a name="l00506"></a>00506             $this-&gt;instancias[$m] = <span class="keyword">new</span> $M(); 
+<a name="l00507"></a>00507             }
+<a name="l00508"></a>00508 
+<a name="l00509"></a>00509          } 
+<a name="l00510"></a>00510 
+<a name="l00511"></a>00511       <span class="keywordflow">return</span> $this-&gt;instancias[$m];
+<a name="l00512"></a>00512 
+<a name="l00513"></a>00513       }
+<a name="l00514"></a>00514 <span class="comment"></span>
+<a name="l00515"></a>00515 <span class="comment">   /**</span>
+<a name="l00516"></a>00516 <span class="comment">    * Lanzar acción de módulo</span>
+<a name="l00517"></a>00517 <span class="comment">    *</span>
+<a name="l00518"></a>00518 <span class="comment">    * Buscamos módulo segun ubicacinoes encontradas desde los archivos de </span>
+<a name="l00519"></a>00519 <span class="comment">    * eventos_usuario y eventos_admin, pero como se puede dar el caso de </span>
+<a name="l00520"></a>00520 <span class="comment">    * que no exista tal ubicación registrada por no tener eventos prefijados, </span>
+<a name="l00521"></a>00521 <span class="comment">    * hacemos una comprobación antes, en caso de negación buscamos en módulos </span>
+<a name="l00522"></a>00522 <span class="comment">    * de proyectos y por último lugar en módulos de gcm.</span>
+<a name="l00523"></a>00523 <span class="comment">    *</span>
+<a name="l00524"></a>00524 <span class="comment">    * En caso de estar logeados se buscara si tenemos un archivo con nombre </span>
+<a name="l00525"></a>00525 <span class="comment">    * modulos/lib/ModuloAdmin.php, si es así lo  utilizamos, con ello </span>
+<a name="l00526"></a>00526 <span class="comment">    * conseguimos poder separar las clases segun usuario o administración </span>
+<a name="l00527"></a>00527 <span class="comment">    * reduciendo la carga de  la aplicación.</span>
+<a name="l00528"></a>00528 <span class="comment">    *</span>
+<a name="l00529"></a>00529 <span class="comment">    * @param $m Nombre del directorio del módulo</span>
+<a name="l00530"></a>00530 <span class="comment">    * @param $a Método de módulo</span>
+<a name="l00531"></a>00531 <span class="comment">    * @param $e Evento que lo llama</span>
+<a name="l00532"></a>00532 <span class="comment">    * @param $args Argumentos</span>
+<a name="l00533"></a>00533 <span class="comment">    */</span>
+<a name="l00534"></a>00534 
+<a name="l00535"></a><a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55">00535</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_ac0f6494f05fd5e760a8bcb2d59cbee55.html#ac0f6494f05fd5e760a8bcb2d59cbee55" title="Lanzar acción de módulo.">lanzar_accion_modulo</a>($m, $a, $e=NULL, $args=NULL) {
+<a name="l00536"></a>00536 
+<a name="l00537"></a>00537       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00538"></a>00538 
+<a name="l00539"></a>00539       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/dfe/a00025_adb1ccbd69ccbaaaf5738c01b1479d379.html#adb1ccbd69ccbaaaf5738c01b1479d379" title="Devolver instancia de un módulo, nos permite interactuar entre componentes sin reacrgar la aplicación...">instancia_modulo</a>($m) ) {
+<a name="l00540"></a>00540 
+<a name="l00541"></a>00541          <span class="keywordflow">if</span> ( method_exists($this-&gt;instancias[$m], $a ) ) {
 <a name="l00542"></a>00542 
-<a name="l00543"></a><a class="code" href="../../d3/dfe/a00025_a70e8eaee58e0486e5f6d836e77970bba.html#a70e8eaee58e0486e5f6d836e77970bba">00543</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a70e8eaee58e0486e5f6d836e77970bba.html#a70e8eaee58e0486e5f6d836e77970bba" title="Anular evento, eliminamos conexiones de evento.">anular</a>($evento, $modulo) {
-<a name="l00544"></a>00544       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;anular(&#39;</span>.$evento.<span class="charliteral">&#39;,&#39;</span>.$modulo.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00545"></a>00545       $this-&gt;cEventos[$evento][<span class="stringliteral">&#39;anular&#39;</span>] = $modulo;
-<a name="l00546"></a>00546       }
-<a name="l00547"></a>00547 <span class="comment"></span>
-<a name="l00548"></a>00548 <span class="comment">   /**</span>
-<a name="l00549"></a>00549 <span class="comment">    * Comprobar si un evento esta anula o no</span>
-<a name="l00550"></a>00550 <span class="comment">    *</span>
-<a name="l00551"></a>00551 <span class="comment">    * @param $evento</span>
-<a name="l00552"></a>00552 <span class="comment">    */</span>
-<a name="l00553"></a>00553 
-<a name="l00554"></a><a class="code" href="../../d3/dfe/a00025_a681b9faef2a7086bf765decbfa5cf8a1.html#a681b9faef2a7086bf765decbfa5cf8a1">00554</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a681b9faef2a7086bf765decbfa5cf8a1.html#a681b9faef2a7086bf765decbfa5cf8a1" title="Comprobar si un evento esta anula o no.">anulado</a>($e) {
-<a name="l00555"></a>00555 
-<a name="l00556"></a>00556       <span class="keywordflow">return</span> ( isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;anular&#39;</span>]) ) ? TRUE : FALSE ;
-<a name="l00557"></a>00557 
-<a name="l00558"></a>00558       }
-<a name="l00559"></a>00559 <span class="comment"></span>
-<a name="l00560"></a>00560 <span class="comment">   /**</span>
-<a name="l00561"></a>00561 <span class="comment">    * Evento unico, eliminamos conexiones de evento que</span>
-<a name="l00562"></a>00562 <span class="comment">    * no sean las del módulo que se especifica</span>
-<a name="l00563"></a>00563 <span class="comment">    *</span>
-<a name="l00564"></a>00564 <span class="comment">    * @param $evento Evento afectado</span>
-<a name="l00565"></a>00565 <span class="comment">    * @param $modulo Módulo</span>
-<a name="l00566"></a>00566 <span class="comment">    */</span>
-<a name="l00567"></a>00567 
-<a name="l00568"></a><a class="code" href="../../d3/dfe/a00025_aac004003985747d7fa1b96565fc2f57d.html#aac004003985747d7fa1b96565fc2f57d">00568</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_aac004003985747d7fa1b96565fc2f57d.html#aac004003985747d7fa1b96565fc2f57d" title="Evento unico, eliminamos conexiones de evento que no sean las del módulo que se especifica.">unico</a>($evento, $modulo) {
-<a name="l00569"></a>00569       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;unico(&#39;</span>.$evento.<span class="charliteral">&#39;,&#39;</span>.$modulo.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00570"></a>00570       $this-&gt;cEventos[$evento][<span class="stringliteral">&#39;unico&#39;</span>] = $modulo;
-<a name="l00571"></a>00571       }
-<a name="l00572"></a>00572 <span class="comment"></span>
-<a name="l00573"></a>00573 <span class="comment">   /**</span>
-<a name="l00574"></a>00574 <span class="comment">    * Añadir una acción a un evento en tiempo de ejecución</span>
-<a name="l00575"></a>00575 <span class="comment">    *</span>
-<a name="l00576"></a>00576 <span class="comment">    * @param $evento Evento</span>
-<a name="l00577"></a>00577 <span class="comment">    * @param $modulo Módulo</span>
-<a name="l00578"></a>00578 <span class="comment">    * @param $metodo Método del módulo</span>
-<a name="l00579"></a>00579 <span class="comment">    * @param $prioridad Orden de prioridad</span>
-<a name="l00580"></a>00580 <span class="comment">    * @param $args Parametros</span>
-<a name="l00581"></a>00581 <span class="comment">    */</span>
-<a name="l00582"></a>00582 
-<a name="l00583"></a><a class="code" href="../../d3/dfe/a00025_a3f5870edb9b40af1d3a3b1a9096c512e.html#a3f5870edb9b40af1d3a3b1a9096c512e">00583</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a3f5870edb9b40af1d3a3b1a9096c512e.html#a3f5870edb9b40af1d3a3b1a9096c512e" title="Añadir una acción a un evento en tiempo de ejecución.">accion2evento</a>($evento,$modulo,$metodo,$prioridad,$args=<span class="stringliteral">&#39;&#39;</span>) {
-<a name="l00584"></a>00584 
-<a name="l00585"></a>00585       $this-&gt;eventos[$evento][$modulo][$metodo][$prioridad] = $args;
+<a name="l00543"></a>00543             registrar(__FILE__,__LINE__,$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;);&#39;</span>);
+<a name="l00544"></a>00544             <span class="comment">/* Si estamos en debug calculamos tiempo de ejecución de la acción */</span>
+<a name="l00545"></a>00545             <span class="keywordflow">if</span> ( GCM_DEBUG ) $tiempo_inicio = microtime(TRUE);
+<a name="l00546"></a>00546             <span class="keywordflow">if</span> ( $this-&gt;instancias[$m]-&gt;$a($e,$args) === FALSE )  {
+<a name="l00547"></a>00547                trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Error al lanzar evento&#39;</span>, E_USER_ERROR);
+<a name="l00548"></a>00548                }
+<a name="l00549"></a>00549             <span class="keywordflow">if</span> ( GCM_DEBUG ) $tiempo_total = microtime(TRUE)-$tiempo_inicio;
+<a name="l00550"></a>00550             <span class="keywordflow">if</span> ( GCM_DEBUG ) registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Tiempo de ejecución de &#39;</span>.$m.<span class="stringliteral">&#39;-&gt;&#39;</span>.$a.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../dd/d42/a00109_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;): (&#39;</span>.$tiempo_total.<span class="charliteral">&#39;)&#39;</span>); 
+<a name="l00551"></a>00551 
+<a name="l00552"></a>00552 
+<a name="l00553"></a>00553          } <span class="keywordflow">else</span> {
+<a name="l00554"></a>00554             
+<a name="l00555"></a>00555             <span class="keywordflow">if</span> ( isset($a) &amp;&amp; !empty($a) ) {
+<a name="l00556"></a>00556                trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Acción no reconocida&#39;</span>);
+<a name="l00557"></a>00557             } <span class="keywordflow">else</span> {
+<a name="l00558"></a>00558                trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Sin acción definida&#39;</span>, E_USER_ERROR);
+<a name="l00559"></a>00559                }
+<a name="l00560"></a>00560 
+<a name="l00561"></a>00561             }
+<a name="l00562"></a>00562 
+<a name="l00563"></a>00563       } <span class="keywordflow">else</span> {
+<a name="l00564"></a>00564          trigger_error(<span class="stringliteral">&#39;Eventos-&gt;lanzar_accion_modulo(&#39;</span>.$m.<span class="charliteral">&#39;,&#39;</span>.$a.<span class="charliteral">&#39;,&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Módulo no reconocido&#39;</span>, E_USER_ERROR);
+<a name="l00565"></a>00565          }
+<a name="l00566"></a>00566 
+<a name="l00567"></a>00567       }
+<a name="l00568"></a>00568 <span class="comment"></span>
+<a name="l00569"></a>00569 <span class="comment">   /**</span>
+<a name="l00570"></a>00570 <span class="comment">    * Anular evento, eliminamos conexiones de evento</span>
+<a name="l00571"></a>00571 <span class="comment">    *</span>
+<a name="l00572"></a>00572 <span class="comment">    * @param $evento Evento que se desea anular</span>
+<a name="l00573"></a>00573 <span class="comment">    * @param $modulo Módulo que pide la anulación.</span>
+<a name="l00574"></a>00574 <span class="comment">    */</span>
+<a name="l00575"></a>00575 
+<a name="l00576"></a><a class="code" href="../../d3/dfe/a00025_a70e8eaee58e0486e5f6d836e77970bba.html#a70e8eaee58e0486e5f6d836e77970bba">00576</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a70e8eaee58e0486e5f6d836e77970bba.html#a70e8eaee58e0486e5f6d836e77970bba" title="Anular evento, eliminamos conexiones de evento.">anular</a>($evento, $modulo) {
+<a name="l00577"></a>00577       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;anular(&#39;</span>.$evento.<span class="charliteral">&#39;,&#39;</span>.$modulo.<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00578"></a>00578       $this-&gt;cEventos[$evento][<span class="stringliteral">&#39;anular&#39;</span>] = $modulo;
+<a name="l00579"></a>00579       }
+<a name="l00580"></a>00580 <span class="comment"></span>
+<a name="l00581"></a>00581 <span class="comment">   /**</span>
+<a name="l00582"></a>00582 <span class="comment">    * Comprobar si un evento esta anula o no</span>
+<a name="l00583"></a>00583 <span class="comment">    *</span>
+<a name="l00584"></a>00584 <span class="comment">    * @param $evento</span>
+<a name="l00585"></a>00585 <span class="comment">    */</span>
 <a name="l00586"></a>00586 
-<a name="l00587"></a>00587       }
+<a name="l00587"></a><a class="code" href="../../d3/dfe/a00025_a681b9faef2a7086bf765decbfa5cf8a1.html#a681b9faef2a7086bf765decbfa5cf8a1">00587</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a681b9faef2a7086bf765decbfa5cf8a1.html#a681b9faef2a7086bf765decbfa5cf8a1" title="Comprobar si un evento esta anula o no.">anulado</a>($e) {
 <a name="l00588"></a>00588 
-<a name="l00589"></a>00589    }
+<a name="l00589"></a>00589       <span class="keywordflow">return</span> ( isset($this-&gt;cEventos[$e][<span class="stringliteral">&#39;anular&#39;</span>]) ) ? TRUE : FALSE ;
 <a name="l00590"></a>00590 
-<a name="l00591"></a>00591 ?&gt;
+<a name="l00591"></a>00591       }
+<a name="l00592"></a>00592 <span class="comment"></span>
+<a name="l00593"></a>00593 <span class="comment">   /**</span>
+<a name="l00594"></a>00594 <span class="comment">    * Evento unico, eliminamos conexiones de evento que</span>
+<a name="l00595"></a>00595 <span class="comment">    * no sean las del módulo que se especifica</span>
+<a name="l00596"></a>00596 <span class="comment">    *</span>
+<a name="l00597"></a>00597 <span class="comment">    * @param $evento Evento afectado</span>
+<a name="l00598"></a>00598 <span class="comment">    * @param $modulo Módulo</span>
+<a name="l00599"></a>00599 <span class="comment">    */</span>
+<a name="l00600"></a>00600 
+<a name="l00601"></a><a class="code" href="../../d3/dfe/a00025_aac004003985747d7fa1b96565fc2f57d.html#aac004003985747d7fa1b96565fc2f57d">00601</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_aac004003985747d7fa1b96565fc2f57d.html#aac004003985747d7fa1b96565fc2f57d" title="Evento unico, eliminamos conexiones de evento que no sean las del módulo que se especifica.">unico</a>($evento, $modulo) {
+<a name="l00602"></a>00602       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Eventos-&gt;unico(&#39;</span>.$evento.<span class="charliteral">&#39;,&#39;</span>.$modulo.<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00603"></a>00603       $this-&gt;cEventos[$evento][<span class="stringliteral">&#39;unico&#39;</span>] = $modulo;
+<a name="l00604"></a>00604       }
+<a name="l00605"></a>00605 <span class="comment"></span>
+<a name="l00606"></a>00606 <span class="comment">   /**</span>
+<a name="l00607"></a>00607 <span class="comment">    * Añadir una acción a un evento en tiempo de ejecución</span>
+<a name="l00608"></a>00608 <span class="comment">    *</span>
+<a name="l00609"></a>00609 <span class="comment">    * @param $evento Evento</span>
+<a name="l00610"></a>00610 <span class="comment">    * @param $modulo Módulo</span>
+<a name="l00611"></a>00611 <span class="comment">    * @param $metodo Método del módulo</span>
+<a name="l00612"></a>00612 <span class="comment">    * @param $prioridad Orden de prioridad</span>
+<a name="l00613"></a>00613 <span class="comment">    * @param $args Parametros</span>
+<a name="l00614"></a>00614 <span class="comment">    */</span>
+<a name="l00615"></a>00615 
+<a name="l00616"></a><a class="code" href="../../d3/dfe/a00025_a3f5870edb9b40af1d3a3b1a9096c512e.html#a3f5870edb9b40af1d3a3b1a9096c512e">00616</a>    <span class="keyword">function</span> <a class="code" href="../../d3/dfe/a00025_a3f5870edb9b40af1d3a3b1a9096c512e.html#a3f5870edb9b40af1d3a3b1a9096c512e" title="Añadir una acción a un evento en tiempo de ejecución.">accion2evento</a>($evento,$modulo,$metodo,$prioridad,$args=<span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00617"></a>00617 
+<a name="l00618"></a>00618       $this-&gt;eventos[$evento][$modulo][$metodo][$prioridad] = $args;
+<a name="l00619"></a>00619 
+<a name="l00620"></a>00620       }
+<a name="l00621"></a>00621 
+<a name="l00622"></a>00622    }
+<a name="l00623"></a>00623 
+<a name="l00624"></a>00624 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 10:08:48 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 26 de Diciembre de 2012 20:30:02 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

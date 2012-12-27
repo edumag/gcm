@@ -2,4 +2,9 @@
 <p>Es importante que si se genera una modificaci&oacute;n sea notificado al m&oacute;dulo cache_http para borrar los archivos relacionados.</p>
 <p>Ejemplo al a&ntilde;adir un comentario en el m&oacute;dulo comentarios, insertamos la siguiente linea para que se borre el cache y se presenta la p&aacute;gina ctualizada la proxima vez que se presente.</p>
 <pre>$gcm-&gt;event-&gt;lanzar_accion_modulo('cache_http','borrar','comentario_insertado',Router::$url);</pre>
-<p>&nbsp;</p>
+<h2>Cachear variables</h2>
+<p>Recuperar</p>
+<pre>$eventos_en_cache = $gcm-&gt;event-&gt;instancias['cache_http']-&gt;recuperar_variable('eventos_'.$nivel) ;<br /></pre>
+<p>Guardar en cache</p>
+<pre>$gcm-&gt;event-&gt;instancias['cache_http']-&gt;guardar_variable('eventos_'.$nivel,$eventos_en_cache);<br /></pre>
+<p>El ejemplo que se muestra es de gcm/lib/int/gcm/lib/Eventos.php</p>

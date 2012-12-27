@@ -643,18 +643,20 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00550"></a>00550 <span class="comment">    */</span>
 <a name="l00551"></a>00551 
 <a name="l00552"></a><a class="code" href="../../d1/d2b/a00018_ab8a2be3d77cb89d08d44bf35abd56c62.html#ab8a2be3d77cb89d08d44bf35abd56c62">00552</a>    <span class="keyword">function</span> <a class="code" href="../../d1/d2b/a00018_ab8a2be3d77cb89d08d44bf35abd56c62.html#ab8a2be3d77cb89d08d44bf35abd56c62" title="Obtener fecha de modificación de contenido.">getFechaActualizacion</a>($ruta) {
-<a name="l00553"></a>00553       <span class="keywordflow">return</span> filemtime($ruta);
-<a name="l00554"></a>00554       }
-<a name="l00555"></a>00555 
-<a name="l00556"></a>00556 
-<a name="l00557"></a>00557    }
+<a name="l00553"></a>00553       $fecha = filemtime($ruta);
+<a name="l00554"></a>00554       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Recuperar fecha de contenido [&#39;</span>.$ruta.<span class="stringliteral">&#39;] fecha: [&#39;</span>.$fecha.<span class="charliteral">&#39;]&#39;</span>);
+<a name="l00555"></a>00555       <span class="keywordflow">return</span> $fecha;
+<a name="l00556"></a>00556       }
+<a name="l00557"></a>00557 
 <a name="l00558"></a>00558 
-<a name="l00559"></a>00559 ?&gt;
+<a name="l00559"></a>00559    }
+<a name="l00560"></a>00560 
+<a name="l00561"></a>00561 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 23 de Noviembre de 2012 10:08:49 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 26 de Diciembre de 2012 20:30:02 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

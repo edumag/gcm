@@ -175,24 +175,30 @@ class Router {
 
       global $gcm;
 
-      $ficheros_gcm = glob(GCM_DIR.'modulos/*/eventos_*.php');
-      $ficheros_pro = glob('DATOS/eventos/*/eventos_*.php');
+      if ( isset($gcm->event->eventos) ) {
 
-      if ( ! empty($ficheros_pro)  ) {
-         $ficheros_eventos = array_merge($ficheros_gcm, $ficheros_pro);
-      } else {
-         $ficheros_eventos = $ficheros_gcm;
-      }
+         self::$eventos = array_keys($gcm->event->eventos);
 
-      foreach ($ficheros_eventos as $fichero) {
-         $eventos = FALSE;
-         include($fichero);
-         if ( $eventos ) {
-            foreach ($eventos as $key => $evento) {
-               if ( ! self::$eventos || ! in_array($key,self::$eventos) ) self::$eventos[] = $key;
-               }
-            }
          }
+
+      // $ficheros_gcm = glob(GCM_DIR.'modulos/*/eventos_*.php');
+      // $ficheros_pro = glob('DATOS/eventos/*/eventos_*.php');
+
+      // if ( ! empty($ficheros_pro)  ) {
+      //    $ficheros_eventos = array_merge($ficheros_gcm, $ficheros_pro);
+      // } else {
+      //    $ficheros_eventos = $ficheros_gcm;
+      // }
+
+      // foreach ($ficheros_eventos as $fichero) {
+      //    $eventos = FALSE;
+      //    include($fichero);
+      //    if ( $eventos ) {
+      //       foreach ($eventos as $key => $evento) {
+      //          if ( ! self::$eventos || ! in_array($key,self::$eventos) ) self::$eventos[] = $key;
+      //          }
+      //       }
+      //    }
 
       }
 
@@ -207,14 +213,30 @@ class Router {
 
    function set_modulos() {
 
-      $modulos = glob(GCM_DIR.'modulos/*');
-      $modulos2 = glob('modulos/*');
+      global $gcm;
 
-      if ( ! empty($modulos2)  ) $modulos = array_merge($modulos, $modulos2);
+      if ( isset($gcm->event->eventos) ) {
 
-      foreach ($modulos as $modulo) {
-         self::$modulos[] = basename($modulo);
+         foreach ( $gcm->event->eventos as $evento ) {
+            foreach ( $evento as $modulo => $accion ) {
+               if ( ! self::$modulos || ! in_array($modulo,self::$modulos) ) {
+                  self::$modulos[] = $modulo;
+                  }
+               }
+            }
+
          }
+
+      return;
+
+      // $modulos = glob(GCM_DIR.'modulos/*');
+      // $modulos2 = glob('modulos/*');
+
+      // if ( ! empty($modulos2)  ) $modulos = array_merge($modulos, $modulos2);
+
+      // foreach ($modulos as $modulo) {
+      //    self::$modulos[] = basename($modulo);
+      //    }
 
       }
 
