@@ -63,11 +63,11 @@ class Eventos {
     * Array con los eventos de la aplicación
     */
 
-   public $eventos;
+   public $eventos = array();
 
    /** Ubicación de los módulos */
 
-   public $ubicaciones;
+   public $ubicaciones = array();
 
    /** Comportamientos de los eventos
     *
@@ -83,7 +83,7 @@ class Eventos {
     *
     */
 
-   public $cEventos;           
+   public $cEventos = array();           
 
    /**
     * Lista de módulos activos, que seran los basicos marcados por gcm
@@ -99,6 +99,10 @@ class Eventos {
    /** Directorio donde se guardan los ficheros de configuración de eventos del proyecto */
 
    private $dir_eventos_proyecto = 'DATOS/eventos/';
+
+   /** Cogemos eventos configurados en proyecto o los de los módulos por defecto */
+
+   private $leer_eventos_proyecto = TRUE;
 
    /** 
     * Visualizar eventos en vez de lanzarlos, util para vista previa
@@ -119,7 +123,7 @@ class Eventos {
     *
     * @param $dir_modulos Directorio de módulos
     * @param $bAdmin      Leer eventos de adminstración TRUE/FALSE
-    * @param $eProyecto    Leer eventos de proyecto TRUE/FALSE
+    * @param $eProyecto   Leer eventos de proyecto TRUE/FALSE, si no solo leemos los eventos de los módulos por defecto
     * @param $visualizar  Mostramos acción a realizar sin realizarla 
     */
 
@@ -136,11 +140,7 @@ class Eventos {
       $this->dir_modulos = $dir_modulos;         // GCM_DIR.'modulos/'
       $this->dir_modulos_proyecto = 'modulos/';
       $this->bAdmin = $bAdmin;
-
-      /* Creamos una instancia de cache_http si esta activado para poder trabajar con ella */
-
-      $gcm->event->instancias['cache_http'] = new Cache_http();
-
+      $this->leer_eventos_proyecto = $eProyecto;
 
       /* Comprobar directorio de eventos en proyecto */
 
@@ -154,20 +154,17 @@ class Eventos {
 
       if ( $this->bAdmin ) {
          $this->leer_eventos('admin');
-         if ( $eProyecto  ) $this->leer_eventos('admin',$this->dir_modulos_proyecto);
+         if ( file_exists($this->dir_modulos_proyecto) ) $this->leer_eventos('admin',$this->dir_modulos_proyecto);
          }
 
       $this->leer_eventos('usuario');
-      if ( $eProyecto  ) $this->leer_eventos('usuario',$this->dir_modulos_proyecto);
+      if ( file_exists($this->dir_modulos_proyecto) ) $this->leer_eventos('usuario',$this->dir_modulos_proyecto);
 
       registrar(__FILE__,__LINE__,depurar(get_object_vars($this),'Variables en eventos'));
 
-      // echo '<p>Eventos</p>';
-      // echo "<pre>" ; print_r($this->eventos) ; echo "</pre>"; // DEV  
-      // echo '<p>Comportamientos de eventos</p>';
-      // echo "<pre>" ; print_r($this->cEventos) ; echo "</pre>"; // DEV  
-      // echo '<p>Ubicación de archivos de eventos</p>';
-      // echo "<pre>" ; print_r($this->ubicaciones) ; echo "</pre>"; // DEV  
+      // echo "<pre>Eventos: " ; print_r($this->eventos) ; echo "</pre>"; // DEV  
+      // echo "<pre>cEventos: " ; print_r($this->cEventos) ; echo "</pre>"; // DEV  
+      // echo "<pre>ubicaiones: " ; print_r($this->ubicaciones) ; echo "</pre>"; // DEV  
       }
 
    /**
@@ -186,18 +183,7 @@ class Eventos {
 
       registrar(__FILE__,__LINE__,__FUNCTION__.'('.$nivel.','.$directorio.')');
 
-      if ( isset($gcm->event->instancias['cache_http']) ) {
-
-         $eventos_en_cache = $gcm->event->instancias['cache_http']->recuperar_variable('eventos_'.$nivel) ;
-
-         if ( $eventos_en_cache ) { 
-            $this->eventos      = $eventos_en_cache['eventos'];
-            $this->cEventos     = $eventos_en_cache['cEventos'];
-            $this->ubicaciones  = $eventos_en_cache['ubicaciones'];
-            return;
-            }
-
-         }
+      $nombre_cache = ( $directorio ) ? 'eventos_'.$nivel.'_'.str_replace('/','-',rtrim($directorio,'/')) : 'eventos_'.$nivel ;
 
       /**
        * Solo comprobamos modulos activados en caso de ser módulos de gcm
@@ -214,16 +200,19 @@ class Eventos {
          }
 
       if ( ! file_exists($directorio) ) {
-         registrar(__FILE__,__LINE__,'No tenemos directorio de modulos en '.$directorio);
+         registrar(__FILE__,__LINE__,'No tenemos directorio de modulos en '.$directorio, 'ERROR');
          return FALSE;
          }
 
       $directorio_modulos = dir($directorio);
 
       while ($modulo = $directorio_modulos->read()) {
+
          if ( $comprobar_activados && ! in_array($modulo,$this->modulos_activados) ) continue;
+
          $fichero_modulo = $directorio.$modulo.'/eventos_'.$nivel.'.php';
          $fichero_evento = $this->dir_eventos_proyecto.$modulo.'/eventos_'.$nivel.'.php';
+
          if ( ! is_file($fichero_modulo) ) continue;
          if ( ! is_file($fichero_evento) ) {
             if ( ! is_dir($this->dir_eventos_proyecto.$modulo)  ) {
@@ -237,7 +226,13 @@ class Eventos {
                return FALSE;
                }
             }
-         include($fichero_evento);
+
+         if ( $this->leer_eventos_proyecto ) {
+            include($fichero_evento);
+         } else {
+            include($fichero_modulo);
+            }
+
          if ( isset($eventos) && is_array($eventos) ) {
             foreach ( $eventos as $e => $accion ) {
                foreach ( $accion as $a => $valor ) {
@@ -258,15 +253,6 @@ class Eventos {
          }
 
          registrar(__FILE__,__LINE__,'Numero de eventos en '.$directorio.': '.$n);
-
-         if ( isset($gcm->event->instancias['cache_http']) ) {
-
-            $eventos_en_cache['eventos']      = $this->eventos       ;
-            $eventos_en_cache['cEventos']     = $this->cEventos      ;
-            $eventos_en_cache['ubicaciones']  = $this->ubicaciones   ;
-            $gcm->event->instancias['cache_http']->guardar_variable('eventos_'.$nivel,$eventos_en_cache);
-
-            }
 
       }
 
@@ -485,13 +471,8 @@ class Eventos {
          $MA = FALSE;
          $fm = $this->dir_modulos.$m.'/lib/'.$M.'.php';
       } else {
+         trigger_error('Error al cargar módulo, Fichero de módulo no encontrado ['.$m.']', E_USER_ERROR);
          registrar(__FILE__,__LINE__,'Error al cargar módulo, Fichero de módulo no encontrado ['.$m.']','ERROR');
-         return FALSE;
-         }
-
-      if ( ! is_file($fm)  ) {
-
-         registrar(__FILE__,__LINE__,'Error al cargar módulo, Fichero de módulo no encontrado ['.$fm.']','ERROR');
          return FALSE;
          }
 
