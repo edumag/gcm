@@ -23,9 +23,6 @@
  * En producción solo se debera comentar la linea en proyecto/index.php y se anula la posibilidad 
  * de debug
  *
- * @author    Eduardo Magrané eduardo.mamedu.com
- * licencia: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- *
  * @{
  */
 

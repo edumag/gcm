@@ -48,7 +48,7 @@ class Cache_http extends Modulos {
     * Tiempo de expiración para las variables
     */
 
-   private $duracion_variables; 
+   private $duracion_variables = 3000 ; 
 
    /**
     * Nombre del archivo de cache
@@ -237,6 +237,7 @@ class Cache_http extends Modulos {
          $archivos = glob($this->dir_cache.'*'.$url.'*');
       } else {
          $archivos = glob($this->dir_cache.'*');
+         if ( function_exists('apc_clear_cache') ) apc_clear_cache();
          }
 
       registrar(__FILE__,__LINE__,
@@ -281,6 +282,11 @@ class Cache_http extends Modulos {
 
       $tiempo_expiracion = ( $tiempo_expiracion ) ? $tiempo_expiracion : $this->duracion_variables;
 
+      if ( function_exists('apc_fetch') ) {
+         $retorno = apc_fetch($nombre_variable);
+         if ( $retorno ) return $retorno;
+         }
+
       $archivo_variable = $this->dir_cache.$nombre_variable.$this->extension;
 
       if (@file_exists($archivo_variable)) {
@@ -294,7 +300,6 @@ class Cache_http extends Modulos {
 
       // devolvemos la variable si aun no vence
       if (time() - $tiempo_expiracion < $fecha_cache) {
-         registrar(__FILE__,__LINE__,'Variable ['.$nombre.'] en cache','ADMIN');
          $contenido = file_get_contents($archivo_variable);
          $retorno = unserialize($contenido);
          registrar(__FILE__,__LINE__,'Recuperamos variable en cache ['.$nombre_variable.'] '."\n".depurar($retorno));
@@ -310,6 +315,8 @@ class Cache_http extends Modulos {
     */
 
    function guardar_variable($nombre_variable,$valor) {
+
+      if ( function_exists('apc_add') ) return apc_add($nombre_variable, $valor);
 
       $archivo_variable = $this->dir_cache.$nombre_variable.$this->extension;
 
