@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Thu Dec 27 22:22:29 CET 2012
+// Archivo generado automaticamente por GcmConfig Fri Dec 28 9:58:37 CET 2012
 $GCM_LG_es['Acciones']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
 $GCM_LG_es['Administracion de los diferentes idiomas']='';
