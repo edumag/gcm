@@ -34,13 +34,20 @@ padding: 0 25px 25px 25px;
 #cabecera{
 color: <?=$this->color("2")?>;
 background: <?=$this->color("3")?>;
-font-size: 300%;
 padding: 15px;
 overflow: hidden;
 }
-#cabecera form, #cabecera div {
+#cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {
 display: inline;
 }
+#cabecera h1 {
+   font-size: 300%;
+}
+#cabecera h2 {
+   font-family: 'Droid Serif';
+   font-size: 100%;
+}
+
 #cabecera a {
 color: <?=$this->color("2")?>;
 }

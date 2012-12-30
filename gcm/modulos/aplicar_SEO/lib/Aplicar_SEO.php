@@ -49,8 +49,8 @@ class Aplicar_SEO extends Modulos {
          </p>
 
          Información sobre SEO en 
-         <a href="http://localhost/subversion/gcm/trunk/proyecto/Documentacion/SEO.html">
-         http://localhost/subversion/gcm/trunk/proyecto/Documentacion/SEO.html
+         <a href="http://mamedu.com/dev/gcm/proyecto/Documentacion/SEO.html">
+         http://mamedu.com/dev/gcm/proyecto/Documentacion/SEO.html
          </a>
 
          <br /><br />
