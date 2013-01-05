@@ -121,8 +121,8 @@ class Temas extends Modulos {
       $this->version    = $bb['version'];
       $this->plataforma = $bb['platform'];
 
-      $this->Titulo = $gcm->config('metatags','Titulo');
-      $this->Subtitulo = $gcm->config('metatags','Subtitulo');
+      $this->Titulo = $gcm->config('metatags','title');
+      $this->Subtitulo = $gcm->config('metatags','subject');
 
       $tema_conf = $this->config('tema_actual');
       //echo "<p>Tema: <b>".$tema_conf."</b></p>";
@@ -320,11 +320,16 @@ class Temas extends Modulos {
          include($ruta);
       } else {
          registrar(__FILE__,__LINE__,'No tenemos plantilla ['.$ruta.']');
-         echo '<a href="index.php" title="Inicio">';
-         echo '<h1 class="titulo">',literal($this->Titulo,1),'</h1>';
-         echo '<p>',literal($this->Subtitulo,1),'</p>' ; 
-         echo '</a>';
-         return FALSE;
+         ?>
+         <a href="" title="<?php echo literal('inicio');?>">
+            <h1>
+               <?php echo literal($this->Titulo,1); ?>
+            </h1>
+            <h2>
+               <?php echo literal($this->Subtitulo,1); ?>
+            </h2>
+         </a>
+         <?php
          }
 
       }
