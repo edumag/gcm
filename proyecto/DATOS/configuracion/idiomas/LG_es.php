@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Sun Nov 4 11:06:04 CET 2012
+// Archivo generado automaticamente por GcmConfig Sun Dec 30 12:12:49 CET 2012
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia';
@@ -72,4 +72,8 @@ $LG_es['Tests_-_Creacion_de_test_sobre_modulos']='Tests - Creación de test sobr
 $LG_es['Tests,_Creacion_de_test_sobre_modulos']='Tests, Creación de test sobre módulos';
 $LG_es['proyecto']='';
 $LG_es['SEO']='SEO';
+$LG_es['Documentación del framework']='';
+$LG_es['Gcm']='';
+$LG_es['Gestor de Contenido Gcm']='';
+$LG_es['Documentación para Gcm']='';
 ?>
