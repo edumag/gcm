@@ -216,7 +216,6 @@ width: 65%;
 width: 33%;
 }
 }
-/* iphone */
 @media screen and (max-width: 1015px){
 #lateral, #contenedor {
 float: none;
@@ -227,7 +226,8 @@ width: 96%;
    margin-left: 10px;
 }
 
-.panel_titulo {
+/* Apariencia de botón a los títulos de los paneles */
+.panel_titulo a {
 -moz-border-radius:10px;
 -webkit-border-radius:10px;
 border-radius:10px;
@@ -239,5 +239,18 @@ background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E
 color:#4A4A4A;
 text-shadow:1px 1px 0 rgba(255, 255, 255, 0.7);
 padding: 5px;
+display: block;
+}
+
+/* Tablas adaptables */
+table, thead, tr, th, tbody, td{
+   display:block;
+}
+
+tr { border-bottom: 4px solid #666666; }
+td { 
+   border: none;
+   border-bottom: 1px solid #eee; 
+   position: relative;
 }
 }
