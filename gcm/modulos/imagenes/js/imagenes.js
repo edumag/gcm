@@ -116,7 +116,7 @@ function editarImagenes(){
             conta ++;
             // presentar las imagenes que se encuentran en el arrray
             // Parece que tiny analiza el contenido y no inserta el class de <a>
-            salida = salida + '<img src="'+datos.imgs[i][1]+'" />';
+            salida = salida + '<img src="'+datos.imgs[i][2]+'" />';
             salida = salida + '<br />';
             salida = salida + '<a title="<?=literal('miniatura')?>" class="boton" onclick="javascript:;" onmousedown="tinyMCE.execCommand(\'mceInsertContent\',\'false\',\'<a href=\\\''+datos.imgs[i][1]+'\\\' class=\\\'botonImg\\\' ><img src=\\\''+datos.imgs[i][2]+'\\\' /></a>\')" ><-</a>';
             salida = salida + '<a title="<?=literal('Tamaño original')?>" class="boton" href="javascript:;" onmousedown="tinyMCE.execCommand(\'mceInsertContent\',\'false\',\'<img src=\\\''+datos.imgs[i][1]+'\\\' />\')" ><-(</a>';
