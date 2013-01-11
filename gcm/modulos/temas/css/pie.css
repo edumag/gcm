@@ -3,11 +3,11 @@
    background: <?=$this->color("3")?>;
    border: 1px solid <?=$this->color("20")?>;
    }
-#pie img	{
+/* logo pequeño */
+#pie img:first-child	{ 
    float: left;
    width: 40px:
    height: 40px;
-   vertical-align: middle;
    margin: 0px;
    margin-right: 5px;
    border: 0;
@@ -15,3 +15,14 @@
 #pie a {
    color: <?=$this->color("2")?>;
    }
+
+#pie_derecho {
+    text-align: center;
+    margin-top: 9px;
+}
+
+#pie_derecho img {
+    border-width: 0;
+    float: right!IMPORTANT;
+    margin-top: -4px !important;
+}
