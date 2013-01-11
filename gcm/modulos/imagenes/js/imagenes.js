@@ -29,29 +29,44 @@ function verImagen(img, ancho, alto) {
 }
 
 /**
-* Presentar imagenes de la sección que estamos editando
-* en el administrador de imagenes
+* Presentar imágenes de la sección que estamos editando
+* en el administrador de imágenes
 */
 
 function editarImagenesAdmin(){
 
-  if (pedido.readyState == 4 ) {
-   if ( pedido.status == 200 ) {
-     // Imagenes del diectoio las tenemos en listaImg.js
-        var container = document.getElementById('thumbnails');
-        var salida = '' ;
-        //var datos = eval(pedido.responseText);
-        var datos = eval('('+pedido.responseText+')');
+   if (pedido.readyState == 4 ) {
+      if ( pedido.status == 200 ) {
+         // Imagenes del diectoio las tenemos en listaImg.js
+         var container = document.getElementById('thumbnails');
+         var salida = '' ;
+         //var datos = eval(pedido.responseText);
+         var datos = eval('('+pedido.responseText+')');
          if ( datos ) {
-           var conta=0;
-           //for ( var x=0; x<datos.length ; x++ ) {
-           for ( i in datos.imgs ) {
+
+            // Recogemos otras secciones
+            for ( i in datos.sec ) {
+               if ( datos.sec[i][0] == 'actual' ) { // sección actual
+                  salida = salida + '<br /><b>' + datos.sec[i][1] + '</b>';
+                  salida = salida + '<div id="navegador" >';
+               } else {
+                  salida = salida + '<a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=ajaxImg&s='+ datos.sec[i][0] +'\',\'editarImagenesAdmin\');" >' + datos.sec[i][1] + '</a><br />';
+               }
+            }
+            salida = salida + '</div>';
+
+            var conta=0;
+            salida = salida + '<div id="cajaImg">';
+
+            for ( i in datos.imgs ) {
+
                var x = conta;
                conta++;
                // presentar las imagenes que se encuentran en el arrray
+               salida = salida + '<div class="img_editar">';
                salida = salida + '<p class="thumb" ><tt>';
                salida = salida + '<a rel="thumbnail" onclick=\'open("' + datos.imgs[i][1] + '","'+datos.imgs[i][0]+'","toolbar=no,scrollbars=no,width='+datos.imgs[i][3]+'px,height='+datos.imgs[i][4]+'px")\' >';
-               salida = salida + '<img width="100px" id="thumb_'+x+'" src="'+datos.imgs[i][2]+'" alt="imagen" /></a>';
+               salida = salida + '<img id="thumb_'+x+'" src="'+datos.imgs[i][2]+'" alt="imagen" /></a>';
                salida = salida + '<br /><span class="idim"><b>'+datos.imgs[i][0]+'</b><br /> ['+datos.imgs[i][3]+'x'+datos.imgs[i][4]+'] '+datos.imgs[i][5];
                salida += '  [<a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=borrarImg&img='+datos.imgs[i][1]+'\',\'borrarImg\',\'Borrar imágen\')" >X</a>] ';
                if ( datos.imgs[i][6]  ) {
@@ -64,24 +79,26 @@ function editarImagenesAdmin(){
                         salida += '<b>'+subElemento+': </b>'+datos.imgs[i][6][elemento][subElemento]+'<br />';
                      }
                   }
-               salida += '</span></tt></p>';
-            } else {
-               salida += '</span></tt></p>';
+                  salida += '</span></tt></p>';
+               } else {
+                  salida += '</span></tt></p>';
+               }
+               salida = salida + '</div>';
             }
-           }
-           container.innerHTML = salida ;
+            salida = salida + '</div>';
+            container.innerHTML = salida ;
 
-           // Si tenemos una ventana abierta la cerramos
-           var v = document.getElementById('ventana_subeImagen');
-           if ( v ) v.parentNode.removeChild(v);
+            // Si tenemos una ventana abierta la cerramos
+            var v = document.getElementById('ventana_subeImagen');
+            if ( v ) v.parentNode.removeChild(v);
          } else {
             container.innerHTML = "<p class='aviso' style='width: 100px'>Sin Imágenes</p>";
          }
-      } else {
-         alert('Fallo');
+         } else {
+            alert('Fallo');
+         }
       }
    }
-}
 
 /**
 * Presentar imagenes de la sección que estamos editando
@@ -101,10 +118,10 @@ function editarImagenes(){
          // Recogemos otras secciones
          for ( i in datos.sec ) {
             if ( datos.sec[i][0] == 'actual' ) { // sección actual
-               salida = salida + '<br /><a href="javascript:;" onmousedown="visualizar(\'navegador\');">' + datos.sec[i][1] + '</a>';
+               salida = salida + '<br /><b>' + datos.sec[i][1] + '</b>';
                salida = salida + '<div id="navegador" >';
             } else {
-               salida = salida + '<br /><a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=ajaxImg&s='+ datos.sec[i][0] +'\',\'editarImagenes\');" >' + datos.sec[i][1] + '</a>';
+               salida = salida + '<a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=ajaxImg&s='+ datos.sec[i][0] +'\',\'editarImagenes\');" >' + datos.sec[i][1] + '</a><br />';
                }
             }
          salida = salida + '</div>';
@@ -116,12 +133,12 @@ function editarImagenes(){
             conta ++;
             // presentar las imagenes que se encuentran en el arrray
             // Parece que tiny analiza el contenido y no inserta el class de <a>
+            salida = salida + '<div class="img_editar">';
             salida = salida + '<img src="'+datos.imgs[i][2]+'" />';
-            salida = salida + '<br />';
             salida = salida + '<a title="<?=literal('miniatura')?>" class="boton" onclick="javascript:;" onmousedown="tinyMCE.execCommand(\'mceInsertContent\',\'false\',\'<a href=\\\''+datos.imgs[i][1]+'\\\' class=\\\'botonImg\\\' ><img src=\\\''+datos.imgs[i][2]+'\\\' /></a>\')" ><-</a>';
             salida = salida + '<a title="<?=literal('Tamaño original')?>" class="boton" href="javascript:;" onmousedown="tinyMCE.execCommand(\'mceInsertContent\',\'false\',\'<img src=\\\''+datos.imgs[i][1]+'\\\' />\')" ><-(</a>';
             salida = salida + '<a title="<?=literal('Eliminar')?>" class="boton" href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=borrarImg&img='+datos.imgs[i][1]+'\',\'borrarImg\',\'Borrar imágen\')" >X</a>';
-            salida = salida + '<br />';
+            salida = salida + '</div>';
            }
          salida = salida + '</div>';
 

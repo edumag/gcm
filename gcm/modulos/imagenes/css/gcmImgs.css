@@ -1,4 +1,4 @@
-
+/** Administrador general */
 #gcmImgs {
    overflow: auto;
    color: <?=$this->color("4")?>;
@@ -55,4 +55,21 @@
    height: 56px;
    margin: 1px 1px 1px 3px;
    padding: 0;
+}
+/* Columna al editar entrada */
+.img_editar {
+   border: 4px solid threedshadow;
+   border-radius: 15px;
+   display: inline-block;
+   background: none repeat scroll 0 0 threedface;
+   padding: 10px;
+   margin: 5px;
+}
+.img_editar img {
+    display: block;
+    margin: 10px;
+}
+
+form#form_img_edit {
+   margin: 40px 0;
 }
