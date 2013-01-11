@@ -53,9 +53,13 @@ class PaginarPDO extends GcmPDO {
     * @param $sufijo Sufijo para que no choquen cuando hay más de un paginador en una
     *                misma pagina.
     * @param $orden Orden por defecto de la sql
+    * @param $sql_relaciones Una sql compleja, puede ser necesario añadir estas relaciones, al 
+    *        ordenar las fechas por el alias el orden nos lo hace como si fuera una  cadena, 
+    *        así en este caso se hace necesario tener el nombre real del  campo para que las 
+    *        ordene como fechas.
     */
 
-   function __construct (PDO $pdo, $sql, $sufijo=FALSE, $elementos_pagina=8, $order = FALSE) {
+   function __construct (PDO $pdo, $sql, $sufijo=FALSE, $elementos_pagina=8, $order = FALSE, $sql_relaciones = FALSE) {
 
        parent::__construct($pdo, $sql);
 
@@ -71,16 +75,17 @@ class PaginarPDO extends GcmPDO {
 
          $this->tipo_orden = ( isset($_GET[$this->sufijo.'tipo_orden']) ) ? $_GET[$this->sufijo.'tipo_orden'] : 'asc';
 
-         $order = "ORDER BY ".$this->as_orden." ".$this->tipo_orden;
+         // Buscamos si tenemos una relación definida del alias del campo con su nombre real
+
+         if ( $sql_relaciones && array_key_exists($this->as_orden,$sql_relaciones) ) {
+            $order = "ORDER BY ".$sql_relaciones[$this->as_orden]." ".$this->tipo_orden;
+         } else {
+            $order = "ORDER BY `".$this->as_orden."` ".$this->tipo_orden;
+            }
 
       } elseif ( $order ) {
 
          preg_match_all('/order by (.*?) (.*?)/i', $order, $coincidencias);
-
-         /** 
-          * @bug FALLO AL INTENTAR DETECTAR EL ORDEN, no debe tener espacios en el campo que ordena
-          *      Da errores en sql como campo AS `Última modificación`
-          */
 
          $ordenadox = ( !empty($coincidencias[1][0]) ) ? trim($coincidencias[1][0],',') : FALSE ;
 

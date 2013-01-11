@@ -142,6 +142,23 @@ class Crud extends DataBoundObject {
    public $sql_listado;
 
    /**
+    * Relación de los campos del listado con sus alias.
+    *
+    * Una sql compleja,  puede  ser  necesario añadir  estas  relaciones, al 
+    * ordenar las fechas por el alias el orden nos lo hace como si fuera una 
+    * cadena, así en este caso se hace necesario tener el nombre real del 
+    * campo para que las ordene como fechas.
+    *
+    * Ejemplo de uso:
+    *
+    * @code
+    * $this->sql_listado_relacion = array(literal('Data') => 'g.fecha_creacion' );
+    * @endcode
+    */
+
+   protected $sql_listado_relacion = FALSE;
+
+   /**
     * Parte FROM de la sql que genera el listado, por defecto $this->strTableName
     */
 
@@ -1032,7 +1049,7 @@ class Crud extends DataBoundObject {
 
       $this->elementos = ( $this->elementos_pagina ) ? $this->elementos_pagina : NULL;
 
-      $pd = new PaginarPDO($this->objPDO, $sql, $this->strTableName.'_', $this->elementos_pagina, $order);
+      $pd = new PaginarPDO($this->objPDO, $sql, $this->strTableName.'_', $this->elementos_pagina, $order, $this->sql_listado_relacion);
 
       if ( $this->conf_paginador ) {
          foreach($this->conf_paginador as $atr => $valor ) {
