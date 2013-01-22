@@ -82,6 +82,28 @@ class Imagenes extends Modulos {
       // Formulario para la subida de una imagen con ajax
 
       ob_start();
+      $this->contenido_ventana_subir_imagen();
+      ?>
+      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
+      <br />
+      <div id='thumbnails' >
+      <div id='cajaImg'>
+      </div> <!-- Acaba cajaImg -->
+      </div> <!-- Acaba thumbnails -->
+      <?php
+      $contenido = ob_get_contents();
+      ob_end_clean(); 
+
+      echo $contenido;
+
+      }
+
+   /**
+    * Contenido para subir imagen con ventana flotante 
+    */
+
+   function contenido_ventana_subir_imagen() {
+
       ?>
       <script type="text/javascript">
 
@@ -125,17 +147,7 @@ class Imagenes extends Modulos {
             alert(mensaje);
          }
       </script>
-      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
-      <br />
-      <div id='thumbnails' >
-      <div id='cajaImg'>
-      </div> <!-- Acaba cajaImg -->
-      </div> <!-- Acaba thumbnails -->
       <?php
-      $contenido = ob_get_contents();
-      ob_end_clean(); 
-
-      echo $contenido;
 
       }
 
@@ -242,49 +254,8 @@ class Imagenes extends Modulos {
       // Formulario para la subida de una imagen con ajax
 
       ob_start();
+      $this->contenido_ventana_subir_imagen();
       ?>
-      <script type="text/javascript">
-
-         /// Contenido de la ventana para subir una imagen
-         var conFormUpload = '<div id="formUpload" >';
-         conFormUpload +=  '<form method="post" enctype="multipart/form-data" ';
-         conFormUpload +=  'action="?a=subirImagen&m=imagenes&pro=<?=$this->proyecto?>" ';
-         conFormUpload +=  'target="iframeUpload">';
-         conFormUpload +=  '<input name="fimagen" type="file" onchange="javascript: submit();" />';
-         conFormUpload +=  '<input name="directorio" type="hidden" value="File/<?=$this->idioma.'/'.$s ?>" />';
-         //conFormUpload +=  '<input type="hidden" name="m" value="admin/subirimagen" />';
-         conFormUpload +=  '<input type="hidden" name="metodo" value="ajax" />';
-         conFormUpload +=  '<input type="hidden" name="subirImagenes" value="ajax" />';
-         conFormUpload +=  '<iframe name="iframeUpload" style="display:none"></iframe>';
-         conFormUpload +=  '</form>';
-         conFormUpload +=  '</div>';
-
-         /**
-         * Recogemos la respuesta del modulo subirimagenes
-         * si es afirmativa actualizamos caja de imágenes (cajaImg)
-         */
-         
-         function resultadoUpload(estado, txt) {
-
-            if (estado == 0) {
-               // Actualizar caja de imágenes 
-               if ( document.getElementById('imgEdit') ) {
-                  pedirDatos('?m=imagenes&a=ajaxImg&s=<?='File/'.$this->idioma.'/'.$s ?>','editarImagenes');
-               }
-
-               if ( document.getElementById('thumbnails') ) {
-                  pedirDatos('?m=imagenes&a=ajaxImg&s=<?='File/'.$this->idioma.'/'.$s ?>','editarImagenesAdmin');
-               }
-               return;
-            }
-            if (estado == 1) var mensaje = 'Falta directorio ' + txt;
-            if (estado == 2) var mensaje = 'Falta archivo ' + txt ;
-            if (estado == 3) var mensaje = 'No se pudo subir Archivo ' + txt ;
-            if (estado == 4) var mensaje = txt;
-
-            alert(mensaje);
-         }
-      </script>
       <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
       <br />
       <div id='imgEdit' >

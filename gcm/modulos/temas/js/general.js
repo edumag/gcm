@@ -114,24 +114,8 @@ function ventana(titulo,contenido, identificador) {
    }
 
    win.id = 'ventana_'+identificador;
-   win.style.position = 'absolute';
-   //win.style.top = topp + '%';
-   win.style.top = '50%';
-   win.style.left = '50%';
-   win.style.border = '1px solid #fff';
-   win.style.background = '#000';
-   win.style.color = 'white';
-   //win.style.width = '200px';
-   //win.style.height = '100px';
-   win.style.padding = '4px';
-   win.style.margin = '-50px 0 0 -100px'; // mitad que elemento
-   // Transparencia
-   if ( navigator.appName == 'Microsoft Internet Explorer' ) {
-      win.style.filter = 'alpha(opacity="85")';
-   } else {
-      win.style.opacity = '0.85';
-   }
-   contenido = '<div style="text-align:right"><span style="float:left">'+titulo+'</span><span style="position:relative;left: 0px; " ><a href="javascript:this.cerrar(\''+win.id+'\')">X</a></span></div><div style="padding: 15px">' + contenido + '</div>';
+   win.className+=' ventana_flotante';
+   contenido = '<div class="titulo_ventana_flotante" style="text-align:right"><span style="float:left">'+titulo+'</span><span style="position:relative;left: 0px; " ><a href="javascript:this.cerrar(\''+win.id+'\')">X</a></span></div><div style="padding: 15px">' + contenido + '</div>';
    win.innerHTML = contenido;
 
    this.cerrar = function(id){

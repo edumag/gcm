@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Fri Jan 11 10:34:50 CET 2013
+// Archivo generado automaticamente por GcmConfig Tue Jan 22 9:43:38 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -106,4 +106,10 @@ $GCM_LG_es['Guardar colores']='';
 $GCM_LG_es['Añadir un color']='';
 $GCM_LG_es['Fallo al generar imagen']='';
 $GCM_LG_es['Error al generar imagen']='';
+$GCM_LG_es['Sin sección']='';
+$GCM_LG_es['Sección [Documentacion/imagenes/] no encontrada']='';
+$GCM_LG_es['Sección [gcm/modulos/imagenes/lib/] no encontrada']='';
+$GCM_LG_es['Sección [gcm/modulos/temas/libjs/] no encontrada']='';
+$GCM_LG_es['Cancelar']='';
+$GCM_LG_es['Registro modificado']='';
 ?>

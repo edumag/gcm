@@ -8,12 +8,16 @@ function initListadoContenido(contexto) {
 
    /* Evento click */
 
-   $('.elemento_lista_off', contexto ).click(function(e) {
+   $('.elemento_lista_off .titulo_articulo', contexto ).click(function(e) {
 
-      var caja = $(this);
-      var titulo = $(this).children('div:first');
-      var contenido = $(this).children(".contenido_articulo");
+      var caja = $(this).parent("div");
+      var titulo = $(this);
+      var contenido = caja.children(".contenido_articulo");
       var url = titulo.children().attr("href");
+
+      /* debug */
+      // titulo.css('background', 'green');
+      // caja.css('background', 'white');
 
       /* Miramos la clase para saber el estado */
 

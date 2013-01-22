@@ -316,7 +316,7 @@ function generarImagen($imagen, $destino, $alto, $ancho, $miniatura='si') {
               imagegif($imagen,$dirFinal.$imagenName);
               break;
           case "image/jpeg":
-              imagejpeg($imagen,$dirFinal.$imagenName);
+              imagejpeg($imagen,$dirFinal.$imagenName, 100);
               break;
           case "image/png":
               imagepng($imagen,$dirFinal.$imagenName);

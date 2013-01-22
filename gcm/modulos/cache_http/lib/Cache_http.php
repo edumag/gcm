@@ -243,7 +243,12 @@ class Cache_http extends Modulos {
       registrar(__FILE__,__LINE__,
          __CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Archivos a borrar: '.depurar($archivos));
 
-      if ( !isset($archivos) || empty($archivos) ) return;
+      if ( !isset($archivos) || empty($archivos) ) {
+         
+         echo literal('Cache vacia');
+         exit();
+         $gcm->salir();
+         }
 
       foreach ( $archivos as $archivo ) {
          if ( is_dir($archivo) ) {
