@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Wed Jan 23 10:43:02 CET 2013
+// Archivo generado automaticamente por GcmConfig Wed Jan 23 11:34:27 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
