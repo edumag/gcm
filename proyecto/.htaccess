@@ -1,8 +1,12 @@
 php_flag register_globals Off
 
-Options +FollowSymLinks
+# En debug poner a 6, producción 7
+php_value error_reporting 8
 
-php_flag register_globals off
+# En producción poner a off
+php_flag expose_php on
+
+Options +FollowSymLinks
 
 # RewriteEngine on
 

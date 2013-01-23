@@ -1,8 +1,8 @@
 <?php
 
 /**
-* \file
-* Funciones para el tratamiento de imagenes
+* @file gcm_imagen.php
+* @brief Funciones para el tratamiento de imagenes
 *
 * @author Eduardo Magrané
 */
@@ -103,13 +103,11 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
    // Si es un archivo zip lo descomprimimos
    if ( $imagenType == 'application/zip' ) {
 
+      $zip = new ZipArchive;
+
       // listar archivos incluidos para procesarlos despues
-      $zip = zip_open($imagenFile);
-      if ($zip) {
-         while ($zip_entry = zip_read($zip)) {
-           $listaZip[]=zip_entry_name($zip_entry);
-         }
-      zip_close($zip);
+      if ( $zip->open($imagenFile) === TRUE ) {
+         $num_imagenes = $zip->numFiles;
       } else {
          $mens = 'No se pudo abrir el archivo zip: '.$imagenName;
          registrar(__FILE__,__LINE__,$mens,'ERROR');
@@ -117,7 +115,7 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
          return null ;
       }
 
-      if ( count($listaZip) < 1 ) {
+      if ( $num_imagenes < 1 ) {
          $mens = $imagenName.' vacio';
          registrar(__FILE__,__LINE__,$mens,'ERROR');
          echo '<script>alert(\'Vacio '.$imagenName.'\');</script>';
@@ -125,8 +123,7 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
       }
 
 
-      include("zip.php");
-      if ( zip_extract_to($imagenFile,$dirFinal , true) ) {
+      if ( $zip->extractTo($dirFinal) ) {
          echo '<script>parent.resultadoUpload (\'0\', \''.$imagenName.'\');</script>';
       } else {
          $mens = 'Archivo '.$imagenName.' no se pudo descomprimir';
@@ -135,11 +132,12 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
          return NULL ;
       }
 
-      $num = count($listaZip);
-      echo "gcm_imagen_copiar::Numero de imagenes: <b>$num</b>";
-      if ( $num > 0 ) {
-         for ($i=0 ; $i!=$num; $i++) {
-            $imagen = $dirFinal.$listaZip[$i] ;
+      echo "gcm_imagen_copiar::Numero de imagenes: <b>$num_imagenes</b>";
+      if ( $num_imagenes > 0 ) {
+         for ($i=0 ; $i!=$num_imagenes; $i++) {
+            $filename = $zip->getNameIndex($i);
+            $fileinfo = pathinfo($filename);
+            $imagen = $dirFinal.$filename ;
             $salida.=$imagen.'\n';
 
             // Generamos imagen
@@ -156,7 +154,7 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
          }
       }
 
-      echo '<script>parent.resultadoUpload (\'0\', \''.$imagenName.' '.$num.' imagenes\\n'.$salida.'\');</script>';
+      echo '<script>parent.resultadoUpload (\'0\', \''.$imagenName.' '.$num_imagenes.' imagenes\\n'.$salida.'\');</script>';
 
       return TRUE ;
 

@@ -375,7 +375,7 @@ class Temas extends Modulos {
 
       $this->javascripts('general.js');
       $this->javascripts('paneles.js');
-      $this->librerias_js('jquery-1.5.2.min.js');
+      $this->librerias_js('jquery.js');
 
       if ( Router::$c == 'proyectos.css' ) {
          header('Content-Type: text/css');

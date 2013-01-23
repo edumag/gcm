@@ -84,7 +84,7 @@ class Imagenes extends Modulos {
       ob_start();
       $this->contenido_ventana_subir_imagen();
       ?>
-      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
+      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.Router::$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
       <br />
       <div id='thumbnails' >
       <div id='cajaImg'>
@@ -100,6 +100,8 @@ class Imagenes extends Modulos {
 
    /**
     * Contenido para subir imagen con ventana flotante 
+    *
+    * Se presenta formulario para la subida de imágenes
     */
 
    function contenido_ventana_subir_imagen() {
@@ -113,7 +115,7 @@ class Imagenes extends Modulos {
          conFormUpload +=  'action="?a=subirImagen&m=imagenes&pro=<?=$this->proyecto?>" ';
          conFormUpload +=  'target="iframeUpload">';
          conFormUpload +=  '<input name="fimagen" type="file" onchange="javascript: submit();" />';
-         conFormUpload +=  '<input name="directorio" type="hidden" value="File/<?=$this->idioma.'/'.$s ?>" />';
+         conFormUpload +=  '<input name="directorio" type="hidden" value="File/<?=$this->idioma.'/'.Router::$s ?>" />';
          //conFormUpload +=  '<input type="hidden" name="m" value="admin/subirimagen" />';
          conFormUpload +=  '<input type="hidden" name="metodo" value="ajax" />';
          conFormUpload +=  '<input type="hidden" name="subirImagenes" value="ajax" />';
@@ -131,11 +133,11 @@ class Imagenes extends Modulos {
             if (estado == 0) {
                // Actualizar caja de imágenes 
                if ( document.getElementById('imgEdit') ) {
-                  pedirDatos('?m=imagenes&a=ajaxImg&s=<?='File/'.$this->idioma.'/'.$s ?>','editarImagenes');
+                  pedirDatos('?m=imagenes&a=ajaxImg&s=<?='File/'.$this->idioma.'/'.Router::$s ?>','editarImagenes');
                }
 
                if ( document.getElementById('thumbnails') ) {
-                  pedirDatos('?m=imagenes&a=ajaxImg&s=<?='File/'.$this->idioma.'/'.$s ?>','editarImagenesAdmin');
+                  pedirDatos('?m=imagenes&a=ajaxImg&s=<?='File/'.$this->idioma.'/'.Router::$s ?>','editarImagenesAdmin');
                }
                return;
             }
@@ -249,14 +251,12 @@ class Imagenes extends Modulos {
 
       $this->javascripts('imagenes.js');
 
-      $s = Router::$s;
-
       // Formulario para la subida de una imagen con ajax
 
       ob_start();
       $this->contenido_ventana_subir_imagen();
       ?>
-      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
+      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.Router::$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
       <br />
       <div id='imgEdit' >
       <div id='cajaImg'>
@@ -269,7 +269,7 @@ class Imagenes extends Modulos {
       $panel = array();
       $panel['titulo'] = literal('Imágenes',3);
       $panel['oculto'] = TRUE;
-      $panel['ajax'] = 'pedirDatos(\''.Router::$dir.'?m=imagenes&a=ajaxImg&s=File/'.Router::$ii.'/'.$s.'\',\'editarImagenes\');';
+      $panel['ajax'] = 'pedirDatos(\''.Router::$dir.'?m=imagenes&a=ajaxImg&s=File/'.Router::$ii.'/'.Router::$s.'\',\'editarImagenes\');';
       $panel['contenido'] =$contenido;
 
       Temas::panel($panel);
@@ -312,16 +312,24 @@ class Imagenes extends Modulos {
       exit();
    }
 
-   /** Presentar galeria
+   /** 
+    * Presentar galeria
     *
-    * Presentamos la galería de fotos con apoyo del módulo gcmImg
+    * Presentamos la galería de fotos
     */
 
-   function presentar_galeria() {
+   function galeria() {
 
       global $gcm;
 
-      $this->javascripts('imagenes.js');
+      // $this->javascripts('imagenes.js');
+      // $this->javascripts('galeria.js');
+
+?>
+      <script>
+<?php include(dirname(__FILE__).'/../js/imagenes.js'); ?>
+      </script>
+<?php
 
       //ob_end_clean();
       $img = $_GET['img'];
@@ -339,8 +347,8 @@ class Imagenes extends Modulos {
       gcm_listaImagenes(Router::$dd.Router::$s, 4);
       echo "\n</script>";
 
-      // Añadimos gcmImgs.js para la presentación de imagenes
-      echo "\n",'<script src="'.Router::$dir.GCM_DIR.'modulos/imagenes/lib/gcmImgs.js'.'" type="text/javascript" language="JavaScript"></script>';
+      // Añadimos galeria.js para la presentación de imagenes
+      // echo "\n",'<script src="'.Router::$dir.GCM_DIR.'modulos/imagenes/js/galeria.js'.'" type="text/javascript" language="JavaScript"></script>';
 
       // Sistema de listado de imagenes manual
       //echo "\n<script language='javascript'>";
@@ -348,17 +356,55 @@ class Imagenes extends Modulos {
       //echo "\nimagen1[0]='".$img."';";
       //echo "\n</script>";
 
-      echo '<div id="contenido" >';
+      ?>
+      <div id="contenido" >
+      <script language='javascript'>
 
-      //echo '<img src=\'',$img,'\' />';
-      echo "\n<script language='javascript'>";
-      echo "\npresentar_contenido();";
-      echo "\n</script>";
-      echo '</div>';
-      //echo '</body></html>';
-      //exit();
+<?php include(dirname(__FILE__).'/../js/galeria.js'); ?>
+      addLoadEvent(function(){
+         presentar_contenido();
+         });
+      </script>
+      </div>
+      <?php
+      }
 
+   /**
+    * Incluimos javascript para convertir los enlaces a imagenes
+    * y se muestren dentro de la galeria.
+    */
+
+   function imagenes_a_galeria($e, $args=FALSE) {
+
+      global $gcm;
+
+      $this->javascripts('imagenes.js');
+      ?>
+      <script>
+      addLoadEvent(function(){
+         linksImgView();
+      });
+      </script>
+      <?php
+      }
+
+   /**
+    * Enlazamos las imágenes dentro de contenido hacia thickbox
+    */
+
+   function imagenes2thickbox($e, $args=FALSE) {
+
+      global $gcm;
+
+      $this->javascripts('imagenes.js');
+      ?>
+      <script>
+      addLoadEvent(function(){
+         img2thickbox();
+      });
+      </script>
+      <?php
+      }
    }
-}
 
 ?>

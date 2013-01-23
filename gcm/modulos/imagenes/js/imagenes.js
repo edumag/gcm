@@ -1,5 +1,3 @@
-<?php
-
 /** imagenes.js.php 
 *
 * javascript para la administración de imagenes
@@ -7,12 +5,6 @@
 * @author Eduardo Magrané
 * @version 1.0
 */
-
-// vim:cal SetSyn("javascript") 
-
-header('Content-Type: text/javascript');
-
-?>
 
 /*
 * Visualizar un imagen
@@ -165,54 +157,83 @@ function editarImagenes(){
 */
 
 function borrarImg(img){
-  if (pedido.readyState == 4 ) {
-   if ( pedido.status == 200 ) {
-      var estado = eval(pedido.responseText);
-      if ( estado[0] == 0 ) { // la imagen se borro bien
-         // actualizar caja de imagenes
-         if ( document.getElementById('imgEdit') ) {
-            pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'editarImagenes');
-         }
-         if ( document.getElementById('thumbnails') ) {
-            pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'editarImagenesAdmin');
-         }
 
-      } else {
-         var res = "Error al borrar imágen";
-         for(x=0;x<estado.length;x++) {
-            res += '\n'+estado[x];
+   if (pedido.readyState == 4 ) {
+      if ( pedido.status == 200 ) {
+         var estado = eval(pedido.responseText);
+         if ( estado[0] == 0 ) { // la imagen se borro bien
+            // actualizar caja de imagenes
+            if ( document.getElementById('imgEdit') ) {
+               pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'editarImagenes');
+            }
+            if ( document.getElementById('thumbnails') ) {
+               pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'editarImagenesAdmin');
+            }
+
+         } else {
+            var res = "Error al borrar imágen";
+            for(x=0;x<estado.length;x++) {
+               res += '\n'+estado[x];
+            }
+            //res += estado[0];
+            alert(res);
          }
-         //res += estado[0];
-         alert(res);
       }
    }
-  }
 
 }
 
-function verImg(img){
-window.open('?m=imagenes&a=presentar_galeria&img='+img,'','toolbar=no,scrollbars=yes')
-}
-   /**
-   *
-   * Transformammos los links hacia imagenes directos a un link a la misma pagina con
-   * el argumento img=con el link, asi podemos enseñar las imagenes de forma más completa
-   *
-   * @author Eduardo Magrané
-   * @version 1.0
-   *
-   */
+/**
+ * Hacemos que las imágenes se abran en la galería
+ */
+
+function verImgEnGaleria(img){
+   window.open('?m=imagenes&a=galeria&img='+img,'','toolbar=no,scrollbars=yes');
+   return false;
+   }
+
+/**
+* Transformammos los links hacia imagenes directos a un link a la misma pagina con
+* el argumento img=con el link, asi podemos enseñar las imagenes de forma más completa
+*/
 
 function linksImgView() {
+
    var links = document.links;
+
    for (var x=0 ; x<links.length ; x++ ) {
+
       var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);
       if ( tipo == '.gif' || tipo == '.jpg' || tipo == 'jpeg' || tipo == '.png' || tipo == 'tiff' || tipo == '.JPG' || tipo == '.GIF'  ) {
          var ancla = links[x];
-         ancla.setAttribute('onmousedown','verImg(\''+links[x].href+'\')');
-         //alert(ancla);
-         //ancla.onclick=verImg(links[x].href);
+         ancla.setAttribute('onclick','verImgEnGaleria(\''+links[x].href+'\'); return false;');
       }
    }
 }
+
+/**
+ * Transformammos los enlaces de las miniaturas de imágenes para que se muestre la
+ * ampliación en la misma pagina utilizando thickbox.
+ */
+
+function img2thickbox() {
+
+   var links = document.links;
+   var num   = 0;
+
+   for (var x=0 ; x<links.length ; x++ ) {
+
+      var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);
+      if ( tipo == '.gif' || tipo == '.jpg' || tipo == 'jpeg' || tipo == '.png' || tipo == 'tiff' || tipo == '.JPG' || tipo == '.GIF'  ) {
+         var ancla = links[x];
+         //ancla.setAttribute('onclick','verImgEnGaleria(\''+links[x].href+'\'); return false;');
+         ancla.setAttribute('rel','galeria_imagenes');
+         ancla.setAttribute('class',"thickbox");
+         num++;
+      }
+   }
+
+   <?php include(dirname(__FILE__).'/../js/thickbox.js');?>
+}
+
 

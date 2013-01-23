@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Tue Jan 22 9:43:38 CET 2013
+// Archivo generado automaticamente por GcmConfig Wed Jan 23 10:43:02 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -89,27 +89,9 @@ $GCM_LG_es['Contenido actualizado']='';
 $GCM_LG_es['Guardar contenido']='';
 $GCM_LG_es['Editar']='';
 $GCM_LG_es['Borrar']='';
-$GCM_LG_es['Listado completo de contenido']='';
-$GCM_LG_es['Acciones sobre contenidos']='';
-$GCM_LG_es['Cambiar nombre']='';
 $GCM_LG_es['Galería de imágenes']='';
-$GCM_LG_es['Administración de temas']='';
-$GCM_LG_es['Temas actual']='';
-$GCM_LG_es['Selecciona tema']='';
-$GCM_LG_es['Creación de un tema nuevo']='';
-$GCM_LG_es['Nuevo tema']='';
-$GCM_LG_es['Editar ficheros de tema']='';
-$GCM_LG_es['Ficheros por defecto']='';
-$GCM_LG_es['Ficheros de tema']='';
-$GCM_LG_es['Subir fichero proyecto.css modificado']='';
-$GCM_LG_es['Guardar colores']='';
-$GCM_LG_es['Añadir un color']='';
-$GCM_LG_es['Fallo al generar imagen']='';
+$GCM_LG_es['Sin Contenido']='';
+$GCM_LG_es['Contenido [Seccion/<] no encontrado']='';
+$GCM_LG_es['Filtro']='';
 $GCM_LG_es['Error al generar imagen']='';
-$GCM_LG_es['Sin sección']='';
-$GCM_LG_es['Sección [Documentacion/imagenes/] no encontrada']='';
-$GCM_LG_es['Sección [gcm/modulos/imagenes/lib/] no encontrada']='';
-$GCM_LG_es['Sección [gcm/modulos/temas/libjs/] no encontrada']='';
-$GCM_LG_es['Cancelar']='';
-$GCM_LG_es['Registro modificado']='';
 ?>

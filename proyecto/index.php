@@ -19,6 +19,12 @@
  */
 
 /**
+ * Configuración basica
+ */
+
+date_default_timezone_set('Europe/Madrid');
+
+/**
  * @def GCM_DIR
  *
  * Ubicación de la carpeta de gcm

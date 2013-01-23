@@ -1,11 +1,14 @@
-/** Lanzar funciones al cargarse la página
+/** 
+ * @file javascript_head.js
+ * @brief Lanzar funciones al cargarse la página
+ *
  * Función que nos permite lanzar más de una función al
  * cargar la página.
  *
  * Forma de uso::
  *
  *    addLoadEvent(function(){
- *       pedirDatos('?m=imagenes&a=ajaxImg&s=<?=$d ?>','editarImagenesAdmin')
+ *       pedirDatos('?m=imagenes&a=ajaxImg&s=seccion','editarImagenesAdmin')
  *       });
  *
  * @ref http://www.danilat.com/weblog/2007/11/20/la-forma-correcta-de-usar-windowonload/
