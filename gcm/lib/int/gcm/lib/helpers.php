@@ -476,23 +476,12 @@ function construir_get ($variables) {
 
    }
 
-/** Determinar si se tienen los permisos especificados
- *
- * Los niveles van desde 0 a 10 siendo 10 el administrador y 0 no es ni usuario.
- *
- * Podemos pasar el usuario afectado para poder comparar si es el mismo que el
- * actual y tenerlo en cuenta si se esta generando una acción sobre otro usuario se deberan
- * tener más permisos que si es sobre uno mismo.
- *
- * @param $nivel Nivel que se requiere
- * @param $usuario_id Usuario afectado
- * @param $salir (TRUE/FALSE) TRUE: En caso de no tener permisos se redirige, 
- *               FALSE: Solo retornamos TRUE o FALSE
+/** 
+ * Determinar si tiene un rol con los permisos especificados para la acción.
  *
  * @todo Crear módulo que gestione el enrutamiento a paginas de error.
  *
- * @param $nivel Nivel necesarios para el administrador
- * @param $usuario_id Identificador de usuario
+ * @param $accion     Acción a realizar
  * @param $salir En caso de no tener permisos enrutamos
  * @param $mensaje Presentar mensaje en caso de no tener permisos T/F
  *

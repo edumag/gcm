@@ -343,8 +343,8 @@ function generarImagen($imagen, $destino, $alto, $ancho, $miniatura='si') {
  * Crear una lista de las imagenes de un directorio
  *
  * @param path Directorio donde buscar imagenes
- * @param tipo tipop de salida
- *
+ * @param tipo tipop de salida, 1: tiny 3: JSON 
+ *        4: JSON con variable default: JSON a pelo
  */
 
 function gcm_listaImagenes($path, $tipo=1) {
@@ -419,6 +419,14 @@ function gcm_listaImagenes($path, $tipo=1) {
 
     $directorio->close();
 
+    // Añadir número de imágenes encontradas en subdirectorios
+
+    foreach ( $otrasSecciones as &$seccion_con_imagenes ) {
+       if ( is_dir($seccion_con_imagenes[0]) && $seccion_con_imagenes[0] != '..' ) {
+          $seccion_con_imagenes[1] = $seccion_con_imagenes[1]. ' ('.contabilizar_imagenes_directorio($seccion_con_imagenes[0]).')';
+          }
+      }
+
     if ( $tipo == 1 ) {                    // escribir archivo para tiny
 
        $num = count($lista);
@@ -460,6 +468,43 @@ function gcm_listaImagenes($path, $tipo=1) {
     }
 
    }
+
+/**
+ * Contabilizar las imágenes que hay dentro de un directorio
+ *
+ * Para ello hay que recorrerlos todos recursivamente para obtener
+ * el numero
+ *
+ * @param $directorio    Directorio 
+ * @param $numero_actual Numero que ya tenemos de imágenes encontradas
+ */
+
+function contabilizar_imagenes_directorio($directorio, $numero_actual=0) {
+
+   $extensiones = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
+
+   // Añadimos barra en caso de no haberla
+   $path = comprobar_barra($directorio);
+
+   $imagenes = glob($path."{*.GIF,*.JPG,*.PNG,*.gif,*.jpg,*.png}", GLOB_BRACE);
+
+   $numero = $numero + sizeof($imagenes);
+
+   $dir = glob($path.'*');
+
+   $tenemos_subdirectorio = FALSE ;
+   foreach ( $dir as $item ) {
+
+      if ( is_dir($item) ) {
+         contabilizar_imagenes_directorio($item, $numero);
+         $tenemos_subdirectorio = TRUE ;
+         }
+      }
+
+   return $numero;
+   }
+
+
 
 /**
 * Borrar imagen

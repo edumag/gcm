@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Wed Jan 23 11:34:27 CET 2013
+// Archivo generado automaticamente por GcmConfig Thu Jan 24 12:43:40 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -94,4 +94,10 @@ $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['Contenido [Seccion/<] no encontrado']='';
 $GCM_LG_es['Filtro']='';
 $GCM_LG_es['Error al generar imagen']='';
+$GCM_LG_es['Listado completo de contenido']='';
+$GCM_LG_es['Acciones sobre contenidos']='';
+$GCM_LG_es['Cambiar nombre']='';
+$GCM_LG_es['Sin sección']='';
+$GCM_LG_es['Sección [Seccion/imagenes/] no encontrada']='';
+$GCM_LG_es['No es un directorio']='';
 ?>

@@ -25,7 +25,7 @@ function verImagen(img, ancho, alto) {
 * en el administrador de imágenes
 */
 
-function editarImagenesAdmin(){
+function galeria(){
 
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
@@ -42,7 +42,7 @@ function editarImagenesAdmin(){
                   salida = salida + '<br /><b>' + datos.sec[i][1] + '</b>';
                   salida = salida + '<div id="navegador" >';
                } else {
-                  salida = salida + '<a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=ajaxImg&s='+ datos.sec[i][0] +'\',\'editarImagenesAdmin\');" >' + datos.sec[i][1] + '</a><br />';
+                  salida = salida + '<a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=ajaxImg&s='+ datos.sec[i][0] +'\',\'galeria\');" >' + datos.sec[i][1] + '</a><br />';
                }
             }
             salida = salida + '</div>';
@@ -60,7 +60,11 @@ function editarImagenesAdmin(){
                salida = salida + '<a rel="thumbnail" onclick=\'open("' + datos.imgs[i][1] + '","'+datos.imgs[i][0]+'","toolbar=no,scrollbars=no,width='+datos.imgs[i][3]+'px,height='+datos.imgs[i][4]+'px")\' >';
                salida = salida + '<img id="thumb_'+x+'" src="'+datos.imgs[i][2]+'" alt="imagen" /></a>';
                salida = salida + '<br /><span class="idim"><b>'+datos.imgs[i][0]+'</b><br /> ['+datos.imgs[i][3]+'x'+datos.imgs[i][4]+'] '+datos.imgs[i][5];
+
+               <?php if ( permiso('editar_imagenes') ) { ?>
                salida += '  [<a href="javascript:;" onmousedown="pedirDatos(\'?m=imagenes&a=borrarImg&img='+datos.imgs[i][1]+'\',\'borrarImg\',\'Borrar imágen\')" >X</a>] ';
+               <?php } ?>
+
                if ( datos.imgs[i][6]  ) {
                   salida += '[<a href="javascript:;" onmousedown="visualizar(\'exif_' + x + '\');visualizar(\'thumb_' + x + '\')" >exif</a>]';
                   salida += '</span><br />';
@@ -167,7 +171,7 @@ function borrarImg(img){
                pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'editarImagenes');
             }
             if ( document.getElementById('thumbnails') ) {
-               pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'editarImagenesAdmin');
+               pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'galeria');
             }
 
          } else {

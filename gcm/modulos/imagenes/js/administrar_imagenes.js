@@ -3,5 +3,5 @@
  */
 
 addLoadEvent(function(){
-   pedirDatos('?m=imagenes&a=ajaxImg&s=<?php echo Router::$d.Router::$s ?>','editarImagenesAdmin')
+   pedirDatos('?m=imagenes&a=ajaxImg&s=<?php echo Router::$d.Router::$s ?>','galeria')
    });

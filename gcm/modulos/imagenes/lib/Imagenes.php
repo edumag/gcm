@@ -61,44 +61,6 @@ class Imagenes extends Modulos {
       }
 
    /**
-   * Administración de las imágenes
-   */
-
-   function administrar() {
-
-      global $gcm;
-
-      $gcm->titulo = literal('Galería de imágenes',3);
-      $gcm->event->anular('contenido','imagenes');
-      $gcm->event->anular('titulo','imagenes');
-
-      permiso(8);
-
-      $this->javascripts('imagenes.js');
-      $this->javascripts('administrar_imagenes.js'); // Lanzar javascript
-
-      $s = Router::$s;
-
-      // Formulario para la subida de una imagen con ajax
-
-      ob_start();
-      $this->contenido_ventana_subir_imagen();
-      ?>
-      <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.Router::$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
-      <br />
-      <div id='thumbnails' >
-      <div id='cajaImg'>
-      </div> <!-- Acaba cajaImg -->
-      </div> <!-- Acaba thumbnails -->
-      <?php
-      $contenido = ob_get_contents();
-      ob_end_clean(); 
-
-      echo $contenido;
-
-      }
-
-   /**
     * Contenido para subir imagen con ventana flotante 
     *
     * Se presenta formulario para la subida de imágenes
@@ -292,8 +254,6 @@ class Imagenes extends Modulos {
 
    /**
     * Borrado de imagenes con ajax
-    *
-    * @todo Crear función que nos devuelva los errores habidos
     */
 
    function borrarImg() {
@@ -322,51 +282,38 @@ class Imagenes extends Modulos {
 
       global $gcm;
 
-      // $this->javascripts('imagenes.js');
-      // $this->javascripts('galeria.js');
+      $imagen_actual = ( isset($_GET['img']) ) ? $_GET['img'] : FALSE ;
 
-?>
-      <script>
-<?php include(dirname(__FILE__).'/../js/imagenes.js'); ?>
-      </script>
-<?php
-
-      //ob_end_clean();
-      $img = $_GET['img'];
-      // presentamos cabeceras
-      $gcm->event->anular('contenido','imagenes');
       $gcm->titulo = literal('Galería de imágenes',3);
+      $gcm->event->anular('contenido','imagenes');
       $gcm->event->anular('titulo','imagenes');
 
-      $gcm->event->anular('columna','imagenes');
+      $this->javascripts('imagenes.js');
+      $this->javascripts('administrar_imagenes.js'); // Lanzar javascript
 
-      // Añadimos lista javascript con las imagenes
-      //echo '<script src="'.$dd.$s.'.listaImg.js'.'" type="text/javascript" language="JavaScript"></script>';
-      include_once(GCM_DIR.'lib/int/gcm_imagen.php');
-      echo "\n<script language='javascript'>";
-      gcm_listaImagenes(Router::$dd.Router::$s, 4);
-      echo "\n</script>";
+      // Formulario para la subida de una imagen con ajax
 
-      // Añadimos galeria.js para la presentación de imagenes
-      // echo "\n",'<script src="'.Router::$dir.GCM_DIR.'modulos/imagenes/js/galeria.js'.'" type="text/javascript" language="JavaScript"></script>';
+      ob_start();
 
-      // Sistema de listado de imagenes manual
-      //echo "\n<script language='javascript'>";
-      //echo "\nimagen1= new Array(3);";
-      //echo "\nimagen1[0]='".$img."';";
-      //echo "\n</script>";
+      if ( permiso('administrar_imagenes') ) {
+         $this->contenido_ventana_subir_imagen();
+         ?>
+         <a class="boton" title="<?php echo literal('Subir imagen a ',3).' '.Router::$s ?>" onclick="javascript:ventana('Subir Imagen',conFormUpload, 'subeImagen');" >Subir Imagen</a>
+         <br />
+         <?php 
+         }
 
       ?>
-      <div id="contenido" >
-      <script language='javascript'>
-
-<?php include(dirname(__FILE__).'/../js/galeria.js'); ?>
-      addLoadEvent(function(){
-         presentar_contenido();
-         });
-      </script>
-      </div>
+      <div id='thumbnails' >
+      <div id='cajaImg'>
+      </div> <!-- Acaba cajaImg -->
+      </div> <!-- Acaba thumbnails -->
       <?php
+      $contenido = ob_get_contents();
+      ob_end_clean(); 
+
+      echo $contenido;
+
       }
 
    /**
