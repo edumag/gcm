@@ -61,9 +61,10 @@ function paneles() {
 
    paneles.click(function(){
 
-      var on   = $(this).parent().parent().find('.subpanel_visible');
-      var off  = $(this).parent().parent().find('.subpanel_oculto');
-      var ajax = $(this).parent().find("a[name='ajax']");
+      var on    = $(this).parent().parent().find('.subpanel_visible');
+      var off   = $(this).parent().parent().find('.subpanel_oculto');
+      var ajax  = $(this).parent().find("a[name='ajax']");
+      var jajax = $(this).parent().find("a[name='jajax']");
 
       on.removeClass('subpanel_visible');
       on.addClass('subpanel_oculto');
@@ -76,8 +77,17 @@ function paneles() {
       //off.show(1000);
       //off.slideDown(1000);
       off.fadeIn(1000);
-      if ( ajax ) { eval(ajax.attr('href')); }
 
+      // alert(off.get());
+      if ( on.get() == '' ) {
+
+         if ( jajax ) {
+            off.load(jajax.attr('href'));
+         } else if ( ajax ) { 
+            eval(ajax.attr('href')); 
+         }
+
+         }
       /* Si tenemos input le damos foco */
       var input = off.parents(".panel").find(":input:first");
       input.focus();

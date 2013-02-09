@@ -344,12 +344,15 @@ class Temas extends Modulos {
     *              oculto:        TRUE/FALSE Em pieza oculto o visible
     *              href:          Enlace al que apunta
     *              ajax:          javascript a ejecutar al presentar contenido
+    *              jajax:         Lanzamos load() de jquery sobre subpanel_visible con la url indicada
+    *                             Con una simple url, nos añadira el contenido en el subpanel.
+    *                             Prevalece jaxax sobre ajax.
     *              contenido:     string con el contenido del panel
     *              altura_maxima: Altura maxima para el subpanel
     * 
     * @return TRUE/FALSE
     *
-    * @todo Creo que se puede evitar tener que definir href y subpanel
+    * @todo Creo que se puede evitar tener que definir href 
     */
 
    static function panel($panel) {

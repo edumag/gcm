@@ -1,10 +1,17 @@
-php_flag register_globals Off
-
-# En debug poner a 6, producción 7
-php_value error_reporting 8
-
-# En producción poner a off
+# Desarrollo
+php_value display_errors: On
+php_value error_reporting: E_ALL
+php_value log_errors: On
 php_flag expose_php on
+
+# Producción
+# php_value display_errors: Off
+# php_value error_reporting: E_ALL
+# php_value log_errors: On
+# php_flag expose_php off
+
+
+php_flag register_globals Off
 
 Options +FollowSymLinks
 

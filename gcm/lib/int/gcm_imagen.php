@@ -21,7 +21,7 @@
 * Se podra indicar si queremos una altura o anchura max que en el caso de tener
 * alguno de estos valores definidos, transformaremos la imagen.
 *
-* Para las miniaturas tambien se puede especificar alto o ancho maximo
+* Para lasthumbnail tambien se puede especificar alto o ancho maximo
 *
 * @param $imagen Nombre del campo de formulario con la imagen
 * @param $destino Carpeta en la que se desea copiar, "/" final incluida
@@ -343,18 +343,28 @@ function generarImagen($imagen, $destino, $alto, $ancho, $miniatura='si') {
  * Crear una lista de las imagenes de un directorio
  *
  * @param path Directorio donde buscar imagenes
- * @param tipo tipop de salida, 1: tiny 3: JSON 
- *        4: JSON con variable default: JSON a pelo
+ * @param tipo tipop de salida:
+ *             1: tiny 
+ *             2: html central
+ *             3: JSON 
+ *             4: JSON con variable 
+ *             5: Array PHP
+ *             default: JSON a pelo
  */
 
 function gcm_listaImagenes($path, $tipo=1) {
 
    global $gcm;
 
+   /** Lista que se genera con las imágenes */
+
+   $lista = array();
+
    $altoMaxMiniatura = $gcm->config('imagenes','altoMaxMiniatura');
    $anchoMaxMiniatura = $gcm->config('imagenes','anchoMaxMiniatura');
 
-   $extensiones = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
+   $extensiones           = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
+   $extensiones_para_exif = array("jpg", "jpeg", "JPG", "JPEG", "tiff", "TIFF");
 
    $base_imagenes='';
 
@@ -369,17 +379,21 @@ function gcm_listaImagenes($path, $tipo=1) {
    $uri = explode("/",$path);
    $ultimo = ( $uri[count($uri)-1] ) ? $uri[count($uri)-1] : $uri[count($uri)-2];
    unset($uri[count($uri)-1]);
+   unset($uri[count($uri)-1]);
    $arriba = implode("/",$uri);
 
    // Listado de otras secciones, que podamos presentar si queremos ver imagenes de otra seccion
-   //if ( "" != $ultimo && $ultimo !== "Image" ) {
+   //
+   // Añadimos como primera opción subir de directorio si lo hay.
+   // Tambien definimos donde estamos, si es la carpeta raiz del contenido es 'inicio' sino
+   // la sección actual.
+
    if ( $ultimo !== $gcm->config('idiomas','Idioma por defecto') ) {
-      $otrasSecciones[] = array ("actual", literal($ultimo));
-      $otrasSecciones[]= array (literal($arriba),"..");
+      $otrasSecciones[] = array (literal('subir'),implode("/",$uri));
+      $estamos = $ultimo;
    } else {
-      $otrasSecciones[] = array ("actual", literal('inicio'));
-   //   $otrasSecciones[]= array ("Image/",literal("inicio"));
-   }
+      $estamos = 'inicio';
+      }
 
    // Añadimos barra en caso de no haberla
    $path = comprobar_barra($path);
@@ -390,7 +404,7 @@ function gcm_listaImagenes($path, $tipo=1) {
 
        $file = $path.$archivo ;
        // Si es un directorio lo añadimos a otrasSecciones
-       if ( $archivo != ".svn" && is_dir($file) && $archivo != ".miniaturas" && $file != $path  && $archivo != "." && $archivo != ".." ) {
+       if ( $archivo != ".svn" && is_dir($file) && $archivo != "thumbnail" && $file != $path  && $archivo != "." && $archivo != ".." ) {
           $otrasSecciones[]= array ($file,literal($archivo));
        }
        $fileInfo = pathinfo($file);
@@ -398,21 +412,32 @@ function gcm_listaImagenes($path, $tipo=1) {
 
        if ( in_array($ext,$extensiones) ) {
           // Comprobar que existe la miniatura
-          $min=$path.'.miniaturas/'.$archivo;
+          $min=$path.'thumbnail/'.$archivo;
           if ( ! is_file($min) ) {
-             if (! generarImagen($file, $path.'.miniaturas', $altoMaxMiniatura, $anchoMaxMiniatura) ) {
-                registrar(__FILE__,__LINE__,literal('Error al generar imagen',3).' ['.$file.'] en ['.$path.'.miniaturas]','ERROR');
+            if ( ! is_dir($path.'thumbnail') ) {
+              if ( ! mkdir($path.'thumbnail') ) {
+                 $mens = literal('Error al crear directorio destino',3).'['.$path.'thumbnail'.']';
+                 registrar(__FILE__,__LINE__,$mens,'ERROR');
+                 return NULL ;
+                 }
+               }
+             if ( generarImagen($file, $path.'thumbnail', $altoMaxMiniatura, $anchoMaxMiniatura) === FALSE ) {
+                registrar(__FILE__,__LINE__,literal('Error al generar miniatura',3).' ['.$file.'] en ['.$path.'thumbnail'.']','ERROR');
              }
           }
+
          /// @todo Añadir width, heigth, size, exif al array
          /// @todo Utilizar libreria nueva para buscar datos de imagenes
-         //$exif = @exif_read_data($path.'/'.$archivo, 0, true);
-         $exif = '';
+         if ( in_array($ext,$extensiones_para_exif) ) {
+            $exif = @exif_read_data($path.'/'.$archivo, 0, true);
+         } else {
+            $exif = FALSE;
+            }
          $i_size = getfilesize(filesize($path.'/'.$archivo));
          $i_area = getimagesize($path.'/'.$archivo);
          $i_width = $i_area[0];
          $i_height = $i_area[1];
-         $lista[]=array($archivo, $base_imagenes.$path.$archivo, $base_imagenes.$path.'.miniaturas/'.$archivo, $i_width, $i_height, $i_size, $exif) ;
+         $lista[]=array($archivo, $base_imagenes.$path.$archivo, $base_imagenes.$path.'thumbnail/'.$archivo, $i_width, $i_height, $i_size, $exif) ;
        }
 
     }
@@ -454,6 +479,104 @@ function gcm_listaImagenes($path, $tipo=1) {
 
        }
 
+    } elseif ( $tipo == 5 ) {              // Array PHP
+
+       $retorno['estamos'] = $estamos ;
+       $retorno['otras_secciones'] = $otrasSecciones;
+       $retorno['lista'] = $lista;
+       return $retorno;
+
+
+    } elseif ( $tipo == 2 ) {              // Salida en html
+
+        // Mostramos sección actual
+        ?>
+        <br />
+        <h2>
+        <?php echo literal($estamos) ; ?>
+        </h2>
+        </br />
+        <div id="navegador">
+            <fieldset>
+            <legend><?php echo literal('Secciones');?></legend>
+        <?php
+
+       // Otras secciones
+       foreach ( $otrasSecciones as $otraseccion ) {
+          if ( $otraseccion[0] == literal('subir') ) {
+            ?>
+            <a class="boton" href="#" onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[1];?>','galeria');return false;">
+            <?php echo $otraseccion[0]; ?>
+            </a>
+            <?php
+          } else {
+            ?>
+            <a class="boton"  href="#" onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[0];?>','galeria');return false;">
+            <?php echo $otraseccion[1]; ?>
+            </a>
+            <?php
+            }
+         ?>
+         <?php } ?>
+         </fieldset>
+         </div>
+
+         <?php
+         // listado de imágenes
+         ?>
+
+         <div id="cajaImg">
+         <?php
+         if ( isset($lista) && $lista ) {
+
+            $conta=0;
+            foreach ( $lista as $img ) {
+                  ?>
+                  <div class="img_editar">
+                  <p class="thumb" ><tt>
+                  <a href="<?php echo $img[1];?>" class="galeria_imagenes">
+                  <img id="thumb_<?php echo $conta;?>" src="<?php echo $img[2];?>" alt="Imagen <?php echo $img[0] ?>" />
+                  </a>
+                  <br />
+                  <span class="idim">
+                  <b><?php echo $img[0] ?></b>
+                  <br /> [<?php echo $img[3] ?>x<?php echo $img[4] ?>] <?php echo $img[5] ?>
+
+                  <?php if ( permiso('editar_imagenes') ) { ?>
+                  [<a href="javascript:;" onclick="pedirDatos('?m=imagenes&a=borrarImg&img=<?php echo $img[1] ?>','borrarImg','Borrar imágen')" >X</a>]
+                  <?php } ?>
+
+
+                  <?php if ( isset($img[6]) && $img[6] ) { ?>
+
+                     <a class="boton" href="#exif_<?php echo $conta; ?>" onclick="visualizar('exif_<?php echo $conta ?>');" >exif</a>
+                     </span>
+                     <br />
+                     <span id="exif_<?php echo $conta; ?>" class="isize" style="display: none" >
+                     <?php foreach ( $img[6] as $elemento ) { ?>
+                        <?php echo key($elemento);?>
+                        <?php foreach ( $elemento as $nombre_elemento => $subelemento ) { ?>
+                           <b><?php echo $nombre_elemento; ?></b>: <?php echo $subelemento; ?>
+                            <br />
+                        <?php } ?>
+                     <?php } ?>
+                     </span></tt></p>
+
+                     <?php } else { // Sin datos exif ?>
+
+                     </span>
+                  <?php } // Acaba datos exif ?>
+
+                  </tt>
+                  </p>
+                  </div>
+
+               <?php $conta++ ; } // Acaba imágenes ?>
+
+            <?php } ?>
+            </div>
+       <?php
+
     } elseif ( $tipo == 3 ) {              // Salida para modulo de imagenes ajax
        $devolver = array ();
        $devolver['imgs'] = ( isset($lista) ) ? $lista : NULL;
@@ -476,7 +599,7 @@ function gcm_listaImagenes($path, $tipo=1) {
  * el numero
  *
  * @param $directorio    Directorio 
- * @param $numero_actual Numero que ya tenemos de imágenes encontradas
+ * @param $numero_actual Número que ya tenemos de imágenes encontradas
  */
 
 function contabilizar_imagenes_directorio($directorio, $numero_actual=0) {
@@ -484,21 +607,26 @@ function contabilizar_imagenes_directorio($directorio, $numero_actual=0) {
    $extensiones = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
 
    // Añadimos barra en caso de no haberla
-   $path = comprobar_barra($directorio);
+   $path = rtrim($directorio,'/').'/';
 
    $imagenes = glob($path."{*.GIF,*.JPG,*.PNG,*.gif,*.jpg,*.png}", GLOB_BRACE);
 
-   $numero = $numero + sizeof($imagenes);
+   $numero = $numero_actual + sizeof($imagenes);
 
    $dir = glob($path.'*');
 
    $tenemos_subdirectorio = FALSE ;
-   foreach ( $dir as $item ) {
 
-      if ( is_dir($item) ) {
-         contabilizar_imagenes_directorio($item, $numero);
-         $tenemos_subdirectorio = TRUE ;
+   if ( $dir ) {
+
+      foreach ( $dir as $item ) {
+
+         if ( is_dir($item) ) {
+            contabilizar_imagenes_directorio($item, $numero);
+            $tenemos_subdirectorio = TRUE ;
+            }
          }
+
       }
 
    return $numero;
@@ -534,7 +662,7 @@ function gcm_borrarImagen($url) {
       registrar(__FILE__,__LINE__,literal('No se pudo borrar el fichero',3).' ['.$url.']','ERROR');
    } else {
       // Si hay miniatura la borramos tambien.
-      $min = dirname($url).'/.miniaturas/'.basename($url);
+      $min = dirname($url).'/thumbnail/'.basename($url);
       if ( is_file($min) ) {
          if ( ! unlink($min) ) {
             registrar(__FILE__,__LINE__,literal('No se borrar el fichero',3).' ['.$min.']','ERROR');
@@ -588,13 +716,14 @@ function gcm_verImagenes($path = "Image") {
 
        if ( in_array($ext,$extensiones) ) {
           // Comprobar que existe la miniatura
-          $min=$path.'/.miniaturas/'.$archivo;
+          $min=$path.'/thumbnail/'.$archivo;
           /// @todo comparar tambien que son de la misma fecha
           if ( ! is_file($min) ) {
-             generarImagen($file, $path.'/.miniaturas', $altoMaxMiniatura, $anchoMaxMiniatura);
+             generarImagen($file, $path.'/thumbnail', $altoMaxMiniatura, $anchoMaxMiniatura);
           }
           // Información sobre la imágen
-         $exif = exif_read_data($path.'/'.$archivo, 0, true);
+         $exif = @exif_read_data($path.'/'.$archivo, 0, true);
+         $exif = ( $exif === FALSE ) ? FALSE : $exif ;
          $lista[]=array($archivo, $path."/".$archivo, $min, $exif) ;
        }
 

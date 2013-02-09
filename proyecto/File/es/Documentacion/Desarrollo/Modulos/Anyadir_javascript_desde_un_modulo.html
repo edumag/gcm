@@ -4,4 +4,15 @@
 <p class="aviso">El archivo debe encontrarse en la carpeta js del m&oacute;dulo.</p>
 <p>Para incluir una librer&iacute;a javascript:</p>
 <pre>$this-&gt;librerias_js('jquery-1.2.6.js');<br /></pre>
-<p><span class="aviso">La librer&iacute;a debe encontrarse en la carpeta js del m&oacute;dulo que la a&ntilde;ade.</span></p>
+<p>&nbsp;</p>
+<p><span class="aviso">La librer&iacute;a debe encontrarse en la carpeta libjs del m&oacute;dulo que la a&ntilde;ade.</span></p>
+<p>&nbsp;</p>
+<h2>Ejemplo de uso:</h2>
+<p>Un ejemplo es el m&oacute;dulo imagenes, tenemos un evento configurado para que despues del contenido las imagenes que se encuentren dentro del div contenido sean visualizadas con el plugin colorbox:</p>
+<p>Archivo de eventos de usuario: <strong>eventos_usuarios.php</strong></p>
+<pre>$eventos['postcontenido']['imagenes2thickbox'][3] = '';</pre>
+<p>Metodo al que enlaza desde el m&oacute;dulo imagenes: <strong>lib/Imagenes.php</strong></p>
+<pre>   /**<br />    * Enlazamos las im&aacute;genes dentro de contenido hacia thickbox<br />    */<br /><br />   function imagenes2thickbox($e, $args=FALSE) {<br /><br />      global $gcm;<br /><br />      $this-&gt;librerias_js('jquery.colorbox.js');<br />      $this-&gt;javascripts('imagenes.js');<br />      ?&gt;<br />      &lt;script&gt;<br />      addLoadEvent(function(){<br />         img2thickbox();<br />      });<br />      &lt;/script&gt;<br />      &lt;?php<br />      }<br />   }<br /><br /></pre>
+<p>Archivo javascript que se carga con las funciones necesarias:<strong> js/imagenes.js</strong></p>
+<pre>/**<br /> * Transformammos los enlaces de las miniaturas de im&aacute;genes para que se muestre la<br /> * ampliaci&oacute;n en la misma pagina utilizando thickbox.<br /> */<br /><br />function img2thickbox() {<br /><br />   var links = document.links;<br />   var num   = 0;<br /><br />   for (var x=0 ; x&lt;links.length ; x++ ) {<br /><br />      var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);<br />      if ( tipo == '.gif' || tipo == '.jpg' || tipo == 'jpeg' || tipo == '.png' || tipo == 'tiff' || tipo == '.JPG' || tipo == '.GIF'  ) {<br />         var ancla = links[x];<br />         //ancla.setAttribute('onclick','verImgEnGaleria(''+links[x].href+''); return false;');<br />         // ancla.setAttribute('rel','galeria_imagenes');<br />         ancla.setAttribute('class',"galeria_imagenes");<br />         num++;<br />      }<br />   }<br /><br />   $(document).ready(function(){<br />      //Examples of how to assign the ColorBox event to elements<br />      $(".galeria_imagenes").colorbox({<br />         rel:'galeria_imagenes'<br />         , slideshow:true<br />         , slideshowSpeed: 5000<br />      });<br />   });<br /><br />}<br /></pre>
+<p>&nbsp;</p>

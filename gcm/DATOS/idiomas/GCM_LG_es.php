@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Thu Jan 24 12:43:40 CET 2013
+// Archivo generado automaticamente por GcmConfig Sat Feb 9 18:22:29 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -100,4 +100,13 @@ $GCM_LG_es['Cambiar nombre']='';
 $GCM_LG_es['Sin sección']='';
 $GCM_LG_es['Sección [Seccion/imagenes/] no encontrada']='';
 $GCM_LG_es['No es un directorio']='';
+$GCM_LG_es['Fallo al generar imagen']='';
+$GCM_LG_es['Sección [gcm/lib/ext/jquery/js/] no encontrada']='';
+$GCM_LG_es['Contenido [upload.php] no encontrado']='';
+$GCM_LG_es['Sección [server/php/] no encontrada']='';
+$GCM_LG_es['Contenido [undefined] no encontrado']='';
+$GCM_LG_es['Error al generar miniatura']='';
+$GCM_LG_es['Sección [File/es/Seccion] no encontrada']='';
+$GCM_LG_es['Sección [File/es/Seccion/Subseccion_de_prueba] no encontrada']='';
+$GCM_LG_es['Contenido [Seccion/undefined] no encontrado']='';
 ?>

@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file columna.phtml
+ * @brief Plantilla para mostrar imagenes en columna y poder 
+ *        ser incluidas al editar contenido
+ *
+ * Recibimos los datos en un array
+ *
+ */
+
+?>
+
+<br />
+<b><?php echo literal($datos['estamos']) ; ?></b>
+
+<div id="navegador">
+
+<?php // Otras secciones ?>
+
+   <?php foreach ( $datos['otras_secciones'] as $otraseccion ) { ?>
+
+      <?php if ( $otraseccion[0] == literal('subir') ) { ?>
+
+         <a class="boton" href="#" 
+            onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria_columna&s=<?php echo $otraseccion[1];?>','galeria_columna');return false;">
+            <?php echo $otraseccion[0]; ?>
+         </a>
+
+      <?php } else { ?>
+
+         <a class="boton"  href="#" 
+            onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria_columna&s=<?php echo $otraseccion[0];?>','galeria_columna');return false;">
+            <?php echo $otraseccion[1]; ?>
+         </a>
+
+      <?php } ?>
+
+   <?php } ?>
+
+</div>
+
+<?php // listado de imágenes ?>
+
+<div id="cajaImg">
+
+<?php if ( isset($datos['lista']) && $datos['lista'] ) {
+
+   $conta=0;
+   foreach ( $datos['lista'] as $img ) {
+         ?>
+         <div class="img_editar">
+         <a href="<?php echo $img[1];?>" class="galeria_imagenes">
+         <img id="thumb_<?php echo $conta;?>" src="<?php echo $img[2];?>" alt="Imagen <?php echo $img[0] ?>" />
+         </a>
+
+
+         <a title="<?php echo literal('Insertar').' '.literal('miniatura')?>" class="boton" 
+         onclick="tinyMCE.execCommand('mceInsertContent','false','<a href=\'<?php echo $img[1];?>\' class=\'botonImg\' ><img src=\'<?php echo $img[2]; ?>\' /></a>')" >
+            <-
+         </a>
+
+         <a title="<?php echo literal('Insertar').' '.literal('con tamaño original')?>" class="boton" 
+            onclick="tinyMCE.execCommand('mceInsertContent','false','<img src=\'<?php echo $img[1]; ?>\' />')" >
+            <-(
+         </a>
+
+
+         <a class="boton"  href="javascript:;" onclick="pedirDatos('?formato=ajax&m=imagenes&a=borrarImg&img=<?php echo $img[1] ?>','borrar_imagen_columna','Borrar imágen')" >
+            [X]
+         </a>
+
+
+         </div>
+
+      <?php $conta++ ; } // Acaba imágenes ?>
+
+   <?php } ?>
+
+</div>
