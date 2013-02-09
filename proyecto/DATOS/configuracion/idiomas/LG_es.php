@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Sun Jan 13 9:46:14 CET 2013
+// Archivo generado automaticamente por GcmConfig Sat Feb 9 20:27:09 CET 2013
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia';
@@ -78,4 +78,5 @@ $LG_es['Gestor de Contenido Gcm']='';
 $LG_es['Documentación para Gcm']='';
 $LG_es['lib']='';
 $LG_es['libjs']='';
+$LG_es['thumbnail']='';
 ?>
