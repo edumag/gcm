@@ -94,14 +94,14 @@ function borrar_imagen_columna(img){
 * borrar imagen
 */
 
-function borrarImg(img){
+function borrar_imagen(img){
 
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
          var estado = eval(pedido.responseText);
          if ( estado[0] == 0 ) { // la imagen se borro bien
             // actualizar caja de imagenes
-            pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'galeria');
+            pedirDatos('?formato=ajax&m=imagenes&a=galeria&s='+estado[1],'galeria');
 
          } else {
             var res = "Error al borrar imágen";

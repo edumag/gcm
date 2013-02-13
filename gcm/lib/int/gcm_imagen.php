@@ -345,7 +345,6 @@ function generarImagen($imagen, $destino, $alto, $ancho, $miniatura='si') {
  * @param path Directorio donde buscar imagenes
  * @param tipo tipop de salida:
  *             1: tiny 
- *             2: html central
  *             3: JSON 
  *             4: JSON con variable 
  *             5: Array PHP
@@ -485,97 +484,6 @@ function gcm_listaImagenes($path, $tipo=1) {
        $retorno['otras_secciones'] = $otrasSecciones;
        $retorno['lista'] = $lista;
        return $retorno;
-
-
-    } elseif ( $tipo == 2 ) {              // Salida en html
-
-        // Mostramos sección actual
-        ?>
-        <br />
-        <h2>
-        <?php echo literal($estamos) ; ?>
-        </h2>
-        </br />
-        <div id="navegador">
-            <fieldset>
-            <legend><?php echo literal('Secciones');?></legend>
-        <?php
-
-       // Otras secciones
-       foreach ( $otrasSecciones as $otraseccion ) {
-          if ( $otraseccion[0] == literal('subir') ) {
-            ?>
-            <a class="boton" href="#" onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[1];?>','galeria');return false;">
-            <?php echo $otraseccion[0]; ?>
-            </a>
-            <?php
-          } else {
-            ?>
-            <a class="boton"  href="#" onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[0];?>','galeria');return false;">
-            <?php echo $otraseccion[1]; ?>
-            </a>
-            <?php
-            }
-         ?>
-         <?php } ?>
-         </fieldset>
-         </div>
-
-         <?php
-         // listado de imágenes
-         ?>
-
-         <div id="cajaImg">
-         <?php
-         if ( isset($lista) && $lista ) {
-
-            $conta=0;
-            foreach ( $lista as $img ) {
-                  ?>
-                  <div class="img_editar">
-                  <p class="thumb" ><tt>
-                  <a href="<?php echo $img[1];?>" class="galeria_imagenes">
-                  <img id="thumb_<?php echo $conta;?>" src="<?php echo $img[2];?>" alt="Imagen <?php echo $img[0] ?>" />
-                  </a>
-                  <br />
-                  <span class="idim">
-                  <b><?php echo $img[0] ?></b>
-                  <br /> [<?php echo $img[3] ?>x<?php echo $img[4] ?>] <?php echo $img[5] ?>
-
-                  <?php if ( permiso('editar_imagenes') ) { ?>
-                  [<a href="javascript:;" onclick="pedirDatos('?m=imagenes&a=borrarImg&img=<?php echo $img[1] ?>','borrarImg','Borrar imágen')" >X</a>]
-                  <?php } ?>
-
-
-                  <?php if ( isset($img[6]) && $img[6] ) { ?>
-
-                     <a class="boton" href="#exif_<?php echo $conta; ?>" onclick="visualizar('exif_<?php echo $conta ?>');" >exif</a>
-                     </span>
-                     <br />
-                     <span id="exif_<?php echo $conta; ?>" class="isize" style="display: none" >
-                     <?php foreach ( $img[6] as $elemento ) { ?>
-                        <?php echo key($elemento);?>
-                        <?php foreach ( $elemento as $nombre_elemento => $subelemento ) { ?>
-                           <b><?php echo $nombre_elemento; ?></b>: <?php echo $subelemento; ?>
-                            <br />
-                        <?php } ?>
-                     <?php } ?>
-                     </span></tt></p>
-
-                     <?php } else { // Sin datos exif ?>
-
-                     </span>
-                  <?php } // Acaba datos exif ?>
-
-                  </tt>
-                  </p>
-                  </div>
-
-               <?php $conta++ ; } // Acaba imágenes ?>
-
-            <?php } ?>
-            </div>
-       <?php
 
     } elseif ( $tipo == 3 ) {              // Salida para modulo de imagenes ajax
        $devolver = array ();

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Sat Feb 9 23:22:42 CET 2013
+// Archivo generado automaticamente por GcmConfig Wed Feb 13 19:16:19 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -108,5 +108,4 @@ $GCM_LG_es['Contenido [undefined] no encontrado']='';
 $GCM_LG_es['Error al generar miniatura']='';
 $GCM_LG_es['Sección [File/es/Seccion] no encontrada']='';
 $GCM_LG_es['Sección [File/es/Seccion/Subseccion_de_prueba] no encontrada']='';
-$GCM_LG_es['Contenido [Seccion/undefined] no encontrado']='';
 ?>
