@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
-// Archivo generado automaticamente por GcmConfig Sat Feb 9 20:27:09 CET 2013
-=======
 // Archivo generado automaticamente por GcmConfig Thu Feb 7 19:40:28 CET 2013
->>>>>>> Galeria_de_imágenes
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia';
@@ -80,12 +76,9 @@ $LG_es['Documentación del framework']='';
 $LG_es['Gcm']='';
 $LG_es['Gestor de Contenido Gcm']='';
 $LG_es['Documentación para Gcm']='';
-<<<<<<< HEAD
 $LG_es['lib']='';
 $LG_es['libjs']='';
-=======
 $LG_es['js']='';
 $LG_es['php']='';
->>>>>>> Galeria_de_imágenes
 $LG_es['thumbnail']='';
 ?>

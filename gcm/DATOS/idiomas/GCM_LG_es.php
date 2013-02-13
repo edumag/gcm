@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
-// Archivo generado automaticamente por GcmConfig Sat Feb 9 20:27:30 CET 2013
-=======
-// Archivo generado automaticamente por GcmConfig Wed Feb 13 19:16:19 CET 2013
->>>>>>> Galeria_de_imágenes
+// Archivo generado automaticamente por GcmConfig Wed Feb 13 19:22:44 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
