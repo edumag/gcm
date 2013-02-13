@@ -1,0 +1,43 @@
+/* Administrador de imágenes */
+
+.img_editar {
+   border: 1px solid threedshadow;
+   border-radius: 8px;
+   display: inline-block;
+   background: none repeat scroll 0 0 white;
+   padding: 10px;
+   margin: 5px;
+}
+.img_editar img {
+    display: block;
+    margin: 10px;
+}
+
+/* Columna al editar entrada */
+
+#thumbnails_columna .img_editar {
+   padding: 8px;
+}
+
+#thumbnails_columna .img_editar img {
+   max-width: 100px;
+}
+
+form#form_img_edit {
+   margin: 40px 0;
+}
+
+#mensajes > p {
+    display: inline;
+ }
+
+#mensajes > p img {
+    height: 90px;
+ }
+
+/* Barra de progeso */
+
+.bar {
+    height: 2px;
+    background: black;
+}

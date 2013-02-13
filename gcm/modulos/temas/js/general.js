@@ -151,14 +151,11 @@ function is_array(obj) {
       return true;
 }
 
-/** Funciones que se inician al cargar la pagina
- *
- * @todo Anulamos galeria de imagenes hasta resolver los problemas
+/** 
+ * Funciones que se inician al cargar la pagina
  */
 
 addLoadEvent(function(){
-   // linksImgView();
    paneles();
-   // $(this).pngFix();
    });
 

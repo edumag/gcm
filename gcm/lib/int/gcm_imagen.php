@@ -1,8 +1,8 @@
 <?php
 
 /**
-* \file
-* Funciones para el tratamiento de imagenes
+* @file gcm_imagen.php
+* @brief Funciones para el tratamiento de imagenes
 *
 * @author Eduardo Magrané
 */
@@ -21,7 +21,7 @@
 * Se podra indicar si queremos una altura o anchura max que en el caso de tener
 * alguno de estos valores definidos, transformaremos la imagen.
 *
-* Para las miniaturas tambien se puede especificar alto o ancho maximo
+* Para lasthumbnail tambien se puede especificar alto o ancho maximo
 *
 * @param $imagen Nombre del campo de formulario con la imagen
 * @param $destino Carpeta en la que se desea copiar, "/" final incluida
@@ -103,13 +103,11 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
    // Si es un archivo zip lo descomprimimos
    if ( $imagenType == 'application/zip' ) {
 
+      $zip = new ZipArchive;
+
       // listar archivos incluidos para procesarlos despues
-      $zip = zip_open($imagenFile);
-      if ($zip) {
-         while ($zip_entry = zip_read($zip)) {
-           $listaZip[]=zip_entry_name($zip_entry);
-         }
-      zip_close($zip);
+      if ( $zip->open($imagenFile) === TRUE ) {
+         $num_imagenes = $zip->numFiles;
       } else {
          $mens = 'No se pudo abrir el archivo zip: '.$imagenName;
          registrar(__FILE__,__LINE__,$mens,'ERROR');
@@ -117,7 +115,7 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
          return null ;
       }
 
-      if ( count($listaZip) < 1 ) {
+      if ( $num_imagenes < 1 ) {
          $mens = $imagenName.' vacio';
          registrar(__FILE__,__LINE__,$mens,'ERROR');
          echo '<script>alert(\'Vacio '.$imagenName.'\');</script>';
@@ -125,8 +123,7 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
       }
 
 
-      include("zip.php");
-      if ( zip_extract_to($imagenFile,$dirFinal , true) ) {
+      if ( $zip->extractTo($dirFinal) ) {
          echo '<script>parent.resultadoUpload (\'0\', \''.$imagenName.'\');</script>';
       } else {
          $mens = 'Archivo '.$imagenName.' no se pudo descomprimir';
@@ -135,11 +132,12 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
          return NULL ;
       }
 
-      $num = count($listaZip);
-      echo "gcm_imagen_copiar::Numero de imagenes: <b>$num</b>";
-      if ( $num > 0 ) {
-         for ($i=0 ; $i!=$num; $i++) {
-            $imagen = $dirFinal.$listaZip[$i] ;
+      echo "gcm_imagen_copiar::Numero de imagenes: <b>$num_imagenes</b>";
+      if ( $num_imagenes > 0 ) {
+         for ($i=0 ; $i!=$num_imagenes; $i++) {
+            $filename = $zip->getNameIndex($i);
+            $fileinfo = pathinfo($filename);
+            $imagen = $dirFinal.$filename ;
             $salida.=$imagen.'\n';
 
             // Generamos imagen
@@ -156,7 +154,7 @@ function gcm_imagen_copiar($imagen, $destino, $imagenAlto='0', $imagenAncho='0',
          }
       }
 
-      echo '<script>parent.resultadoUpload (\'0\', \''.$imagenName.' '.$num.' imagenes\\n'.$salida.'\');</script>';
+      echo '<script>parent.resultadoUpload (\'0\', \''.$imagenName.' '.$num_imagenes.' imagenes\\n'.$salida.'\');</script>';
 
       return TRUE ;
 
@@ -345,18 +343,27 @@ function generarImagen($imagen, $destino, $alto, $ancho, $miniatura='si') {
  * Crear una lista de las imagenes de un directorio
  *
  * @param path Directorio donde buscar imagenes
- * @param tipo tipop de salida
- *
+ * @param tipo tipop de salida:
+ *             1: tiny 
+ *             3: JSON 
+ *             4: JSON con variable 
+ *             5: Array PHP
+ *             default: JSON a pelo
  */
 
 function gcm_listaImagenes($path, $tipo=1) {
 
    global $gcm;
 
+   /** Lista que se genera con las imágenes */
+
+   $lista = array();
+
    $altoMaxMiniatura = $gcm->config('imagenes','altoMaxMiniatura');
    $anchoMaxMiniatura = $gcm->config('imagenes','anchoMaxMiniatura');
 
-   $extensiones = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
+   $extensiones           = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
+   $extensiones_para_exif = array("jpg", "jpeg", "JPG", "JPEG", "tiff", "TIFF");
 
    $base_imagenes='';
 
@@ -371,17 +378,21 @@ function gcm_listaImagenes($path, $tipo=1) {
    $uri = explode("/",$path);
    $ultimo = ( $uri[count($uri)-1] ) ? $uri[count($uri)-1] : $uri[count($uri)-2];
    unset($uri[count($uri)-1]);
+   unset($uri[count($uri)-1]);
    $arriba = implode("/",$uri);
 
    // Listado de otras secciones, que podamos presentar si queremos ver imagenes de otra seccion
-   //if ( "" != $ultimo && $ultimo !== "Image" ) {
+   //
+   // Añadimos como primera opción subir de directorio si lo hay.
+   // Tambien definimos donde estamos, si es la carpeta raiz del contenido es 'inicio' sino
+   // la sección actual.
+
    if ( $ultimo !== $gcm->config('idiomas','Idioma por defecto') ) {
-      $otrasSecciones[] = array ("actual", literal($ultimo));
-      $otrasSecciones[]= array (literal($arriba),"..");
+      $otrasSecciones[] = array (literal('subir'),implode("/",$uri));
+      $estamos = $ultimo;
    } else {
-      $otrasSecciones[] = array ("actual", literal('inicio'));
-   //   $otrasSecciones[]= array ("Image/",literal("inicio"));
-   }
+      $estamos = 'inicio';
+      }
 
    // Añadimos barra en caso de no haberla
    $path = comprobar_barra($path);
@@ -392,7 +403,7 @@ function gcm_listaImagenes($path, $tipo=1) {
 
        $file = $path.$archivo ;
        // Si es un directorio lo añadimos a otrasSecciones
-       if ( $archivo != ".svn" && is_dir($file) && $archivo != ".miniaturas" && $file != $path  && $archivo != "." && $archivo != ".." ) {
+       if ( $archivo != ".svn" && is_dir($file) && $archivo != "thumbnail" && $file != $path  && $archivo != "." && $archivo != ".." ) {
           $otrasSecciones[]= array ($file,literal($archivo));
        }
        $fileInfo = pathinfo($file);
@@ -400,26 +411,45 @@ function gcm_listaImagenes($path, $tipo=1) {
 
        if ( in_array($ext,$extensiones) ) {
           // Comprobar que existe la miniatura
-          $min=$path.'.miniaturas/'.$archivo;
+          $min=$path.'thumbnail/'.$archivo;
           if ( ! is_file($min) ) {
-             if (! generarImagen($file, $path.'.miniaturas', $altoMaxMiniatura, $anchoMaxMiniatura) ) {
-                registrar(__FILE__,__LINE__,literal('Error al generar imagen',3).' ['.$file.'] en ['.$path.'.miniaturas]','ERROR');
+            if ( ! is_dir($path.'thumbnail') ) {
+              if ( ! mkdir($path.'thumbnail') ) {
+                 $mens = literal('Error al crear directorio destino',3).'['.$path.'thumbnail'.']';
+                 registrar(__FILE__,__LINE__,$mens,'ERROR');
+                 return NULL ;
+                 }
+               }
+             if ( generarImagen($file, $path.'thumbnail', $altoMaxMiniatura, $anchoMaxMiniatura) === FALSE ) {
+                registrar(__FILE__,__LINE__,literal('Error al generar miniatura',3).' ['.$file.'] en ['.$path.'thumbnail'.']','ERROR');
              }
           }
+
          /// @todo Añadir width, heigth, size, exif al array
          /// @todo Utilizar libreria nueva para buscar datos de imagenes
-         //$exif = @exif_read_data($path.'/'.$archivo, 0, true);
-         $exif = '';
+         if ( in_array($ext,$extensiones_para_exif) ) {
+            $exif = @exif_read_data($path.'/'.$archivo, 0, true);
+         } else {
+            $exif = FALSE;
+            }
          $i_size = getfilesize(filesize($path.'/'.$archivo));
          $i_area = getimagesize($path.'/'.$archivo);
          $i_width = $i_area[0];
          $i_height = $i_area[1];
-         $lista[]=array($archivo, $base_imagenes.$path.$archivo, $base_imagenes.$path.'.miniaturas/'.$archivo, $i_width, $i_height, $i_size, $exif) ;
+         $lista[]=array($archivo, $base_imagenes.$path.$archivo, $base_imagenes.$path.'thumbnail/'.$archivo, $i_width, $i_height, $i_size, $exif) ;
        }
 
     }
 
     $directorio->close();
+
+    // Añadir número de imágenes encontradas en subdirectorios
+
+    foreach ( $otrasSecciones as &$seccion_con_imagenes ) {
+       if ( is_dir($seccion_con_imagenes[0]) && $seccion_con_imagenes[0] != '..' ) {
+          $seccion_con_imagenes[1] = $seccion_con_imagenes[1]. ' ('.contabilizar_imagenes_directorio($seccion_con_imagenes[0]).')';
+          }
+      }
 
     if ( $tipo == 1 ) {                    // escribir archivo para tiny
 
@@ -448,6 +478,13 @@ function gcm_listaImagenes($path, $tipo=1) {
 
        }
 
+    } elseif ( $tipo == 5 ) {              // Array PHP
+
+       $retorno['estamos'] = $estamos ;
+       $retorno['otras_secciones'] = $otrasSecciones;
+       $retorno['lista'] = $lista;
+       return $retorno;
+
     } elseif ( $tipo == 3 ) {              // Salida para modulo de imagenes ajax
        $devolver = array ();
        $devolver['imgs'] = ( isset($lista) ) ? $lista : NULL;
@@ -462,6 +499,48 @@ function gcm_listaImagenes($path, $tipo=1) {
     }
 
    }
+
+/**
+ * Contabilizar las imágenes que hay dentro de un directorio
+ *
+ * Para ello hay que recorrerlos todos recursivamente para obtener
+ * el numero
+ *
+ * @param $directorio    Directorio 
+ * @param $numero_actual Número que ya tenemos de imágenes encontradas
+ */
+
+function contabilizar_imagenes_directorio($directorio, $numero_actual=0) {
+
+   $extensiones = array("jpg", "jpeg", "JPG", "JPEG", "GIF", "gif", "png", "PNG", "tiff", "TIFF");
+
+   // Añadimos barra en caso de no haberla
+   $path = rtrim($directorio,'/').'/';
+
+   $imagenes = glob($path."{*.GIF,*.JPG,*.PNG,*.gif,*.jpg,*.png}", GLOB_BRACE);
+
+   $numero = $numero_actual + sizeof($imagenes);
+
+   $dir = glob($path.'*');
+
+   $tenemos_subdirectorio = FALSE ;
+
+   if ( $dir ) {
+
+      foreach ( $dir as $item ) {
+
+         if ( is_dir($item) ) {
+            contabilizar_imagenes_directorio($item, $numero);
+            $tenemos_subdirectorio = TRUE ;
+            }
+         }
+
+      }
+
+   return $numero;
+   }
+
+
 
 /**
 * Borrar imagen
@@ -491,7 +570,7 @@ function gcm_borrarImagen($url) {
       registrar(__FILE__,__LINE__,literal('No se pudo borrar el fichero',3).' ['.$url.']','ERROR');
    } else {
       // Si hay miniatura la borramos tambien.
-      $min = dirname($url).'/.miniaturas/'.basename($url);
+      $min = dirname($url).'/thumbnail/'.basename($url);
       if ( is_file($min) ) {
          if ( ! unlink($min) ) {
             registrar(__FILE__,__LINE__,literal('No se borrar el fichero',3).' ['.$min.']','ERROR');
@@ -545,13 +624,14 @@ function gcm_verImagenes($path = "Image") {
 
        if ( in_array($ext,$extensiones) ) {
           // Comprobar que existe la miniatura
-          $min=$path.'/.miniaturas/'.$archivo;
+          $min=$path.'/thumbnail/'.$archivo;
           /// @todo comparar tambien que son de la misma fecha
           if ( ! is_file($min) ) {
-             generarImagen($file, $path.'/.miniaturas', $altoMaxMiniatura, $anchoMaxMiniatura);
+             generarImagen($file, $path.'/thumbnail', $altoMaxMiniatura, $anchoMaxMiniatura);
           }
           // Información sobre la imágen
-         $exif = exif_read_data($path.'/'.$archivo, 0, true);
+         $exif = @exif_read_data($path.'/'.$archivo, 0, true);
+         $exif = ( $exif === FALSE ) ? FALSE : $exif ;
          $lista[]=array($archivo, $path."/".$archivo, $min, $exif) ;
        }
 

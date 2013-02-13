@@ -22,6 +22,10 @@ height: auto !important;
    padding: 10px;
 }
 
+#contenido > p {
+    margin: 10px;
+   }
+
 #lateral {
 width: 27%;
 color: #6F6137;
@@ -86,20 +90,23 @@ color: #6F6137;
 outline: 0;
 }
 .boton{
--moz-border-radius:50px;
--webkit-border-radius:50px;
-border-radius:50px;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
 -moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
 -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
-color:#4A4A4A;
-float:left;
-font-family:helvetica,sans-serif;
-padding:0px 8px 0px 8px;
+color:#3D3C38;
+padding:3px 8px 3px 8px;
 margin: 2px;
-text-shadow:1px 1px 0 rgba(255, 255, 255, 0.7);
+text-shadow:1px 1px 0 rgba(255, 255, 255, 1);
+font-family: sans-serif;
+font-size: 90%;
+font-style: normal;
+font-weight: normal;
+cursor: pointer;
 }
 .boton:hover{
 background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
@@ -139,12 +146,13 @@ margin-right: 30px;
 padding: 3px;
 overflow: auto;
 max-height: 450px;
+margin-bottom: 10px;
 }
 
 /* Cajas de aviso */
 
 .aviso , .error, .admin, .normal, .debug  {
-padding: 0;
+padding: 10px;
 background: transparent;
 border: 0;
 /* Esquinas redondeadas */
@@ -226,7 +234,6 @@ width: 96%;
    margin-left: 10px;
 }
 
-/* Apariencia de botón a los títulos de los paneles */
 .panel_titulo a {
 -moz-border-radius:10px;
 -webkit-border-radius:10px;
@@ -277,4 +284,8 @@ td {
     margin-bottom: 4px;
     min-width: 200px;
    }
+
+ul input {
+   margin-right: 6px;
+}
 

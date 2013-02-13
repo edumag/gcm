@@ -2,7 +2,10 @@
    <div class='panel_titulo'>
       <a href="<?=$enlace?>"><?=$panel['titulo']?></a>
       <?php if ( isset($panel['ajax']) ) { ?>
-      <a name="ajax" href="<?=$panel['ajax']?>" />
+      <a name="ajax" href="<?=$panel['ajax']?>" ></a>
+      <?php } ?>
+      <?php if ( isset($panel['jajax']) ) { ?>
+      <a name="jajax" href="<?=$panel['jajax']?>" ></a>
       <?php } ?>
    </div>
 

@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 // Archivo generado automaticamente por GcmConfig Sat Feb 9 20:27:30 CET 2013
+=======
+// Archivo generado automaticamente por GcmConfig Wed Feb 13 19:16:19 CET 2013
+>>>>>>> Galeria_de_imágenes
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -89,27 +93,23 @@ $GCM_LG_es['Contenido actualizado']='';
 $GCM_LG_es['Guardar contenido']='';
 $GCM_LG_es['Editar']='';
 $GCM_LG_es['Borrar']='';
+$GCM_LG_es['Galería de imágenes']='';
+$GCM_LG_es['Sin Contenido']='';
+$GCM_LG_es['Contenido [Seccion/<] no encontrado']='';
+$GCM_LG_es['Filtro']='';
+$GCM_LG_es['Error al generar imagen']='';
 $GCM_LG_es['Listado completo de contenido']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
 $GCM_LG_es['Cambiar nombre']='';
-$GCM_LG_es['Galería de imágenes']='';
-$GCM_LG_es['Administración de temas']='';
-$GCM_LG_es['Temas actual']='';
-$GCM_LG_es['Selecciona tema']='';
-$GCM_LG_es['Creación de un tema nuevo']='';
-$GCM_LG_es['Nuevo tema']='';
-$GCM_LG_es['Editar ficheros de tema']='';
-$GCM_LG_es['Ficheros por defecto']='';
-$GCM_LG_es['Ficheros de tema']='';
-$GCM_LG_es['Subir fichero proyecto.css modificado']='';
-$GCM_LG_es['Guardar colores']='';
-$GCM_LG_es['Añadir un color']='';
-$GCM_LG_es['Fallo al generar imagen']='';
-$GCM_LG_es['Error al generar imagen']='';
 $GCM_LG_es['Sin sección']='';
-$GCM_LG_es['Sección [Documentacion/imagenes/] no encontrada']='';
-$GCM_LG_es['Sección [gcm/modulos/imagenes/lib/] no encontrada']='';
-$GCM_LG_es['Sección [gcm/modulos/temas/libjs/] no encontrada']='';
-$GCM_LG_es['Cancelar']='';
-$GCM_LG_es['Registro modificado']='';
+$GCM_LG_es['Sección [Seccion/imagenes/] no encontrada']='';
+$GCM_LG_es['No es un directorio']='';
+$GCM_LG_es['Fallo al generar imagen']='';
+$GCM_LG_es['Sección [gcm/lib/ext/jquery/js/] no encontrada']='';
+$GCM_LG_es['Contenido [upload.php] no encontrado']='';
+$GCM_LG_es['Sección [server/php/] no encontrada']='';
+$GCM_LG_es['Contenido [undefined] no encontrado']='';
+$GCM_LG_es['Error al generar miniatura']='';
+$GCM_LG_es['Sección [File/es/Seccion] no encontrada']='';
+$GCM_LG_es['Sección [File/es/Seccion/Subseccion_de_prueba] no encontrada']='';
 ?>

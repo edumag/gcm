@@ -5,6 +5,9 @@ padding: 5px 5px 5px 0px;
 margin: 3px 2px 3px 5px;
 text-align: left;
 }
+#barraNavegacion .m_off, #barraNavegacion .m_on {
+   font-size: 110%;
+}
 #barraNavegacion a {
 border: 1px;
 color: <?=$this->color("4")?>;
@@ -32,9 +35,7 @@ font-weight: bold;
 }
 #barraNavegacion ul ul {
    font-size: 90%;
-}
-#barraNavegacion ul ul ul {
-   font-size: 90%;
+   margin: 5px 16px;
 }
 #barraNavegacion li a {
 font-weight: normal;
@@ -48,7 +49,4 @@ text-decoration: none;
 font-weight: normal;
 color: #D97B40;
 text-decoration: none;
-}
-#barraNavegacion .m_off, #barraNavegacion .m_on {
-   font-size: 110%;
 }

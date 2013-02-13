@@ -1,3 +1,10 @@
-<p>Mediante Eventos podemos interactuar entre los m&oacute;dulos.</p>
+<h2>Mediante Eventos podemos interactuar entre los m&oacute;dulos.</h2>
 <p>Un ejemplo de como desde un m&oacute;dulo enviamos un email con el m&oacute;dulo enviomail</p>
-<pre>$args['cuerpo']  = "\nUsuario: ".$resultado['usuario'];<br />$args['cuerpo'] .= "\nMail: ".$resultado['mail'];<br />$args['cuerpo'] .= "\nTexto: ";<br />$args['cuerpo'] .= "\n".$resultado['texto'];<br />$args['asunto'] = 'Comentario a&ntilde;adido';<br /><br />$gcm-&gt;event-&gt;lanzar_accion_modulo('enviomail','enviar_email','comentario_a&ntilde;adido',$args);<br /></pre>
+<pre>$args['cuerpo']  = "nUsuario: ".$resultado['usuario'];<br />$args['cuerpo'] .= "nMail: ".$resultado['mail'];<br />$args['cuerpo'] .= "nTexto: ";<br />$args['cuerpo'] .= "n".$resultado['texto'];<br />$args['asunto'] = 'Comentario a&ntilde;adido';<br /><br />$gcm-&gt;event-&gt;lanzar_accion_modulo('enviomail','enviar_email','comentario_a&ntilde;adido',$args);<br /></pre>
+<h2>Utilizar la instancia de un m&oacute;dulo</h2>
+<pre>$pdo = $gcm-&gt;event-&gt;instancias['trabajos']-&gt;getPDO();</pre>
+<p>Todos los m&oacute;dulos que hayan sido inicializados estaran disponibles desde Gcm.</p>
+<h2>Recogida de parametros</h2>
+<p>Como los parametros pueden venir en diferentes formatos, como un array o como una cadena en forma de url, la funci&oacute;n recoger_parametros() dentro de helpers.php nos devolvera venga como venga en una array con el formato $args[variable] = valor</p>
+<pre>$args = recoger_parametros($args);</pre>
+<p>&nbsp;</p>

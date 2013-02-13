@@ -29,8 +29,6 @@
 /* Notificar todos los errores de PHP (véase el registro de cambios) */
 error_reporting(E_ALL);
 
-date_default_timezone_set('Europe/Madrid');
-
 /* Iniciamos sesión */
 session_start();
 
