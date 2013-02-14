@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -116,33 +115,33 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00022"></a>00022 <span class="comment"> * @version 0.1</span>
 <a name="l00023"></a>00023 <span class="comment"> */</span>
 <a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="../../d2/de7/a00014.html">00025</a> <span class="keyword">abstract</span> <span class="keyword">class </span><a class="code" href="../../d2/de7/a00014.html" title="Abstracción para manipilación de datos con PDO.">DataBoundObject</a> {
+<a name="l00025"></a><a class="code" href="../../d7/dd4/a00013.html">00025</a> <span class="keyword">abstract</span> <span class="keyword">class </span><a class="code" href="../../d7/dd4/a00013.html" title="Abstracción para manipilación de datos con PDO.">DataBoundObject</a> {
 <a name="l00026"></a>00026 
 <a name="l00027"></a>00027    <span class="keyword">protected</span> $ID;
-<a name="l00028"></a><a class="code" href="../../d2/de7/a00014_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38">00028</a>    <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>;                      <span class="comment">///&lt; PDO</span>
-<a name="l00029"></a><a class="code" href="../../d2/de7/a00014_a1645f0bdf211d6adec7e529273a3a3db.html#a1645f0bdf211d6adec7e529273a3a3db">00029</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_a1645f0bdf211d6adec7e529273a3a3db.html#a1645f0bdf211d6adec7e529273a3a3db" title="Nombre de tabla.">$strTableName</a>;                <span class="comment">///&lt; Nombre de tabla</span>
-<a name="l00030"></a><a class="code" href="../../d2/de7/a00014_ab65139b4e182b386bfd6dc9838b0b4a7.html#ab65139b4e182b386bfd6dc9838b0b4a7">00030</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_ab65139b4e182b386bfd6dc9838b0b4a7.html#ab65139b4e182b386bfd6dc9838b0b4a7" title="Array con las relaciones campo tabla-&gt;nombre_variable.">$arRelationMap</a>;               <span class="comment">///&lt; Array con las relaciones campo tabla-&gt;nombre_variable</span>
-<a name="l00031"></a><a class="code" href="../../d2/de7/a00014_a671a98aa7bee5549b70f3d5d6e3da135.html#a671a98aa7bee5549b70f3d5d6e3da135">00031</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_a671a98aa7bee5549b70f3d5d6e3da135.html#a671a98aa7bee5549b70f3d5d6e3da135" title="Para saber si se debe borrar el registro.">$blForDeletion</a>;               <span class="comment">///&lt; Para saber si se debe borrar el registro</span>
-<a name="l00032"></a><a class="code" href="../../d2/de7/a00014_ab8228657905f85158513999cb82b3a46.html#ab8228657905f85158513999cb82b3a46">00032</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_ab8228657905f85158513999cb82b3a46.html#ab8228657905f85158513999cb82b3a46" title="Saber si ya se fue ha buscar a la BD.">$blIsLoaded</a>;                  <span class="comment">///&lt; Saber si ya se fue ha buscar a la BD</span>
-<a name="l00033"></a><a class="code" href="../../d2/de7/a00014_ac124771d8e1242777d44dde1469ee2b8.html#ac124771d8e1242777d44dde1469ee2b8">00033</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_ac124771d8e1242777d44dde1469ee2b8.html#ac124771d8e1242777d44dde1469ee2b8" title="listado de campos modificados">$arModifiedRelations</a>;         <span class="comment">///&lt; listado de campos modificados</span>
+<a name="l00028"></a><a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38">00028</a>    <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>;                      <span class="comment">///&lt; PDO</span>
+<a name="l00029"></a><a class="code" href="../../d7/dd4/a00013_a1645f0bdf211d6adec7e529273a3a3db.html#a1645f0bdf211d6adec7e529273a3a3db">00029</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_a1645f0bdf211d6adec7e529273a3a3db.html#a1645f0bdf211d6adec7e529273a3a3db" title="Nombre de tabla.">$strTableName</a>;                <span class="comment">///&lt; Nombre de tabla</span>
+<a name="l00030"></a><a class="code" href="../../d7/dd4/a00013_ab65139b4e182b386bfd6dc9838b0b4a7.html#ab65139b4e182b386bfd6dc9838b0b4a7">00030</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_ab65139b4e182b386bfd6dc9838b0b4a7.html#ab65139b4e182b386bfd6dc9838b0b4a7" title="Array con las relaciones campo tabla-&gt;nombre_variable.">$arRelationMap</a>;               <span class="comment">///&lt; Array con las relaciones campo tabla-&gt;nombre_variable</span>
+<a name="l00031"></a><a class="code" href="../../d7/dd4/a00013_a671a98aa7bee5549b70f3d5d6e3da135.html#a671a98aa7bee5549b70f3d5d6e3da135">00031</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_a671a98aa7bee5549b70f3d5d6e3da135.html#a671a98aa7bee5549b70f3d5d6e3da135" title="Para saber si se debe borrar el registro.">$blForDeletion</a>;               <span class="comment">///&lt; Para saber si se debe borrar el registro</span>
+<a name="l00032"></a><a class="code" href="../../d7/dd4/a00013_ab8228657905f85158513999cb82b3a46.html#ab8228657905f85158513999cb82b3a46">00032</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_ab8228657905f85158513999cb82b3a46.html#ab8228657905f85158513999cb82b3a46" title="Saber si ya se fue ha buscar a la BD.">$blIsLoaded</a>;                  <span class="comment">///&lt; Saber si ya se fue ha buscar a la BD</span>
+<a name="l00033"></a><a class="code" href="../../d7/dd4/a00013_ac124771d8e1242777d44dde1469ee2b8.html#ac124771d8e1242777d44dde1469ee2b8">00033</a> <span class="comment"></span>   <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_ac124771d8e1242777d44dde1469ee2b8.html#ac124771d8e1242777d44dde1469ee2b8" title="listado de campos modificados">$arModifiedRelations</a>;         <span class="comment">///&lt; listado de campos modificados</span>
 <a name="l00034"></a>00034 <span class="comment"></span><span class="comment"></span>
 <a name="l00035"></a>00035 <span class="comment">   /**</span>
 <a name="l00036"></a>00036 <span class="comment">    * Valores de los campos del registro</span>
 <a name="l00037"></a>00037 <span class="comment">    */</span>
 <a name="l00038"></a>00038 
-<a name="l00039"></a><a class="code" href="../../d2/de7/a00014_ac6779ef52b366ee1f3890352f18d7784.html#ac6779ef52b366ee1f3890352f18d7784">00039</a>    <span class="keyword">protected</span> <a class="code" href="../../d2/de7/a00014_ac6779ef52b366ee1f3890352f18d7784.html#ac6779ef52b366ee1f3890352f18d7784" title="Valores de los campos del registro.">$valores</a>;
+<a name="l00039"></a><a class="code" href="../../d7/dd4/a00013_ac6779ef52b366ee1f3890352f18d7784.html#ac6779ef52b366ee1f3890352f18d7784">00039</a>    <span class="keyword">protected</span> <a class="code" href="../../d7/dd4/a00013_ac6779ef52b366ee1f3890352f18d7784.html#ac6779ef52b366ee1f3890352f18d7784" title="Valores de los campos del registro.">$valores</a>;
 <a name="l00040"></a>00040 <span class="comment"></span>
 <a name="l00041"></a>00041 <span class="comment">   /**</span>
 <a name="l00042"></a>00042 <span class="comment">    * Nombre de tabla</span>
 <a name="l00043"></a>00043 <span class="comment">    */</span>
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045    <span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>();
+<a name="l00045"></a>00045    <span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>();
 <a name="l00046"></a>00046 <span class="comment"></span>
 <a name="l00047"></a>00047 <span class="comment">   /**</span>
 <a name="l00048"></a>00048 <span class="comment">    * Relación entre campos de la tabla y variables a utilizar en el dominio</span>
 <a name="l00049"></a>00049 <span class="comment">    */</span>
 <a name="l00050"></a>00050 
-<a name="l00051"></a>00051    <span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_a3e5fff704a80b583de8be2158b9d60f8.html#a3e5fff704a80b583de8be2158b9d60f8" title="Relación entre campos de la tabla y variables a utilizar en el dominio.">DefineRelationMap</a>(<a class="code" href="../../d2/de7/a00014_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>);
+<a name="l00051"></a>00051    <span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a3e5fff704a80b583de8be2158b9d60f8.html#a3e5fff704a80b583de8be2158b9d60f8" title="Relación entre campos de la tabla y variables a utilizar en el dominio.">DefineRelationMap</a>(<a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>);
 <a name="l00052"></a>00052 <span class="comment"></span>
 <a name="l00053"></a>00053 <span class="comment">   /**</span>
 <a name="l00054"></a>00054 <span class="comment">    * Constructor</span>
@@ -151,11 +150,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00057"></a>00057 <span class="comment">    * @param $id     Identificador de registro, sino es uno nuevo</span>
 <a name="l00058"></a>00058 <span class="comment">    */</span>
 <a name="l00059"></a>00059 
-<a name="l00060"></a><a class="code" href="../../d2/de7/a00014_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf">00060</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf" title="Constructor.">__construct</a>(PDO <a class="code" href="../../d2/de7/a00014_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>, $id = NULL) {
+<a name="l00060"></a><a class="code" href="../../d7/dd4/a00013_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf">00060</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf" title="Constructor.">__construct</a>(PDO <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>, $id = NULL) {
 <a name="l00061"></a>00061 
-<a name="l00062"></a>00062       $this-&gt;strTableName = $this-&gt;<a class="code" href="../../d2/de7/a00014_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>();
-<a name="l00063"></a>00063       $this-&gt;arRelationMap = $this-&gt;<a class="code" href="../../d2/de7/a00014_a3e5fff704a80b583de8be2158b9d60f8.html#a3e5fff704a80b583de8be2158b9d60f8" title="Relación entre campos de la tabla y variables a utilizar en el dominio.">DefineRelationMap</a>($objPDO);
-<a name="l00064"></a>00064       $this-&gt;objPDO = <a class="code" href="../../d2/de7/a00014_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>;
+<a name="l00062"></a>00062       $this-&gt;strTableName = $this-&gt;<a class="code" href="../../d7/dd4/a00013_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>();
+<a name="l00063"></a>00063       $this-&gt;arRelationMap = $this-&gt;<a class="code" href="../../d7/dd4/a00013_a3e5fff704a80b583de8be2158b9d60f8.html#a3e5fff704a80b583de8be2158b9d60f8" title="Relación entre campos de la tabla y variables a utilizar en el dominio.">DefineRelationMap</a>($objPDO);
+<a name="l00064"></a>00064       $this-&gt;objPDO = <a class="code" href="../../d7/dd4/a00013_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>;
 <a name="l00065"></a>00065       $this-&gt;blIsLoaded = <span class="keyword">false</span>;
 <a name="l00066"></a>00066       <span class="keywordflow">if</span> (isset($id)) {
 <a name="l00067"></a>00067          $this-&gt;ID = $id;
@@ -167,7 +166,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00073"></a>00073 <span class="comment">    * Buscar información en base de datos</span>
 <a name="l00074"></a>00074 <span class="comment">    */</span>
 <a name="l00075"></a>00075 
-<a name="l00076"></a><a class="code" href="../../d2/de7/a00014_ae6ed4b28251fa690207d846c3bd02a5c.html#ae6ed4b28251fa690207d846c3bd02a5c">00076</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_ae6ed4b28251fa690207d846c3bd02a5c.html#ae6ed4b28251fa690207d846c3bd02a5c" title="Buscar información en base de datos.">Load</a>() {
+<a name="l00076"></a><a class="code" href="../../d7/dd4/a00013_ae6ed4b28251fa690207d846c3bd02a5c.html#ae6ed4b28251fa690207d846c3bd02a5c">00076</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_ae6ed4b28251fa690207d846c3bd02a5c.html#ae6ed4b28251fa690207d846c3bd02a5c" title="Buscar información en base de datos.">Load</a>() {
 <a name="l00077"></a>00077 
 <a name="l00078"></a>00078       <span class="keywordflow">if</span> (isset($this-&gt;ID)) {
 <a name="l00079"></a>00079 
@@ -201,7 +200,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00107"></a>00107 <span class="comment">    * Guardar registro en base de datos</span>
 <a name="l00108"></a>00108 <span class="comment">    */</span>
 <a name="l00109"></a>00109 
-<a name="l00110"></a><a class="code" href="../../d2/de7/a00014_aeee39ed4504d63dd248d802e363391ed.html#aeee39ed4504d63dd248d802e363391ed">00110</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_aeee39ed4504d63dd248d802e363391ed.html#aeee39ed4504d63dd248d802e363391ed" title="Guardar registro en base de datos.">Save</a>() {
+<a name="l00110"></a><a class="code" href="../../d7/dd4/a00013_aeee39ed4504d63dd248d802e363391ed.html#aeee39ed4504d63dd248d802e363391ed">00110</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_aeee39ed4504d63dd248d802e363391ed.html#aeee39ed4504d63dd248d802e363391ed" title="Guardar registro en base de datos.">Save</a>() {
 <a name="l00111"></a>00111 
 <a name="l00112"></a>00112       $debug = <span class="stringliteral">&#39;&#39;</span>;
 <a name="l00113"></a>00113 
@@ -247,13 +246,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00153"></a>00153 
 <a name="l00154"></a>00154       } <span class="keywordflow">else</span> {
 <a name="l00155"></a>00155 
-<a name="l00156"></a>00156          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d2/de7/a00014_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() == <span class="stringliteral">&#39;mysql&#39;</span>  ) {
+<a name="l00156"></a>00156          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d7/dd4/a00013_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() == <span class="stringliteral">&#39;mysql&#39;</span>  ) {
 <a name="l00157"></a>00157             $this-&gt;ID = NULL;
 <a name="l00158"></a>00158          } <span class="keywordflow">else</span> {
-<a name="l00159"></a>00159             $this-&gt;ID = $this-&gt;<a class="code" href="../../d2/de7/a00014_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>() + 1;
+<a name="l00159"></a>00159             $this-&gt;ID = $this-&gt;<a class="code" href="../../d7/dd4/a00013_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>() + 1;
 <a name="l00160"></a>00160             }
 <a name="l00161"></a>00161          $strValueList = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00162"></a>00162          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d2/de7/a00014_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() == <span class="stringliteral">&#39;mysql&#39;</span>  ) {
+<a name="l00162"></a>00162          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d7/dd4/a00013_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() == <span class="stringliteral">&#39;mysql&#39;</span>  ) {
 <a name="l00163"></a>00163             $strQuery = <span class="stringliteral">&#39;INSERT INTO &#39;</span> . $this-&gt;strTableName . <span class="stringliteral">&#39;( &#39;</span>;
 <a name="l00164"></a>00164          } <span class="keywordflow">else</span> {
 <a name="l00165"></a>00165             $strQuery = <span class="stringliteral">&#39;INSERT INTO &#39;</span> . $this-&gt;strTableName . <span class="stringliteral">&#39;( id,&#39;</span>;
@@ -271,7 +270,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00177"></a>00177 
 <a name="l00178"></a>00178          $strQuery = substr($strQuery, 0, strlen($strQuery) - 2);
 <a name="l00179"></a>00179          $strValueList = substr($strValueList, 0, strlen($strValueList) - 2);
-<a name="l00180"></a>00180          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d2/de7/a00014_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() == <span class="stringliteral">&#39;mysql&#39;</span>  ) {
+<a name="l00180"></a>00180          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d7/dd4/a00013_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() == <span class="stringliteral">&#39;mysql&#39;</span>  ) {
 <a name="l00181"></a>00181             $strQuery .= <span class="stringliteral">&quot;) VALUES ( &quot;</span>;
 <a name="l00182"></a>00182          } <span class="keywordflow">else</span> {
 <a name="l00183"></a>00183             $strQuery .= <span class="stringliteral">&quot;) VALUES ( &quot;</span>.$this-&gt;ID.<span class="stringliteral">&quot;,&quot;</span>;
@@ -308,7 +307,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00214"></a>00214 <span class="comment">    * Marcar registro para ser borrado </span>
 <a name="l00215"></a>00215 <span class="comment">    */</span>
 <a name="l00216"></a>00216 
-<a name="l00217"></a><a class="code" href="../../d2/de7/a00014_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804">00217</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804" title="Marcar registro para ser borrado.">MarkForDeletion</a>() {
+<a name="l00217"></a><a class="code" href="../../d7/dd4/a00013_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804">00217</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804" title="Marcar registro para ser borrado.">MarkForDeletion</a>() {
 <a name="l00218"></a>00218       $this-&gt;blForDeletion = <span class="keyword">true</span>;
 <a name="l00219"></a>00219       }
 <a name="l00220"></a>00220 <span class="comment"></span>
@@ -317,7 +316,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00223"></a>00223 <span class="comment">    * al instante se le puede llamar directamente</span>
 <a name="l00224"></a>00224 <span class="comment">    */</span>
 <a name="l00225"></a>00225 
-<a name="l00226"></a><a class="code" href="../../d2/de7/a00014_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758">00226</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758" title="Destructor borra los registros marcados para borrar, si queremos que lo haga al instante se le puede ...">__destruct</a>() {
+<a name="l00226"></a><a class="code" href="../../d7/dd4/a00013_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758">00226</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758" title="Destructor borra los registros marcados para borrar, si queremos que lo haga al instante se le puede ...">__destruct</a>() {
 <a name="l00227"></a>00227       <span class="keywordflow">if</span> (isset($this-&gt;ID)) {   
 <a name="l00228"></a>00228          <span class="keywordflow">if</span> ($this-&gt;blForDeletion == <span class="keyword">true</span>) {
 <a name="l00229"></a>00229             $strQuery = <span class="stringliteral">&#39;DELETE FROM &#39;</span> . $this-&gt;strTableName . <span class="stringliteral">&#39; WHERE</span>
@@ -335,16 +334,16 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00241"></a>00241 <span class="comment">    * @deprecated</span>
 <a name="l00242"></a>00242 <span class="comment">    */</span>
 <a name="l00243"></a>00243 
-<a name="l00244"></a><a class="code" href="../../d2/de7/a00014_aabb5ff32626bacddb4e2c874e024378c.html#aabb5ff32626bacddb4e2c874e024378c">00244</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_aabb5ff32626bacddb4e2c874e024378c.html#aabb5ff32626bacddb4e2c874e024378c" title="Para acceder o modificar los valores de los campos.">__call</a>($strFunction, $arArguments) {
+<a name="l00244"></a><a class="code" href="../../d7/dd4/a00013_aabb5ff32626bacddb4e2c874e024378c.html#aabb5ff32626bacddb4e2c874e024378c">00244</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_aabb5ff32626bacddb4e2c874e024378c.html#aabb5ff32626bacddb4e2c874e024378c" title="Para acceder o modificar los valores de los campos.">__call</a>($strFunction, $arArguments) {
 <a name="l00245"></a>00245 
 <a name="l00246"></a>00246       $strMethodType = substr($strFunction, 0, 3);
 <a name="l00247"></a>00247       $strMethodMember = substr($strFunction, 3);
 <a name="l00248"></a>00248       <span class="keywordflow">switch</span> ($strMethodType) {
 <a name="l00249"></a>00249          <span class="keywordflow">case</span> <span class="stringliteral">&quot;set&quot;</span>:
-<a name="l00250"></a>00250             <span class="keywordflow">return</span>($this-&gt;<a class="code" href="../../d2/de7/a00014_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($strMethodMember, $arArguments[0]));
+<a name="l00250"></a>00250             <span class="keywordflow">return</span>($this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($strMethodMember, $arArguments[0]));
 <a name="l00251"></a>00251             <span class="keywordflow">break</span>;
 <a name="l00252"></a>00252          <span class="keywordflow">case</span> <span class="stringliteral">&quot;get&quot;</span>:
-<a name="l00253"></a>00253             <span class="keywordflow">return</span>($this-&gt;<a class="code" href="../../d2/de7/a00014_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($strMethodMember));   
+<a name="l00253"></a>00253             <span class="keywordflow">return</span>($this-&gt;<a class="code" href="../../d7/dd4/a00013_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($strMethodMember));   
 <a name="l00254"></a>00254       };
 <a name="l00255"></a>00255       <span class="keywordflow">return</span>(<span class="keyword">false</span>);   
 <a name="l00256"></a>00256       }
@@ -356,7 +355,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00262"></a>00262 <span class="comment">    * @param $strNewValue Nuevo valor</span>
 <a name="l00263"></a>00263 <span class="comment">    */</span>
 <a name="l00264"></a>00264 
-<a name="l00265"></a><a class="code" href="../../d2/de7/a00014_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b">00265</a>    <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($strMember, $strNewValue) {
+<a name="l00265"></a><a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b">00265</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($strMember, $strNewValue) {
 <a name="l00266"></a>00266       $this-&gt;valores[$strMember] = $strNewValue;
 <a name="l00267"></a>00267       $this-&gt;arModifiedRelations[$strMember] = <span class="stringliteral">&quot;1&quot;</span>;
 <a name="l00268"></a>00268       }
@@ -367,9 +366,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00273"></a>00273 <span class="comment">    * @param $strMember Campo al que accedemos</span>
 <a name="l00274"></a>00274 <span class="comment">    */</span>
 <a name="l00275"></a>00275 
-<a name="l00276"></a><a class="code" href="../../d2/de7/a00014_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f">00276</a>    <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($strMember) {
+<a name="l00276"></a><a class="code" href="../../d7/dd4/a00013_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f">00276</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a1d6ecbdbbe96c2d269f665a8a669524f.html#a1d6ecbdbbe96c2d269f665a8a669524f" title="Acceder al valor del campo.">GetAccessor</a>($strMember) {
 <a name="l00277"></a>00277       <span class="keywordflow">if</span> ($this-&gt;blIsLoaded != <span class="keyword">true</span>) {
-<a name="l00278"></a>00278          $this-&gt;<a class="code" href="../../d2/de7/a00014_ae6ed4b28251fa690207d846c3bd02a5c.html#ae6ed4b28251fa690207d846c3bd02a5c" title="Buscar información en base de datos.">Load</a>();
+<a name="l00278"></a>00278          $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae6ed4b28251fa690207d846c3bd02a5c.html#ae6ed4b28251fa690207d846c3bd02a5c" title="Buscar información en base de datos.">Load</a>();
 <a name="l00279"></a>00279          }
 <a name="l00280"></a>00280       <span class="keywordflow">return</span> ( isset($this-&gt;valores[$strMember])  ) ? $this-&gt;valores[$strMember] : FALSE ;
 <a name="l00281"></a>00281       }
@@ -378,9 +377,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00284"></a>00284 <span class="comment">    * Devolver último id registrado</span>
 <a name="l00285"></a>00285 <span class="comment">    */</span>
 <a name="l00286"></a>00286 
-<a name="l00287"></a><a class="code" href="../../d2/de7/a00014_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4">00287</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>() {
+<a name="l00287"></a><a class="code" href="../../d7/dd4/a00013_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4">00287</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>() {
 <a name="l00288"></a>00288 
-<a name="l00289"></a>00289       <span class="keywordflow">switch</span> ( $this-&gt;<a class="code" href="../../d2/de7/a00014_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() ) {
+<a name="l00289"></a>00289       <span class="keywordflow">switch</span> ( $this-&gt;<a class="code" href="../../d7/dd4/a00013_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() ) {
 <a name="l00290"></a>00290 
 <a name="l00291"></a>00291          <span class="keywordflow">case</span> <span class="stringliteral">&#39;sqlite&#39;</span>:
 <a name="l00292"></a>00292             $sql = <span class="stringliteral">&quot;select id from &quot;</span>.$this-&gt;strTableName.<span class="stringliteral">&quot; order by id desc limit 1;&quot;</span>;
@@ -405,7 +404,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00311"></a>00311 <span class="comment">    * Devolver driver utilizado por PDO</span>
 <a name="l00312"></a>00312 <span class="comment">    */</span>
 <a name="l00313"></a>00313 
-<a name="l00314"></a><a class="code" href="../../d2/de7/a00014_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874">00314</a>    <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() {
+<a name="l00314"></a><a class="code" href="../../d7/dd4/a00013_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874">00314</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_af18ae468f22af40e25e380f6217b5874.html#af18ae468f22af40e25e380f6217b5874" title="Devolver driver utilizado por PDO.">driverPDO</a>() {
 <a name="l00315"></a>00315       <span class="keywordflow">return</span> $this-&gt;objPDO-&gt;getAttribute(constant(<span class="stringliteral">&quot;PDO::ATTR_DRIVER_NAME&quot;</span>));
 <a name="l00316"></a>00316       }
 <a name="l00317"></a>00317 <span class="comment"></span>
@@ -419,7 +418,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00325"></a>00325 <span class="comment">    * @return Array con resultado</span>
 <a name="l00326"></a>00326 <span class="comment">    */</span>
 <a name="l00327"></a>00327 
-<a name="l00328"></a><a class="code" href="../../d2/de7/a00014_ad5b22b9387e0ff469d7b7008ee8e26b6.html#ad5b22b9387e0ff469d7b7008ee8e26b6">00328</a>    <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_ad5b22b9387e0ff469d7b7008ee8e26b6.html#ad5b22b9387e0ff469d7b7008ee8e26b6" title="Buscar por condición o en caso de no recibirla todos.">find</a>($condicion=NULL, $campos=NULL, $orden=NULL) {
+<a name="l00328"></a><a class="code" href="../../d7/dd4/a00013_ad5b22b9387e0ff469d7b7008ee8e26b6.html#ad5b22b9387e0ff469d7b7008ee8e26b6">00328</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_ad5b22b9387e0ff469d7b7008ee8e26b6.html#ad5b22b9387e0ff469d7b7008ee8e26b6" title="Buscar por condición o en caso de no recibirla todos.">find</a>($condicion=NULL, $campos=NULL, $orden=NULL) {
 <a name="l00329"></a>00329 
 <a name="l00330"></a>00330       $retorno = array();
 <a name="l00331"></a>00331 
@@ -461,9 +460,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00367"></a>00367 <span class="comment">    * select de formulario</span>
 <a name="l00368"></a>00368 <span class="comment">    */</span>
 <a name="l00369"></a>00369 
-<a name="l00370"></a><a class="code" href="../../d2/de7/a00014_afaf5c46ef8a87b51da7179440c6d94d6.html#afaf5c46ef8a87b51da7179440c6d94d6">00370</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/de7/a00014_afaf5c46ef8a87b51da7179440c6d94d6.html#afaf5c46ef8a87b51da7179440c6d94d6" title="Devolver listao con id y nombre para poder ser utilizado en select de formulario.">listado_para_select</a>() {
+<a name="l00370"></a><a class="code" href="../../d7/dd4/a00013_afaf5c46ef8a87b51da7179440c6d94d6.html#afaf5c46ef8a87b51da7179440c6d94d6">00370</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_afaf5c46ef8a87b51da7179440c6d94d6.html#afaf5c46ef8a87b51da7179440c6d94d6" title="Devolver listao con id y nombre para poder ser utilizado en select de formulario.">listado_para_select</a>() {
 <a name="l00371"></a>00371 
-<a name="l00372"></a>00372       <span class="keywordflow">return</span> $this-&gt;<a class="code" href="../../d2/de7/a00014_ad5b22b9387e0ff469d7b7008ee8e26b6.html#ad5b22b9387e0ff469d7b7008ee8e26b6" title="Buscar por condición o en caso de no recibirla todos.">find</a>(null,array(<span class="stringliteral">&#39;id&#39;</span>, <span class="stringliteral">&#39;nombre&#39;</span>),<span class="stringliteral">&#39;id desc&#39;</span>);
+<a name="l00372"></a>00372       <span class="keywordflow">return</span> $this-&gt;<a class="code" href="../../d7/dd4/a00013_ad5b22b9387e0ff469d7b7008ee8e26b6.html#ad5b22b9387e0ff469d7b7008ee8e26b6" title="Buscar por condición o en caso de no recibirla todos.">find</a>(null,array(<span class="stringliteral">&#39;id&#39;</span>, <span class="stringliteral">&#39;nombre&#39;</span>),<span class="stringliteral">&#39;id desc&#39;</span>);
 <a name="l00373"></a>00373 
 <a name="l00374"></a>00374       }
 <a name="l00375"></a>00375 
@@ -474,7 +473,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/js/paneles.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/html/pie.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -82,72 +81,33 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e0a24ccc065b8a3374588f0638fa40a0.html">js</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e333815ca684251e94807f1625b54517.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">paneles.js</div>  </div>
+<div class="title">pie.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment"></span>
-<a name="l00002"></a>00002 <span class="comment">/**</span>
-<a name="l00003"></a>00003 <span class="comment"> * Construimos botones para controlar la visibilidad o no</span>
-<a name="l00004"></a>00004 <span class="comment"> * sobre los div con class panel que tengan un tituloPanel dentro</span>
-<a name="l00005"></a>00005 <span class="comment"> * y una subcaja con la clase subpanel_oculto o subpanel_visible.</span>
-<a name="l00006"></a>00006 <span class="comment"> *</span>
-<a name="l00007"></a>00007 <span class="comment"> * los nombre de clases de los subpaneles hacen referencia a si de entrada</span>
-<a name="l00008"></a>00008 <span class="comment"> * están ocultos o no.</span>
-<a name="l00009"></a>00009 <span class="comment"> *</span>
-<a name="l00010"></a>00010 <span class="comment"> * Si no se dan todas estas circustancias no hacemos nada.</span>
-<a name="l00011"></a>00011 <span class="comment"> */</span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 <span class="keyword">function</span> paneles() {
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015    var paneles = $(<span class="stringliteral">&quot;.panel_titulo a[class!=&#39;panel_iniciado&#39;]&quot;</span>);
-<a name="l00016"></a>00016    paneles.addClass(<span class="stringliteral">&#39;panel_iniciado&#39;</span>);
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018    paneles.click(<span class="keyword">function</span>(){
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020       var on   = $(<span class="keyword">this</span>).parent().parent().find(<span class="stringliteral">&#39;.subpanel_visible&#39;</span>);
-<a name="l00021"></a>00021       var off  = $(<span class="keyword">this</span>).parent().parent().find(<span class="stringliteral">&#39;.subpanel_oculto&#39;</span>);
-<a name="l00022"></a>00022       var ajax = $(<span class="keyword">this</span>).parent().find(<span class="stringliteral">&quot;a[name=&#39;ajax&#39;]&quot;</span>);
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024       on.removeClass(<span class="stringliteral">&#39;subpanel_visible&#39;</span>);
-<a name="l00025"></a>00025       on.addClass(<span class="stringliteral">&#39;subpanel_oculto&#39;</span>);
-<a name="l00026"></a>00026       <span class="comment">//on.hide(1000);</span>
-<a name="l00027"></a>00027       on.slideUp(1000);
-<a name="l00028"></a>00028       <span class="comment">//on.fadeOut(1000);</span>
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030       off.removeClass(<span class="stringliteral">&#39;subpanel_oculto&#39;</span>);
-<a name="l00031"></a>00031       off.addClass(<span class="stringliteral">&#39;subpanel_visible&#39;</span>);
-<a name="l00032"></a>00032       <span class="comment">//off.show(1000);</span>
-<a name="l00033"></a>00033       <span class="comment">//off.slideDown(1000);</span>
-<a name="l00034"></a>00034       off.fadeIn(1000);
-<a name="l00035"></a>00035       <span class="keywordflow">if</span> ( ajax ) { eval(ajax.attr(<span class="stringliteral">&#39;href&#39;</span>)); }
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037       <span class="comment">/* Si tenemos input le damos foco */</span>
-<a name="l00038"></a>00038       var input = off.parents(<span class="stringliteral">&quot;.panel&quot;</span>).find(<span class="stringliteral">&quot;:input:first&quot;</span>);
-<a name="l00039"></a>00039       input.focus();
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043       });
-<a name="l00044"></a>00044    }
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 $(document).ready(<span class="keyword">function</span>() { 
-<a name="l00047"></a>00047       $(<span class="stringliteral">&quot;.subpanel_oculto&quot;</span>).hide(3000);
-<a name="l00048"></a>00048       <span class="keywordflow">if</span> ( !(jQuery.browser.msie &amp;&amp; jQuery.browser.version &lt; 7)) { <span class="comment">// take away IE6</span>
-<a name="l00049"></a>00049          paneles();
-<a name="l00050"></a>00050          }
-<a name="l00051"></a>00051       });
-<a name="l00052"></a>00052 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;img src=<span class="stringliteral">&quot;File/es//ojo.gif&quot;</span> alt=<span class="stringliteral">&quot;ojo.gif&quot;</span> title=<span class="stringliteral">&quot;ojo&quot;</span>/&gt;
+<a name="l00002"></a>00002 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;pie_derecho&quot;</span>&gt;
+<a name="l00003"></a>00003    &lt;a rel=<span class="stringliteral">&quot;license&quot;</span> href=<span class="stringliteral">&quot;http://creativecommons.org/licenses/by/3.0/deed.es_CO&quot;</span>&gt;
+<a name="l00004"></a>00004       &lt;img alt=<span class="stringliteral">&quot;Licencia Creative Commons&quot;</span> style=<span class="stringliteral">&quot;border-width:0&quot;</span> src=<span class="stringliteral">&quot;http://i.creativecommons.org/l/by/3.0/88x31.png&quot;</span> /&gt;
+<a name="l00005"></a>00005    &lt;/a&gt;
+<a name="l00006"></a>00006    &lt;span xmlns:dct=<span class="stringliteral">&quot;http://purl.org/dc/terms/&quot;</span> <span class="keyword">property</span>=<span class="stringliteral">&quot;dct:title&quot;</span>&gt;
+<a name="l00007"></a>00007       mamedu.com
+<a name="l00008"></a>00008    &lt;/span&gt; 
+<a name="l00009"></a>00009    se encuentra bajo una 
+<a name="l00010"></a>00010    &lt;a rel=<span class="stringliteral">&quot;license&quot;</span> href=<span class="stringliteral">&quot;http://creativecommons.org/licenses/by/3.0/deed.es_CO&quot;</span>&gt;
+<a name="l00011"></a>00011       Licencia Creative Commons Atribución 3.0 Unported
+<a name="l00012"></a>00012    &lt;/a&gt;.
+<a name="l00013"></a>00013 &lt;/div&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:43 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

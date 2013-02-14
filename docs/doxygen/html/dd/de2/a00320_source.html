@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/html/form_ficheros_tema.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/body.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -82,51 +81,311 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e333815ca684251e94807f1625b54517.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1d927d548771ddffa1e7287445c148df.html">css</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_ficheros_tema.html</div>  </div>
+<div class="title">body.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form method=<span class="stringliteral">&quot;post&quot;</span>&gt;
-<a name="l00002"></a>00002 &lt;fieldset&gt;
-<a name="l00003"></a>00003    &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Editar ficheros de tema&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00004"></a>00004    &lt;select name=<span class="stringliteral">&quot;editar_xdfecto&quot;</span> onchange=<span class="stringliteral">&quot;this.form.submit();&quot;</span>&gt;
-<a name="l00005"></a>00005       &lt;option value=<span class="stringliteral">&quot;&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Ficheros por defecto&#39;</span>,3)?&gt;&lt;/option&gt;
-<a name="l00006"></a>00006       &lt;?php 
-<a name="l00007"></a>00007       <span class="keywordflow">foreach</span>($tipos as $tipo) {
-<a name="l00008"></a>00008          <span class="keywordflow">if</span> ( !empty($this-&gt;ficheros_xdefecto[$tipo]) ) {
-<a name="l00009"></a>00009             <span class="keywordflow">foreach</span>($this-&gt;ficheros_xdefecto[$tipo] as $key =&gt; $val) { ?&gt;
-<a name="l00010"></a>00010                &lt;option title=<span class="stringliteral">&quot;&lt;?=$val?&gt;&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> &gt;&lt;?=$key?&gt;&lt;/option&gt;
-<a name="l00011"></a>00011                &lt;?php }
-<a name="l00012"></a>00012             }
-<a name="l00013"></a>00013          }
-<a name="l00014"></a>00014       ?&gt;
-<a name="l00015"></a>00015    &lt;/select&gt;
-<a name="l00016"></a>00016    &lt;select name=<span class="stringliteral">&quot;editar_tema&quot;</span> onchange=<span class="stringliteral">&quot;this.form.submit();&quot;</span>&gt;
-<a name="l00017"></a>00017       &lt;option value=<span class="stringliteral">&quot;&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Ficheros de tema&#39;</span>,3)?&gt;&lt;/option&gt;
-<a name="l00018"></a>00018       &lt;?php 
-<a name="l00019"></a>00019       <span class="keywordflow">foreach</span>($tipos as $tipo) {
-<a name="l00020"></a>00020          <span class="keywordflow">if</span> ( !empty($this-&gt;ficheros_tema[$tipo]) ) {
-<a name="l00021"></a>00021             <span class="keywordflow">foreach</span>($this-&gt;ficheros_tema[$tipo] as $key =&gt; $val) { ?&gt;
-<a name="l00022"></a>00022                &lt;option title=<span class="stringliteral">&quot;&lt;?=$val?&gt;&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> &gt;&lt;?=$key?&gt;&lt;/option&gt;
-<a name="l00023"></a>00023                &lt;?php }
-<a name="l00024"></a>00024             }
-<a name="l00025"></a>00025          }
-<a name="l00026"></a>00026       ?&gt;
-<a name="l00027"></a>00027    &lt;/select&gt;
-<a name="l00028"></a>00028    &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;m&quot;</span> value=<span class="stringliteral">&quot;temas&quot;</span> /&gt;
-<a name="l00029"></a>00029    &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;a&quot;</span> value=<span class="stringliteral">&quot;editar_fichero&quot;</span> /&gt;
-<a name="l00030"></a>00030 &lt;/fieldset&gt;
-<a name="l00031"></a>00031 &lt;/form&gt;<span class="stringliteral">&#39;</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 body {
+<a name="l00003"></a>00003 background-color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;0&quot;</span>)?&gt;;
+<a name="l00004"></a>00004 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;1&quot;</span>)?&gt;;
+<a name="l00005"></a>00005 font-family: Palatino, <span class="stringliteral">&#39;Book Antiqua&#39;</span>, serif;
+<a name="l00006"></a>00006 line-height: 20px;
+<a name="l00007"></a>00007 padding: 0;
+<a name="l00008"></a>00008 margin: 0;
+<a name="l00009"></a>00009 }
+<a name="l00010"></a>00010 <span class="preprocessor">#wrap{</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>width: 100%;
+<a name="l00012"></a>00012 margin:0 <span class="keyword">auto</span>;
+<a name="l00013"></a>00013 }
+<a name="l00014"></a>00014 <span class="preprocessor">#contenedor {</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span>width: 70%;
+<a name="l00016"></a>00016 <span class="keywordtype">float</span>:left;
+<a name="l00017"></a>00017 padding: 20px 10px 10px 10px;
+<a name="l00018"></a>00018 min-height: 400px;
+<a name="l00019"></a>00019 height: <span class="keyword">auto</span> !important;
+<a name="l00020"></a>00020 }
+<a name="l00021"></a>00021 <span class="preprocessor">#contenido {</span>
+<a name="l00022"></a>00022 <span class="preprocessor"></span>   padding: 10px;
+<a name="l00023"></a>00023 }
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025 <span class="preprocessor">#contenido &gt; p {</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>    margin: 10px;
+<a name="l00027"></a>00027    }
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029 <span class="preprocessor">#lateral {</span>
+<a name="l00030"></a>00030 <span class="preprocessor"></span>width: 27%;
+<a name="l00031"></a>00031 color: #6F6137;
+<a name="l00032"></a>00032 <span class="keywordtype">float</span>:right;
+<a name="l00033"></a>00033 padding-top: 30px;
+<a name="l00034"></a>00034 }
+<a name="l00035"></a>00035 <span class="preprocessor">#lateral p{</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span>padding: 0 25px 25px 25px;
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 <span class="preprocessor">#cabecera{</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;;
+<a name="l00040"></a>00040 background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00041"></a>00041 padding: 15px;
+<a name="l00042"></a>00042 overflow: hidden;
+<a name="l00043"></a>00043 }
+<a name="l00044"></a>00044 <span class="preprocessor">#cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>display: <span class="keyword">inline</span>;
+<a name="l00046"></a>00046 }
+<a name="l00047"></a>00047 <span class="preprocessor">#cabecera h1 {</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>   font-size: 300%;
+<a name="l00049"></a>00049 }
+<a name="l00050"></a>00050 <span class="preprocessor">#cabecera h2 {</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span>   font-family: <span class="stringliteral">&#39;Droid Serif&#39;</span>;
+<a name="l00052"></a>00052    font-size: 100%;
+<a name="l00053"></a>00053 }
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="preprocessor">#cabecera a {</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;;
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 <span class="preprocessor">#cabeceraDerecha {</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="keywordtype">float</span>: right;
+<a name="l00060"></a>00060 width: 60%;
+<a name="l00061"></a>00061 text-align:right;
+<a name="l00062"></a>00062 }
+<a name="l00063"></a>00063 <span class="preprocessor">#subcabecera {</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span>background: #FBFBFB
+<a name="l00065"></a>00065 }
+<a name="l00066"></a>00066 <span class="preprocessor">#pie {</span>
+<a name="l00067"></a>00067 <span class="preprocessor"></span><span class="keywordtype">float</span>: left;
+<a name="l00068"></a>00068 width: 100%;
+<a name="l00069"></a>00069 margin-top:10px;
+<a name="l00070"></a>00070 margin-bottom:10px;
+<a name="l00071"></a>00071 }
+<a name="l00072"></a>00072 <span class="preprocessor">#scripts {</span>
+<a name="l00073"></a>00073 <span class="preprocessor"></span><span class="keywordtype">float</span>: left;
+<a name="l00074"></a>00074 width: 100%;
+<a name="l00075"></a>00075 }
+<a name="l00076"></a>00076 <span class="preprocessor">#lateral p, #lateral2 p{</span>
+<a name="l00077"></a>00077 <span class="preprocessor"></span>margin:0;
+<a name="l00078"></a>00078 padding: 0 15px 15px 15px;
+<a name="l00079"></a>00079 }
+<a name="l00080"></a>00080 a{
+<a name="l00081"></a>00081 text-decoration: none;
+<a name="l00082"></a>00082 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00083"></a>00083 font-style: italic;
+<a name="l00084"></a>00084 text-shadow: 0 1px 0 #fff;
+<a name="l00085"></a>00085 }
+<a name="l00086"></a>00086 a:hover{
+<a name="l00087"></a>00087 color: #6F6137;
+<a name="l00088"></a>00088 }
+<a name="l00089"></a>00089 <span class="preprocessor">#contenido :focus {</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span>outline: 0;
+<a name="l00091"></a>00091 }
+<a name="l00092"></a>00092 .boton{
+<a name="l00093"></a>00093 -moz-border-radius:5px;
+<a name="l00094"></a>00094 -webkit-border-radius:5px;
+<a name="l00095"></a>00095 border-radius:5px;
+<a name="l00096"></a>00096 -moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+<a name="l00097"></a>00097 -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+<a name="l00098"></a>00098 box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+<a name="l00099"></a>00099 background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+<a name="l00100"></a>00100 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+<a name="l00101"></a>00101 color:#3D3C38;
+<a name="l00102"></a>00102 padding:3px 8px 3px 8px;
+<a name="l00103"></a>00103 margin: 2px;
+<a name="l00104"></a>00104 text-shadow:1px 1px 0 rgba(255, 255, 255, 1);
+<a name="l00105"></a>00105 font-family: sans-serif;
+<a name="l00106"></a>00106 font-size: 90%;
+<a name="l00107"></a>00107 font-style: normal;
+<a name="l00108"></a>00108 font-weight: normal;
+<a name="l00109"></a>00109 cursor: pointer;
+<a name="l00110"></a>00110 }
+<a name="l00111"></a>00111 .boton:hover{
+<a name="l00112"></a>00112 background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
+<a name="l00113"></a>00113 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D6D6D6));
+<a name="l00114"></a>00114 }<span class="comment"></span>
+<a name="l00115"></a>00115 <span class="comment">/** Título del contenido **/</span>
+<a name="l00116"></a>00116 .titulo_principal {
+<a name="l00117"></a>00117     margin: 10px 0 0 10px;
+<a name="l00118"></a>00118     padding: 0px;
+<a name="l00119"></a>00119 }
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121 <span class="preprocessor">#titulo {</span>
+<a name="l00122"></a>00122 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00123"></a>00123 font-style: italic;
+<a name="l00124"></a>00124 line-height: 40px;
+<a name="l00125"></a>00125 margin-bottom: 10px;
+<a name="l00126"></a>00126 text-shadow: 2px 1px 1px #FFFFFF;
+<a name="l00127"></a>00127 }
+<a name="l00128"></a>00128 <span class="preprocessor">#camino a, #camino {</span>
+<a name="l00129"></a>00129 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;4&quot;</span>)?&gt;;
+<a name="l00130"></a>00130 font-size: 100%;
+<a name="l00131"></a>00131 }
+<a name="l00132"></a>00132 textarea {
+<a name="l00133"></a>00133 border-bottom:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;5&quot;</span>)?&gt;;
+<a name="l00134"></a>00134 border-left:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;6&quot;</span>)?&gt;;
+<a name="l00135"></a>00135 border-right:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;6&quot;</span>)?&gt;;
+<a name="l00136"></a>00136 border-top:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;7&quot;</span>)?&gt;;
+<a name="l00137"></a>00137 }
+<a name="l00138"></a>00138 <span class="comment">/* class para bloques de codigo, por ejemplo */</span>
+<a name="l00139"></a>00139 pre {
+<a name="l00140"></a>00140 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;;
+<a name="l00141"></a>00141 border-left: 3px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;;
+<a name="l00142"></a>00142 background-color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;4&quot;</span>)?&gt;;
+<a name="l00143"></a>00143 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;; 
+<a name="l00144"></a>00144 margin-left: 10px;
+<a name="l00145"></a>00145 margin-right: 30px;
+<a name="l00146"></a>00146 padding: 3px;
+<a name="l00147"></a>00147 overflow: <span class="keyword">auto</span>;
+<a name="l00148"></a>00148 max-height: 450px;
+<a name="l00149"></a>00149 margin-bottom: 10px;
+<a name="l00150"></a>00150 }
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152 <span class="comment">/* Cajas de aviso */</span>
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154 .aviso , .error, .admin, .normal, .debug  {
+<a name="l00155"></a>00155 padding: 10px;
+<a name="l00156"></a>00156 background: transparent;
+<a name="l00157"></a>00157 border: 0;
+<a name="l00158"></a>00158 <span class="comment">/* Esquinas redondeadas */</span>
+<a name="l00159"></a>00159 border-radius: 5px 5px 5px 5px ;
+<a name="l00160"></a>00160 -moz-border-radius: 5px 5px 5px 5px ;
+<a name="l00161"></a>00161 -webkit-border-radius: 5px 5px 5px 5px;
+<a name="l00162"></a>00162 }
+<a name="l00163"></a>00163 .aviso li, .error li, .admin li, .normal li , .debug li  {
+<a name="l00164"></a>00164 list-style: none ;
+<a name="l00165"></a>00165 border: 2px;
+<a name="l00166"></a>00166 padding: 8px;
+<a name="l00167"></a>00167 margin-top: 2px;
+<a name="l00168"></a>00168 }
+<a name="l00169"></a>00169 .error , .error a {
+<a name="l00170"></a>00170 background: red ;
+<a name="l00171"></a>00171 color: white;
+<a name="l00172"></a>00172 }
+<a name="l00173"></a>00173 .aviso , .aviso a {
+<a name="l00174"></a>00174 background: #5F6C5B ;
+<a name="l00175"></a>00175 color: #fff !IMPORTANT;
+<a name="l00176"></a>00176 }
+<a name="l00177"></a>00177 .admin , .admin a {
+<a name="l00178"></a>00178 background: #5F6C5B ;
+<a name="l00179"></a>00179 color: #fff !IMPORTANT;
+<a name="l00180"></a>00180 }
+<a name="l00181"></a>00181 .normal , .normal a {
+<a name="l00182"></a>00182 background: #5F6C5B ;
+<a name="l00183"></a>00183 color: #fff !IMPORTANT;
+<a name="l00184"></a>00184 }
+<a name="l00185"></a>00185 .debug , .debug a {
+<a name="l00186"></a>00186 background: #5F6C5B ;
+<a name="l00187"></a>00187 color: #fff !IMPORTANT;
+<a name="l00188"></a>00188 }
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191 <span class="comment">/* Clases para generar símbolos */</span>
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193 .simb_arriba {
+<a name="l00194"></a>00194    vertical-align:middle;
+<a name="l00195"></a>00195    border: 0px solid #000;
+<a name="l00196"></a>00196    border-radius: 15px 15px 0 0 ;
+<a name="l00197"></a>00197    -moz-border-radius: 15px 15px 0 0 ;
+<a name="l00198"></a>00198    -webkit-border-radius: 15px 15px 0 0 ;
+<a name="l00199"></a>00199    }
+<a name="l00200"></a>00200 .simb_abajo {
+<a name="l00201"></a>00201    vertical-align:middle;
+<a name="l00202"></a>00202    border: 0px solid #000;
+<a name="l00203"></a>00203    border-radius: 0 0 15px 15px ;
+<a name="l00204"></a>00204    -moz-border-radius: 0 0 15px 15px ;
+<a name="l00205"></a>00205    -webkit-border-radius: 0 0 15px 15px;
+<a name="l00206"></a>00206    }
+<a name="l00207"></a>00207 .simb_neutro {
+<a name="l00208"></a>00208    padding: 3px;
+<a name="l00209"></a>00209    color: #000;
+<a name="l00210"></a>00210    border-color: #000;
+<a name="l00211"></a>00211    background: #dd0;
+<a name="l00212"></a>00212    font-style:oblique;
+<a name="l00213"></a>00213    }
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215 <span class="comment">/* Comportamiento para diferentes resoluciones</span>
+<a name="l00216"></a>00216 <span class="comment"> *</span>
+<a name="l00217"></a>00217 <span class="comment"> * ipad 740px x </span>
+<a name="l00218"></a>00218 <span class="comment"> */</span>
+<a name="l00219"></a>00219 @media screen and (max-width: 1160px){
+<a name="l00220"></a>00220 <span class="preprocessor">#contenedor{</span>
+<a name="l00221"></a>00221 <span class="preprocessor"></span>width: 65%;
+<a name="l00222"></a>00222 }
+<a name="l00223"></a>00223 <span class="preprocessor">#lateral {</span>
+<a name="l00224"></a>00224 <span class="preprocessor"></span>width: 33%;
+<a name="l00225"></a>00225 }
+<a name="l00226"></a>00226 }
+<a name="l00227"></a>00227 @media screen and (max-width: 1015px){
+<a name="l00228"></a>00228 <span class="preprocessor">#lateral, #contenedor {</span>
+<a name="l00229"></a>00229 <span class="preprocessor"></span><span class="keywordtype">float</span>: none;
+<a name="l00230"></a>00230 margin: 0 <span class="keyword">auto</span>;
+<a name="l00231"></a>00231 width: 96%;
+<a name="l00232"></a>00232 }
+<a name="l00233"></a>00233 <span class="preprocessor">#lateral { </span>
+<a name="l00234"></a>00234 <span class="preprocessor"></span>   margin-left: 10px;
+<a name="l00235"></a>00235 }
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237 .panel_titulo a {
+<a name="l00238"></a>00238 -moz-border-radius:10px;
+<a name="l00239"></a>00239 -webkit-border-radius:10px;
+<a name="l00240"></a>00240 border-radius:10px;
+<a name="l00241"></a>00241 -moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+<a name="l00242"></a>00242 -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+<a name="l00243"></a>00243 box-shadow:0 1px 0 rgba(0,0,0,0.3);
+<a name="l00244"></a>00244 background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+<a name="l00245"></a>00245 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+<a name="l00246"></a>00246 color:#4A4A4A;
+<a name="l00247"></a>00247 text-shadow:1px 1px 0 rgba(255, 255, 255, 0.7);
+<a name="l00248"></a>00248 padding: 5px;
+<a name="l00249"></a>00249 display: block;
+<a name="l00250"></a>00250 }
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252 <span class="comment">/* Tablas adaptables */</span>
+<a name="l00253"></a>00253 table, thead, tr, th, tbody, td{
+<a name="l00254"></a>00254    display:block;
+<a name="l00255"></a>00255 }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257 tr { border-bottom: 4px solid #666666; }
+<a name="l00258"></a>00258 td { 
+<a name="l00259"></a>00259    border: none;
+<a name="l00260"></a>00260    border-bottom: 1px solid #eee; 
+<a name="l00261"></a>00261    position: relative;
+<a name="l00262"></a>00262 }
+<a name="l00263"></a>00263 }
+<a name="l00264"></a>00264 
+<a name="l00265"></a>00265 <span class="comment">/* Ventana flotante */</span>
+<a name="l00266"></a>00266 .ventana_flotante {
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268    position: absolute;
+<a name="l00269"></a>00269    top: 50%;
+<a name="l00270"></a>00270    left: 50%;
+<a name="l00271"></a>00271    border: 1px solid #fff;
+<a name="l00272"></a>00272    background: #000;
+<a name="l00273"></a>00273    color: white;
+<a name="l00274"></a>00274    padding: 4px;
+<a name="l00275"></a>00275    margin: -50px 0 0 -100px;
+<a name="l00276"></a>00276    filter: alpha(opacity=85); <span class="comment">/* internet explorer */</span>
+<a name="l00277"></a>00277    -khtml-opacity: 0.8;      <span class="comment">/* khtml, version anterior de safari */</span>
+<a name="l00278"></a>00278    -moz-opacity: 0.8;       <span class="comment">/* firefox, mozilla, netscape */</span>
+<a name="l00279"></a>00279    opacity: 0.8;           <span class="comment">/* safari, chrome, opera */</span>
+<a name="l00280"></a>00280    -ms-filter: <span class="stringliteral">&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=85)&quot;</span>; <span class="comment">/*internet explorer 8 */</span> 
+<a name="l00281"></a>00281    }
+<a name="l00282"></a>00282 .titulo_ventana_flotante {
+<a name="l00283"></a>00283     border-bottom: 1px solid white;
+<a name="l00284"></a>00284     margin-bottom: 4px;
+<a name="l00285"></a>00285     min-width: 200px;
+<a name="l00286"></a>00286    }
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288 ul input {
+<a name="l00289"></a>00289    margin-right: 6px;
+<a name="l00290"></a>00290 }
+<a name="l00291"></a>00291 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:43 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

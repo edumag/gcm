@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/info.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/idiomas/html/form_idiomas.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -81,30 +80,108 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_925a7c03a73672f2b14aa59d01f20b70.html">imagenes</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_b7b160c85ecc815e27c5369a42816dc4.html">idiomas</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_8bfae080871b3206093c021e2dff499d.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">info.php</div>  </div>
+<div class="title">form_idiomas.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment">// Información del modulo</span>
-<a name="l00003"></a>00003 $imagenes[<span class="stringliteral">&#39;descripcion&#39;</span>]=<span class="stringliteral">&quot;Con este modulo activado se podra subir imagenes al servidor&quot;</span>;
-<a name="l00004"></a>00004 $imagenes[<span class="stringliteral">&#39;version&#39;</span>]=<span class="stringliteral">&quot;0.1&quot;</span>;
-<a name="l00005"></a>00005 $imagenes[<span class="stringliteral">&#39;nombre&#39;</span>][<span class="stringliteral">&#39;es&#39;</span>]=<span class="stringliteral">&quot;Subir imagenes&quot;</span>;
-<a name="l00006"></a>00006 $imagenes[<span class="stringliteral">&#39;nombre&#39;</span>][<span class="stringliteral">&#39;ca&#39;</span>]=<span class="stringliteral">&quot;Possar Imatges&quot;</span>;
-<a name="l00007"></a>00007 $imagenes[<span class="stringliteral">&#39;title&#39;</span>][<span class="stringliteral">&#39;es&#39;</span>]=<span class="stringliteral">&quot;Subir imagenes al servidor&quot;</span>;
-<a name="l00008"></a>00008 $imagenes[<span class="stringliteral">&#39;title&#39;</span>][<span class="stringliteral">&#39;ca&#39;</span>]=<span class="stringliteral">&quot;Possar Imatges al servidor&quot;</span>;
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 ?&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;fieldset&gt;
+<a name="l00002"></a>00002    &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Idiomas Activados&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004    &lt;?php <span class="keywordflow">foreach</span>($i_activados as $key =&gt; $idioma) { $imagen=$this-&gt;dir_idiomas.$key.<span class="stringliteral">&#39;.gif&#39;</span>; ?&gt;
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006    &lt;div&gt;
+<a name="l00007"></a>00007       &lt;a style=<span class="stringliteral">&quot;cursor: pointer;&quot;</span> title=<span class="stringliteral">&quot;Modificar imágen&quot;</span> onclick=<span class="stringliteral">&quot;javascript:visualizar(&#39;caja-&lt;?=$key?&gt;&#39;);&quot;</span> &gt;
+<a name="l00008"></a>00008          &lt;img src=<span class="stringliteral">&quot;&lt;?=$imagen?&gt;&quot;</span> &gt;
+<a name="l00009"></a>00009          &lt;?=$idioma?&gt;(&lt;?=$key?&gt;)
+<a name="l00010"></a>00010       &lt;/a&gt;
+<a name="l00011"></a>00011       &lt;div style=<span class="stringliteral">&#39;display:none&#39;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja-&lt;?=$key ?&gt;&quot;</span>&gt;
+<a name="l00012"></a>00012          &lt;br /&gt;&lt;br /&gt;
+<a name="l00013"></a>00013          &lt;form method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00014"></a>00014             Idioma: &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;idiomaNombre&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$idioma ?&gt;&quot;</span>/&gt;
+<a name="l00015"></a>00015             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;codIdioma&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> /&gt;
+<a name="l00016"></a>00016             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;MAX_FILE_SIZE&quot;</span> value=<span class="stringliteral">&quot;5000000&quot;</span> /&gt;
+<a name="l00017"></a>00017             &lt;br /&gt;&lt;br /&gt;Imagen: &lt;input type=<span class="stringliteral">&quot;file&quot;</span> name=<span class="stringliteral">&quot;imagenIdioma&quot;</span> /&gt;
+<a name="l00018"></a>00018             &lt;br /&gt;&lt;br /&gt;&lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;modificarIdioma&quot;</span> value=<span class="stringliteral">&quot;Modificar&quot;</span> /&gt; 
+<a name="l00019"></a>00019          &lt;/form&gt;
+<a name="l00020"></a>00020          &lt;form method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00021"></a>00021             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;codIdioma&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> /&gt;
+<a name="l00022"></a>00022             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;nameIdioma&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$idioma?&gt;&quot;</span> /&gt;
+<a name="l00023"></a>00023             &lt;p&gt;Desactivar un idioma permite tener el contenido y administrarlo pero sin presentarlo&lt;/p&gt;
+<a name="l00024"></a>00024             &lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;desactivarIdioma&quot;</span> value=<span class="stringliteral">&quot;Desactivar idioma&quot;</span> /&gt; 
+<a name="l00025"></a>00025             &lt;p&gt;Eliminar un idioma hara que todo el contenido de ese idioma sea eliminado.&lt;/p&gt;
+<a name="l00026"></a>00026             &lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;eliminarIdioma&quot;</span> value=<span class="stringliteral">&quot;Eliminar&quot;</span> /&gt; 
+<a name="l00027"></a>00027          &lt;/form&gt;
+<a name="l00028"></a>00028       &lt;/div&gt;
+<a name="l00029"></a>00029    &lt;/div&gt;
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031    &lt;?php } ?&gt;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 &lt;/fieldset&gt;
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036 &lt;?php <span class="keywordflow">if</span> ( isset($desactivados) ) {         <span class="comment">// Solo presentamos si hay alguno ?&gt;</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 &lt;fieldset&gt;
+<a name="l00039"></a>00039    &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Idiomas desactivados&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041    &lt;?php <span class="keywordflow">foreach</span>($desactivados as $key =&gt; $idioma) { $imagen=$this-&gt;dir_idiomas.$key.<span class="stringliteral">&#39;.gif&#39;</span>; ?&gt;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043    &lt;span&gt;
+<a name="l00044"></a>00044       &lt;a style=<span class="stringliteral">&quot;cursor: pointer;&quot;</span> title=<span class="stringliteral">&quot;Modificar imágen&quot;</span> onclick=<span class="stringliteral">&quot;javascript:visualizar(&#39;caja-&lt;?=$key?&gt;&#39;);&quot;</span> &gt;
+<a name="l00045"></a>00045          &lt;img src=<span class="stringliteral">&quot;&lt;?=$imagen?&gt;&quot;</span> &gt;
+<a name="l00046"></a>00046          &lt;?=$idioma?&gt;(&lt;?=$key?&gt;)
+<a name="l00047"></a>00047       &lt;/a&gt;
+<a name="l00048"></a>00048       &lt;div style=<span class="stringliteral">&#39;display:none&#39;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja-&lt;?=$key ?&gt;&quot;</span>&gt;
+<a name="l00049"></a>00049          &lt;br /&gt;&lt;br /&gt;
+<a name="l00050"></a>00050          &lt;form method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00051"></a>00051             Idioma: &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;idiomaNombre&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$idioma ?&gt;&quot;</span>/&gt;
+<a name="l00052"></a>00052             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;codIdioma&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> /&gt;
+<a name="l00053"></a>00053             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;MAX_FILE_SIZE&quot;</span> value=<span class="stringliteral">&quot;5000000&quot;</span> /&gt;
+<a name="l00054"></a>00054             &lt;br /&gt;&lt;br /&gt;Imagen: &lt;input type=<span class="stringliteral">&quot;file&quot;</span> name=<span class="stringliteral">&quot;imagenIdioma&quot;</span> /&gt;
+<a name="l00055"></a>00055             &lt;br /&gt;&lt;br /&gt;&lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;modificarIdioma&quot;</span> value=<span class="stringliteral">&quot;Modificar&quot;</span> /&gt; 
+<a name="l00056"></a>00056          &lt;/form&gt;
+<a name="l00057"></a>00057          &lt;form method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00058"></a>00058             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;codIdioma&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$key?&gt;&quot;</span> /&gt;
+<a name="l00059"></a>00059             &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;nameIdioma&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$idioma?&gt;&quot;</span> /&gt;
+<a name="l00060"></a>00060             &lt;br /&gt;
+<a name="l00061"></a>00061             &lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;activarIdioma&quot;</span> value=<span class="stringliteral">&quot;Activar idioma&quot;</span> /&gt; 
+<a name="l00062"></a>00062             &lt;p&gt;Eliminar un idioma hara que todo el contenido de ese idioma sea eliminado.&lt;/p&gt;
+<a name="l00063"></a>00063             &lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;eliminarIdioma&quot;</span> value=<span class="stringliteral">&quot;Eliminar&quot;</span> /&gt; 
+<a name="l00064"></a>00064          &lt;/form&gt;
+<a name="l00065"></a>00065       &lt;/div&gt;
+<a name="l00066"></a>00066    &lt;/span&gt;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068    &lt;?php } ?&gt;
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070 &lt;/fieldset&gt;
+<a name="l00071"></a>00071     
+<a name="l00072"></a>00072 &lt;?php } ?&gt;
+<a name="l00073"></a>00073       &lt;?php <span class="comment">// Formulario de entrada para un nuevo idioma ?&gt;</span>
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> enctype=<span class="stringliteral">&quot;multipart/form-data&quot;</span> &gt;
+<a name="l00076"></a>00076    &lt;fieldset&gt;
+<a name="l00077"></a>00077       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Nuevo idioma&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00078"></a>00078       Idioma: &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;idiomaNombre&quot;</span> /&gt;
+<a name="l00079"></a>00079       &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;MAX_FILE_SIZE&quot;</span> value=<span class="stringliteral">&quot;50000000&quot;</span>  /&gt;
+<a name="l00080"></a>00080       Imagen(gif): 
+<a name="l00081"></a>00081       &lt;input name=<span class="stringliteral">&quot;imagenIdioma&quot;</span> type=<span class="stringliteral">&quot;file&quot;</span> size=<span class="stringliteral">&quot;18&quot;</span> /&gt;
+<a name="l00082"></a>00082       &lt;br /&gt;
+<a name="l00083"></a>00083       &lt;input type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;nuevoIdioma&quot;</span> value=<span class="stringliteral">&quot;Añadir idioma&quot;</span> /&gt;
+<a name="l00084"></a>00084    &lt;/fieldset&gt;
+<a name="l00085"></a>00085 &lt;/form&gt;
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:43 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
