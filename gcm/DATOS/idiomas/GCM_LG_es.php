@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Thu Feb 14 8:42:19 CET 2013
+// Archivo generado automaticamente por GcmConfig Thu Feb 14 10:01:51 CET 2013
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Listado completo de contenido']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
@@ -73,4 +73,5 @@ $GCM_LG_es['El correo no parece valido']='';
 $GCM_LG_es['Campo obligatorio']='';
 $GCM_LG_es['Insertar']='';
 $GCM_LG_es['Editar']='';
+$GCM_LG_es['Contraseña']='';
 ?>
