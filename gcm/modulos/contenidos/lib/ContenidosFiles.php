@@ -25,8 +25,6 @@ require_once(dirname(__FILE__).'/ContenidosAbstract.php');
  *
  * Clase para manejar el contenido en archivos
  *
- * @todo Separar la clase en funciones esenciales y las que recogen los eventos
- *
  * @package Contenidos Gestión de contenido
  * @author Eduardo Magrané
  * @version 0.1
@@ -34,6 +32,14 @@ require_once(dirname(__FILE__).'/ContenidosAbstract.php');
  */
 
 class Contenidos extends ContenidosAbstract {
+
+   /**
+    * Filtro de secciones, nos permite tener una lista de directorios que no queremos
+    * que se muestren como secciones, por ejemplo el directorio de las miniaturas,
+    * ( thumbnail ).
+    */
+
+   private $filtro_secciones = array('thumbnail');
 
    function __construct() { 
 
@@ -292,6 +298,12 @@ class Contenidos extends ContenidosAbstract {
                $descartar = TRUE;
                }
             }
+         foreach ( $this->filtro_secciones as $descartado ) {
+            if ( strpos($path,$descartado) !== FALSE ) {
+               registrar(__FILE__,__LINE__,'Descartado: '.$path. ' coincide con '.$descartado);
+               $descartar = TRUE;
+               }
+            }
 
          if ( $descartar ) {
             return;
@@ -453,8 +465,6 @@ class Contenidos extends ContenidosAbstract {
     * Listar contenido de una sección
     *
     * Para cuando se entra en una sección, listamos el contenido que hay en ella.
-    *
-    * @todo Pasar metodo a Abstract y dejar solo las funciones imprescindibles
     *
     * @param $e     Evento que recibimos de Eventos
     * @param $seccion Directorio a mostra

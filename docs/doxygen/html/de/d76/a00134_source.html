@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/mimetypes.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/idiomas/lib/IdiomasCore.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -82,476 +81,336 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_fd4bba98c5907e0eee9729cf831b341d.html">idiomas</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_822c3fcc8b67ea712de36b3a611b6f55.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">mimetypes.php</div>  </div>
+<div class="title">IdiomasCore.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 $mimetypes=array(
-<a name="l00003"></a>00003 <span class="stringliteral">&quot;ez&quot;</span> =&gt; <span class="stringliteral">&quot;application/andrew-inset&quot;</span>, 
-<a name="l00004"></a>00004 <span class="stringliteral">&quot;atom&quot;</span> =&gt; <span class="stringliteral">&quot;application/atom&quot;</span>, 
-<a name="l00005"></a>00005 <span class="stringliteral">&quot;atomcat&quot;</span> =&gt; <span class="stringliteral">&quot;application/atomcat+xml&quot;</span>, 
-<a name="l00006"></a>00006 <span class="stringliteral">&quot;atomsrv&quot;</span> =&gt; <span class="stringliteral">&quot;application/atomserv+xml&quot;</span>, 
-<a name="l00007"></a>00007 <span class="stringliteral">&quot;cap&quot;</span> =&gt; <span class="stringliteral">&quot;application/cap&quot;</span>, 
-<a name="l00008"></a>00008 <span class="stringliteral">&quot;cu&quot;</span> =&gt; <span class="stringliteral">&quot;application/cu-seeme&quot;</span>, 
-<a name="l00009"></a>00009 <span class="stringliteral">&quot;tsp&quot;</span> =&gt; <span class="stringliteral">&quot;application/dsptype&quot;</span>, 
-<a name="l00010"></a>00010 <span class="stringliteral">&quot;spl&quot;</span> =&gt; <span class="stringliteral">&quot;application/futuresplash&quot;</span>, 
-<a name="l00011"></a>00011 <span class="stringliteral">&quot;hta&quot;</span> =&gt; <span class="stringliteral">&quot;application/hta&quot;</span>, 
-<a name="l00012"></a>00012 <span class="stringliteral">&quot;jar&quot;</span> =&gt; <span class="stringliteral">&quot;application/java-archive&quot;</span>, 
-<a name="l00013"></a>00013 <span class="stringliteral">&quot;ser&quot;</span> =&gt; <span class="stringliteral">&quot;application/java-serialized-object&quot;</span>, 
-<a name="l00014"></a>00014 <span class="stringliteral">&quot;class&quot;</span> =&gt; <span class="stringliteral">&quot;application/java-vm&quot;</span>, 
-<a name="l00015"></a>00015 <span class="stringliteral">&quot;hqx&quot;</span> =&gt; <span class="stringliteral">&quot;application/mac-binhex40&quot;</span>, 
-<a name="l00016"></a>00016 <span class="stringliteral">&quot;cpt&quot;</span> =&gt; <span class="stringliteral">&quot;application/mac-compactpro&quot;</span>, 
-<a name="l00017"></a>00017 <span class="stringliteral">&quot;nb&quot;</span> =&gt; <span class="stringliteral">&quot;application/mathematica&quot;</span>, 
-<a name="l00018"></a>00018 <span class="stringliteral">&quot;mdb&quot;</span> =&gt; <span class="stringliteral">&quot;application/msaccess&quot;</span>, 
-<a name="l00019"></a>00019 <span class="stringliteral">&quot;doc&quot;</span> =&gt; <span class="stringliteral">&quot;application/msword&quot;</span>, 
-<a name="l00020"></a>00020 <span class="stringliteral">&quot;bin&quot;</span> =&gt; <span class="stringliteral">&quot;application/octet-stream&quot;</span>, 
-<a name="l00021"></a>00021 <span class="stringliteral">&quot;oda&quot;</span> =&gt; <span class="stringliteral">&quot;application/oda&quot;</span>, 
-<a name="l00022"></a>00022 <span class="stringliteral">&quot;ogg&quot;</span> =&gt; <span class="stringliteral">&quot;application/ogg&quot;</span>, 
-<a name="l00023"></a>00023 <span class="stringliteral">&quot;pdf&quot;</span> =&gt; <span class="stringliteral">&quot;application/pdf&quot;</span>, 
-<a name="l00024"></a>00024 <span class="stringliteral">&quot;key&quot;</span> =&gt; <span class="stringliteral">&quot;application/pgp-keys&quot;</span>, 
-<a name="l00025"></a>00025 <span class="stringliteral">&quot;pgp&quot;</span> =&gt; <span class="stringliteral">&quot;application/pgp-signature&quot;</span>, 
-<a name="l00026"></a>00026 <span class="stringliteral">&quot;prf&quot;</span> =&gt; <span class="stringliteral">&quot;application/pics-rules&quot;</span>, 
-<a name="l00027"></a>00027 <span class="stringliteral">&quot;ps&quot;</span> =&gt; <span class="stringliteral">&quot;application/postscript&quot;</span>, 
-<a name="l00028"></a>00028 <span class="stringliteral">&quot;rar&quot;</span> =&gt; <span class="stringliteral">&quot;application/rar&quot;</span>, 
-<a name="l00029"></a>00029 <span class="stringliteral">&quot;rdf&quot;</span> =&gt; <span class="stringliteral">&quot;application/rdf+xml&quot;</span>, 
-<a name="l00030"></a>00030 <span class="stringliteral">&quot;rss&quot;</span> =&gt; <span class="stringliteral">&quot;application/rss+xml&quot;</span>, 
-<a name="l00031"></a>00031 <span class="stringliteral">&quot;rtf&quot;</span> =&gt; <span class="stringliteral">&quot;application/rtf&quot;</span>, 
-<a name="l00032"></a>00032 <span class="stringliteral">&quot;smi&quot;</span> =&gt; <span class="stringliteral">&quot;application/smil&quot;</span>, 
-<a name="l00033"></a>00033 <span class="stringliteral">&quot;wpd&quot;</span> =&gt; <span class="stringliteral">&quot;application/wordperfect&quot;</span>, 
-<a name="l00034"></a>00034 <span class="stringliteral">&quot;wp5&quot;</span> =&gt; <span class="stringliteral">&quot;application/wordperfect5.1&quot;</span>, 
-<a name="l00035"></a>00035 <span class="stringliteral">&quot;xhtml&quot;</span> =&gt; <span class="stringliteral">&quot;application/xhtml+xml&quot;</span>, 
-<a name="l00036"></a>00036 <span class="stringliteral">&quot;xml&quot;</span> =&gt; <span class="stringliteral">&quot;application/xml&quot;</span>, 
-<a name="l00037"></a>00037 <span class="stringliteral">&quot;zip&quot;</span> =&gt; <span class="stringliteral">&quot;application/zip&quot;</span>, 
-<a name="l00038"></a>00038 <span class="stringliteral">&quot;cdy&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.cinderella&quot;</span>, 
-<a name="l00039"></a>00039 <span class="stringliteral">&quot;kml&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.google-earth.kml+xml&quot;</span>, 
-<a name="l00040"></a>00040 <span class="stringliteral">&quot;kmz&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.google-earth.kmz&quot;</span>, 
-<a name="l00041"></a>00041 <span class="stringliteral">&quot;xul&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.mozilla.xul+xml&quot;</span>, 
-<a name="l00042"></a>00042 <span class="stringliteral">&quot;xls&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-excel&quot;</span>, 
-<a name="l00043"></a>00043 <span class="stringliteral">&quot;cat&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-pki.seccat&quot;</span>, 
-<a name="l00044"></a>00044 <span class="stringliteral">&quot;stl&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-pki.stl&quot;</span>, 
-<a name="l00045"></a>00045 <span class="stringliteral">&quot;ppt&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-powerpoint&quot;</span>, 
-<a name="l00046"></a>00046 <span class="stringliteral">&quot;odc&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.chart&quot;</span>, 
-<a name="l00047"></a>00047 <span class="stringliteral">&quot;odb&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.database&quot;</span>, 
-<a name="l00048"></a>00048 <span class="stringliteral">&quot;odf&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.formula&quot;</span>, 
-<a name="l00049"></a>00049 <span class="stringliteral">&quot;odg&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.graphics&quot;</span>, 
-<a name="l00050"></a>00050 <span class="stringliteral">&quot;otg&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.graphics-template&quot;</span>, 
-<a name="l00051"></a>00051 <span class="stringliteral">&quot;odi&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.image&quot;</span>, 
-<a name="l00052"></a>00052 <span class="stringliteral">&quot;odp&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.presentation&quot;</span>, 
-<a name="l00053"></a>00053 <span class="stringliteral">&quot;otp&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.presentation-template&quot;</span>, 
-<a name="l00054"></a>00054 <span class="stringliteral">&quot;ods&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.spreadsheet&quot;</span>, 
-<a name="l00055"></a>00055 <span class="stringliteral">&quot;ots&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.spreadsheet-template&quot;</span>, 
-<a name="l00056"></a>00056 <span class="stringliteral">&quot;odt&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.text&quot;</span>, 
-<a name="l00057"></a>00057 <span class="stringliteral">&quot;odm&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.text-master&quot;</span>, 
-<a name="l00058"></a>00058 <span class="stringliteral">&quot;ott&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.text-template&quot;</span>, 
-<a name="l00059"></a>00059 <span class="stringliteral">&quot;oth&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.oasis.opendocument.text-web&quot;</span>, 
-<a name="l00060"></a>00060 <span class="stringliteral">&quot;cod&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.rim.cod&quot;</span>, 
-<a name="l00061"></a>00061 <span class="stringliteral">&quot;mmf&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.smaf&quot;</span>, 
-<a name="l00062"></a>00062 <span class="stringliteral">&quot;sdc&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.calc&quot;</span>, 
-<a name="l00063"></a>00063 <span class="stringliteral">&quot;sds&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.chart&quot;</span>, 
-<a name="l00064"></a>00064 <span class="stringliteral">&quot;sda&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.draw&quot;</span>, 
-<a name="l00065"></a>00065 <span class="stringliteral">&quot;sdd&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.impress&quot;</span>, 
-<a name="l00066"></a>00066 <span class="stringliteral">&quot;sdf&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.math&quot;</span>, 
-<a name="l00067"></a>00067 <span class="stringliteral">&quot;sdw&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.writer&quot;</span>, 
-<a name="l00068"></a>00068 <span class="stringliteral">&quot;sgl&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.stardivision.writer-global&quot;</span>, 
-<a name="l00069"></a>00069 <span class="stringliteral">&quot;sxc&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.calc&quot;</span>, 
-<a name="l00070"></a>00070 <span class="stringliteral">&quot;stc&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.calc.template&quot;</span>, 
-<a name="l00071"></a>00071 <span class="stringliteral">&quot;sxd&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.draw&quot;</span>, 
-<a name="l00072"></a>00072 <span class="stringliteral">&quot;std&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.draw.template&quot;</span>, 
-<a name="l00073"></a>00073 <span class="stringliteral">&quot;sxi&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.impress&quot;</span>, 
-<a name="l00074"></a>00074 <span class="stringliteral">&quot;sti&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.impress.template&quot;</span>, 
-<a name="l00075"></a>00075 <span class="stringliteral">&quot;sxm&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.math&quot;</span>, 
-<a name="l00076"></a>00076 <span class="stringliteral">&quot;sxw&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.writer&quot;</span>, 
-<a name="l00077"></a>00077 <span class="stringliteral">&quot;sxg&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.writer.global&quot;</span>, 
-<a name="l00078"></a>00078 <span class="stringliteral">&quot;stw&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.sun.xml.writer.template&quot;</span>, 
-<a name="l00079"></a>00079 <span class="stringliteral">&quot;sis&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.symbian.install&quot;</span>, 
-<a name="l00080"></a>00080 <span class="stringliteral">&quot;vsd&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.visio&quot;</span>, 
-<a name="l00081"></a>00081 <span class="stringliteral">&quot;wbxml&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.wap.wbxml&quot;</span>, 
-<a name="l00082"></a>00082 <span class="stringliteral">&quot;wmlc&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.wap.wmlc&quot;</span>, 
-<a name="l00083"></a>00083 <span class="stringliteral">&quot;wmlsc&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.wap.wmlscriptc&quot;</span>, 
-<a name="l00084"></a>00084 <span class="stringliteral">&quot;wk&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-123&quot;</span>, 
-<a name="l00085"></a>00085 <span class="stringliteral">&quot;7z&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-7z-compressed&quot;</span>, 
-<a name="l00086"></a>00086 <span class="stringliteral">&quot;abw&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-abiword&quot;</span>, 
-<a name="l00087"></a>00087 <span class="stringliteral">&quot;dmg&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-apple-diskimage&quot;</span>, 
-<a name="l00088"></a>00088 <span class="stringliteral">&quot;bcpio&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-bcpio&quot;</span>, 
-<a name="l00089"></a>00089 <span class="stringliteral">&quot;torrent&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-bittorrent&quot;</span>, 
-<a name="l00090"></a>00090 <span class="stringliteral">&quot;cab&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-cab&quot;</span>, 
-<a name="l00091"></a>00091 <span class="stringliteral">&quot;cbr&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-cbr&quot;</span>, 
-<a name="l00092"></a>00092 <span class="stringliteral">&quot;cbz&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-cbz&quot;</span>, 
-<a name="l00093"></a>00093 <span class="stringliteral">&quot;cdf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-cdf&quot;</span>, 
-<a name="l00094"></a>00094 <span class="stringliteral">&quot;vcd&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-cdlink&quot;</span>, 
-<a name="l00095"></a>00095 <span class="stringliteral">&quot;pgn&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-chess-pgn&quot;</span>, 
-<a name="l00096"></a>00096 <span class="stringliteral">&quot;cpio&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-cpio&quot;</span>, 
-<a name="l00097"></a>00097 <span class="stringliteral">&quot;csh&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-csh&quot;</span>, 
-<a name="l00098"></a>00098 <span class="stringliteral">&quot;deb&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-debian-package&quot;</span>, 
-<a name="l00099"></a>00099 <span class="stringliteral">&quot;dcr&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-director&quot;</span>, 
-<a name="l00100"></a>00100 <span class="stringliteral">&quot;dms&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-dms&quot;</span>, 
-<a name="l00101"></a>00101 <span class="stringliteral">&quot;wad&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-doom&quot;</span>, 
-<a name="l00102"></a>00102 <span class="stringliteral">&quot;dvi&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-dvi&quot;</span>, 
-<a name="l00103"></a>00103 <span class="stringliteral">&quot;rhtml&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-eruby&quot;</span>, 
-<a name="l00104"></a>00104 <span class="stringliteral">&quot;flac&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-flac&quot;</span>, 
-<a name="l00105"></a>00105 <span class="stringliteral">&quot;pfa&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-font&quot;</span>, 
-<a name="l00106"></a>00106 <span class="stringliteral">&quot;mm&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-freemind&quot;</span>, 
-<a name="l00107"></a>00107 <span class="stringliteral">&quot;spl&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-futuresplash&quot;</span>, 
-<a name="l00108"></a>00108 <span class="stringliteral">&quot;gnumeric&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-gnumeric&quot;</span>, 
-<a name="l00109"></a>00109 <span class="stringliteral">&quot;sgf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-go-sgf&quot;</span>, 
-<a name="l00110"></a>00110 <span class="stringliteral">&quot;gcf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-graphing-calculator&quot;</span>, 
-<a name="l00111"></a>00111 <span class="stringliteral">&quot;gtar&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-gtar&quot;</span>, 
-<a name="l00112"></a>00112 <span class="stringliteral">&quot;hdf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-hdf&quot;</span>, 
-<a name="l00113"></a>00113 <span class="stringliteral">&quot;phtml&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php&quot;</span>, 
-<a name="l00114"></a>00114 <span class="stringliteral">&quot;phps&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php-source&quot;</span>, 
-<a name="l00115"></a>00115 <span class="stringliteral">&quot;php3&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php3&quot;</span>, 
-<a name="l00116"></a>00116 <span class="stringliteral">&quot;php3p&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php3-preprocessed&quot;</span>, 
-<a name="l00117"></a>00117 <span class="stringliteral">&quot;php4&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php4&quot;</span>, 
-<a name="l00118"></a>00118 <span class="stringliteral">&quot;ica&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-ica&quot;</span>, 
-<a name="l00119"></a>00119 <span class="stringliteral">&quot;ins&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-internet-signup&quot;</span>, 
-<a name="l00120"></a>00120 <span class="stringliteral">&quot;iii&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-iphone&quot;</span>, 
-<a name="l00121"></a>00121 <span class="stringliteral">&quot;iso&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-iso9660-image&quot;</span>, 
-<a name="l00122"></a>00122 <span class="stringliteral">&quot;jnlp&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-java-jnlp-file&quot;</span>, 
-<a name="l00123"></a>00123 <span class="stringliteral">&quot;js&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-javascript&quot;</span>, 
-<a name="l00124"></a>00124 <span class="stringliteral">&quot;jmz&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-jmol&quot;</span>, 
-<a name="l00125"></a>00125 <span class="stringliteral">&quot;chrt&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-kchart&quot;</span>, 
-<a name="l00126"></a>00126 <span class="stringliteral">&quot;kil&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-killustrator&quot;</span>, 
-<a name="l00127"></a>00127 <span class="stringliteral">&quot;skp&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-koan&quot;</span>, 
-<a name="l00128"></a>00128 <span class="stringliteral">&quot;kpr&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-kpresenter&quot;</span>, 
-<a name="l00129"></a>00129 <span class="stringliteral">&quot;ksp&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-kspread&quot;</span>, 
-<a name="l00130"></a>00130 <span class="stringliteral">&quot;kwd&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-kword&quot;</span>, 
-<a name="l00131"></a>00131 <span class="stringliteral">&quot;latex&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-latex&quot;</span>, 
-<a name="l00132"></a>00132 <span class="stringliteral">&quot;lha&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-lha&quot;</span>, 
-<a name="l00133"></a>00133 <span class="stringliteral">&quot;lyx&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-lyx&quot;</span>, 
-<a name="l00134"></a>00134 <span class="stringliteral">&quot;lzh&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-lzh&quot;</span>, 
-<a name="l00135"></a>00135 <span class="stringliteral">&quot;lzx&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-lzx&quot;</span>, 
-<a name="l00136"></a>00136 <span class="stringliteral">&quot;frm&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span>, 
-<a name="l00137"></a>00137 <span class="stringliteral">&quot;mif&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-mif&quot;</span>, 
-<a name="l00138"></a>00138 <span class="stringliteral">&quot;wmd&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-ms-wmd&quot;</span>, 
-<a name="l00139"></a>00139 <span class="stringliteral">&quot;wmz&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-ms-wmz&quot;</span>, 
-<a name="l00140"></a>00140 <span class="stringliteral">&quot;com&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-msdos-program&quot;</span>, 
-<a name="l00141"></a>00141 <span class="stringliteral">&quot;msi&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-msi&quot;</span>, 
-<a name="l00142"></a>00142 <span class="stringliteral">&quot;nc&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-netcdf&quot;</span>, 
-<a name="l00143"></a>00143 <span class="stringliteral">&quot;pac&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-ns-proxy-autoconfig&quot;</span>, 
-<a name="l00144"></a>00144 <span class="stringliteral">&quot;nwc&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-nwc&quot;</span>, 
-<a name="l00145"></a>00145 <span class="stringliteral">&quot;o&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-object&quot;</span>, 
-<a name="l00146"></a>00146 <span class="stringliteral">&quot;oza&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-oz-application&quot;</span>, 
-<a name="l00147"></a>00147 <span class="stringliteral">&quot;p7r&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-pkcs7-certreqresp&quot;</span>, 
-<a name="l00148"></a>00148 <span class="stringliteral">&quot;crl&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-pkcs7-crl&quot;</span>, 
-<a name="l00149"></a>00149 <span class="stringliteral">&quot;pyc&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-python-code&quot;</span>, 
-<a name="l00150"></a>00150 <span class="stringliteral">&quot;qtl&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-quicktimeplayer&quot;</span>, 
-<a name="l00151"></a>00151 <span class="stringliteral">&quot;rpm&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-redhat-package-manager&quot;</span>, 
-<a name="l00152"></a>00152 <span class="stringliteral">&quot;sh&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-sh&quot;</span>, 
-<a name="l00153"></a>00153 <span class="stringliteral">&quot;shar&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-shar&quot;</span>, 
-<a name="l00154"></a>00154 <span class="stringliteral">&quot;swf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-shockwave-flash&quot;</span>, 
-<a name="l00155"></a>00155 <span class="stringliteral">&quot;sit&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-stuffit&quot;</span>, 
-<a name="l00156"></a>00156 <span class="stringliteral">&quot;sv4cpio&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-sv4cpio&quot;</span>, 
-<a name="l00157"></a>00157 <span class="stringliteral">&quot;sv4crc&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-sv4crc&quot;</span>, 
-<a name="l00158"></a>00158 <span class="stringliteral">&quot;tar&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-tar&quot;</span>, 
-<a name="l00159"></a>00159 <span class="stringliteral">&quot;tcl&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-tcl&quot;</span>, 
-<a name="l00160"></a>00160 <span class="stringliteral">&quot;gf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-tex-gf&quot;</span>, 
-<a name="l00161"></a>00161 <span class="stringliteral">&quot;pk&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-tex-pk&quot;</span>, 
-<a name="l00162"></a>00162 <span class="stringliteral">&quot;texinfo&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-texinfo&quot;</span>, 
-<a name="l00163"></a>00163 <span class="stringliteral">&quot;~&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-trash&quot;</span>, 
-<a name="l00164"></a>00164 <span class="stringliteral">&quot;t&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-troff&quot;</span>, 
-<a name="l00165"></a>00165 <span class="stringliteral">&quot;man&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-troff-man&quot;</span>, 
-<a name="l00166"></a>00166 <span class="stringliteral">&quot;me&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-troff-me&quot;</span>, 
-<a name="l00167"></a>00167 <span class="stringliteral">&quot;ms&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-troff-ms&quot;</span>, 
-<a name="l00168"></a>00168 <span class="stringliteral">&quot;ustar&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-ustar&quot;</span>, 
-<a name="l00169"></a>00169 <span class="stringliteral">&quot;src&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-wais-source&quot;</span>, 
-<a name="l00170"></a>00170 <span class="stringliteral">&quot;wz&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-wingz&quot;</span>, 
-<a name="l00171"></a>00171 <span class="stringliteral">&quot;crt&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-x509-ca-cert&quot;</span>, 
-<a name="l00172"></a>00172 <span class="stringliteral">&quot;xcf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-xcf&quot;</span>, 
-<a name="l00173"></a>00173 <span class="stringliteral">&quot;fig&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-xfig&quot;</span>, 
-<a name="l00174"></a>00174 <span class="stringliteral">&quot;xpi&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-xpinstall&quot;</span>, 
-<a name="l00175"></a>00175 <span class="stringliteral">&quot;au&quot;</span> =&gt; <span class="stringliteral">&quot;audio/basic&quot;</span>, 
-<a name="l00176"></a>00176 <span class="stringliteral">&quot;mid&quot;</span> =&gt; <span class="stringliteral">&quot;audio/midi&quot;</span>, 
-<a name="l00177"></a>00177 <span class="stringliteral">&quot;mpga&quot;</span> =&gt; <span class="stringliteral">&quot;audio/mpeg&quot;</span>, 
-<a name="l00178"></a>00178 <span class="stringliteral">&quot;m3u&quot;</span> =&gt; <span class="stringliteral">&quot;audio/mpegurl&quot;</span>, 
-<a name="l00179"></a>00179 <span class="stringliteral">&quot;oga&quot;</span> =&gt; <span class="stringliteral">&quot;audio/ogg&quot;</span>, 
-<a name="l00180"></a>00180 <span class="stringliteral">&quot;sid&quot;</span> =&gt; <span class="stringliteral">&quot;audio/prs.sid&quot;</span>, 
-<a name="l00181"></a>00181 <span class="stringliteral">&quot;aif&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-aiff&quot;</span>, 
-<a name="l00182"></a>00182 <span class="stringliteral">&quot;gsm&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-gsm&quot;</span>, 
-<a name="l00183"></a>00183 <span class="stringliteral">&quot;m3u&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-mpegurl&quot;</span>, 
-<a name="l00184"></a>00184 <span class="stringliteral">&quot;wma&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-ms-wma&quot;</span>, 
-<a name="l00185"></a>00185 <span class="stringliteral">&quot;wax&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-ms-wax&quot;</span>, 
-<a name="l00186"></a>00186 <span class="stringliteral">&quot;ra&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-pn-realaudio&quot;</span>, 
-<a name="l00187"></a>00187 <span class="stringliteral">&quot;ra&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-realaudio&quot;</span>, 
-<a name="l00188"></a>00188 <span class="stringliteral">&quot;pls&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-scpls&quot;</span>, 
-<a name="l00189"></a>00189 <span class="stringliteral">&quot;sd2&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-sd2&quot;</span>, 
-<a name="l00190"></a>00190 <span class="stringliteral">&quot;wav&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-wav&quot;</span>, 
-<a name="l00191"></a>00191 <span class="stringliteral">&quot;alc&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-alchemy&quot;</span>, 
-<a name="l00192"></a>00192 <span class="stringliteral">&quot;cac&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cache&quot;</span>, 
-<a name="l00193"></a>00193 <span class="stringliteral">&quot;csf&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cache-csf&quot;</span>, 
-<a name="l00194"></a>00194 <span class="stringliteral">&quot;cbin&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cactvs-binary&quot;</span>, 
-<a name="l00195"></a>00195 <span class="stringliteral">&quot;cdx&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cdx&quot;</span>, 
-<a name="l00196"></a>00196 <span class="stringliteral">&quot;cer&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cerius&quot;</span>, 
-<a name="l00197"></a>00197 <span class="stringliteral">&quot;c3d&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-chem3d&quot;</span>, 
-<a name="l00198"></a>00198 <span class="stringliteral">&quot;chm&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-chemdraw&quot;</span>, 
-<a name="l00199"></a>00199 <span class="stringliteral">&quot;cif&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cif&quot;</span>, 
-<a name="l00200"></a>00200 <span class="stringliteral">&quot;cmdf&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cmdf&quot;</span>, 
-<a name="l00201"></a>00201 <span class="stringliteral">&quot;cml&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cml&quot;</span>, 
-<a name="l00202"></a>00202 <span class="stringliteral">&quot;cpa&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-compass&quot;</span>, 
-<a name="l00203"></a>00203 <span class="stringliteral">&quot;bsd&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-crossfire&quot;</span>, 
-<a name="l00204"></a>00204 <span class="stringliteral">&quot;csml&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-csml&quot;</span>, 
-<a name="l00205"></a>00205 <span class="stringliteral">&quot;ctx&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ctx&quot;</span>, 
-<a name="l00206"></a>00206 <span class="stringliteral">&quot;cxf&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cxf&quot;</span>, 
-<a name="l00207"></a>00207 <span class="stringliteral">&quot;emb&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-embl-dl-nucleotide&quot;</span>, 
-<a name="l00208"></a>00208 <span class="stringliteral">&quot;spc&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-galactic-spc&quot;</span>, 
-<a name="l00209"></a>00209 <span class="stringliteral">&quot;inp&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gamess-input&quot;</span>, 
-<a name="l00210"></a>00210 <span class="stringliteral">&quot;fch&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-checkpoint&quot;</span>, 
-<a name="l00211"></a>00211 <span class="stringliteral">&quot;cub&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-cube&quot;</span>, 
-<a name="l00212"></a>00212 <span class="stringliteral">&quot;gau&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-input&quot;</span>, 
-<a name="l00213"></a>00213 <span class="stringliteral">&quot;gal&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-log&quot;</span>, 
-<a name="l00214"></a>00214 <span class="stringliteral">&quot;gcg&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gcg8-sequence&quot;</span>, 
-<a name="l00215"></a>00215 <span class="stringliteral">&quot;gen&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-genbank&quot;</span>, 
-<a name="l00216"></a>00216 <span class="stringliteral">&quot;hin&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-hin&quot;</span>, 
-<a name="l00217"></a>00217 <span class="stringliteral">&quot;istr&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-isostar&quot;</span>, 
-<a name="l00218"></a>00218 <span class="stringliteral">&quot;jdx&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-jcamp-dx&quot;</span>, 
-<a name="l00219"></a>00219 <span class="stringliteral">&quot;kin&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-kinemage&quot;</span>, 
-<a name="l00220"></a>00220 <span class="stringliteral">&quot;mcm&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-macmolecule&quot;</span>, 
-<a name="l00221"></a>00221 <span class="stringliteral">&quot;mmd&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-macromodel-input&quot;</span>, 
-<a name="l00222"></a>00222 <span class="stringliteral">&quot;mol&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mdl-molfile&quot;</span>, 
-<a name="l00223"></a>00223 <span class="stringliteral">&quot;rd&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mdl-rdfile&quot;</span>, 
-<a name="l00224"></a>00224 <span class="stringliteral">&quot;rxn&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mdl-rxnfile&quot;</span>, 
-<a name="l00225"></a>00225 <span class="stringliteral">&quot;sd&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mdl-sdfile&quot;</span>, 
-<a name="l00226"></a>00226 <span class="stringliteral">&quot;tgf&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mdl-tgf&quot;</span>, 
-<a name="l00227"></a>00227 <span class="stringliteral">&quot;mcif&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mmcif&quot;</span>, 
-<a name="l00228"></a>00228 <span class="stringliteral">&quot;mol2&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mol2&quot;</span>, 
-<a name="l00229"></a>00229 <span class="stringliteral">&quot;b&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-molconn-Z&quot;</span>, 
-<a name="l00230"></a>00230 <span class="stringliteral">&quot;gpt&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-graph&quot;</span>, 
-<a name="l00231"></a>00231 <span class="stringliteral">&quot;mop&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-input&quot;</span>, 
-<a name="l00232"></a>00232 <span class="stringliteral">&quot;moo&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-out&quot;</span>, 
-<a name="l00233"></a>00233 <span class="stringliteral">&quot;mvb&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-vib&quot;</span>, 
-<a name="l00234"></a>00234 <span class="stringliteral">&quot;asn&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ncbi-asn1&quot;</span>, 
-<a name="l00235"></a>00235 <span class="stringliteral">&quot;prt&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ncbi-asn1-ascii&quot;</span>, 
-<a name="l00236"></a>00236 <span class="stringliteral">&quot;val&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ncbi-asn1-binary&quot;</span>, 
-<a name="l00237"></a>00237 <span class="stringliteral">&quot;asn&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ncbi-asn1-spec&quot;</span>, 
-<a name="l00238"></a>00238 <span class="stringliteral">&quot;pdb&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-pdb&quot;</span>, 
-<a name="l00239"></a>00239 <span class="stringliteral">&quot;ros&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-rosdal&quot;</span>, 
-<a name="l00240"></a>00240 <span class="stringliteral">&quot;sw&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-swissprot&quot;</span>, 
-<a name="l00241"></a>00241 <span class="stringliteral">&quot;vms&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-vamas-iso14976&quot;</span>, 
-<a name="l00242"></a>00242 <span class="stringliteral">&quot;vmd&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-vmd&quot;</span>, 
-<a name="l00243"></a>00243 <span class="stringliteral">&quot;xtel&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-xtel&quot;</span>, 
-<a name="l00244"></a>00244 <span class="stringliteral">&quot;xyz&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-xyz&quot;</span>, 
-<a name="l00245"></a>00245 <span class="stringliteral">&quot;gif&quot;</span> =&gt; <span class="stringliteral">&quot;image/gif&quot;</span>, 
-<a name="l00246"></a>00246 <span class="stringliteral">&quot;ief&quot;</span> =&gt; <span class="stringliteral">&quot;image/ief&quot;</span>, 
-<a name="l00247"></a>00247 <span class="stringliteral">&quot;jpeg&quot;</span> =&gt; <span class="stringliteral">&quot;image/jpeg&quot;</span>, 
-<a name="l00248"></a>00248 <span class="stringliteral">&quot;pcx&quot;</span> =&gt; <span class="stringliteral">&quot;image/pcx&quot;</span>, 
-<a name="l00249"></a>00249 <span class="stringliteral">&quot;png&quot;</span> =&gt; <span class="stringliteral">&quot;image/png&quot;</span>, 
-<a name="l00250"></a>00250 <span class="stringliteral">&quot;svg&quot;</span> =&gt; <span class="stringliteral">&quot;image/svg+xml&quot;</span>, 
-<a name="l00251"></a>00251 <span class="stringliteral">&quot;tiff&quot;</span> =&gt; <span class="stringliteral">&quot;image/tiff&quot;</span>, 
-<a name="l00252"></a>00252 <span class="stringliteral">&quot;djvu&quot;</span> =&gt; <span class="stringliteral">&quot;image/vnd.djvu&quot;</span>, 
-<a name="l00253"></a>00253 <span class="stringliteral">&quot;wbmp&quot;</span> =&gt; <span class="stringliteral">&quot;image/vnd.wap.wbmp&quot;</span>, 
-<a name="l00254"></a>00254 <span class="stringliteral">&quot;ras&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-cmu-raster&quot;</span>, 
-<a name="l00255"></a>00255 <span class="stringliteral">&quot;cdr&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-coreldraw&quot;</span>, 
-<a name="l00256"></a>00256 <span class="stringliteral">&quot;pat&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-coreldrawpattern&quot;</span>, 
-<a name="l00257"></a>00257 <span class="stringliteral">&quot;cdt&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-coreldrawtemplate&quot;</span>, 
-<a name="l00258"></a>00258 <span class="stringliteral">&quot;cpt&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-corelphotopaint&quot;</span>, 
-<a name="l00259"></a>00259 <span class="stringliteral">&quot;ico&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-icon&quot;</span>, 
-<a name="l00260"></a>00260 <span class="stringliteral">&quot;art&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-jg&quot;</span>, 
-<a name="l00261"></a>00261 <span class="stringliteral">&quot;jng&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-jng&quot;</span>, 
-<a name="l00262"></a>00262 <span class="stringliteral">&quot;bmp&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-ms-bmp&quot;</span>, 
-<a name="l00263"></a>00263 <span class="stringliteral">&quot;psd&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-photoshop&quot;</span>, 
-<a name="l00264"></a>00264 <span class="stringliteral">&quot;pnm&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-portable-anymap&quot;</span>, 
-<a name="l00265"></a>00265 <span class="stringliteral">&quot;pbm&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-portable-bitmap&quot;</span>, 
-<a name="l00266"></a>00266 <span class="stringliteral">&quot;pgm&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-portable-graymap&quot;</span>, 
-<a name="l00267"></a>00267 <span class="stringliteral">&quot;ppm&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-portable-pixmap&quot;</span>, 
-<a name="l00268"></a>00268 <span class="stringliteral">&quot;rgb&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-rgb&quot;</span>, 
-<a name="l00269"></a>00269 <span class="stringliteral">&quot;xbm&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-xbitmap&quot;</span>, 
-<a name="l00270"></a>00270 <span class="stringliteral">&quot;xpm&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-xpixmap&quot;</span>, 
-<a name="l00271"></a>00271 <span class="stringliteral">&quot;xwd&quot;</span> =&gt; <span class="stringliteral">&quot;image/x-xwindowdump&quot;</span>, 
-<a name="l00272"></a>00272 <span class="stringliteral">&quot;eml&quot;</span> =&gt; <span class="stringliteral">&quot;message/rfc822&quot;</span>, 
-<a name="l00273"></a>00273 <span class="stringliteral">&quot;igs&quot;</span> =&gt; <span class="stringliteral">&quot;model/iges&quot;</span>, 
-<a name="l00274"></a>00274 <span class="stringliteral">&quot;msh&quot;</span> =&gt; <span class="stringliteral">&quot;model/mesh&quot;</span>, 
-<a name="l00275"></a>00275 <span class="stringliteral">&quot;wrl&quot;</span> =&gt; <span class="stringliteral">&quot;model/vrml&quot;</span>, 
-<a name="l00276"></a>00276 <span class="stringliteral">&quot;ics&quot;</span> =&gt; <span class="stringliteral">&quot;text/calendar&quot;</span>, 
-<a name="l00277"></a>00277 <span class="stringliteral">&quot;css&quot;</span> =&gt; <span class="stringliteral">&quot;text/css&quot;</span>, 
-<a name="l00278"></a>00278 <span class="stringliteral">&quot;csv&quot;</span> =&gt; <span class="stringliteral">&quot;text/csv&quot;</span>, 
-<a name="l00279"></a>00279 <span class="stringliteral">&quot;323&quot;</span> =&gt; <span class="stringliteral">&quot;text/h323&quot;</span>, 
-<a name="l00280"></a>00280 <span class="stringliteral">&quot;html&quot;</span> =&gt; <span class="stringliteral">&quot;text/html&quot;</span>, 
-<a name="l00281"></a>00281 <span class="stringliteral">&quot;uls&quot;</span> =&gt; <span class="stringliteral">&quot;text/iuls&quot;</span>, 
-<a name="l00282"></a>00282 <span class="stringliteral">&quot;mml&quot;</span> =&gt; <span class="stringliteral">&quot;text/mathml&quot;</span>, 
-<a name="l00283"></a>00283 <span class="stringliteral">&quot;asc&quot;</span> =&gt; <span class="stringliteral">&quot;text/plain&quot;</span>, 
-<a name="l00284"></a>00284 <span class="stringliteral">&quot;rtx&quot;</span> =&gt; <span class="stringliteral">&quot;text/richtext&quot;</span>, 
-<a name="l00285"></a>00285 <span class="stringliteral">&quot;sct&quot;</span> =&gt; <span class="stringliteral">&quot;text/scriptlet&quot;</span>, 
-<a name="l00286"></a>00286 <span class="stringliteral">&quot;tm&quot;</span> =&gt; <span class="stringliteral">&quot;text/texmacs&quot;</span>, 
-<a name="l00287"></a>00287 <span class="stringliteral">&quot;tsv&quot;</span> =&gt; <span class="stringliteral">&quot;text/tab-separated-values&quot;</span>, 
-<a name="l00288"></a>00288 <span class="stringliteral">&quot;jad&quot;</span> =&gt; <span class="stringliteral">&quot;text/vnd.sun.j2me.app-descriptor&quot;</span>, 
-<a name="l00289"></a>00289 <span class="stringliteral">&quot;wml&quot;</span> =&gt; <span class="stringliteral">&quot;text/vnd.wap.wml&quot;</span>, 
-<a name="l00290"></a>00290 <span class="stringliteral">&quot;wmls&quot;</span> =&gt; <span class="stringliteral">&quot;text/vnd.wap.wmlscript&quot;</span>, 
-<a name="l00291"></a>00291 <span class="stringliteral">&quot;bib&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-bibtex&quot;</span>, 
-<a name="l00292"></a>00292 <span class="stringliteral">&quot;boo&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-boo&quot;</span>, 
-<a name="l00293"></a>00293 <span class="stringliteral">&quot;h++&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++hdr&quot;</span>, 
-<a name="l00294"></a>00294 <span class="stringliteral">&quot;c++&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++src&quot;</span>, 
-<a name="l00295"></a>00295 <span class="stringliteral">&quot;h&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-chdr&quot;</span>, 
-<a name="l00296"></a>00296 <span class="stringliteral">&quot;htc&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-component&quot;</span>, 
-<a name="l00297"></a>00297 <span class="stringliteral">&quot;csh&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-csh&quot;</span>, 
-<a name="l00298"></a>00298 <span class="stringliteral">&quot;c&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-csrc&quot;</span>, 
-<a name="l00299"></a>00299 <span class="stringliteral">&quot;d&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-dsrc&quot;</span>, 
-<a name="l00300"></a>00300 <span class="stringliteral">&quot;diff&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-diff&quot;</span>, 
-<a name="l00301"></a>00301 <span class="stringliteral">&quot;hs&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-haskell&quot;</span>, 
-<a name="l00302"></a>00302 <span class="stringliteral">&quot;java&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-java&quot;</span>, 
-<a name="l00303"></a>00303 <span class="stringliteral">&quot;lhs&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-literate-haskell&quot;</span>, 
-<a name="l00304"></a>00304 <span class="stringliteral">&quot;moc&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-moc&quot;</span>, 
-<a name="l00305"></a>00305 <span class="stringliteral">&quot;p&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-pascal&quot;</span>, 
-<a name="l00306"></a>00306 <span class="stringliteral">&quot;gcd&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-pcs-gcd&quot;</span>, 
-<a name="l00307"></a>00307 <span class="stringliteral">&quot;pl&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-perl&quot;</span>, 
-<a name="l00308"></a>00308 <span class="stringliteral">&quot;py&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-python&quot;</span>, 
-<a name="l00309"></a>00309 <span class="stringliteral">&quot;etx&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-setext&quot;</span>, 
-<a name="l00310"></a>00310 <span class="stringliteral">&quot;sh&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-sh&quot;</span>, 
-<a name="l00311"></a>00311 <span class="stringliteral">&quot;tcl&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-tcl&quot;</span>, 
-<a name="l00312"></a>00312 <span class="stringliteral">&quot;tex&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-tex&quot;</span>, 
-<a name="l00313"></a>00313 <span class="stringliteral">&quot;vcs&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-vcalendar&quot;</span>, 
-<a name="l00314"></a>00314 <span class="stringliteral">&quot;vcf&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-vcard&quot;</span>, 
-<a name="l00315"></a>00315 <span class="stringliteral">&quot;3gp&quot;</span> =&gt; <span class="stringliteral">&quot;video/3gpp&quot;</span>, 
-<a name="l00316"></a>00316 <span class="stringliteral">&quot;dl&quot;</span> =&gt; <span class="stringliteral">&quot;video/dl&quot;</span>, 
-<a name="l00317"></a>00317 <span class="stringliteral">&quot;dif&quot;</span> =&gt; <span class="stringliteral">&quot;video/dv&quot;</span>, 
-<a name="l00318"></a>00318 <span class="stringliteral">&quot;fli&quot;</span> =&gt; <span class="stringliteral">&quot;video/fli&quot;</span>, 
-<a name="l00319"></a>00319 <span class="stringliteral">&quot;gl&quot;</span> =&gt; <span class="stringliteral">&quot;video/gl&quot;</span>, 
-<a name="l00320"></a>00320 <span class="stringliteral">&quot;mpeg&quot;</span> =&gt; <span class="stringliteral">&quot;video/mpeg&quot;</span>, 
-<a name="l00321"></a>00321 <span class="stringliteral">&quot;mp4&quot;</span> =&gt; <span class="stringliteral">&quot;video/mp4&quot;</span>, 
-<a name="l00322"></a>00322 <span class="stringliteral">&quot;ogv&quot;</span> =&gt; <span class="stringliteral">&quot;video/ogg&quot;</span>, 
-<a name="l00323"></a>00323 <span class="stringliteral">&quot;qt&quot;</span> =&gt; <span class="stringliteral">&quot;video/quicktime&quot;</span>, 
-<a name="l00324"></a>00324 <span class="stringliteral">&quot;mxu&quot;</span> =&gt; <span class="stringliteral">&quot;video/vnd.mpegurl&quot;</span>, 
-<a name="l00325"></a>00325 <span class="stringliteral">&quot;lsf&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-la-asf&quot;</span>, 
-<a name="l00326"></a>00326 <span class="stringliteral">&quot;mng&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-mng&quot;</span>, 
-<a name="l00327"></a>00327 <span class="stringliteral">&quot;asf&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-ms-asf&quot;</span>, 
-<a name="l00328"></a>00328 <span class="stringliteral">&quot;wm&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-ms-wm&quot;</span>, 
-<a name="l00329"></a>00329 <span class="stringliteral">&quot;wmv&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-ms-wmv&quot;</span>, 
-<a name="l00330"></a>00330 <span class="stringliteral">&quot;wmx&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-ms-wmx&quot;</span>, 
-<a name="l00331"></a>00331 <span class="stringliteral">&quot;wvx&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-ms-wvx&quot;</span>, 
-<a name="l00332"></a>00332 <span class="stringliteral">&quot;avi&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-msvideo&quot;</span>, 
-<a name="l00333"></a>00333 <span class="stringliteral">&quot;movie&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-sgi-movie&quot;</span>, 
-<a name="l00334"></a>00334 <span class="stringliteral">&quot;ice&quot;</span> =&gt; <span class="stringliteral">&quot;x-conference/x-cooltalk&quot;</span>, 
-<a name="l00335"></a>00335 <span class="stringliteral">&quot;sisx&quot;</span> =&gt; <span class="stringliteral">&quot;x-epoc/x-sisx-app&quot;</span>, 
-<a name="l00336"></a>00336 <span class="stringliteral">&quot;vrm&quot;</span> =&gt; <span class="stringliteral">&quot;x-world/x-vrml&quot;</span>, 
-<a name="l00337"></a>00337 <span class="stringliteral">&quot;pcap&quot;</span> =&gt; <span class="stringliteral">&quot;application/cap&quot;</span>, 
-<a name="l00338"></a>00338 <span class="stringliteral">&quot;dot&quot;</span> =&gt; <span class="stringliteral">&quot;application/msword&quot;</span>, 
-<a name="l00339"></a>00339 <span class="stringliteral">&quot;ogx&quot;</span> =&gt; <span class="stringliteral">&quot;application/ogg&quot;</span>, 
-<a name="l00340"></a>00340 <span class="stringliteral">&quot;ai&quot;</span> =&gt; <span class="stringliteral">&quot;application/postscript&quot;</span>, 
-<a name="l00341"></a>00341 <span class="stringliteral">&quot;smil&quot;</span> =&gt; <span class="stringliteral">&quot;application/smil&quot;</span>, 
-<a name="l00342"></a>00342 <span class="stringliteral">&quot;xht&quot;</span> =&gt; <span class="stringliteral">&quot;application/xhtml+xml&quot;</span>, 
-<a name="l00343"></a>00343 <span class="stringliteral">&quot;xsl&quot;</span> =&gt; <span class="stringliteral">&quot;application/xml&quot;</span>, 
-<a name="l00344"></a>00344 <span class="stringliteral">&quot;xlb&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-excel&quot;</span>, 
-<a name="l00345"></a>00345 <span class="stringliteral">&quot;pps&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-powerpoint&quot;</span>, 
-<a name="l00346"></a>00346 <span class="stringliteral">&quot;udeb&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-debian-package&quot;</span>, 
-<a name="l00347"></a>00347 <span class="stringliteral">&quot;dir&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-director&quot;</span>, 
-<a name="l00348"></a>00348 <span class="stringliteral">&quot;pfb&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-font&quot;</span>, 
-<a name="l00349"></a>00349 <span class="stringliteral">&quot;tgz&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-gtar&quot;</span>, 
-<a name="l00350"></a>00350 <span class="stringliteral">&quot;pht&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php&quot;</span>, 
-<a name="l00351"></a>00351 <span class="stringliteral">&quot;isp&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-internet-signup&quot;</span>, 
-<a name="l00352"></a>00352 <span class="stringliteral">&quot;skd&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-koan&quot;</span>, 
-<a name="l00353"></a>00353 <span class="stringliteral">&quot;kpt&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-kpresenter&quot;</span>, 
-<a name="l00354"></a>00354 <span class="stringliteral">&quot;kwt&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-kword&quot;</span>, 
-<a name="l00355"></a>00355 <span class="stringliteral">&quot;maker&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span>, 
-<a name="l00356"></a>00356 <span class="stringliteral">&quot;exe&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-msdos-program&quot;</span>, 
-<a name="l00357"></a>00357 <span class="stringliteral">&quot;pyo&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-python-code&quot;</span>, 
-<a name="l00358"></a>00358 <span class="stringliteral">&quot;swfl&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-shockwave-flash&quot;</span>, 
-<a name="l00359"></a>00359 <span class="stringliteral">&quot;sitx&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-stuffit&quot;</span>, 
-<a name="l00360"></a>00360 <span class="stringliteral">&quot;texi&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-texinfo&quot;</span>, 
-<a name="l00361"></a>00361 <span class="stringliteral">&quot;%&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-trash&quot;</span>, 
-<a name="l00362"></a>00362 <span class="stringliteral">&quot;tr&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-troff&quot;</span>, 
-<a name="l00363"></a>00363 <span class="stringliteral">&quot;snd&quot;</span> =&gt; <span class="stringliteral">&quot;audio/basic&quot;</span>, 
-<a name="l00364"></a>00364 <span class="stringliteral">&quot;midi&quot;</span> =&gt; <span class="stringliteral">&quot;audio/midi&quot;</span>, 
-<a name="l00365"></a>00365 <span class="stringliteral">&quot;mpega&quot;</span> =&gt; <span class="stringliteral">&quot;audio/mpeg&quot;</span>, 
-<a name="l00366"></a>00366 <span class="stringliteral">&quot;spx&quot;</span> =&gt; <span class="stringliteral">&quot;audio/ogg&quot;</span>, 
-<a name="l00367"></a>00367 <span class="stringliteral">&quot;aiff&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-aiff&quot;</span>, 
-<a name="l00368"></a>00368 <span class="stringliteral">&quot;rm&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-pn-realaudio&quot;</span>, 
-<a name="l00369"></a>00369 <span class="stringliteral">&quot;cache&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cache&quot;</span>, 
-<a name="l00370"></a>00370 <span class="stringliteral">&quot;cascii&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cactvs-binary&quot;</span>, 
-<a name="l00371"></a>00371 <span class="stringliteral">&quot;csm&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-csml&quot;</span>, 
-<a name="l00372"></a>00372 <span class="stringliteral">&quot;cef&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cxf&quot;</span>, 
-<a name="l00373"></a>00373 <span class="stringliteral">&quot;embl&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-embl-dl-nucleotide&quot;</span>, 
-<a name="l00374"></a>00374 <span class="stringliteral">&quot;gam&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gamess-input&quot;</span>, 
-<a name="l00375"></a>00375 <span class="stringliteral">&quot;fchk&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-checkpoint&quot;</span>, 
-<a name="l00376"></a>00376 <span class="stringliteral">&quot;gjc&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-input&quot;</span>, 
-<a name="l00377"></a>00377 <span class="stringliteral">&quot;ist&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-isostar&quot;</span>, 
-<a name="l00378"></a>00378 <span class="stringliteral">&quot;dx&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-jcamp-dx&quot;</span>, 
-<a name="l00379"></a>00379 <span class="stringliteral">&quot;mmod&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-macromodel-input&quot;</span>, 
-<a name="l00380"></a>00380 <span class="stringliteral">&quot;sdf&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mdl-sdfile&quot;</span>, 
-<a name="l00381"></a>00381 <span class="stringliteral">&quot;mopcrt&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-input&quot;</span>, 
-<a name="l00382"></a>00382 <span class="stringliteral">&quot;ent&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ncbi-asn1-ascii&quot;</span>, 
-<a name="l00383"></a>00383 <span class="stringliteral">&quot;aso&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-ncbi-asn1-binary&quot;</span>, 
-<a name="l00384"></a>00384 <span class="stringliteral">&quot;ent&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-pdb&quot;</span>, 
-<a name="l00385"></a>00385 <span class="stringliteral">&quot;jpg&quot;</span> =&gt; <span class="stringliteral">&quot;image/jpeg&quot;</span>, 
-<a name="l00386"></a>00386 <span class="stringliteral">&quot;svgz&quot;</span> =&gt; <span class="stringliteral">&quot;image/svg+xml&quot;</span>, 
-<a name="l00387"></a>00387 <span class="stringliteral">&quot;tif&quot;</span> =&gt; <span class="stringliteral">&quot;image/tiff&quot;</span>, 
-<a name="l00388"></a>00388 <span class="stringliteral">&quot;djv&quot;</span> =&gt; <span class="stringliteral">&quot;image/vnd.djvu&quot;</span>, 
-<a name="l00389"></a>00389 <span class="stringliteral">&quot;iges&quot;</span> =&gt; <span class="stringliteral">&quot;model/iges&quot;</span>, 
-<a name="l00390"></a>00390 <span class="stringliteral">&quot;mesh&quot;</span> =&gt; <span class="stringliteral">&quot;model/mesh&quot;</span>, 
-<a name="l00391"></a>00391 <span class="stringliteral">&quot;vrml&quot;</span> =&gt; <span class="stringliteral">&quot;model/vrml&quot;</span>, 
-<a name="l00392"></a>00392 <span class="stringliteral">&quot;icz&quot;</span> =&gt; <span class="stringliteral">&quot;text/calendar&quot;</span>, 
-<a name="l00393"></a>00393 <span class="stringliteral">&quot;htm&quot;</span> =&gt; <span class="stringliteral">&quot;text/html&quot;</span>, 
-<a name="l00394"></a>00394 <span class="stringliteral">&quot;txt&quot;</span> =&gt; <span class="stringliteral">&quot;text/plain&quot;</span>, 
-<a name="l00395"></a>00395 <span class="stringliteral">&quot;wsc&quot;</span> =&gt; <span class="stringliteral">&quot;text/scriptlet&quot;</span>, 
-<a name="l00396"></a>00396 <span class="stringliteral">&quot;ts&quot;</span> =&gt; <span class="stringliteral">&quot;text/texmacs&quot;</span>, 
-<a name="l00397"></a>00397 <span class="stringliteral">&quot;hpp&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++hdr&quot;</span>, 
-<a name="l00398"></a>00398 <span class="stringliteral">&quot;cpp&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++src&quot;</span>, 
-<a name="l00399"></a>00399 <span class="stringliteral">&quot;patch&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-diff&quot;</span>, 
-<a name="l00400"></a>00400 <span class="stringliteral">&quot;pas&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-pascal&quot;</span>, 
-<a name="l00401"></a>00401 <span class="stringliteral">&quot;pm&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-perl&quot;</span>, 
-<a name="l00402"></a>00402 <span class="stringliteral">&quot;tk&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-tcl&quot;</span>, 
-<a name="l00403"></a>00403 <span class="stringliteral">&quot;ltx&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-tex&quot;</span>, 
-<a name="l00404"></a>00404 <span class="stringliteral">&quot;dv&quot;</span> =&gt; <span class="stringliteral">&quot;video/dv&quot;</span>, 
-<a name="l00405"></a>00405 <span class="stringliteral">&quot;mpg&quot;</span> =&gt; <span class="stringliteral">&quot;video/mpeg&quot;</span>, 
-<a name="l00406"></a>00406 <span class="stringliteral">&quot;mov&quot;</span> =&gt; <span class="stringliteral">&quot;video/quicktime&quot;</span>, 
-<a name="l00407"></a>00407 <span class="stringliteral">&quot;lsx&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-la-asf&quot;</span>, 
-<a name="l00408"></a>00408 <span class="stringliteral">&quot;asx&quot;</span> =&gt; <span class="stringliteral">&quot;video/x-ms-asf&quot;</span>, 
-<a name="l00409"></a>00409 <span class="stringliteral">&quot;vrml&quot;</span> =&gt; <span class="stringliteral">&quot;x-world/x-vrml&quot;</span>, 
-<a name="l00410"></a>00410 <span class="stringliteral">&quot;eps&quot;</span> =&gt; <span class="stringliteral">&quot;application/postscript&quot;</span>, 
-<a name="l00411"></a>00411 <span class="stringliteral">&quot;xlt&quot;</span> =&gt; <span class="stringliteral">&quot;application/vnd.ms-excel&quot;</span>, 
-<a name="l00412"></a>00412 <span class="stringliteral">&quot;dxr&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-director&quot;</span>, 
-<a name="l00413"></a>00413 <span class="stringliteral">&quot;gsf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-font&quot;</span>, 
-<a name="l00414"></a>00414 <span class="stringliteral">&quot;taz&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-gtar&quot;</span>, 
-<a name="l00415"></a>00415 <span class="stringliteral">&quot;php&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-httpd-php&quot;</span>, 
-<a name="l00416"></a>00416 <span class="stringliteral">&quot;skt&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-koan&quot;</span>, 
-<a name="l00417"></a>00417 <span class="stringliteral">&quot;frame&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span>, 
-<a name="l00418"></a>00418 <span class="stringliteral">&quot;bat&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-msdos-program&quot;</span>, 
-<a name="l00419"></a>00419 <span class="stringliteral">&quot;bak&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-trash&quot;</span>, 
-<a name="l00420"></a>00420 <span class="stringliteral">&quot;roff&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-troff&quot;</span>, 
-<a name="l00421"></a>00421 <span class="stringliteral">&quot;kar&quot;</span> =&gt; <span class="stringliteral">&quot;audio/midi&quot;</span>, 
-<a name="l00422"></a>00422 <span class="stringliteral">&quot;mp2&quot;</span> =&gt; <span class="stringliteral">&quot;audio/mpeg&quot;</span>, 
-<a name="l00423"></a>00423 <span class="stringliteral">&quot;aifc&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-aiff&quot;</span>, 
-<a name="l00424"></a>00424 <span class="stringliteral">&quot;ram&quot;</span> =&gt; <span class="stringliteral">&quot;audio/x-pn-realaudio&quot;</span>, 
-<a name="l00425"></a>00425 <span class="stringliteral">&quot;ctab&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-cactvs-binary&quot;</span>, 
-<a name="l00426"></a>00426 <span class="stringliteral">&quot;gamin&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gamess-input&quot;</span>, 
-<a name="l00427"></a>00427 <span class="stringliteral">&quot;gjf&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-gaussian-input&quot;</span>, 
-<a name="l00428"></a>00428 <span class="stringliteral">&quot;mpc&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-input&quot;</span>, 
-<a name="l00429"></a>00429 <span class="stringliteral">&quot;jpe&quot;</span> =&gt; <span class="stringliteral">&quot;image/jpeg&quot;</span>, 
-<a name="l00430"></a>00430 <span class="stringliteral">&quot;silo&quot;</span> =&gt; <span class="stringliteral">&quot;model/mesh&quot;</span>, 
-<a name="l00431"></a>00431 <span class="stringliteral">&quot;shtml&quot;</span> =&gt; <span class="stringliteral">&quot;text/html&quot;</span>, 
-<a name="l00432"></a>00432 <span class="stringliteral">&quot;text&quot;</span> =&gt; <span class="stringliteral">&quot;text/plain&quot;</span>, 
-<a name="l00433"></a>00433 <span class="stringliteral">&quot;hxx&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++hdr&quot;</span>, 
-<a name="l00434"></a>00434 <span class="stringliteral">&quot;cxx&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++src&quot;</span>, 
-<a name="l00435"></a>00435 <span class="stringliteral">&quot;sty&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-tex&quot;</span>, 
-<a name="l00436"></a>00436 <span class="stringliteral">&quot;mpe&quot;</span> =&gt; <span class="stringliteral">&quot;video/mpeg&quot;</span>, 
-<a name="l00437"></a>00437 <span class="stringliteral">&quot;wrl&quot;</span> =&gt; <span class="stringliteral">&quot;x-world/x-vrml&quot;</span>, 
-<a name="l00438"></a>00438 <span class="stringliteral">&quot;pcf&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-font&quot;</span>, 
-<a name="l00439"></a>00439 <span class="stringliteral">&quot;skm&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-koan&quot;</span>, 
-<a name="l00440"></a>00440 <span class="stringliteral">&quot;fm&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span>, 
-<a name="l00441"></a>00441 <span class="stringliteral">&quot;dll&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-msdos-program&quot;</span>, 
-<a name="l00442"></a>00442 <span class="stringliteral">&quot;old&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-trash&quot;</span>, 
-<a name="l00443"></a>00443 <span class="stringliteral">&quot;mp3&quot;</span> =&gt; <span class="stringliteral">&quot;audio/mpeg&quot;</span>, 
-<a name="l00444"></a>00444 <span class="stringliteral">&quot;dat&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-input&quot;</span>, 
-<a name="l00445"></a>00445 <span class="stringliteral">&quot;pot&quot;</span> =&gt; <span class="stringliteral">&quot;text/plain&quot;</span>, 
-<a name="l00446"></a>00446 <span class="stringliteral">&quot;hh&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++hdr&quot;</span>, 
-<a name="l00447"></a>00447 <span class="stringliteral">&quot;cc&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-c++src&quot;</span>, 
-<a name="l00448"></a>00448 <span class="stringliteral">&quot;cls&quot;</span> =&gt; <span class="stringliteral">&quot;text/x-tex&quot;</span>, 
-<a name="l00449"></a>00449 <span class="stringliteral">&quot;pcf.Z&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-font&quot;</span>, 
-<a name="l00450"></a>00450 <span class="stringliteral">&quot;fb&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span>, 
-<a name="l00451"></a>00451 <span class="stringliteral">&quot;sik&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-trash&quot;</span>, 
-<a name="l00452"></a>00452 <span class="stringliteral">&quot;m4a&quot;</span> =&gt; <span class="stringliteral">&quot;audio/mpeg&quot;</span>, 
-<a name="l00453"></a>00453 <span class="stringliteral">&quot;zmt&quot;</span> =&gt; <span class="stringliteral">&quot;chemical/x-mopac-input&quot;</span>, 
-<a name="l00454"></a>00454 <span class="stringliteral">&quot;book&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span>, 
-<a name="l00455"></a>00455 <span class="stringliteral">&quot;fbdoc&quot;</span> =&gt; <span class="stringliteral">&quot;application/x-maker&quot;</span> 
-<a name="l00456"></a>00456 );
-<a name="l00457"></a>00457 ?&gt;
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/**</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file      Idiomas.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Módulo para la manipulación de literales</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> * Created    13/11/09</span>
+<a name="l00011"></a>00011 <span class="comment"> * Revision   SVN $Id: Idiomas.php 469 2011-02-04 07:56:07Z eduardo $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2009, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/gcm/lib/helpers.php&#39;</span>);
+<a name="l00019"></a>00019 <span class="comment"></span>
+<a name="l00020"></a>00020 <span class="comment">/** Idiomas</span>
+<a name="l00021"></a>00021 <span class="comment"> * para la administración de los idiomas</span>
+<a name="l00022"></a>00022 <span class="comment"> *</span>
+<a name="l00023"></a>00023 <span class="comment"> * Se presentan los idiomas disponobles, se puede cambiar la imagen correspondiente</span>
+<a name="l00024"></a>00024 <span class="comment"> * a cada idioma y eliminar un idioma, en tal caso se debe presentar las carpetas</span>
+<a name="l00025"></a>00025 <span class="comment"> * que continen el contenido perteneciente a ese idioma y confirmar el borrado del mismo.</span>
+<a name="l00026"></a>00026 <span class="comment"> *</span>
+<a name="l00027"></a>00027 <span class="comment"> * Se crea un select con los idiomas disponibles y se da la posibilidad de cambiar</span>
+<a name="l00028"></a>00028 <span class="comment"> *</span>
+<a name="l00029"></a>00029 <span class="comment"> * Se presenta formulario para la entrada de un nuevo idioma, en tal caso:</span>
+<a name="l00030"></a>00030 <span class="comment"> *</span>
+<a name="l00031"></a>00031 <span class="comment"> * - se creara una nueva carpeta en el directorio Files con el codigo del idioma y en copiasSeguridad </span>
+<a name="l00032"></a>00032 <span class="comment"> * - se añade el literal del nuevo idioma en DATOS/idiomas/idiomas.php</span>
+<a name="l00033"></a>00033 <span class="comment"> * - se crear archivo de literales LG_&lt;idioma&gt;.php</span>
+<a name="l00034"></a>00034 <span class="comment"> * - se añade imagen al directorio.</span>
+<a name="l00035"></a>00035 <span class="comment"> *</span>
+<a name="l00036"></a>00036 <span class="comment"> * @author Eduardo Magrané</span>
+<a name="l00037"></a>00037 <span class="comment"> *</span>
+<a name="l00038"></a>00038 <span class="comment"> */</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a><a class="code" href="../../d3/de7/a00039.html">00040</a> <span class="keyword">class </span><a class="code" href="../../d3/de7/a00039.html" title="Idiomas para la administración de los idiomas.">IdiomasCore</a> {
+<a name="l00041"></a>00041 <span class="comment"></span>
+<a name="l00042"></a>00042 <span class="comment">   /**</span>
+<a name="l00043"></a>00043 <span class="comment">    * Definir el nombre del proyecto nos permite guardar el idioma</span>
+<a name="l00044"></a>00044 <span class="comment">    * actual del usuario en sesión y poder trabajar con diferentes</span>
+<a name="l00045"></a>00045 <span class="comment">    * proyectos sin que se chafen unos a otros.</span>
+<a name="l00046"></a>00046 <span class="comment">    */</span>
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048    <span class="keyword">private</span> $proyecto;                        
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050    <span class="keyword">private</span> $idiomas_activados;   <span class="comment">///&lt; Idioma activados</span>
+<a name="l00051"></a>00051 <span class="comment"></span>   <span class="keyword">private</span> $idiomaxdefecto;      <span class="comment">///&lt; Idioma por defecto</span>
+<a name="l00052"></a>00052 <span class="comment"></span>   <span class="keyword">private</span> $dir_idiomas;         <span class="comment">///&lt; Directorio para los archivos de idiomas</span>
+<a name="l00053"></a>00053 <span class="comment"></span>
+<a name="l00054"></a>00054    <span class="keyword">private</span> $idioma_actual;       <span class="comment">///&lt; Idioma actual</span>
+<a name="l00055"></a>00055 <span class="comment"></span><span class="comment"></span>
+<a name="l00056"></a>00056 <span class="comment">   /**</span>
+<a name="l00057"></a>00057 <span class="comment">    * Constructor</span>
+<a name="l00058"></a>00058 <span class="comment">    *</span>
+<a name="l00059"></a>00059 <span class="comment">    * @param $aConfiguracion Array con la configuración:</span>
+<a name="l00060"></a>00060 <span class="comment">    *        - proyecto = &#39;nombre del proyecto&#39;</span>
+<a name="l00061"></a>00061 <span class="comment">    *        - dir_idiomas = directorio donde se encuentran los archivos con los literales</span>
+<a name="l00062"></a>00062 <span class="comment">    *        - idiomaxdefecto = idioma por defecto del proyecto</span>
+<a name="l00063"></a>00063 <span class="comment">    *        - idiomas_activados = Idiomas activados</span>
+<a name="l00064"></a>00064 <span class="comment">    *</span>
+<a name="l00065"></a>00065 <span class="comment">    */</span>
+<a name="l00066"></a>00066 
+<a name="l00067"></a><a class="code" href="../../d3/de7/a00039_a4ee31d4e24ba9cedefa57f423289cbfc.html#a4ee31d4e24ba9cedefa57f423289cbfc">00067</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a4ee31d4e24ba9cedefa57f423289cbfc.html#a4ee31d4e24ba9cedefa57f423289cbfc" title="Constructor.">__construct</a>($aConfiguracion) {
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069       <span class="keywordflow">if</span> ( ! isset($aConfiguracion) ) {
+<a name="l00070"></a>00070          trigger_error(<span class="stringliteral">&quot;Es necesario definir las variables de configuracion&quot;</span>, E_USER_ERROR);
+<a name="l00071"></a>00071          }
+<a name="l00072"></a>00072 <span class="comment"></span>
+<a name="l00073"></a>00073 <span class="comment">      /** Array global con los literales del idioma actual */</span>
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075       $GLOBALS[<span class="stringliteral">&#39;LG&#39;</span>] = array();
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077       <span class="keywordflow">foreach</span> ( $aConfiguracion as $key =&gt; $valor ) {
+<a name="l00078"></a>00078          $this-&gt;$key = $valor;
+<a name="l00079"></a>00079          }
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081       $this-&gt;proyecto = ( isset($this-&gt;proyecto) ) ? $this-&gt;proyecto : <span class="stringliteral">&#39;default&#39;</span>;
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083       <span class="keywordflow">if</span> ( ! isset($this-&gt;idiomas_activados) ) {
+<a name="l00084"></a>00084          trigger_error(<span class="stringliteral">&quot;Es necesario definir idiomas_activados dentro del array de configuracion&quot;</span>, E_USER_ERROR);
+<a name="l00085"></a>00085          }
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087       <span class="keywordflow">if</span> ( ! isset($this-&gt;idiomaxdefecto) ) {
+<a name="l00088"></a>00088          trigger_error(<span class="stringliteral">&quot;Es necesario definir idiomaxdefecto dentro del array de configuracion&quot;</span>, E_USER_ERROR);
+<a name="l00089"></a>00089          }
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091       <span class="keywordflow">if</span> ( ! isset($this-&gt;dir_idiomas) ) {
+<a name="l00092"></a>00092          trigger_error(<span class="stringliteral">&quot;Es necesario definir dir_idiomas dentro del array de configuracion&quot;</span>, E_USER_ERROR);
+<a name="l00093"></a>00093          }
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095       $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a>();
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097       }
+<a name="l00098"></a>00098 <span class="comment"></span>
+<a name="l00099"></a>00099 <span class="comment">   /**</span>
+<a name="l00100"></a>00100 <span class="comment">    * Detectar idioma actual de usuario</span>
+<a name="l00101"></a>00101 <span class="comment">    */</span>
+<a name="l00102"></a>00102 
+<a name="l00103"></a><a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386">00103</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a>() {
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> ) <span class="keywordflow">return</span> $this-&gt;idioma_actual;
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108       <span class="comment">// Si hay un idioma definido en el url se redefine idioma actual</span>
+<a name="l00109"></a>00109       <span class="keywordflow">if</span> (isset($_GET[<span class="stringliteral">&quot;idioma&quot;</span>])) { 
+<a name="l00110"></a>00110          $_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>] = $_GET[<span class="stringliteral">&quot;idioma&quot;</span>]; 
+<a name="l00111"></a>00111          $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> = $_GET[<span class="stringliteral">&#39;idioma&#39;</span>];
+<a name="l00112"></a>00112          <span class="keywordflow">return</span> $_GET[<span class="stringliteral">&#39;idioma&#39;</span>];
+<a name="l00113"></a>00113          }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115       <span class="comment">// Si no existe variable de session se crea el predeterminado.</span>
+<a name="l00116"></a>00116       <span class="keywordflow">if</span> (isset($_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>])) {
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118             $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> = $_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>] ;
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120       } <span class="keywordflow">else</span> {
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122          <span class="comment">// Miramos el idioma que el usuario tiene definido en el navegador</span>
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124          $sitelang = getenv(<span class="stringliteral">&quot;HTTP_ACCEPT_LANGUAGE&quot;</span>);
+<a name="l00125"></a>00125          $sitelang = $sitelang[0].$sitelang[1];
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127          <span class="keywordflow">if</span> ( array_key_exists($sitelang,$this-&gt;idiomas_activados ) ) {    <span class="comment">// Si es un idioma activado lo definimos</span>
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129             $_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>] = $sitelang;
+<a name="l00130"></a>00130             $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> = $sitelang;
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132          } <span class="keywordflow">else</span> {                                                <span class="comment">// sino es un idioma activado cogemos el por defecto</span>
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134             $_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>] = $this-&gt;idiomaxdefecto;
+<a name="l00135"></a>00135             $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> = $this-&gt;idiomaxdefecto;
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137             }
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139          }
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141       }
+<a name="l00142"></a>00142 <span class="comment"></span>
+<a name="l00143"></a>00143 <span class="comment">   /**</span>
+<a name="l00144"></a>00144 <span class="comment">    * Instalación</span>
+<a name="l00145"></a>00145 <span class="comment">    *</span>
+<a name="l00146"></a>00146 <span class="comment">    * Creamos los directorios necesarios para el funcionamiento del módulo</span>
+<a name="l00147"></a>00147 <span class="comment">    */</span>
+<a name="l00148"></a>00148 
+<a name="l00149"></a><a class="code" href="../../d3/de7/a00039_a167f6fb58adbd4f8fa9a0143b0ba6e3d.html#a167f6fb58adbd4f8fa9a0143b0ba6e3d">00149</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a167f6fb58adbd4f8fa9a0143b0ba6e3d.html#a167f6fb58adbd4f8fa9a0143b0ba6e3d" title="Instalación.">instalacion</a>() {
+<a name="l00150"></a>00150       <span class="keywordflow">if</span> ( ! file_exists($this-&gt;dir_idiomas) ) {
+<a name="l00151"></a>00151          <span class="keywordflow">return</span> <a class="code" href="../../d4/d81/a00110_a64a0dcf7a28d2b6acb2ee72e6b9b27b9.html#a64a0dcf7a28d2b6acb2ee72e6b9b27b9" title="Creación de un directorio y sus subdirectorios si es necesario.">mkdir_recursivo</a>($this-&gt;dir_idiomas);
+<a name="l00152"></a>00152          }
+<a name="l00153"></a>00153       <span class="keywordflow">return</span>;
+<a name="l00154"></a>00154       }
+<a name="l00155"></a>00155 <span class="comment"></span>
+<a name="l00156"></a>00156 <span class="comment">   /**</span>
+<a name="l00157"></a>00157 <span class="comment">    * Seleccionamos idioma con el que se presenta la página</span>
+<a name="l00158"></a>00158 <span class="comment">    *</span>
+<a name="l00159"></a>00159 <span class="comment">    * Este metodo detecta idioma actual y genera el array de los </span>
+<a name="l00160"></a>00160 <span class="comment">    * literales</span>
+<a name="l00161"></a>00161 <span class="comment">    *</span>
+<a name="l00162"></a>00162 <span class="comment">    * El idioma puede venir por GET o POST [&#39;idioma&#39;] o puede estar</span>
+<a name="l00163"></a>00163 <span class="comment">    * en la variable de sessión $_SESSION[$this-&gt;proyecto.&quot;-idioma&quot;]</span>
+<a name="l00164"></a>00164 <span class="comment">    *</span>
+<a name="l00165"></a>00165 <span class="comment">    * @note Es importante que se ejecute este metodo al inicio, para comenzar sabiendo</span>
+<a name="l00166"></a>00166 <span class="comment">    *       antes de nada el idioma que se desea.</span>
+<a name="l00167"></a>00167 <span class="comment">    *</span>
+<a name="l00168"></a>00168 <span class="comment">    */</span>
+<a name="l00169"></a>00169 
+<a name="l00170"></a><a class="code" href="../../d3/de7/a00039_afa28ebb12ea81b6085a3dab74b3bbdd6.html#afa28ebb12ea81b6085a3dab74b3bbdd6">00170</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_afa28ebb12ea81b6085a3dab74b3bbdd6.html#afa28ebb12ea81b6085a3dab74b3bbdd6" title="Seleccionamos idioma con el que se presenta la página.">seleccion_idioma</a>() {
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172       global <a class="code" href="../../d2/d1f/a00083_ace04dd6b8f596ad496608240dc47c0de.html#ace04dd6b8f596ad496608240dc47c0de" title="Literales de proyecto.">$LG</a>, <a class="code" href="../../d2/d1f/a00083_a546a5e7bea120c9a754f586c26764075.html#a546a5e7bea120c9a754f586c26764075" title="Literales de gcm.">$GCM_LG</a>;
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174       <span class="comment">// Incluimos literales del propio gcm</span>
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176       $this-&gt;incluir_literales(GCM_DIR.<span class="stringliteral">&#39;DATOS/idiomas/GCM_LG_&#39;</span>.$this-&gt;idiomaxdefecto.<span class="stringliteral">&#39;.php&#39;</span>, $this-&gt;idiomaxdefecto, <span class="stringliteral">&#39;GCM_LG_&#39;</span>);
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> != $this-&gt;idiomaxdefecto ) {
+<a name="l00179"></a>00179          $this-&gt;incluir_literales(GCM_DIR.<span class="stringliteral">&#39;DATOS/idiomas/GCM_LG_&#39;</span>.$this-&gt;idioma_actual.<span class="stringliteral">&#39;.php&#39;</span>, $this-&gt;idioma_actual, <span class="stringliteral">&#39;GCM_LG_&#39;</span>);
+<a name="l00180"></a>00180          }
+<a name="l00181"></a>00181 
+<a name="l00182"></a>00182       <span class="comment">// Añadimos literales del idioma predeterminado</span>
+<a name="l00183"></a>00183       
+<a name="l00184"></a>00184       $this-&gt;incluir_literales($this-&gt;dir_idiomas.<span class="stringliteral">&quot;LG_&quot;</span>.$this-&gt;idiomaxdefecto.<span class="stringliteral">&quot;.php&quot;</span>, $this-&gt;idiomaxdefecto);
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186       <span class="comment">// Si el idioma actual no es el predeterminado lo añadimos chafando los literales predeterminados</span>
+<a name="l00187"></a>00187       <span class="comment">// por los del idioma actual, pero sin perder los literales faltantes del idioma actual ya que quedaran</span>
+<a name="l00188"></a>00188       <span class="comment">// los predeterminados</span>
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> != $this-&gt;idiomaxdefecto ) {
+<a name="l00191"></a>00191          $this-&gt;incluir_literales($this-&gt;dir_idiomas.<span class="stringliteral">&quot;LG_&quot;</span>.$this-&gt;idioma_actual.<span class="stringliteral">&quot;.php&quot;</span>, $this-&gt;idioma_actual);
+<a name="l00192"></a>00192          }
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194       }
+<a name="l00195"></a>00195 <span class="comment"></span>
+<a name="l00196"></a>00196 <span class="comment">   /**</span>
+<a name="l00197"></a>00197 <span class="comment">    * Incluir literales a variable global LG del archivo especificado</span>
+<a name="l00198"></a>00198 <span class="comment">    *</span>
+<a name="l00199"></a>00199 <span class="comment">    * @param $file Archivo con los literales</span>
+<a name="l00200"></a>00200 <span class="comment">    * @param $idioma Idioma de los literales</span>
+<a name="l00201"></a>00201 <span class="comment">    * @param $prefijo_array Prefijo del nombre del array que contiene los literales,</span>
+<a name="l00202"></a>00202 <span class="comment">    *                       por defecto es LG_ pero en el caso de los de gcm es GCM_LG_</span>
+<a name="l00203"></a>00203 <span class="comment">    */</span>
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205    <span class="keyword">private</span> <span class="keyword">function</span> incluir_literales($file, $idioma, $prefijo_array = <span class="stringliteral">&#39;LG_&#39;</span>) {
+<a name="l00206"></a>00206 
+<a name="l00207"></a>00207       global <a class="code" href="../../d2/d1f/a00083_ace04dd6b8f596ad496608240dc47c0de.html#ace04dd6b8f596ad496608240dc47c0de" title="Literales de proyecto.">$LG</a>;
+<a name="l00208"></a>00208 
+<a name="l00209"></a>00209       <span class="keywordflow">if</span> ( file_exists($file) ) {
+<a name="l00210"></a>00210          include($file);
+<a name="l00211"></a>00211          <span class="keywordflow">if</span> ( isset(${$prefijo_array.$idioma}) ) $LG = array_merge($LG,${$prefijo_array.$idioma});
+<a name="l00212"></a>00212          }
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214       }
+<a name="l00215"></a>00215 <span class="comment"></span>
+<a name="l00216"></a>00216 <span class="comment">   /**</span>
+<a name="l00217"></a>00217 <span class="comment">    * Devolver idioma por defecto</span>
+<a name="l00218"></a>00218 <span class="comment">    */</span>
+<a name="l00219"></a>00219 
+<a name="l00220"></a><a class="code" href="../../d3/de7/a00039_a8be19ed206b9b50917a4775fbe13f8b4.html#a8be19ed206b9b50917a4775fbe13f8b4">00220</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a8be19ed206b9b50917a4775fbe13f8b4.html#a8be19ed206b9b50917a4775fbe13f8b4" title="Devolver idioma por defecto.">getIdiomaxdefecto</a>() {
+<a name="l00221"></a>00221       <span class="keywordflow">return</span> ( isset($this-&gt;idiomaxdefecto) ) ? $this-&gt;idiomaxdefecto : FALSE;
+<a name="l00222"></a>00222       }
+<a name="l00223"></a>00223 <span class="comment"></span>
+<a name="l00224"></a>00224 <span class="comment">   /**</span>
+<a name="l00225"></a>00225 <span class="comment">    * Devolver idioma actual</span>
+<a name="l00226"></a>00226 <span class="comment">    */</span>
+<a name="l00227"></a>00227 
+<a name="l00228"></a><a class="code" href="../../d3/de7/a00039_a4a2e69a79a717aa9665708afc937e067.html#a4a2e69a79a717aa9665708afc937e067">00228</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a4a2e69a79a717aa9665708afc937e067.html#a4a2e69a79a717aa9665708afc937e067" title="Devolver idioma actual.">getIdioma_actual</a>() {
+<a name="l00229"></a>00229       <span class="keywordflow">return</span> ( isset($this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a>) ) ? $this-&gt;<a class="code" href="../../d3/de7/a00039_a8b5b88a143aba512c07b7bbb4c2db386.html#a8b5b88a143aba512c07b7bbb4c2db386" title="Detectar idioma actual de usuario.">idioma_actual</a> : FALSE;
+<a name="l00230"></a>00230       }
+<a name="l00231"></a>00231 <span class="comment"></span>
+<a name="l00232"></a>00232 <span class="comment">   /**</span>
+<a name="l00233"></a>00233 <span class="comment">    * Devolver directorio de idiomas</span>
+<a name="l00234"></a>00234 <span class="comment">    */</span>
+<a name="l00235"></a>00235 
+<a name="l00236"></a><a class="code" href="../../d3/de7/a00039_a5995c29d5685ac7a0ade66755cf8a5bf.html#a5995c29d5685ac7a0ade66755cf8a5bf">00236</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a5995c29d5685ac7a0ade66755cf8a5bf.html#a5995c29d5685ac7a0ade66755cf8a5bf" title="Devolver directorio de idiomas.">getDir_idiomas</a>() {
+<a name="l00237"></a>00237       <span class="keywordflow">return</span> ( isset($this-&gt;dir_idiomas) ) ? $this-&gt;dir_idiomas : FALSE;
+<a name="l00238"></a>00238       }
+<a name="l00239"></a>00239 <span class="comment"></span>
+<a name="l00240"></a>00240 <span class="comment">   /** Devolver idiomas activados */</span>
+<a name="l00241"></a>00241 
+<a name="l00242"></a><a class="code" href="../../d3/de7/a00039_a56c12d5f227ea585d5754d2ed94e36ce.html#a56c12d5f227ea585d5754d2ed94e36ce">00242</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a56c12d5f227ea585d5754d2ed94e36ce.html#a56c12d5f227ea585d5754d2ed94e36ce" title="Devolver idiomas activados.">getIdiomasActivados</a>() {
+<a name="l00243"></a>00243       <span class="keywordflow">return</span> $this-&gt;idiomas_activados;
+<a name="l00244"></a>00244       }
+<a name="l00245"></a>00245 <span class="comment"></span>
+<a name="l00246"></a>00246 <span class="comment">   /** </span>
+<a name="l00247"></a>00247 <span class="comment">    * Formulario para selección de idioma</span>
+<a name="l00248"></a>00248 <span class="comment">    */</span>
+<a name="l00249"></a>00249 
+<a name="l00250"></a><a class="code" href="../../d3/de7/a00039_ad01f3952df69fcfcd79a266a728f445c.html#ad01f3952df69fcfcd79a266a728f445c">00250</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_ad01f3952df69fcfcd79a266a728f445c.html#ad01f3952df69fcfcd79a266a728f445c" title="Formulario para selección de idioma.">selector_idiomas</a>() {
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252       global <a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254       <span class="comment">// Solo se presenta selecctor si hay más de un idioma activo</span>
+<a name="l00255"></a>00255       <span class="keywordflow">if</span> ( count($this-&gt;idiomas_activados) &gt; 1 ) {
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257          ?&gt;
+<a name="l00258"></a>00258          &lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span>&gt;
+<a name="l00259"></a>00259             <span class="keyword">function</span> validaSelect(theList){ theList.form.submit(); }
+<a name="l00260"></a>00260          &lt;/script&gt;
+<a name="l00261"></a>00261          &lt;?php
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263          echo <span class="stringliteral">&quot;\n&lt;div id=&#39;idiomas&#39;&gt;&quot;</span>   ;
+<a name="l00264"></a>00264          echo <span class="stringliteral">&quot;\n&lt;form action=&#39;#&#39;&gt;&quot;</span>;
+<a name="l00265"></a>00265          echo <span class="stringliteral">&quot;&lt;select name=&#39;idioma&#39; onChange=&#39;validaSelect(this);&#39; &gt;&quot;</span>;
+<a name="l00266"></a>00266          <span class="keywordflow">foreach</span>($this-&gt;idiomas_activados as $idioma) {
+<a name="l00267"></a>00267             <span class="keywordflow">if</span> ($idioma!=$_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>]) {
+<a name="l00268"></a>00268                echo <span class="stringliteral">&quot;&lt;option value=&#39;&quot;</span>.$idioma.<span class="stringliteral">&quot;&#39; &gt;&quot;</span>.literal($idioma).<span class="stringliteral">&quot;&lt;/option&gt;&quot;</span>;
+<a name="l00269"></a>00269             } <span class="keywordflow">else</span> {
+<a name="l00270"></a>00270                echo <span class="stringliteral">&quot;&lt;option selected value=&#39;&quot;</span>.$idioma.<span class="stringliteral">&quot;&#39; &gt;&quot;</span>.literal($idioma).<span class="stringliteral">&quot;&lt;/option&gt;&quot;</span>;
+<a name="l00271"></a>00271                }
+<a name="l00272"></a>00272             }
+<a name="l00273"></a>00273          echo <span class="stringliteral">&quot;&lt;/select&gt;\n&lt;/form&gt;&quot;</span>;
+<a name="l00274"></a>00274          echo <span class="stringliteral">&quot;\n&lt;/div&gt; &lt;!-- ACABA idiomas --&gt;&quot;</span>;
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276          }
+<a name="l00277"></a>00277       }
+<a name="l00278"></a>00278 <span class="comment"></span>
+<a name="l00279"></a>00279 <span class="comment">   /**</span>
+<a name="l00280"></a>00280 <span class="comment">    * Listado de idiomas con banderas</span>
+<a name="l00281"></a>00281 <span class="comment">    *</span>
+<a name="l00282"></a>00282 <span class="comment">    * Si no encontramos las banderas en el directorio de idiomas del proyecto</span>
+<a name="l00283"></a>00283 <span class="comment">    * las cogemos del módulo de idiomas.</span>
+<a name="l00284"></a>00284 <span class="comment">    *</span>
+<a name="l00285"></a>00285 <span class="comment">    * @param $plantilla Archivo con la plantilla para las banderas</span>
+<a name="l00286"></a>00286 <span class="comment">    */</span>
+<a name="l00287"></a>00287 
+<a name="l00288"></a><a class="code" href="../../d3/de7/a00039_a0edcf56fd0fdd151c10336ab23315e2e.html#a0edcf56fd0fdd151c10336ab23315e2e">00288</a>    <span class="keyword">function</span> <a class="code" href="../../d3/de7/a00039_a0edcf56fd0fdd151c10336ab23315e2e.html#a0edcf56fd0fdd151c10336ab23315e2e" title="Listado de idiomas con banderas.">banderas</a>($plantilla = FALSE) {
+<a name="l00289"></a>00289 
+<a name="l00290"></a>00290       global <a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00291"></a>00291 
+<a name="l00292"></a>00292       <span class="keywordflow">if</span> ( ! $plantilla ) {
+<a name="l00293"></a>00293 
+<a name="l00294"></a>00294          <span class="comment">// Solo se presenta selecctor si hay más de un idioma activo</span>
+<a name="l00295"></a>00295          <span class="keywordflow">if</span> ( count($this-&gt;idiomas_activados) &gt; 1 ) {
+<a name="l00296"></a>00296             echo <span class="stringliteral">&#39;&lt;div id=&quot;banderas&quot;&gt;&#39;</span>;
+<a name="l00297"></a>00297             <span class="keywordflow">foreach</span>($this-&gt;idiomas_activados as $idioma) {
+<a name="l00298"></a>00298 
+<a name="l00299"></a>00299                $bandera = ( file_exists($this-&gt;dir_idiomas.<span class="stringliteral">&#39;&#39;</span>.$idioma.<span class="stringliteral">&#39;.png&#39;</span>) ) ? $this-&gt;dir_idiomas.<span class="stringliteral">&#39;&#39;</span>.$idioma.<span class="stringliteral">&#39;.png&#39;</span> : <a class="code" href="../../d9/d73/a00060_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.GCM_DIR.<span class="stringliteral">&#39;lib/int/idiomas/img/&#39;</span>.$idioma.<span class="stringliteral">&#39;.png&#39;</span> ;
+<a name="l00300"></a>00300 
+<a name="l00301"></a>00301                if ($idioma != $_SESSION[$this-&gt;proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>]) {
+<a name="l00302"></a>00302                   echo <span class="stringliteral">&#39;&lt;a href=&quot;?idioma=&#39;</span>.$idioma.<span class="stringliteral">&#39;&quot; &gt;&lt;img alt=&quot;&#39;</span>.$idioma.<span class="stringliteral">&#39;&quot; src=&quot;&#39;</span>.$bandera.<span class="stringliteral">&#39;&quot; /&gt;&lt;/a&gt; &#39;</span>;
+<a name="l00303"></a>00303                } <span class="keywordflow">else</span> {
+<a name="l00304"></a>00304                   echo <span class="stringliteral">&#39;&lt;a class=&quot;idioma_activado&quot; href=&quot;?idioma=&#39;</span>.$idioma.<span class="stringliteral">&#39;&quot; &gt;&lt;img alt=&quot;&#39;</span>.$idioma.<span class="stringliteral">&#39;&quot; src=&quot;&#39;</span>.$bandera.<span class="stringliteral">&#39;&quot; /&gt;&lt;/a&gt; &#39;</span>;
+<a name="l00305"></a>00305                   }
+<a name="l00306"></a>00306                }
+<a name="l00307"></a>00307             echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
+<a name="l00308"></a>00308             }
+<a name="l00309"></a>00309       } <span class="keywordflow">else</span> {
+<a name="l00310"></a>00310          include($plantilla);
+<a name="l00311"></a>00311          }
+<a name="l00312"></a>00312       }
+<a name="l00313"></a>00313 
+<a name="l00314"></a>00314    }
+<a name="l00315"></a>00315 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

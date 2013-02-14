@@ -1,8 +1,19 @@
+# Desarrollo
+php_value display_errors: On
+php_value error_reporting: E_ALL
+php_value log_errors: On
+php_flag expose_php on
+
+# Producción
+# php_value display_errors: Off
+# php_value error_reporting: E_ALL
+# php_value log_errors: On
+# php_flag expose_php off
+
+
 php_flag register_globals Off
 
 Options +FollowSymLinks
-
-php_flag register_globals off
 
 # RewriteEngine on
 

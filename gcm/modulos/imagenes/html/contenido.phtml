@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * @file contenido.phtml
+ * @brief Plantilla para mostrar imagenes en el contenido
+ *        de la pagina y poder administrarlas o verlas
+ *
+ * Recibimos los datos en un array
+ *
+ */
+
+// Mostramos sección actual
+
+?>
+
+<br />
+<h2><?php echo literal($datos['estamos']) ; ?></h2>
+</br />
+
+<div id="navegador">
+   <fieldset>
+   <legend><?php echo literal('Secciones');?></legend>
+
+<?php foreach ( $datos['otras_secciones'] as $otraseccion ) { // Otras secciones  ?>
+
+   <?php if ( $otraseccion[0] == literal('subir') ) { ?>
+
+      <a class="boton" href="#" 
+         onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[1];?>','galeria');return false;">
+         <?php echo $otraseccion[0]; ?>
+      </a>
+
+   <?php } else { ?>
+
+      <a class="boton"  href="#" 
+         onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[0];?>','galeria');return false;">
+         <?php echo $otraseccion[1]; ?>
+      </a>
+
+   <?php } ?>
+
+<?php } ?>
+
+</fieldset>
+</div>
+
+<?php // listado de imágenes ?>
+
+<div id="cajaImg">
+
+<?php if ( isset($datos['lista']) && $datos['lista'] ) { ?>
+
+   <?php $conta=0; foreach ( $datos['lista'] as $img ) { ?>
+
+      <div class="img_editar">
+         <p class="thumb" ><tt>
+         <a href="<?php echo $img[1];?>" class="galeria_imagenes">
+         <img id="thumb_<?php echo $conta;?>" src="<?php echo $img[2];?>" alt="Imagen <?php echo $img[0] ?>" />
+         </a>
+         <br />
+         <span class="idim">
+         <b><?php echo $img[0] ?></b>
+         <br /> [<?php echo $img[3] ?>x<?php echo $img[4] ?>] <?php echo $img[5] ?>
+
+         <?php if ( permiso('editar_imagenes') ) { ?>
+         [<a href="javascript:;" onclick="pedirDatos('?formato=ajax&m=imagenes&a=borrarImg&img=<?php echo $img[1] ?>','borrar_imagen','Borrar imagen')" >X</a>]
+         <?php } ?>
+
+
+         <?php if ( isset($img[6]) && $img[6] ) { ?>
+
+            <a class="boton" href="#exif_<?php echo $conta; ?>" onclick="visualizar('exif_<?php echo $conta ?>');" >exif</a>
+            </span>
+            <br />
+            <span id="exif_<?php echo $conta; ?>" class="isize" style="display: none" >
+            <?php foreach ( $img[6] as $elemento ) { ?>
+               <?php echo key($elemento);?>
+               <?php foreach ( $elemento as $nombre_elemento => $subelemento ) { ?>
+                  <b><?php echo $nombre_elemento; ?></b>: <?php echo $subelemento; ?>
+                   <br />
+               <?php } ?>
+            <?php } ?>
+            </span></tt></p>
+
+            <?php } else { // Sin datos exif ?>
+
+            </span>
+         <?php } // Acaba datos exif ?>
+
+         </tt>
+         </p>
+         </div>
+
+      <?php $conta++ ; } // Acaba imágenes ?>
+
+   <?php } ?>
+
+   </div>
+

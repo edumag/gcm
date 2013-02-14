@@ -157,7 +157,7 @@ class Referencias extends Modulos {
 
       // Presentamos panel de referencias si estamos editando
 
-      if ( Router::$e !== 'editar_contenido'  ) return;
+      if ( Router::$e !== 'editar_contenido' && Router::$e !== 'nuevo'  ) return;
 
       $panel = array();
       $panel['titulo'] = literal('Insertar').' '.literal('referencia');

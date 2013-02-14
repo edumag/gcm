@@ -121,8 +121,8 @@ class Temas extends Modulos {
       $this->version    = $bb['version'];
       $this->plataforma = $bb['platform'];
 
-      $this->Titulo = $gcm->config('metatags','Titulo');
-      $this->Subtitulo = $gcm->config('metatags','Subtitulo');
+      $this->Titulo = $gcm->config('metatags','title');
+      $this->Subtitulo = $gcm->config('metatags','subject');
 
       $tema_conf = $this->config('tema_actual');
       //echo "<p>Tema: <b>".$tema_conf."</b></p>";
@@ -320,11 +320,16 @@ class Temas extends Modulos {
          include($ruta);
       } else {
          registrar(__FILE__,__LINE__,'No tenemos plantilla ['.$ruta.']');
-         echo '<a href="index.php" title="Inicio">';
-         echo '<h1 class="titulo">',literal($this->Titulo,1),'</h1>';
-         echo '<p>',literal($this->Subtitulo,1),'</p>' ; 
-         echo '</a>';
-         return FALSE;
+         ?>
+         <a href="" title="<?php echo literal('inicio');?>">
+            <h1>
+               <?php echo literal($this->Titulo,1); ?>
+            </h1>
+            <h2>
+               <?php echo literal($this->Subtitulo,1); ?>
+            </h2>
+         </a>
+         <?php
          }
 
       }
@@ -339,12 +344,15 @@ class Temas extends Modulos {
     *              oculto:        TRUE/FALSE Em pieza oculto o visible
     *              href:          Enlace al que apunta
     *              ajax:          javascript a ejecutar al presentar contenido
+    *              jajax:         Lanzamos load() de jquery sobre subpanel_visible con la url indicada
+    *                             Con una simple url, nos añadira el contenido en el subpanel.
+    *                             Prevalece jaxax sobre ajax.
     *              contenido:     string con el contenido del panel
     *              altura_maxima: Altura maxima para el subpanel
     * 
     * @return TRUE/FALSE
     *
-    * @todo Creo que se puede evitar tener que definir href y subpanel
+    * @todo Creo que se puede evitar tener que definir href 
     */
 
    static function panel($panel) {
@@ -370,7 +378,7 @@ class Temas extends Modulos {
 
       $this->javascripts('general.js');
       $this->javascripts('paneles.js');
-      $this->librerias_js('jquery-1.5.2.min.js');
+      $this->librerias_js('jquery.js');
 
       if ( Router::$c == 'proyectos.css' ) {
          header('Content-Type: text/css');

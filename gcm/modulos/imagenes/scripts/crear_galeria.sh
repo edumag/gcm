@@ -20,13 +20,13 @@ img2="automatic.gif"
 img3="stop.gif"
 img4="derecha2.gif"
 prog=`basename $0`
-ruta_gcmImgs='../gcmImgs/'
+ruta_galeria='../galeria/'
 # Cabecera propia
 CS="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 CS="${CS}\n<!--Autor: Eduardo Magrane-->\n<!--Email: eduardo@mamedu.com-->\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>"
 CS="${CS}\n<script language=\"JavaScript\"  type=\"text/javascript\" src=\"automatic.js\" ></script>"
-CS="${CS}\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"${ruta_gcmImgs}gcmImgs.js\" ></script>"
-CS="${CS}\n<style type=\"text/css\" media=\"screen, projection\">@import \"${ruta_gcmImgs}gcmImgs.css\";</style>"
+CS="${CS}\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"${ruta_galeria}galeria.js\" ></script>"
+CS="${CS}\n<style type=\"text/css\" media=\"screen, projection\">@import \"${ruta_galeria}galeria.css\";</style>"
 CS="${CS}\n</head>\n<body style='background-color: #ddd; color: black'>"
 final_propio="</body>\n</html>"
 
@@ -47,7 +47,7 @@ OPCIONES: -h esta ayuda.
           -f fichero con el final de la pagina html.
           -html crea las paginas html, miniaturas.html grandes.html, esto supone que 
            las miniaturas ya estan creadas y en el directorio miniaturas.
-          --ruta-gcmImgs <Directorio relativo para gcmImgs.js, por defecto ../>
+          --ruta-galeria <Directorio relativo para galeria.js, por defecto ../>
 
 EJEMPLO: $prog -m -html *jpg
 
@@ -239,7 +239,7 @@ case $1 in
     -m) shift 1 ; MINIATURAS="SI" ;;
     -html) shift 1 ; HTML="SI" ;;
     -600) shift 1 ; imagen600 $* ;;
-    --ruta-gcmImgs) ruta_gcmImgs=$2 ; shift 2 ;;
+    --ruta-galeria) ruta_galeria=$2 ; shift 2 ;;
     --) break;;
     -*) echo "error: sin opciones $1. -h para ayuda";exit 1;;
     *)  break;;

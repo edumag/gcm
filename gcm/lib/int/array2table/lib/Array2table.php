@@ -105,6 +105,16 @@ class Array2table {
 
       ?>
      <table cellpadding="0" cellspacing="0" border="0" id="table" class="tinytable">
+
+         <?php // Elementos colgroup nos permite modificar presentación por columnas ?>
+
+         <colgroup>
+         <?php foreach ( $res[0] as $columna => $valor ) { ?>
+         <?php if ( $columna == $identificador  && $ocultar_id ) continue; ?>
+         <col id="col_<?php echo htmlspecialchars($columna,ENT_QUOTES);?>"> 
+         <?php } ?>
+         </colgroup>
+
          <thead>
             <tr>
       <?php
@@ -199,11 +209,13 @@ class Array2table {
 
          echo "\n\t\t<tr class='".$fpi."'>";
 
+         $col = 0;
          foreach ( $fila as $key_columna => $columna ) {       // columnas
 
+            $col++;
             // Si estamos en la columna que ordena añadimos clase especial
 
-            $clase_columna =  ( $key_columna == $orden ) ? ' class="oddselected" ' : '' ;
+            $clase_columna =  ( $key_columna == $orden ) ? ' class="col_'.$col.' oddselected" ' : ' class="col_'.$col.'"' ;
 
             /* Si estamos en la columna id definimos enlaces hacia el elemento */
 
@@ -217,6 +229,7 @@ class Array2table {
             /* Si tenemos columna con % Añadimos efecto visual para representarlo */
 
             if ( $key_columna == $identificador  && $ocultar_id ) { // id oculto
+               $col--;
                echo ''; 
 
             } elseif ($key_columna == "img" ) {

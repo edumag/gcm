@@ -316,7 +316,6 @@ abstract class ContenidosAbstract extends Modulos {
 
       // Comprobar que tenemos los directorios base creados
 
-      echo "Router::dd: ".Router::$dd;
       if ( file_exists(Router::$dd) ) {
          $gcm->titulo = literal('Sin sección',3);
          registrar(__FILE__,__LINE__,literal('Sección ['.Router::$s.'] no encontrada',3),'ERROR');

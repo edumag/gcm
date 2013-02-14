@@ -1,9 +1,70 @@
 /**
  * Mecanismo con ajax para ver todo el contenido de la entrada sin 
- * salir de página
+ * salir de página, se añade un botón para ejecutar ajax y se mantiene 
+ * el enlace del titulo para ir a su contexto
  */
 
 function initListadoContenido(contexto) {
+
+   /* Evento click */
+
+   $('.elemento_lista_off .titulo_articulo', contexto ).click(function(e) {
+
+      var caja = $(this).parent("div");
+      var titulo = $(this);
+      var contenido = caja.children(".contenido_articulo");
+      var url = titulo.children().attr("href");
+
+      /* debug */
+      // titulo.css('background', 'green');
+      // caja.css('background', 'white');
+
+      /* Miramos la clase para saber el estado */
+
+      var estado = caja.attr("class");
+
+      if ( estado == 'elemento_lista_off'  ) {
+
+         caja.removeClass("elemento_lista_off");
+         caja.addClass("elemento_lista_on");
+
+         contenido.html("Buscando contenido...");
+
+         if ( url ) {
+            $.get('?e=contenido&formato=ajax&url='+url,function(data){
+               contenido.html(data);
+              });
+            }
+         return false;
+         }
+ 
+      if ( estado == 'elemento_lista_on'  ) {
+
+         caja.removeClass("elemento_lista_on");
+         caja.addClass("elemento_lista_hide");
+
+         contenido.hide("slow");
+         return false;
+         }
+
+      if ( estado == 'elemento_lista_hide'  ) {
+
+         caja.removeClass("elemento_lista_hide");
+         caja.addClass("elemento_lista_on");
+
+         contenido.show("slow");
+         return false;
+         }
+
+      });
+   }
+
+/**
+ * Mecanismo con ajax para ver todo el contenido de la entrada sin 
+ * salir de página, se convierte el enlace del titulo en enlace ajax
+ */
+
+function initListadoContenido_boton(contexto) {
 
    var boton_html = "<a title='<?=literal('Ampliar contenido')?>' ";
    boton_html    += "class='boton_ajax simb_abajo simb_neutro' ";
