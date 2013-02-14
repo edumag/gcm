@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/admin/config/config.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/temas/lib/TemaGcmTest.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -80,43 +79,134 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_406c13f9334d411137a984d45e973f8a.html">config</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_f339ddfbe2de8958fc425e435cc4e7c9.html">temas</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_d4981816818a402d12f3032963dc6fc2.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">config.php</div>  </div>
+<div class="title">TemaGcmTest.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment">// Archivo generado automaticamente por /home/eduardo/SERVIDOR/subversion/gcm/trunk/gcm/lib/int/GcmConfig/lib/GcmConfig.php</span>
-<a name="l00003"></a>00003 $config[<span class="stringliteral">&#39;Proyecto&#39;</span>]=<span class="stringliteral">&#39;gcm&#39;</span>;
-<a name="l00004"></a>00004 $config[<span class="stringliteral">&#39;bd_conexion&#39;</span>]=<span class="stringliteral">&#39;sqlite:DATOS/proyecto.db&#39;</span>;
-<a name="l00005"></a>00005 $config[<span class="stringliteral">&#39;bd_usuario&#39;</span>] = <span class="stringliteral">&#39;&#39;</span>;
-<a name="l00006"></a>00006 $config[<span class="stringliteral">&#39;bd_pass&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00007"></a>00007 $config[<span class="stringliteral">&#39;Sufijo para base de datos&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00008"></a>00008 $config[<span class="stringliteral">&#39;Idioma por defecto&#39;</span>]=<span class="stringliteral">&#39;es&#39;</span>;
-<a name="l00009"></a>00009 $config[<span class="stringliteral">&#39;Palabra secreta para depurar&#39;</span>]=<span class="stringliteral">&#39;debug&#39;</span>;
-<a name="l00010"></a>00010 $config[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;cache_http&#39;</span>;
-<a name="l00011"></a>00011 $config[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;comentarios&#39;</span>;
-<a name="l00012"></a>00012 $config[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;descargables&#39;</span>;
-<a name="l00013"></a>00013 $config[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;indexador&#39;</span>;
-<a name="l00014"></a>00014 $config[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;referencias&#39;</span>;
-<a name="l00015"></a>00015 $config[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;widgets&#39;</span>;
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 $config[<span class="stringliteral">&#39;bd_conexion&#39;</span>]=<span class="stringliteral">&#39;sqlite:DATOS/proyecto.db&#39;</span>;
-<a name="l00018"></a>00018 $config[<span class="stringliteral">&#39;bd_usuario&#39;</span>] = <span class="stringliteral">&#39;&#39;</span>;
-<a name="l00019"></a>00019 $config[<span class="stringliteral">&#39;bd_pass&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00020"></a>00020 $config[<span class="stringliteral">&#39;Sufijo para base de datos&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00021"></a>00021 ?&gt;
+<a name="l00002"></a>00002 require_once <span class="stringliteral">&#39;PHPUnit/Framework.php&#39;</span>;
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 require_once <span class="stringliteral">&#39;/home/eduardo/SERVIDOR/subversion/gcm/trunk/gcm/modulos/temas/lib/TemaGcm.php&#39;</span>;
+<a name="l00005"></a>00005 <span class="comment"></span>
+<a name="l00006"></a>00006 <span class="comment">/**</span>
+<a name="l00007"></a>00007 <span class="comment"> * Test class for TemaGcm.</span>
+<a name="l00008"></a>00008 <span class="comment"> * Generated by PHPUnit on 2010-10-25 at 11:59:31.</span>
+<a name="l00009"></a>00009 <span class="comment"> */</span>
+<a name="l00010"></a><a class="code" href="../../de/de1/a00065.html">00010</a> <span class="keyword">class </span><a class="code" href="../../de/de1/a00065.html" title="Test class for TemaGcm.">TemaGcmTest</a> <span class="keyword">extends</span> <a class="code" href="../../d5/de0/a00050.html">PHPUnit_Framework_TestCase</a>
+<a name="l00011"></a>00011 {<span class="comment"></span>
+<a name="l00012"></a>00012 <span class="comment">    /**</span>
+<a name="l00013"></a>00013 <span class="comment">     * @var TemaGcm</span>
+<a name="l00014"></a>00014 <span class="comment">     */</span>
+<a name="l00015"></a>00015     <span class="keyword">protected</span> $object;
+<a name="l00016"></a>00016 <span class="comment"></span>
+<a name="l00017"></a>00017 <span class="comment">    /**</span>
+<a name="l00018"></a>00018 <span class="comment">     * Sets up the fixture, for example, opens a network connection.</span>
+<a name="l00019"></a>00019 <span class="comment">     * This method is called before a test is executed.</span>
+<a name="l00020"></a>00020 <span class="comment">     */</span>
+<a name="l00021"></a><a class="code" href="../../de/de1/a00065_a0bc688732d2b3b162ffebaf7812e78da.html#a0bc688732d2b3b162ffebaf7812e78da">00021</a>     <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_a0bc688732d2b3b162ffebaf7812e78da.html#a0bc688732d2b3b162ffebaf7812e78da" title="Sets up the fixture, for example, opens a network connection.">setUp</a>()
+<a name="l00022"></a>00022     {
+<a name="l00023"></a>00023         $this-&gt;<span class="keywordtype">object</span> = <span class="keyword">new</span> <a class="code" href="../../df/d5f/a00064.html" title="Tratar con temas de proyectos.">TemaGcm</a>;
+<a name="l00024"></a>00024     }
+<a name="l00025"></a>00025 <span class="comment"></span>
+<a name="l00026"></a>00026 <span class="comment">    /**</span>
+<a name="l00027"></a>00027 <span class="comment">     * Tears down the fixture, for example, closes a network connection.</span>
+<a name="l00028"></a>00028 <span class="comment">     * This method is called after a test is executed.</span>
+<a name="l00029"></a>00029 <span class="comment">     */</span>
+<a name="l00030"></a><a class="code" href="../../de/de1/a00065_a80fe3d17e658907fc75346a0ec9d6fc7.html#a80fe3d17e658907fc75346a0ec9d6fc7">00030</a>     <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_a80fe3d17e658907fc75346a0ec9d6fc7.html#a80fe3d17e658907fc75346a0ec9d6fc7" title="Tears down the fixture, for example, closes a network connection.">tearDown</a>()
+<a name="l00031"></a>00031     {
+<a name="l00032"></a>00032     }
+<a name="l00033"></a>00033 <span class="comment"></span>
+<a name="l00034"></a>00034 <span class="comment">    /**</span>
+<a name="l00035"></a>00035 <span class="comment">     * @todo Implement test_construct().</span>
+<a name="l00036"></a>00036 <span class="comment">     */</span>
+<a name="l00037"></a><a class="code" href="../../de/de1/a00065_ae75f4e0c3451d7d4c35c4815ef17c833.html#ae75f4e0c3451d7d4c35c4815ef17c833">00037</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_ae75f4e0c3451d7d4c35c4815ef17c833.html#ae75f4e0c3451d7d4c35c4815ef17c833">test_construct</a>()
+<a name="l00038"></a>00038     {
+<a name="l00039"></a>00039         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00040"></a>00040         $this-&gt;markTestIncomplete(
+<a name="l00041"></a>00041           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00042"></a>00042         );
+<a name="l00043"></a>00043     }
+<a name="l00044"></a>00044 <span class="comment"></span>
+<a name="l00045"></a>00045 <span class="comment">    /**</span>
+<a name="l00046"></a>00046 <span class="comment">     * @todo Implement testIncluir_javascript().</span>
+<a name="l00047"></a>00047 <span class="comment">     */</span>
+<a name="l00048"></a><a class="code" href="../../de/de1/a00065_af9b9ce74bf892f07deee157ecf99ed6e.html#af9b9ce74bf892f07deee157ecf99ed6e">00048</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_af9b9ce74bf892f07deee157ecf99ed6e.html#af9b9ce74bf892f07deee157ecf99ed6e">testIncluir_javascript</a>()
+<a name="l00049"></a>00049     {
+<a name="l00050"></a>00050         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00051"></a>00051         $this-&gt;markTestIncomplete(
+<a name="l00052"></a>00052           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00053"></a>00053         );
+<a name="l00054"></a>00054     }
+<a name="l00055"></a>00055 <span class="comment"></span>
+<a name="l00056"></a>00056 <span class="comment">    /**</span>
+<a name="l00057"></a>00057 <span class="comment">     * @todo Implement testColor().</span>
+<a name="l00058"></a>00058 <span class="comment">     */</span>
+<a name="l00059"></a><a class="code" href="../../de/de1/a00065_a4598545026f99bfe0ca39ec42bc72023.html#a4598545026f99bfe0ca39ec42bc72023">00059</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_a4598545026f99bfe0ca39ec42bc72023.html#a4598545026f99bfe0ca39ec42bc72023">testColor</a>()
+<a name="l00060"></a>00060     {
+<a name="l00061"></a>00061         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00062"></a>00062         $this-&gt;markTestIncomplete(
+<a name="l00063"></a>00063           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00064"></a>00064         );
+<a name="l00065"></a>00065     }
+<a name="l00066"></a>00066 <span class="comment"></span>
+<a name="l00067"></a>00067 <span class="comment">    /**</span>
+<a name="l00068"></a>00068 <span class="comment">     * @todo Implement testConstruir_css().</span>
+<a name="l00069"></a>00069 <span class="comment">     */</span>
+<a name="l00070"></a><a class="code" href="../../de/de1/a00065_aabac64b667dcb0d02c07259b0d93f8a2.html#aabac64b667dcb0d02c07259b0d93f8a2">00070</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_aabac64b667dcb0d02c07259b0d93f8a2.html#aabac64b667dcb0d02c07259b0d93f8a2">testConstruir_css</a>()
+<a name="l00071"></a>00071     {
+<a name="l00072"></a>00072         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00073"></a>00073         $this-&gt;markTestIncomplete(
+<a name="l00074"></a>00074           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00075"></a>00075         );
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077 <span class="comment"></span>
+<a name="l00078"></a>00078 <span class="comment">    /**</span>
+<a name="l00079"></a>00079 <span class="comment">     * @todo Implement testConstruir_js().</span>
+<a name="l00080"></a>00080 <span class="comment">     */</span>
+<a name="l00081"></a><a class="code" href="../../de/de1/a00065_ad4076fd36f9d48714564332bafa80d5a.html#ad4076fd36f9d48714564332bafa80d5a">00081</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_ad4076fd36f9d48714564332bafa80d5a.html#ad4076fd36f9d48714564332bafa80d5a">testConstruir_js</a>()
+<a name="l00082"></a>00082     {
+<a name="l00083"></a>00083         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00084"></a>00084         $this-&gt;markTestIncomplete(
+<a name="l00085"></a>00085           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00086"></a>00086         );
+<a name="l00087"></a>00087     }
+<a name="l00088"></a>00088 <span class="comment"></span>
+<a name="l00089"></a>00089 <span class="comment">    /**</span>
+<a name="l00090"></a>00090 <span class="comment">     * @todo Implement testRuta().</span>
+<a name="l00091"></a>00091 <span class="comment">     */</span>
+<a name="l00092"></a><a class="code" href="../../de/de1/a00065_ada0e408fbaa31567b9423f8d3006886b.html#ada0e408fbaa31567b9423f8d3006886b">00092</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_ada0e408fbaa31567b9423f8d3006886b.html#ada0e408fbaa31567b9423f8d3006886b">testRuta</a>()
+<a name="l00093"></a>00093     {
+<a name="l00094"></a>00094         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00095"></a>00095         $this-&gt;markTestIncomplete(
+<a name="l00096"></a>00096           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00097"></a>00097         );
+<a name="l00098"></a>00098     }
+<a name="l00099"></a>00099 <span class="comment"></span>
+<a name="l00100"></a>00100 <span class="comment">    /**</span>
+<a name="l00101"></a>00101 <span class="comment">     * @todo Implement testDevolver_colores_faltantes().</span>
+<a name="l00102"></a>00102 <span class="comment">     */</span>
+<a name="l00103"></a><a class="code" href="../../de/de1/a00065_aaf3503f5ec7d8389aaa43aa660787864.html#aaf3503f5ec7d8389aaa43aa660787864">00103</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../de/de1/a00065_aaf3503f5ec7d8389aaa43aa660787864.html#aaf3503f5ec7d8389aaa43aa660787864">testDevolver_colores_faltantes</a>()
+<a name="l00104"></a>00104     {
+<a name="l00105"></a>00105         <span class="comment">// Remove the following lines when you implement this test.</span>
+<a name="l00106"></a>00106         $this-&gt;markTestIncomplete(
+<a name="l00107"></a>00107           <span class="stringliteral">&#39;This test has not been implemented yet.&#39;</span>
+<a name="l00108"></a>00108         );
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110 }
+<a name="l00111"></a>00111 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

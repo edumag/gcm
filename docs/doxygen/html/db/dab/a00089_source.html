@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -114,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00020"></a>00020 <span class="comment"> *</span>
 <a name="l00021"></a>00021 <span class="comment"> */</span>
 <a name="l00022"></a>00022 
-<a name="l00023"></a><a class="code" href="../../de/d5e/a00007.html">00023</a> <span class="keyword">class </span><a class="code" href="../../de/d5e/a00007.html" title="Componente Autentificacion.">Autentificacion</a> {
+<a name="l00023"></a><a class="code" href="../../de/d21/a00006.html">00023</a> <span class="keyword">class </span><a class="code" href="../../de/d21/a00006.html" title="Componente Autentificacion.">Autentificacion</a> {
 <a name="l00024"></a>00024 <span class="comment"></span>
 <a name="l00025"></a>00025 <span class="comment">   /** Conexión con base de datos  */</span>
 <a name="l00026"></a>00026 
@@ -122,7 +121,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00028"></a>00028 <span class="comment"></span>
 <a name="l00029"></a>00029 <span class="comment">   /** Sufijo para diferenciar entre proyectos */</span>
 <a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../de/d5e/a00007_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">00031</a>    <span class="keyword">public</span> <a class="code" href="../../de/d5e/a00007_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>;
+<a name="l00031"></a><a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">00031</a>    <span class="keyword">public</span> <a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>;
 <a name="l00032"></a>00032 <span class="comment"></span>
 <a name="l00033"></a>00033 <span class="comment">   /** Lista de acciones con roles permitidos */</span> 
 <a name="l00034"></a>00034 
@@ -139,16 +138,16 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00045"></a>00045 <span class="comment">    *</span>
 <a name="l00046"></a>00046 <span class="comment">    */</span>
 <a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="../../de/d5e/a00007_a70411eda6655614ac34062f8f605645d.html#a70411eda6655614ac34062f8f605645d">00048</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a70411eda6655614ac34062f8f605645d.html#a70411eda6655614ac34062f8f605645d" title="constructor">__construct</a>(PDO $pdo, <a class="code" href="../../de/d5e/a00007_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>=<span class="stringliteral">&#39;au&#39;</span>, $acciones = FALSE) {
+<a name="l00048"></a><a class="code" href="../../de/d21/a00006_a70411eda6655614ac34062f8f605645d.html#a70411eda6655614ac34062f8f605645d">00048</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a70411eda6655614ac34062f8f605645d.html#a70411eda6655614ac34062f8f605645d" title="constructor">__construct</a>(PDO $pdo, <a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>=<span class="stringliteral">&#39;au&#39;</span>, $acciones = FALSE) {
 <a name="l00049"></a>00049 
 <a name="l00050"></a>00050       $this-&gt;pdo = $pdo;
-<a name="l00051"></a>00051       $this-&gt;sufijo = <a class="code" href="../../de/d5e/a00007_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>;
+<a name="l00051"></a>00051       $this-&gt;sufijo = <a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>;
 <a name="l00052"></a>00052 
 <a name="l00053"></a>00053       $this-&gt;acciones = ( $acciones ) ? $acciones : array(<span class="stringliteral">&#39;administrar&#39;</span> =&gt; array(<span class="stringliteral">&#39;administrador&#39;</span>) ) ;
 <a name="l00054"></a>00054 
 <a name="l00055"></a>00055       <span class="comment">/* Comprobar existencia de tabla de usuarios */</span>
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d5e/a00007_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($this-&gt;sufijo.<span class="stringliteral">&#39;usuarios&#39;</span>)  ) $this-&gt;<a class="code" href="../../de/d5e/a00007_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
+<a name="l00057"></a>00057       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($this-&gt;sufijo.<span class="stringliteral">&#39;usuarios&#39;</span>)  ) $this-&gt;<a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
 <a name="l00058"></a>00058 
 <a name="l00059"></a>00059       <span class="comment">/* Comprobar existencia de al menos un usuarios administratico */</span>
 <a name="l00060"></a>00060 
@@ -165,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00071"></a>00071          }
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073       <span class="keywordflow">if</span> ( $num_admnistradores &lt; 1  ) 
-<a name="l00074"></a>00074          $this-&gt;<a class="code" href="../../de/d5e/a00007_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>();
+<a name="l00074"></a>00074          $this-&gt;<a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>();
 <a name="l00075"></a>00075 
 <a name="l00076"></a>00076       }
 <a name="l00077"></a>00077 <span class="comment"></span>
@@ -173,7 +172,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00079"></a>00079 <span class="comment">    * Existe tabla</span>
 <a name="l00080"></a>00080 <span class="comment">    */</span>
 <a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="../../de/d5e/a00007_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4">00082</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($tabla) {
+<a name="l00082"></a><a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4">00082</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($tabla) {
 <a name="l00083"></a>00083 
 <a name="l00084"></a>00084       <span class="keywordflow">try</span> {
 <a name="l00085"></a>00085 
@@ -182,13 +181,13 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00088"></a>00088          <span class="keywordflow">if</span> ( ! $sth = $this-&gt;pdo-&gt;prepare($sql) ) {
 <a name="l00089"></a>00089 
 <a name="l00090"></a>00090             registrar(__FILE__,__LINE__, <span class="stringliteral">&#39;No existe tabla para usuarios la creamos&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
-<a name="l00091"></a>00091             $this-&gt;<a class="code" href="../../de/d5e/a00007_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
+<a name="l00091"></a>00091             $this-&gt;<a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
 <a name="l00092"></a>00092 
 <a name="l00093"></a>00093          } <span class="keywordflow">else</span> {
 <a name="l00094"></a>00094 
 <a name="l00095"></a>00095             <span class="keywordflow">if</span> (!$sth-&gt;execute()) {
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097                $this-&gt;<a class="code" href="../../de/d5e/a00007_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
+<a name="l00097"></a>00097                $this-&gt;<a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
 <a name="l00098"></a>00098 
 <a name="l00099"></a>00099                }
 <a name="l00100"></a>00100 
@@ -210,7 +209,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00116"></a>00116 <span class="comment">    *</span>
 <a name="l00117"></a>00117 <span class="comment">    */</span>
 <a name="l00118"></a>00118 
-<a name="l00119"></a><a class="code" href="../../de/d5e/a00007_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0">00119</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>() {
+<a name="l00119"></a><a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0">00119</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>() {
 <a name="l00120"></a>00120 
 <a name="l00121"></a>00121       $SQL = <span class="stringliteral">&quot;CREATE TABLE &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;roles (</span>
 <a name="l00122"></a>00122 <span class="stringliteral">         id  INT PRIMARY KEY,</span>
@@ -259,7 +258,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00165"></a>00165 
 <a name="l00166"></a>00166          }
 <a name="l00167"></a>00167 
-<a name="l00168"></a>00168       $this-&gt;<a class="code" href="../../de/d5e/a00007_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>();
+<a name="l00168"></a>00168       $this-&gt;<a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>();
 <a name="l00169"></a>00169 
 <a name="l00170"></a>00170       }
 <a name="l00171"></a>00171 <span class="comment"></span>
@@ -272,7 +271,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00178"></a>00178 <span class="comment">    * @param pass    Contraseña de usuario</span>
 <a name="l00179"></a>00179 <span class="comment">    */</span>
 <a name="l00180"></a>00180 
-<a name="l00181"></a><a class="code" href="../../de/d5e/a00007_ad54d6ca833d286d08529b363cfc55844.html#ad54d6ca833d286d08529b363cfc55844">00181</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_ad54d6ca833d286d08529b363cfc55844.html#ad54d6ca833d286d08529b363cfc55844" title="entrar">entrar</a>($usuario, $pass) {
+<a name="l00181"></a><a class="code" href="../../de/d21/a00006_ad54d6ca833d286d08529b363cfc55844.html#ad54d6ca833d286d08529b363cfc55844">00181</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_ad54d6ca833d286d08529b363cfc55844.html#ad54d6ca833d286d08529b363cfc55844" title="entrar">entrar</a>($usuario, $pass) {
 <a name="l00182"></a>00182 
 <a name="l00183"></a>00183       global $_SESSION;
 <a name="l00184"></a>00184 
@@ -347,7 +346,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00253"></a>00253 <span class="comment">    * Comprobar que se esta logeado</span>
 <a name="l00254"></a>00254 <span class="comment">    */</span>
 <a name="l00255"></a>00255 
-<a name="l00256"></a><a class="code" href="../../de/d5e/a00007_aa2da21e35438b304d35187baf13668fc.html#aa2da21e35438b304d35187baf13668fc">00256</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_aa2da21e35438b304d35187baf13668fc.html#aa2da21e35438b304d35187baf13668fc" title="logeado">logeado</a>() {
+<a name="l00256"></a><a class="code" href="../../de/d21/a00006_aa2da21e35438b304d35187baf13668fc.html#aa2da21e35438b304d35187baf13668fc">00256</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_aa2da21e35438b304d35187baf13668fc.html#aa2da21e35438b304d35187baf13668fc" title="logeado">logeado</a>() {
 <a name="l00257"></a>00257 
 <a name="l00258"></a>00258        global $_SESSION;
 <a name="l00259"></a>00259 
@@ -363,7 +362,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00269"></a>00269 <span class="comment">    * @return TRUE/FALSE</span>
 <a name="l00270"></a>00270 <span class="comment">    */</span>
 <a name="l00271"></a>00271 
-<a name="l00272"></a><a class="code" href="../../de/d5e/a00007_a8e468a825ddd6494c37ed14e98cab43e.html#a8e468a825ddd6494c37ed14e98cab43e">00272</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a8e468a825ddd6494c37ed14e98cab43e.html#a8e468a825ddd6494c37ed14e98cab43e" title="es_admin">es_admin</a>() {
+<a name="l00272"></a><a class="code" href="../../de/d21/a00006_a8e468a825ddd6494c37ed14e98cab43e.html#a8e468a825ddd6494c37ed14e98cab43e">00272</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a8e468a825ddd6494c37ed14e98cab43e.html#a8e468a825ddd6494c37ed14e98cab43e" title="es_admin">es_admin</a>() {
 <a name="l00273"></a>00273 
 <a name="l00274"></a>00274       <span class="keywordflow">if</span> ( ! isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]) ) <span class="keywordflow">return</span> FALSE;
 <a name="l00275"></a>00275 
@@ -379,7 +378,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00285"></a>00285 <span class="comment">    *</span>
 <a name="l00286"></a>00286 <span class="comment">    */</span>
 <a name="l00287"></a>00287 
-<a name="l00288"></a><a class="code" href="../../de/d5e/a00007_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d">00288</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d" title="Identificador de usuario.">id</a>() {
+<a name="l00288"></a><a class="code" href="../../de/d21/a00006_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d">00288</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d" title="Identificador de usuario.">id</a>() {
 <a name="l00289"></a>00289       <span class="keywordflow">return</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]) ) ? $_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]: FALSE ;
 <a name="l00290"></a>00290       }
 <a name="l00291"></a>00291 <span class="comment"></span>
@@ -387,7 +386,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00293"></a>00293 <span class="comment">    * Devolvemos array con roles de usuario</span>
 <a name="l00294"></a>00294 <span class="comment">    */</span>
 <a name="l00295"></a>00295 
-<a name="l00296"></a><a class="code" href="../../de/d5e/a00007_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99">00296</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99" title="Devolvemos array con roles de usuario.">roles_usuario</a>() {
+<a name="l00296"></a><a class="code" href="../../de/d21/a00006_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99">00296</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99" title="Devolvemos array con roles de usuario.">roles_usuario</a>() {
 <a name="l00297"></a>00297 
 <a name="l00298"></a>00298       <span class="keywordflow">if</span> ( ! isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]) ) <span class="keywordflow">return</span> FALSE;
 <a name="l00299"></a>00299 
@@ -403,9 +402,9 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00309"></a>00309 <span class="comment">    * @param $accion Acción</span>
 <a name="l00310"></a>00310 <span class="comment">    */</span>
 <a name="l00311"></a>00311 
-<a name="l00312"></a><a class="code" href="../../de/d5e/a00007_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48">00312</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48" title="Roles de acción.">roles_accion</a>($accion) {
+<a name="l00312"></a><a class="code" href="../../de/d21/a00006_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48">00312</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48" title="Roles de acción.">roles_accion</a>($accion) {
 <a name="l00313"></a>00313 
-<a name="l00314"></a>00314       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00314"></a>00314       global <a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00315"></a>00315 
 <a name="l00316"></a>00316       <span class="keywordflow">if</span> ( isset($this-&gt;acciones[$accion]) ) <span class="keywordflow">return</span> $this-&gt;acciones[$accion];
 <a name="l00317"></a>00317 
@@ -419,11 +418,11 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00325"></a>00325 <span class="comment">    * @param $accion Accion a realizar</span>
 <a name="l00326"></a>00326 <span class="comment">    */</span>
 <a name="l00327"></a>00327 
-<a name="l00328"></a><a class="code" href="../../de/d5e/a00007_a150138f49806ca23b5c5633e33c7271a.html#a150138f49806ca23b5c5633e33c7271a">00328</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_a150138f49806ca23b5c5633e33c7271a.html#a150138f49806ca23b5c5633e33c7271a" title="Comprobar permiso para usuario segun accion a realizar.">permiso</a>($accion) {
+<a name="l00328"></a><a class="code" href="../../de/d21/a00006_a150138f49806ca23b5c5633e33c7271a.html#a150138f49806ca23b5c5633e33c7271a">00328</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a150138f49806ca23b5c5633e33c7271a.html#a150138f49806ca23b5c5633e33c7271a" title="Comprobar permiso para usuario segun accion a realizar.">permiso</a>($accion) {
 <a name="l00329"></a>00329 
-<a name="l00330"></a>00330       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00330"></a>00330       global <a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00331"></a>00331 
-<a name="l00332"></a>00332       $usuario_id    = $this-&gt;<a class="code" href="../../de/d5e/a00007_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d" title="Identificador de usuario.">id</a>();
+<a name="l00332"></a>00332       $usuario_id    = $this-&gt;<a class="code" href="../../de/d21/a00006_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d" title="Identificador de usuario.">id</a>();
 <a name="l00333"></a>00333 
 <a name="l00334"></a>00334       <span class="comment">// Si no hay identificador de usuario salimos</span>
 <a name="l00335"></a>00335 
@@ -433,8 +432,8 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00339"></a>00339 
 <a name="l00340"></a>00340       <span class="keywordflow">if</span> ( $gcm-&gt;au-&gt;es_admin() ) <span class="keywordflow">return</span> TRUE;
 <a name="l00341"></a>00341 
-<a name="l00342"></a>00342       $roles_usuario = $this-&gt;<a class="code" href="../../de/d5e/a00007_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99" title="Devolvemos array con roles de usuario.">roles_usuario</a>();
-<a name="l00343"></a>00343       $roles_accion  = $this-&gt;<a class="code" href="../../de/d5e/a00007_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48" title="Roles de acción.">roles_accion</a>($accion);
+<a name="l00342"></a>00342       $roles_usuario = $this-&gt;<a class="code" href="../../de/d21/a00006_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99" title="Devolvemos array con roles de usuario.">roles_usuario</a>();
+<a name="l00343"></a>00343       $roles_accion  = $this-&gt;<a class="code" href="../../de/d21/a00006_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48" title="Roles de acción.">roles_accion</a>($accion);
 <a name="l00344"></a>00344 
 <a name="l00345"></a>00345       <span class="keywordflow">foreach</span> ( $roles_accion as $rol_accion ) {
 <a name="l00346"></a>00346          <span class="keywordflow">if</span> ( in_array($rol_accion, $roles_usuario) ) <span class="keywordflow">return</span> TRUE;
@@ -450,7 +449,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00356"></a>00356 <span class="comment">    * Cerrar sessión.</span>
 <a name="l00357"></a>00357 <span class="comment">    */</span>
 <a name="l00358"></a>00358 
-<a name="l00359"></a><a class="code" href="../../de/d5e/a00007_ae640d82759dd7439b2d6611c41f6478b.html#ae640d82759dd7439b2d6611c41f6478b">00359</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_ae640d82759dd7439b2d6611c41f6478b.html#ae640d82759dd7439b2d6611c41f6478b" title="salir">salir</a>() {
+<a name="l00359"></a><a class="code" href="../../de/d21/a00006_ae640d82759dd7439b2d6611c41f6478b.html#ae640d82759dd7439b2d6611c41f6478b">00359</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_ae640d82759dd7439b2d6611c41f6478b.html#ae640d82759dd7439b2d6611c41f6478b" title="salir">salir</a>() {
 <a name="l00360"></a>00360 
 <a name="l00361"></a>00361       <span class="keywordflow">if</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>])  ) unset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]);
 <a name="l00362"></a>00362       <span class="keywordflow">if</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_admin&#39;</span>])  ) unset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_admin&#39;</span>]);
@@ -467,7 +466,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00373"></a>00373 <span class="comment">    * password: admin</span>
 <a name="l00374"></a>00374 <span class="comment">    */</span>
 <a name="l00375"></a>00375 
-<a name="l00376"></a><a class="code" href="../../de/d5e/a00007_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b">00376</a>    <span class="keyword">function</span> <a class="code" href="../../de/d5e/a00007_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>() {
+<a name="l00376"></a><a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b">00376</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>() {
 <a name="l00377"></a>00377 
 <a name="l00378"></a>00378       <span class="comment">/* Insertar un administrador por defecto */</span>
 <a name="l00379"></a>00379 
@@ -526,7 +525,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

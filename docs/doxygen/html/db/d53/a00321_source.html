@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/html/form_temas.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/colores.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
       <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
       <li><a href="../../dirs.html"><span>Directorios</span></a></li>
-      <li><a href="../../examples.html"><span>Ejemplos</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
           <div class="left">
@@ -82,46 +81,45 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e333815ca684251e94807f1625b54517.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1d927d548771ddffa1e7287445c148df.html">css</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_temas.html</div>  </div>
+<div class="title">colores.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
-<a name="l00002"></a>00002    &lt;fieldset&gt;
-<a name="l00003"></a>00003       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Temas actual&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00004"></a>00004       &lt;?php <span class="keywordflow">if</span> ( !empty($temas_proyecto) ) { ?&gt;
-<a name="l00005"></a>00005       &lt;select name=<span class="stringliteral">&quot;tema_actual&quot;</span> onchange=<span class="stringliteral">&quot;this.form.submit();&quot;</span>&gt;
-<a name="l00006"></a>00006          &lt;option value=<span class="stringliteral">&quot;&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Selecciona tema&#39;</span>,3)?&gt;&lt;/option&gt;
-<a name="l00007"></a>00007          &lt;?php <span class="keywordflow">foreach</span> ( $temas_proyecto as $tema ) { ?&gt;
-<a name="l00008"></a>00008          &lt;option value=<span class="stringliteral">&quot;&lt;?=$tema?&gt;&quot;</span> 
-<a name="l00009"></a>00009          &lt;?php <span class="keywordflow">if</span> ( $tema == $this-&gt;tema_actual ) echo <span class="stringliteral">&#39; selected=&quot;1&quot;&#39;</span> ?&gt;&gt;
-<a name="l00010"></a>00010          &lt;?=$tema?&gt;
-<a name="l00011"></a>00011          &lt;/option&gt;
-<a name="l00012"></a>00012          &lt;?php } ?&gt;
-<a name="l00013"></a>00013       &lt;?php } ?&gt;
-<a name="l00014"></a>00014       &lt;/select&gt;
-<a name="l00015"></a>00015    &lt;input type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;m&#39;</span> value=<span class="stringliteral">&#39;temas&#39;</span>/&gt;
-<a name="l00016"></a>00016    &lt;input type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;a&#39;</span> value=<span class="stringliteral">&#39;seleccionar_tema&#39;</span>/&gt;
-<a name="l00017"></a>00017    &lt;/fieldset&gt;
-<a name="l00018"></a>00018 &lt;/form&gt;
-<a name="l00019"></a>00019 &lt;form action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
-<a name="l00020"></a>00020    &lt;fieldset&gt;
-<a name="l00021"></a>00021          &lt;legend&gt;Nuevo tema&lt;/legend&gt;
-<a name="l00022"></a>00022          &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;nuevo_tema&quot;</span> /&gt;
-<a name="l00023"></a>00023          &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="charliteral">&#39;a&#39;</span> title=<span class="stringliteral">&quot;&lt;?=literal(&#39;Creación de un tema nuevo&#39;,3)?&gt;&quot;</span> value=<span class="stringliteral">&quot;nuevo_tema&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Nuevo tema&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00024"></a>00024    &lt;input type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;m&#39;</span> value=<span class="stringliteral">&#39;temas&#39;</span>/&gt;
-<a name="l00025"></a>00025    &lt;/fieldset&gt;
-<a name="l00026"></a>00026 &lt;/form&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="comment">/* Fichero procesado por TemasAdmin.php */</span>
+<a name="l00004"></a>00004 $colores[<span class="charliteral">&#39;0&#39;</span>] = <span class="stringliteral">&#39;#e9eaec&#39;</span>;
+<a name="l00005"></a>00005 $colores[<span class="charliteral">&#39;1&#39;</span>] = <span class="stringliteral">&#39;#161818&#39;</span>;
+<a name="l00006"></a>00006 $colores[<span class="charliteral">&#39;2&#39;</span>] = <span class="stringliteral">&#39;#fff&#39;</span>;
+<a name="l00007"></a>00007 $colores[<span class="charliteral">&#39;3&#39;</span>] = <span class="stringliteral">&#39;#646464&#39;</span>;
+<a name="l00008"></a>00008 $colores[<span class="charliteral">&#39;4&#39;</span>] = <span class="stringliteral">&#39;#000&#39;</span>;
+<a name="l00009"></a>00009 $colores[<span class="charliteral">&#39;5&#39;</span>] = <span class="stringliteral">&#39;#ddd&#39;</span>;
+<a name="l00010"></a>00010 $colores[<span class="charliteral">&#39;6&#39;</span>] = <span class="stringliteral">&#39;#c3c3c3&#39;</span>;
+<a name="l00011"></a>00011 $colores[<span class="charliteral">&#39;7&#39;</span>] = <span class="stringliteral">&#39;#7c7c7c&#39;</span>;
+<a name="l00012"></a>00012 $colores[<span class="charliteral">&#39;8&#39;</span>] = <span class="stringliteral">&#39;#666&#39;</span>;
+<a name="l00013"></a>00013 $colores[<span class="charliteral">&#39;9&#39;</span>] = <span class="stringliteral">&#39;#ccc&#39;</span>;
+<a name="l00014"></a>00014 $colores[<span class="stringliteral">&#39;10&#39;</span>] = <span class="stringliteral">&#39;#222223&#39;</span>;
+<a name="l00015"></a>00015 $colores[<span class="stringliteral">&#39;11&#39;</span>] = <span class="stringliteral">&#39;#222&#39;</span>;
+<a name="l00016"></a>00016 $colores[<span class="stringliteral">&#39;12&#39;</span>] = <span class="stringliteral">&#39;#f8f8f8&#39;</span>;
+<a name="l00017"></a>00017 $colores[<span class="stringliteral">&#39;13&#39;</span>] = <span class="stringliteral">&#39;#202021&#39;</span>;
+<a name="l00018"></a>00018 $colores[<span class="stringliteral">&#39;14&#39;</span>] = <span class="stringliteral">&#39;#505e80&#39;</span>;
+<a name="l00019"></a>00019 $colores[<span class="stringliteral">&#39;15&#39;</span>] = <span class="stringliteral">&#39;#eee&#39;</span>;
+<a name="l00020"></a>00020 $colores[<span class="stringliteral">&#39;16&#39;</span>] = <span class="stringliteral">&#39;#d9e6fc&#39;</span>;
+<a name="l00021"></a>00021 $colores[<span class="stringliteral">&#39;17&#39;</span>] = <span class="stringliteral">&#39;#e7e7e4&#39;</span>;
+<a name="l00022"></a>00022 $colores[<span class="stringliteral">&#39;18&#39;</span>] = <span class="stringliteral">&#39;#eff0f0&#39;</span>;
+<a name="l00023"></a>00023 $colores[<span class="stringliteral">&#39;19&#39;</span>] = <span class="stringliteral">&#39;#2c2f3f&#39;</span>;
+<a name="l00024"></a>00024 $colores[<span class="stringliteral">&#39;20&#39;</span>] = <span class="stringliteral">&#39;#eeeeee&#39;</span>;
+<a name="l00025"></a>00025 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 28 de Diciembre de 2012 10:07:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Jueves, 14 de Febrero de 2013 09:53:43 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
