@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Fri Feb 15 13:32:31 CET 2013
+// Archivo generado automaticamente por GcmConfig Fri Feb 15 16:50:30 CET 2013
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Listado completo de contenido']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
