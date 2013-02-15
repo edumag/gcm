@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Sun Nov 4 11:12:42 CET 2012
+// Archivo generado automaticamente por GcmConfig Fri Feb 15 9:20:39 CET 2013
 $config_DESC['Conexión con base de datos (PDO)']='En caso de tener un servidor de base de datos, añadir el driver a utlizar para PDO';
 $config_DESC['Contraseña base de datos']='Contraseña para servidor de base de datos';
 $config_DESC['Idioma por defecto']='Idioma predeterminado';

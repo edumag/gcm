@@ -16,6 +16,7 @@ function respuesta_borrar_cache(respuesta) {
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
          var datos = pedido.responseText;
+         if ( datos == '' ) { datos = 'Cache borrada'; }
          ventana(titulo,datos,'id');
          }
       }

@@ -245,7 +245,7 @@ class Cache_http extends Modulos {
 
       if ( !isset($archivos) || empty($archivos) ) {
          
-         echo literal('Cache vacia');
+         return;
          exit();
          $gcm->salir();
          }
@@ -264,7 +264,7 @@ class Cache_http extends Modulos {
 
       if ( $e == 'borrar_cache' ) {
 
-         echo literal('Cache borrada');
+         return;
          exit();
          $gcm->salir();
 

@@ -444,18 +444,7 @@ class GcmConfig {
 
    function guardar_variables() {
       
-      try {
-
-         $this->escribirArchivos($this->archivo, $this->variables, $this->nombre_array);
-
-      } catch (Exception $ex) {
-
-         echo '<b>ERROR en guardar_variables</b>';
-         return FALSE;
-
-         }
-
-      return TRUE;
+      return $this->escribirArchivos($this->archivo, $this->variables, $this->nombre_array);
 
       }
 
@@ -493,51 +482,55 @@ class GcmConfig {
 
       try {
 
-         if ( ! ( $file = @fopen($archivo, "w") ) ) {
+         if ( ! $file = @fopen($archivo, "w") ) {
+            throw new Exception("No se pudo abrir archivo $file para incluir $nombre_array");
+         } else {
 
-            throw new Exception('No se pudo abrir archivo ['.$archivo.'] para editar, faltan permisos');
+            fputs($file, "<?php\n");
+            fputs($file, "// Archivo generado automaticamente por ".__CLASS__." ".date("D M j G:i:s T Y")."\n");
 
-            }
+            while (list($clave, $val)=each($datos)){
 
-      fputs($file, "<?php\n");
-      fputs($file, "// Archivo generado automaticamente por ".__CLASS__." ".date("D M j G:i:s T Y")."\n");
+               if ( is_array($val)) {   // si es un array 
 
-      while (list($clave, $val)=each($datos)){
+                  while (list($claveArray, $valorArray)=each($val)) {
 
-         if ( is_array($val)) {   // si es un array 
+                     $valorArray = str_replace("\\","",$valorArray);
+                     $valorArray = stripcslashes($valorArray);
 
-            while (list($claveArray, $valorArray)=each($val)) {
+                     if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
+                        throw new Exception("No se puede escribir en ".$archivo);
+                        return FALSE;
+                        }
+                     }
 
-               $valorArray = str_replace("\\","",$valorArray);
-               $valorArray = stripcslashes($valorArray);
+               } else {                   // No es un array
 
-               if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
-                  throw new Exception("No se puede escribir en ".$archivo);
-                  return FALSE;
+                  $val = str_replace("\\","",$val);
+                  $val = stripcslashes($val);
+
+                  if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
+                     throw new Exception("No se puede escribir en ".$archivo);
+                     return FALSE;
+                     }
+
                   }
                }
 
-         } else {                   // No es un array
+            fputs($file, '?>');
+            fclose($file);
 
-            $val = str_replace("\\","",$val);
-            $val = stripcslashes($val);
+            $this->variables_modificadas = FALSE;
+         
+            }
 
-            if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
-               throw new Exception("No se puede escribir en ".$archivo);
-               return FALSE;
-               }
+         } catch (Exception $ex) {
+
+            // throw new Exception("Error escribiendo archivo ".$archivo."\n".$ex->getMessage());
+            registrar($ex->getFile(), $ex->getLine(),"Error escribiendo archivo ".$archivo."\n".$ex->getMessage(),'ERROR');
+            return FALSE;
 
             }
-         }
-
-      fputs($file, "?>");
-      fclose($file);
-
-      $this->variables_modificadas = FALSE;
-      
-      } catch (Exception $ex) {
-         echo '<b>Error escribiendo archivo ['.$file.']</b>';
-         }
 
       }
 
