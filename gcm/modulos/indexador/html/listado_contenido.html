@@ -15,7 +15,7 @@
    <?php } else { ?>
    <?php $titulo = literal(trim($fila->nombre)); ?>
    <?php } ?>
-   <?php $titulo = '<a href="'.str_replace(' ','%20',$url).'" ondblclick="location.href=\''.str_replace(' ','%20',$url).'\'">'.$titulo.'</a>'; ?>
+   <?php $titulo = '<a class="enlace_entrada" href="'.str_replace(' ','%20',$url).'" ondblclick="location.href=\''.str_replace(' ','%20',$url).'\'">'.$titulo.'</a>'; ?>
    <div  class="elemento_lista_off" id="elemento_<?=htmlentities(GUtil::gcm_generar_url($fila->url))?>">
       <?php include(dirname(__FILE__).'/../../contenidos/html/titulo_articulo.html');?>
       <div class='contenido_articulo'>
