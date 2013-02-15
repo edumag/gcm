@@ -417,7 +417,9 @@ abstract class ContenidosAbstract extends Modulos {
 
       $titulo_seccion = comprobar_barra(basename(Router::$s),'eliminar');
       $titulo_seccion = literal($titulo_seccion);
-      $seccion_seleccionada = comprobar_barra(Router::$dd.str_replace($titulo_seccion,'',Router::$s));
+      // Descartamos mover sobre la misma sección
+      $seccion_descartada = comprobar_barra(Router::$dd.str_replace($titulo_seccion,'',Router::$s));
+      $seccion_seleccionada = FALSE;
 
       include ($gcm->event->instancias['temas']->ruta('contenidos','html','form_mover_seccion.html'));
 
@@ -503,8 +505,6 @@ abstract class ContenidosAbstract extends Modulos {
     *
     * Guardar documento 
     *
-    * @todo Filtrar POST
-    *
     * @param $e     Evento que recibimos de Eventos
     * @param $args  Argumentos posibles
     */
@@ -514,6 +514,8 @@ abstract class ContenidosAbstract extends Modulos {
       global $gcm;
 
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).')');
+
+      permiso('editar_contenido');
 
       $contenido = $_POST['areaTexto'];
 
@@ -552,8 +554,12 @@ abstract class ContenidosAbstract extends Modulos {
             /* Nuevo: verificar que no haya contenido existente */
 
             if ( $this->verificar_contenido($destino)  ) {
-               $this->existe_contenido($contenido, $destino);
-               return;
+               registrar(__FILE__,__LINE__,literal(
+                  'Ya existe contenido con este nombre')
+                  .' '.literal('Se debe cambiar el nombre')
+                 , 'AVISO'); 
+               $this->existe_contenido($contenido, $titulo);
+               return FALSE;
                }
             $mens = literal('Contenido añadido',3);
             break;
@@ -582,6 +588,7 @@ abstract class ContenidosAbstract extends Modulos {
 
          registrar(__FILE__,__LINE__,
             literal('Error').' '.literal('guardando contenido').': '.$destino,'ERROR');
+         return FALSE;
       } else {
          registrar(__FILE__,__LINE__,$mens,'AVISO');
 
@@ -610,18 +617,18 @@ abstract class ContenidosAbstract extends Modulos {
     *
     */
 
-   function existe_contenido($contenido, $f){
+   function existe_contenido($contenido, $titulo){
 
       global $gcm;
 
-      $titulo = literal($this->devolver_titulo($f));
       $contenido = limpiarContenido($contenido);
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
       $gcm->titulo = $titulo;
 
-      include ($gcm->event->instancias['temas']->ruta('contenidos','html','form_existe_contenido.html'));
+      include ($gcm->event->instancias['temas']->ruta('contenidos','html','form_nuevo.html'));
+      // include ($gcm->event->instancias['temas']->ruta('contenidos','html','form_existe_contenido.html'));
 
       }
 

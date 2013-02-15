@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/databoundobject/html/registro.html</title>
+<title>gcm: Fichero Fuente gcm/lib/int/databoundobject/html/form_registro.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">registro.html</div>  </div>
+<div class="title">form_registro.html</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>]) ) { ?&gt;
@@ -97,78 +97,82 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00004"></a>00004 
 <a name="l00005"></a>00005 &lt;br /&gt;
 <a name="l00006"></a>00006 
-<a name="l00007"></a>00007    &lt;?php <span class="keywordflow">foreach</span> ( $this-&gt;campos as $campo =&gt; $relacion ) { ?&gt;
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009     &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;privado&#39;</span>]) &amp;&amp; $this-&gt;campos[$campo][<span class="stringliteral">&#39;privado&#39;</span>] == 1 ) { <span class="keywordflow">continue</span>; } ?&gt;
+<a name="l00007"></a>00007    &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;ID) ) { ?&gt;
+<a name="l00008"></a>00008    &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;id&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$this-&gt;ID?&gt;&quot;</span> /&gt; 
+<a name="l00009"></a>00009    &lt;?php } ?&gt;
 <a name="l00010"></a>00010 
-<a name="l00011"></a>00011     &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;oculto_form&#39;</span>]) &amp;&amp; $this-&gt;campos[$campo][<span class="stringliteral">&#39;oculto_form&#39;</span>] == 1 ) { ?&gt;
-<a name="l00012"></a>00012    &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$this-&gt;valores($campo)?&gt;&quot;</span> /&gt; 
-<a name="l00013"></a>00013    &lt;?php <span class="keywordflow">continue</span>; } ?&gt;
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015    &lt;?php <span class="keywordflow">if</span> ( $relacion != <span class="stringliteral">&#39;ID&#39;</span> &amp;&amp; $campo != <span class="stringliteral">&quot;fecha_creacion&quot;</span> &amp;&amp; $campo != <span class="stringliteral">&quot;fecha_modificacion&quot;</span> ) { ?&gt;   
+<a name="l00011"></a>00011    &lt;?php <span class="keywordflow">foreach</span> ( $this-&gt;campos as $campo =&gt; $relacion ) { ?&gt;
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013    &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;oculto_form&#39;</span>]) &amp;&amp; $this-&gt;campos[$campo][<span class="stringliteral">&#39;oculto_form&#39;</span>] == 1 ) { ?&gt;
+<a name="l00014"></a>00014    &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$this-&gt;valores($campo)?&gt;&quot;</span> /&gt; 
+<a name="l00015"></a>00015    &lt;?php <span class="keywordflow">continue</span>; } ?&gt;
 <a name="l00016"></a>00016 
-<a name="l00017"></a>00017    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja_campo_&lt;?=$campo?&gt;&quot;</span>&gt;
+<a name="l00017"></a>00017    &lt;?php <span class="keywordflow">if</span> ( $relacion != <span class="stringliteral">&#39;ID&#39;</span> &amp;&amp; $campo != <span class="stringliteral">&quot;fecha_creacion&quot;</span> &amp;&amp; $campo != <span class="stringliteral">&quot;fecha_modificacion&quot;</span> ) { ?&gt;   
 <a name="l00018"></a>00018 
-<a name="l00019"></a>00019    &lt;?php <span class="keywordflow">if</span> ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;textarea&#39;</span>  ) { ?&gt;
+<a name="l00019"></a>00019    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja_campo_&lt;?=$campo?&gt;&quot;</span>&gt;
 <a name="l00020"></a>00020 
-<a name="l00021"></a>00021    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
-<a name="l00022"></a>00022    &lt;textarea readonly=<span class="stringliteral">&quot;readonly&quot;</span> rows=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;rows&#39;]?&gt;&quot;</span> cols=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;cols&#39;]?&gt;&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>&gt;&lt;?=$this-&gt;valores($campo)?&gt;&lt;/textarea&gt;
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024    &lt;?php } elseif ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;relacion&#39;</span>  ) { ?&gt;
+<a name="l00021"></a>00021    &lt;?php <span class="keywordflow">if</span> ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;textarea&#39;</span>  ) { ?&gt;
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
+<a name="l00024"></a>00024    &lt;textarea rows=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;rows&#39;]?&gt;&quot;</span> cols=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;cols&#39;]?&gt;&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>&gt;&lt;?=$this-&gt;valores($campo)?&gt;&lt;/textarea&gt;
 <a name="l00025"></a>00025 
-<a name="l00026"></a>00026       &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($this-&gt;campos[$campo][<span class="stringliteral">&#39;tabla&#39;</span>])?&gt;: &lt;/div&gt;
-<a name="l00027"></a>00027       &lt;select disabled name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>&gt;
-<a name="l00028"></a>00028          &lt;option readonly=<span class="stringliteral">&quot;readonly&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Seleccionar&#39;</span>)?&gt;&lt;/option&gt;
-<a name="l00029"></a>00029          &lt;?php <span class="keywordflow">foreach</span> ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;opciones&#39;</span>] as $res) { ?&gt;
-<a name="l00030"></a>00030             &lt;?php $count=0; ?&gt;
-<a name="l00031"></a>00031             &lt;?php <span class="keywordflow">foreach</span> ( $res as $contenido ) { ?&gt;
-<a name="l00032"></a>00032             &lt;?php <span class="keywordflow">if</span> ( $count == 0 ) $identificador = $contenido; ?&gt;
-<a name="l00033"></a>00033             &lt;?php <span class="keywordflow">if</span> ( $count == 1 ) $nombre = $contenido; ?&gt;
-<a name="l00034"></a>00034             &lt;?php $count++; ?&gt;
-<a name="l00035"></a>00035             &lt;?php } ?&gt;
-<a name="l00036"></a>00036             &lt;option value=<span class="stringliteral">&quot;&lt;?=$identificador?&gt;&quot;</span>&lt;?php <span class="keywordflow">if</span> ( $identificador == $this-&gt;valores($campo) ) echo <span class="stringliteral">&#39; selected&#39;</span> ;?&gt;&gt;&lt;?=$nombre?&gt;
-<a name="l00037"></a>00037             &lt;/option&gt;
-<a name="l00038"></a>00038          &lt;?php } ?&gt;
-<a name="l00039"></a>00039       &lt;/select&gt;
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041    &lt;?php } elseif ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;fecha&#39;</span> ) { ?&gt;
-<a name="l00042"></a>00042    
-<a name="l00043"></a>00043    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
-<a name="l00044"></a>00044    &lt;input readonly=<span class="stringliteral">&quot;readonly&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>  type=<span class="stringliteral">&quot;date&quot;</span> value=<span class="stringliteral">&quot;&lt;?=str_replace(&#39; &#39;,&#39;T&#39;,$this-&gt;valores($campo))?&gt;&quot;</span>/&gt;
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046    &lt;?php } elseif ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;fecha_hora&#39;</span> ) { ?&gt;
-<a name="l00047"></a>00047    
-<a name="l00048"></a>00048    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
-<a name="l00049"></a>00049    &lt;input readonly=<span class="stringliteral">&quot;readonly&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>  type=<span class="stringliteral">&quot;datetime-local&quot;</span> value=<span class="stringliteral">&quot;&lt;?php if ( $this-&gt;valores($campo) !== &#39;0000-00-00 00:00:00&#39; ) { echo strftime(&quot;</span>%Y-%m-%dT%H:%M<span class="stringliteral">&quot;,strtotime($this-&gt;valores($campo))); } else { echo &#39;&#39;; } ?&gt;&quot;</span>/&gt;
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051    &lt;?php } <span class="keywordflow">else</span> { ?&gt;
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
-<a name="l00054"></a>00054    &lt;input readonly=<span class="stringliteral">&quot;readonly&quot;</span> name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span> 
-<a name="l00055"></a>00055       &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;maxlength&#39;</span>]) ) { ?&gt;
-<a name="l00056"></a>00056       maxlength=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;maxlength&#39;]?&gt;&quot;</span> 
-<a name="l00057"></a>00057       &lt;?php } ?&gt;
-<a name="l00058"></a>00058       &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;size&#39;</span>]) ) { ?&gt;
-<a name="l00059"></a>00059       size=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;size&#39;]?&gt;&quot;</span> 
-<a name="l00060"></a>00060       &lt;?php } ?&gt;
-<a name="l00061"></a>00061       type=<span class="stringliteral">&quot;text&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$this-&gt;valores($campo)?&gt;&quot;</span>/&gt;
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063    &lt;?php } ?&gt;
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_error&quot;</span>&gt;
-<a name="l00066"></a>00066       &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;displayHash[<span class="stringliteral">&#39;PROBLEMS&#39;</span>][$campo]) ) echo $this-&gt;displayHash[<span class="stringliteral">&#39;PROBLEMS&#39;</span>][$campo]; ?&gt;
-<a name="l00067"></a>00067    &lt;/div&gt;
+<a name="l00026"></a>00026    &lt;?php } elseif ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;relacion&#39;</span>  ) { ?&gt;
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028       &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($this-&gt;campos[$campo][<span class="stringliteral">&#39;tabla&#39;</span>])?&gt;: &lt;/div&gt;
+<a name="l00029"></a>00029       &lt;select name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>&gt;
+<a name="l00030"></a>00030          &lt;option&gt;&lt;?=literal(<span class="stringliteral">&#39;Seleccionar&#39;</span>)?&gt;&lt;/option&gt;
+<a name="l00031"></a>00031          &lt;option&gt;&lt;/option&gt;
+<a name="l00032"></a>00032          &lt;?php <span class="keywordflow">foreach</span> ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;opciones&#39;</span>] as $res) { ?&gt;
+<a name="l00033"></a>00033             &lt;?php $count=0; ?&gt;
+<a name="l00034"></a>00034             &lt;?php <span class="keywordflow">foreach</span> ( $res as $contenido ) { ?&gt;
+<a name="l00035"></a>00035             &lt;?php <span class="keywordflow">if</span> ( $count == 0 ) $identificador = $contenido; ?&gt;
+<a name="l00036"></a>00036             &lt;?php <span class="keywordflow">if</span> ( $count == 1 ) $nombre = $contenido; ?&gt;
+<a name="l00037"></a>00037             &lt;?php $count++; ?&gt;
+<a name="l00038"></a>00038             &lt;?php } ?&gt;
+<a name="l00039"></a>00039             &lt;option value=<span class="stringliteral">&quot;&lt;?=$identificador?&gt;&quot;</span>&lt;?php <span class="keywordflow">if</span> ( $identificador == $this-&gt;valores($campo) ) echo <span class="stringliteral">&#39; selected&#39;</span> ;?&gt;&gt;
+<a name="l00040"></a>00040             &lt;?php echo $nombre; ?&gt;
+<a name="l00041"></a>00041             &lt;/option&gt;
+<a name="l00042"></a>00042          &lt;?php } ?&gt;
+<a name="l00043"></a>00043       &lt;/select&gt;
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045    &lt;?php } elseif ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;fecha&#39;</span> ) { ?&gt;
+<a name="l00046"></a>00046    
+<a name="l00047"></a>00047    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
+<a name="l00048"></a>00048    &lt;input name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>  type=<span class="stringliteral">&quot;date&quot;</span> value=<span class="stringliteral">&quot;&lt;?=str_replace(&#39; &#39;,&#39;T&#39;,$this-&gt;valores($campo))?&gt;&quot;</span>/&gt;
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050    &lt;?php } elseif ( $this-&gt;campos[$campo][<span class="stringliteral">&#39;tipo&#39;</span>] == <span class="stringliteral">&#39;fecha_hora&#39;</span> ) { ?&gt;
+<a name="l00051"></a>00051    
+<a name="l00052"></a>00052    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
+<a name="l00053"></a>00053    &lt;input name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span>  type=<span class="stringliteral">&quot;datetime-local&quot;</span> value=<span class="stringliteral">&quot;&lt;?php if ( $this-&gt;valores($campo) !== &#39;0000-00-00 00:00:00&#39; ) { echo strftime(&quot;</span>%Y-%m-%dT%H:%M<span class="stringliteral">&quot;,strtotime($this-&gt;valores($campo))); } else { echo &#39;&#39;; } ?&gt;&quot;</span>/&gt;
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055    &lt;?php } <span class="keywordflow">else</span> { ?&gt;
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_titulo&quot;</span>&gt;&lt;?=literal($campo)?&gt;: &lt;/div&gt;
+<a name="l00058"></a>00058    &lt;input name=<span class="stringliteral">&quot;&lt;?=$campo?&gt;&quot;</span> 
+<a name="l00059"></a>00059       &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;maxlength&#39;</span>]) ) { ?&gt;
+<a name="l00060"></a>00060       maxlength=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;maxlength&#39;]?&gt;&quot;</span> 
+<a name="l00061"></a>00061       &lt;?php } ?&gt;
+<a name="l00062"></a>00062       &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;campos[$campo][<span class="stringliteral">&#39;size&#39;</span>]) ) { ?&gt;
+<a name="l00063"></a>00063       size=<span class="stringliteral">&quot;&lt;?=$this-&gt;campos[$campo][&#39;size&#39;]?&gt;&quot;</span> 
+<a name="l00064"></a>00064       &lt;?php } ?&gt;
+<a name="l00065"></a>00065       type=<span class="stringliteral">&quot;text&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$this-&gt;valores($campo)?&gt;&quot;</span>/&gt;
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067    &lt;?php } ?&gt;
 <a name="l00068"></a>00068 
-<a name="l00069"></a>00069    &lt;/div&gt;
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071    &lt;?php } ?&gt;
+<a name="l00069"></a>00069    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;caja_campo_error&quot;</span>&gt;
+<a name="l00070"></a>00070       &lt;?php <span class="keywordflow">if</span> ( isset($this-&gt;displayHash[<span class="stringliteral">&#39;PROBLEMS&#39;</span>][$campo]) ) echo $this-&gt;displayHash[<span class="stringliteral">&#39;PROBLEMS&#39;</span>][$campo]; ?&gt;
+<a name="l00071"></a>00071    &lt;/div&gt;
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073    &lt;?php } ?&gt;
+<a name="l00073"></a>00073    &lt;/div&gt;
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075    &lt;?php } ?&gt;
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077    &lt;?php } ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 15 de Febrero de 2013 17:15:11 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

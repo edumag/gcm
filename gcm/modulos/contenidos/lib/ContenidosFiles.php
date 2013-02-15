@@ -165,7 +165,8 @@ class Contenidos extends ContenidosAbstract {
       $idiomaXdefecto = FALSE;
 
       if ( $contenido == "" )  {
-         registrar(__FILE__,__LINE__,"Necesito contenido especifico para poder trabajar",'ERROR');
+         registrar(__FILE__,__LINE__
+            ,"Es necesario especificar contenido",'ERROR');
          return ;
          }
 
@@ -195,20 +196,15 @@ class Contenidos extends ContenidosAbstract {
 
          if ( $idiomaXdefecto ) {                                    // Tenemos contenido con idioma x defecto
             
-            // Buscamos información sobre los idiomas disponibles
-            include("DATOS/idiomas/idiomas.php");
-            include("DATOS/idiomas/desactivados.php");
-            if ( !empty($desactivados) ) {
-               $todosLosIdiomas = array_merge($i_activados, $desactivados);
-            } else {
-               $todosLosIdiomas = $i_activados;
-            }
+            $todosLosIdiomas = glob('File/*');
 
             // Recorremos los idiomas
-            foreach ($todosLosIdiomas as $otro_idioma => $literal) {
+            foreach ($todosLosIdiomas as $item => $carpeta_idioma) {
+
+               $otro_idioma = str_replace('File/','',$carpeta_idioma);
 
                // Remplazar idioma predeterminado por el actual
-               $dir_otros_idiomas = str_replace("File/".Router::$ii, "File/".$otro_idioma, $dir);
+               $dir_otros_idiomas = str_replace("File/".Router::$ii, $carpeta_idioma, $dir);
 
                if (file_exists($dir_otros_idiomas)) {
 
@@ -279,20 +275,26 @@ class Contenidos extends ContenidosAbstract {
     * @param checkqued Ruta de directorio que debe quedar seleccionada, Tiene que 
     *        coincidir exactamente con la ruta de las secciones, ejemplo: File/es/seccion/subseccion
     * @param $multiple Se permite seleccionar másde uno o no.
+    * @param $ocultar  Directorio o contenido que no debe mostrarse, util para cuando se esta movimiendo
+    *                   y no debe seleccionarse a si mismo como destino.
     *
     */
 
    function mostrarSecciones($path, $path_visible=FALSE, $verDocumentos=FALSE, $seleccionable=TRUE, 
-                             $filtro=FALSE, $recursivo=TRUE, $checkqued=NULL, $multiple=TRUE) {
+                             $filtro=FALSE, $recursivo=TRUE, $checkqued=NULL, $multiple=TRUE, $ocultar = FALSE) {
 
       global $gcm;
 
       // Comprobar descartados
+      // Añadimos a los descartados por configuración el que se desea ocultar
 
-      if ( ($this->descartar) ) {
+      $items_a_descartar = $this->descartar ;
+      if ( $ocultar ) $items_a_descartar[] = $ocultar;
+
+      if ( ($items_a_descartar) ) {
 
          $descartar = FALSE;
-         foreach ( $this->descartar as $descartado ) {
+         foreach ( $items_a_descartar as $descartado ) {
             if ( strpos($path,$descartado) !== FALSE ) {
                registrar(__FILE__,__LINE__,'Descartado: '.$path. ' coincide con '.$descartado);
                $descartar = TRUE;
@@ -310,6 +312,7 @@ class Contenidos extends ContenidosAbstract {
             }
          }
 
+      if ( $ocultar ) $ocultar = comprobar_barra($ocultar,'eliminar');
       $path = comprobar_barra($path,'eliminar');
       $nombre_campo = 'seleccionado[]';
 
@@ -362,6 +365,8 @@ class Contenidos extends ContenidosAbstract {
 
          if ( $d->path == $checkqued ) { // Si es el que queremos tener seleccionado
             echo " <input checked type='".$tipo_campo."' name='".$nombre_campo."' value='", htmlentities($d->path), "' />";
+         } elseif ( $d->path == $ocultar ) { // No se debe mostrar
+            echo "Descartado";
          } else {
             echo " <input type='".$tipo_campo."' name='".$nombre_campo."' value='", htmlentities($d->path), "' />";
             }
@@ -417,7 +422,7 @@ class Contenidos extends ContenidosAbstract {
          }
 
       foreach($subsecciones as $x) {
-         $this->mostrarSecciones($x, $path_visible, $verDocumentos, $seleccionable, $filtro, $recursivo, $checkqued, $multiple);
+         $this->mostrarSecciones($x, $path_visible, $verDocumentos, $seleccionable, $filtro, $recursivo, $checkqued, $multiple, $ocultar);
          }
 
       echo "</div>";
@@ -444,7 +449,12 @@ class Contenidos extends ContenidosAbstract {
 
       $contenido = limpiarContenido($contenido);
       if ( ! $nuevoDoc = @fopen($fich, 'w') ) {
-         registrar(__FILE__, __LINE__, "No se puede abrir el archivo [".$fich."] para escribir",'ERROR');
+         registrar(__FILE__, __LINE__, 
+            "No se puede abrir el archivo [".$fich."] para escribir
+            La causa más probable es que no tengamos permisos en el directorio destino.
+            
+            Comprueba los permisos y recarga la pagina para poder guardar el contenido
+            ",'ERROR');
          return FALSE;
          }
 
@@ -522,7 +532,7 @@ class Contenidos extends ContenidosAbstract {
       global $gcm;
       $gcm->event->lanzar_accion_modulo('cache_http','borrar','renombrar_seccion',$ruta_origen);
 
-      if ( rename($ruta_origen,$seccion_nueva) ) {
+      if ( rename($ruta_origen,$ruta_destino) ) {
          return TRUE;
       } else {
          return FALSE;

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/html/titulo.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/html/sin_tema.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,22 +87,27 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">titulo.html</div>  </div>
+<div class="title">sin_tema.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;a href=<span class="stringliteral">&quot;&quot;</span> title=<span class="stringliteral">&quot;&lt;?php echo literal(&#39;inicio&#39;);?&gt;&quot;</span>&gt;
-<a name="l00002"></a>00002    &lt;h1&gt;
-<a name="l00003"></a>00003       &lt;?php echo literal($this-&gt;Titulo,1); ?&gt;
-<a name="l00004"></a>00004    &lt;/h1&gt;
-<a name="l00005"></a>00005    &lt;h2&gt;
-<a name="l00006"></a>00006       &lt;?php echo literal($this-&gt;Subtitulo,1); ?&gt;
-<a name="l00007"></a>00007    &lt;/h2&gt;
-<a name="l00008"></a>00008 &lt;/a&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form action=<span class="stringliteral">&quot;&lt;?php echo $_SERVER[&#39;PHP_SELF&#39;] ?&gt;&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00002"></a>00002    &lt;fieldset&gt;
+<a name="l00003"></a>00003       &lt;legend  accesskey=<span class="stringliteral">&quot;s&quot;</span>&gt;Nombre del nuevo tema&lt;/legend&gt;
+<a name="l00004"></a>00004       &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;tema&quot;</span> size=<span class="stringliteral">&quot;30&quot;</span> /&gt;
+<a name="l00005"></a>00005    &lt;/fieldset&gt;
+<a name="l00006"></a>00006    &lt;fieldset&gt;
+<a name="l00007"></a>00007       &lt;legend  accesskey=<span class="stringliteral">&quot;s&quot;</span>&gt;Seleccionar una acción&lt;/legend&gt;
+<a name="l00008"></a>00008       &lt;button name=<span class="stringliteral">&quot;a&quot;</span> value=<span class="stringliteral">&quot;nuevo_tema&quot;</span>&gt;Nuevo tema vacio&lt;/button&gt;
+<a name="l00009"></a>00009       &lt;button name=<span class="stringliteral">&quot;a&quot;</span> value=<span class="stringliteral">&quot;copia_tema&quot;</span>&gt;Nuevo tema basado en actual&lt;/button&gt;
+<a name="l00010"></a>00010       &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;m&quot;</span> value=<span class="stringliteral">&quot;temas&quot;</span> /&gt;
+<a name="l00011"></a>00011    &lt;/fieldset&gt;
+<a name="l00012"></a>00012 &lt;/form&gt;
+<a name="l00013"></a>00013 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 14 de Febrero de 2013 09:53:43 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

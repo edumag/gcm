@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Thu Feb 14 8:42:19 CET 2013
+// Archivo generado automaticamente por GcmConfig Fri Feb 15 17:09:49 CET 2013
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Listado completo de contenido']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
@@ -73,4 +73,38 @@ $GCM_LG_es['El correo no parece valido']='';
 $GCM_LG_es['Campo obligatorio']='';
 $GCM_LG_es['Insertar']='';
 $GCM_LG_es['Editar']='';
+$GCM_LG_es['Contraseña']='';
+$GCM_LG_es['Últimas entradas en']='';
+$GCM_LG_es['Contenido nuevo']='';
+$GCM_LG_es['Título']='';
+$GCM_LG_es['Título del contenido']='';
+$GCM_LG_es['Acciones']='';
+$GCM_LG_es['Guardar']='';
+$GCM_LG_es['Constantes']='';
+$GCM_LG_es['Añadir email oculto a los spammers']='';
+$GCM_LG_es['Nombre a mostrar']='';
+$GCM_LG_es['Email']='';
+$GCM_LG_es['Contenido añadido']='';
+$GCM_LG_es['Sin Contenido']='';
+$GCM_LG_es['Contenido [Seccion/Subseccion_de_prueba/Contenido_de_prueba.html] no encontrado']='';
+$GCM_LG_es['Registros de página actual']='';
+$GCM_LG_es['Registros']='';
+$GCM_LG_es['Contenido [Seccion/Subseccion_de_prueba/Probando_contenido.html] no encontrado']='';
+$GCM_LG_es['Contenido actualizado']='';
+$GCM_LG_es['Guardar contenido']='';
+$GCM_LG_es['Renombrar o mover contenido']='';
+$GCM_LG_es['Ejecutar']='';
+$GCM_LG_es['Contenido renombrado o movido']='';
+$GCM_LG_es['Confirmar borrado']='';
+$GCM_LG_es['Borrado de contenido']='';
+$GCM_LG_es['Contenido borrado']='';
+$GCM_LG_es['de']='';
+$GCM_LG_es['Configuración guardada']='';
+$GCM_LG_es['Nombre de sección']='';
+$GCM_LG_es['Renombrando o moviendo sección']='';
+$GCM_LG_es['Filtro']='';
+$GCM_LG_es['Publicar']='';
+$GCM_LG_es['No existe contenido a borrar']='';
+$GCM_LG_es['Sin sección']='';
+$GCM_LG_es['Sección [Seccion_de_prueba/Una_mas/] no encontrada']='';
 ?>

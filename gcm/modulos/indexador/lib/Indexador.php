@@ -270,7 +270,7 @@ class Indexador extends Modulos {
       if ( ! @file_exists($fichero) ) {
          registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).
             'No existe ['.$fichero.'] archivo, salimos');
-         return FALSE;
+         return ;
          }
 
       $fecha_creacion_at = date('Y-m-d H:i:s', filemtime($fichero));

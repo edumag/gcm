@@ -31,5 +31,5 @@
 $menuAdmin['Administración']['boton']['Borrar cache']['activado']= 1;
 $menuAdmin['Administración']['boton']['Borrar cache']['title']="Borrar cache";
 $menuAdmin['Administración']['boton']['Borrar cache']['link'] = 
-   "javascript:pedirDatos(\"".Router::$dir."borrar_cache\",\"respuesta_borrar_cache\");";
+   "javascript:pedirDatos(\"".Router::$dir."ajax/borrar_cache\",\"respuesta_borrar_cache\");";
 
