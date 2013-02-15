@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/solicitud/lib/Restricciones.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/rst2html/lib/Rst2html.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,44 +81,106 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_6dcf7604432fbe0cdce90d2c3270522a.html">solicitud</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_b45f4a2cdae25a1e4b75b511541262b6.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_373d56ee7ecdd957186c6921e2451b3f.html">rst2html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_cec5b1a3cf99bd00ce94541bdb3bec5d.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Restricciones.php</div>  </div>
+<div class="title">Rst2html.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 require_once(<span class="stringliteral">&quot;constantes.php&quot;</span>);
-<a name="l00004"></a>00004 
-<a name="l00005"></a><a class="code" href="../../d1/d22/a00057.html">00005</a> <span class="keyword">class </span><a class="code" href="../../d1/d22/a00057.html">Restricciones</a> {
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007   <span class="keyword">private</span> $_intConstraintType;
-<a name="l00008"></a>00008   <span class="keyword">private</span> $_strConstraintOperand;
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010   <span class="keyword">function</span> __construct($intConstraintType, $strConstraintOperand) {
-<a name="l00011"></a>00011     $this-&gt;_intConstraintType = $intConstraintType;
-<a name="l00012"></a>00012     $this-&gt;_strConstraintOperand = $strConstraintOperand;
-<a name="l00013"></a>00013   }
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015   <span class="keyword">function</span> GetConstraintType() {
-<a name="l00016"></a>00016     <span class="keywordflow">return</span>($this-&gt;_intConstraintType);
-<a name="l00017"></a>00017   }
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019   <span class="keyword">function</span> GetConstraintOperand() {
-<a name="l00020"></a>00020     <span class="keywordflow">return</span>($this-&gt;_strConstraintOperand);
-<a name="l00021"></a>00021   }
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 ?&gt;
+<a href="../../d5/da7/a00144.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/**</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file Rst2html.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief Transfomar texto rst a html</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @category   Gcm</span>
+<a name="l00008"></a>00008 <span class="comment"> * @subpackage Rst2html</span>
+<a name="l00009"></a>00009 <span class="comment"> * @author     Eduardo Magrané eduardo@mamedu.com</span>
+<a name="l00010"></a>00010 <span class="comment"> *</span>
+<a name="l00011"></a>00011 <span class="comment"> * @internal</span>
+<a name="l00012"></a>00012 <span class="comment"> *   Created  23/11/09</span>
+<a name="l00013"></a>00013 <span class="comment"> *  Revision  SVN $Id: modulo.php 483 2011-03-30 08:56:20Z eduardo $</span>
+<a name="l00014"></a>00014 <span class="comment"> * Copyright  Copyright (c) 2009, Eduardo Magrané</span>
+<a name="l00015"></a>00015 <span class="comment"> *</span>
+<a name="l00016"></a>00016 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00017"></a>00017 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00018"></a>00018 <span class="comment"> */</span>
+<a name="l00019"></a>00019 <span class="comment"></span>
+<a name="l00020"></a>00020 <span class="comment">/**</span>
+<a name="l00021"></a>00021 <span class="comment"> * @class Rst2html</span>
+<a name="l00022"></a>00022 <span class="comment"> * @brief rst2html</span>
+<a name="l00023"></a>00023 <span class="comment"> *</span>
+<a name="l00024"></a>00024 <span class="comment"> * Código extraido de:</span>
+<a name="l00025"></a>00025 <span class="comment"> *</span>
+<a name="l00026"></a>00026 <span class="comment"> * reStructuredText to HTML</span>
+<a name="l00027"></a>00027 <span class="comment"> * version 0.1b (2008-01-31)</span>
+<a name="l00028"></a>00028 <span class="comment"> * by Paul Kippes</span>
+<a name="l00029"></a>00029 <span class="comment"> *</span>
+<a name="l00030"></a>00030 <span class="comment"> * Requires local installation of reStructuredText parser</span>
+<a name="l00031"></a>00031 <span class="comment"> * See: http://docutils.sourceforge.net/rst.html</span>
+<a name="l00032"></a>00032 <span class="comment"> *</span>
+<a name="l00033"></a>00033 <span class="comment"> * Update $rst2html for the appropriate location of rst2html.py</span>
+<a name="l00034"></a>00034 <span class="comment"> *</span>
+<a name="l00035"></a>00035 <span class="comment"> * @version 0.1</span>
+<a name="l00036"></a>00036 <span class="comment"> */</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="../../d1/d6f/a00063.html">00038</a> <span class="keyword">class </span><a class="code" href="../../d1/d6f/a00063.html" title="rst2html">Rst2html</a> {
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040    <span class="keyword">static</span> <span class="keyword">function</span> convertir($input) {
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042       $rst2html = <span class="stringliteral">&#39;/usr/bin/rst2html&#39;</span>;
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044       <span class="keywordflow">if</span> (!is_executable($rst2html)) {
+<a name="l00045"></a>00045          <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;strong class=&#39;error&#39;&gt;&quot;</span> .
+<a name="l00046"></a>00046             <span class="stringliteral">&quot;reStructureText extension: No executable at $rst2html&quot;</span> .
+<a name="l00047"></a>00047             <span class="stringliteral">&quot;&lt;/strong&gt;&quot;</span>;
+<a name="l00048"></a>00048          }
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <span class="preprocessor">      # If pipe errors are reported, enable output to the file.</span>
+<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">      # But make certain the file doesn&#39;t already exist or else</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">      # the webserver may not have permission to create it.</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span>      $io_desc = array(
+<a name="l00054"></a>00054          0 =&gt; array(<span class="stringliteral">&#39;pipe&#39;</span>, <span class="charliteral">&#39;r&#39;</span>),
+<a name="l00055"></a>00055          1 =&gt; array(<span class="stringliteral">&#39;pipe&#39;</span>, <span class="charliteral">&#39;w&#39;</span>),
+<a name="l00056"></a>00056                <span class="comment">/* 2 =&gt; array(&#39;file&#39;, &#39;/tmp/error-output.txt&#39;, &#39;a&#39;) */</span>);
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058       $res = proc_open($rst2html . <span class="stringliteral">&quot; --stylesheet-path=&#39;&#39; &quot;</span> .
+<a name="l00059"></a>00059          <span class="stringliteral">&quot;--initial-header-level=2 --no-doc-title &quot;</span> .
+<a name="l00060"></a>00060          <span class="stringliteral">&quot;--no-file-insertion --no-raw&quot;</span>,
+<a name="l00061"></a>00061          $io_desc, $pipes, <span class="stringliteral">&#39;/tmp&#39;</span>, NULL);
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063       <span class="keywordflow">if</span> (is_resource($res)) {
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065          fwrite($pipes[0], $input);
+<a name="l00066"></a>00066          fclose($pipes[0]);
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068          $html = stream_get_contents($pipes[1]);
+<a name="l00069"></a>00069          fclose($pipes[1]);
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071          $html = preg_replace(<span class="stringliteral">&#39;/.*&lt;body&gt;\n(.*)&lt;\/body&gt;.*/s&#39;</span>, <span class="stringliteral">&#39;${1}&#39;</span>, $html);
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073       } <span class="keywordflow">else</span> {
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075          $html = <span class="stringliteral">&quot;&lt;strong class=&#39;error&#39;&gt;&quot;</span> .
+<a name="l00076"></a>00076             <span class="stringliteral">&quot;reStructureText extension: error opening pipe&quot;</span> .
+<a name="l00077"></a>00077             <span class="stringliteral">&quot;&lt;/strong&gt;&quot;</span>;
+<a name="l00078"></a>00078          }
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080       <span class="keywordflow">return</span> $html;
+<a name="l00081"></a>00081       }
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083    }
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
