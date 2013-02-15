@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/css/tinytable.css</title>
+<title>gcm: Fichero Fuente gcm/lib/int/array2table/css/tinytable.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -79,9 +79,10 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_1d927d548771ddffa1e7287445c148df.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_9e2b0a5ed21a9930c23570b5c6adb3b5.html">array2table</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_adddf0f76a41182e3e28585fc6ae1080.html">css</a>      </li>
     </ul>
   </div>
 </div>
@@ -94,48 +95,63 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/** Directorio con las imagenes de tinytabla */</span>
 <a name="l00004"></a>00004 
-<a name="l00005"></a>00005 $dir_img_tinytable = <a class="code" href="../../d9/d73/a00060_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.GCM_DIR.<span class="stringliteral">&#39;lib/ext/TinyTable/images/&#39;</span>;
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 echo <span class="stringliteral">&quot;\n/* Direcorio imágenes: $dir_img_tinytable */\n&quot;</span>;
+<a name="l00005"></a>00005 <span class="comment">/* </span>
+<a name="l00006"></a>00006 <span class="comment">$dir_img_tinytable = ( isset($dir_img_tinytable) ) ? $dir_img_tinytable : GCM_DIR.Router::$base.&#39;lib/ext/TinyTable/images/&#39;; </span>
+<a name="l00007"></a>00007 <span class="comment">*/</span>
 <a name="l00008"></a>00008 
-<a name="l00009"></a>00009 ?&gt;
-<a name="l00010"></a>00010 <span class="preprocessor">#tablewrapper {overflow: auto;width:100%; margin:0 auto}</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#tableheader {height:55px; width: 96%}</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span>.search {<span class="keywordtype">float</span>:left; padding:6px; border:1px solid #c6d5e1; background:#fff}
-<a name="l00013"></a>00013 <span class="preprocessor">#tableheader select {float:left; font-size:12px; width:125px; padding:2px 4px 4px}</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="preprocessor">#tableheader input {float:left; font-size:12px; width:225px; padding:2px 4px 4px; margin-left:4px}</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>.details {<span class="keywordtype">float</span>:right; padding-top:12px}
-<a name="l00016"></a>00016 .details div {<span class="keywordtype">float</span>:left; margin-left:15px; font-size:12px}
-<a name="l00017"></a>00017 .tinytable {width:96%; border-left:1px solid #c6d5e1; border-top:1px solid #c6d5e1; border-bottom:none}
-<a name="l00018"></a>00018 .tinytable th {background: #E0E0E3; text-align:left; color:#000; border:1px solid #fff; border-right:none}
-<a name="l00019"></a>00019 .tinytable th h3 {font-size:10px; padding:3px}
-<a name="l00020"></a>00020 .tinytable td {padding:2px; border-bottom:1px solid #c6d5e1; border-right:1px solid #c6d5e1}
-<a name="l00021"></a>00021 .tinytable .head h3 {background:url(&lt;?=$dir_img_tinytable?&gt;sort.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
-<a name="l00022"></a>00022 .tinytable .desc, .sortable .asc {background:url(&lt;?=$dir_img_tinytable?&gt;header-selected-bg.gif)}
-<a name="l00023"></a>00023 .tinytable .desc h3 {background:url(&lt;?=$dir_img_tinytable?&gt;desc.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
-<a name="l00024"></a>00024 .tinytable .asc h3 {background:url(&lt;?=$dir_img_tinytable?&gt;asc.gif) 7px  center no-repeat; cursor:pointer; padding-left:18px}
-<a name="l00025"></a>00025 .tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {color:#fff}
-<a name="l00026"></a>00026 .tinytable .evenrow td {background:#fff}
-<a name="l00027"></a>00027 .tinytable .oddrow td {background:#ecf2f6}
-<a name="l00028"></a>00028 .tinytable td.evenselected {background:#ecf2f6}
-<a name="l00029"></a>00029 .tinytable td.oddselected {background:#dce6ee}
-<a name="l00030"></a>00030 .tinytable tfoot {background:#fff; font-weight:bold}
-<a name="l00031"></a>00031 .tinytable tfoot td {padding:6px 8px 8px}
-<a name="l00032"></a>00032 <span class="preprocessor">#tablefooter {height:15px; margin-top:20px; width: 96%}</span>
-<a name="l00033"></a>00033 <span class="preprocessor"></span><span class="preprocessor">#tablenav {float:left}</span>
-<a name="l00034"></a>00034 <span class="preprocessor"></span><span class="preprocessor">#tablenav img {cursor:pointer}</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span><span class="preprocessor">#tablenav div {float:left; margin-right:15px}</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span><span class="preprocessor">#tablelocation {float:right; font-size:12px}</span>
-<a name="l00037"></a>00037 <span class="preprocessor"></span><span class="preprocessor">#tablelocation select {margin-right:3px}</span>
-<a name="l00038"></a>00038 <span class="preprocessor"></span><span class="preprocessor">#tablelocation div {float:left; margin-left:15px}</span>
-<a name="l00039"></a>00039 <span class="preprocessor"></span>.page {margin-top:2px; font-style:italic}
-<a name="l00040"></a>00040 <span class="preprocessor">#selectedrow td {background:#c6d5e1}</span>
-<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00009"></a>00009 $dir_img_tinytable = ( isset($dir_img_tinytable) ) ? $dir_img_tinytable : <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 echo <span class="stringliteral">&quot;/* Direcorio imágenes: $dir_img_tinytable */&quot;</span>;
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 ?&gt;
+<a name="l00014"></a>00014 <span class="preprocessor">#tablewrapper {overflow: auto;width:100%; margin:0 auto}</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span><span class="preprocessor">#tableheader {height:55px; width: 96%}</span>
+<a name="l00016"></a>00016 <span class="preprocessor"></span>.search {<span class="keywordtype">float</span>:left; padding:6px; border:1px solid #c6d5e1; background:#fff}
+<a name="l00017"></a>00017 <span class="preprocessor">#tableheader select {float:left; font-size:12px; width:125px; padding:2px 4px 4px}</span>
+<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#tableheader input {float:left; font-size:12px; width:225px; padding:2px 4px 4px; margin-left:4px}</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>.details {<span class="keywordtype">float</span>:right; padding-top:12px}
+<a name="l00020"></a>00020 .details div {<span class="keywordtype">float</span>:left; margin-left:15px; font-size:12px}
+<a name="l00021"></a>00021 .tinytable {width:96%; border-left:1px solid #c6d5e1; border-top:1px solid #c6d5e1; border-bottom:none}
+<a name="l00022"></a>00022 .tinytable th {background: currentColor; text-align:left; color:#cfdce7; border:1px solid #fff; border-right:none}
+<a name="l00023"></a>00023 .tinytable th h3 {font-size:10px; padding:3px}
+<a name="l00024"></a>00024 .tinytable td {padding:2px; border-bottom:1px solid #c6d5e1; border-right:1px solid #c6d5e1}
+<a name="l00025"></a>00025 .tinytable .head h3 {background:url(&lt;?=$dir_img_tinytable?&gt;sort.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
+<a name="l00026"></a>00026 .tinytable .desc, .sortable .asc {background:url(&lt;?=$dir_img_tinytable?&gt;header-selected-bg.gif)}
+<a name="l00027"></a>00027 .tinytable .desc h3 {background:url(&lt;?=$dir_img_tinytable?&gt;desc.gif) 7px center no-repeat; cursor:pointer; padding-left:18px}
+<a name="l00028"></a>00028 .tinytable .asc h3 {background:url(&lt;?=$dir_img_tinytable?&gt;asc.gif) 7px  center no-repeat; cursor:pointer; padding-left:18px}
+<a name="l00029"></a>00029 .tinytable .head:hover, .tinytable .desc:hover, .tinytable .asc:hover {color:#fff}
+<a name="l00030"></a>00030 .tinytable .evenrow td {background:#fff}
+<a name="l00031"></a>00031 .tinytable .oddrow td {background:#ecf2f6}
+<a name="l00032"></a>00032 .tinytable td.evenselected {background:#ecf2f6}
+<a name="l00033"></a>00033 .tinytable td.oddselected {background:#dce6ee}
+<a name="l00034"></a>00034 .tinytable tfoot {background:#fff; font-weight:bold}
+<a name="l00035"></a>00035 .tinytable tfoot td {padding:6px 8px 8px}
+<a name="l00036"></a>00036 <span class="preprocessor">#tablefooter {height:15px; margin-top:20px; width: 96%}</span>
+<a name="l00037"></a>00037 <span class="preprocessor"></span><span class="preprocessor">#tablenav {float:left}</span>
+<a name="l00038"></a>00038 <span class="preprocessor"></span><span class="preprocessor">#tablenav img {cursor:pointer}</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span><span class="preprocessor">#tablenav div {float:left; margin-right:15px}</span>
+<a name="l00040"></a>00040 <span class="preprocessor"></span><span class="preprocessor">#tablelocation {float:right; font-size:12px}</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span><span class="preprocessor">#tablelocation select {margin-right:3px}</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">#tablelocation div {float:left; margin-left:15px}</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span>.page {margin-top:2px; font-style:italic}
+<a name="l00044"></a>00044 <span class="preprocessor">#selectedrow td {background:#c6d5e1}</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 .tinytable tr.oddrow:hover  td {
+<a name="l00048"></a>00048 background: #98A4B8 !IMPORTANT;
+<a name="l00049"></a>00049 border: 1px solid #98A4B8;
+<a name="l00050"></a>00050 }
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 .tinytable tr.evenrow:hover td {
+<a name="l00053"></a>00053 background: #98A4B8 !IMPORTANT;
+<a name="l00054"></a>00054 border: 1px solid #98A4B8;
+<a name="l00055"></a>00055 }
+<a name="l00056"></a>00056 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Jueves, 14 de Febrero de 2013 09:53:42 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 15 de Febrero de 2013 17:15:11 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
