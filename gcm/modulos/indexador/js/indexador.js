@@ -8,7 +8,7 @@ function initListadoContenido(contexto) {
 
    /* Evento click */
 
-   $('.elemento_lista_off .titulo_articulo a:first', contexto ).click(function(e) {
+   $('.elemento_lista_off .titulo_articulo .enlace_entrada', contexto ).click(function(e) {
 
       var caja = $(this).parent("div").parent("div");
       var titulo = $(this).parent("div");
