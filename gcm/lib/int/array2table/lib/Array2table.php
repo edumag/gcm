@@ -80,20 +80,33 @@ class Array2table {
       $num_registros = count($res);
       $num_columnas  = count($res[0]);
 
+      /** Identificador de la tabla */
+      $table_id      = ( isset($opciones['table_id']))      ? $opciones['table_id']      : FALSE ;
+
       /** url base para enlaces */
       $url           = ( isset($opciones['url']))           ? $opciones['url']           : FALSE ;
+
       /** Nombre de variable get que lleva la acción */
       $accion        = ( isset($opciones['accion']))        ? $opciones['accion']        : FALSE ;
+
       /** identificador base para enlaces */
       $identificador = ( isset($opciones['identificador'])) ? $opciones['identificador'] : FALSE ;
+
       /** ver base para enlaces */
       $ver           = ( isset($opciones['ver']))           ? $opciones['ver']           : FALSE ;
+
       /** modificar base para enlaces */
       $modificar     = ( isset($opciones['modificar']))     ? $opciones['modificar']     : FALSE ;
+
       /** eliminar base para enlaces */
       $eliminar      = ( isset($opciones['eliminar']))      ? $opciones['eliminar']      : FALSE ;
+
       /** ocultar_id base para enlaces */
       $ocultar_id    = ( isset($opciones['ocultar_id']))    ? $opciones['ocultar_id']    : FALSE ;
+
+      /** Generar colgroup en la cabecera de la tabla */
+      $colgroup    = ( isset($opciones['colgroup']))    ? $opciones['colgroup']    : FALSE ;
+
       /** Url del directorio de los iconos */
       self::$base_imagenes = ( isset($opciones['dir_img']))    ? $opciones['dir_img']    : self::$base_imagenes ;
 
@@ -104,16 +117,20 @@ class Array2table {
       $simbolo = ( strrpos($url,'?') === FALSE ) ? '?' : '&';        //< Evitar colocar dos veces el interrogante en la url
 
       ?>
-     <table cellpadding="0" cellspacing="0" border="0" id="table" class="tinytable">
+         <table cellpadding="0" cellspacing="0" border="0" <?php if ( $table_id ) echo 'id="'.$table_id.'"';?> class="tinytable">
 
          <?php // Elementos colgroup nos permite modificar presentación por columnas ?>
 
-         <colgroup>
-         <?php foreach ( $res[0] as $columna => $valor ) { ?>
-         <?php if ( $columna == $identificador  && $ocultar_id ) continue; ?>
-         <col id="col_<?php echo htmlspecialchars($columna,ENT_QUOTES);?>"> 
+         <?php if ( $colgroup ) { ?>
+
+            <colgroup>
+            <?php foreach ( $res[0] as $columna => $valor ) { ?>
+            <?php if ( $columna == $identificador  && $ocultar_id ) continue; ?>
+            <col id="col_<?php echo htmlspecialchars($columna,ENT_QUOTES);?>"> 
+            <?php } ?>
+            </colgroup>
+
          <?php } ?>
-         </colgroup>
 
          <thead>
             <tr>
@@ -150,11 +167,11 @@ class Array2table {
 
             echo "\n\t\t\t";
             echo "<th".$clase.">";
-            echo "<a href='".htmlspecialchars($url_orden,ENT_QUOTES)."'>";
+            if ( $url ) echo "<a href='".htmlspecialchars($url_orden,ENT_QUOTES)."'>";
             echo "<h3>";
             echo $columna;
             echo "</h3>";
-            echo "</a>";
+            if ( $url ) echo "</a>";
             echo "</th>";
 
             }

@@ -167,6 +167,38 @@ class Ver_registros extends Modulos {
             return FALSE;
             }
 
+         // Probamos con tinytable
+
+         $opciones = array ('identificador'=>'id');
+
+         require_once(GCM_DIR.'lib/int/array2table/lib/TinyTable.php');
+
+         $conta = 0;
+         reset($registros);
+         while ( current($registros) ) {
+            $registro = current($registros);
+            list($id,$sesion,$fecha,$tipo,$fichero,$linea,$mensaje,$descripcion) = $registro;
+            $resultado[$conta]['id'] = $id;
+            $resultado[$conta]['sesion'] = $sesion;
+            $resultado[$conta]['fecha'] = $fecha;
+            $resultado[$conta]['tipo'] = $tipo;
+            $resultado[$conta]['fichero'] = $fichero;
+            $resultado[$conta]['linea'] = $linea;
+            $resultado[$conta]['mensaje'] = $mensaje;
+            // $resultado[$conta]['descripcion'] = $descripcion;
+            $conta++;
+            next($registros);
+            }
+
+
+         $array2table = new TinyTable();
+         $array2table->generar_tabla($resultado, $opciones);
+         return;
+
+
+
+
+
          $conta = 0;
          $sesion_anterior = '';
          $tipo_anterior = '';
