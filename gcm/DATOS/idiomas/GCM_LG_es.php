@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Mon Feb 25 16:10:52 CET 2013
+// Archivo generado automaticamente por GcmConfig Mon Feb 25 16:28:03 CET 2013
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
 $GCM_LG_es['Últimas entradas en']='';
@@ -281,4 +281,15 @@ $GCM_LG_es['Configuración de comentarios']='';
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Registros de página actual']='';
 $GCM_LG_es['Registros']='';
+$GCM_LG_es['Sección [MagTrabajos/] no encontrada']='';
+$GCM_LG_es['Contenido [apuntes/Linux/Maquinas_y_linux/Conectar_con_escritorio_remoto.html] no encontrado']='';
+$GCM_LG_es['Sección [apuntes/google/Proyectos/MagScripts/] no encontrada']='';
+$GCM_LG_es['Contenido [apuntes/google/Alta en google.html] no encontrado']='';
+$GCM_LG_es['Contenido [Proyectos/MagScripts/gdoxygen/de/a00006_source.htm] no encontrado']='';
+$GCM_LG_es['Sección [apuntes/apuntes/programacion/drupal/] no encontrada']='';
+$GCM_LG_es['Contenido [apuntes/Linux/consola/function.is-dir] no encontrado']='';
+$GCM_LG_es['Contenido [apuntes/programacion/Php/Varios.html] no encontrado']='';
+$GCM_LG_es['Contenido [apuntes/programacion/Php/test_programación.html] no encontrado']='';
+$GCM_LG_es['Contenido [registrar] no encontrado']='';
+$GCM_LG_es['Contenido [registro] no encontrado']='';
 ?>
