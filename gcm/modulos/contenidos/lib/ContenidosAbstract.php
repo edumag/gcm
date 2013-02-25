@@ -160,7 +160,7 @@ abstract class ContenidosAbstract extends Modulos {
       switch($e) {
 
          case 'traducir':
-            $titulo = literal($this->devolver_titulo());
+            $titulo = $this->devolver_titulo();
             $evento = 'ejecutar_traducir';
             $boton  = 'Traducir';
             break;
@@ -195,7 +195,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       $contenido = $this->devolver_contenido($gcm->seleccionado[0]);
 
-      $titulo = literal($this->devolver_titulo($gcm->seleccionado[0]));
+      $titulo = $this->devolver_titulo($gcm->seleccionado[0]);
 
       $gcm->router->inicia($gcm->seleccionado[0]);
 
@@ -290,7 +290,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       $ruta = $gcm->event->instancias['temas']->ruta('temas','html','sin_contenido.html');
 
-      registrar(__FILE__,__LINE__,literal('Contenido ['.Router::$s.Router::$c.'] no encontrado',3),'ERROR');
+      registrar(__FILE__,__LINE__,literal('Contenido').' ['.Router::$s.Router::$c.'] '.literal('no encontrado',3),'ERROR');
       return;
 
       if ( $ruta ) {
@@ -318,9 +318,9 @@ abstract class ContenidosAbstract extends Modulos {
 
       if ( file_exists(Router::$dd) ) {
          $gcm->titulo = literal('Sin sección',3);
-         registrar(__FILE__,__LINE__,literal('Sección ['.Router::$s.'] no encontrada',3),'ERROR');
+         registrar(__FILE__,__LINE__,literal('Sección',3).' ['.Router::$s.'] '.literal('no encontrada',3),'ERROR');
       } else {
-         registrar(__FILE__,__LINE__,literal('Creamos directorio para contenido ['.Router::$dd.']',3),'ERROR');
+         registrar(__FILE__,__LINE__,literal('Creamos directorio para contenido',3).' ['.Router::$dd.']','ERROR');
          mkdir_recursivo(Router::$dd);
          }
 
