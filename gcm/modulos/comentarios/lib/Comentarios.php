@@ -296,7 +296,7 @@ class Comentarios extends Modulos {
                nombre CHAR(60) ,
                mail CHAR(60) ,
                contenido CHAR(100),
-               comentario CHAR(500),
+               comentario TEXT,
                PRIMARY KEY (id)
                )";
 
