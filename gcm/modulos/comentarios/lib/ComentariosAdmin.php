@@ -146,18 +146,26 @@ class ComentariosAdmin extends Comentarios {
       $condicion = ( $args['id'] ) ? " AND c.id=".$args['id'] : '';
       // $campo =  ( ! $id_proyecto ) ? " p.nombre as Proyecto," : '';
 
-      $sql = "SELECT c.id, c.url, c.fecha, c.nombre, c.mail, c.contenido, c.comentario  
-         FROM ".$this->tabla." c ORDER BY c.fecha desc";
+      $sql = 'SELECT c.id,c. fecha_creacion `fecha creación`, 
+         c.url, c.contenido , 
+         c.nombre, c.mail, c.comentario  
+         FROM '.$this->tabla.' c ORDER BY c.fecha_creacion desc';
 
       $gcmpdo = new GcmPDO($this->pdo, $sql);
       $array = $gcmpdo->to_array();
-      $opciones = array (
-         'url'=>'?comentario='
-         , 'identificador'=>'id'
+      $opciones = array ('url'=>'?comentario='
+         , 'Identificador'=>'id'
+         , 'ver'=>'ver'
          , 'modificar'=>'modificar'
          , 'eliminar'=>'eliminar'
-         , 'ver'=>'ver'
+         , 'ocultar_id'=>TRUE
          , 'accion'=>'accion'
+         , 'fila_unica'=>'comentario'
+         , 'enlaces'=> array('url' => array('campo_enlazado'=>'contenido'
+                                           ,'titulo_columna'=>'Contenido'
+                                           ,'base_url'=>Router::$base
+                                        )
+                            )
          );
 
 

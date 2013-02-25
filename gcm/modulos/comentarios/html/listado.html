@@ -1,7 +1,7 @@
 <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
 <div class='caja_comentario_ind' id="comentario_<?=$fila->id?>">
    <div class="encabezado_comentario">
-      <p class="fecha_comentario"><?=presentarFecha($fila->fecha,1,'mysql')?></p>
+      <p class="fecha_comentario"><?=presentarFecha($fila->fecha_creacion,1,'mysql')?></p>
       <?php if ( $gcm->au->logeado() ) { ?>
       <!--<a href="javascript:pedirDatos('<?=Router::$dir?>comentarios/modificar/<?=$fila->id?>','modificarComentario');" title='<?=literal('Modificar')?>' >-->
       <a href="?e=modificar_comentario&id=<?=$fila->id?>" title='<?=literal('Modificar')?>' >

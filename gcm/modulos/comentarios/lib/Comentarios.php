@@ -31,6 +31,13 @@ class Comentarios extends Modulos {
    protected $tabla   = NULL;                        ///< Nombre de la tabla con prefijo
 
    /**
+    * Tipo de base de datos ( mysql o sqlite )
+    */
+
+   protected $tipo_base_datos ;
+
+   private $moderacion;                              ///< Activación de moderación de comentarios TRUE/FALSE
+   /**
     * Saber si hemos cargado ya el javascript del editor web
     */
 
@@ -45,6 +52,8 @@ class Comentarios extends Modulos {
       $this->pdo     = $gcm->pdo_conexion();
       $this->prefijo = $gcm->sufijo;
       $this->tabla   = $this->prefijo.'comentarios';
+
+      $this->tipo_base_datos = $this->pdo->getAttribute(constant("PDO::ATTR_DRIVER_NAME"));
 
       /** Comprobar la existencia de la tabla comentarios, sino la creamos */
 
@@ -65,6 +74,8 @@ class Comentarios extends Modulos {
          }
 
       parent::__construct();
+
+      $this->moderacion = $this->config('moderación');
 
    }
 
@@ -90,8 +101,8 @@ class Comentarios extends Modulos {
 
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 
-      $SQL  = "SELECT fecha, nombre, url, contenido, comentario FROM ".$this->tabla;
-      $SQL .= " ORDER BY fecha desc";
+      $SQL  = "SELECT fecha_creacion, nombre, url, contenido, comentario FROM ".$this->tabla;
+      $SQL .= " ORDER BY fecha_creacion desc";
 
       $pd = new PaginarPDO($this->pdo, $SQL, 'ult_');
 
@@ -139,8 +150,8 @@ class Comentarios extends Modulos {
 
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 
-      $SQL  = "SELECT id, fecha, nombre, url, contenido, comentario FROM ".$this->tabla." WHERE url='".Router::$url."'";
-      $SQL .= " ORDER BY fecha desc";
+      $SQL  = "SELECT id, fecha_creacion, nombre, url, contenido, comentario FROM ".$this->tabla." WHERE url='".Router::$url."'";
+      $SQL .= " ORDER BY fecha_creacion desc";
 
       $pd = new PaginarPDO($this->pdo, $SQL, 'comentarios_');
 
@@ -246,9 +257,7 @@ class Comentarios extends Modulos {
 
       global $gcm;
 
-      $driver = $this->pdo->getAttribute(constant("PDO::ATTR_DRIVER_NAME"));
-
-      switch($driver) {
+      switch($this->tipo_base_datos) {
 
          case 'sqlite':
 
@@ -257,11 +266,11 @@ class Comentarios extends Modulos {
             $SQL="CREATE TABLE ".$this->tabla." (
                id INTEGER PRIMARY KEY ,
                url CHAR(150) ,
-               fecha TIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+               fecha_creacion TIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
                nombre CHAR(60) ,
                mail CHAR(60) ,
                contenido CHAR(100),
-               comentario CHAR(100)
+               comentario CHAR(500)
                )";
 
             if ( ! $sqlResult = $this->pdo->query($SQL) ) {
@@ -283,15 +292,15 @@ class Comentarios extends Modulos {
             $SQL="CREATE TABLE ".$this->tabla." (
                id MEDIUMINT NOT NULL AUTO_INCREMENT ,
                url CHAR(150) ,
-               fecha DATETIME ,
+               fecha_creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                nombre CHAR(60) ,
                mail CHAR(60) ,
                contenido CHAR(100),
-               comentario CHAR(100),
+               comentario CHAR(500),
                PRIMARY KEY (id)
                )";
 
-            if ( ! $sqlResult = $this->pdo->query($SQL, SQLITE_ASSOC) ) {
+            if ( ! $sqlResult = $this->pdo->query($SQL) ) {
 
                registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'() ERROR al crear tabla '.$this->tabla.' '.$pdo_error,'ERROR');
                return FALSE;

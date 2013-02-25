@@ -371,10 +371,14 @@ function presentarBytes($bytes) {
  *
  * @param $time tiempo unix
  * @param $formato_salida Formato de salida 
- * 1- 08 de May, 2008
- * 2- 08 de May, 2008 23.34
- * 3- 08 May
- * @param $formato_entrada Formato de entrada, por defecto unix
+ *                        1- 08 de May, 2008
+ *                        2- 08 de May, 2008 23.34
+ *                        3- 08 May
+ * @param $formato_entrada Formatos de entrada (por defecto unix):
+ *                         - unix
+ *                         - mysql   datatime
+ *                         - sqlite  se espera unix
+ *                         - deducir Intentaremos deducir cual es
  *
  * @return fecha formateada
  *
@@ -383,6 +387,17 @@ function presentarBytes($bytes) {
 function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
    registrar(__FILE__,__LINE__, "<br>time: $time / formato_entrada: $formato_entrada / formato_salida: $formato_salida");
+
+   if ( $formato_entrada == 'sqlite' ) $formato_entrada = 'unix';
+
+   if ( $formato_entrada == 'deducir' ) {
+
+      if ( is_int($time) ) {
+         $formato_entrada = 'unix';
+      } else {
+         registrar(__FILE__,__LINE__, "No se pudo dedicir el formato de la fecha [".$time."]",'ADMIN');
+         }
+      }
 
    if ( $formato_entrada != 'unix' ) {
 

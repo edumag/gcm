@@ -854,6 +854,8 @@ class Crud extends DataBoundObject {
 
             if ( $resultado ) {
 
+               if (get_magic_quotes_gpc()) echo "MAGIC_QUOTES_ON";
+
                foreach ( $this->arRelationMap as $campo => $rCampo ) {
 
                   if ( isset($this->ID) && $campo == 'fecha_creacion'  ) {
@@ -867,7 +869,11 @@ class Crud extends DataBoundObject {
                      }
 
                   if ( $campo != 'id'  ) {
-                     $this->SetAccessor($rCampo, $resultado[$campo]);
+                     if (get_magic_quotes_gpc() == 1) {
+                        $this->SetAccessor($rCampo, stripslashes($resultado[$campo]));
+                     } else {
+                        $this->SetAccessor($rCampo, $resultado[$campo]);
+                        }
                      }
 
                   }
@@ -1008,7 +1014,7 @@ class Crud extends DataBoundObject {
 
          // Boton borrar
          if (  $this->ID ) {
-            echo ' <a class="formulari2" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
+            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->DefineTableName().'" class="formulari2" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
             }
 
          // Boton Cancelar
@@ -1064,7 +1070,7 @@ class Crud extends DataBoundObject {
                'url'           => '?'.$this->DefineTableName().'_id='
                ,'identifiador' => 'id'
                ,'modificar'    => 'editar'  
-               ,'eliminar'     => 'eliminar'
+               // ,'eliminar'     => 'eliminar'
                //,'ver'          => 'ver'
                ,'accion'       => $this->DefineTableName().'_accion'
                ,'ocultar_id'   => 1

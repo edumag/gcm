@@ -20,7 +20,7 @@
 require_once(GCM_DIR.'lib/int/databoundobject/lib/DataBoundObject.php');
 
 /**
- * @class Comentarios.php
+ * @class Comentarios_dbo.php
  * @brief Modelo para los comentarios de las entradas.
  * @version 0.1
  */

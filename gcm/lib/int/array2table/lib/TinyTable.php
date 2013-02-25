@@ -93,7 +93,7 @@ class TinyTable extends Array2table {
     * 
     */
 
-   function generar_tabla($res, $opciones=NULL, $orden = FALSE , $tipo_orden = FALSE) {
+   function generar_tabla($res, $opciones=FALSE, $orden = FALSE , $tipo_orden = FALSE) {
       
       ?>
       <div id="tablewrapper">
@@ -109,6 +109,12 @@ class TinyTable extends Array2table {
            </div>
 
       <?php
+
+      if ( $opciones ) {
+         $opciones = array_merge(array( 'table_id' => 'table'), $opciones);
+      } else {
+         $opciones = array( 'table_id' => 'table');
+         }
 
       parent::generar_tabla($res, $opciones);
 
