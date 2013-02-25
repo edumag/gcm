@@ -31,7 +31,7 @@
       <?php */ ?>
    </div>
    <div class='contenidoListadoComentario'>
-      <?php echo stripslashes($fila->comentario); ?>
+      <?php echo substr(stripslashes($fila->comentario),0,100); ?>
    </div> <!-- Acaba contenidoListado -->
 </div> <!-- Acaba cajaListado -->
 

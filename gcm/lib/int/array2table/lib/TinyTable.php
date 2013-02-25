@@ -79,17 +79,16 @@ class TinyTable extends Array2table {
     *   Si se desea cambiar 'accion' por otra palabra se puede especificar en opciones.
     *
     * 
-    * @param $res Array con el contenido
-    *        Formato del array $resultado[0][columna]=valor
+    * @param $res      Array con el contenido, formato del array $resultado[0][columna]=valor
+    * @param $opciones Array con las diferentes opciones:
     *
-    * @param $opciones Array con las diferentes opciones
-    *         identificador = '<nombre columna que hace de identificador>', por defecto 'id'.
-    *         ver           = '<nombre de la acción para entrar en detalles de un registro>'
-    *         modificar     = '<nombre de la acción para modificar>', es necesario tener identificador
-    *         eliminar      = '<nombre de la acción para eliminar registro>', Es necesario identificador
-    *         ocultar_id    = TRUE/FALSE Ocultar columna de identificador.
-    *         url           = 'Url para enlaces de registro'
-    *         accion        = 'Nombre de variable GET que se pasara en url, por defecto 'accion'
+    *     identificador <nombre columna que hace de identificador>', por defecto 'id'
+    *     ver           <nombre de la acción para entrar en detalles de un registro>
+    *     modificar     <nombre de la acción para modificar>', es necesario tener identificador
+    *     eliminar      <nombre de la acción para eliminar registro>', Es necesario identificador
+    *     ocultar_id    TRUE/FALSE Ocultar columna de identificador.
+    *     url           Url para enlaces de registro
+    *     accion        Nombre de variable GET que se pasara en url, por defecto 'accion'
     * 
     */
 

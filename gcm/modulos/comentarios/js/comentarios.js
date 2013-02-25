@@ -4,7 +4,7 @@ function modificarComentario(id) {
          var datos = pedido.responseText;
          if ( datos ) {
             if ( datos == 'FALSE' ) {
-               alert('No se pudo borrar comentario');
+               alert('No se pudo modificar comentario');
                return false;
             } else {
                $('#comentario_'+datos).replaceWith(datos);

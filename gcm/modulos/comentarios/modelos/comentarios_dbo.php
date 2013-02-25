@@ -28,7 +28,7 @@ require_once(GCM_DIR.'lib/int/databoundobject/lib/DataBoundObject.php');
 class Comentarios_dbo extends DataBoundObject {
 
    protected $Url;
-   protected $Fecha;
+   protected $Fecha_creacion;
    protected $Nombre;
    protected $Mail;
    protected $Contenido;
@@ -44,7 +44,7 @@ class Comentarios_dbo extends DataBoundObject {
       return (array(
          "id"=>"ID",
          "url"=>"Url",
-         "fecha"=>"Fecha",
+         "fecha_creacion"=>"Fecha_creacion",
          "nombre"=>"Nombre",
          "mail"=>"Mail",
          "contenido"=>"Contenido",

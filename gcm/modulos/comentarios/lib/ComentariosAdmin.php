@@ -38,10 +38,12 @@ class ComentariosAdmin extends Comentarios {
 
       require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
 
-      if ( !empty($args) ) {
+      if ( !empty($args) && is_array($args) ) {
+         $id = $args[0] ;
+      } elseif ( !empty($args) && ! is_array($args) ) {
          $id = $args ;
       } elseif ( !empty(Router::$args) ) {
-         $id = Router::$args;
+         $id = Router::$args[0];
       } else {
          registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Sin identificaor no se puede borrar comentario','ERROR');
          echo "FALSE";
@@ -49,13 +51,13 @@ class ComentariosAdmin extends Comentarios {
          }
 
       $comentario = new Comentarios_dbo($this->pdo, $id);
-      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_eliminado',$id);
-
       $comentario->MarkForDeletion();
-      registrar(__FILE__,__LINE__,literal('Comentario borrado'),'AVISO');
+      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_eliminado',Router::$s.Router::$c);
       if ( Router::$formato == 'ajax' ) {
          echo $id;
          exit();
+      } else {
+         registrar(__FILE__,__LINE__,literal('Comentario borrado'),'AVISO');
          }
 
       }
@@ -98,7 +100,7 @@ class ComentariosAdmin extends Comentarios {
 
          if ( $resultado ) {
 
-            $comentario->setFecha(time());
+            $comentario->setFecha_creacion(time());
             $comentario->setNombre($resultado['usuario']);
             $comentario->setMail($resultado['mail']);
             $comentario->setUrl(Router::$s.Router::$c);
@@ -122,7 +124,7 @@ class ComentariosAdmin extends Comentarios {
       }
 
    /**
-    * Listar comentarios
+    * Listar comentarios para administración
     */
 
    function listar($e, $args) {
@@ -155,6 +157,7 @@ class ComentariosAdmin extends Comentarios {
       $array = $gcmpdo->to_array();
       $opciones = array ('url'=>'?comentario='
          , 'Identificador'=>'id'
+         , 'table_id'=>'commentarios'
          , 'ver'=>'ver'
          , 'modificar'=>'modificar'
          , 'eliminar'=>'eliminar'

@@ -230,7 +230,12 @@ abstract class DataBoundObject {
                          id = :eid';
             $objStatement = $this->objPDO->prepare($strQuery);
             $objStatement->bindValue(':eid', $this->ID, PDO::PARAM_INT);   
-                        $objStatement->execute();
+
+            try {
+               $objStatement->execute();
+            } catch (Exception $ex) {
+               registrar(__FILE__,__LINE__,'Error con BD: '.$ex->getMessage(),'ERROR');
+               }
          };
       }
       }
