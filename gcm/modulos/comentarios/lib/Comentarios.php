@@ -303,7 +303,7 @@ class Comentarios extends Modulos {
                comentario CHAR(500),
                activado INTEGER,
                padre INTEGER,
-               usuarios_id INTEGER
+               usuarios_id CHAR(40)
                )";
 
             if ( ! $sqlResult = $this->pdo->query($SQL) ) {
@@ -332,7 +332,7 @@ class Comentarios extends Modulos {
                comentario TEXT,
                activado TINYINT,
                padre MEDIUMINT,
-               usuarios_id MEDIUMINT,
+               usuarios_id CHAR(40),
                PRIMARY KEY (id)
                )";
 
