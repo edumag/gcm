@@ -1,3 +1,12 @@
+<?php
+
+/** 
+ * @file comentarios.css
+ * @brief css para los comentarios
+ * @ingroup modulo_comentarios
+ */
+
+ ?>
 #caja_ultimos_comentarios {
 	font-size: x-small;
 	padding: 2px;

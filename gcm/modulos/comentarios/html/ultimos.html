@@ -1,3 +1,12 @@
+<?php
+
+/** 
+ * @file ultimos.html
+ * @brief Plantilla para mostrar los últimos comentarios añadidos
+ * @ingroup modulo_comentarios
+ */
+
+ ?>
 <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
 
 <?php $caminos = explode('/',$fila->url); ?>

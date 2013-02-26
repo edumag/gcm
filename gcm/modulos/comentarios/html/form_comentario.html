@@ -1,3 +1,12 @@
+<?php
+
+/** 
+ * @file form_comentario.html
+ * @brief Plantilla de formulario para añadir un comentario a una entrada
+ * @ingroup modulo_comentarios
+ */
+
+ ?>
 <form method='post' action="<?=Router::$dir.Router::$url?>" >
 <?=anyadirCaptcha();?>
 <input style='display: none;' type='hidden' name='a' value='<?=$accion?>' />

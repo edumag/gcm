@@ -15,6 +15,9 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @defgroup modulos_aplicacion Módulos de la aplicación
+ * @{
  */
 
 /* GcmConfig */
@@ -277,4 +280,6 @@ abstract class Modulos {
       }
 
    }
+
+/** @} */
 ?>

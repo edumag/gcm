@@ -17,11 +17,6 @@
 
 /** 
  * Transformar contenido array en tabla html
- *
- * @category Gcm
- * @author Eduardo Magrané
- * @version 0.1
- *
  */
 
 class Array2table {
@@ -63,15 +58,15 @@ class Array2table {
     *
     * @param $opciones Array con las diferentes opciones:
     *
-    *     identificador  '<nombre columna que hace de identificador>', por defecto 'id'.
-    *     ver            '<nombre de la acción para entrar en detalles de un registro>'
-    *     modificar      '<nombre de la acción para modificar>', es necesario tener identificador
-    *     eliminar       '<nombre de la acción para eliminar registro>', Es necesario identificador
+    *     identificador  Nombre columna que hace de identificador>', por defecto 'id'.
+    *     ver            Nombre de la acción para entrar en detalles de un registro>'
+    *     modificar      Nombre de la acción para modificar>', es necesario tener identificador
+    *     eliminar       Nombre de la acción para eliminar registro>', Es necesario identificador
     *     ocultar_id     TRUE/FALSE Ocultar columna de identificador.
-    *     url            'Url para enlaces de registro'
-    *     accion         'Nombre de variable GET que se pasara en url, por defecto 'accion'
-    *     dir_imag       'Url del directorio donde se encuentran los iconos modificar, eliminar, etc...
-    *     enlaces        array con el contenido de los campos que contienen un enlace.
+    *     url            Url para enlaces de registro'
+    *     accion         Nombre de variable GET que se pasara en url, por defecto 'accion'
+    *     dir_imag       Url del directorio donde se encuentran los iconos modificar, eliminar, etc...
+    *     enlaces        Array con el contenido de los campos que contienen un enlace.
     *
     *                    Estructura de ejemplo:
     *
@@ -221,6 +216,7 @@ class Array2table {
          }
 
       if ( $ver ) {
+         $num_columnas++;
          ?>
          <th>
             <h3>
@@ -233,6 +229,7 @@ class Array2table {
          }
 
       if ( $modificar ) {
+         $num_columnas++;
          ?>
          <th>
             <h3>
@@ -245,6 +242,7 @@ class Array2table {
          }
 
       if ( $eliminar ) {
+         $num_columnas++;
          ?>
          <th>
             <h3>
@@ -336,7 +334,6 @@ class Array2table {
          if ($enlace)  {
 
             if ( $modificar ) {
-               $num_columnas++;
                echo "\n\t\t\t<td><a href='$enlace&$accion=".$modificar."'>
                <img src='".self::$base_imagenes.self::$img_modificar."'
                width='16' height='16' border='0' title='Modificar' 
@@ -344,7 +341,6 @@ class Array2table {
                }
 
             if ( $eliminar ) {
-               $num_columnas++;
                echo "\n\t\t\t<td><a href='$enlace&$accion=$eliminar'>
                <img src='".self::$base_imagenes.self::$img_borrar."'
                width='16' height='16' border='0' title='Eliminar' 
@@ -352,7 +348,6 @@ class Array2table {
                }
 
             if ( $ver ) {
-               $num_columnas++;
                echo "\n\t\t\t<td><a href='$enlace&$accion=ver'>
                <img src='".self::$base_imagenes.self::$img_ver."' 
                width='16' height='16' border='0' title='ver' 

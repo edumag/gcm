@@ -152,7 +152,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
 }
 
-if( ! function_exists("registrar") ) {
+if ( ! function_exists("registrar") ) {
 
 /** registrar 
  *
@@ -1040,5 +1040,34 @@ function borrar_archivos_viejos($horas, $patron) {
       }
 
    }
+
+if ( ! function_exists("sesion") ) {
+
+/**
+ * Con session() podemos recoger comodamente variables de sesión sin 
+ * preocuparnos de que choquen entre proyectos.
+ *
+ * Una posible aplicación puede ser utilizar cookies para mantener las
+ * sesiones de un día para otro.
+ */
+
+function sesion($elemento, $valor=FALSE) {
+
+   global $gcm;
+
+   if ( $valor ) {
+      $_SESSION[$gcm->sufijo.$elemento] = $valor ;
+      return;
+      }
+
+   if ( isset($_SESSION[$gcm->sufijo.$elemento]) ) 
+      return $_SESSION[$gcm->sufijo.$elemento];
+
+   return FALSE;
+
+   }
+
+
+}
 
 ?>

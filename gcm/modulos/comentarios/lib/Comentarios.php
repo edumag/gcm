@@ -2,6 +2,7 @@
 
 /**
  * @file      Comentarios.php
+ * @brief     Módulo para comentarios
  *
  * @author    Eduardo Magrané 
  *
@@ -14,14 +15,16 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
-/** Comentarios
- *
- * Este módulo nos permite que los usuarios entren comentarios
+/** 
+ * @class Comentarios
+ * @brief Este módulo nos permite que los usuarios entren comentarios
  *
  * @todo Evitar spam comprobando enlaces en texto de comentario
  * @todo Comprobar email en caso de que queramos hacerlo
  * @todo Configurar módulo número que se presentan etc...
+ * @todo Modiicar el campo contenido, si hay evento de cambio de nombre de un contenido
  *
+ * @ingroup modulo_comentarios
  */
 
 class Comentarios extends Modulos {
@@ -29,14 +32,10 @@ class Comentarios extends Modulos {
    protected $pdo     = NULL;                        ///< Instancia a la base de datos
    protected $prefijo = NULL;                        ///< Prefijo para la tabla
    protected $tabla   = NULL;                        ///< Nombre de la tabla con prefijo
-
-   /**
-    * Tipo de base de datos ( mysql o sqlite )
-    */
-
-   protected $tipo_base_datos ;
+   protected $tipo_base_datos ;                      ///< Tipo de base de datos ( mysql o sqlite )
 
    private $moderacion;                              ///< Activación de moderación de comentarios TRUE/FALSE
+
    /**
     * Saber si hemos cargado ya el javascript del editor web
     */
@@ -101,7 +100,7 @@ class Comentarios extends Modulos {
 
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 
-      $SQL  = "SELECT fecha_creacion, nombre, url, contenido, comentario FROM ".$this->tabla;
+      $SQL  = "SELECT fecha_creacion, nombre, url, contenido, comentario, activado, usuarios_id FROM ".$this->tabla;
       $SQL .= " ORDER BY fecha_creacion desc";
 
       $pd = new PaginarPDO($this->pdo, $SQL, 'ult_');
@@ -127,13 +126,33 @@ class Comentarios extends Modulos {
 
       }
 
+   /**
+    * Comprobar permisos
+    *
+    * - Si tiene permisos para moderar TRUE
+    * - Si es el autor del comentario TRUE
+    * - Si es anonimo, pero en su sesion queda reflejada la autoria TRUE
+    * - Si no FALSE
+    */
+
+   function comprobar_permisos($autor_id=FALSE) {
+
+      global $gcm;
+
+      if ( permiso('moderar_comentarios') ) return TRUE ;
+
+      if ( $autor_id && $autor_id == $gcm->au->id() ) return TRUE;
+
+      if ( $autor_id && $autor_id == sesion('autor_comentario') ) return TRUE;
+
+      return FALSE ;
+
+      }
+
    /** Acciones del modulo comentarios
-   * 
-   * Listamos comentarios si los hay y presentamos formulario para añadir uno nuevo
-   *
-   * @author Eduardo Magrané
-   * @version 1.0
-   */
+    * 
+    * Listamos comentarios si los hay y presentamos formulario para añadir uno nuevo
+    */
 
    function presentar_comentarios($e, $args=NULL) {
 
@@ -146,11 +165,18 @@ class Comentarios extends Modulos {
       $num = ( isset($parametros['num']) ) ? $parametros['num'] : $num_items_df ;
 
       // Añadimos javascript para eliminar o borrar comentarios
-      if ( $gcm->au->logeado() ) $this->javascripts('comentarios.js');
+      $this->javascripts('comentarios.js');
 
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 
-      $SQL  = "SELECT id, fecha_creacion, nombre, url, contenido, comentario FROM ".$this->tabla." WHERE url='".Router::$url."'";
+      $SQL  = "SELECT id, fecha_creacion, nombre, url, contenido, comentario, activado, usuarios_id 
+         FROM ".$this->tabla." WHERE url='".Router::$url."'";
+
+      // Con moderación activada mostramos solo activos o del usuario de sesión
+
+      if ( $this->moderacion && ! permiso('moderacion_comentarios') ) 
+         $SQL .= " AND ( activado = 1 OR usuarios_id = '".session_id()."')";
+
       $SQL .= " ORDER BY fecha_creacion desc";
 
       $pd = new PaginarPDO($this->pdo, $SQL, 'comentarios_');
@@ -226,6 +252,10 @@ class Comentarios extends Modulos {
             </script>
             <?php
          } else {
+            ?>
+            <script language="javascript" type="text/javascript" 
+            src="<?php echo GCM_DIR_P ?>lib/ext/tiny_mce/tiny_mce.js"></script>
+            <?php
             $this->javascripts('editorweb.js');
             }
 
@@ -270,7 +300,10 @@ class Comentarios extends Modulos {
                nombre CHAR(60) ,
                mail CHAR(60) ,
                contenido CHAR(100),
-               comentario CHAR(500)
+               comentario CHAR(500),
+               activado INTEGER,
+               padre INTEGER,
+               usuarios_id INTEGER
                )";
 
             if ( ! $sqlResult = $this->pdo->query($SQL) ) {
@@ -297,6 +330,9 @@ class Comentarios extends Modulos {
                mail CHAR(60) ,
                contenido CHAR(100),
                comentario TEXT,
+               activado TINYINT,
+               padre MEDIUMINT,
+               usuarios_id MEDIUMINT,
                PRIMARY KEY (id)
                )";
 
@@ -365,12 +401,8 @@ class Comentarios extends Modulos {
 
       }
 
-   /** Modulo para los comentarios de usuario
-    *
-    * Se presenta formulario de comentarios
-    *
-    * @author Eduardo Magrané
-    *
+   /**
+    * Insertar comentario a la base de datos
     */
 
    function verificar_entrada($e, $args=NULL) {
@@ -408,6 +440,12 @@ class Comentarios extends Modulos {
          $comentario->setUrl(Router::$s.Router::$c);
          $comentario->setContenido(str_replace('.html','',Router::$c));
          $comentario->setComentario($resultado['texto']);
+         if ( $gcm->au->id() ) {
+            $comentario->setActivado(1);
+            $comentario->setUsuarios_id($gcm->au->id());
+         } else {
+            $comentario->setUsuarios_id(session_id());
+            }
          $comentario->save();
          $resultado['id'] = $comentario->ultimo_identificador();
 
@@ -434,6 +472,102 @@ class Comentarios extends Modulos {
          }
 
       }
+
+   /**
+    * Eliminar comentario
+    */
+
+   function eliminar($e, $args=NULL) {
+
+   
+      if ( ! permiso('moderar_comentarios') && $fila->usuarios_id != session_id() ) return ;
+
+      global $gcm;
+
+      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
+
+      if ( !empty($args) && is_array($args) ) {
+         $id = $args[0] ;
+      } elseif ( !empty($args) && ! is_array($args) ) {
+         $id = $args ;
+      } elseif ( !empty(Router::$args) ) {
+         $id = Router::$args[0];
+      } else {
+         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Sin identificaor no se puede borrar comentario','ERROR');
+         echo "FALSE";
+         exit();
+         }
+
+      $comentario = new Comentarios_dbo($this->pdo, $id);
+      $comentario->MarkForDeletion();
+      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_eliminado',Router::$s.Router::$c);
+      if ( Router::$formato == 'ajax' ) {
+         echo $id;
+         exit();
+      } else {
+         registrar(__FILE__,__LINE__,literal('Comentario borrado'),'AVISO');
+         }
+
+      }
+
+   /**
+    * Modificar comentario
+    */
+
+   function modificar($e, $args=NULL) {
+
+      permiso(8);
+   
+      global $gcm;
+
+      $id = $args;
+      $this->formulario('modificar_comentario',$id);
+
+      }
+
+   /**
+    * Ejecutar Modificar comentario
+    */
+
+   function ejecutar_modificar_comentario($e, $args=NULL) {
+
+      permiso(8);
+   
+      global $gcm;
+
+      $mens="Modificar comentario";
+      registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') '.$mens);
+
+      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
+
+      $resultado = $this->validar_datos($_POST);
+
+      if ( isset($resultado['id']) ) {
+
+         $comentario = new Comentarios_dbo($this->pdo, $resultado['id']);
+
+         if ( $resultado ) {
+
+            $comentario->setNombre($resultado['usuario']);
+            $comentario->setMail($resultado['mail']);
+            $comentario->setComentario($resultado['texto']);
+            $comentario->save();
+
+            registrar(__FILE__,__LINE__,literal('Comentario Modificado'),'AVISO');
+
+            $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_modificado',Router::$url);
+            }
+
+      } else {
+         
+         $mens=literal("Sin Identificador no se puede borrar comentario",3);
+         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') '.$mens);
+
+         }
+
+
+      }
+
 
    }
 

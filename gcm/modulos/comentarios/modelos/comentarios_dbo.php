@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file      comentarios.php
+ * @file      comentarios_dbo.php
  * @brief     Modelo para comentarios
  *
  * @author    Eduardo Magrané 
@@ -15,43 +15,43 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
-/** DataBoundObject */
+/* DataBoundObject */
 
-require_once(GCM_DIR.'lib/int/databoundobject/lib/DataBoundObject.php');
+require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
 
 /**
- * @class Comentarios.php
+ * @class Comentarios_dbo
  * @brief Modelo para los comentarios de las entradas.
- * @version 0.1
+ * @ingroup modulo_comentarios
  */
 
-class Comentarios_dbo extends DataBoundObject {
+class Comentarios_dbo extends Crud {
 
-   protected $Url;
-   protected $Fecha_creacion;
-   protected $Nombre;
-   protected $Mail;
-   protected $Contenido;
-   protected $Comentario;
+//   protected $Url;
+//   protected $Fecha_creacion;
+//   protected $Nombre;
+//   protected $Mail;
+//   protected $Contenido;
+//   protected $Comentario;
 
-   protected function DefineTableName() {
+   function DefineTableName() {
       global $gcm;
       return($gcm->sufijo.'comentarios');
       }
 
-   protected function DefineRelationMap($pdo) {
-
-      return (array(
-         "id"=>"ID",
-         "url"=>"Url",
-         "fecha_creacion"=>"Fecha_creacion",
-         "nombre"=>"Nombre",
-         "mail"=>"Mail",
-         "contenido"=>"Contenido",
-         "comentario"=>"Comentario"
-         ));
-
-      }
+//    protected function DefineRelationMap($pdo) {
+// 
+//       return (array(
+//          "id"=>"ID",
+//          "url"=>"Url",
+//          "fecha_creacion"=>"Fecha_creacion",
+//          "nombre"=>"Nombre",
+//          "mail"=>"Mail",
+//          "contenido"=>"Contenido",
+//          "comentario"=>"Comentario"
+//          ));
+// 
+//       }
 
    }
 

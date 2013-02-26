@@ -1,18 +1,17 @@
 <?php
 
-/** Comentarios.php
- *
- * Modulo Comentarios
- *
+/** 
+ * @file ComentariosAdmin.php
+ * @brief Administración para los comentarios
  */
 
 require_once(dirname(__FILE__).'/Comentarios.php');
 
-/** Comentarios
+/** 
+ * @class ComentariosAdmin
+ * @brief Métodos administrativos para comentarios
  *
- * Este módulo nos permite que los usuarios entren comentarios, los mismos se guardaran en
- * una carpeta oculta de la sección correspondiente.
- *
+ * @ingroup modulo_comentarios
  */
 
 class ComentariosAdmin extends Comentarios {
@@ -22,104 +21,6 @@ class ComentariosAdmin extends Comentarios {
    function __construct() {
 
       parent::__construct();
-
-      }
-
-
-   /**
-    * Eliminar comentario
-    */
-
-   function eliminar($e, $args=NULL) {
-
-      permiso(8);
-   
-      global $gcm;
-
-      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
-
-      if ( !empty($args) && is_array($args) ) {
-         $id = $args[0] ;
-      } elseif ( !empty($args) && ! is_array($args) ) {
-         $id = $args ;
-      } elseif ( !empty(Router::$args) ) {
-         $id = Router::$args[0];
-      } else {
-         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Sin identificaor no se puede borrar comentario','ERROR');
-         echo "FALSE";
-         exit();
-         }
-
-      $comentario = new Comentarios_dbo($this->pdo, $id);
-      $comentario->MarkForDeletion();
-      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_eliminado',Router::$s.Router::$c);
-      if ( Router::$formato == 'ajax' ) {
-         echo $id;
-         exit();
-      } else {
-         registrar(__FILE__,__LINE__,literal('Comentario borrado'),'AVISO');
-         }
-
-      }
-
-   /**
-    * Modificar comentario
-    */
-
-   function modificar($e, $args=NULL) {
-
-      permiso(8);
-   
-      global $gcm;
-
-      $id = $args;
-      $this->formulario('modificar_comentario',$id);
-
-      }
-
-   /**
-    * Ejecutar Modificar comentario
-    */
-
-   function ejecutar_modificar_comentario($e, $args=NULL) {
-
-      permiso(8);
-   
-      global $gcm;
-
-      $mens="Modificar comentario";
-      registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') '.$mens);
-
-      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
-
-      $resultado = $this->validar_datos($_POST);
-
-      if ( isset($resultado['id']) ) {
-
-         $comentario = new Comentarios_dbo($this->pdo, $resultado['id']);
-
-         if ( $resultado ) {
-
-            $comentario->setFecha_creacion(time());
-            $comentario->setNombre($resultado['usuario']);
-            $comentario->setMail($resultado['mail']);
-            $comentario->setUrl(Router::$s.Router::$c);
-            $comentario->setContenido(str_replace('.html','',Router::$c));
-            $comentario->setComentario($resultado['texto']);
-            $comentario->save();
-
-            registrar(__FILE__,__LINE__,literal('Comentario Modificado'),'AVISO');
-
-            $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_modificado',Router::$url);
-            }
-
-      } else {
-         
-         $mens=literal("Sin Identificador no se puede borrar comentario",3);
-         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') '.$mens);
-
-         }
-
 
       }
 
@@ -182,4 +83,43 @@ class ComentariosAdmin extends Comentarios {
       return;
 
       }
+
+   /**
+    * Activación de un comentarios
+    */
+
+   function activar($e, $args) {
+
+      if ( ! permiso('moderar_comentarios') ) return ;
+   
+      global $gcm;
+
+      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
+
+      if ( !empty($args) && is_array($args) ) {
+         $id = $args[0] ;
+      } elseif ( !empty($args) && ! is_array($args) ) {
+         $id = $args ;
+      } elseif ( !empty(Router::$args) ) {
+         $id = Router::$args[0];
+      } else {
+         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Sin identificaor no se puede borrar comentario','ERROR');
+         echo "FALSE";
+         exit();
+         }
+
+      $comentario = new Comentarios_dbo($this->pdo, $id);
+      $comentario->setActivado(1);
+      $comentario->save();
+
+      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_activado',Router::$s.Router::$c);
+      if ( Router::$formato == 'ajax' ) {
+         echo $id;
+         exit();
+      } else {
+         registrar(__FILE__,__LINE__,literal('comentario').' '.literal('activado'),'AVISO');
+         }
+
+      }
+
    }
