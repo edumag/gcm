@@ -947,249 +947,255 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00854"></a>00854 
 <a name="l00855"></a>00855             <span class="keywordflow">if</span> ( $resultado ) {
 <a name="l00856"></a>00856 
-<a name="l00857"></a>00857                <span class="keywordflow">foreach</span> ( $this-&gt;arRelationMap as $campo =&gt; $rCampo ) {
+<a name="l00857"></a>00857                <span class="keywordflow">if</span> (get_magic_quotes_gpc()) echo <span class="stringliteral">&quot;MAGIC_QUOTES_ON&quot;</span>;
 <a name="l00858"></a>00858 
-<a name="l00859"></a>00859                   <span class="keywordflow">if</span> ( isset($this-&gt;ID) &amp;&amp; $campo == <span class="stringliteral">&#39;fecha_creacion&#39;</span>  ) {
-<a name="l00860"></a>00860                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, date(<span class="stringliteral">&quot;Y-m-d H:i:s&quot;</span>));
-<a name="l00861"></a>00861                      <span class="keywordflow">continue</span>;
-<a name="l00862"></a>00862                      }
-<a name="l00863"></a>00863 
-<a name="l00864"></a>00864                   <span class="keywordflow">if</span> ( $campo == <span class="stringliteral">&#39;fecha_modificacion&#39;</span>  ) {
-<a name="l00865"></a>00865                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, date(<span class="stringliteral">&quot;Y-m-d H:i:s&quot;</span>));
-<a name="l00866"></a>00866                      <span class="keywordflow">continue</span>;
-<a name="l00867"></a>00867                      }
-<a name="l00868"></a>00868 
-<a name="l00869"></a>00869                   <span class="keywordflow">if</span> ( $campo != <span class="stringliteral">&#39;id&#39;</span>  ) {
-<a name="l00870"></a>00870                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, $resultado[$campo]);
-<a name="l00871"></a>00871                      }
-<a name="l00872"></a>00872 
-<a name="l00873"></a>00873                   }
-<a name="l00874"></a>00874 
-<a name="l00875"></a>00875                <span class="keywordflow">if</span> ( $this-&gt;save() ) {
-<a name="l00876"></a>00876 
-<a name="l00877"></a>00877                   <span class="comment">/* Si utilizamos galería hay que guardar imagenes */</span>
+<a name="l00859"></a>00859                <span class="keywordflow">foreach</span> ( $this-&gt;arRelationMap as $campo =&gt; $rCampo ) {
+<a name="l00860"></a>00860 
+<a name="l00861"></a>00861                   <span class="keywordflow">if</span> ( isset($this-&gt;ID) &amp;&amp; $campo == <span class="stringliteral">&#39;fecha_creacion&#39;</span>  ) {
+<a name="l00862"></a>00862                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, date(<span class="stringliteral">&quot;Y-m-d H:i:s&quot;</span>));
+<a name="l00863"></a>00863                      <span class="keywordflow">continue</span>;
+<a name="l00864"></a>00864                      }
+<a name="l00865"></a>00865 
+<a name="l00866"></a>00866                   <span class="keywordflow">if</span> ( $campo == <span class="stringliteral">&#39;fecha_modificacion&#39;</span>  ) {
+<a name="l00867"></a>00867                      $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, date(<span class="stringliteral">&quot;Y-m-d H:i:s&quot;</span>));
+<a name="l00868"></a>00868                      <span class="keywordflow">continue</span>;
+<a name="l00869"></a>00869                      }
+<a name="l00870"></a>00870 
+<a name="l00871"></a>00871                   <span class="keywordflow">if</span> ( $campo != <span class="stringliteral">&#39;id&#39;</span>  ) {
+<a name="l00872"></a>00872                      <span class="keywordflow">if</span> (get_magic_quotes_gpc() == 1) {
+<a name="l00873"></a>00873                         $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, stripslashes($resultado[$campo]));
+<a name="l00874"></a>00874                      } <span class="keywordflow">else</span> {
+<a name="l00875"></a>00875                         $this-&gt;<a class="code" href="../../d7/dd4/a00013_ae3ea633e873463bb8384f40cb3759c0b.html#ae3ea633e873463bb8384f40cb3759c0b" title="Modificar valor de campos.">SetAccessor</a>($rCampo, $resultado[$campo]);
+<a name="l00876"></a>00876                         }
+<a name="l00877"></a>00877                      }
 <a name="l00878"></a>00878 
-<a name="l00879"></a>00879                   $this-&gt;accion = ( isset($this-&gt;ID) ) ? <span class="stringliteral">&#39;modificando&#39;</span> : <span class="stringliteral">&#39;insertando&#39;</span>;
+<a name="l00879"></a>00879                   }
 <a name="l00880"></a>00880 
-<a name="l00881"></a>00881                   $this-&gt;ID = ( isset($this-&gt;ID) ) ? $this-&gt;ID : $this-&gt;<a class="code" href="../../d7/dd4/a00013_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>();
+<a name="l00881"></a>00881                <span class="keywordflow">if</span> ( $this-&gt;save() ) {
 <a name="l00882"></a>00882 
-<a name="l00883"></a>00883                   <span class="comment">/* Si tenemos eventos los lanzamos */</span>
+<a name="l00883"></a>00883                   <span class="comment">/* Si utilizamos galería hay que guardar imagenes */</span>
 <a name="l00884"></a>00884 
-<a name="l00885"></a>00885                   <span class="keywordflow">if</span> ( $this-&gt;evento_guardar &amp;&amp; $this-&gt;accion == <span class="stringliteral">&#39;insertando&#39;</span> ) {
-<a name="l00886"></a>00886                      $metodo = <a class="code" href="../../db/db2/a00020_a466997e82fbbcf7d775ae152055763e0.html#a466997e82fbbcf7d775ae152055763e0" title="Metodo a lanzar al guardar registro.">$this-&gt;evento_guardar</a>;
-<a name="l00887"></a>00887                      $this-&gt;$metodo($this-&gt;ID);
-<a name="l00888"></a>00888                      }
-<a name="l00889"></a>00889                   <span class="keywordflow">if</span> ( $this-&gt;evento_modificar &amp;&amp; $this-&gt;accion == <span class="stringliteral">&#39;modificando&#39;</span> ) {
-<a name="l00890"></a>00890                      $metodo = <a class="code" href="../../db/db2/a00020_afb914213a9067568422a87f37a56a235.html#afb914213a9067568422a87f37a56a235" title="Metodo a lanzar al modificar registro.">$this-&gt;evento_modificar</a>;
-<a name="l00891"></a>00891                      $this-&gt;$metodo($this-&gt;ID);
-<a name="l00892"></a>00892                      }
-<a name="l00893"></a>00893 
-<a name="l00894"></a>00894                   <span class="keywordflow">if</span> ( $this-&gt;galeria ) $this-&gt;galeria-&gt;guardar($this-&gt;ID);
-<a name="l00895"></a>00895 
-<a name="l00896"></a>00896                   $mens = ( $this-&gt;accion == <span class="stringliteral">&#39;modificando&#39;</span> ) ? <span class="stringliteral">&#39;Registro modificado&#39;</span> : <span class="stringliteral">&#39;Registro incluido&#39;</span>;
-<a name="l00897"></a>00897                   registrar(__FILE__,__LINE__,literal($mens,3),<span class="stringliteral">&#39;AVISO&#39;</span>);
-<a name="l00898"></a>00898                } <span class="keywordflow">else</span> {
-<a name="l00899"></a>00899                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;ERROR al añadir o modificar registro&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00900"></a>00900                   }
+<a name="l00885"></a>00885                   $this-&gt;accion = ( isset($this-&gt;ID) ) ? <span class="stringliteral">&#39;modificando&#39;</span> : <span class="stringliteral">&#39;insertando&#39;</span>;
+<a name="l00886"></a>00886 
+<a name="l00887"></a>00887                   $this-&gt;ID = ( isset($this-&gt;ID) ) ? $this-&gt;ID : $this-&gt;<a class="code" href="../../d7/dd4/a00013_a6d9c627d2fd37f09dd3fce08de0696f4.html#a6d9c627d2fd37f09dd3fce08de0696f4" title="Devolver último id registrado.">ultimo_identificador</a>();
+<a name="l00888"></a>00888 
+<a name="l00889"></a>00889                   <span class="comment">/* Si tenemos eventos los lanzamos */</span>
+<a name="l00890"></a>00890 
+<a name="l00891"></a>00891                   <span class="keywordflow">if</span> ( $this-&gt;evento_guardar &amp;&amp; $this-&gt;accion == <span class="stringliteral">&#39;insertando&#39;</span> ) {
+<a name="l00892"></a>00892                      $metodo = <a class="code" href="../../db/db2/a00020_a466997e82fbbcf7d775ae152055763e0.html#a466997e82fbbcf7d775ae152055763e0" title="Metodo a lanzar al guardar registro.">$this-&gt;evento_guardar</a>;
+<a name="l00893"></a>00893                      $this-&gt;$metodo($this-&gt;ID);
+<a name="l00894"></a>00894                      }
+<a name="l00895"></a>00895                   <span class="keywordflow">if</span> ( $this-&gt;evento_modificar &amp;&amp; $this-&gt;accion == <span class="stringliteral">&#39;modificando&#39;</span> ) {
+<a name="l00896"></a>00896                      $metodo = <a class="code" href="../../db/db2/a00020_afb914213a9067568422a87f37a56a235.html#afb914213a9067568422a87f37a56a235" title="Metodo a lanzar al modificar registro.">$this-&gt;evento_modificar</a>;
+<a name="l00897"></a>00897                      $this-&gt;$metodo($this-&gt;ID);
+<a name="l00898"></a>00898                      }
+<a name="l00899"></a>00899 
+<a name="l00900"></a>00900                   <span class="keywordflow">if</span> ( $this-&gt;galeria ) $this-&gt;galeria-&gt;guardar($this-&gt;ID);
 <a name="l00901"></a>00901 
-<a name="l00902"></a>00902             }
-<a name="l00903"></a>00903 
-<a name="l00904"></a>00904          $_SESSION[<span class="stringliteral">&#39;dh&#39;</span>] = $displayHash;
-<a name="l00905"></a>00905          $_SESSION[<span class="stringliteral">&#39;mens&#39;</span>] = $gcm-&gt;reg-&gt;sesion;
-<a name="l00906"></a>00906          header(<span class="stringliteral">&quot;Location: &quot;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]);
-<a name="l00907"></a>00907          exit(0);
-<a name="l00908"></a>00908 
-<a name="l00909"></a>00909       <span class="comment">/* LLega con errores de formulario o se esta insertando */</span>
-<a name="l00910"></a>00910 
-<a name="l00911"></a>00911       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;con_errores&#39;</span> ) {
-<a name="l00912"></a>00912 
-<a name="l00913"></a>00913          $solicitud = <span class="keyword">new</span> <a class="code" href="../../df/d5f/a00064.html" title="Recoger solicitud venga de GET, POST o Cookies.">Solicitud</a>();
-<a name="l00914"></a>00914          $problemas = ($solicitud-&gt;IsRedirectFollowingConstraintFailure());
-<a name="l00915"></a>00915          $displayHash[<span class="stringliteral">&#39;HADPROBLEMS&#39;</span>] = $problemas;
+<a name="l00902"></a>00902                   $mens = ( $this-&gt;accion == <span class="stringliteral">&#39;modificando&#39;</span> ) ? <span class="stringliteral">&#39;Registro modificado&#39;</span> : <span class="stringliteral">&#39;Registro incluido&#39;</span>;
+<a name="l00903"></a>00903                   registrar(__FILE__,__LINE__,literal($mens,3),<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00904"></a>00904                } <span class="keywordflow">else</span> {
+<a name="l00905"></a>00905                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;ERROR al añadir o modificar registro&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00906"></a>00906                   }
+<a name="l00907"></a>00907 
+<a name="l00908"></a>00908             }
+<a name="l00909"></a>00909 
+<a name="l00910"></a>00910          $_SESSION[<span class="stringliteral">&#39;dh&#39;</span>] = $displayHash;
+<a name="l00911"></a>00911          $_SESSION[<span class="stringliteral">&#39;mens&#39;</span>] = $gcm-&gt;reg-&gt;sesion;
+<a name="l00912"></a>00912          header(<span class="stringliteral">&quot;Location: &quot;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]);
+<a name="l00913"></a>00913          exit(0);
+<a name="l00914"></a>00914 
+<a name="l00915"></a>00915       <span class="comment">/* LLega con errores de formulario o se esta insertando */</span>
 <a name="l00916"></a>00916 
-<a name="l00917"></a>00917          <span class="keywordflow">if</span> ( $problemas  ) {
+<a name="l00917"></a>00917       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;con_errores&#39;</span> ) {
 <a name="l00918"></a>00918 
-<a name="l00919"></a>00919             $objFailingRequest = $solicitud-&gt;GetOriginalRequestObjectFollowingConstraintFailure();
-<a name="l00920"></a>00920             $arConstraintFailures = $objFailingRequest-&gt;GetConstraintFailures();
-<a name="l00921"></a>00921 
-<a name="l00922"></a>00922             $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>] = Array();
-<a name="l00923"></a>00923 
-<a name="l00924"></a>00924             $mensajes_error = $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>();
-<a name="l00925"></a>00925 
-<a name="l00926"></a>00926             <span class="keywordflow">for</span> ($i=0; $i&lt;=<span class="keyword">sizeof</span>($arConstraintFailures)-1; $i++) {
+<a name="l00919"></a>00919          $solicitud = <span class="keyword">new</span> <a class="code" href="../../df/d5f/a00064.html" title="Recoger solicitud venga de GET, POST o Cookies.">Solicitud</a>();
+<a name="l00920"></a>00920          $problemas = ($solicitud-&gt;IsRedirectFollowingConstraintFailure());
+<a name="l00921"></a>00921          $displayHash[<span class="stringliteral">&#39;HADPROBLEMS&#39;</span>] = $problemas;
+<a name="l00922"></a>00922 
+<a name="l00923"></a>00923          <span class="keywordflow">if</span> ( $problemas  ) {
+<a name="l00924"></a>00924 
+<a name="l00925"></a>00925             $objFailingRequest = $solicitud-&gt;GetOriginalRequestObjectFollowingConstraintFailure();
+<a name="l00926"></a>00926             $arConstraintFailures = $objFailingRequest-&gt;GetConstraintFailures();
 <a name="l00927"></a>00927 
-<a name="l00928"></a>00928                $objThisConstraintFailure = &amp;$arConstraintFailures[$i];
-<a name="l00929"></a>00929                $objThisFailingConstraintObject = $objThisConstraintFailure-&gt;GetFailedConstraintObject();
-<a name="l00930"></a>00930                $intTypeOfFailure = $objThisFailingConstraintObject-&gt;GetConstraintType();
-<a name="l00931"></a>00931                $nombre_parametro = $arConstraintFailures[$i]-&gt;GetParameterName();
-<a name="l00932"></a>00932 
-<a name="l00933"></a>00933                <span class="keywordflow">if</span> ( isset($mensajes_error[$nombre_parametro][$intTypeOfFailure])  ) {
-<a name="l00934"></a>00934                   $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>][$nombre_parametro] = $mensajes_error[$nombre_parametro][$intTypeOfFailure];
-<a name="l00935"></a>00935                } <span class="keywordflow">else</span> {
-<a name="l00936"></a>00936                   $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>][$nombre_parametro] = <span class="stringliteral">&quot;Error sin definir&quot;</span>;
-<a name="l00937"></a>00937                   }
+<a name="l00928"></a>00928             $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>] = Array();
+<a name="l00929"></a>00929 
+<a name="l00930"></a>00930             $mensajes_error = $this-&gt;<a class="code" href="../../db/db2/a00020_a043378378416821f7bda102c77273695.html#a043378378416821f7bda102c77273695" title="Devolver array con los mensajes.">mensajes</a>();
+<a name="l00931"></a>00931 
+<a name="l00932"></a>00932             <span class="keywordflow">for</span> ($i=0; $i&lt;=<span class="keyword">sizeof</span>($arConstraintFailures)-1; $i++) {
+<a name="l00933"></a>00933 
+<a name="l00934"></a>00934                $objThisConstraintFailure = &amp;$arConstraintFailures[$i];
+<a name="l00935"></a>00935                $objThisFailingConstraintObject = $objThisConstraintFailure-&gt;GetFailedConstraintObject();
+<a name="l00936"></a>00936                $intTypeOfFailure = $objThisFailingConstraintObject-&gt;GetConstraintType();
+<a name="l00937"></a>00937                $nombre_parametro = $arConstraintFailures[$i]-&gt;GetParameterName();
 <a name="l00938"></a>00938 
-<a name="l00939"></a>00939                }
-<a name="l00940"></a>00940 
-<a name="l00941"></a>00941             <span class="keywordflow">if</span> ( isset($_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>]) ) {
-<a name="l00942"></a>00942                $displayHash[<span class="stringliteral">&#39;VALORES&#39;</span>] = $_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>];
-<a name="l00943"></a>00943                unset($_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>]);
-<a name="l00944"></a>00944                }
-<a name="l00945"></a>00945 
-<a name="l00946"></a>00946             }
-<a name="l00947"></a>00947 
-<a name="l00948"></a>00948          $this-&gt;<a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>($displayHash);
-<a name="l00949"></a>00949          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
-<a name="l00950"></a>00950 
-<a name="l00951"></a>00951       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;ver&#39;</span> ) {
-<a name="l00952"></a>00952 
-<a name="l00953"></a>00953          $this-&gt;<a class="code" href="../../db/db2/a00020_a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb.html#a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb" title="Visualizar registro.">visualizar_registro</a>();
-<a name="l00954"></a>00954          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
-<a name="l00955"></a>00955 
-<a name="l00956"></a>00956       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;eliminar&#39;</span> ) {
-<a name="l00957"></a>00957 
-<a name="l00958"></a>00958          <span class="comment">/* Si tenemos evento_guardar lo lanzamos */</span>
-<a name="l00959"></a>00959          <span class="keywordflow">if</span> ( $this-&gt;evento_borrar ) {
-<a name="l00960"></a>00960             $metodo = <a class="code" href="../../db/db2/a00020_a4ed60cd68e2b823f684463c328c20025.html#a4ed60cd68e2b823f684463c328c20025" title="Metodo a lanzar al borrar registro.">$this-&gt;evento_borrar</a>;
-<a name="l00961"></a>00961             $this-&gt;$metodo($this-&gt;ID);
-<a name="l00962"></a>00962             }
+<a name="l00939"></a>00939                <span class="keywordflow">if</span> ( isset($mensajes_error[$nombre_parametro][$intTypeOfFailure])  ) {
+<a name="l00940"></a>00940                   $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>][$nombre_parametro] = $mensajes_error[$nombre_parametro][$intTypeOfFailure];
+<a name="l00941"></a>00941                } <span class="keywordflow">else</span> {
+<a name="l00942"></a>00942                   $displayHash[<span class="stringliteral">&quot;PROBLEMS&quot;</span>][$nombre_parametro] = <span class="stringliteral">&quot;Error sin definir&quot;</span>;
+<a name="l00943"></a>00943                   }
+<a name="l00944"></a>00944 
+<a name="l00945"></a>00945                }
+<a name="l00946"></a>00946 
+<a name="l00947"></a>00947             <span class="keywordflow">if</span> ( isset($_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>]) ) {
+<a name="l00948"></a>00948                $displayHash[<span class="stringliteral">&#39;VALORES&#39;</span>] = $_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>];
+<a name="l00949"></a>00949                unset($_SESSION[<span class="stringliteral">&#39;VALORES&#39;</span>]);
+<a name="l00950"></a>00950                }
+<a name="l00951"></a>00951 
+<a name="l00952"></a>00952             }
+<a name="l00953"></a>00953 
+<a name="l00954"></a>00954          $this-&gt;<a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>($displayHash);
+<a name="l00955"></a>00955          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00956"></a>00956 
+<a name="l00957"></a>00957       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;ver&#39;</span> ) {
+<a name="l00958"></a>00958 
+<a name="l00959"></a>00959          $this-&gt;<a class="code" href="../../db/db2/a00020_a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb.html#a0a1aa6a37d0e1dfdcd0ad7e8c52d1aeb" title="Visualizar registro.">visualizar_registro</a>();
+<a name="l00960"></a>00960          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00961"></a>00961 
+<a name="l00962"></a>00962       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;eliminar&#39;</span> ) {
 <a name="l00963"></a>00963 
-<a name="l00964"></a>00964          $this-&gt;<a class="code" href="../../d7/dd4/a00013_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804" title="Marcar registro para ser borrado.">MarkForDeletion</a>();
-<a name="l00965"></a>00965          $this-&gt;<a class="code" href="../../d7/dd4/a00013_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758" title="Destructor borra los registros marcados para borrar, si queremos que lo haga al instante se le puede ...">__destruct</a>();
-<a name="l00966"></a>00966 
-<a name="l00967"></a>00967          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Registro eliminado&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
-<a name="l00968"></a>00968          header(<span class="stringliteral">&quot;Location: &quot;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]);
-<a name="l00969"></a>00969          exit(0);
-<a name="l00970"></a>00970 
-<a name="l00971"></a>00971       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;editar&#39;</span> || $this-&gt;accion == <span class="stringliteral">&#39;insertar&#39;</span> ) {
+<a name="l00964"></a>00964          <span class="comment">/* Si tenemos evento_guardar lo lanzamos */</span>
+<a name="l00965"></a>00965          <span class="keywordflow">if</span> ( $this-&gt;evento_borrar ) {
+<a name="l00966"></a>00966             $metodo = <a class="code" href="../../db/db2/a00020_a4ed60cd68e2b823f684463c328c20025.html#a4ed60cd68e2b823f684463c328c20025" title="Metodo a lanzar al borrar registro.">$this-&gt;evento_borrar</a>;
+<a name="l00967"></a>00967             $this-&gt;$metodo($this-&gt;ID);
+<a name="l00968"></a>00968             }
+<a name="l00969"></a>00969 
+<a name="l00970"></a>00970          $this-&gt;<a class="code" href="../../d7/dd4/a00013_a35953a55dc4bad6a967a169f33ac6804.html#a35953a55dc4bad6a967a169f33ac6804" title="Marcar registro para ser borrado.">MarkForDeletion</a>();
+<a name="l00971"></a>00971          $this-&gt;<a class="code" href="../../d7/dd4/a00013_a421831a265621325e1fdd19aace0c758.html#a421831a265621325e1fdd19aace0c758" title="Destructor borra los registros marcados para borrar, si queremos que lo haga al instante se le puede ...">__destruct</a>();
 <a name="l00972"></a>00972 
-<a name="l00973"></a>00973          $this-&gt;<a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>();
-<a name="l00974"></a>00974          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
-<a name="l00975"></a>00975 
-<a name="l00976"></a>00976       } <span class="keywordflow">else</span> {
-<a name="l00977"></a>00977 
-<a name="l00978"></a>00978          $this-&gt;<a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb" title="Listado.">listado</a>($condicion, $order);
-<a name="l00979"></a>00979          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
-<a name="l00980"></a>00980 
-<a name="l00981"></a>00981          }
-<a name="l00982"></a>00982 
-<a name="l00983"></a>00983       }
-<a name="l00984"></a>00984 <span class="comment"></span>
-<a name="l00985"></a>00985 <span class="comment">   /**</span>
-<a name="l00986"></a>00986 <span class="comment">    * Botones para acciones</span>
-<a name="l00987"></a>00987 <span class="comment">    */</span>
+<a name="l00973"></a>00973          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Registro eliminado&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00974"></a>00974          header(<span class="stringliteral">&quot;Location: &quot;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]);
+<a name="l00975"></a>00975          exit(0);
+<a name="l00976"></a>00976 
+<a name="l00977"></a>00977       } elseif ( $this-&gt;accion == <span class="stringliteral">&#39;editar&#39;</span> || $this-&gt;accion == <span class="stringliteral">&#39;insertar&#39;</span> ) {
+<a name="l00978"></a>00978 
+<a name="l00979"></a>00979          $this-&gt;<a class="code" href="../../db/db2/a00020_a470a77bc922826b9f054b78122c6c120.html#a470a77bc922826b9f054b78122c6c120" title="Generar formulario.">generar_formulario</a>();
+<a name="l00980"></a>00980          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00981"></a>00981 
+<a name="l00982"></a>00982       } <span class="keywordflow">else</span> {
+<a name="l00983"></a>00983 
+<a name="l00984"></a>00984          $this-&gt;<a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb" title="Listado.">listado</a>($condicion, $order);
+<a name="l00985"></a>00985          $this-&gt;<a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>($this-&gt;accion);
+<a name="l00986"></a>00986 
+<a name="l00987"></a>00987          }
 <a name="l00988"></a>00988 
-<a name="l00989"></a><a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788">00989</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>(<a class="code" href="../../db/db2/a00020_ab72ee2fc8baee210bbf369702d14040e.html#ab72ee2fc8baee210bbf369702d14040e" title="Acción que se esta realizando.">$accion</a>) {
-<a name="l00990"></a>00990 
-<a name="l00991"></a>00991       <span class="comment">// Si no tenemos permisos de edición volvemos</span>
-<a name="l00992"></a>00992       <span class="keywordflow">if</span> ( ! $this-&gt;permisos ) return ;
-<a name="l00993"></a>00993 
-<a name="l00994"></a>00994       <span class="comment">// Si estamos en formato ajax no se presentan botones</span>
-<a name="l00995"></a>00995       <span class="keywordflow">if</span> ( !isset($_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]) || $_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>] != <span class="stringliteral">&#39;ajax&#39;</span> ) {
+<a name="l00989"></a>00989       }
+<a name="l00990"></a>00990 <span class="comment"></span>
+<a name="l00991"></a>00991 <span class="comment">   /**</span>
+<a name="l00992"></a>00992 <span class="comment">    * Botones para acciones</span>
+<a name="l00993"></a>00993 <span class="comment">    */</span>
+<a name="l00994"></a>00994 
+<a name="l00995"></a><a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788">00995</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_a77408eed03806ff09d29e1adb86e7788.html#a77408eed03806ff09d29e1adb86e7788" title="Botones para acciones.">botones_acciones</a>(<a class="code" href="../../db/db2/a00020_ab72ee2fc8baee210bbf369702d14040e.html#ab72ee2fc8baee210bbf369702d14040e" title="Acción que se esta realizando.">$accion</a>) {
 <a name="l00996"></a>00996 
-<a name="l00997"></a>00997          echo <span class="stringliteral">&#39;&lt;div class=&quot;botones_acciones&quot;&gt;&#39;</span>;
-<a name="l00998"></a>00998 
-<a name="l00999"></a>00999          <span class="comment">// Boton insertar</span>
-<a name="l01000"></a>01000          <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&quot;ver&quot;</span> || $this-&gt;accion == <span class="stringliteral">&quot;inicio&quot;</span> ) {
-<a name="l01001"></a>01001             echo <span class="stringliteral">&#39;&lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_insertar=1&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Insertar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
-<a name="l01002"></a>01002             }
-<a name="l01003"></a>01003 
-<a name="l01004"></a>01004          <span class="comment">// Boton editar</span>
-<a name="l01005"></a>01005          <span class="keywordflow">if</span> ( $this-&gt;accion != <span class="stringliteral">&quot;editar&quot;</span> &amp;&amp; $this-&gt;ID ) {
-<a name="l01006"></a>01006             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_accion=editar&amp;&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>.$this-&gt;ID.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Editar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
-<a name="l01007"></a>01007             }
-<a name="l01008"></a>01008 
-<a name="l01009"></a>01009          <span class="comment">// Boton borrar</span>
-<a name="l01010"></a>01010          <span class="keywordflow">if</span> (  $this-&gt;ID ) {
-<a name="l01011"></a>01011             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_accion=eliminar&amp;&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>.$this-&gt;ID.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Borrar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
-<a name="l01012"></a>01012             }
-<a name="l01013"></a>01013 
-<a name="l01014"></a>01014          <span class="comment">// Boton Cancelar</span>
-<a name="l01015"></a>01015          <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&quot;editar&quot;</span> || $this-&gt;accion == <span class="stringliteral">&#39;insertar&#39;</span> ) {
-<a name="l01016"></a>01016             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;&#39;</span>.$_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>].<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Cancelar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt; &#39;</span>;
-<a name="l01017"></a>01017             }
-<a name="l01018"></a>01018 
-<a name="l01019"></a>01019          echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
-<a name="l01020"></a>01020 
-<a name="l01021"></a>01021          }
-<a name="l01022"></a>01022       }
-<a name="l01023"></a>01023 <span class="comment"></span>
-<a name="l01024"></a>01024 <span class="comment">   /**</span>
-<a name="l01025"></a>01025 <span class="comment">    * Listado</span>
-<a name="l01026"></a>01026 <span class="comment">    * @param $condicion Condicion para el listado</span>
-<a name="l01027"></a>01027 <span class="comment">    * @param $order     Orden para presentar el listado, por defecto id desc</span>
-<a name="l01028"></a>01028 <span class="comment">    */</span>
-<a name="l01029"></a>01029 
-<a name="l01030"></a><a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb">01030</a>    <span class="keyword">function</span> <a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb" title="Listado.">listado</a>($condicion = FALSE, $order = FALSE) {
-<a name="l01031"></a>01031 
-<a name="l01032"></a>01032       $sql = ( isset($this-&gt;sql_listado) ) ? $this-&gt;sql_listado : <span class="stringliteral">&#39;SELECT * FROM &#39;</span>.$this-&gt;strTableName;
-<a name="l01033"></a>01033       
-<a name="l01034"></a>01034       <span class="comment">// La condición debe añadirse antes de GROUP en caso de lo haya.</span>
+<a name="l00997"></a>00997       <span class="comment">// Si no tenemos permisos de edición volvemos</span>
+<a name="l00998"></a>00998       <span class="keywordflow">if</span> ( ! $this-&gt;permisos ) return ;
+<a name="l00999"></a>00999 
+<a name="l01000"></a>01000       <span class="comment">// Si estamos en formato ajax no se presentan botones</span>
+<a name="l01001"></a>01001       <span class="keywordflow">if</span> ( !isset($_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]) || $_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>] != <span class="stringliteral">&#39;ajax&#39;</span> ) {
+<a name="l01002"></a>01002 
+<a name="l01003"></a>01003          echo <span class="stringliteral">&#39;&lt;div class=&quot;botones_acciones&quot;&gt;&#39;</span>;
+<a name="l01004"></a>01004 
+<a name="l01005"></a>01005          <span class="comment">// Boton insertar</span>
+<a name="l01006"></a>01006          <span class="keywordflow">if</span> ( $this-&gt;accion == <span class="stringliteral">&quot;ver&quot;</span> || $this-&gt;accion == <span class="stringliteral">&quot;inicio&quot;</span> ) {
+<a name="l01007"></a>01007             echo <span class="stringliteral">&#39;&lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_insertar=1&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Insertar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
+<a name="l01008"></a>01008             }
+<a name="l01009"></a>01009 
+<a name="l01010"></a>01010          <span class="comment">// Boton editar</span>
+<a name="l01011"></a>01011          <span class="keywordflow">if</span> ( $this-&gt;accion != <span class="stringliteral">&quot;editar&quot;</span> &amp;&amp; $this-&gt;ID ) {
+<a name="l01012"></a>01012             echo <span class="stringliteral">&#39; &lt;a class=&quot;formulari2&quot; href=&quot;?&#39;</span>.$this-&gt;DefineTableName().<span class="stringliteral">&#39;_accion=editar&amp;&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>.$this-&gt;ID.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.literal(<span class="stringliteral">&#39;Editar&#39;</span>,3).<span class="stringliteral">&#39; &lt;/a&gt;&amp;nbsp;&#39;</span>;
+<a name="l01013"></a>01013             }
+<a name="l01014"></a>01014 
+<a name="l01015"></a>01015          <span class="comment">// Boton borrar</span>
+<a name="l01016"></a>01016          <span class="keywordflow">if</span> (  $this-&gt;ID ) {
+<a name="l01017"></a>01017             echo <span class="stringliteral">&#39; &lt;a onclick=&quot;return confirm(\&#39;&#39;</span>.literal(<span class="stringliteral">&#39;Confirmar borrado&#39;</span>).<span class="charliteral">&#39;\&#39;</span>);<span class="stringliteral">&quot; id=&quot;</span>a_eliminar_<span class="stringliteral">&#39;.$this-&gt;DefineTableName().&#39;</span><span class="stringliteral">&quot; class=&quot;</span>formulari2<span class="stringliteral">&quot; href=&quot;</span>?<span class="stringliteral">&#39;.$this-&gt;DefineTableName().&#39;</span>_accion=eliminar&amp;<span class="stringliteral">&#39;.$this-&gt;DefineTableName().&#39;</span>_id=<span class="stringliteral">&#39;.$this-&gt;ID.&#39;</span><span class="stringliteral">&quot;&gt;&#39;.literal(&#39;Borrar&#39;,3).&#39; &lt;/a&gt;&amp;nbsp;&#39;;</span>
+<a name="l01018"></a>01018 <span class="stringliteral">            }</span>
+<a name="l01019"></a>01019 <span class="stringliteral"></span>
+<a name="l01020"></a>01020 <span class="stringliteral">         // Boton Cancelar</span>
+<a name="l01021"></a>01021 <span class="stringliteral">         if ( $this-&gt;accion == &quot;</span>editar<span class="stringliteral">&quot; || $this-&gt;accion == &#39;insertar&#39; ) {</span>
+<a name="l01022"></a>01022 <span class="stringliteral">            echo &#39; &lt;a class=&quot;</span>formulari2<span class="stringliteral">&quot; href=&quot;</span><span class="stringliteral">&#39;.$_SERVER[&#39;</span>PHP_SELF<span class="stringliteral">&#39;].&#39;</span><span class="stringliteral">&quot;&gt;&#39;.literal(&#39;Cancelar&#39;,3).&#39; &lt;/a&gt; &#39;;</span>
+<a name="l01023"></a>01023 <span class="stringliteral">            }</span>
+<a name="l01024"></a>01024 <span class="stringliteral"></span>
+<a name="l01025"></a>01025 <span class="stringliteral">         echo &#39;&lt;/div&gt;&#39;;</span>
+<a name="l01026"></a>01026 <span class="stringliteral"></span>
+<a name="l01027"></a>01027 <span class="stringliteral">         }</span>
+<a name="l01028"></a>01028 <span class="stringliteral">      }</span>
+<a name="l01029"></a>01029 <span class="stringliteral"></span><span class="comment"></span>
+<a name="l01030"></a>01030 <span class="comment">   /**</span>
+<a name="l01031"></a>01031 <span class="comment">    * Listado</span>
+<a name="l01032"></a>01032 <span class="comment">    * @param $condicion Condicion para el listado</span>
+<a name="l01033"></a>01033 <span class="comment">    * @param $order     Orden para presentar el listado, por defecto id desc</span>
+<a name="l01034"></a>01034 <span class="comment">    */</span>
 <a name="l01035"></a>01035 
-<a name="l01036"></a>01036       <span class="keywordflow">if</span> ( $condicion ) {
+<a name="l01036"></a><a class="code" href="../../db/db2/a00020_ae253576e6d18f7d48cdd46e7523fddcb.html#ae253576e6d18f7d48cdd46e7523fddcb">01036</a>    function listado($condicion = FALSE, $order = FALSE) {
 <a name="l01037"></a>01037 
-<a name="l01038"></a>01038          <span class="keywordflow">if</span> ( stripos($sql,<span class="stringliteral">&#39;GROUP&#39;</span>) !== FALSE ) {
-<a name="l01039"></a>01039             $sql = str_ireplace(<span class="stringliteral">&#39;GROUP&#39;</span>,<span class="stringliteral">&#39; WHERE &#39;</span>.$condicion.<span class="stringliteral">&#39; GROUP&#39;</span>, $sql);
-<a name="l01040"></a>01040          } <span class="keywordflow">else</span> {
-<a name="l01041"></a>01041             $sql .= <span class="stringliteral">&#39; WHERE &#39;</span>.$condicion ;
-<a name="l01042"></a>01042             }
+<a name="l01038"></a>01038       $sql = ( isset($this-&gt;sql_listado) ) ? $this-&gt;sql_listado : &#39;SELECT * FROM &#39;.$this-&gt;strTableName;
+<a name="l01039"></a>01039       
+<a name="l01040"></a>01040       // La condición debe añadirse antes de GROUP en caso de lo haya.
+<a name="l01041"></a>01041 
+<a name="l01042"></a>01042       if ( $condicion ) {
 <a name="l01043"></a>01043 
-<a name="l01044"></a>01044          }
-<a name="l01045"></a>01045 
-<a name="l01046"></a>01046       $order = ( $order ) ? <span class="stringliteral">&#39; ORDER BY &#39;</span>.$order : <span class="stringliteral">&#39; ORDER BY id desc&#39;</span>;
-<a name="l01047"></a>01047 
-<a name="l01048"></a>01048       require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/GcmPDO/lib/paginarPDO.php&#39;</span>);
+<a name="l01044"></a>01044          if ( stripos($sql,&#39;GROUP&#39;) !== FALSE ) {
+<a name="l01045"></a>01045             $sql = str_ireplace(&#39;GROUP&#39;,&#39; WHERE &#39;.$condicion.&#39; GROUP&#39;, $sql);
+<a name="l01046"></a>01046          } else {
+<a name="l01047"></a>01047             $sql .= &#39; WHERE &#39;.$condicion ;
+<a name="l01048"></a>01048             }
 <a name="l01049"></a>01049 
-<a name="l01050"></a>01050       $this-&gt;elementos = ( <a class="code" href="../../db/db2/a00020_a37c9346f84f8c72cbafa14fa42176576.html#a37c9346f84f8c72cbafa14fa42176576" title="Número de elementos por página en listado, por defecto los de paginarPDO.">$this-&gt;elementos_pagina</a> ) ? $this-&gt;elementos_pagina : NULL;
+<a name="l01050"></a>01050          }
 <a name="l01051"></a>01051 
-<a name="l01052"></a>01052       $pd = <span class="keyword">new</span> <a class="code" href="../../d5/de0/a00050.html" title="Recogemos clase padre.">PaginarPDO</a>($this-&gt;objPDO, $sql, $this-&gt;strTableName.<span class="charliteral">&#39;_&#39;</span>, $this-&gt;elementos_pagina, $order, $this-&gt;sql_listado_relacion);
+<a name="l01052"></a>01052       $order = ( $order ) ? &#39; ORDER BY &#39;.$order : &#39; ORDER BY id desc&#39;;
 <a name="l01053"></a>01053 
-<a name="l01054"></a>01054       <span class="keywordflow">if</span> ( $this-&gt;conf_paginador ) {
-<a name="l01055"></a>01055          <span class="keywordflow">foreach</span>($this-&gt;conf_paginador as $atr =&gt; $valor ) {
-<a name="l01056"></a>01056             $pd-&gt;$atr = $valor;
-<a name="l01057"></a>01057          }
-<a name="l01058"></a>01058       }
+<a name="l01054"></a>01054       require_once(GCM_DIR.&#39;lib/int/GcmPDO/lib/paginarPDO.php&#39;);
+<a name="l01055"></a>01055 
+<a name="l01056"></a>01056       $this-&gt;elementos = ( $this-&gt;elementos_pagina ) ? $this-&gt;elementos_pagina : NULL;
+<a name="l01057"></a>01057 
+<a name="l01058"></a>01058       $pd = new PaginarPDO($this-&gt;objPDO, $sql, $this-&gt;strTableName.&#39;_&#39;, $this-&gt;elementos_pagina, $order, $this-&gt;sql_listado_relacion);
 <a name="l01059"></a>01059 
-<a name="l01060"></a>01060       <span class="keywordflow">if</span> ( $pd-&gt;validar() ) {
-<a name="l01061"></a>01061 
-<a name="l01062"></a>01062          <span class="keywordflow">if</span> ( $this-&gt;permisos ) {
-<a name="l01063"></a>01063             $opciones = array(
-<a name="l01064"></a>01064                <span class="stringliteral">&#39;url&#39;</span>           =&gt; <span class="charliteral">&#39;?&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>
-<a name="l01065"></a>01065                ,<span class="stringliteral">&#39;identifiador&#39;</span> =&gt; <span class="stringliteral">&#39;id&#39;</span>
-<a name="l01066"></a>01066                ,<span class="stringliteral">&#39;modificar&#39;</span>    =&gt; <span class="stringliteral">&#39;editar&#39;</span>  
-<a name="l01067"></a>01067                ,<span class="stringliteral">&#39;eliminar&#39;</span>     =&gt; <span class="stringliteral">&#39;eliminar&#39;</span>
-<a name="l01068"></a>01068                <span class="comment">//,&#39;ver&#39;          =&gt; &#39;ver&#39;</span>
-<a name="l01069"></a>01069                ,<span class="stringliteral">&#39;accion&#39;</span>       =&gt; $this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>
-<a name="l01070"></a>01070                ,<span class="stringliteral">&#39;ocultar_id&#39;</span>   =&gt; 1
-<a name="l01071"></a>01071                ,<span class="stringliteral">&#39;dir_img&#39;</span>      =&gt; ( $this-&gt;dir_img_array2table ) ? $this-&gt;dir_img_array2table : NULL
-<a name="l01072"></a>01072                );
-<a name="l01073"></a>01073          } <span class="keywordflow">else</span> {
-<a name="l01074"></a>01074             $opciones = array(
-<a name="l01075"></a>01075                <span class="stringliteral">&#39;url&#39;</span>           =&gt; <span class="charliteral">&#39;?&#39;</span>.$this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_id=&#39;</span>
-<a name="l01076"></a>01076                ,<span class="stringliteral">&#39;identifiador&#39;</span> =&gt; <span class="stringliteral">&#39;id&#39;</span>
-<a name="l01077"></a>01077                <span class="comment">//,&#39;ver&#39;          =&gt; &#39;ver&#39;</span>
-<a name="l01078"></a>01078                ,<span class="stringliteral">&#39;accion&#39;</span>       =&gt; $this-&gt;<a class="code" href="../../db/db2/a00020_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>().<span class="stringliteral">&#39;_accion&#39;</span>
-<a name="l01079"></a>01079                ,<span class="stringliteral">&#39;ocultar_id&#39;</span>   =&gt; 1
-<a name="l01080"></a>01080                ,<span class="stringliteral">&#39;dir_img&#39;</span>      =&gt; ( $this-&gt;dir_img_array2table ) ? $this-&gt;dir_img_array2table : NULL
-<a name="l01081"></a>01081                );
-<a name="l01082"></a>01082          }
-<a name="l01083"></a>01083 
-<a name="l01084"></a>01084          $pd-&gt;generar_pagina($this-&gt;url_ajax, $opciones, $this-&gt;opciones_array2table);
-<a name="l01085"></a>01085 
-<a name="l01086"></a>01086       } <span class="keywordflow">else</span> {
-<a name="l01087"></a>01087          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Tabla sin contenido&quot;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l01060"></a>01060       if ( $this-&gt;conf_paginador ) {
+<a name="l01061"></a>01061          foreach($this-&gt;conf_paginador as $atr =&gt; $valor ) {
+<a name="l01062"></a>01062             $pd-&gt;$atr = $valor;
+<a name="l01063"></a>01063          }
+<a name="l01064"></a>01064       }
+<a name="l01065"></a>01065 
+<a name="l01066"></a>01066       if ( $pd-&gt;validar() ) {
+<a name="l01067"></a>01067 
+<a name="l01068"></a>01068          if ( $this-&gt;permisos ) {
+<a name="l01069"></a>01069             $opciones = array(
+<a name="l01070"></a>01070                &#39;url&#39;           =&gt; &#39;?&#39;.$this-&gt;DefineTableName().&#39;_id=&#39;
+<a name="l01071"></a>01071                ,&#39;identifiador&#39; =&gt; &#39;id&#39;
+<a name="l01072"></a>01072                ,&#39;modificar&#39;    =&gt; &#39;editar&#39;  
+<a name="l01073"></a>01073                // ,&#39;eliminar&#39;     =&gt; &#39;eliminar&#39;
+<a name="l01074"></a>01074                //,&#39;ver&#39;          =&gt; &#39;ver&#39;
+<a name="l01075"></a>01075                ,&#39;accion&#39;       =&gt; $this-&gt;DefineTableName().&#39;_accion&#39;
+<a name="l01076"></a>01076                ,&#39;ocultar_id&#39;   =&gt; 1
+<a name="l01077"></a>01077                ,&#39;dir_img&#39;      =&gt; ( $this-&gt;dir_img_array2table ) ? $this-&gt;dir_img_array2table : NULL
+<a name="l01078"></a>01078                );
+<a name="l01079"></a>01079          } else {
+<a name="l01080"></a>01080             $opciones = array(
+<a name="l01081"></a>01081                &#39;url&#39;           =&gt; &#39;?&#39;.$this-&gt;DefineTableName().&#39;_id=&#39;
+<a name="l01082"></a>01082                ,&#39;identifiador&#39; =&gt; &#39;id&#39;
+<a name="l01083"></a>01083                //,&#39;ver&#39;          =&gt; &#39;ver&#39;
+<a name="l01084"></a>01084                ,&#39;accion&#39;       =&gt; $this-&gt;DefineTableName().&#39;_accion&#39;
+<a name="l01085"></a>01085                ,&#39;ocultar_id&#39;   =&gt; 1
+<a name="l01086"></a>01086                ,&#39;dir_img&#39;      =&gt; ( $this-&gt;dir_img_array2table ) ? $this-&gt;dir_img_array2table : NULL
+<a name="l01087"></a>01087                );
 <a name="l01088"></a>01088          }
 <a name="l01089"></a>01089 
-<a name="l01090"></a>01090       }
+<a name="l01090"></a>01090          $pd-&gt;generar_pagina($this-&gt;url_ajax, $opciones, $this-&gt;opciones_array2table);
 <a name="l01091"></a>01091 
-<a name="l01092"></a>01092    }
-<a name="l01093"></a>01093 
-<a name="l01094"></a>01094 ?&gt;
+<a name="l01092"></a>01092       } else {
+<a name="l01093"></a>01093          registrar(__FILE__,__LINE__,&quot;Tabla sin contenido<span class="stringliteral">&quot;,&#39;AVISO&#39;);</span>
+<a name="l01094"></a>01094 <span class="stringliteral">         }</span>
+<a name="l01095"></a>01095 <span class="stringliteral"></span>
+<a name="l01096"></a>01096 <span class="stringliteral">      }</span>
+<a name="l01097"></a>01097 <span class="stringliteral"></span>
+<a name="l01098"></a>01098 <span class="stringliteral">   }</span>
+<a name="l01099"></a>01099 <span class="stringliteral"></span>
+<a name="l01100"></a>01100 <span class="stringliteral">?&gt;</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:11 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

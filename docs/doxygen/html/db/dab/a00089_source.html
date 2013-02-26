@@ -172,140 +172,145 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00079"></a>00079 <span class="comment">    *   Si se desea cambiar &#39;accion&#39; por otra palabra se puede especificar en opciones.</span>
 <a name="l00080"></a>00080 <span class="comment">    *</span>
 <a name="l00081"></a>00081 <span class="comment">    * </span>
-<a name="l00082"></a>00082 <span class="comment">    * @param $res Array con el contenido</span>
-<a name="l00083"></a>00083 <span class="comment">    *        Formato del array $resultado[0][columna]=valor</span>
+<a name="l00082"></a>00082 <span class="comment">    * @param $res      Array con el contenido, formato del array $resultado[0][columna]=valor</span>
+<a name="l00083"></a>00083 <span class="comment">    * @param $opciones Array con las diferentes opciones:</span>
 <a name="l00084"></a>00084 <span class="comment">    *</span>
-<a name="l00085"></a>00085 <span class="comment">    * @param $opciones Array con las diferentes opciones</span>
-<a name="l00086"></a>00086 <span class="comment">    *         identificador = &#39;&lt;nombre columna que hace de identificador&gt;&#39;, por defecto &#39;id&#39;.</span>
-<a name="l00087"></a>00087 <span class="comment">    *         ver           = &#39;&lt;nombre de la acción para entrar en detalles de un registro&gt;&#39;</span>
-<a name="l00088"></a>00088 <span class="comment">    *         modificar     = &#39;&lt;nombre de la acción para modificar&gt;&#39;, es necesario tener identificador</span>
-<a name="l00089"></a>00089 <span class="comment">    *         eliminar      = &#39;&lt;nombre de la acción para eliminar registro&gt;&#39;, Es necesario identificador</span>
-<a name="l00090"></a>00090 <span class="comment">    *         ocultar_id    = TRUE/FALSE Ocultar columna de identificador.</span>
-<a name="l00091"></a>00091 <span class="comment">    *         url           = &#39;Url para enlaces de registro&#39;</span>
-<a name="l00092"></a>00092 <span class="comment">    *         accion        = &#39;Nombre de variable GET que se pasara en url, por defecto &#39;accion&#39;</span>
-<a name="l00093"></a>00093 <span class="comment">    * </span>
-<a name="l00094"></a>00094 <span class="comment">    */</span>
-<a name="l00095"></a>00095 
-<a name="l00096"></a><a class="code" href="../../d4/d31/a00069_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c">00096</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c" title="Generar tabla.">generar_tabla</a>($res, $opciones=NULL, $orden = FALSE , $tipo_orden = FALSE) {
-<a name="l00097"></a>00097       
-<a name="l00098"></a>00098       ?&gt;
-<a name="l00099"></a>00099       &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablewrapper&quot;</span>&gt;
-<a name="l00100"></a>00100          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tableheader&quot;</span>&gt;
-<a name="l00101"></a>00101             &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;search&quot;</span>&gt;
-<a name="l00102"></a>00102                    &lt;select <span class="keywordtype">id</span>=<span class="stringliteral">&quot;columns&quot;</span> onchange=<span class="stringliteral">&quot;sorter.search(&#39;query&#39;)&quot;</span>&gt;&lt;/select&gt;
-<a name="l00103"></a>00103                    &lt;input type=<span class="stringliteral">&quot;text&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;query&quot;</span> onkeyup=<span class="stringliteral">&quot;sorter.search(&#39;query&#39;)&quot;</span> /&gt;
-<a name="l00104"></a>00104                &lt;/div&gt; &lt;!-- search --&gt;
-<a name="l00105"></a>00105                &lt;span <span class="keyword">class</span>=<span class="stringliteral">&quot;details&quot;</span>&gt;
-<a name="l00106"></a>00106                &lt;div&gt;Records &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;startrecord&quot;</span>&gt;&lt;/span&gt;-&lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;endrecord&quot;</span>&gt;&lt;/span&gt; of &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;totalrecords&quot;</span>&gt;&lt;/span&gt;&lt;/div&gt;
-<a name="l00107"></a>00107                &lt;div&gt;&lt;a href=<span class="stringliteral">&quot;javascript:sorter.reset()&quot;</span>&gt;reset&lt;/a&gt;&lt;/div&gt;
-<a name="l00108"></a>00108             &lt;/span&gt;
-<a name="l00109"></a>00109            &lt;/div&gt;
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111       &lt;?php
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113       <a class="code" href="../../d4/d31/a00069_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c" title="Generar tabla.">parent::generar_tabla</a>($res, $opciones);
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115       $this-&gt;<a class="code" href="../../d4/d31/a00069_a0734523f05265ed2bf516c8948010c1d.html#a0734523f05265ed2bf516c8948010c1d" title="Pie de tabla.">pie_tabla</a>();
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117       }
-<a name="l00118"></a>00118 <span class="comment"></span>
-<a name="l00119"></a>00119 <span class="comment">   /** Pie de tabla */</span>
-<a name="l00120"></a>00120 
-<a name="l00121"></a><a class="code" href="../../d4/d31/a00069_a0734523f05265ed2bf516c8948010c1d.html#a0734523f05265ed2bf516c8948010c1d">00121</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a0734523f05265ed2bf516c8948010c1d.html#a0734523f05265ed2bf516c8948010c1d" title="Pie de tabla.">pie_tabla</a>() {
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123       ?&gt;
-<a name="l00124"></a>00124 
-<a name="l00125"></a>00125         &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablefooter&quot;</span>&gt;
-<a name="l00126"></a>00126           &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablenav&quot;</span>&gt;
-<a name="l00127"></a>00127                &lt;div&gt;
-<a name="l00128"></a>00128                &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/first.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;First Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(-1,true)&quot;</span> /&gt;
-<a name="l00129"></a>00129                     &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/previous.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;First Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(-1)&quot;</span> /&gt;
-<a name="l00130"></a>00130                     &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/next.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;First Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(1)&quot;</span> /&gt;
-<a name="l00131"></a>00131                     &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/last.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;Last Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(1,true)&quot;</span> /&gt;
-<a name="l00132"></a>00132                 &lt;/div&gt;
-<a name="l00133"></a>00133                 &lt;div&gt;
-<a name="l00134"></a>00134                   &lt;select <span class="keywordtype">id</span>=<span class="stringliteral">&quot;pagedropdown&quot;</span>&gt;&lt;/select&gt;
-<a name="l00135"></a>00135             &lt;/div&gt;
-<a name="l00136"></a>00136                 &lt;div&gt;
-<a name="l00137"></a>00137                   &lt;a href=<span class="stringliteral">&quot;javascript:sorter.showall()&quot;</span>&gt;view all&lt;/a&gt;
-<a name="l00138"></a>00138                 &lt;/div&gt;
-<a name="l00139"></a>00139             &lt;/div&gt;
-<a name="l00140"></a>00140          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablelocation&quot;</span>&gt;
-<a name="l00141"></a>00141                &lt;div&gt;
-<a name="l00142"></a>00142                     &lt;select onchange=<span class="stringliteral">&quot;sorter.size(this.value)&quot;</span>&gt;
-<a name="l00143"></a>00143                     &lt;option value=<span class="stringliteral">&quot;5&quot;</span>&gt;5&lt;/option&gt;
-<a name="l00144"></a>00144                         &lt;option value=<span class="stringliteral">&quot;10&quot;</span> selected=<span class="stringliteral">&quot;selected&quot;</span>&gt;10&lt;/option&gt;
-<a name="l00145"></a>00145                         &lt;option value=<span class="stringliteral">&quot;20&quot;</span>&gt;20&lt;/option&gt;
-<a name="l00146"></a>00146                         &lt;option value=<span class="stringliteral">&quot;50&quot;</span>&gt;50&lt;/option&gt;
-<a name="l00147"></a>00147                         &lt;option value=<span class="stringliteral">&quot;100&quot;</span>&gt;100&lt;/option&gt;
-<a name="l00148"></a>00148                     &lt;/select&gt;
-<a name="l00149"></a>00149                     &lt;span&gt;Entries Per Page&lt;/span&gt;
-<a name="l00150"></a>00150                 &lt;/div&gt;
-<a name="l00151"></a>00151                 &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;page&quot;</span>&gt;Page &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;currentpage&quot;</span>&gt;&lt;/span&gt; of &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;totalpages&quot;</span>&gt;&lt;/span&gt;&lt;/div&gt;
-<a name="l00152"></a>00152             &lt;/div&gt;
-<a name="l00153"></a>00153         &lt;/div&gt;
-<a name="l00154"></a>00154       &lt;/div&gt;
-<a name="l00155"></a>00155 
-<a name="l00156"></a>00156       &lt;?php $this-&gt;<a class="code" href="../../d4/d31/a00069_a3dc593f496b7dbf2e5e3c406cb5fd106.html#a3dc593f496b7dbf2e5e3c406cb5fd106" title="Añadimos codigo javascript necesario para el funcionamiento.">scripts</a>(); ?&gt;
-<a name="l00157"></a>00157 
-<a name="l00158"></a>00158       &lt;?php <span class="keywordflow">if</span> ( $this-&gt;cargar_script ) { ?&gt;
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160       &lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span>&gt;
-<a name="l00161"></a>00161          var sorter = <span class="keyword">new</span> TINY.table.sorter(<span class="stringliteral">&#39;sorter&#39;</span>,<span class="stringliteral">&#39;table&#39;</span>,{
-<a name="l00162"></a>00162             headclass:<span class="stringliteral">&#39;head&#39;</span>, <span class="comment">// Header Class //</span>
-<a name="l00163"></a>00163             ascclass:<span class="stringliteral">&#39;asc&#39;</span>, <span class="comment">// Ascending Class //</span>
-<a name="l00164"></a>00164             descclass:<span class="stringliteral">&#39;desc&#39;</span>, <span class="comment">// Descending Class //</span>
-<a name="l00165"></a>00165             evenclass:<span class="stringliteral">&#39;evenrow&#39;</span>, <span class="comment">// Even Row Class //</span>
-<a name="l00166"></a>00166             oddclass:<span class="stringliteral">&#39;oddrow&#39;</span>, <span class="comment">// Odd Row Class //</span>
-<a name="l00167"></a>00167             evenselclass:<span class="stringliteral">&#39;evenselected&#39;</span>, <span class="comment">// Even Selected Column Class //</span>
-<a name="l00168"></a>00168             oddselclass:<span class="stringliteral">&#39;oddselected&#39;</span>, <span class="comment">// Odd Selected Column Class //</span>
-<a name="l00169"></a>00169             paginate:<span class="keyword">true</span>, <span class="comment">// Paginate? (true or false) //</span>
-<a name="l00170"></a>00170             size:20, <span class="comment">// Initial Page Size //</span>
-<a name="l00171"></a>00171             colddid:<span class="stringliteral">&#39;columns&#39;</span>, <span class="comment">// Columns Dropdown ID (optional) //</span>
-<a name="l00172"></a>00172             currentid:<span class="stringliteral">&#39;currentpage&#39;</span>, <span class="comment">// Current Page ID (optional) //</span>
-<a name="l00173"></a>00173             totalid:<span class="stringliteral">&#39;totalpages&#39;</span>, <span class="comment">// Current Page ID (optional) //</span>
-<a name="l00174"></a>00174             startingrecid:<span class="stringliteral">&#39;startrecord&#39;</span>, <span class="comment">// Starting Record ID (optional) //</span>
-<a name="l00175"></a>00175             endingrecid:<span class="stringliteral">&#39;endrecord&#39;</span>, <span class="comment">// Ending Record ID (optional) //</span>
-<a name="l00176"></a>00176             totalrecid:<span class="stringliteral">&#39;totalrecords&#39;</span>, <span class="comment">// Total Records ID (optional) //</span>
-<a name="l00177"></a>00177             hoverid:<span class="stringliteral">&#39;selectedrow&#39;</span>, <span class="comment">// Hover Row ID (optional) //</span>
-<a name="l00178"></a>00178             pageddid:<span class="stringliteral">&#39;pagedropdown&#39;</span>, <span class="comment">// Page Dropdown ID (optional) //</span>
-<a name="l00179"></a>00179             navid:<span class="stringliteral">&#39;tablenav&#39;</span>, <span class="comment">// Table Navigation ID (optional) //</span>
-<a name="l00180"></a>00180             sortcolumn:1, <span class="comment">// Index of Initial Column to Sort (optional) //</span>
-<a name="l00181"></a>00181             sortdir:1, <span class="comment">// Sort Direction (1 or -1) //</span>
-<a name="l00182"></a>00182             &lt;?php
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184       <span class="comment">/* Totals */</span>
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186       <span class="comment">//sum:[8], // Index of Columns to Sum (optional) //</span>
-<a name="l00187"></a>00187       <span class="comment">//avg:[6,7,8,9], // Index of Columns to Average (optional) //</span>
+<a name="l00085"></a>00085 <span class="comment">    *     identificador &lt;nombre columna que hace de identificador&gt;&#39;, por defecto &#39;id&#39;</span>
+<a name="l00086"></a>00086 <span class="comment">    *     ver           &lt;nombre de la acción para entrar en detalles de un registro&gt;</span>
+<a name="l00087"></a>00087 <span class="comment">    *     modificar     &lt;nombre de la acción para modificar&gt;&#39;, es necesario tener identificador</span>
+<a name="l00088"></a>00088 <span class="comment">    *     eliminar      &lt;nombre de la acción para eliminar registro&gt;&#39;, Es necesario identificador</span>
+<a name="l00089"></a>00089 <span class="comment">    *     ocultar_id    TRUE/FALSE Ocultar columna de identificador.</span>
+<a name="l00090"></a>00090 <span class="comment">    *     url           Url para enlaces de registro</span>
+<a name="l00091"></a>00091 <span class="comment">    *     accion        Nombre de variable GET que se pasara en url, por defecto &#39;accion&#39;</span>
+<a name="l00092"></a>00092 <span class="comment">    * </span>
+<a name="l00093"></a>00093 <span class="comment">    */</span>
+<a name="l00094"></a>00094 
+<a name="l00095"></a><a class="code" href="../../d4/d31/a00069_a4dc6231cfc5b72aae5496b497f2a8857.html#a4dc6231cfc5b72aae5496b497f2a8857">00095</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a4dc6231cfc5b72aae5496b497f2a8857.html#a4dc6231cfc5b72aae5496b497f2a8857" title="Generar tabla.">generar_tabla</a>($res, $opciones=FALSE, $orden = FALSE , $tipo_orden = FALSE) {
+<a name="l00096"></a>00096       
+<a name="l00097"></a>00097       ?&gt;
+<a name="l00098"></a>00098       &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablewrapper&quot;</span>&gt;
+<a name="l00099"></a>00099          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tableheader&quot;</span>&gt;
+<a name="l00100"></a>00100             &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;search&quot;</span>&gt;
+<a name="l00101"></a>00101                    &lt;select <span class="keywordtype">id</span>=<span class="stringliteral">&quot;columns&quot;</span> onchange=<span class="stringliteral">&quot;sorter.search(&#39;query&#39;)&quot;</span>&gt;&lt;/select&gt;
+<a name="l00102"></a>00102                    &lt;input type=<span class="stringliteral">&quot;text&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;query&quot;</span> onkeyup=<span class="stringliteral">&quot;sorter.search(&#39;query&#39;)&quot;</span> /&gt;
+<a name="l00103"></a>00103                &lt;/div&gt; &lt;!-- search --&gt;
+<a name="l00104"></a>00104                &lt;span <span class="keyword">class</span>=<span class="stringliteral">&quot;details&quot;</span>&gt;
+<a name="l00105"></a>00105                &lt;div&gt;Records &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;startrecord&quot;</span>&gt;&lt;/span&gt;-&lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;endrecord&quot;</span>&gt;&lt;/span&gt; of &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;totalrecords&quot;</span>&gt;&lt;/span&gt;&lt;/div&gt;
+<a name="l00106"></a>00106                &lt;div&gt;&lt;a href=<span class="stringliteral">&quot;javascript:sorter.reset()&quot;</span>&gt;reset&lt;/a&gt;&lt;/div&gt;
+<a name="l00107"></a>00107             &lt;/span&gt;
+<a name="l00108"></a>00108            &lt;/div&gt;
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110       &lt;?php
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112       <span class="keywordflow">if</span> ( $opciones ) {
+<a name="l00113"></a>00113          $opciones = array_merge(array( <span class="stringliteral">&#39;table_id&#39;</span> =&gt; <span class="stringliteral">&#39;table&#39;</span>), $opciones);
+<a name="l00114"></a>00114       } <span class="keywordflow">else</span> {
+<a name="l00115"></a>00115          $opciones = array( <span class="stringliteral">&#39;table_id&#39;</span> =&gt; <span class="stringliteral">&#39;table&#39;</span>);
+<a name="l00116"></a>00116          }
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118       <a class="code" href="../../d4/d31/a00069_a4dc6231cfc5b72aae5496b497f2a8857.html#a4dc6231cfc5b72aae5496b497f2a8857" title="Generar tabla.">parent::generar_tabla</a>($res, $opciones);
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120       $this-&gt;<a class="code" href="../../d4/d31/a00069_a0734523f05265ed2bf516c8948010c1d.html#a0734523f05265ed2bf516c8948010c1d" title="Pie de tabla.">pie_tabla</a>();
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122       }
+<a name="l00123"></a>00123 <span class="comment"></span>
+<a name="l00124"></a>00124 <span class="comment">   /** Pie de tabla */</span>
+<a name="l00125"></a>00125 
+<a name="l00126"></a><a class="code" href="../../d4/d31/a00069_a0734523f05265ed2bf516c8948010c1d.html#a0734523f05265ed2bf516c8948010c1d">00126</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a0734523f05265ed2bf516c8948010c1d.html#a0734523f05265ed2bf516c8948010c1d" title="Pie de tabla.">pie_tabla</a>() {
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128       ?&gt;
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130         &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablefooter&quot;</span>&gt;
+<a name="l00131"></a>00131           &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablenav&quot;</span>&gt;
+<a name="l00132"></a>00132                &lt;div&gt;
+<a name="l00133"></a>00133                &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/first.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;First Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(-1,true)&quot;</span> /&gt;
+<a name="l00134"></a>00134                     &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/previous.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;First Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(-1)&quot;</span> /&gt;
+<a name="l00135"></a>00135                     &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/next.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;First Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(1)&quot;</span> /&gt;
+<a name="l00136"></a>00136                     &lt;img src=<span class="stringliteral">&quot;&lt;?=$this-&gt;dir_tinytable?&gt;images/last.gif&quot;</span> width=<span class="stringliteral">&quot;16&quot;</span> height=<span class="stringliteral">&quot;16&quot;</span> alt=<span class="stringliteral">&quot;Last Page&quot;</span> onclick=<span class="stringliteral">&quot;sorter.move(1,true)&quot;</span> /&gt;
+<a name="l00137"></a>00137                 &lt;/div&gt;
+<a name="l00138"></a>00138                 &lt;div&gt;
+<a name="l00139"></a>00139                   &lt;select <span class="keywordtype">id</span>=<span class="stringliteral">&quot;pagedropdown&quot;</span>&gt;&lt;/select&gt;
+<a name="l00140"></a>00140             &lt;/div&gt;
+<a name="l00141"></a>00141                 &lt;div&gt;
+<a name="l00142"></a>00142                   &lt;a href=<span class="stringliteral">&quot;javascript:sorter.showall()&quot;</span>&gt;view all&lt;/a&gt;
+<a name="l00143"></a>00143                 &lt;/div&gt;
+<a name="l00144"></a>00144             &lt;/div&gt;
+<a name="l00145"></a>00145          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;tablelocation&quot;</span>&gt;
+<a name="l00146"></a>00146                &lt;div&gt;
+<a name="l00147"></a>00147                     &lt;select onchange=<span class="stringliteral">&quot;sorter.size(this.value)&quot;</span>&gt;
+<a name="l00148"></a>00148                     &lt;option value=<span class="stringliteral">&quot;5&quot;</span>&gt;5&lt;/option&gt;
+<a name="l00149"></a>00149                         &lt;option value=<span class="stringliteral">&quot;10&quot;</span> selected=<span class="stringliteral">&quot;selected&quot;</span>&gt;10&lt;/option&gt;
+<a name="l00150"></a>00150                         &lt;option value=<span class="stringliteral">&quot;20&quot;</span>&gt;20&lt;/option&gt;
+<a name="l00151"></a>00151                         &lt;option value=<span class="stringliteral">&quot;50&quot;</span>&gt;50&lt;/option&gt;
+<a name="l00152"></a>00152                         &lt;option value=<span class="stringliteral">&quot;100&quot;</span>&gt;100&lt;/option&gt;
+<a name="l00153"></a>00153                     &lt;/select&gt;
+<a name="l00154"></a>00154                     &lt;span&gt;Entries Per Page&lt;/span&gt;
+<a name="l00155"></a>00155                 &lt;/div&gt;
+<a name="l00156"></a>00156                 &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;page&quot;</span>&gt;Page &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;currentpage&quot;</span>&gt;&lt;/span&gt; of &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;totalpages&quot;</span>&gt;&lt;/span&gt;&lt;/div&gt;
+<a name="l00157"></a>00157             &lt;/div&gt;
+<a name="l00158"></a>00158         &lt;/div&gt;
+<a name="l00159"></a>00159       &lt;/div&gt;
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161       &lt;?php $this-&gt;<a class="code" href="../../d4/d31/a00069_a3dc593f496b7dbf2e5e3c406cb5fd106.html#a3dc593f496b7dbf2e5e3c406cb5fd106" title="Añadimos codigo javascript necesario para el funcionamiento.">scripts</a>(); ?&gt;
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163       &lt;?php <span class="keywordflow">if</span> ( $this-&gt;cargar_script ) { ?&gt;
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165       &lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span>&gt;
+<a name="l00166"></a>00166          var sorter = <span class="keyword">new</span> TINY.table.sorter(<span class="stringliteral">&#39;sorter&#39;</span>,<span class="stringliteral">&#39;table&#39;</span>,{
+<a name="l00167"></a>00167             headclass:<span class="stringliteral">&#39;head&#39;</span>, <span class="comment">// Header Class //</span>
+<a name="l00168"></a>00168             ascclass:<span class="stringliteral">&#39;asc&#39;</span>, <span class="comment">// Ascending Class //</span>
+<a name="l00169"></a>00169             descclass:<span class="stringliteral">&#39;desc&#39;</span>, <span class="comment">// Descending Class //</span>
+<a name="l00170"></a>00170             evenclass:<span class="stringliteral">&#39;evenrow&#39;</span>, <span class="comment">// Even Row Class //</span>
+<a name="l00171"></a>00171             oddclass:<span class="stringliteral">&#39;oddrow&#39;</span>, <span class="comment">// Odd Row Class //</span>
+<a name="l00172"></a>00172             evenselclass:<span class="stringliteral">&#39;evenselected&#39;</span>, <span class="comment">// Even Selected Column Class //</span>
+<a name="l00173"></a>00173             oddselclass:<span class="stringliteral">&#39;oddselected&#39;</span>, <span class="comment">// Odd Selected Column Class //</span>
+<a name="l00174"></a>00174             paginate:<span class="keyword">true</span>, <span class="comment">// Paginate? (true or false) //</span>
+<a name="l00175"></a>00175             size:20, <span class="comment">// Initial Page Size //</span>
+<a name="l00176"></a>00176             colddid:<span class="stringliteral">&#39;columns&#39;</span>, <span class="comment">// Columns Dropdown ID (optional) //</span>
+<a name="l00177"></a>00177             currentid:<span class="stringliteral">&#39;currentpage&#39;</span>, <span class="comment">// Current Page ID (optional) //</span>
+<a name="l00178"></a>00178             totalid:<span class="stringliteral">&#39;totalpages&#39;</span>, <span class="comment">// Current Page ID (optional) //</span>
+<a name="l00179"></a>00179             startingrecid:<span class="stringliteral">&#39;startrecord&#39;</span>, <span class="comment">// Starting Record ID (optional) //</span>
+<a name="l00180"></a>00180             endingrecid:<span class="stringliteral">&#39;endrecord&#39;</span>, <span class="comment">// Ending Record ID (optional) //</span>
+<a name="l00181"></a>00181             totalrecid:<span class="stringliteral">&#39;totalrecords&#39;</span>, <span class="comment">// Total Records ID (optional) //</span>
+<a name="l00182"></a>00182             hoverid:<span class="stringliteral">&#39;selectedrow&#39;</span>, <span class="comment">// Hover Row ID (optional) //</span>
+<a name="l00183"></a>00183             pageddid:<span class="stringliteral">&#39;pagedropdown&#39;</span>, <span class="comment">// Page Dropdown ID (optional) //</span>
+<a name="l00184"></a>00184             navid:<span class="stringliteral">&#39;tablenav&#39;</span>, <span class="comment">// Table Navigation ID (optional) //</span>
+<a name="l00185"></a>00185             sortcolumn:1, <span class="comment">// Index of Initial Column to Sort (optional) //</span>
+<a name="l00186"></a>00186             sortdir:1, <span class="comment">// Sort Direction (1 or -1) //</span>
+<a name="l00187"></a>00187             &lt;?php
 <a name="l00188"></a>00188 
-<a name="l00189"></a>00189       <span class="keywordflow">if</span> ( isset($sum) ) { echo <span class="stringliteral">&quot;\n\t&quot;</span>.<span class="stringliteral">&#39;sum:[&#39;</span>.$sum.<span class="stringliteral">&#39;],&#39;</span>; }
-<a name="l00190"></a>00190       <span class="keywordflow">if</span> ( isset($avg) ) { echo <span class="stringliteral">&quot;\n\t&quot;</span>.<span class="stringliteral">&#39;avg:[&#39;</span>.$avg.<span class="stringliteral">&#39;],&#39;</span>; }
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192       <span class="comment">/*</span>
-<a name="l00193"></a>00193 <span class="comment">      columns:[{index:7, format:&#39;%&#39;, decimals:1},{index:8, format:&#39;$&#39;, decimals:0}], // Sorted Column Settings (optional) //</span>
-<a name="l00194"></a>00194 <span class="comment">       */</span>
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196       ?&gt;
-<a name="l00197"></a>00197       init:<span class="keyword">true</span> <span class="comment">// Init Now? (true or false) //</span>
-<a name="l00198"></a>00198       });
-<a name="l00199"></a>00199       &lt;/script&gt;
+<a name="l00189"></a>00189       <span class="comment">/* Totals */</span>
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191       <span class="comment">//sum:[8], // Index of Columns to Sum (optional) //</span>
+<a name="l00192"></a>00192       <span class="comment">//avg:[6,7,8,9], // Index of Columns to Average (optional) //</span>
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194       <span class="keywordflow">if</span> ( isset($sum) ) { echo <span class="stringliteral">&quot;\n\t&quot;</span>.<span class="stringliteral">&#39;sum:[&#39;</span>.$sum.<span class="stringliteral">&#39;],&#39;</span>; }
+<a name="l00195"></a>00195       <span class="keywordflow">if</span> ( isset($avg) ) { echo <span class="stringliteral">&quot;\n\t&quot;</span>.<span class="stringliteral">&#39;avg:[&#39;</span>.$avg.<span class="stringliteral">&#39;],&#39;</span>; }
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197       <span class="comment">/*</span>
+<a name="l00198"></a>00198 <span class="comment">      columns:[{index:7, format:&#39;%&#39;, decimals:1},{index:8, format:&#39;$&#39;, decimals:0}], // Sorted Column Settings (optional) //</span>
+<a name="l00199"></a>00199 <span class="comment">       */</span>
 <a name="l00200"></a>00200 
-<a name="l00201"></a>00201       &lt;?php } ?&gt;
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203       &lt;br /&gt;&lt;br /&gt;
-<a name="l00204"></a>00204       &lt;?php
+<a name="l00201"></a>00201       ?&gt;
+<a name="l00202"></a>00202       init:<span class="keyword">true</span> <span class="comment">// Init Now? (true or false) //</span>
+<a name="l00203"></a>00203       });
+<a name="l00204"></a>00204       &lt;/script&gt;
 <a name="l00205"></a>00205 
-<a name="l00206"></a>00206       }
+<a name="l00206"></a>00206       &lt;?php } ?&gt;
 <a name="l00207"></a>00207 
-<a name="l00208"></a>00208    }
-<a name="l00209"></a>00209 
-<a name="l00210"></a>00210 ?&gt;
+<a name="l00208"></a>00208       &lt;br /&gt;&lt;br /&gt;
+<a name="l00209"></a>00209       &lt;?php
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211       }
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213    }
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:11 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

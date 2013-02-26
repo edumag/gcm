@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/js/ocultar_contenido_desde_titulo.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/js/iniciar_selector_color.js</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,29 +87,29 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">ocultar_contenido_desde_titulo.js</div>  </div>
+<div class="title">iniciar_selector_color.js</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/**</span>
-<a name="l00002"></a>00002 <span class="comment"> * Visualizar ocultar contenido desde el título</span>
-<a name="l00003"></a>00003 <span class="comment"> */</span>
-<a name="l00004"></a>00004 
-<a name="l00005"></a>00005 <span class="keyword">function</span> initTituloOcultaContenido() {
-<a name="l00006"></a>00006    $(<span class="stringliteral">&#39;#titulo&#39;</span>).click(<span class="keyword">function</span>(e) {
-<a name="l00007"></a>00007      $(<span class="stringliteral">&#39;#contenido&#39;</span>).toggle(<span class="stringliteral">&#39;slow&#39;</span>);
-<a name="l00008"></a>00008      })
-<a name="l00009"></a>00009    };
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 addLoadEvent(<span class="keyword">function</span>(){
-<a name="l00012"></a>00012    initTituloOcultaContenido();
-<a name="l00013"></a>00013    });
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 $(document).ready(<span class="keyword">function</span>() {
+<a name="l00002"></a>00002 var f = $.farbtastic(<span class="stringliteral">&#39;#picker&#39;</span>);
+<a name="l00003"></a>00003 var p = $(<span class="stringliteral">&#39;#picker&#39;</span>).css(<span class="stringliteral">&#39;opacity&#39;</span>, 0.25);
+<a name="l00004"></a>00004 var selected;
+<a name="l00005"></a>00005 $(<span class="stringliteral">&#39;.colorwell&#39;</span>)
+<a name="l00006"></a>00006   .each(<span class="keyword">function</span> () { f.linkTo(<span class="keyword">this</span>); $(<span class="keyword">this</span>).css(<span class="stringliteral">&#39;opacity&#39;</span>, 0.75); })
+<a name="l00007"></a>00007   .focus(<span class="keyword">function</span>() {
+<a name="l00008"></a>00008     <span class="keywordflow">if</span> (selected) {
+<a name="l00009"></a>00009       $(selected).css(<span class="stringliteral">&#39;opacity&#39;</span>, 0.75).removeClass(<span class="stringliteral">&#39;colorwell-selected&#39;</span>);
+<a name="l00010"></a>00010     }
+<a name="l00011"></a>00011     f.linkTo(<span class="keyword">this</span>);
+<a name="l00012"></a>00012     p.css(<span class="stringliteral">&#39;opacity&#39;</span>, 1);
+<a name="l00013"></a>00013     $(selected = <span class="keyword">this</span>).css(<span class="stringliteral">&#39;opacity&#39;</span>, 1).addClass(<span class="stringliteral">&#39;colorwell-selected&#39;</span>);
+<a name="l00014"></a>00014   });
+<a name="l00015"></a>00015 });
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

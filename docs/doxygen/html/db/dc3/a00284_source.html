@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/css/jquery.fileupload-ui.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/imagenes/config/config_ca.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,104 +81,26 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_925a7c03a73672f2b14aa59d01f20b70.html">imagenes</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_13f4cfbc66bfdbea420c2ff541de55b5.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4e6ca1276f3ded4918c928f0e5f707c1.html">config</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">jquery.fileupload-ui.css</div>  </div>
+<div class="title">config_ca.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 @charset <span class="stringliteral">&quot;UTF-8&quot;</span>;
-<a name="l00002"></a>00002 <span class="comment">/*</span>
-<a name="l00003"></a>00003 <span class="comment"> * jQuery File Upload UI Plugin CSS 6.10</span>
-<a name="l00004"></a>00004 <span class="comment"> * https://github.com/blueimp/jQuery-File-Upload</span>
-<a name="l00005"></a>00005 <span class="comment"> *</span>
-<a name="l00006"></a>00006 <span class="comment"> * Copyright 2010, Sebastian Tschan</span>
-<a name="l00007"></a>00007 <span class="comment"> * https://blueimp.net</span>
-<a name="l00008"></a>00008 <span class="comment"> *</span>
-<a name="l00009"></a>00009 <span class="comment"> * Licensed under the MIT license:</span>
-<a name="l00010"></a>00010 <span class="comment"> * http://www.opensource.org/licenses/MIT</span>
-<a name="l00011"></a>00011 <span class="comment"> */</span>
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 .fileinput-button {
-<a name="l00014"></a>00014   position: relative;
-<a name="l00015"></a>00015   overflow: hidden;
-<a name="l00016"></a>00016   <span class="keywordtype">float</span>: left;
-<a name="l00017"></a>00017   margin-right: 4px;
-<a name="l00018"></a>00018 }
-<a name="l00019"></a>00019 .fileinput-button input {
-<a name="l00020"></a>00020   position: absolute;
-<a name="l00021"></a>00021   top: 0;
-<a name="l00022"></a>00022   right: 0;
-<a name="l00023"></a>00023   margin: 0;
-<a name="l00024"></a>00024   opacity: 0;
-<a name="l00025"></a>00025   filter: alpha(opacity=0);
-<a name="l00026"></a>00026   transform: translate(-300px, 0) scale(4);
-<a name="l00027"></a>00027   font-size: 23px;
-<a name="l00028"></a>00028   direction: ltr;
-<a name="l00029"></a>00029   cursor: pointer;
-<a name="l00030"></a>00030 }
-<a name="l00031"></a>00031 .fileupload-buttonbar .btn,
-<a name="l00032"></a>00032 .fileupload-buttonbar .toggle {
-<a name="l00033"></a>00033   margin-bottom: 5px;
-<a name="l00034"></a>00034 }
-<a name="l00035"></a>00035 .files .progress {
-<a name="l00036"></a>00036   width: 200px;
-<a name="l00037"></a>00037 }
-<a name="l00038"></a>00038 .progress-animated .bar {
-<a name="l00039"></a>00039   background: url(../img/progressbar.gif) !important;
-<a name="l00040"></a>00040   filter: none;
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 .fileupload-loading {
-<a name="l00043"></a>00043   position: absolute;
-<a name="l00044"></a>00044   left: 50%;
-<a name="l00045"></a>00045   width: 128px;
-<a name="l00046"></a>00046   height: 128px;
-<a name="l00047"></a>00047   background: url(../img/loading.gif) center no-repeat;
-<a name="l00048"></a>00048   display: none;
-<a name="l00049"></a>00049 }
-<a name="l00050"></a>00050 .fileupload-processing .fileupload-loading {
-<a name="l00051"></a>00051   display: block;
-<a name="l00052"></a>00052 }
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054 <span class="comment">/* Fix for IE 6: */</span>
-<a name="l00055"></a>00055 * html .fileinput-button {
-<a name="l00056"></a>00056   line-height: 24px;
-<a name="l00057"></a>00057   margin: 1px -3px 0 0;
-<a name="l00058"></a>00058 }
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="comment">/* Fix for IE 7: */</span>
-<a name="l00061"></a>00061 * + html .fileinput-button {
-<a name="l00062"></a>00062   padding: 2px 15px;
-<a name="l00063"></a>00063   margin: 1px 0 0 0;
-<a name="l00064"></a>00064 }
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 @media (max-width: 767px) {
-<a name="l00067"></a>00067   .files .btn span {
-<a name="l00068"></a>00068     display: none;
-<a name="l00069"></a>00069   }
-<a name="l00070"></a>00070   .files .preview * {
-<a name="l00071"></a>00071     width: 40px;
-<a name="l00072"></a>00072   }
-<a name="l00073"></a>00073   .files .name * {
-<a name="l00074"></a>00074     width: 80px;
-<a name="l00075"></a>00075     display: <span class="keyword">inline</span>-block;
-<a name="l00076"></a>00076     word-wrap: <span class="keywordflow">break</span>-word;
-<a name="l00077"></a>00077   }
-<a name="l00078"></a>00078   .files .progress {
-<a name="l00079"></a>00079     width: 20px;
-<a name="l00080"></a>00080   }
-<a name="l00081"></a>00081   .files .delete {
-<a name="l00082"></a>00082     width: 60px;
-<a name="l00083"></a>00083   }
-<a name="l00084"></a>00084 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 $config_DESC[<span class="stringliteral">&#39;anchoMaxImg&#39;</span>]=<span class="stringliteral">&#39;amplada màxima de les imatges&#39;</span>;
+<a name="l00003"></a>00003 $config_DESC[<span class="stringliteral">&#39;altoMaxImg&#39;</span>]=<span class="stringliteral">&#39;Altura màxima de les imatges&#39;</span>;
+<a name="l00004"></a>00004 $config_DESC[<span class="stringliteral">&#39;anchoMaxMiniatura&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00005"></a>00005 $config_DESC[<span class="stringliteral">&#39;altoMaxMiniatura&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00006"></a>00006 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

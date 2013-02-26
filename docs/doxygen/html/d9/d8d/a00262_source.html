@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/descargables/html/presentar_codigo.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/descargables/html/codigo_decorado.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,18 +87,21 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">presentar_codigo.html</div>  </div>
+<div class="title">codigo_decorado.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;h2&gt;&lt;?=literal(<span class="stringliteral">&#39;Codigo fuente&#39;</span>).<span class="charliteral">&#39; &#39;</span>.literal(<span class="stringliteral">&#39;de&#39;</span>).<span class="charliteral">&#39; &#39;</span>.literal($nombre)?&gt;&lt;/h2&gt;
-<a name="l00002"></a>00002 &lt;pre LANG=<span class="stringliteral">&#39;sh&#39;</span>&gt;
-<a name="l00003"></a>00003 &lt;?=$contenido?&gt;
-<a name="l00004"></a>00004 &lt;/pre&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;h3&gt;
+<a name="l00002"></a>00002 &lt;a <span class="keywordtype">id</span>=<span class="stringliteral">&#39;boton_&lt;?=$nombre?&gt;&gt;&#39;</span> <span class="keyword">class</span>=<span class="stringliteral">&#39;boton_codigo&#39;</span> 
+<a name="l00003"></a>00003 title=<span class="stringliteral">&#39;&lt;?=literal(&#39;</span>Contenido<span class="stringliteral">&#39;).&#39;</span> <span class="stringliteral">&#39;.literal(&#39;</span>de<span class="stringliteral">&#39;).&#39;</span> <span class="stringliteral">&#39;.literal($nombre)?&gt;&#39;</span>&gt;
+<a name="l00004"></a>00004 &lt;?=literal(<span class="stringliteral">&#39;Contenido&#39;</span>).<span class="charliteral">&#39; &#39;</span>.literal(<span class="stringliteral">&#39;de&#39;</span>).<span class="charliteral">&#39; &#39;</span>.$nombre?&gt;
+<a name="l00005"></a>00005 &lt;/a&gt;
+<a name="l00006"></a>00006 &lt;/h3&gt;
+<a name="l00007"></a>00007 &lt;?=$contenido?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
