@@ -6,6 +6,7 @@
  */
 
 require_once(dirname(__FILE__).'/Comentarios.php');
+require_once(dirname(__FILE__).'/Comentarios.php');
 
 /** 
  * @class ComentariosAdmin
@@ -42,6 +43,30 @@ class ComentariosAdmin extends Comentarios {
          }
 
       $gcm->titulo = literal('Listado de comentarios',3);
+
+      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
+
+      $comentarios = new Comentarios_dbo($this->pdo, $args['id']);
+
+      $this->conf_paginador = array ('url'=>'?comentario='
+         , 'Identificador'=>'id'
+         , 'table_id'=>'commentarios'
+         , 'ver'=>'ver'
+         , 'modificar'=>'modificar'
+         , 'eliminar'=>'eliminar'
+         , 'ocultar_id'=>TRUE
+         , 'accion'=>'accion'
+         , 'fila_unica'=>'comentario'
+         , 'enlaces'=> array('url' => array('campo_enlazado'=>'contenido'
+                                           ,'titulo_columna'=>'Contenido'
+                                           ,'base_url'=>Router::$base
+                                        )
+                            )
+         );
+
+      $comentarios->administrar(FALSE,'fecha_creacion desc',FALSE,TRUE);
+
+      return
 
       require_once(GCM_DIR.'lib/int/array2table/lib/TinyTable.php');
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/GcmPDO.php');

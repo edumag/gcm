@@ -57,15 +57,27 @@ class Crud extends DataBoundObject {
    protected function visualizando_registro() { return FALSE ; }
 
    /**
-    * Opciones de presentación para el listado
+    * Opciones de presentación para el listado con array2table o
+    * una extensión de él.
     *
-    * Array con:
-    *
-    * $opciones_array2table = array(
-    * 'presentacion' => 'TinyTable' // Extensión de array2table,
-    * 'args' => array ( 'dir_tinytable' => GCM_DIR.'lib/ext/TinyTable/',
-    *                   'cargar_srcipt' => TRUE ),
-    *                   );
+    * Ejemplo:
+    * @code
+    * $this->opciones_array2table = array(
+    *    'presentacion' => 'Array2table',
+    *    'op' => array (
+    *       'ocultar_id'=>TRUE
+    *       , 'eliminar'=>'eliminar'
+    *       , 'fila_unica'=>'comentario'
+    *       , 'enlaces'=> array(
+    *          'url' => array(
+    *             'campo_enlazado'=>'contenido'
+    *             ,'titulo_columna'=>'Contenido'
+    *             ,'base_url'=>Router::$base
+    *             )
+    *          )
+    *       )
+    *    );
+    * @endcode
     *
     * El nombre de la presentación es el nombre de la clase que extiende
     * a array2table.
@@ -1057,6 +1069,7 @@ class Crud extends DataBoundObject {
 
       $pd = new PaginarPDO($this->objPDO, $sql, $this->strTableName.'_', $this->elementos_pagina, $order, $this->sql_listado_relacion);
 
+      // Configuración de paginador
       if ( $this->conf_paginador ) {
          foreach($this->conf_paginador as $atr => $valor ) {
             $pd->$atr = $valor;
@@ -1087,7 +1100,17 @@ class Crud extends DataBoundObject {
                );
          }
 
-         $pd->generar_pagina($this->url_ajax, $opciones, $this->opciones_array2table);
+         // Opciones personalizadas para presentación de datos
+         if ( isset($this->opciones_array2table['op']) ) 
+            $opciones = array_merge($opciones, $this->opciones_array2table['op']);
+
+         // echo "<pre>opciones: " ; print_r($opciones) ; echo "</pre>"; // DEV  
+
+         $presentacion = ( isset($this->opciones_array2table['presentacion']) ) ?
+            $this->opciones_array2table['presentacion'] :
+            'Array2table' ;
+
+         $pd->generar_pagina($this->url_ajax, $opciones, $presentacion);
 
       } else {
          registrar(__FILE__,__LINE__,"Tabla sin contenido",'AVISO');

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file      PaginarPDO.php
+ * @file      paginarPDO.php
  * @brief     Componente para la paginación de PDO
  *
  * @author    Eduardo Magrané 
@@ -22,8 +22,6 @@ require_once(dirname(__FILE__).'/GcmPDO.php');
 /**
  * @class PaginarPDO
  * @brief Componente para la paginación de PDO
- * @version 0.1
- * @todo Plantillas por defecto.
  */
 
 class PaginarPDO extends GcmPDO {
@@ -157,12 +155,12 @@ class PaginarPDO extends GcmPDO {
    /** 
     * Presentamos contenido
     *
-    * @param $opciones Opciones que pasamos a array2table
-    * @param $presentacion default por defecto pero podemos seleccionar
+    * @param $opciones_array2table Opciones que pasamos a array2table
+    * @param $presentacion array2table por defecto pero podemos seleccionar
     *        tinytable para tener una tabla dinamica con javascript.
     */
 
-   function pagina($opciones=NULL, $opciones_array2table = FALSE) {
+   function pagina($opciones_array2table=FALSE, $presentacion = 'Array2table') {
 
       global $gcm;
 
@@ -179,25 +177,24 @@ class PaginarPDO extends GcmPDO {
 
          include($this->plantilla_resultados);
 
-      } elseif ( ! $opciones_array2table ) {
+      // } elseif ( ! $opciones_array2table ) {
 
-         // Utilizamos array2table si no se especifico plantilla
+      //    // Utilizamos array2table si no se especifico plantilla
 
-         require_once(dirname(__FILE__).'/../../array2table/lib/Array2table.php');
+      //    require_once(dirname(__FILE__).'/../../array2table/lib/Array2table.php');
 
-         $array2table = new Array2table($this->sufijo);
-         $array2table->generar_tabla($this->to_array(), $opciones, $this->as_orden, $this->tipo_orden);
+      //    $array2table = new Array2table($this->sufijo);
+      //    $array2table->generar_tabla($this->to_array(), $opciones_array2table, $this->as_orden, $this->tipo_orden);
 
       } else {
 
-         // Presentación con tinytable
+         // Presentación 
 
-         $extension = $opciones_array2table['presentacion'];
+         require_once(dirname(__FILE__).'/../../array2table/lib/'.$presentacion.'.php');
 
-         require_once(dirname(__FILE__).'/../../array2table/lib/'.$extension.'.php');
-
-         $array2table = new $extension($opciones_array2table['op']);
-         $array2table->generar_tabla($this->to_array(), $opciones, $this->as_orden, $this->tipo_orden);
+         $array2table = new $presentacion();
+         $array2table->sufijo = $this->sufijo;
+         $array2table->generar_tabla($this->to_array(), $opciones_array2table, $this->as_orden, $this->tipo_orden);
 
          }
 
@@ -239,12 +236,16 @@ class PaginarPDO extends GcmPDO {
     * Generar página con contenido
     *
     * @param $url_ajax Para indicar a la url que hacemos ajax, ejemplo: '&formato=ajax'
-    * @param $opciones Opciones para generar la tabla con array2table
-    * @param $opciones_array2table default por defecto pero podemos seleccionar
-    *        tinytable para tener una tabla dinamica con javascript. @see tinyTable
+    * @param $opciones_array2table Opciones para generar la tabla con array2table
+    * @param $presentacion Clase a utilizar para presentar la tabla, por defecto
+    *                      array2table.
+    *
+    *       posibles: 
+    *
+    *       - tinytable para tener una tabla dinamica con javascript. @see tinyTable
     */
 
-   function generar_pagina($url_ajax=FALSE, $opciones=NULL, $opciones_array2table = FALSE) {
+   function generar_pagina($url_ajax=FALSE, $opciones_array2table = FALSE, $presentacion = 'Array2table') {
 
       /* creamos caja con contenido que pueda ser sustituido con ajax */
 
@@ -253,7 +254,7 @@ class PaginarPDO extends GcmPDO {
 
       echo '<div id="'.$div.'">';
       $this->botonera();
-      $this->pagina($opciones, $opciones_array2table);
+      $this->pagina($opciones_array2table, $presentacion);
       $this->botonera();
       echo '</div>';
       if ($this->total_de_paginas > 1) {

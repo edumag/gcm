@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Tue Feb 26 17:16:47 CET 2013
+// Archivo generado automaticamente por GcmConfig Wed Feb 27 13:11:02 CET 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -80,4 +80,5 @@ $GCM_LG_es['no encontrada']='';
 $GCM_LG_es['Insertar']='';
 $GCM_LG_es['Editar']='';
 $GCM_LG_es['Borrar']='';
+$GCM_LG_es['Cancelar']='';
 ?>

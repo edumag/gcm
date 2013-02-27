@@ -113,6 +113,10 @@ class GcmPDO {
 
       $retorno = array();
 
+      if ( ! $this->resultado ) {
+         registrar(__FILE__,__LINE__,'Sin resultados');
+         return FALSE;
+      }
       $arAll = $this->resultado->fetchAll(PDO::FETCH_ASSOC);
 
       $conta = 0;
