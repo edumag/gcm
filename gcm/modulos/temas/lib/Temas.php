@@ -107,8 +107,8 @@ class Temas extends Modulos {
 
       // Si nos llega el tema por get lo pasamos a sesión para mantenerlo
 
-      if ( isset($_GET['tema']) ) {
-         $tema_actual = $_GET['tema'];
+      if ( isset($_REQUEST['tema']) ) {
+         $tema_actual = $_REQUEST['tema'];
          $_SESSION[$gcm->config('admin','Proyecto').'_tema'] = $tema_actual;
       } elseif ( isset($_SESSION[$gcm->config('admin','Proyecto').'_tema']) ) {
          $tema_actual = $_SESSION[$gcm->config('admin','Proyecto').'_tema'];
@@ -206,7 +206,7 @@ class Temas extends Modulos {
    function contruir_lista_colores() {
 
       include($this->fich_colores);
-      $this->colores = $colores;
+      if ( isset($colores) ) $this->colores = $colores;
 
       }
 
@@ -268,7 +268,27 @@ class Temas extends Modulos {
     * @param $color Identificador del color
     */
 
-   function color($color) { return $this->tema->color($color); }
+   function color($color, $valor=FALSE) { 
+
+      $return = $this->tema->color($color, $valor); 
+
+      // if ( $return == 'red' ) {
+      //    // Todo esto no actua, los css utilizan directamente color()
+      //    // de temaGcm.
+      //    //
+      //    // Si devuelve red es que no encontro el color definido.
+      //    // Guardamos los colores en caso de estar administrando
+      //    // para tener referencia de los que falta definir.
+      //    if ( permiso('administrar_temas') ) {
+      //       $this->guardar_colores();
+      //    } else {
+      //       echo 'SIN PERMISOS';
+      //       }
+      //    }
+
+      return $return;
+
+      }
 
    /** Construir css */
 

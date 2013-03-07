@@ -50,27 +50,33 @@
   background: url(<?=Router::$dir.$this->ruta('temas','img','marker.png')?>) no-repeat;
 }
 .colorwell {
- border: 2px solid <?=$this->color("4")?>;
+ border: 2px solid #000;
  width: 6em;
  text-align: center;
  cursor: pointer;
 }
 body .colorwell-selected {
- border: 2px solid <?=$this->color("15")?>;
+ border: 2px solid #eee;
  font-weight: bold;
 }
 #selector_colores table {
 display: inline-block;
- border: 1px solid <?=$this->color("4")?>;
+ border: 1px solid #000;
 }
 #selector_colores thead td {
- border: 1px solid <?=$this->color("2")?>;
- background: <?=$this->color("4")?>;
- color: <?=$this->color("2")?>;
+ border: 1px solid #fff;
+ background: #000;
+ color: #fff;
  text-align: center;
  font-weight: bold;
 }
 #picker {
    padding: 5px;
    float: right;
+}
+
+#selector_colores {
+    display: block;
+    height: 300px;
+    overflow: auto;
 }

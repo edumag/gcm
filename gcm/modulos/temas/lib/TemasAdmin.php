@@ -103,8 +103,6 @@ class TemasAdmin extends Temas {
 
    /**
     * Recogemos fichero proyecto.css modificado
-    *
-    * @todo Procesar imágenes que vienen desde File/
     */
 
    function fichero_css($e,$args=NULL) {
@@ -140,6 +138,7 @@ class TemasAdmin extends Temas {
          if ( stripos($linea,'fichero:')  ) {
             list($literal,$fichero,$nada) = explode(':',$linea);
             $ficheros[$fichero] = '';
+            $count_color=0;
          // Si la linea contiene 'acaba:'
          } elseif ( stripos($linea,'acaba:') ) {
             $fichero = FALSE;
@@ -155,8 +154,7 @@ class TemasAdmin extends Temas {
                      $palabra = trim($palabra);
                      if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
                         if ( !in_array($palabra,$colores) ) {
-                           $colores[] = $palabra;
-                           $clave = $count_color;
+                           $clave = basename($fichero,'.css').'-'.$count_color;
                            $count_color++;
                         } else {
                            $clave = array_search($palabra, $colores); 
@@ -170,6 +168,7 @@ class TemasAdmin extends Temas {
                }
             // Buscamos iconos o imagenes de módulos
             if ( preg_match("/url\(.*\)/",$linea, $coincidencias, PREG_OFFSET_CAPTURE) ) {
+
                $url = str_replace('url(','',$coincidencias[0][0]);
                $url = str_replace(')','',$url);
                $url = str_replace('\'','',$url);
@@ -179,7 +178,6 @@ class TemasAdmin extends Temas {
                if ( empty($nombre) ) {
 
                   registrar(__FILE__,__LINE__,'Url de imagen sin contenido en '.$fichero."\nLinea: ".$linea,'AVISO');
-                  continue;
 
                } elseif ( in_array('File',$url_split) || in_array('http',$url_split) ) {
 
@@ -188,12 +186,21 @@ class TemasAdmin extends Temas {
 
                } else {
 
-                  $tipo = $url_split[count($url_split)-2];
-                  $modulo = $url_split[count($url_split)-3];
-                  $nueva_url = Router::$dir.$gcm->event->instancias['temas']->ruta($modulo,$tipo,$nombre);
-                  $remplazo = 'url(\'<?=Router::$dir.$gcm->event->instancias["temas"]->ruta("'.$modulo.'","'.$tipo.'","'.$nombre.'")?>\')';
-                  $imagenes[] = $nueva_url;
-                  $linea = str_replace($coincidencias[0][0],$remplazo,$linea);
+
+                  if ( count($url_split) < 3 ) {
+                     registrar(__FILE__,__LINE__,"Fichero: ".$fichero." Imagen fuera de sistema: ".depurar($url_split),'AVISO');
+                  } else {
+                     $tipo = $url_split[count($url_split)-2];
+                     $modulo = $url_split[count($url_split)-3];
+                     $nueva_url = Router::$dir.$gcm->event->instancias['temas']->ruta($modulo,$tipo,$nombre);
+                     if ( ! $nueva_url ) {
+                        registrar(__FILE__,__LINE__,"Fichero: ".$fichero." Imagen fuera de sistema: ".depurar($url_split),'AVISO');
+                     } else {
+                        $remplazo = 'url(\'<?=Router::$dir.$this->ruta("'.$modulo.'","'.$tipo.'","'.$nombre.'")?>\')';
+                        $imagenes[] = $nueva_url;
+                        $linea = str_replace($coincidencias[0][0],$remplazo,$linea);
+                        }
+                     }
 
                   }
                }
@@ -212,9 +219,9 @@ class TemasAdmin extends Temas {
          }
 
 
-      echo '<br />Numero de colores  procesados: <b>'.count($colores).'</b>';
-      echo '<br />Numero de ficheros procesados: <b>'.count($ficheros).'</b>';
-      echo '<br />Numero de imágenes procesados: <b>'.count($imagenes).'</b>';
+      if ( isset( $colores ) ) echo '<br />Numero de colores  procesados: <b>'.count($colores).'</b>';
+      if ( isset( $ficheros ) ) echo '<br />Numero de ficheros procesados: <b>'.count($ficheros).'</b>';
+      if ( isset( $imagenes ) ) echo '<br />Numero de imágenes procesados: <b>'.count($imagenes).'</b>';
 
       echo '<br /><h2>Ficheros procesados</h2>';
       foreach ( $ficheros as $key => $valor ) {
@@ -413,6 +420,9 @@ class TemasAdmin extends Temas {
 
       include ($arch_colores);
 
+      ksort($colores);
+      reset($colores);
+
       $salida = '';
 
       foreach ($colores as $key => $color) {
@@ -459,6 +469,26 @@ class TemasAdmin extends Temas {
          return FALSE;
          }
 
+      // Procesar css de proyecto para obtener la lista de todos los colores
+      ob_start();
+      $this->contruir_lista_colores();
+      $this->tema->colores=$this->colores;
+      echo "\n/* fichero:".$this->tema->ficheros['css']['temas/css/body.css'].": */\n";
+      include($this->tema->ficheros['css']['temas/css/body.css']);
+      echo "\n/* acaba:".$this->tema->ficheros['css']['temas/css/body.css'].": */\n";
+
+      foreach ( $this->tema->ficheros['css'] as $llave => $fichero) {
+
+         if ( $llave != 'temas/css/body.css' ) {
+            echo "\n/* fichero:".$llave.": */\n";
+            include($fichero);
+            echo "\n/* acaba:".$llave.": */\n";
+            }
+
+         }
+      $proceso_css = ob_get_clean();
+      if ( GCM_DEBUG ) echo "\n<h3>Resultado de procesar archivos css</h3>\n<pre>\n$proceso_css\n</pre>";
+
       /* Si se añade un nuevo color */
 
       if ( isset($_REQUEST['accion']) && $_REQUEST['accion'] == 'anyadir_color' ) {
@@ -476,9 +506,9 @@ class TemasAdmin extends Temas {
             registrar(__FILE__,__LINE__,literal('El color no es válido',3),'ERROR');
 
          } else {
-            $colores[$nuevo_color] = '#ffffff';
-            ksort($colores);
-            reset($colores);
+            $this->tema->colores[$nuevo_color] = '#ffffff';
+            ksort($this->tema->colores);
+            reset($this->tema->colores);
             registrar(__FILE__,__LINE__,literal('Añade un valor al nuevo color para que tenga efecto el cambio',3),'AVISO');
             }
 
@@ -488,65 +518,13 @@ class TemasAdmin extends Temas {
 
       if ( isset($_REQUEST['accion']) && $_REQUEST['accion'] == 'guardar_colores' ) {
 
-         try {
-
-            if ( ! ( $file = @fopen($arch_colores_tema_actual, "w") ) ) {
-
-               throw new Exception('No se pudo abrir archivo para editar');
-
-               }
-
-         $nombre_array = 'colores';
-         $datos = $_REQUEST['colores'];
-         ksort($datos);
-         reset($datos);
-
-
-         fputs($file, "<?php\n");
-         fputs($file, "// Archivo generado automaticamente por ".__FILE__."\n");
-
-         while (list($clave, $val)=each($datos)){
-
-            if ( is_array($val)) {   // si es un array 
-
-               while (list($claveArray, $valorArray)=each($val)) {
-
-                  $valorArray = str_replace("\\","",$valorArray);
-                  $valorArray = stripcslashes($valorArray);
-
-                  if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
-                     throw new Exception("No se puede escribir en ".$archivo);
-                     return FALSE;
-                     }
-                  }
-
-            } else {                   // No es un array
-
-               $val = str_replace("\\","",$val);
-               $val = stripcslashes($val);
-
-               if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
-                  throw new Exception("No se puede escribir en ".$archivo);
-                  return FALSE;
-                  }
-
-               }
-            }
-
-            fputs($file, "?>");
-            fclose($file);
-
-            registrar(__FILE__,__LINE__,'Colores guardados','AVISO');
-      
-         } catch (Exception $ex) {
-            registrar($ex->getFile(),$ex->getLine(),$ex->getMessage(),'ERROR');
-            }
-
-         $arch_colores = $arch_colores_tema_actual;
+         $this->guardar_colores();
 
       }
 
-      if ( $incluir_colores ) include ($arch_colores);
+      // if ( $incluir_colores ) include ($arch_colores);
+
+      ksort($this->tema->colores);
 
       include($this->ruta('temas','html','form_colores.html'));
 
@@ -706,6 +684,71 @@ class TemasAdmin extends Temas {
 
          }
 
+      }
+
+   /**
+    * Guardar los colores en el archivo del tema
+    */
+
+   function guardar_colores() {
+
+      $arch_colores_tema_actual = $this->dir_tema_actual.'/modulos/temas/css/colores.php';
+
+      try {
+
+         if ( ! ( $file = @fopen($arch_colores_tema_actual, "w") ) ) {
+
+            throw new Exception('No se pudo abrir archivo para editar');
+
+            }
+
+      $nombre_array = 'colores';
+      if ( isset($_POST['colores']) ) $this->tema->colores = $_REQUEST['colores'];
+      ksort($this->tema->colores);
+      reset($this->tema->colores);
+
+
+      fputs($file, "<?php\n");
+      fputs($file, "// Archivo generado automaticamente por ".__FILE__."\n");
+
+      while (list($clave, $val)=each($this->tema->colores)){
+
+         if ( is_array($val)) {   // si es un array 
+
+            while (list($claveArray, $valorArray)=each($val)) {
+
+               $valorArray = str_replace("\\","",$valorArray);
+               $valorArray = stripcslashes($valorArray);
+
+               if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
+                  throw new Exception("No se puede escribir en ".$archivo);
+                  return FALSE;
+                  }
+               }
+
+         } else {                   // No es un array
+
+            $val = str_replace("\\","",$val);
+            $val = stripcslashes($val);
+
+            if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
+               throw new Exception("No se puede escribir en ".$archivo);
+               return FALSE;
+               }
+
+            }
+         }
+
+         fputs($file, "?>");
+         fclose($file);
+
+         registrar(__FILE__,__LINE__,'Colores guardados','AVISO');
+   
+      } catch (Exception $ex) {
+         registrar($ex->getFile(),$ex->getLine(),$ex->getMessage(),'ERROR');
+         }
+
+      $arch_colores = $arch_colores_tema_actual;
       }
 
 

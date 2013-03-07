@@ -139,6 +139,8 @@ class Literales extends Modulos {
 
    function eliminarLiteral() {
 
+      global $gcm;
+
       $idioma = Router::$i;
       $file=$gcm->config('idiomas','Directorio idiomas')."LG_".$idioma.".php";
 
@@ -191,16 +193,16 @@ class Literales extends Modulos {
             $salida .= '
                <p class="'.$clase.'">
                <a href="javascript:;" 
-                  onmousedown="tinyMCE.execCommand(\'mceInsertContent\',false,\'{L{'.$key.'}}\'); return false"
+                  onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'{L{'.$key.'}}\'); return false"
                   title="'.$valor.'" >
                   '.$key.'
                </a>
                <a style="font-size: smaller;" title="Eliminar" 
-                  href="javascript:;" onmousedown="eliminarLiteral(\''.str_replace("'","\'",$key).'\')" >
+                  href="javascript:;" onclick="eliminarLiteral(\''.str_replace("'","\'",$key).'\')" >
                   [X]
                </a>
                <a style="font-size: smaller;" title="Modificar" 
-                  href="javascript:;" onmousedown="modificarLiteral(\''.$key.'\',\''.$valor.'\')" >
+                  href="javascript:;" onclick="modificarLiteral(\''.$key.'\',\''.$valor.'\')" >
                   [M]
                </a>
                </p>';

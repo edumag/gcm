@@ -1,21 +1,19 @@
-
 body {
-background-color: <?=$this->color("0")?>;
-color: <?=$this->color("1")?>;
+background-color: <?=$this->color("fondo","rgba(254,254,254,1)")?>;
+color: <?=$this->color("texto","#000")?>;
 font-family: Palatino, 'Book Antiqua', serif;
 line-height: 20px;
 padding: 0;
 margin: 0;
 
 /* Gradiante */
-background: rgba(254,254,254,1);
-background: -moz-linear-gradient(-45deg, rgba(254,254,254,1) 0%, rgba(252,252,252,1) 2%, rgba(219,219,219,1) 45%, rgba(129,130,133,1) 100%);
-background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(254,254,254,1)), color-stop(2%, rgba(252,252,252,1)), color-stop(45%, rgba(219,219,219,1)), color-stop(100%, rgba(129,130,133,1)));
-background: -webkit-linear-gradient(-45deg, rgba(254,254,254,1) 0%, rgba(252,252,252,1) 2%, rgba(219,219,219,1) 45%, rgba(129,130,133,1) 100%);
-background: -o-linear-gradient(-45deg, rgba(254,254,254,1) 0%, rgba(252,252,252,1) 2%, rgba(219,219,219,1) 45%, rgba(129,130,133,1) 100%);
-background: -ms-linear-gradient(-45deg, rgba(254,254,254,1) 0%, rgba(252,252,252,1) 2%, rgba(219,219,219,1) 45%, rgba(129,130,133,1) 100%);
-background: linear-gradient(135deg, rgba(254,254,254,1) 0%, rgba(252,252,252,1) 2%, rgba(219,219,219,1) 45%, rgba(129,130,133,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
+background: -moz-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1","rgba(254,254,254,1)")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, <?=$this->color("fondo_degradado-1")?>), color-stop(2%, <?=$this->color("fondo_degradado-2")?>), color-stop(45%, <?=$this->color("fondo_degradado-3")?>), color-stop(100%, <?=$this->color("fondo_degradado-4")?>));
+background: -webkit-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
+background: -o-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
+background: -ms-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
+background: linear-gradient(135deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<?=$this->color("fondo_degradado-1")?>', endColorstr='<?=$this->color("fondo_degradado-2")?>', GradientType=1 );
 
 }
 #wrap{
@@ -39,7 +37,7 @@ height: auto !important;
 
 #lateral {
 width: 27%;
-color: #6F6137;
+color: <?php echo $this->color("lateral_fuente","#6F6137");?>);
 float:right;
 padding-top: 30px;
 }
@@ -47,8 +45,8 @@ padding-top: 30px;
 padding: 0 25px 25px 25px;
 }
 #cabecera{
-color: <?=$this->color("2")?>;
-background: <?=$this->color("3")?>;
+color: <?=$this->color("cabecera-texto")?>;
+background: <?=$this->color("cabecera-fondo")?>;
 padding: 15px;
 overflow: hidden;
 }
@@ -64,7 +62,7 @@ display: inline;
 }
 
 #cabecera a {
-color: <?=$this->color("2")?>;
+color: <?=$this->color("cabecera-enlaces")?>;
 }
 #cabeceraDerecha {
 float: right;
@@ -90,12 +88,12 @@ padding: 0 15px 15px 15px;
 }
 a{
 text-decoration: none;
-color: <?=$this->color("3")?>;
+color: <?=$this->color("enlace-normal")?>;
 font-style: italic;
 text-shadow: 0 1px 0 #fff;
 }
 a:hover{
-color: #6F6137;
+color: <?=$this->color("enlace-hover")?>;
 }
 #contenido :focus {
 outline: 0;
@@ -104,7 +102,7 @@ outline: 0;
 -moz-border-radius:5px;
 -webkit-border-radius:5px;
 border-radius:5px;
--moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
+-moz-box-shadow:0 1px 0 <?=$this->color("enlace-hover",'rgba(0,0,0,0.3)')?>;
 -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
 box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
 background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
@@ -130,28 +128,25 @@ background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D
 }
 
 #titulo {
-color: <?=$this->color("3")?>;
+color: <?=$this->color("titulo_fuente","#000")?>;
 font-style: italic;
 line-height: 40px;
 margin-bottom: 10px;
 text-shadow: 2px 1px 1px #FFFFFF;
 }
 #camino a, #camino {
-color: <?=$this->color("4")?>;
+color: <?=$this->color("camino","#000")?>;
 font-size: 100%;
 }
 textarea {
-border-bottom:1px solid <?=$this->color("5")?>;
-border-left:1px solid <?=$this->color("6")?>;
-border-right:1px solid <?=$this->color("6")?>;
-border-top:1px solid <?=$this->color("7")?>;
+border:1px solid <?=$this->color("textarea","#000")?>;
 }
 /* class para bloques de codigo, por ejemplo */
 pre {
-border: 1px solid <?=$this->color("2")?>;
-border-left: 3px solid <?=$this->color("2")?>;
-background-color: <?=$this->color("4")?>;
-color: <?=$this->color("2")?>; 
+border: 1px solid #fff;
+border-left: 3px solid #fff;
+background-color: #000?>;
+color: #fff;
 margin-left: 10px;
 margin-right: 30px;
 padding: 3px;
@@ -162,42 +157,78 @@ margin-bottom: 10px;
 
 /* Cajas de aviso */
 
-.aviso , .error, .admin, .normal, .debug  {
-padding: 10px;
-background: transparent;
-border: 0;
-/* Esquinas redondeadas */
-border-radius: 5px 5px 5px 5px ;
--moz-border-radius: 5px 5px 5px 5px ;
--webkit-border-radius: 5px 5px 5px 5px;
-}
+.aviso ul, .error ul, .admin ul, .normal ul , .debug ul  {
+   padding: 0;
+   margin: 0;
+   }
+
 .aviso li, .error li, .admin li, .normal li , .debug li  {
 list-style: none ;
 border: 2px;
 padding: 8px;
 margin-top: 2px;
-}
-.error , .error a {
-background: red ;
-color: white;
-}
-.aviso , .aviso a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-.admin , .admin a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-.normal , .normal a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-.debug , .debug a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
+margin-left: 2px;
+   padding: 0;
+   margin: 0;
 }
 
+.error a {
+color: #7B040F;
+}
+.aviso a {
+color: #082B33;
+}
+.admin a {
+color: #796616;
+}
+.normal a , .debug a {
+color: #32510F;
+}
+
+/* #main h4.alert_info { */
+.aviso, .admin, .error {
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+font-size: 14px;
+margin: 20px;
+padding: 10px 0 10px 40px;
+}
+
+div.aviso {
+background: #B5E5EF url(<?=Router::$dir.$this->icono('aviso')?>) no-repeat 10px 10px;
+border: 1px solid #77BACE;
+color: #082B33;
+}
+
+/* h4.alert_warning { */
+.admin {
+background: #F5F3BA url(<?=Router::$dir.$this->icono('alerta')?>) no-repeat 10px 10px ;
+border: 1px solid #C7A20D;
+color: #796616;
+}
+
+div.error pre {
+   background: transparent;
+   color: #7B040F;
+   border: 0;
+   margin: 20px 3% 0 3%;
+   padding: 5px;
+}
+
+/* h4.alert_error { */
+div.error {
+background: #F3D9D9 url(<?=Router::$dir.$this->icono('error')?>) no-repeat 10px 10px ;
+border: 1px solid #D20009;
+color: #7B040F;
+}
+
+/* h4.alert_success { */
+div.normal {
+background: #E2F6C5 url(<?=Router::$dir.$this->icono('ok')?>) no-repeat 10px 10px ;
+border: 1px solid #79C20D;
+color: #32510F;
+}
 
 /* Clases para generar símbolos */
 
@@ -306,4 +337,3 @@ color: #fff !IMPORTANT;
 ul input {
    margin-right: 6px;
 }
-
