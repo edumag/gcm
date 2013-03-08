@@ -8,6 +8,9 @@
 list-style-image: url(&lt;?=Router::$dir.$this-&gt;ruta('temas','iconos','16/alerta.gif')?&gt;)
 }
 </pre>
+<h2>Iconos</h2>
+<p>En el caso de iconos, definimos el nombre del icono sin extensi&oacute;n</p>
+<pre>background: #F5F3BA url(&lt;?=Router::$dir.$this-&gt;icono('alerta')?&gt;) no-repeat 10px 10px ;<br /></pre>
 <h2>Colores</h2>
 <p>Los colores son guardados en el archivo gcm/modulos/temas/css/colores.php y pueden ser incluidos en los css personalizados con el metodo:</p>
 <pre>&lt;?=$this-&gt;color('nombre del color')?&gt;<br /></pre>

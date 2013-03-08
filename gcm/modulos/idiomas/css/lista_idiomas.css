@@ -1,15 +1,14 @@
+
 #lista_idiomas ul {
-   border: 5px solid #000;
+   border: 5px solid <?=$this->color("body-11")?>;
    list-style-type: none;
    text-align: center;
 }
-
 #lista_idiomas a {
    color: red;
 }
-
 #lista_idiomas li {
-   color: #000;
+   color: <?=$this->color("body-11")?>;
    display: inline;
    text-align: center;
    margin: 0 10px 0 0;
