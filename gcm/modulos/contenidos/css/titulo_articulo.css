@@ -2,13 +2,13 @@
 #listado_de_contenido .titulo_articulo {
 font-size: 1.8em;
 }
-/* Caja con informaciÃ½n del documento */
+/* Caja con informaciýn del documento */
 /* fecha,etc.. */
 .titulo_articulo h3 {
 font-size: small;
 display: inline;
 }
 .titulo_articulo a {
-/* color: <?=$this->color("4")?>; */
+/* color: <?=$this->color("body-11")?>; */
 font-weight: normal !IMPORTANT ;
 }

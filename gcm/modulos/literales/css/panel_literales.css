@@ -1,4 +1,4 @@
 
 .subpanelNegativo a {
-   color: <?=$this->color("4")?>;
+   color: <?=$this->color("body-11")?>;
 }

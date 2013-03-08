@@ -435,6 +435,10 @@ class Eventos {
 
       global $gcm;
 
+      // Comprobar que esta activo
+
+      if ( ! in_array($m,$this->modulos_activados) ) return;
+
       /**
        * url del fichero que contiene la clase, ejemplo: temas/lib/Temas.php
        */
@@ -516,6 +520,8 @@ class Eventos {
    function lanzar_accion_modulo($m, $a, $e=NULL, $args=NULL) {
 
       global $gcm;
+
+      if ( ! in_array($m,$this->modulos_activados) ) return;
 
       if ( $this->instancia_modulo($m) ) {
 

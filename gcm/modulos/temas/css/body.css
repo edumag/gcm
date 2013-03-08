@@ -1,20 +1,20 @@
+
 body {
-background-color: <?=$this->color("fondo","rgba(254,254,254,1)")?>;
-color: <?=$this->color("texto","#000")?>;
+background-color: <?=$this->color("body-00")?>;
+color: <?=$this->color("body-01")?>;
 font-family: Palatino, 'Book Antiqua', serif;
 line-height: 20px;
 padding: 0;
 margin: 0;
-
 /* Gradiante */
-background: -moz-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1","rgba(254,254,254,1)")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
-background: -webkit-gradient(left top, right bottom, color-stop(0%, <?=$this->color("fondo_degradado-1")?>), color-stop(2%, <?=$this->color("fondo_degradado-2")?>), color-stop(45%, <?=$this->color("fondo_degradado-3")?>), color-stop(100%, <?=$this->color("fondo_degradado-4")?>));
-background: -webkit-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
-background: -o-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
-background: -ms-linear-gradient(-45deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
-background: linear-gradient(135deg, <?=$this->color("fondo_degradado-1")?> 0%, <?=$this->color("fondo_degradado-2")?> 2%, <?=$this->color("fondo_degradado-3")?> 45%, <?=$this->color("fondo_degradado-4")?> 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<?=$this->color("fondo_degradado-1")?>', endColorstr='<?=$this->color("fondo_degradado-2")?>', GradientType=1 );
-
+background: <?=$this->color("body-02")?>;
+background: -moz-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, <?=$this->color("body-02")?>), color-stop(2%, <?=$this->color("body-03")?>), color-stop(45%, <?=$this->color("body-04")?>), color-stop(100%, <?=$this->color("body-05")?>));
+background: -webkit-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: -o-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: -ms-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: linear-gradient(135deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
 }
 #wrap{
 width: 100%;
@@ -30,14 +30,12 @@ height: auto !important;
 #contenido {
    padding: 10px;
 }
-
 #contenido > p {
     margin: 10px;
    }
-
 #lateral {
 width: 27%;
-color: <?php echo $this->color("lateral_fuente","#6F6137");?>);
+color: #6F6137;
 float:right;
 padding-top: 30px;
 }
@@ -45,8 +43,8 @@ padding-top: 30px;
 padding: 0 25px 25px 25px;
 }
 #cabecera{
-color: <?=$this->color("cabecera-texto")?>;
-background: <?=$this->color("cabecera-fondo")?>;
+color: <?=$this->color("body-06")?>;
+background: <?=$this->color("body-07")?>;
 padding: 15px;
 overflow: hidden;
 }
@@ -60,9 +58,8 @@ display: inline;
    font-family: 'Droid Serif';
    font-size: 100%;
 }
-
 #cabecera a {
-color: <?=$this->color("cabecera-enlaces")?>;
+color: <?=$this->color("body-06")?>;
 }
 #cabeceraDerecha {
 float: right;
@@ -88,12 +85,12 @@ padding: 0 15px 15px 15px;
 }
 a{
 text-decoration: none;
-color: <?=$this->color("enlace-normal")?>;
+color: <?=$this->color("body-07")?>;
 font-style: italic;
 text-shadow: 0 1px 0 #fff;
 }
 a:hover{
-color: <?=$this->color("enlace-hover")?>;
+color: #6F6137;
 }
 #contenido :focus {
 outline: 0;
@@ -102,15 +99,15 @@ outline: 0;
 -moz-border-radius:5px;
 -webkit-border-radius:5px;
 border-radius:5px;
--moz-box-shadow:0 1px 0 <?=$this->color("enlace-hover",'rgba(0,0,0,0.3)')?>;
--webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+-moz-box-shadow:0 1px 0 <?=$this->color("body-08")?>;
+-webkit-box-shadow:0 1px 0 <?=$this->color("body-08")?>;
+box-shadow: 2px 2px 0 <?=$this->color("body-09")?>;
 background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
 color:#3D3C38;
 padding:3px 8px 3px 8px;
 margin: 2px;
-text-shadow:1px 1px 0 rgba(255, 255, 255, 1);
+text-shadow:1px 1px 0 <?=$this->color("body-10")?>;
 font-family: sans-serif;
 font-size: 90%;
 font-style: normal;
@@ -121,32 +118,34 @@ cursor: pointer;
 background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D6D6D6));
 }
-/** TÃ­tulo del contenido **/
+/** Týtulo del contenido **/
 .titulo_principal {
     margin: 10px 0 0 10px;
     padding: 0px;
 }
-
 #titulo {
-color: <?=$this->color("titulo_fuente","#000")?>;
+color: <?=$this->color("body-07")?>;
 font-style: italic;
 line-height: 40px;
 margin-bottom: 10px;
 text-shadow: 2px 1px 1px #FFFFFF;
 }
 #camino a, #camino {
-color: <?=$this->color("camino","#000")?>;
+color: <?=$this->color("body-11")?>;
 font-size: 100%;
 }
 textarea {
-border:1px solid <?=$this->color("textarea","#000")?>;
+border-bottom:1px solid <?=$this->color("body-12")?>;
+border-left:1px solid <?=$this->color("body-13")?>;
+border-right:1px solid <?=$this->color("body-13")?>;
+border-top:1px solid <?=$this->color("body-14")?>;
 }
 /* class para bloques de codigo, por ejemplo */
 pre {
-border: 1px solid #fff;
-border-left: 3px solid #fff;
-background-color: #000?>;
-color: #fff;
+border: 1px solid <?=$this->color("body-06")?>;
+border-left: 3px solid <?=$this->color("body-06")?>;
+background-color: <?=$this->color("body-11")?>;
+color: <?=$this->color("body-06")?>; 
 margin-left: 10px;
 margin-right: 30px;
 padding: 3px;
@@ -154,106 +153,64 @@ overflow: auto;
 max-height: 450px;
 margin-bottom: 10px;
 }
-
 /* Cajas de aviso */
-
-.aviso ul, .error ul, .admin ul, .normal ul , .debug ul  {
-   padding: 0;
-   margin: 0;
-   }
-
+.aviso , .error, .admin, .normal, .debug  {
+padding: 10px;
+background: transparent;
+border: 0;
+/* Esquinas redondeadas */
+border-radius: 5px 5px 5px 5px ;
+-moz-border-radius: 5px 5px 5px 5px ;
+-webkit-border-radius: 5px 5px 5px 5px;
+}
 .aviso li, .error li, .admin li, .normal li , .debug li  {
 list-style: none ;
 border: 2px;
 padding: 8px;
 margin-top: 2px;
-margin-left: 2px;
-   padding: 0;
-   margin: 0;
 }
-
-.error a {
-color: #7B040F;
+.error , .error a {
+background: red ;
+color: white;
 }
-.aviso a {
-color: #082B33;
+.aviso , .aviso a {
+background: #5F6C5B ;
+color: <?=$this->color("body-06")?> !IMPORTANT;
 }
-.admin a {
-color: #796616;
+.admin , .admin a {
+background: #5F6C5B ;
+color: <?=$this->color("body-06")?> !IMPORTANT;
 }
-.normal a , .debug a {
-color: #32510F;
+.normal , .normal a {
+background: #5F6C5B ;
+color: <?=$this->color("body-06")?> !IMPORTANT;
 }
-
-/* #main h4.alert_info { */
-.aviso, .admin, .error {
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-font-size: 14px;
-margin: 20px;
-padding: 10px 0 10px 40px;
+.debug , .debug a {
+background: #5F6C5B ;
+color: <?=$this->color("body-06")?> !IMPORTANT;
 }
-
-div.aviso {
-background: #B5E5EF url(<?=Router::$dir.$this->icono('aviso')?>) no-repeat 10px 10px;
-border: 1px solid #77BACE;
-color: #082B33;
-}
-
-/* h4.alert_warning { */
-.admin {
-background: #F5F3BA url(<?=Router::$dir.$this->icono('alerta')?>) no-repeat 10px 10px ;
-border: 1px solid #C7A20D;
-color: #796616;
-}
-
-div.error pre {
-   background: transparent;
-   color: #7B040F;
-   border: 0;
-   margin: 20px 3% 0 3%;
-   padding: 5px;
-}
-
-/* h4.alert_error { */
-div.error {
-background: #F3D9D9 url(<?=Router::$dir.$this->icono('error')?>) no-repeat 10px 10px ;
-border: 1px solid #D20009;
-color: #7B040F;
-}
-
-/* h4.alert_success { */
-div.normal {
-background: #E2F6C5 url(<?=Router::$dir.$this->icono('ok')?>) no-repeat 10px 10px ;
-border: 1px solid #79C20D;
-color: #32510F;
-}
-
-/* Clases para generar sÃ­mbolos */
-
+/* Clases para generar sýmbolos */
 .simb_arriba {
    vertical-align:middle;
-   border: 0px solid #000;
+   border: 0px solid <?=$this->color("body-11")?>;
    border-radius: 15px 15px 0 0 ;
    -moz-border-radius: 15px 15px 0 0 ;
    -webkit-border-radius: 15px 15px 0 0 ;
    }
 .simb_abajo {
    vertical-align:middle;
-   border: 0px solid #000;
+   border: 0px solid <?=$this->color("body-11")?>;
    border-radius: 0 0 15px 15px ;
    -moz-border-radius: 0 0 15px 15px ;
    -webkit-border-radius: 0 0 15px 15px;
    }
 .simb_neutro {
    padding: 3px;
-   color: #000;
-   border-color: #000;
-   background: #dd0;
+   color: <?=$this->color("body-11")?>;
+   border-color: <?=$this->color("body-11")?>;
+   background: <?=$this->color("body-15")?>;
    font-style:oblique;
    }
-
 /* Comportamiento para diferentes resoluciones
  *
  * ipad 740px x 
@@ -267,7 +224,6 @@ color: #32510F;
    }
 }
 @media screen and (max-width: 1015px){
-
    #lateral, #contenedor {
    float: none;
    margin: 0 auto;
@@ -276,49 +232,43 @@ color: #32510F;
    #lateral { 
       margin-left: 10px;
    }
-
    .panel_titulo a {
    -moz-border-radius:10px;
    -webkit-border-radius:10px;
    border-radius:10px;
-   -moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-   -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-   box-shadow:0 1px 0 rgba(0,0,0,0.3);
+   -moz-box-shadow:0 1px 0 <?=$this->color("body-08")?>;
+   -webkit-box-shadow:0 1px 0 <?=$this->color("body-08")?>;
+   box-shadow:0 1px 0 <?=$this->color("body-08")?>;
    background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
    background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
    color:#4A4A4A;
-   text-shadow:1px 1px 0 rgba(255, 255, 255, 0.7);
+   text-shadow:1px 1px 0 <?=$this->color("body-16")?>;
    padding: 5px;
    display: block;
    }
-
    /* Tablas adaptables */
    table, thead, tr, th, tbody, td{
       display:block;
    }
-
-   tr { border-bottom: 4px solid #666666; }
+   tr { border-bottom: 4px solid <?=$this->color("body-17")?>; }
    td { 
       border: none;
-      border-bottom: 1px solid #eee; 
+      border-bottom: 1px solid <?=$this->color("body-18")?>; 
       position: relative;
    }
 }
-
 @media screen and (max-width: 500px){
    body {
       font-size: 140%;
       }
    }
-
 /* Ventana flotante */
 .ventana_flotante {
-
    position: absolute;
    top: 50%;
    left: 50%;
-   border: 1px solid #fff;
-   background: #000;
+   border: 1px solid <?=$this->color("body-06")?>;
+   background: <?=$this->color("body-11")?>;
    color: white;
    padding: 4px;
    margin: -50px 0 0 -100px;
@@ -333,7 +283,6 @@ color: #32510F;
     margin-bottom: 4px;
     min-width: 200px;
    }
-
 ul input {
    margin-right: 6px;
 }

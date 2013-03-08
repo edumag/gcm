@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /*
  * jQuery File Upload UI Plugin CSS 6.10
@@ -9,7 +10,6 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
-
 .fileinput-button {
   position: relative;
   overflow: hidden;
@@ -36,7 +36,7 @@
   width: 200px;
 }
 .progress-animated .bar {
-  background: url(<?=Router::$dir.$this->ruta('temas','img','progressbar.gif')?>) !important;
+  background: url('<?=Router::$dir.$this->ruta("temas","img","progressbar.gif")?>') !important;
   filter: none;
 }
 .fileupload-loading {
@@ -44,25 +44,22 @@
   left: 50%;
   width: 128px;
   height: 128px;
-  background: url(<?=Router::$dir.$this->ruta('temas','img','loading.gif')?>) center no-repeat;
+  background: url('<?=Router::$dir.$this->ruta("temas","img","loading.gif")?>') center no-repeat;
   display: none;
 }
 .fileupload-processing .fileupload-loading {
   display: block;
 }
-
 /* Fix for IE 6: */
 * html .fileinput-button {
   line-height: 24px;
   margin: 1px -3px 0 0;
 }
-
 /* Fix for IE 7: */
 * + html .fileinput-button {
   padding: 2px 15px;
   margin: 1px 0 0 0;
 }
-
 @media (max-width: 767px) {
   .files .btn span {
     display: none;

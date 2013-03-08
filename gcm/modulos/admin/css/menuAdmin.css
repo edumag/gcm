@@ -54,7 +54,7 @@ ul#navmenu-h a {
   float: left; /*For IE*/
   display: block;
   background: #EEE;
-  color: <?=$this->color("8")?>;
+  color: <?=$this->color("menuAdmin-00")?>;
   font: bold 10px/22px Verdana, Arial, Helvetica, sans-serif;
   text-decoration: none;
   height: auto !important;
@@ -72,12 +72,12 @@ ul#navmenu-h li:hover li a,
 ul#navmenu-h li.iehover li a {
   float: none;
   background: #EEE;
-  color: <?=$this->color("8")?>;
+  color: <?=$this->color("menuAdmin-00")?>;
 }
 /* Botones desactivdos */
 ul#navmenu-h ul li.ma_off a {
   background: #EEE;
-  color: <?=$this->color("9")?>;
+  color: <?=$this->color("menuAdmin-01")?>;
  
 }
 /* 2nd Menu Hover Persistence */
@@ -92,7 +92,7 @@ ul#navmenu-h li.iehover li.iehover a {
 ul#navmenu-h li:hover li:hover li a,
 ul#navmenu-h li.iehover li.iehover li a {
   background: #EEE;
-  color: <?=$this->color("8")?>;
+  color: <?=$this->color("menuAdmin-00")?>;
 }
 /* 3rd Menu Hover Persistence */
 ul#navmenu-h li:hover li:hover li a:hover,
@@ -106,7 +106,7 @@ ul#navmenu-h li.iehover li.iehover li.iehover a {
 ul#navmenu-h li:hover li:hover li:hover li a,
 ul#navmenu-h li.iehover li.iehover li.iehover li a {
   background: #EEE;
-  color: <?=$this->color("8")?>;
+  color: <?=$this->color("menuAdmin-00")?>;
 }
 /* 4th Menu Hover */
 ul#navmenu-h li:hover li:hover li:hover li a:hover,

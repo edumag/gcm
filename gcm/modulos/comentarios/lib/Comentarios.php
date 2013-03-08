@@ -101,14 +101,16 @@ class Comentarios extends Modulos {
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 
       $SQL  = "SELECT fecha_creacion, nombre, url, contenido, comentario, activado, usuarios_id FROM ".$this->tabla;
+      if ( $this->moderacion && ! permiso('moderacion_comentarios') ) 
+         $SQL .= " WHERE ( activado = 1 OR usuarios_id = '".session_id()."')";
+
       $SQL .= " ORDER BY fecha_creacion desc";
 
-      $pd = new PaginarPDO($this->pdo, $SQL, 'ult_');
+      $pd = new PaginarPDO($this->pdo, $SQL, 'ult_', $num);
 
       if ( $pd->validar() ) {
 
          ob_start();
-         $pd->elementos_pagina=$num;
          $pd->plantilla_resultados=dirname(__FILE__).'/../html/ultimos.html';
          $pd->pagina();
          $salida = ob_get_contents();

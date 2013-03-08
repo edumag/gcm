@@ -147,14 +147,14 @@ class TemasAdmin extends Temas {
             // Buscamos colores
             // Si tenemos color, background, border 
             if ( preg_match("/border|background|color/",$linea) ) {
-               // separamos palabras buscamos # con seis caracteres más o tres
                foreach ( explode(':',$linea) as $bloque ) {
                   foreach ( explode(' ',$bloque) as $palabra ) {
                      $palabra = str_replace(';','',$palabra);
                      $palabra = trim($palabra);
+                     // separamos palabras buscamos # con seis caracteres más o tres
                      if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
                         if ( !in_array($palabra,$colores) ) {
-                           $clave = basename($fichero,'.css').'-'.$count_color;
+                           $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
                            $count_color++;
                         } else {
                            $clave = array_search($palabra, $colores); 
@@ -162,9 +162,31 @@ class TemasAdmin extends Temas {
                         $colores[$clave]=$palabra;
                         $mod = '<?=$this->color("'.$clave.'")?>';
                         $linea = str_replace($palabra,$mod,$linea);
+                     } elseif ( preg_match("/rgba\((.*)\){1}/",$palabra,$resultado) ) {
+                        $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
+                        if ( !in_array($limpia,$colores) ) {
+                           $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                           $count_color++;
+                        } else {
+                           $clave = array_search($limpia, $colores); 
+                           }
+                        $colores[$clave]=$limpia;
+                        $mod = '<?=$this->color("'.$clave.'")?>';
+                        $linea = str_replace($limpia,$mod,$linea);
                         }
                      }
                   }
+               } elseif ( preg_match("/rgba\((.*)\){1}/",$linea,$resultado) ) {
+                  $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
+                  if ( !in_array($limpia,$colores) ) {
+                     $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                     $count_color++;
+                  } else {
+                     $clave = array_search($limpia, $colores); 
+                     }
+                  $colores[$clave]=$limpia;
+                  $mod = '<?=$this->color("'.$clave.'")?>';
+                  $linea = str_replace($limpia,$mod,$linea);
                }
             // Buscamos iconos o imagenes de módulos
             if ( preg_match("/url\(.*\)/",$linea, $coincidencias, PREG_OFFSET_CAPTURE) ) {

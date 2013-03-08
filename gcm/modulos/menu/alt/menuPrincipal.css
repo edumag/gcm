@@ -12,14 +12,14 @@ table#menu {
 margin-top: 3px;
 border: 0px;
 padding: 0px;
-background: #EED8AE ;
-background: transparent ;
+background: #EED8AE;
+background: transparent;
 }
 #menu td {
 text-align: center;
 font-size: 90%;
-background: #EED8AE ;
-background: transparent ;
+background: #EED8AE;
+background: transparent;
 color: <?=$this->color("3")?>;
 padding: 1px;
 background: no-repeat url('<?=Router::$dir.$gcm->event->instancias["temas"]->ruta("menu","img","boton_desactivado.gif")?>');
@@ -36,7 +36,7 @@ border: 1px solid transparent;
 margin: 1px;
 }
 #menu td a:hover {
-background: #4B87AD ;
+background: #4B87AD;
 color: <?=$this->color("0")?>;
 border: 1px solid <?=$this->color("3")?>;
 }
