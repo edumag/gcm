@@ -103,6 +103,18 @@ class TemasAdmin extends Temas {
 
    /**
     * Recogemos fichero proyecto.css modificado
+    *
+    * - El fichero debe llevar las marcas del fichero correspondiente en el tema.
+    *
+    *    + fichero:menu/css/body.css:
+    *    + acaba:menu/css/body.css:
+    *
+    * - Los colores se separaran por secciones, cada fichero es una sección
+    *
+    * - Si encontramos colores iguales en una misma sección los juntamos en una
+    *   sola variable, así colores como los fondos degradados que pueden tener
+    *   varias reglas por cada navegador, serám facilmente modificados en una 
+    *   sola variable.
     */
 
    function fichero_css($e,$args=NULL) {
@@ -140,11 +152,10 @@ class TemasAdmin extends Temas {
             $ficheros[$fichero] = '';
             $count_color=0;
             // Ponemos a cero los colores del fichero
+            $nom_archivo = basename($fichero,'.css'); 
             foreach ( $colores as $seccion_color => $valor_color ) {
-               $nom_archivo = basename($fichero,'.css'); 
-               echo "<br />Miramos: $nom_archivo : $seccion_color / ";
-               if ( strrpos($nom_archivo, $seccion_color) !== FALSE ) {
-                  echo "Borramos: $seccion_color";
+               list($nom_seccion,$num_seccion) = explode("-",$seccion_color);
+               if ( $nom_seccion  == $nom_archivo ) {
                   unset($colores[$seccion_color]) ;
                   }
                }
