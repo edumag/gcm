@@ -1,0 +1,4 @@
+#camino a, #camino {
+color: <?=$this->color("body-11")?>;
+font-size: 100%;
+}

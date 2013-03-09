@@ -1,0 +1,23 @@
+.boton{
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+-moz-box-shadow:0 1px 0 <?=$this->color("body-08")?>;
+-webkit-box-shadow:0 1px 0 <?=$this->color("body-08")?>;
+box-shadow: 2px 2px 0 <?=$this->color("body-09")?>;
+background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+color:#3D3C38;
+padding:3px 8px 3px 8px;
+margin: 2px;
+text-shadow:1px 1px 0 <?=$this->color("body-10")?>;
+font-family: sans-serif;
+font-size: 90%;
+font-style: normal;
+font-weight: normal;
+cursor: pointer;
+}
+.boton:hover{
+background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
+background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D6D6D6));
+}

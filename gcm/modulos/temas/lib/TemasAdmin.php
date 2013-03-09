@@ -129,7 +129,7 @@ class TemasAdmin extends Temas {
 
       $ficheros    = array();
       $fichero     = FALSE;
-      $colores     = array();
+      $colores     = $this->tema->colores;
       $count_color = 0;
 
       foreach ($vlineas as $linea) {
@@ -139,55 +139,67 @@ class TemasAdmin extends Temas {
             list($literal,$fichero,$nada) = explode(':',$linea);
             $ficheros[$fichero] = '';
             $count_color=0;
+            // Ponemos a cero los colores del fichero
+            foreach ( $colores as $seccion_color => $valor_color ) {
+               $nom_archivo = basename($fichero,'.css'); 
+               echo "<br />Miramos: $nom_archivo : $seccion_color / ";
+               if ( strrpos($nom_archivo, $seccion_color) !== FALSE ) {
+                  echo "Borramos: $seccion_color";
+                  unset($colores[$seccion_color]) ;
+                  }
+               }
+
          // Si la linea contiene 'acaba:'
          } elseif ( stripos($linea,'acaba:') ) {
             $fichero = FALSE;
          // Si tenemos $fichero
          } elseif ( $fichero ) {
-            // Buscamos colores
+
             // Si tenemos color, background, border 
             if ( preg_match("/border|background|color/",$linea) ) {
+
                foreach ( explode(':',$linea) as $bloque ) {
                   foreach ( explode(' ',$bloque) as $palabra ) {
                      $palabra = str_replace(';','',$palabra);
                      $palabra = trim($palabra);
                      // separamos palabras buscamos # con seis caracteres más o tres
-                     if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
-                        if ( !in_array($palabra,$colores) ) {
-                           $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-                           $count_color++;
-                        } else {
-                           $clave = array_search($palabra, $colores); 
-                           }
+                     //if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
+                     if (preg_match ('/^#[a-f0-9]{6}$/i', $palabra) || preg_match ('/^#[a-f0-9]{3}$/i', $palabra) ) {
+                        $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                        $count_color++;
                         $colores[$clave]=$palabra;
                         $mod = '<?=$this->color("'.$clave.'")?>';
                         $linea = str_replace($palabra,$mod,$linea);
+                     } elseif ( preg_match("/transparent/i",$palabra,$resultado) ) {
+                        $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                        $count_color++;
+                        $colores[$clave]='transparent';
+                        $mod = '<?=$this->color("'.$clave.'")?>';
+                        $linea = str_replace($resultado[0],$mod,$linea);
                      } elseif ( preg_match("/rgba\((.*)\){1}/",$palabra,$resultado) ) {
                         $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
-                        if ( !in_array($limpia,$colores) ) {
-                           $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-                           $count_color++;
-                        } else {
-                           $clave = array_search($limpia, $colores); 
-                           }
+                        $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                        $count_color++;
                         $colores[$clave]=$limpia;
                         $mod = '<?=$this->color("'.$clave.'")?>';
                         $linea = str_replace($limpia,$mod,$linea);
                         }
                      }
                   }
-               } elseif ( preg_match("/rgba\((.*)\){1}/",$linea,$resultado) ) {
-                  $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
-                  if ( !in_array($limpia,$colores) ) {
-                     $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-                     $count_color++;
-                  } else {
-                     $clave = array_search($limpia, $colores); 
-                     }
-                  $colores[$clave]=$limpia;
-                  $mod = '<?=$this->color("'.$clave.'")?>';
-                  $linea = str_replace($limpia,$mod,$linea);
+
+            }
+
+           // Buscamos colores en formato rgbs()
+
+           if ( preg_match("/rgba\((.*)\){1}/",$linea,$resultado) ) {
+               $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
+               $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+               $count_color++;
+               $colores[$clave]=$limpia;
+               $mod = '<?=$this->color("'.$clave.'")?>';
+               $linea = str_replace($limpia,$mod,$linea);
                }
+
             // Buscamos iconos o imagenes de módulos
             if ( preg_match("/url\(.*\)/",$linea, $coincidencias, PREG_OFFSET_CAPTURE) ) {
 
@@ -226,6 +238,7 @@ class TemasAdmin extends Temas {
 
                   }
                }
+
             $linea = trim($linea,"\n\r");
             if ( $linea != '' ) $ficheros[$fichero] .= "\n".$linea;
             }
@@ -233,6 +246,7 @@ class TemasAdmin extends Temas {
          }
 
       if ( empty($ficheros) ) {
+
          registrar(__FILE__,__LINE__,
             __CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') No se pudo especificar contenido'
             ,'ERROR');
@@ -404,14 +418,14 @@ class TemasAdmin extends Temas {
 
    /** Pasar formato de colores de rgb a html */
 
-   function rgb2html($rgb) {
+   function rgb2html($rgba) {
 
-      if ( strpos($rgb,'rgb') === FALSE  ) return $rgb ;
+      if ( strpos($rgba,'rgba') === FALSE  ) return $rgba ;
 
-      $rgb = str_replace('rgb(','',$rgb);
-      $rgb = str_replace(')','',$rgb);
+      $rgba = str_replace('rgba(','',$rgba);
+      $rgba = str_replace(')','',$rgba);
 
-      list ($r,$g,$b) = explode(',',$rgb);
+      list ($r,$g,$b) = explode(',',$rgba);
 
       $r = intval($r); $g = intval($g);
       $b = intval($b);
@@ -509,7 +523,6 @@ class TemasAdmin extends Temas {
 
          }
       $proceso_css = ob_get_clean();
-      if ( GCM_DEBUG ) echo "\n<h3>Resultado de procesar archivos css</h3>\n<pre>\n$proceso_css\n</pre>";
 
       /* Si se añade un nuevo color */
 
@@ -550,6 +563,7 @@ class TemasAdmin extends Temas {
 
       include($this->ruta('temas','html','form_colores.html'));
 
+      if ( GCM_DEBUG ) echo "\n<br /><h3>Resultado de procesar archivos css</h3><br />\n<pre>\n$proceso_css\n</pre>";
       }
 
    /**
