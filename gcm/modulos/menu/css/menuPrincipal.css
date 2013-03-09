@@ -1,0 +1,44 @@
+
+/* menuPrincipal.css */
+#menu_principal {
+background: <?=$this->color("body-18")?>;
+}
+table#menu {
+margin-top: 3px;
+border: 0px;
+padding: 0px;
+background: #EED8AE ;
+background: transparent ;
+}
+#menu td {
+text-align: center;
+background: #EED8AE ;
+background: transparent ;
+color: <?=$this->color("body-11")?>;
+padding: 3px;
+margin: 0;
+}
+#menu td a {
+margin: 15px 15px;
+padding: 3px 15px 3px 15px;
+color:<?=$this->color("body-11")?>;
+text-decoration: none;
+background: #EED8AE;
+background: transparent ;
+border: 1px solid transparent;
+}
+#menu td a:hover {
+background: #4B87AD ;
+color: <?=$this->color("body-06")?>;
+border: 1px solid <?=$this->color("body-11")?>;
+}
+#menu td a:active {
+background: #EED8AE;
+color: <?=$this->color("body-11")?>;
+}
+/* Estamos aqui del menu principal */
+#menu td#menuOff a {
+background: <?=$this->color("body-12")?>;
+color: <?=$this->color("body-11")?>;
+border: 1px solid <?=$this->color("body-11")?>;	
+}
