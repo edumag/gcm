@@ -34,9 +34,7 @@ require_once(GCM_DIR.'lib/ext/detectar_navegador/browser_class_inc.php');
  *
  * - css:    Archivos css que suplantes a los del tema por defecto.
  * - html:   Archivos html.
- * - iconos: Iconos del tema. Con los iconos tambien se mirara en el 
- *           subdirectorio para poder dividirlos por tamaños, como ejemplo:
- *           16/+.gif 24/+.gif.
+ * - iconos: Iconos del tema. No es necesario la extensión.
  * - js:     Archivos javascript.
  * - libjs:  Librerías de javascript como jquery
  *
@@ -58,7 +56,6 @@ require_once(GCM_DIR.'lib/ext/detectar_navegador/browser_class_inc.php');
  * - Aplicar plantilla() en otros módulos
  * - Metodo icono que nos presente el icono correspondiente o su grafica alternativa si no
  *   lo encuentra.
- * - Separar logica de administración, o más bien hacer una librería independiente de gcm.
  * - Estaria bien diferenciar entre archivos de administración y de usuarios
  *
  */
@@ -426,12 +423,11 @@ class Temas extends Modulos {
     
    function icono($icono) {
 
-      $icono = $this->tema->icono($icono);
+      $retorno = $this->tema->icono($icono);
 
-      if ( $icono ) return $icono;
+      if ( $retorno ) return $retorno;
 
-      registrar(__FILE__,__LINE__,
-         __CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') No se encontro icono ['.$icono.']',
+      registrar(__FILE__,__LINE__,'No se encontro icono ['.$icono.']',
          'ADMIN');
       return FALSE;
 

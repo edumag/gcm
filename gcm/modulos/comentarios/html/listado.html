@@ -13,20 +13,20 @@
       <p class="fecha_comentario"><?=presentarFecha($fila->fecha_creacion,1,'mysql')?></p>
       <?php if ( permiso('moderar_comentarios') || $fila->usuarios_id == session_id() ) { ?>
       <a href="?e=modificar_comentario&id=<?=$fila->id?>" title='<?=literal('Modificar')?>' >
-         <img src='<?=$gcm->event->instancias['temas']->icono('16/editar')?>' alt=' [!] ' />
+         <img src='<?=$gcm->event->instancias['temas']->icono('editar')?>' alt=' [!] ' />
       </a>
       <a href="javascript:pedirDatos('<?=Router::$dir?>ajax/comentarios/eliminar/<?=$fila->id?>','confirmarBorradoComentario');" 
          title='<?=literal('Eliminar')?>' 
          onclick="return confirm('<?php echo literal('Eliminar').' '.literal('comentario');?>');"
          >
-         <img src='<?=$gcm->event->instancias['temas']->icono('16/borrar')?>' alt=' [X] ' />
+         <img src='<?=$gcm->event->instancias['temas']->icono('borrar')?>' alt=' [X] ' />
       </a>
       <?php } ?>
       <?php if ( permiso('moderar_comentarios') && $fila->activado != 1) { ?>
       <a href="javascript:pedirDatos('<?=Router::$dir?>ajax/comentarios/activar/<?=$fila->id?>','confirmarActivacionComentario');" 
          title='<?=literal('Activar').' '.literal('comentario')?>' 
          >
-         <img src='<?=$gcm->event->instancias['temas']->icono('16/ok')?>' alt=' [X] ' />
+         <img src='<?=$gcm->event->instancias['temas']->icono('ok')?>' alt=' [X] ' />
       </a>
       <?php } ?>
       <?php if ( isset($fila->mail) AND $fila->mail != '' ) { 

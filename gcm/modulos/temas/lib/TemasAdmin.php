@@ -670,7 +670,6 @@ class TemasAdmin extends Temas {
     *
     * - Iconos:
     *   Panel de los iconos. ¿Hacer paquetes de iconos individual de temas?
-    *   Separar por directorios 16/ 24/ 48/
     */
 
    function administrar() {
