@@ -53,6 +53,14 @@
 
 class TemasAdmin extends Temas {
 
+   /**
+    * Array con los colores optenidos del fichero css
+    *
+    * @todo dar la opción de mantener los colores que tenemos. 
+    */
+
+   private $colores_recopilados = FALSE;
+
    function __construct($tema_actual='') {
 
       parent::__construct($tema_actual);
@@ -102,6 +110,19 @@ class TemasAdmin extends Temas {
       }
 
    /**
+    * Incluir color a sección
+    */
+
+   private function incluir_color($seccion, $valor) {
+
+      if ( ! isset($this->colores_recopilados[$seccion]) || ! in_array($valor, $this->colores_recopilados[$seccion]) ) {
+         $this->colores_recopilados[$seccion][] = $valor;
+         }
+
+      return $seccion.'-'.sprintf("%02d",array_search($valor, $this->colores_recopilados[$seccion]));
+      }
+
+   /**
     * Recogemos fichero proyecto.css modificado
     *
     * - El fichero debe llevar las marcas del fichero correspondiente en el tema.
@@ -141,7 +162,6 @@ class TemasAdmin extends Temas {
 
       $ficheros    = array();
       $fichero     = FALSE;
-      $colores     = $this->tema->colores;
       $count_color = 0;
 
       foreach ($vlineas as $linea) {
@@ -151,14 +171,15 @@ class TemasAdmin extends Temas {
             list($literal,$fichero,$nada) = explode(':',$linea);
             $ficheros[$fichero] = '';
             $count_color=0;
+            $seccion = basename($fichero,'.css'); 
             // Ponemos a cero los colores del fichero
-            $nom_archivo = basename($fichero,'.css'); 
-            foreach ( $colores as $seccion_color => $valor_color ) {
-               list($nom_seccion,$num_seccion) = explode("-",$seccion_color);
-               if ( $nom_seccion  == $nom_archivo ) {
-                  unset($colores[$seccion_color]) ;
-                  }
-               }
+            // No hace falta.
+            // foreach ( $colores as $seccion_color => $valor_color ) {
+            //    list($nom_seccion,$num_seccion) = explode("-",$seccion_color);
+            //    if ( $nom_seccion  == $nom_archivo ) {
+            //       unset($colores[$seccion_color]) ;
+            //       }
+            //    }
 
          // Si la linea contiene 'acaba:'
          } elseif ( stripos($linea,'acaba:') ) {
@@ -176,40 +197,40 @@ class TemasAdmin extends Temas {
                      // separamos palabras buscamos # con seis caracteres más o tres
                      //if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
                      if (preg_match ('/^#[a-f0-9]{6}$/i', $palabra) || preg_match ('/^#[a-f0-9]{3}$/i', $palabra) ) {
-                        $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-                        $count_color++;
-                        $colores[$clave]=$palabra;
+                        // $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                        // $colores[$clave]=$palabra;
+                        $color = $palabra;
+                        $clave = $this->incluir_color($seccion, $color);
                         $mod = '<?=$this->color("'.$clave.'")?>';
-                        $linea = str_replace($palabra,$mod,$linea);
+                        $count_color++;
+                        $linea = str_replace($color,$mod,$linea);
                      } elseif ( preg_match("/transparent/i",$palabra,$resultado) ) {
-                        $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-                        $count_color++;
-                        $colores[$clave]='transparent';
+                        $color = $resultado[0];
+                        $clave = $this->incluir_color($seccion, $color);
                         $mod = '<?=$this->color("'.$clave.'")?>';
-                        $linea = str_replace($resultado[0],$mod,$linea);
+                        $linea = str_replace($color,$mod,$linea);
+                        $count_color++;
                      } elseif ( preg_match("/rgba\((.*)\){1}/",$palabra,$resultado) ) {
-                        $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
-                        $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-                        $count_color++;
-                        $colores[$clave]=$limpia;
+                        $color = "rgba(".str_replace(')','',$resultado[1]).")";
+                        $clave = $this->incluir_color($seccion, $color);
                         $mod = '<?=$this->color("'.$clave.'")?>';
-                        $linea = str_replace($limpia,$mod,$linea);
+                        $linea = str_replace($color,$mod,$linea);
+                        $count_color++;
                         }
                      }
                   }
 
             }
 
-           // Buscamos colores en formato rgbs()
+           // Buscamos colores en formato rgba()
 
            if ( preg_match("/rgba\((.*)\){1}/",$linea,$resultado) ) {
-               $limpia = "rgba(".str_replace(')','',$resultado[1]).")";
-               $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
-               $count_color++;
-               $colores[$clave]=$limpia;
-               $mod = '<?=$this->color("'.$clave.'")?>';
-               $linea = str_replace($limpia,$mod,$linea);
-               }
+              $color = "rgba(".str_replace(')','',$resultado[1]).")";
+              $clave = $this->incluir_color($seccion, $color);
+              $mod = '<?=$this->color("'.$clave.'")?>';
+              $linea = str_replace($color,$mod,$linea);
+              $count_color++;
+              }
 
             // Buscamos iconos o imagenes de módulos
             if ( preg_match("/url\(.*\)/",$linea, $coincidencias, PREG_OFFSET_CAPTURE) ) {
@@ -266,7 +287,7 @@ class TemasAdmin extends Temas {
          }
 
 
-      if ( isset( $colores ) ) echo '<br />Numero de colores  procesados: <b>'.count($colores).'</b>';
+      if ( isset( $this->colores_recopilados ) ) echo '<br />Numero de colores  procesados: <b>'.count($this->colores_recopilados).'</b>';
       if ( isset( $ficheros ) ) echo '<br />Numero de ficheros procesados: <b>'.count($ficheros).'</b>';
       if ( isset( $imagenes ) ) echo '<br />Numero de imágenes procesados: <b>'.count($imagenes).'</b>';
 
@@ -280,8 +301,10 @@ class TemasAdmin extends Temas {
       $fichero_colores_tema = $this->dir_tema_actual.'modulos/temas/css/colores.php';
 
       $salida = "<?php\n\n/* Fichero procesado por TemasAdmin.php */";
-      foreach ( $colores as $key => $valor ) {
-         $salida .= "\n".'$colores[\''.$key.'\'] = \''.$valor.'\';';
+      foreach ( $this->colores_recopilados as $nombre_seccion => $seccion ) {
+         foreach ( $seccion as $numero_color => $color ) {
+            $salida .= "\n".'$colores[\''.$nombre_seccion.'-'.sprintf("%02d",$numero_color).'\'] = \''.$color.'\';';
+            }
          }
       $salida .= "\n?>";
       file_put_contents($fichero_colores_tema,$salida,LOCK_EX);

@@ -29,7 +29,7 @@ color: #32510F;
 }
 
 /* h4.alert_info { */
-div.aviso, div.admin, div.error {
+div.aviso, div.admin, div.error, div.normal, div.ayuda {
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
@@ -69,3 +69,10 @@ background: #E2F6C5 url(<?=Router::$dir.$this->icono('alerta')?>) no-repeat 10px
 border: 1px solid #79C20D;
 color: #32510F;
 }
+
+div.ayuda {
+background: #B5E5EF url(<?=Router::$dir.$this->icono('ayuda')?>) no-repeat 10px 10px;
+border: 1px solid #77BACE;
+color: #082B33;
+}
+

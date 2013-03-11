@@ -1,6 +1,15 @@
 <form method="post" enctype="multipart/form-data" >
 <fieldset>
    <legend><?=literal('Subir fichero proyecto.css modificado',3)?></legend>
+   <div class="ayuda">
+      El fichero css a procesar debe tener las marcas de las secciones. La idea es coger el css que genera el proyecto
+      modificarlo con el editor externo de tu gusto y procesarlo desde aquí para tener el listado de los colores e imagenes
+      del tema que se utilizan. Pudiendo posteriormente cambiarlos al gusto sin problemas.
+      <br />
+      Tener en cuenta que este proceso modifica completamente el tema que estes editando, siendo conveniente crear uno nuevo
+      para no arriesgarse a perderlo.
+
+   </div>
    <input type="file" name="fichero" onchange="this.form.submit()"/>
    <Input type="hidden" name="MAX_FILE_SIZE"  value="204800000" />
    <input type="hidden" name="m" value="temas" />
