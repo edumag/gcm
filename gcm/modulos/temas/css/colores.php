@@ -41,5 +41,4 @@ $colores['botonera-00'] = '#d9e6fc';
 $colores['listado_contenidos-00'] = '#eff0f0';
 $colores['listado_contenidos-01'] = '#2c2f3f';
 $colores['pie-00'] = '#eeeeee';
-$colores['tinytable-00'] = '#c6d5e1';
 ?>

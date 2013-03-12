@@ -138,7 +138,7 @@ class Array2table {
       $simbolo = ( strrpos($url,'?') === FALSE ) ? '?' : '&';        //< Evitar colocar dos veces el interrogante en la url
 
       ?>
-         <table cellpadding="0" cellspacing="0" border="0" <?php if ( $table_id ) echo 'id="'.$table_id.'"';?> class="tinytable">
+         <table cellpadding="0" cellspacing="0" border="0" <?php if ( $table_id ) echo 'id="'.$table_id.'"';?> class="dataTable">
 
          <?php // Elementos colgroup nos permite modificar presentación por columnas ?>
 

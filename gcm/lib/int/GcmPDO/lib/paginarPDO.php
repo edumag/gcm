@@ -156,8 +156,7 @@ class PaginarPDO extends GcmPDO {
     * Presentamos contenido
     *
     * @param $opciones_array2table Opciones que pasamos a array2table
-    * @param $presentacion array2table por defecto pero podemos seleccionar
-    *        tinytable para tener una tabla dinamica con javascript.
+    * @param $presentacion array2table.
     */
 
    function pagina($opciones_array2table=FALSE, $presentacion = 'Array2table') {
@@ -239,10 +238,6 @@ class PaginarPDO extends GcmPDO {
     * @param $opciones_array2table Opciones para generar la tabla con array2table
     * @param $presentacion Clase a utilizar para presentar la tabla, por defecto
     *                      array2table.
-    *
-    *       posibles: 
-    *
-    *       - tinytable para tener una tabla dinamica con javascript. @see tinyTable
     */
 
    function generar_pagina($url_ajax=FALSE, $opciones_array2table = FALSE, $presentacion = 'Array2table') {

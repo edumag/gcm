@@ -43,3 +43,11 @@ function presenta_registros() {
    return false;
    }
 
+
+/**
+ * Datatable
+ */
+
+$(document).ready(function() {
+   $('#table').dataTable();
+   } );

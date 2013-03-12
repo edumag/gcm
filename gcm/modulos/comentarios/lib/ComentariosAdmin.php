@@ -68,7 +68,7 @@ class ComentariosAdmin extends Comentarios {
 
       return
 
-      require_once(GCM_DIR.'lib/int/array2table/lib/TinyTable.php');
+      require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/GcmPDO.php');
 
       $condicion = ( $args['id'] ) ? " AND c.id=".$args['id'] : '';
@@ -99,7 +99,7 @@ class ComentariosAdmin extends Comentarios {
 
 
       if ( $gcmpdo->validar() ) {
-         $array2table = new TinyTable();
+         $array2table = new Array2table();
          $array2table->generar_tabla($array, $opciones);
       } else {
          echo literal('No hay comentarios para listar');

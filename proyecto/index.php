@@ -31,7 +31,7 @@ date_default_timezone_set('Europe/Madrid');
  *
  */
 
-DEFINE('GCM_DIR','../gcm/');
+DEFINE('GCM_DIR','../../gcm/gcm/');
 
 require(GCM_DIR.'inicio.php');
 ?>

@@ -560,7 +560,7 @@ class Admin extends Modulos {
       $this->gestionar_usuario($usuario_id);
 
       require_once(dirname(__FILE__).'/../modelos/usuarios.php');
-      require_once(GCM_DIR.'lib/int/array2table/lib/TinyTable.php');
+      require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
 
       $usuarios = new Usuarios($gcm->pdo_conexion());
 
@@ -571,7 +571,7 @@ class Admin extends Modulos {
       $numUsuarios = count($arUsuarios);
 
       if ( $numUsuarios > 0 ) {
-         $array2table = new TinyTable();
+         $array2table = new Array2table();
          $array2table->generar_tabla($arUsuarios, array('url'=>'?m=admin&a=usuarios&id='));
          }
 

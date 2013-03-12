@@ -244,7 +244,7 @@ class GUtil {
       $mime_dir='text/directory';
 
       // Si es un directorio devolvemos $mime_dir
-      if ( is_dir($archivo) ) {
+      if ( @is_dir($archivo) ) {
          registrar(__FILE__,__LINE__,"Gutil::tipo_de_archivo()::tipo_de_archivo::mimetype=".$mime_dir);
          return $mime_dir;
       }
