@@ -219,6 +219,14 @@ class Ver_registros extends Modulos {
       $filtro = ( isset($_GET['filtro']) ) ? $_GET['filtro'] : '';
 
       $this->tabla_registros($filtro);
+
+      ?>
+      <script>
+      $(document).ready(function() {
+      $('#table').dataTable();
+      } );
+      </script>
+      <?php
       exit();
       }
 
@@ -292,6 +300,8 @@ class Ver_registros extends Modulos {
    function visualizar() {
 
       global $gcm;
+
+      $gcm->add_lib_js('temas', 'jquery.dataTables.js');
 
       $this->javascripts('ver_registros.js');
 
