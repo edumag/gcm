@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/titulo_articulo.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/lib/Contenidos.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,31 +81,27 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_564572b1ce5d7fe7ca8c92124076e676.html">contenidos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_a845b7d6e636d33255f017612c18fb71.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1c57f582eabe266eb86264e5b75dfa55.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">titulo_articulo.html</div>  </div>
+<div class="title">Contenidos.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;titulo_articulo&#39;</span>&gt;
-<a name="l00002"></a>00002    &lt;?=$titulo; ?&gt;
-<a name="l00003"></a>00003    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;doc_info&#39;</span>&gt;
-<a name="l00004"></a>00004       &lt;?php <span class="keywordflow">if</span> ( isset($fecha) )  { ?&gt;
-<a name="l00005"></a>00005       &lt;h3&gt;&lt;?php echo $fecha; ?&gt;&lt;/h3&gt;
-<a name="l00006"></a>00006       &lt;?php } ?&gt;
-<a name="l00007"></a>00007       &lt;?php <span class="keywordflow">if</span> ( !empty($camino)  ) { ?&gt;
-<a name="l00008"></a>00008       &lt;h3&gt;&lt;?=$camino?&gt;&lt;/h3&gt;
-<a name="l00009"></a>00009       &lt;?php } ?&gt;
-<a name="l00010"></a>00010    &lt;/div&gt;
-<a name="l00011"></a>00011 &lt;/div&gt;
+<a href="../../dd/dd7/a00248.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 require(dirname(__FILE__).<span class="stringliteral">&#39;/../config/config.php&#39;</span>);
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 require(<span class="stringliteral">&#39;Contenidos&#39;</span>.<a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;sistema&#39;</span>].<span class="stringliteral">&#39;.php&#39;</span>);
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 13 de Marzo de 2013 09:58:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

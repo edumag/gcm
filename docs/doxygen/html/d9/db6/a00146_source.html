@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/solicitud/lib/Restricciones.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/admin/config/config.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -79,46 +79,43 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_6dcf7604432fbe0cdce90d2c3270522a.html">solicitud</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_b45f4a2cdae25a1e4b75b511541262b6.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_406c13f9334d411137a984d45e973f8a.html">config</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Restricciones.php</div>  </div>
+<div class="title">config.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 require_once(<span class="stringliteral">&quot;constantes.php&quot;</span>);
-<a name="l00004"></a>00004 
-<a name="l00005"></a><a class="code" href="../../d7/df7/a00058.html">00005</a> <span class="keyword">class </span><a class="code" href="../../d7/df7/a00058.html">Restricciones</a> {
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007   <span class="keyword">private</span> $_intConstraintType;
-<a name="l00008"></a>00008   <span class="keyword">private</span> $_strConstraintOperand;
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010   <span class="keyword">function</span> __construct($intConstraintType, $strConstraintOperand) {
-<a name="l00011"></a>00011     $this-&gt;_intConstraintType = $intConstraintType;
-<a name="l00012"></a>00012     $this-&gt;_strConstraintOperand = $strConstraintOperand;
-<a name="l00013"></a>00013   }
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015   <span class="keyword">function</span> GetConstraintType() {
-<a name="l00016"></a>00016     <span class="keywordflow">return</span>($this-&gt;_intConstraintType);
-<a name="l00017"></a>00017   }
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019   <span class="keyword">function</span> GetConstraintOperand() {
-<a name="l00020"></a>00020     <span class="keywordflow">return</span>($this-&gt;_strConstraintOperand);
-<a name="l00021"></a>00021   }
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 ?&gt;
+<a name="l00002"></a>00002 <span class="comment">// Archivo generado automaticamente por /home/eduardo/SERVIDOR/subversion/gcm/trunk/gcm/lib/int/GcmConfig/lib/GcmConfig.php</span>
+<a name="l00003"></a>00003 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Proyecto&#39;</span>]=<span class="stringliteral">&#39;gcm&#39;</span>;
+<a name="l00004"></a>00004 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;bd_conexion&#39;</span>]=<span class="stringliteral">&#39;sqlite:DATOS/proyecto.db&#39;</span>;
+<a name="l00005"></a>00005 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;bd_usuario&#39;</span>] = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00006"></a>00006 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;bd_pass&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00007"></a>00007 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Sufijo para base de datos&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00008"></a>00008 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Idioma por defecto&#39;</span>]=<span class="stringliteral">&#39;es&#39;</span>;
+<a name="l00009"></a>00009 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Palabra secreta para depurar&#39;</span>]=<span class="stringliteral">&#39;debug&#39;</span>;
+<a name="l00010"></a>00010 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;cache_http&#39;</span>;
+<a name="l00011"></a>00011 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;comentarios&#39;</span>;
+<a name="l00012"></a>00012 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;descargables&#39;</span>;
+<a name="l00013"></a>00013 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;indexador&#39;</span>;
+<a name="l00014"></a>00014 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;referencias&#39;</span>;
+<a name="l00015"></a>00015 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Módulos activados&#39;</span>][] = <span class="stringliteral">&#39;widgets&#39;</span>;
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;bd_conexion&#39;</span>]=<span class="stringliteral">&#39;sqlite:DATOS/proyecto.db&#39;</span>;
+<a name="l00018"></a>00018 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;bd_usuario&#39;</span>] = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00019"></a>00019 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;bd_pass&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00020"></a>00020 <a class="code" href="../../d4/d13/a00377_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;Sufijo para base de datos&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00021"></a>00021 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 13 de Marzo de 2013 09:58:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

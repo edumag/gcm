@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/registro/RegistroFactoryTest.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/solicitud/lib/constantes.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,62 +81,58 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_f936d10d5cef60c660b4cee12b5fb202.html">registro</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_6dcf7604432fbe0cdce90d2c3270522a.html">solicitud</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_b45f4a2cdae25a1e4b75b511541262b6.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">RegistroFactoryTest.php</div>  </div>
+<div class="title">constantes.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a href="../../d5/db1/a00140.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file   Test phpUnit para RegistroFactory</span>
-<a name="l00005"></a>00005 <span class="comment"> */</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 require_once <span class="stringliteral">&#39;PHPUnit/Framework.php&#39;</span>;
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 require(dirname(__FILE__).<span class="stringliteral">&#39;/RegistroFactory.php&#39;</span>);
-<a name="l00010"></a>00010 
-<a name="l00011"></a><a class="code" href="../../d9/d2e/a00056.html">00011</a> <span class="keyword">class </span><a class="code" href="../../d9/d2e/a00056.html">RegistroFactoryTest</a> <span class="keyword">extends</span> <a class="code" href="../../d2/d79/a00051.html">PHPUnit_Framework_TestCase</a>{
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013    <span class="keyword">public</span> $registroFactory;
-<a name="l00014"></a>00014    <span class="keyword">public</span> $archivo;
-<a name="l00015"></a>00015 
-<a name="l00016"></a>00016    <span class="keyword">function</span> __construct() {
+<a name="l00004"></a>00004 <span class="comment"> * @file      constantes.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Constantes predefinidas para el módulo Solicitud</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  04/02/11</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2011, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
 <a name="l00017"></a>00017 
-<a name="l00018"></a>00018       $this-&gt;archivo = <span class="stringliteral">&#39;/tmp/TestRegistroFactory.db&#39;</span>;
-<a name="l00019"></a>00019       $this-&gt;registroFactory = RegistroFactory::getRegistro($this-&gt;archivo);
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021       }
-<a name="l00022"></a>00022 <span class="comment"></span>
-<a name="l00023"></a>00023 <span class="comment">   /** Comprobando valor de la primera variable */</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a><a class="code" href="../../d9/d2e/a00056_a3ebdf2219ea1415a9ded49e4a7f14d94.html#a3ebdf2219ea1415a9ded49e4a7f14d94">00025</a>    <span class="keyword">function</span> <a class="code" href="../../d9/d2e/a00056_a3ebdf2219ea1415a9ded49e4a7f14d94.html#a3ebdf2219ea1415a9ded49e4a7f14d94" title="Comprobando valor de la primera variable.">testAnyadirRegistros</a>() {
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027       $this-&gt;registroFactory-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;Test sobre Registro&#39;</span>);
-<a name="l00028"></a>00028       $this-&gt;assertTrue(file_exists($this-&gt;archivo), <span class="stringliteral">&#39;Archivo de registro creado&#39;</span>);
-<a name="l00029"></a>00029 <span class="comment"></span>
-<a name="l00030"></a>00030 <span class="comment">      /** Cambiamos base de datos */</span>
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032       $this-&gt;archivo = <span class="stringliteral">&#39;/tmp/TestRegistroFactory2.db&#39;</span>;
-<a name="l00033"></a>00033       $this-&gt;registroFactory = RegistroFactory::getRegistro($this-&gt;archivo);
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035       $this-&gt;registroFactory-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;Test sobre Registro2&#39;</span>);
-<a name="l00036"></a>00036       $this-&gt;assertTrue(file_exists($this-&gt;archivo), <span class="stringliteral">&#39;Archivo de registro creado&#39;</span>);
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038       }
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041    }
-<a name="l00042"></a>00042 ?&gt;
+<a name="l00018"></a>00018 define(<span class="stringliteral">&#39;ENTRADAS_COOKIE&#39;</span>,1);
+<a name="l00019"></a>00019 define(<span class="stringliteral">&#39;ENTRADAS_GET&#39;</span>,2);
+<a name="l00020"></a>00020 define(<span class="stringliteral">&#39;ENTRADAS_POST&#39;</span>,4);
+<a name="l00021"></a>00021 <span class="comment"></span>
+<a name="l00022"></a>00022 <span class="comment">/** Restricciones */</span>
+<a name="l00023"></a>00023 
+<a name="l00024"></a><a class="code" href="../../d5/db1/a00140_ab78166469618b355c2fa7ae4fb5682a4.html#ab78166469618b355c2fa7ae4fb5682a4">00024</a> define(<span class="stringliteral">&#39;RT_LONG_MIN&#39;</span>,1);
+<a name="l00025"></a>00025 define(<span class="stringliteral">&#39;RT_LONG_MAX&#39;</span>,2);
+<a name="l00026"></a>00026 define(<span class="stringliteral">&#39;RT_CARACTERES_PERMITIDOS&#39;</span>,3);
+<a name="l00027"></a>00027 define(<span class="stringliteral">&#39;RT_CARACTERES_NO_PERMITIDOS&#39;</span>,4);
+<a name="l00028"></a>00028 define(<span class="stringliteral">&#39;RT_MENOR_QUE&#39;</span>,5);
+<a name="l00029"></a>00029 define(<span class="stringliteral">&#39;RT_MAYOR_QUE&#39;</span>,6);
+<a name="l00030"></a>00030 define(<span class="stringliteral">&#39;RT_IGUAL_QUE&#39;</span>,7);
+<a name="l00031"></a>00031 define(<span class="stringliteral">&#39;RT_NO_IGUAL&#39;</span>,8);
+<a name="l00032"></a>00032 define(<span class="stringliteral">&#39;RT_PASA_EXPRESION_REGULAR&#39;</span>,9);
+<a name="l00033"></a>00033 define(<span class="stringliteral">&#39;RT_NO_PASA_EXPRESION_REGULAR&#39;</span>,10);
+<a name="l00034"></a>00034 define(<span class="stringliteral">&#39;RT_NO_ES_NUMERO&#39;</span>,11);
+<a name="l00035"></a>00035 define(<span class="stringliteral">&#39;RT_REQUERIDO&#39;</span>,12);
+<a name="l00036"></a>00036 define(<span class="stringliteral">&#39;RT_MAIL&#39;</span>,13);
+<a name="l00037"></a>00037 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 13 de Marzo de 2013 09:58:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

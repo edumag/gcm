@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/css/farbtastic.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/columna.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,90 +87,24 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">farbtastic.css</div>  </div>
+<div class="title">columna.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment"></span>
-<a name="l00002"></a>00002 <span class="comment">/**</span>
-<a name="l00003"></a>00003 <span class="comment"> * Farbtastic Color Picker 1.2</span>
-<a name="l00004"></a>00004 <span class="comment"> * ý 2008 Steven Wittens</span>
-<a name="l00005"></a>00005 <span class="comment"> *</span>
-<a name="l00006"></a>00006 <span class="comment"> * This program is free software; you can redistribute it and/or modify</span>
-<a name="l00007"></a>00007 <span class="comment"> * it under the terms of the GNU General Public License as published by</span>
-<a name="l00008"></a>00008 <span class="comment"> * the Free Software Foundation; either version 2 of the License, or</span>
-<a name="l00009"></a>00009 <span class="comment"> * (at your option) any later version.</span>
-<a name="l00010"></a>00010 <span class="comment"> *</span>
-<a name="l00011"></a>00011 <span class="comment"> * This program is distributed in the hope that it will be useful,</span>
-<a name="l00012"></a>00012 <span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<a name="l00013"></a>00013 <span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<a name="l00014"></a>00014 <span class="comment"> * GNU General Public License for more details.</span>
-<a name="l00015"></a>00015 <span class="comment"> *</span>
-<a name="l00016"></a>00016 <span class="comment"> * You should have received a copy of the GNU General Public License</span>
-<a name="l00017"></a>00017 <span class="comment"> * along with this program; if not, write to the Free Software</span>
-<a name="l00018"></a>00018 <span class="comment"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</span>
-<a name="l00019"></a>00019 <span class="comment"> */</span>
-<a name="l00020"></a>00020 .farbtastic {
-<a name="l00021"></a>00021   position: relative;
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 .farbtastic * {
-<a name="l00024"></a>00024   position: absolute;
-<a name="l00025"></a>00025   cursor: crosshair;
-<a name="l00026"></a>00026 }
-<a name="l00027"></a>00027 .farbtastic, .farbtastic .wheel {
-<a name="l00028"></a>00028   width: 195px;
-<a name="l00029"></a>00029   height: 195px;
-<a name="l00030"></a>00030 }
-<a name="l00031"></a>00031 .farbtastic .color, .farbtastic .overlay {
-<a name="l00032"></a>00032   top: 47px;
-<a name="l00033"></a>00033   left: 47px;
-<a name="l00034"></a>00034   width: 101px;
-<a name="l00035"></a>00035   height: 101px;
-<a name="l00036"></a>00036 }
-<a name="l00037"></a>00037 .farbtastic .wheel {
-<a name="l00038"></a>00038   background: url(&lt;?=<a class="code" href="../../d4/de8/a00061_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>.$this-&gt;ruta(<span class="stringliteral">&#39;temas&#39;</span>,<span class="stringliteral">&#39;img&#39;</span>,<span class="stringliteral">&#39;wheel.png&#39;</span>)?&gt;) no-repeat;
-<a name="l00039"></a>00039   width: 195px;
-<a name="l00040"></a>00040   height: 195px;
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 .farbtastic .overlay {
-<a name="l00043"></a>00043   background: url(&lt;?=<a class="code" href="../../d4/de8/a00061_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>.$this-&gt;ruta(<span class="stringliteral">&#39;temas&#39;</span>,<span class="stringliteral">&#39;img&#39;</span>,<span class="stringliteral">&#39;mask.png&#39;</span>)?&gt;) no-repeat;
-<a name="l00044"></a>00044 }
-<a name="l00045"></a>00045 .farbtastic .marker {
-<a name="l00046"></a>00046   width: 17px;
-<a name="l00047"></a>00047   height: 17px;
-<a name="l00048"></a>00048   margin: -8px 0 0 -8px;
-<a name="l00049"></a>00049   overflow: hidden; 
-<a name="l00050"></a>00050   background: url(&lt;?=<a class="code" href="../../d4/de8/a00061_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>.$this-&gt;ruta(<span class="stringliteral">&#39;temas&#39;</span>,<span class="stringliteral">&#39;img&#39;</span>,<span class="stringliteral">&#39;marker.png&#39;</span>)?&gt;) no-repeat;
-<a name="l00051"></a>00051 }
-<a name="l00052"></a>00052 .colorwell {
-<a name="l00053"></a>00053  border: 2px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;4&quot;</span>)?&gt;;
-<a name="l00054"></a>00054  width: 6em;
-<a name="l00055"></a>00055  text-align: center;
-<a name="l00056"></a>00056  cursor: pointer;
-<a name="l00057"></a>00057 }
-<a name="l00058"></a>00058 body .colorwell-selected {
-<a name="l00059"></a>00059  border: 2px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;15&quot;</span>)?&gt;;
-<a name="l00060"></a>00060  font-weight: bold;
-<a name="l00061"></a>00061 }
-<a name="l00062"></a>00062 <span class="preprocessor">#selector_colores table {</span>
-<a name="l00063"></a>00063 <span class="preprocessor"></span>display: <span class="keyword">inline</span>-block;
-<a name="l00064"></a>00064  border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;4&quot;</span>)?&gt;;
-<a name="l00065"></a>00065 }
-<a name="l00066"></a>00066 <span class="preprocessor">#selector_colores thead td {</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span> border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;;
-<a name="l00068"></a>00068  background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;4&quot;</span>)?&gt;;
-<a name="l00069"></a>00069  color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;2&quot;</span>)?&gt;;
-<a name="l00070"></a>00070  text-align: center;
-<a name="l00071"></a>00071  font-weight: bold;
-<a name="l00072"></a>00072 }
-<a name="l00073"></a>00073 <span class="preprocessor">#picker {</span>
-<a name="l00074"></a>00074 <span class="preprocessor"></span>   padding: 5px;
-<a name="l00075"></a>00075    <span class="keywordtype">float</span>: right;
-<a name="l00076"></a>00076 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002    
+<a name="l00003"></a>00003 <span class="preprocessor">#columna .panel ul {</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span>list-style: none;
+<a name="l00005"></a>00005 padding: 3px 0px 5px 7px;
+<a name="l00006"></a>00006 margin: 0;
+<a name="l00007"></a>00007 }
+<a name="l00008"></a>00008 <span class="preprocessor">#columna .panel li {</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span>margin: 3px;
+<a name="l00010"></a>00010 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el MiÃ©rcoles, 13 de Marzo de 2013 09:58:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

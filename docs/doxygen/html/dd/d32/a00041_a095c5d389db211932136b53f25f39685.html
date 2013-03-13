@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Imagenes\__construct</title>
+<title>gcm: ImagenesAbstract\__construct</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   </div>
   <div id="nav-path" class="navpath">
     <ul>
-      <li class="navelem"><a class="el" href="../../dd/d32/a00041.html">Imagenes</a>      </li>
+      <li class="navelem"><a class="el" href="../../dd/d32/a00041.html">ImagenesAbstract</a>      </li>
     </ul>
   </div>
 </div>
@@ -82,54 +82,12 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
    <td valign="top">
       <div class="navtab">
         <table>
-          <tr><td class="navtab"><a class="qindexHL" href="../../dd/d32/a00041_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">__construct</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a9a98f609af7c225ca89afe6262cc5799.html#a9a98f609af7c225ca89afe6262cc5799">galeria</a></td></tr>
-          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_abf7bd6bbe8fe0ded68b8c75daccb9ab7.html#abf7bd6bbe8fe0ded68b8c75daccb9ab7">imagenes2thickbox</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a5210a84a3d6b41ca54b051b080ee9283.html#a5210a84a3d6b41ca54b051b080ee9283">$nombre_imagen</a></td></tr>
+          <tr><td class="navtab"><a class="qindex" href="../../dd/d32/a00041_a19ecce3d19e108b3bdfb5c8e74512062.html#a19ecce3d19e108b3bdfb5c8e74512062">getNombre</a></td></tr>
         </table>
       </div>
    </td>
    <td valign="top" class="mempage">
-<a class="anchor" id="a095c5d389db211932136b53f25f39685"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../dd/d32/a00041_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">__construct</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Constructor. </p>
-
-<p>Reimplementado de <a class="el" href="../../d2/dee/a00049_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">Modulos</a>.</p>
-
-<p>Reimplementado en <a class="el" href="../../d6/d42/a00043_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">ImagenesAdmin</a>.</p>
-
-<p>Definición en la línea <a class="el" href="../../da/dd4/a00291_source.html#l00045">45</a> del archivo <a class="el" href="../../da/dd4/a00291_source.html">Imagenes.php</a>.</p>
-
-<p>Hace referencia a <a class="el" href="../../df/d5d/a00084_source.html#l00027">$gcm</a> y <a class="el" href="../../d3/d00/a00113_source.html#l00146">Modulos\config()</a>.</p>
-<div class="fragment"><pre class="fragment">                          {
-
-      global <a class="code" href="../../df/d5d/a00084_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-
-      <a class="code" href="../../dd/d32/a00041_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
-
-      $this-&gt;altoMaxImg = $this-&gt;<a class="code" href="../../d2/dee/a00049_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;altoMaxImg&#39;</span>);
-      $this-&gt;anchoMaxImg = $this-&gt;<a class="code" href="../../d2/dee/a00049_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;anchoMaxImg&#39;</span>);
-      $this-&gt;altoMaxMiniatura = $this-&gt;<a class="code" href="../../d2/dee/a00049_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;altoMaxMiniatura&#39;</span>);
-      $this-&gt;anchoMaxMiniatura = $this-&gt;<a class="code" href="../../d2/dee/a00049_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>(<span class="stringliteral">&#39;anchoMaxMiniatura&#39;</span>);
-
-      $this-&gt;proyecto = $gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>);
-      $this-&gt;idioma   = $gcm-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Idioma por defecto&#39;</span>);
-
-      }
-</pre></div>
-</div>
-</div>
     </td>
   </tr>
 </table>
@@ -137,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 26 de Febrero de 2013 10:38:39 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 13 de Marzo de 2013 09:58:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

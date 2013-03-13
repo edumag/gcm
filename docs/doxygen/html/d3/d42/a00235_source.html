@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/_form_titulo.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_borrar.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,18 +87,31 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">_form_titulo.html</div>  </div>
+<div class="title">form_borrar.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;fieldset&gt;
-<a name="l00002"></a>00002    &lt;legend  accesskey=<span class="stringliteral">&quot;t&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Título&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00003"></a>00003    &lt;input style=<span class="stringliteral">&#39;width: 100%;&#39;</span> title=<span class="stringliteral">&#39;&lt;?php echo literal(&#39;</span>Título del contenido<span class="stringliteral">&#39;,3);?&gt;&#39;</span> type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;titulo&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$titulo?&gt;&quot;</span> /&gt;
-<a name="l00004"></a>00004 &lt;/fieldset&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;] ?&gt;&quot;</span> &gt;
+<a name="l00002"></a>00002    &lt;fieldset&gt;
+<a name="l00003"></a>00003       &lt;legend&gt;&lt;?php echo literal(<span class="stringliteral">&#39;Confirmar borrado&#39;</span>,3);?&gt;&lt;/legend&gt;
+<a name="l00004"></a>00004       &lt;?php <span class="keywordflow">foreach</span> ( $contenidos_borrar as $apartado =&gt; $cont ) { ?&gt;
+<a name="l00005"></a>00005       &lt;b&gt;&lt;?=$apartado?&gt;&lt;/b&gt;
+<a name="l00006"></a>00006       &lt;?php <a class="code" href="../../df/d98/a00107_ac34bd8d344b3c4dea60eefaf01927893.html#ac34bd8d344b3c4dea60eefaf01927893" title="convertir array en lista">array_lista</a>($contenidos_borrar[$apartado],NULL,TRUE); ?&gt;
+<a name="l00007"></a>00007       &lt;?php  } ?&gt;
+<a name="l00008"></a>00008    &lt;/fieldset&gt;
+<a name="l00009"></a>00009    &lt;fieldset&gt;
+<a name="l00010"></a>00010       &lt;legend&gt;&lt;?php echo literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3);?&gt;&lt;/legend&gt;
+<a name="l00011"></a>00011       &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;ejecutar_borrar&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Confirmar&#39;</span>)?&gt;&lt;/button&gt;
+<a name="l00012"></a>00012       &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;cancelar&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Cancelar&#39;</span>)?&gt;&lt;/button&gt;
+<a name="l00013"></a>00013       &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;s&quot;</span> value=<span class="stringliteral">&quot;&lt;?=Router::$s?&gt;&quot;</span> /&gt;
+<a name="l00014"></a>00014       &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;c&quot;</span> value=<span class="stringliteral">&quot;&lt;?=Router::$c?&gt;&quot;</span> /&gt;
+<a name="l00015"></a>00015    &lt;/fieldset&gt;
+<a name="l00016"></a>00016 &lt;/form&gt;
+<a name="l00017"></a>00017 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 26 de Febrero de 2013 10:38:38 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 13 de Marzo de 2013 09:58:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
