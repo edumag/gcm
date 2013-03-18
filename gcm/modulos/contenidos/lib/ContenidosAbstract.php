@@ -89,6 +89,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
+      permiso('editar_contenido',TRUE);
+
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
       $gcm->titulo = literal('Guardar como',3);
@@ -116,6 +118,8 @@ abstract class ContenidosAbstract extends Modulos {
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.$args.')');
 
       global $GCM_LG, $gcm ;
+
+      permiso('editar_contenido',TRUE);
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->titulo = literal('Confirmar lista de contenidos a borrar');
@@ -152,6 +156,8 @@ abstract class ContenidosAbstract extends Modulos {
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.$args.')');
 
       global $gcm;
+
+      permiso('editar_contenido',TRUE);
 
       $gcm->event->anular('contenido','contenidos');
 
@@ -193,6 +199,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
+      permiso('editar_contenido',TRUE);
+
       $contenido = $this->devolver_contenido($gcm->seleccionado[0]);
 
       $titulo = $this->devolver_titulo($gcm->seleccionado[0]);
@@ -221,6 +229,8 @@ abstract class ContenidosAbstract extends Modulos {
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.$args.')');
 
       global $gcm;
+
+      permiso('editar_contenido',TRUE);
 
       $gcm->event->anular('contenido','contenidos');
 
@@ -387,6 +397,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
+      permiso('editar_contenido',TRUE);
+
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
       $gcm->titulo = literal('Nueva sección');
@@ -410,6 +422,8 @@ abstract class ContenidosAbstract extends Modulos {
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.$args.')');
 
       global $gcm;
+
+      permiso('editar_contenido',TRUE);
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -515,7 +529,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).')');
 
-      permiso('editar_contenido');
+      permiso('editar_contenido',TRUE);
 
       $contenido = $_POST['areaTexto'];
 
@@ -668,6 +682,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
+      permiso('editar_contenido',TRUE);
+
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).')');
 
       switch($e) {
@@ -720,6 +736,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
+      permiso('editar_contenido',TRUE);
+
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
       $gcm->titulo = literal('Renombrando o moviendo sección',3);
@@ -760,6 +778,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
+      permiso('editar_contenido',TRUE);
+
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
       $gcm->titulo = literal('Nueva sección');
@@ -791,6 +811,8 @@ abstract class ContenidosAbstract extends Modulos {
    function ejecutar_borrar($e, $args=NULL) {
 
       global $gcm;
+
+      permiso('editar_contenido',TRUE);
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');

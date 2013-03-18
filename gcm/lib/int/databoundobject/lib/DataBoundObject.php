@@ -91,7 +91,8 @@ abstract class DataBoundObject {
          $arRow = $objStatement->fetch(PDO::FETCH_ASSOC);
 
          if ( ! $arRow  ) {
-            trigger_error('No existe registro ['.$this->ID.'] en ['.$this->strTableName.']'."\nsql: ".$strQuery, E_USER_ERROR);
+            registrar(__FILE__,__LINE__,'No existe registro ['.$this->ID.'] en ['.$this->strTableName.']'."\nsql: ".$strQuery,'ADMIN');
+            $this->ID = FALSE;
             return FALSE;
             }
 
@@ -100,7 +101,8 @@ abstract class DataBoundObject {
             $this->valores[$strMember] = $value;
          };
          $this->blIsLoaded = true;
-      };
+         return TRUE;
+      }
    }
 
    /**
@@ -283,6 +285,20 @@ abstract class DataBoundObject {
          $this->Load();
          }
       return ( isset($this->valores[$strMember])  ) ? $this->valores[$strMember] : FALSE ;
+      }
+
+   /**
+    * Nos permite eliminar el valor de un campo, evitando así que al guardar las modificaciones
+    * no modifique un campo que deseamos mantener como esta.
+    *
+    * Útil en el caso por ejemplo de las contraseñas donde en caso de no poner contenido en el
+    * formulario implica que no se desea cambiar.
+    */
+
+   function DelAccessor($strMember) {
+
+      if ( isset($this->valores[$strMember]) ) unset($this->valores[$strMember]);
+
       }
 
    /**

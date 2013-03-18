@@ -51,7 +51,7 @@ class AdminAdmin extends Admin {
 
    function test() {
 
-      permiso(2);
+      permiso('administrar',TRUE);
 
       global $gcm;
 
@@ -221,7 +221,7 @@ class AdminAdmin extends Admin {
 
       global $gcm;
 
-      permiso(8);
+      permiso('administrar',TRUE);
 
       $gcm->tema = 'admin';
       $gcm->plantilla = 'administrando.html';
@@ -265,7 +265,7 @@ class AdminAdmin extends Admin {
    
       global $gcm;
 
-      permiso(8);
+      permiso('administrar',TRUE);
 
       $diff_usuario = FALSE;   ///< ¿Hay diferencias entre el archivo por defecto?
       $diff_admin   = FALSE;   ///< ¿Hay diferencias entre el archivo por defecto?
@@ -370,7 +370,7 @@ class AdminAdmin extends Admin {
    
       global $gcm;
 
-      permiso(8);
+      permiso('administrar',TRUE);
 
       $modulo    = $_POST['modulo'];
       $tipo      = $_POST['tipo'];

@@ -8,6 +8,7 @@
    <input type="hidden" name="id" value="<?=$this->ID?>" /> 
    <?php } ?>
 
+   <?php // echo "CAMPOS: <pre>" ; print_r($this->campos) ; echo "</pre>"; // DEV  ?>
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
@@ -18,12 +19,7 @@
 
    <div class="caja_campo" id="caja_campo_<?=$campo?>">
 
-   <?php if ( $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
-
-   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
-   <textarea rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
-
-   <?php } elseif ( $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
+   <?php if ( $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
       <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>
       <select name="<?=$campo?>">
@@ -51,6 +47,20 @@
    
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
    <input name="<?=$campo?>"  type="datetime-local" value="<?php if ( $this->valores($campo) !== '0000-00-00 00:00:00' ) { echo strftime("%Y-%m-%dT%H:%M",strtotime($this->valores($campo))); } else { echo ''; } ?>"/>
+
+   <?php } elseif ( $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
+   
+   <div class="caja_campo_titulo"><?=literal('contraseña')?>: </div>
+   <input name="<?=$campo?>"  type="password" value=""/>
+   </div>
+   <div class="caja_campo" id="caja_campo_verificacion">
+   <div class="caja_campo_titulo"><?=literal('verificación')?>: </div>
+   <input name="verificacion"  type="password" value=""/>
+
+   <?php } elseif ( $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
+
+   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <textarea rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
 
    <?php } else { ?>
 

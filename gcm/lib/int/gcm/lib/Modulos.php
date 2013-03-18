@@ -171,7 +171,7 @@ abstract class Modulos {
 
       global $gcm;
 
-      if ( !permiso(10) ) return FALSE;
+      if ( !permiso('configuracion') ) return FALSE;
 
       if ( isset($_POST['accion']) && $_POST['accion'] == 'escribir_gcmconfig'  ) {
 

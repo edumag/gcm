@@ -33,7 +33,7 @@ class ComentariosAdmin extends Comentarios {
 
       global $gcm;
 
-      permiso(8);
+      permiso('moderar_comentarios');
 
       $gcm->event->anular('titulo','contenido');
       $gcm->event->anular('contenido','contenido');

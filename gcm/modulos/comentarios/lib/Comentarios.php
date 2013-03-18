@@ -518,7 +518,8 @@ class Comentarios extends Modulos {
 
    function modificar($e, $args=NULL) {
 
-      permiso(8);
+      $args = recuperar_variable($args);
+      permiso('modificar_comentario',TRUE);
    
       global $gcm;
 
@@ -533,7 +534,7 @@ class Comentarios extends Modulos {
 
    function ejecutar_modificar_comentario($e, $args=NULL) {
 
-      permiso(8);
+      permiso('modificar_comentario',TRUE);
    
       global $gcm;
 

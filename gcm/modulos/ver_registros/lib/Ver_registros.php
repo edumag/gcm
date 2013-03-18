@@ -211,7 +211,7 @@ class Ver_registros extends Modulos {
 
    function registros_ajax() {
 
-      if (  ! GCM_DEBUG && !permiso(3,NULL,FALSE,FALSE) ) {
+      if (  ! GCM_DEBUG && !permiso('ver_registros',NULL,FALSE,FALSE) ) {
          echo '<p class="error">'.literal('Sin permisos').'</p>';
          return FALSE;
          }

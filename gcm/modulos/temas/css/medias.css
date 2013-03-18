@@ -44,8 +44,15 @@
       position: relative;
    }
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 800px){
    body {
-      font-size: 140%;
+      font-size: 130%;
       }
    }
+
+@media screen and (max-width: 500px){
+   body {
+      font-size: 180%;
+      }
+   }
+

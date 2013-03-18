@@ -60,8 +60,6 @@ class Admin extends Modulos {
 
       global $gcm;
 
-      permiso(1);
-
       $vale = TRUE;
 
       if ( isset($aDatos['usuario']) && stripos($aDatos['usuario'],'javascript')  ) {
@@ -92,40 +90,26 @@ class Admin extends Modulos {
       }
 
    /**
-    * Borrar usuario
-    */
-
-   function borrar_usuario() {
-
-      permiso(1, $usuario_id);
-
-      }
-
-   /**
-    * Añadir usuario
-    */
-
-   function anyadir_usuario() {
-
-      permiso(10);
-
-      }
-
-   /**
     * Cambio de contraseña
     */
 
-   function cambio_password() {
+   function cambio_password($usuario_id=FALSE) {
 
       global $gcm;
 
-      permiso(1);
+      // Si no tenemos permisos, tenemos que ser el usuario que edita
+      if ( ! permiso() ) {
+         $usuario_id = $gcm->au->logeado();
+         }
+
+      if ( ! $usuario_id ) return ;
 
       ?>
       <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
          <?php include($gcm->event->instancias['temas']->ruta('admin','html','form_cambio_pass.html')); ?>
          <input type="hidden" name="a" value="ejecutar_cambio_password" />
          <input type="hidden" name="m" value="admin" />
+         <input type="hidden" name="id" value="<?php echo $usuario_id; ?>" />
       </form>
       <?php
 
@@ -139,11 +123,12 @@ class Admin extends Modulos {
 
       global $gcm;
 
+      $usuario_id = is_numeric($_POST['id'] );
+
+      // Si no tenemos permisos, tenemos que ser el usuario que edita
+      if ( ! permiso() && $usuario_id != $gcm->au->logeado()) return ;
+
       require_once(dirname(__FILE__).'/../modelos/usuarios.php');
-
-      $usuario_id = $gcm->au->logeado();
-
-      permiso(1, $usuario_id);
 
       $gcm->event->anular('contenido','admin');
       $gcm->event->unico('titulo','admin');
@@ -175,7 +160,9 @@ class Admin extends Modulos {
 
       global $gcm;
 
-      permiso(1, $usuario_id);
+      // Si no tenemos permisos, tenemos que ser el usuario que edita
+      if ( ! permiso() && $usuario_id != $gcm->au->logeado()) return ;
+
 
       $presentar_form = TRUE;          ///< Presentamos formulario
       $anyadir_usuario = FALSE;        ///< Si se desea añadir un usuario
@@ -458,31 +445,23 @@ class Admin extends Modulos {
     * @param $args Identificador de usuario a mostrar, sino pasamos niinguno sera el logeado.
     */
 
-   function perfil_usuario($e, $args=NULL) {
+   function perfil_usuario($e, $args=FALSE) {
 
       global $gcm;
 
       $usuario_id = ( $args ) ? $args : $gcm->au->logeado();
 
-      permiso(1, $usuario_id);
+      if ( $usuario_id ) {
 
-      $gcm->event->anular('contenido','admin');
-      $gcm->event->unico('titulo','admin');
-      $gcm->titulo = literal('Perfil de usuario');
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->unico('titulo','admin');
+         $gcm->titulo = literal('Perfil de usuario');
 
-      $this->gestionar_usuario($usuario_id);
+         $this->gestionar_usuario($usuario_id);
 
-      $this->cambio_password();
+         $this->cambio_password();
 
-      }
-
-   /**
-    * Listar usuarios para administrar
-    */
-
-   function listar_usuarios() {
-
-      permiso(10);
+         }
 
       }
 
@@ -508,14 +487,13 @@ class Admin extends Modulos {
 
             $aviso = literal("Es necesario modificar los datos del administrador por seguridad");
 
-            registrar(__FILE__,__LINE__,$aviso,'AVISO');
+            if ( empty($_POST['pass_md5']) ) registrar(__FILE__,__LINE__,$aviso,'AVISO');
 
-            $this->anularEvento('contenido','admin');
-            $this->anularEvento('contenido_dinamico','admin');
-            $this->anularEvento('titulo','admin');
-            $gcm->titulo = literal('Configurar proyecto');
+            $usuarios = new Usuarios($gcm->pdo_conexion(),1);
+            $usuarios->administrar(FALSE,FALSE,FALSE,TRUE,'editar');
+            // $usuarios->generar_formulario();
+            // $usuarios->botones_acciones('editar');
 
-            $this->gestionar_usuario($usuario_id);
 
             }
 
@@ -535,47 +513,28 @@ class Admin extends Modulos {
     * Usuarios
     *
     * Formulario para administrar los usuarios
-    *
-    * @todo Seleccionar los campos que deben salir y paginarlos
     */
 
    function usuarios($e, $args) {
 
       global $gcm;
 
-      permiso(NULL,TRUE);
+      if ( permiso('administrar') ) {
 
-      $gcm->event->anular('contenido','admin');
-      $gcm->event->anular('titulo','admin');
-      $gcm->titulo = literal('Usuarios');
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->anular('titulo','admin');
+         $gcm->titulo = literal('Administración de usuarios');
 
-      if ( isset($_GET['id'])  ) {
-         $usuario_id = $_GET['id'];
-      } elseif ( isset($_POST['id']) ) {
-         $usuario_id = $_POST['id'];
+         require_once(dirname(__FILE__).'/../modelos/usuarios.php');
+         $usuarios = new Usuarios($gcm->pdo_conexion());
+         $usuarios->administrar(FALSE,FALSE,FALSE,TRUE);
+         return;
+
       } else {
-         $usuario_id = $gcm->au->id();
+
+         $this->perfil_usuario('interno');
+
          }
-
-      $this->gestionar_usuario($usuario_id);
-
-      require_once(dirname(__FILE__).'/../modelos/usuarios.php');
-      require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
-
-      $usuarios = new Usuarios($gcm->pdo_conexion());
-
-      $usuarios->listado();
-      return;
-      $arUsuarios = $usuarios->find();
-
-      $numUsuarios = count($arUsuarios);
-
-      if ( $numUsuarios > 0 ) {
-         $array2table = new Array2table();
-         $array2table->generar_tabla($arUsuarios, array('url'=>'?m=admin&a=usuarios&id='));
-         }
-
-      return;
 
       }
 
@@ -583,12 +542,9 @@ class Admin extends Modulos {
     * Presentar acciones sin realizarlas
     */
 
-   function eventos_sin_accion($e, $args) {
-
-      global $gcm;
-
-
-      }
+   // function eventos_sin_accion($e, $args) {
+   //    global $gcm;
+   //    }
 
    /**
     * Presentar información de servidor
@@ -598,7 +554,7 @@ class Admin extends Modulos {
 
       global $gcm;
 
-      permiso(5);
+      permiso('administrar',TRUE);
 
       $gcm->event->anular('titulo','admin');
       $gcm->event->anular('contenido','admin');

@@ -71,7 +71,7 @@ class Contenidos extends ContenidosAbstract {
 
       /* Si se pide un borrador mirar que tenga permisos */
 
-      if ( strpos(Router::$c,'.btml') ) permiso(5);
+      if ( strpos(Router::$c,'.btml') ) permiso('editar_contenido');
 
       }
 
@@ -285,6 +285,9 @@ class Contenidos extends ContenidosAbstract {
 
       global $gcm;
 
+      // Si no tenemos permisos selecccionable pasa a FALSE
+      if ( !permiso('editar_contenido') ) $seleccionable = FALSE;
+
       // Comprobar descartados
       // Añadimos a los descartados por configuración el que se desea ocultar
 
@@ -361,12 +364,17 @@ class Contenidos extends ContenidosAbstract {
       echo "\n<ul>";
 
       // Boton de radio
-      if (  ( $ver == 'SI' ) || $d->path == $dir_por_defecto) {
+      if ( $seleccionable ) {
+         if (  ( $ver == 'SI' ) || $d->path == $dir_por_defecto) {
 
-         if ( $d->path == $checkqued ) { // Si es el que queremos tener seleccionado
-            echo " <input checked type='".$tipo_campo."' name='".$nombre_campo."' value='", htmlentities($d->path), "' />";
-         } elseif ( $d->path == $ocultar ) { // No se debe mostrar
-            echo "Descartado";
+            if ( $d->path == $checkqued ) { // Si es el que queremos tener seleccionado
+               echo " <input checked type='".$tipo_campo."' name='".$nombre_campo."' value='", htmlentities($d->path), "' />";
+            } elseif ( $d->path == $ocultar ) { // No se debe mostrar
+               echo "Descartado";
+            } else {
+               echo " <input type='".$tipo_campo."' name='".$nombre_campo."' value='", htmlentities($d->path), "' />";
+               }
+
          } else {
             echo " <input type='".$tipo_campo."' name='".$nombre_campo."' value='", htmlentities($d->path), "' />";
             }
@@ -398,9 +406,12 @@ class Contenidos extends ContenidosAbstract {
                   echo '<span class="datos_fichero_html">';
                } else {
                   echo '<span class="datos_fichero">';
-               }
-               echo "<input type='".$tipo_campo."' name='".$nombre_campo."' ";
-               echo 'value="'.htmlentities($d->path."/".$doc).'" />';
+                  }
+               if ( $seleccionable ) {
+                  echo "<input type='".$tipo_campo."' name='".$nombre_campo."' ";
+                  echo 'value="'.htmlentities($d->path."/".$doc).'" />';
+                  }
+
                // Segun tipo documento mostramos
                if ( esImagen($d->path.'/'.$doc) )  {
                   echo "<img align='center' width='50px' src='".htmlentities($d->path."/".$doc)."' />";
@@ -409,7 +420,7 @@ class Contenidos extends ContenidosAbstract {
                echo $doc;
                echo "</a>";
                // Solo ponemos link para editar si son paginas html
-               if ( GUtil::tipo_de_archivo($d->path.'/'.$doc) == 'text/html' ) {
+               if ( permiso('editar_contenido') && GUtil::tipo_de_archivo($d->path.'/'.$doc) == 'text/html' ) {
                   echo '<a title="'.literal('Editar').'" href="?e=editar_contenido&url='.htmlentities($d->path.'/'.$doc).'"> [#]</a>';
                }
                echo '<span class="detalles_fichero">';

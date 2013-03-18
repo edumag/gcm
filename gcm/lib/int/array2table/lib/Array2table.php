@@ -37,10 +37,10 @@ class Array2table {
    function __construct($sufijo='') {
 
       $this->sufijo        = $sufijo         ;
-      self::$base_imagenes = ''              ;
       self::$img_modificar = 'modificar.png' ;
       self::$img_borrar    = 'borrar.png'    ;
       self::$img_ver       = 'ver.png'       ;
+      self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
 
       }
 

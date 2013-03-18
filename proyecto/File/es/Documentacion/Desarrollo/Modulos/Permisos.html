@@ -1,6 +1,11 @@
-<p>Los permisos de los usuarios est&aacute;n implementados numericamente, siendo 1 un usuario registrado sin m&aacute;s, y 10 el superadministrador.</p>
-<p>Gestionar los permisos, es importante cualquier m&eacute;todo que no deba ser accedido por usuarios sin permisos, debe comenzar examinando si los tiene.</p>
-<p>Para facilitar este proceso se ha creado una funci&oacute;n general a la que se le puede llamar de esta manera:</p>
-<pre>permiso(10);</pre>
-<p>permiso() comprueba que el usuario logueado tenga los permisos suficientes seg&uacute;n el nivel que se especifica.</p>
-<p>En caso de no tener los permisos suficientes se redigira al usuario a una nueva p&aacute;gina de aviso</p>
+<p>La gesti&oacute;n de los permisos se realiza seg&uacute;n roles, el rol administrativo que es el que tiene el administrador por defecto, permite cualquier acci&oacute;n.</p>
+<p>Roles por defecto:</p>
+<ul>
+<li>administrador: Se le permiten todas las acciones.</li>
+<li>usuario: Limitado</li>
+</ul>
+<p>Formas de uso:</p>
+<pre>permiso('editar_contenido', TRUE);</pre>
+<p>En este caso la acci&oacute;n a realizar esta relacionada con la edici&oacute;n de contenido, en caso de que el usuario actual no tenga permiso se enruta con aviso de que no tiene permisos.</p>
+<p>El valor TRUE del segundo parametro es el que nos indica que debe enrutarse en caso de tener permisos, si no pasamos este parametro simplemente la funci&oacute;n nos devolver&iacute;a un FALSE y seriamos nosotros los que gestionasemos la respuesta.</p>
+<p>&nbsp;</p>

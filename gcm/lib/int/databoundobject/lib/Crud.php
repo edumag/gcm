@@ -33,7 +33,7 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  *   presentar automáticamente un select con las opciones de los registros de la
  *   tabla relacionada.
  * - fecha_creacion como timestamp.
- * - fecha_modificacion como datetime
+ * - fecha_modificacion como timestamp
  * - imagen_url Campo para url de imagen.
  *
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
@@ -197,7 +197,7 @@ class Crud extends DataBoundObject {
    function __construct(PDO $objPdo, $id = NULL) {
 
       parent::__construct($objPdo, $id);
-
+ 
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
       //$this->plantilla   = dirname(__FILE__).'/../html/form_registro.html';
@@ -445,6 +445,12 @@ class Crud extends DataBoundObject {
 
             }
 
+         /* Para campos pass_md5 */
+
+         if ( $row['name'] == 'pass_md5'  ) {
+            $this->tipos_formulario[$row['name']]['tipo'] = 'pass_md5';
+            }
+
          /* Para campos mail */
 
          if ( $row['name'] == 'mail'  ) {
@@ -459,7 +465,7 @@ class Crud extends DataBoundObject {
 
          // Campos 'text' seran 'textarea'
          
-         if ( $row['type'] == 'text' ) {
+         if ( ! isset($this->tipos_formulario[$row['name']]['tipo'])  && $row['type'] == 'text' ) {
 
             $this->tipos_formulario[$row['name']]['tipo'] = 'textarea';
             $this->tipos_formulario[$row['name']]['cols'] = '30';
@@ -508,6 +514,12 @@ class Crud extends DataBoundObject {
             $this->tipos_formulario[$row['Field']]['tipo'] = 'relacion';
             $this->tipos_formulario[$row['Field']]['tabla'] = str_replace($this->id_relacion,'',$row['Field']);
 
+            }
+
+         /* Para campos pass_md5 */
+
+         if ( $row['Field'] == 'pass_md5'  ) {
+            $this->tipos_formulario[$row['Field']]['tipo'] = 'pass_md5';
             }
 
          /* Para campos mail */
@@ -564,6 +576,8 @@ class Crud extends DataBoundObject {
       foreach ( $this->arRelationMap as $campo => $referencia) {
 
          if ( $campo == 'mail' ) $this->restricciones[$campo][RT_MAIL] = 1;
+
+         if ( $campo == 'pass_md5' ) $this->restricciones[$campo][RT_PASSWORD] = 1;
 
          if ( $campo == 'fecha_creacion' || $campo == 'fecha_modificacion'  ) continue;
 
@@ -648,6 +662,10 @@ class Crud extends DataBoundObject {
 
                      case RT_NO_PASA_EXPRESION_REGULAR:
                         $this->mensajes[$campo][$tipo] = literal('Contenido no permitido',3);
+                        break;
+
+                     case RT_PASSWORD:
+                        $this->mensajes[$campo][$tipo] = literal('Contraseña no pasa verificación',3);
                         break;
 
                      }
@@ -777,7 +795,7 @@ class Crud extends DataBoundObject {
       if ( isset($this->plantilla_editar) ) $form->plantilla = $this->plantilla_editar;
 
       ?>
-         <form name="crud" action="<?=$_SERVER['REDIRECT_URL']?>" method="post">
+         <form name="crud" action="<?php if ( isset($_SERVER['REDIRECT_URL']) ) echo $_SERVER['REDIRECT_URL'];?>" method="post">
       <?php
 
       $form->genera_formulario(FALSE, $this->accion);
@@ -798,7 +816,7 @@ class Crud extends DataBoundObject {
     * @param $dir_img    Directorio de las imagenes de iconos
     */
 
-   function administrar($condicion = FALSE, $order = FALSE, $dir_img = '', $permisos = FALSE) {
+   function administrar($condicion = FALSE, $order = FALSE, $dir_img = '', $permisos = FALSE, $accion_directa = FALSE) {
 
       global $gcm;
 
@@ -807,6 +825,20 @@ class Crud extends DataBoundObject {
       $displayHash = array();
 
       if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) $this->ID = $_REQUEST[$this->DefineTableName().'_id'];
+
+      // El identificador puede que venga por sesión.
+      if ( ! $this->ID && isset($_SESSION['VALORES'][$this->DefineTableName().'_id']) ) 
+         $this->ID = isset($_SESSION['VALORES'][$this->DefineTableName().'_id']);
+
+      // Verificar registro
+      if ( $this->ID ) {
+         if ( ! $this->blIsLoaded ) {
+            if ( ! $this->Load() ) {
+               registrar(__FILE__,__LINE__,'No esiste registro ['.$this->ID.']','ERROR');
+               return FALSE;
+               }
+            }
+      }
 
       // Determinar acción actual
 
@@ -824,6 +856,8 @@ class Crud extends DataBoundObject {
          $this->accion = 'eliminar';
       } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'editar') {
          $this->accion = 'editar';
+      } elseif ( $accion_directa ) {
+         $this->accion = $accion_directa;
       } else {
          if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) {
             $this->accion = 'ver';
@@ -866,8 +900,6 @@ class Crud extends DataBoundObject {
 
             if ( $resultado ) {
 
-               if (get_magic_quotes_gpc()) echo "MAGIC_QUOTES_ON";
-
                foreach ( $this->arRelationMap as $campo => $rCampo ) {
 
                   if ( isset($this->ID) && $campo == 'fecha_creacion'  ) {
@@ -880,6 +912,21 @@ class Crud extends DataBoundObject {
                      continue;
                      }
 
+                  // pass_md5: password debe ser igual a la verificación y lo convertimos 
+                  // con md5()
+                  if ( $campo == 'pass_md5' && !empty($resultado[$campo]) ) {
+                     $this->SetAccessor($rCampo, md5($resultado[$campo]));
+                     // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
+                     continue;
+                     }
+
+                  // Si viene la contraseña vacia la eliminamos de los datos a modificar sino
+                  // la modifica sin ser lo que queremos.
+                  if ( $campo == 'pass_md5' && empty($resultado[$campo]) ) {
+                     $this->DelAccessor($rCampo);
+                     // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
+                     continue;
+                     }
                   if ( $campo != 'id'  ) {
                      if (get_magic_quotes_gpc() == 1) {
                         $this->SetAccessor($rCampo, stripslashes($resultado[$campo]));
@@ -913,6 +960,7 @@ class Crud extends DataBoundObject {
 
                   $mens = ( $this->accion == 'modificando' ) ? 'Registro modificado' : 'Registro incluido';
                   registrar(__FILE__,__LINE__,literal($mens,3),'AVISO');
+                  unset($_SESSION['VALORES']);
                } else {
                   registrar(__FILE__,__LINE__,'ERROR al añadir o modificar registro','ERROR');
                   }
@@ -921,7 +969,8 @@ class Crud extends DataBoundObject {
 
          $_SESSION['dh'] = $displayHash;
          $_SESSION['mens'] = $gcm->reg->sesion;
-         header("Location: ".$_SERVER['PHP_SELF']);
+         $redireccion = $_SERVER['REDIRECT_URL'];
+         header("Location: ".$redireccion);
          exit(0);
 
       /* LLega con errores de formulario o se esta insertando */
@@ -968,10 +1017,20 @@ class Crud extends DataBoundObject {
 
       } elseif ( $this->accion == 'ver' ) {
 
+         if ( ! $this->ID ) {
+            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            return FALSE;
+            }
+
          $this->visualizar_registro();
          $this->botones_acciones($this->accion);
 
       } elseif ( $this->accion == 'eliminar' ) {
+
+         if ( ! $this->ID ) {
+            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            return FALSE;
+            }
 
          /* Si tenemos evento_guardar lo lanzamos */
          if ( $this->evento_borrar ) {
@@ -983,12 +1042,17 @@ class Crud extends DataBoundObject {
          $this->__destruct();
 
          registrar(__FILE__,__LINE__,"Registro eliminado",'AVISO');
-         header("Location: ".$_SERVER['PHP_SELF']);
+         header("Location: ".$_SERVER['REDIRECT_URL']);
          exit(0);
 
-      } elseif ( $this->accion == 'editar' || $this->accion == 'insertar' ) {
-
+      } elseif ( $this->accion == 'editar' ) {
+         
          $this->generar_formulario();
+         $this->botones_acciones($this->accion);
+
+      } elseif ( $this->accion == 'insertar' ) {
+
+         $this->generar_formulario(NULL);
          $this->botones_acciones($this->accion);
 
       } else {
@@ -1016,22 +1080,22 @@ class Crud extends DataBoundObject {
 
          // Boton insertar
          if ( $this->accion == "ver" || $this->accion == "inicio" ) {
-            echo '<a class="formulari2" href="?'.$this->DefineTableName().'_insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
+            echo '<a class="formulari2 boton" href="?'.$this->DefineTableName().'_insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
             }
 
          // Boton editar
          if ( $this->accion != "editar" && $this->ID ) {
-            echo ' <a class="formulari2" href="?'.$this->DefineTableName().'_accion=editar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
+            echo ' <a class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=editar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
             }
 
          // Boton borrar
          if (  $this->ID ) {
-            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->DefineTableName().'" class="formulari2" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
+            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->DefineTableName().'" class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
             }
 
          // Boton Cancelar
          if ( $this->accion == "editar" || $this->accion == 'insertar' ) {
-            echo ' <a class="formulari2" href="'.$_SERVER['PHP_SELF'].'">'.literal('Cancelar',3).' </a> ';
+            echo ' <a class="formulari2 boton" href="'.$_SERVER['PHP_SELF'].'">'.literal('Cancelar',3).' </a> ';
             }
 
          echo '</div>';

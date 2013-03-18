@@ -311,6 +311,7 @@ class Formulario {
     * campo[tipo restriccion][valor]
     *
     * @todo Los casos que estan comentados hay que buscar la manera de implementarlos
+    * @todo Aplicar pass_md5
     */
 
    function crear_restricciones() {

@@ -419,6 +419,18 @@ class Solicitud {
                }
             break;
 
+         case RT_PASSWORD:
+            if ( ! isset($_REQUEST['verificacion']) ) {
+               $thisFail = true;
+               registrar(__FILE__,__LINE__,'Se necesita un campo "verificacion" para poder verificar la contraseña ','ERROR');
+               }
+            if ( $varActualValue != $_REQUEST['verificacion'] ) {
+               $thisFail = true;
+               registrar(__FILE__,__LINE__,$strThisParameter.' contraseña diferente a verificación '.$strConstraintOperand);
+               registrar(__FILE__,__LINE__,$varActualValue.' != '.$_REQUEST['verificacion'],'ADMIN');
+               }
+            break;
+
          };
 
          if ($thisFail) {
@@ -432,7 +444,7 @@ class Solicitud {
 
          if ($this->_blRedirectOnConstraintFailure) {
 
-            $targetURL = $_SERVER["PHP_SELF"];
+            $targetURL = $_SERVER["REDIRECT_URL"];
             if (!$targetURL) {
                $targetURL = $this->_strConstraintFailureDefaultRedirectTargetURL;
             };

@@ -118,41 +118,49 @@ class Autentificacion {
 
    function crear_tabla() {
 
-      $SQL = "CREATE TABLE ".$this->sufijo."roles (
-         id  INT PRIMARY KEY,
-         nombre varchar(150) NOT NULL,
-         descripcion varchar(500) NOT NULL
-         )
-         ";
+      if ( ! $this->existe_tabla($this->sufijo.'roles') ) {
 
-      if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+         $SQL = "CREATE TABLE ".$this->sufijo."roles (
+            id  INT PRIMARY KEY,
+            nombre varchar(150) NOT NULL,
+            descripcion varchar(500) NOT NULL
+            )
+            ";
 
-         throw new Exception("Error al crear tabla de ".$this->sufijo."roles\n".$pdo_error);
-         return FALSE;
+         if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+
+            throw new Exception("Error al crear tabla de ".$this->sufijo."roles\n".$pdo_error);
+            return FALSE;
+
+            }
 
          }
 
-      $SQL = "CREATE TABLE ".$this->sufijo."r_usuarios_roles (
-         usuarios_id int(11) NOT NULL,
-         roles_id int(11) NOT NULL,
-         PRIMARY KEY (usuarios_id,roles_id)
-         )
-         ";
+      if ( ! $this->existe_tabla($this->sufijo.'r_usuarios_roles') ) {
 
-      if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+         $SQL = "CREATE TABLE ".$this->sufijo."r_usuarios_roles (
+            usuarios_id int(11) NOT NULL,
+            roles_id int(11) NOT NULL,
+            PRIMARY KEY (usuarios_id,roles_id)
+            )
+            ";
 
-         throw new Exception("Error al crear tabla de ".$this->sufijo."r_usuarios_roles\n".$pdo_error);
-         return FALSE;
+         if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+
+            throw new Exception("Error al crear tabla de ".$this->sufijo."r_usuarios_roles\n".$pdo_error);
+            return FALSE;
+
+            }
 
          }
 
       $SQL="CREATE TABLE ".$this->sufijo."usuarios (
-         id INT PRIMARY KEY,
+         id INT  PRIMARY KEY AUTO_INCREMENT ,
          usuario CHAR(50) , 
          pass_md5 CHAR(32) ,
          nombre CHAR(50) , 
          apellidos CHAR(50) , 
-         fecha_creacion datetime DEFAULT NULL,
+         fecha_creacion datetime  NOT NULL,
          fecha_modificacion timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
          mail CHAR(60) ,
          telefono CHAR(15)
@@ -201,6 +209,8 @@ class Autentificacion {
 
       } elseif ( count($retorno) < 1 ) {
 
+         $this->registra(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
+
          return FALSE;
 
          }
@@ -229,12 +239,14 @@ class Autentificacion {
 
       } elseif ( count($retorno) < 1 ) {
 
-         return FALSE;
+         // Si es un usuario sin rol le adjudicamos el de usuario que es el mínimo.
+         $roles[] = 'usuario';
 
-         }
+      } else {
 
-      foreach ( $retorno as $rol ) {
-         $roles[] = $rol[0];
+         foreach ( $retorno as $rol ) {
+            $roles[] = $rol[0];
+            }
          }
 
       /* Cramos sessión para usuario */
@@ -341,6 +353,11 @@ class Autentificacion {
 
       $roles_usuario = $this->roles_usuario();
       $roles_accion  = $this->roles_accion($accion);
+
+      if ( ! $roles_accion ) {
+         registrar(__FILE__,__LINE__,'Sin permisos para ['.$accion.']','DEBUG');
+         return FALSE;
+         }
 
       foreach ( $roles_accion as $rol_accion ) {
          if ( in_array($rol_accion, $roles_usuario) ) return TRUE;
