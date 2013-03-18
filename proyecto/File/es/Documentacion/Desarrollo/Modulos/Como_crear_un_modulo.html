@@ -1,94 +1,77 @@
-<div class="document" id="m-dulos-propios-de-gcm">
-<h1 class="title">Módulos propios de gcm</h1>
-<p>Pasos a seguir para la creación de un módulo.</p>
-<p>Los módulos propios de gcm se encuentran en la carpeta gcm/modulos/gcm, Todos los módulos siguen un comportamiento peculiar, que se debe entender para la realización o modificación.</p>
+<div>
+<p>Pasos a seguir para la creaci&oacute;n de un m&oacute;dulo.</p>
+<p>Los m&oacute;dulos propios de gcm se encuentran en la carpeta gcm/modulos/gcm, Todos los m&oacute;dulos siguen un comportamiento peculiar, que se debe entender para la realizaci&oacute;n o modificaci&oacute;n.</p>
+<div>
+<h1>Ficheros esenciales para que un m&oacute;dulo funcione</h1>
+<dl class="docutils"><dt>info.php</dt><dd>Informaci&ccedil;on del m&oacute;dulo.</dd><dt>eventos_admin.php</dt><dd>Array con los eventos y sus acciones para el administrador.</dd><dt>eventos_usuario.php</dt><dd>Array con los eventos y sus acciones para el usuario.</dd><dt>html</dt><dd>Plantillas html.</dd><dt>index.php</dt><dd>Recoge las acciones a realizar.</dd></dl></div>
+<div>
+<h1>Archivos de m&oacute;dulo</h1>
 <div class="section">
-<h1><a id="ficheros-esenciales-para-que-un-m-dulo-funcione" name="ficheros-esenciales-para-que-un-m-dulo-funcione">Ficheros esenciales para que un módulo funcione</a></h1>
-<dl class="docutils">
-<dt>info.php</dt>
-<dd>Informaciçon del módulo.</dd>
-<dt>eventos_admin.php</dt>
-<dd>Array con los eventos y sus acciones para el administrador.</dd>
-<dt>eventos_usuario.php</dt>
-<dd>Array con los eventos y sus acciones para el usuario.</dd>
-<dt>html</dt>
-<dd>Plantillas html.</dd>
-<dt>index.php</dt>
-<dd>Recoge las acciones a realizar.</dd>
-</dl>
-</div>
-<div class="section">
-<h1><a id="archivos-de-m-dulo" name="archivos-de-m-dulo">Archivos de módulo</a></h1>
-<div class="section">
-<h2><a id="info-php" name="info-php">info.php</a></h2>
-<p>Información de módulos, aquí pondremos la información general sobre el mismo, pudiendo especificar el contenido en diferentes idiomas:</p>
-<pre class="literal-block">
-$nombre_modulo['descripcion']=&quot;Descripción del módulo&quot;;
-$nombre_modulo['version']=&quot;0.1&quot;;
-$nombre_modulo['nombre']['es']=&quot;Nombre del módulo&quot;;
-$nombre_modulo['nombre']['ca']=&quot;Nom modul&quot;;
-$nombre_modulo['title']['es']=&quot;Pequeña descripción de módulo&quot;;
-$nombre_modulo['title']['ca']=&quot;Petita descripcio de modul&quot;;
+<h2>info.php</h2>
+<p>Informaci&oacute;n de m&oacute;dulos, aqu&iacute; pondremos la informaci&oacute;n general sobre el mismo, pudiendo especificar el contenido en diferentes idiomas:</p>
+<pre class="literal-block">$nombre_modulo['descripcion']="Descripci&oacute;n del m&oacute;dulo";
+$nombre_modulo['version']="0.1";
+$nombre_modulo['nombre']['es']="Nombre del m&oacute;dulo";
+$nombre_modulo['nombre']['ca']="Nom modul";
+$nombre_modulo['title']['es']="Peque&ntilde;a descripci&oacute;n de m&oacute;dulo";
+$nombre_modulo['title']['ca']="Petita descripcio de modul";
 </pre>
 </div>
-<div class="section">
-<h2><a id="eventos-usuario-php-eventos-admin-php-y-eventos-root-php" name="eventos-usuario-php-eventos-admin-php-y-eventos-root-php">eventos_usuario.php, eventos_admin.php y eventos_root.php</a></h2>
-<p>Los archivos de eventos especifican sobre que evento debe lanzarse una acción del módulo, su forma es:</p>
-<pre class="literal-block">
-$eventos[&lt;evento&gt;][&lt;acción&gt;]='&lt;prioridad&gt;|&lt;argumentos&gt;';
+<div>
+<h3>eventos_usuario.php, eventos_admin.php y eventos_root.php</h3>
+<p>Los archivos de eventos especifican sobre que evento debe lanzarse una acci&oacute;n del m&oacute;dulo, su forma es:</p>
+<pre class="literal-block">$eventos[&lt;evento&gt;][&lt;acci&oacute;n&gt;]='&lt;prioridad&gt;|&lt;argumentos&gt;';
 </pre>
-<p>Ejemplo para el módulo indexador:</p>
-<pre class="literal-block">
-&lt;?php
+<p>Ejemplo para el m&oacute;dulo indexador:</p>
+<pre class="literal-block">&lt;?php
    $eventos['columna']['formulario_busqueda']='1';
-   $eventos['columna']['ultimas_entradas']=&quot;2|num=7&amp;seccion=&quot;.Router::get_estamos().&quot;&amp;formato=1&quot;;
+   $eventos['columna']['ultimas_entradas']="2|num=7&amp;seccion=".Router::get_estamos()."&amp;formato=1";
    $eventos['contenido_dinamico']['contenido_dinamico']='1|';
    $eventos['precarga']['presentar_busquedas']=3;
 ?&gt;
 </pre>
 </div>
-<div class="section">
-<h2><a id="menuadmin-php" name="menuadmin-php">menuAdmin.php</a></h2>
-<p>En caso de que queramos que el modulo tenga una entrada en el menú de administración.</p>
-<p>Podremos especificar en que pestaña del mismo y que archivo debe cargarse:</p>
-<pre class="literal-block">
-$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['activado']=1;
-$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['nombre']=&quot;Nombre del módulo&quot;;
-$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['title']=&quot;descripción de módulo&quot;;
-$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['link']=&quot;?m=nombre_modulo&quot;;
+<div>
+<h3>menuAdmin.php</h3>
+<p>En caso de que queramos que el modulo tenga una entrada en el men&uacute; de administraci&oacute;n.</p>
+<p>Podremos especificar en que pesta&ntilde;a del mismo y que archivo debe cargarse:</p>
+<pre class="literal-block">$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['activado']=1;
+$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['nombre']="Nombre del m&oacute;dulo";
+$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['title']="descripci&oacute;n de m&oacute;dulo";
+$menuAdmin['lugar_modulo']['mod']['nombre_modulo']['link']="?m=nombre_modulo";
 </pre>
 <p>Opciones:</p>
 <blockquote>
 <ul>
-<li><dl class="first docutils">
-<dt>lugar_modulo: sección del menú en la que queremos que salga el botón. Posibilidades;</dt>
-<dd><ul class="first last simple">
-<li>admin: Administración</li>
-<li>conf: Configuración</li>
+<li><dl class="first docutils"><dt>lugar_modulo: secci&oacute;n del men&uacute; en la que queremos que salga el bot&oacute;n. Posibilidades;</dt><dd>
+<ul class="first last simple">
+<li>admin: Administraci&oacute;n</li>
+<li>conf: Configuraci&oacute;n</li>
 <li>seguimiento: Seguimiento</li>
 <li>Otra diferente.</li>
 </ul>
-</dd>
-</dl>
+</dd></dl></li>
+<li>
+<p class="first">activado: Para permitir desactivar el m&oacute;dulo.</p>
 </li>
-<li><p class="first">activado: Para permitir desactivar el módulo.</p>
+<li>
+<p class="first">nombre del m&oacute;dulo: Literal que se presentara en el bot&oacute;n.</p>
 </li>
-<li><p class="first">nombre del módulo: Literal que se presentara en el botón.</p>
+<li>
+<p class="first">descripci&oacute;n: Literal que se presentara en title del enlace.</p>
 </li>
-<li><p class="first">descripción: Literal que se presentara en title del enlace.</p>
-</li>
-<li><p class="first">link: Enlace que active el módulo.</p>
+<li>
+<p class="first">link: Enlace que active el m&oacute;dulo.</p>
 </li>
 </ul>
 </blockquote>
 </div>
 </div>
-<div class="section">
-<h1><a id="informaci-n-de-la-aplicaci-n" name="informaci-n-de-la-aplicaci-n">Información de la aplicación</a></h1>
-<p>La clase Router nos permite saber información de la acción o lugar actual.</p>
-<p>sus métodos son:</p>
-<pre class="literal-block">
-/** Devolver la ruta hacia el directorio base del proyecto */
+<div>
+<h2>Informaci&oacute;n de la aplicaci&oacute;n</h2>
+<p>La clase Router nos permite saber informaci&oacute;n de la acci&oacute;n o lugar actual.</p>
+<p>sus m&eacute;todos son:</p>
+<pre class="literal-block">/** Devolver la ruta hacia el directorio base del proyecto */
 Router::get_dir(){
 
 /** Se quiere presentar contenido o no TRUE/FALSE */
@@ -97,13 +80,13 @@ Router::get_sin_contenido(){
 /** Devolver la url recibida */
 Router::get_url()
 
-/** Devolver directorio del contenido por defecto, dependerá del idioma por defecto, ejemplo File/es  */
+/** Devolver directorio del contenido por defecto, depender&aacute; del idioma por defecto, ejemplo File/es  */
 Router::get_dd()
 
-/** Devolver el directorio de contenido según idioma seleccionado, ejemplo File/ca */
+/** Devolver el directorio de contenido seg&uacute;n idioma seleccionado, ejemplo File/ca */
 Router::get_d()
 
-/** Devolver la sección actual */
+/** Devolver la secci&oacute;n actual */
 Router::get_s()
 
 /** Devolver el nombre del contenido */
@@ -112,7 +95,7 @@ Router::get_c()
 /** Devolver la ruta completa del contenido, ejemplo: FIle/es/Documentacion/contenido.html */
 Router::get_f()
 
-/** Devolver el nombre del módulo  */
+/** Devolver el nombre del m&oacute;dulo  */
 Router::get_m()
 
 /** Devolver la accion que se pide realizar */
@@ -124,7 +107,7 @@ Router::get_i()
 /** Devolver el idioma por defecto */
 Router::get_ii()
 
-/** Devolver el nombre de la sección actual sin las secciones padres */
+/** Devolver el nombre de la secci&oacute;n actual sin las secciones padres */
 Router::get_estamos()
 
 /** Devolver si estamos editando o viendo */
@@ -135,7 +118,7 @@ Router::get_mime_type()
 </pre>
 </div>
 <div class="section">
-<h1><a id="control-de-presentaci-n" name="control-de-presentaci-n">Control de presentación</a></h1>
+<h2>Control de presentaci&oacute;n</h2>
 <p>Podemos activar o desactivar ciertos comportamientos.</p>
 <ul class="simple">
 <li>$presentar_titulo = TRUE;</li>
