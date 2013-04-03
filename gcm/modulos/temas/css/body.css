@@ -16,6 +16,11 @@ background: -ms-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$thi
 background: linear-gradient(135deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
 }
+
+#contenido h1 {
+    margin: 18px 2px;
+}
+
 #wrap{
 width: 100%;
 margin:0 auto;
@@ -65,8 +70,7 @@ border: 1px solid <?=$this->color("body-06")?>;
 border-left: 3px solid <?=$this->color("body-06")?>;
 background-color: <?=$this->color("body-11")?>;
 color: <?=$this->color("body-06")?>; 
-margin-left: 10px;
-margin-right: 30px;
+margin: 18px 2px;
 padding: 3px;
 overflow: auto;
 max-height: 450px;

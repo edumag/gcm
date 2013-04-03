@@ -1,14 +1,10 @@
 <?php
 
 /**
- * Gcm - Gestor de contenido mamedu
+ * @file Temas.php
+ * @brief Módulo para la gestión de temas
  *
- * @category Gcm
  * @package Modulos
- * @subpackage Temas
- * @author    Eduardo Magrané
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- * @version   SVN $Id: Temas.php 651 2012-10-17 09:19:07Z eduardo $ 
  */
 
 require_once(GCM_DIR.'lib/int/temas/lib/TemaGcm.php');
@@ -261,8 +257,8 @@ class Temas extends Modulos {
    /**
     * Devolver color
     *
-    * @param $capa Capa del color
     * @param $color Identificador del color
+    * @param $valor Valor del color
     */
 
    function color($color, $valor=FALSE) { 
@@ -305,7 +301,7 @@ class Temas extends Modulos {
 
    /** 
     * Presentar pie de página, si tenemos archivo en tema actual 
-    * <tema>/modulos/tema/html/pie.html lo incluimos en caso 
+    * tema/modulos/tema/html/pie.html lo incluimos en caso 
     * contrario, contruimos uno con los datos de gcm.
     */
 
@@ -323,7 +319,7 @@ class Temas extends Modulos {
 
    /**
     * Presentar el titulo de la página si no hay plantilla de título
-    * <tema>/modulos/temas/html/titulo.html añadimos titulo de proyecto
+    * tema/modulos/temas/html/titulo.html añadimos titulo de proyecto
     * y subtitulo de la configuración del proyecto.
     */
 
@@ -356,16 +352,16 @@ class Temas extends Modulos {
     *
     * creación de un panel con funcionalidades de javascript
     *
-    * @param panel Array con la información del panel
-    *              titulo:        Título del panel
-    *              oculto:        TRUE/FALSE Em pieza oculto o visible
-    *              href:          Enlace al que apunta
-    *              ajax:          javascript a ejecutar al presentar contenido
-    *              jajax:         Lanzamos load() de jquery sobre subpanel_visible con la url indicada
-    *                             Con una simple url, nos añadira el contenido en el subpanel.
-    *                             Prevalece jaxax sobre ajax.
-    *              contenido:     string con el contenido del panel
-    *              altura_maxima: Altura maxima para el subpanel
+    * @param $panel Array con la información del panel
+    *   - titulo:        Título del panel
+    *   - oculto:        TRUE/FALSE Empieza oculto o visible
+    *   - href:          Enlace al que apunta
+    *   - ajax:          javascript a ejecutar al presentar contenido
+    *   - jajax:         Lanzamos load() de jquery sobre subpanel_visible con la url indicada
+    *                    Con una simple url, nos añadira el contenido en el subpanel.
+    *                    Prevalece jaxax sobre ajax.
+    *   - contenido:     string con el contenido del panel
+    *   - altura_maxima: Altura máxima para el subpanel
     * 
     * @return TRUE/FALSE
     *
@@ -452,6 +448,10 @@ class Temas extends Modulos {
      *
      * Buscamos si tenemos archivos javascript especifico de navegador, si
      * es así lo añadimos a parte.
+     *
+     * @param $e Evento
+     * @param $args Argumentos
+     *
      */
 
     function incluir_javascript_head($e, $args=NULL) {
@@ -470,6 +470,9 @@ class Temas extends Modulos {
      *
      * Buscamos si tenemos archivos css especifico de navegador en la carpeta
      * 'condicion' del tema actual, si es así lo añadimos a parte.
+     *
+     * @param $e Evento
+     * @param $args Argumentos
      *
      * @see coincide_archivo_css
      */
@@ -505,28 +508,25 @@ class Temas extends Modulos {
       }
 
    /**
-   * Buscamos si los archivos css de condiciones, entran dentro de la plataforma,
-   * el navegador y versión actual
-   *
-   * El mecanismo se basa en archivos css con nomenclatura:
-   *
-   * [plataforma]_[navegador]_[version].css
-   *
-   * Puede añadirse un all para especificar todas, ejemplo:
-   *
-   * - Linux_all_all.css      Para todos los que vengan de linux.
-   * - all_Safari_all.css     Navegadores safari
-   * - all_Firefox_3.css      Firefox version 3
-   *
-   * @todo Implementar comparación de versión
-   *
-   * @param $nombre_archivo    Nombre del archivo
-   * @param $plataforma        Plataforma en la que estamos
-   * @param $navegador         Navegador actual
-   * @param $version           Versión del navegador
-   *
-   * @return TRUE/FALSE
-   */
+    * Buscamos si los archivos css de condiciones, entran dentro de la plataforma,
+    * el navegador y versión actual
+    *
+    * El mecanismo se basa en archivos css con nomenclatura:
+    *
+    * [plataforma]_[navegador]_[version].css
+    *
+    * Puede añadirse un all para especificar todas, ejemplo:
+    *
+    * - Linux_all_all.css      Para todos los que vengan de linux.
+    * - all_Safari_all.css     Navegadores safari
+    * - all_Firefox_3.css      Firefox version 3
+    *
+    * @todo Implementar comparación de versión
+    *
+    * @param $archivo    Nombre del archivo
+    *
+    * @return TRUE/FALSE
+    */
 
    function coincide_archivo_css($archivo) {
 

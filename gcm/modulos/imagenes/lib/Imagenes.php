@@ -1,36 +1,29 @@
 <?php
 
 /**
- * Gcm - Gestor de contenido mamedu
+ * @file Imagenes.php
+ * @brief Módulo para la gestión de imágenes
  *
- * @category Gcm
  * @package Modulos
- * @subpackage Imagenes
- * @author    Eduardo Magrané <eduardo mamedu com>
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- * @version   SVN $Id: Imagenes.php 554 2012-01-17 17:12:56Z eduardo $ 
  */
 
 /** 
- * Tratamiento de imagenes
+ * @class Imagenes
+ * @brief Tratamiento de imagenes
  *
  * Con este módulo estandarizamos la forma de tratar las imágenes,
  * a la hora de subirla al servidor y adaptarlas al tamaño especificado y
  * a la hora de presentarlas con la generación dethumbnail, que agilice 
  * la presentación de las mismas.
  *
- * @category Gcm
- * @package   Imagenes
- * @author Eduardo Magrané
- * @version 0.1
  */
 
 class Imagenes extends Modulos {
 
-   public $altoMaxImg;
-   public $anchoMaxImg;
-   public $altoMaxMiniatura;
-   public $anchoMaxMiniatura;
+   public $altoMaxImg;         ///< Alto máximo para las imágenes
+   public $anchoMaxImg;        ///< Ancho máximo para las imágenes   
+   public $altoMaxMiniatura;   ///< Alto máximo para las miniaturas
+   public $anchoMaxMiniatura;  ///< Ancho máximo para las miniaturas
 
    /** Nombre del proyecto */
 
@@ -62,6 +55,9 @@ class Imagenes extends Modulos {
     * Presentar galeria
     *
     * Presentamos la galería de fotos
+    *
+    * @param $e Evento
+    * @param $args Argumentos
     */
 
    function galeria($e, $args = FALSE) {
@@ -130,6 +126,9 @@ class Imagenes extends Modulos {
       
    /**
     * Enlazamos las imágenes dentro de contenido hacia thickbox
+    *
+    * @param $e Evento
+    * @param $args Argumentos
     */
 
    function imagenes2thickbox($e, $args=FALSE) {

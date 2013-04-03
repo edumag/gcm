@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @file Literales
- * Módulo para los literales
+ * @file Literales.php
+ * @brief Módulo para los literales
  *
  * @author    Eduardo Magrané 
  *
@@ -43,7 +43,7 @@ class Literales extends Modulos {
       }
 
    /**
-    * Procesar texto para identificar etiqueta {Lit{<archivo>}} y presentar
+    * Procesar texto para identificar etiqueta {Lit{archivo}} y presentar
     * contenido del archivo
     */
 
@@ -102,7 +102,7 @@ class Literales extends Modulos {
     *
     * @todo Difrenciar entre literales sin contenido y literales sin traducción
     *
-    * @param $evento Evento
+    * @param $e Evento
     * @param $args Array de argumentos
     *
     */
@@ -113,15 +113,15 @@ class Literales extends Modulos {
 
       ob_start(); 
       echo '<div id="panelLiterales">';
-      $this->devolverLiterales(); 
+      // $this->devolverLiterales(); 
       echo '</div>';
       $salida = ob_get_contents() ; ob_end_clean();
 
       $panel = array();
-      $panel['titulo'] = literal('Literales',3).'['.Router::$i.']';
-      $panel['oculto'] = TRUE;
-      $panel['href'] = 'javascript:visualizar(\'panelLiterales\');';
-      $panel['subpanel'] ='panelLiterales';
+      $panel['titulo']    = literal('Literales',3).'['.Router::$i.']';
+      $panel['oculto']    = TRUE;
+      $panel['subpanel']  ='panelLiterales';
+      $panel['jajax']      = "?formato=ajax&m=literales&a=devolverLiterales"; 
       $panel['contenido'] = $salida; 
          
       Temas::panel($panel);
@@ -167,6 +167,7 @@ class Literales extends Modulos {
 
       global $gcm;
 
+
       $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
 
       if ( !file_exists($file) ) {
@@ -176,7 +177,9 @@ class Literales extends Modulos {
 
       $arr = GcmConfigFactory::GetGcmConfig($file);
 
-      $salida = '<a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >'
+      $salida = '<div id="panelLiterales">';
+      $salida .= '<br />';
+      $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >'
          .literal('Añadir',3)
          .'</a>';
       $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:filtra()" >'
@@ -209,6 +212,8 @@ class Literales extends Modulos {
             }
          }
 
+      $salida .= '</div>';
+
       echo $salida;
 
       }
@@ -216,12 +221,11 @@ class Literales extends Modulos {
    /**
     * Añadir elemento nuevo a array
     *
-    * @param $_GET Parametros recogidos mediante GET
-    *
-    *        - elemento: clave del array a modificar
-    *        - valor:    Valor a añadir
-    *        - file:     Archivo con array, de formato especifico
-    *                    En caso de no haberlo cogemos el del idioma actual
+    * Se espera recibir desde $_GET
+    *   - elemento: clave del array a modificar
+    *   - valor:    Valor a añadir
+    *   - file:     Archivo con array, de formato especifico
+    *               En caso de no haberlo cogemos el del idioma actual
     */
 
    function anyadirLiteral() {
@@ -241,12 +245,11 @@ class Literales extends Modulos {
    /**
     * Modificar array
     *
-    * @param $_GET Parametros recogidos mediante GET
-    *
-    *        - elemento: clave del array a modificar
-    *        - valor:    Valor a añadir
-    *        - file:     Archivo con array, de formato especifico
-    *                    En caso de no haberlo cogemos el del idioma actual
+    * $_GET Parametros recogidos mediante GET
+    *   - elemento: clave del array a modificar
+    *   - valor:    Valor a añadir
+    *   - file:     Archivo con array, de formato especifico
+    *               En caso de no haberlo cogemos el del idioma actual
     *
     * @see GcmConfig
     */
@@ -271,7 +274,7 @@ class Literales extends Modulos {
     *
     * En caso de que ya exista literal no lo modificamos.
     *
-    * @param $evento Evento
+    * @param $e    Evento
     * @param $args Array de argumentos
     *
     * @see GcmConfig
