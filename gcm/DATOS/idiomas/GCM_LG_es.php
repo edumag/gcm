@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Mon Mar 18 16:37:55 CET 2013
+// Archivo generado automaticamente por GcmConfig Wed Apr 3 8:20:51 CEST 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -115,4 +115,6 @@ $GCM_LG_es['Cancelar']='';
 $GCM_LG_es['Registro incluido']='';
 $GCM_LG_es['Registro modificado']='';
 $GCM_LG_es['Contraseña no pasa verificación']='';
+$GCM_LG_es['Contenido nuevo']='';
+$GCM_LG_es['Contenido añadido']='';
 ?>

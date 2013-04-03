@@ -167,9 +167,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <span class="comment">/* Comprobar administrador que nos llega */</span>
 
       <span class="keywordflow">if</span> ( isset($_POST[<span class="stringliteral">&#39;loginPro&#39;</span>]) ){
-         <span class="keywordflow">if</span> ( ! $this-&gt;au-&gt;entrar($_POST[<span class="stringliteral">&quot;loginPro&quot;</span>],$_POST[<span class="stringliteral">&quot;passwd&quot;</span>]) ) {
-            $this-&gt;<a class="code" href="../../dc/d3c/a00028_ab47fef37169b00582e06421600ac1d7d.html#ab47fef37169b00582e06421600ac1d7d" title="Registra las acciones y avisos de la aplicación.">registra</a>(__FILE__,__LINE__,<span class="stringliteral">&#39;Usuario o contraseña incorrecta&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
-         } <span class="keywordflow">else</span> {
+         <span class="keywordflow">if</span> ( $this-&gt;au-&gt;entrar($_POST[<span class="stringliteral">&quot;loginPro&quot;</span>],$_POST[<span class="stringliteral">&quot;passwd&quot;</span>]) ) {
             $this-&gt;<a class="code" href="../../dc/d3c/a00028_ab47fef37169b00582e06421600ac1d7d.html#ab47fef37169b00582e06421600ac1d7d" title="Registra las acciones y avisos de la aplicación.">registra</a>(__FILE__,__LINE__,<span class="stringliteral">&#39;gcm-&gt;inicia: Usuario [ &#39;</span>.$_POST[<span class="stringliteral">&#39;loginPro&#39;</span>].<span class="stringliteral">&#39; ] registrado&#39;</span>);
             }
          }
@@ -266,7 +264,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 13 de Marzo de 2013 09:58:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 3 de Abril de 2013 09:33:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

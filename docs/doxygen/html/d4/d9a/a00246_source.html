@@ -105,20 +105,22 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00013"></a>00013    &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&#39;listar_dir_recur&#39;</span>&gt;
 <a name="l00014"></a>00014       &lt;?php $this-&gt;mostrarSecciones($path, $path_seleccionado,TRUE); ?&gt;
 <a name="l00015"></a>00015    &lt;/div&gt;
-<a name="l00016"></a>00016    &lt;br /&gt;&lt;br /&gt;
-<a name="l00017"></a>00017    &lt;fieldset&gt;
-<a name="l00018"></a>00018       &lt;legend&gt;&lt;?php echo literal(<span class="stringliteral">&#39;Acciones sobre contenidos&#39;</span>,3);?&gt;&lt;/legend&gt;
-<a name="l00019"></a>00019       &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;accion&quot;</span> value=<span class="stringliteral">&quot;&lt;?php echo $accion ?&gt;&quot;</span>  /&gt;
-<a name="l00020"></a>00020       &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&#39;borrar&#39;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Borrar&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00021"></a>00021       &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&#39;mover&#39;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Cambiar nombre&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00022"></a>00022    &lt;/fieldset&gt;
-<a name="l00023"></a>00023 &lt;/form&gt;
-<a name="l00024"></a>00024 
+<a name="l00016"></a>00016    &lt;?php <span class="keywordflow">if</span> ( <a class="code" href="../../df/d98/a00107_a5056a3ee6f23afd1d1585b8185b746f3.html#a5056a3ee6f23afd1d1585b8185b746f3" title="Determinar si tiene un rol con los permisos especificados para la acción.">permiso</a>(<span class="stringliteral">&#39;editar_contenido&#39;</span>) ) { ?&gt;
+<a name="l00017"></a>00017    &lt;br /&gt;&lt;br /&gt;
+<a name="l00018"></a>00018    &lt;fieldset&gt;
+<a name="l00019"></a>00019       &lt;legend&gt;&lt;?php echo literal(<span class="stringliteral">&#39;Acciones sobre contenidos&#39;</span>,3);?&gt;&lt;/legend&gt;
+<a name="l00020"></a>00020       &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;accion&quot;</span> value=<span class="stringliteral">&quot;&lt;?php echo $accion ?&gt;&quot;</span>  /&gt;
+<a name="l00021"></a>00021       &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&#39;borrar&#39;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Borrar&#39;</span>,3)?&gt;&lt;/button&gt;
+<a name="l00022"></a>00022       &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&#39;mover&#39;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Cambiar nombre&#39;</span>,3)?&gt;&lt;/button&gt;
+<a name="l00023"></a>00023    &lt;/fieldset&gt;
+<a name="l00024"></a>00024    &lt;?php } ?&gt;
+<a name="l00025"></a>00025 &lt;/form&gt;
+<a name="l00026"></a>00026 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 13 de Marzo de 2013 09:58:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

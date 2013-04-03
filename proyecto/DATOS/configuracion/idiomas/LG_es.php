@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Tue Mar 12 9:22:38 CET 2013
+// Archivo generado automaticamente por GcmConfig Wed Apr 3 8:16:28 CEST 2013
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia';
@@ -15,21 +15,16 @@ $LG_es['Ejemplo_de_documento']='Ejemplo de documento';
 $LG_es['Ejemplo_de_uso_de_GcmConfig']='Ejemplo de uso de GcmConfig';
 $LG_es['Entrada_de_prueba']='Entrada de prueba';
 $LG_es['Eventos']='';
-$LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='Evitar reenvios a formulario al actualizar una pagina';
-$LG_es['Forzar_eventos_por_omision']='Forzar eventos por omisión';
 $LG_es['GCM']='';
 $LG_es['Gestor de Contenido Mamedu']='';
 $LG_es['Instalar']='Instalar';
 $LG_es['Literales']='';
 $LG_es['Modificar secciones definidas en la plantilla dinamicamente']='';
-$LG_es['Modificar_secciones_definidas_en_la_plantilla_dinamicamente']='Modificar secciones definidas en la plantilla dinamicamente';
 $LG_es['Modulos']='Módulos';
 $LG_es['November']='Noviembre';
-$LG_es['Pagina_de_registro']='Página de registro';
 $LG_es['Paginador_con_ajax']='Paginador con ajax';
 $LG_es['Permisos']='';
 $LG_es['Permisos borrador']='';
-$LG_es['Plantilla_principal']='Plantilla principal';
 $LG_es['Plantillas']='Plantillas';
 $LG_es['Presentacion']='Presentación';
 $LG_es['Probando_contenido']='Probando contenido';
@@ -40,18 +35,14 @@ $LG_es['Sistema_de_plantillas']='Sistema de plantillas';
 $LG_es['Sistema_de_registros']='Sistema de registros';
 $LG_es['Subir imagen a ']='Subir una imagen';
 $LG_es['Subseccion_de_prueba']='Subsección de prueba';
-$LG_es['Sustitucion_en_enlaces_en_caso_de_ser_llamados_mediante_ajax']='Sustitución en enlaces en caso de ser llamados mediante ajax';
 $LG_es['Tema_diferente_para_administracion']='Tema diferente para administración';
 $LG_es['Trabajando_con_imagenes']=' Trabajando con imagenes';
 $LG_es['Tratar_las_diferencias_entre_navegadores']='Tratar las diferencias entre navegadores';
 $LG_es['Tratar_las_diferencias_entre_navegadores2']='Tratar las diferencias entre navegadores';
-$LG_es['a00016']='';
-$LG_es['d7a']='';
 $LG_es['documento_nuevo']='Documento nuevo';
 $LG_es['eliminar']='';
 $LG_es['es']='Castellano';
 $LG_es['gcm']='';
-$LG_es['hola']='';
 $LG_es['inicio']='Inicio';
 $LG_es['iniciot']='Pagina de inicio';
 $LG_es['literales']='';

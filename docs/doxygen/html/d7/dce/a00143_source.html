@@ -512,62 +512,74 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00419"></a>00419                }
 <a name="l00420"></a>00420             <span class="keywordflow">break</span>;
 <a name="l00421"></a>00421 
-<a name="l00422"></a>00422          };
-<a name="l00423"></a>00423 
-<a name="l00424"></a>00424          <span class="keywordflow">if</span> ($thisFail) {
-<a name="l00425"></a>00425             $anyFail = <span class="keyword">true</span>;
-<a name="l00426"></a>00426             $this-&gt;_arObjConstraintFailure[] = $objFailureObject;
-<a name="l00427"></a>00427          };
-<a name="l00428"></a>00428 
-<a name="l00429"></a>00429       };
-<a name="l00430"></a>00430 
-<a name="l00431"></a>00431       <span class="keywordflow">if</span> ($anyFail) {
-<a name="l00432"></a>00432 
-<a name="l00433"></a>00433          <span class="keywordflow">if</span> ($this-&gt;_blRedirectOnConstraintFailure) {
-<a name="l00434"></a>00434 
-<a name="l00435"></a>00435             $targetURL = $_SERVER[<span class="stringliteral">&quot;PHP_SELF&quot;</span>];
-<a name="l00436"></a>00436             <span class="keywordflow">if</span> (!$targetURL) {
-<a name="l00437"></a>00437                $targetURL = $this-&gt;_strConstraintFailureDefaultRedirectTargetURL;
-<a name="l00438"></a>00438             };
-<a name="l00439"></a>00439             <span class="keywordflow">if</span> ($this-&gt;_strConstraintFailureRedirectTargetURL) {
-<a name="l00440"></a>00440                $targetURL = $this-&gt;_strConstraintFailureRedirectTargetURL;
-<a name="l00441"></a>00441             };
-<a name="l00442"></a>00442             <span class="keywordflow">if</span> ($targetURL) {
-<a name="l00443"></a>00443                $objToSerialize = $this;
-<a name="l00444"></a>00444                $strSerialization = serialize($objToSerialize);
-<a name="l00445"></a>00445                <span class="comment">//setcookie (&quot;phprqcOriginalRequestObject&quot;, $strSerialization, time() + 3600,&#39;/&#39;);</span>
-<a name="l00446"></a>00446                $_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>] = $strSerialization;
-<a name="l00447"></a>00447                header(<span class="stringliteral">&quot;Location: $targetURL&quot;</span>);
-<a name="l00448"></a>00448                exit(0);
-<a name="l00449"></a>00449             };
-<a name="l00450"></a>00450          };
-<a name="l00451"></a>00451       };
-<a name="l00452"></a>00452       <span class="keywordflow">return</span>(!($anyFail));  <span class="comment">// Returns TRUE if all tests passed, otherwise returns</span>
-<a name="l00453"></a>00453       <span class="comment">//  FALSE</span>
-<a name="l00454"></a>00454    }
-<a name="l00455"></a>00455 <span class="comment"></span>
-<a name="l00456"></a>00456 <span class="comment">   /**</span>
-<a name="l00457"></a>00457 <span class="comment">    * Cuando una llamada a TestConstraints() indica que han fallado este método </span>
-<a name="l00458"></a>00458 <span class="comment">    * devolvera una matriz de objetos RestriccionesFallidas que representan todos</span>
-<a name="l00459"></a>00459 <span class="comment">    * estos fallos, a este método se tiene que acceder desde el objeto &#39;Solicitud&#39; </span>
-<a name="l00460"></a>00460 <span class="comment">    * original, al que se ha accedido utilizando </span>
-<a name="l00461"></a>00461 <span class="comment">    * GetOriginalRequestObjectFollowingConstraintFailure</span>
-<a name="l00462"></a>00462 <span class="comment">    */</span>
-<a name="l00463"></a>00463 
-<a name="l00464"></a><a class="code" href="../../d1/d6f/a00063_ab9bb9d6ec6c744c9e1265493ef462c5c.html#ab9bb9d6ec6c744c9e1265493ef462c5c">00464</a>    <span class="keyword">function</span> <a class="code" href="../../d1/d6f/a00063_ab9bb9d6ec6c744c9e1265493ef462c5c.html#ab9bb9d6ec6c744c9e1265493ef462c5c" title="Cuando una llamada a TestConstraints() indica que han fallado este método devolvera una matriz de obj...">GetConstraintFailures</a>() {
-<a name="l00465"></a>00465       <span class="keywordflow">if</span> (!$this-&gt;_blHasRunConstraintTests) {
-<a name="l00466"></a>00466          $this-&gt;<a class="code" href="../../d1/d6f/a00063_ae1d5ac813434379f8fff6b953359a70d.html#ae1d5ac813434379f8fff6b953359a70d" title="Prueba cada restricción una a una y toma de cualquier fallo rellenando la variable miembro GetConstra...">TestConstraints</a>();
-<a name="l00467"></a>00467       };
-<a name="l00468"></a>00468       <span class="keywordflow">return</span>($this-&gt;_arObjConstraintFailure);
-<a name="l00469"></a>00469    }
-<a name="l00470"></a>00470 }
-<a name="l00471"></a>00471 
-<a name="l00472"></a>00472 ?&gt;
+<a name="l00422"></a>00422          <span class="keywordflow">case</span> RT_PASSWORD:
+<a name="l00423"></a>00423             <span class="keywordflow">if</span> ( ! isset($_REQUEST[<span class="stringliteral">&#39;verificacion&#39;</span>]) ) {
+<a name="l00424"></a>00424                $thisFail = <span class="keyword">true</span>;
+<a name="l00425"></a>00425                registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Se necesita un campo &quot;verificacion&quot; para poder verificar la contraseña &#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00426"></a>00426                }
+<a name="l00427"></a>00427             <span class="keywordflow">if</span> ( $varActualValue != $_REQUEST[<span class="stringliteral">&#39;verificacion&#39;</span>] ) {
+<a name="l00428"></a>00428                $thisFail = <span class="keyword">true</span>;
+<a name="l00429"></a>00429                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; contraseña diferente a verificación &#39;</span>.$strConstraintOperand);
+<a name="l00430"></a>00430                registrar(__FILE__,__LINE__,$varActualValue.<span class="stringliteral">&#39; != &#39;</span>.$_REQUEST[<span class="stringliteral">&#39;verificacion&#39;</span>],<span class="stringliteral">&#39;ADMIN&#39;</span>);
+<a name="l00431"></a>00431                }
+<a name="l00432"></a>00432             <span class="keywordflow">break</span>;
+<a name="l00433"></a>00433 
+<a name="l00434"></a>00434          };
+<a name="l00435"></a>00435 
+<a name="l00436"></a>00436          <span class="keywordflow">if</span> ($thisFail) {
+<a name="l00437"></a>00437             $anyFail = <span class="keyword">true</span>;
+<a name="l00438"></a>00438             $this-&gt;_arObjConstraintFailure[] = $objFailureObject;
+<a name="l00439"></a>00439          };
+<a name="l00440"></a>00440 
+<a name="l00441"></a>00441       };
+<a name="l00442"></a>00442 
+<a name="l00443"></a>00443       <span class="keywordflow">if</span> ($anyFail) {
+<a name="l00444"></a>00444 
+<a name="l00445"></a>00445          <span class="keywordflow">if</span> ($this-&gt;_blRedirectOnConstraintFailure) {
+<a name="l00446"></a>00446 
+<a name="l00447"></a>00447             $targetURL = $_SERVER[<span class="stringliteral">&quot;REDIRECT_URL&quot;</span>];
+<a name="l00448"></a>00448             <span class="keywordflow">if</span> (!$targetURL) {
+<a name="l00449"></a>00449                $targetURL = $this-&gt;_strConstraintFailureDefaultRedirectTargetURL;
+<a name="l00450"></a>00450             };
+<a name="l00451"></a>00451             <span class="keywordflow">if</span> ($this-&gt;_strConstraintFailureRedirectTargetURL) {
+<a name="l00452"></a>00452                $targetURL = $this-&gt;_strConstraintFailureRedirectTargetURL;
+<a name="l00453"></a>00453             };
+<a name="l00454"></a>00454             <span class="keywordflow">if</span> ($targetURL) {
+<a name="l00455"></a>00455                $objToSerialize = $this;
+<a name="l00456"></a>00456                $strSerialization = serialize($objToSerialize);
+<a name="l00457"></a>00457                <span class="comment">//setcookie (&quot;phprqcOriginalRequestObject&quot;, $strSerialization, time() + 3600,&#39;/&#39;);</span>
+<a name="l00458"></a>00458                $_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>] = $strSerialization;
+<a name="l00459"></a>00459                header(<span class="stringliteral">&quot;Location: $targetURL&quot;</span>);
+<a name="l00460"></a>00460                exit(0);
+<a name="l00461"></a>00461             };
+<a name="l00462"></a>00462          };
+<a name="l00463"></a>00463       };
+<a name="l00464"></a>00464       <span class="keywordflow">return</span>(!($anyFail));  <span class="comment">// Returns TRUE if all tests passed, otherwise returns</span>
+<a name="l00465"></a>00465       <span class="comment">//  FALSE</span>
+<a name="l00466"></a>00466    }
+<a name="l00467"></a>00467 <span class="comment"></span>
+<a name="l00468"></a>00468 <span class="comment">   /**</span>
+<a name="l00469"></a>00469 <span class="comment">    * Cuando una llamada a TestConstraints() indica que han fallado este método </span>
+<a name="l00470"></a>00470 <span class="comment">    * devolvera una matriz de objetos RestriccionesFallidas que representan todos</span>
+<a name="l00471"></a>00471 <span class="comment">    * estos fallos, a este método se tiene que acceder desde el objeto &#39;Solicitud&#39; </span>
+<a name="l00472"></a>00472 <span class="comment">    * original, al que se ha accedido utilizando </span>
+<a name="l00473"></a>00473 <span class="comment">    * GetOriginalRequestObjectFollowingConstraintFailure</span>
+<a name="l00474"></a>00474 <span class="comment">    */</span>
+<a name="l00475"></a>00475 
+<a name="l00476"></a><a class="code" href="../../d1/d6f/a00063_ab9bb9d6ec6c744c9e1265493ef462c5c.html#ab9bb9d6ec6c744c9e1265493ef462c5c">00476</a>    <span class="keyword">function</span> <a class="code" href="../../d1/d6f/a00063_ab9bb9d6ec6c744c9e1265493ef462c5c.html#ab9bb9d6ec6c744c9e1265493ef462c5c" title="Cuando una llamada a TestConstraints() indica que han fallado este método devolvera una matriz de obj...">GetConstraintFailures</a>() {
+<a name="l00477"></a>00477       <span class="keywordflow">if</span> (!$this-&gt;_blHasRunConstraintTests) {
+<a name="l00478"></a>00478          $this-&gt;<a class="code" href="../../d1/d6f/a00063_ae1d5ac813434379f8fff6b953359a70d.html#ae1d5ac813434379f8fff6b953359a70d" title="Prueba cada restricción una a una y toma de cualquier fallo rellenando la variable miembro GetConstra...">TestConstraints</a>();
+<a name="l00479"></a>00479       };
+<a name="l00480"></a>00480       <span class="keywordflow">return</span>($this-&gt;_arObjConstraintFailure);
+<a name="l00481"></a>00481    }
+<a name="l00482"></a>00482 }
+<a name="l00483"></a>00483 
+<a name="l00484"></a>00484 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 13 de Marzo de 2013 09:58:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

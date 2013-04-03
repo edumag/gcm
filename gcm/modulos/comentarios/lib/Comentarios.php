@@ -19,6 +19,8 @@
  * @class Comentarios
  * @brief Este módulo nos permite que los usuarios entren comentarios
  *
+ * @todo Funciona la comprobación de usuario con sesión pero faltaria la comprobación de un usuario registrado
+ *       que añade comentario o modifica.
  * @todo Evitar spam comprobando enlaces en texto de comentario
  * @todo Comprobar email en caso de que queramos hacerlo
  * @todo Configurar módulo número que se presentan etc...
@@ -229,6 +231,9 @@ class Comentarios extends Modulos {
             $usuario = $comentario->getNombre();
             $mail    = $comentario->getMail();
             $texto   = $comentario->getComentario();
+            $id_user = $comentario->getUsuarios_id();
+
+            if ( ! permiso('moderar_comentarios') && $id_user != session_id() ) return ;
 
             $titulo = literal('Modificar comentario');
             $ocultar = FALSE;
@@ -518,9 +523,6 @@ class Comentarios extends Modulos {
 
    function modificar($e, $args=NULL) {
 
-      $args = recuperar_variable($args);
-      permiso('modificar_comentario',TRUE);
-   
       global $gcm;
 
       $id = $args;
@@ -534,8 +536,6 @@ class Comentarios extends Modulos {
 
    function ejecutar_modificar_comentario($e, $args=NULL) {
 
-      permiso('modificar_comentario',TRUE);
-   
       global $gcm;
 
       $mens="Modificar comentario";
@@ -548,6 +548,11 @@ class Comentarios extends Modulos {
       if ( isset($resultado['id']) ) {
 
          $comentario = new Comentarios_dbo($this->pdo, $resultado['id']);
+
+         if ( ! permiso('moderar_comentarios') && $comentario->getUsuarios_id() != session_id() ) {
+            registrar(__FILE__,__LINE__,'Acción no permitida','ERROR');
+            return ;
+            }
 
          if ( $resultado ) {
 
