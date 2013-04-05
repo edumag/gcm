@@ -24,4 +24,12 @@ $eventos['columna']['panel_literales'][5] = '';
 /** Borrar literales despues renombrar una sección */
 //$eventos['postejecutar_mover_seccion']['borrar_literal_seccion'][5] = '';
 
-?>
+/**
+ * Configuración para los permisos de usuario
+ *
+ * permitimos administrar literales a editores y traductores
+ */
+
+$acciones['literales']['panel_literales'][] = 'editor';
+$acciones['literales']['panel_literales'][] = 'traductor';
+

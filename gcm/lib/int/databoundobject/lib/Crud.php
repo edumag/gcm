@@ -98,9 +98,9 @@ class Crud extends DataBoundObject {
 
    public $conf_paginador = FALSE;        
 
-   protected $evento_guardar = FALSE;     ///< Metodo a lanzar al guardar registro
-   protected $evento_modificar = FALSE;   ///< Metodo a lanzar al modificar registro
-   protected $evento_borrar  = FALSE;     ///< Metodo a lanzar al borrar registro
+   protected $evento_guardar = FALSE;     ///< Metodo a lanzar al guardar registro, recibe identificador de registro como parametro
+   protected $evento_modificar = FALSE;   ///< Metodo a lanzar al modificar registro, recibe identificador de registro como parametro
+   protected $evento_borrar  = FALSE;     ///< Metodo a lanzar al borrar registro, recibe identificador de registro como parametro
 
    protected $restricciones;              ///< Restricciones para Solicitud
    protected $mensajes;                   ///< Mensajes de respuesta a fallos de restricciones

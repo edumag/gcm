@@ -497,17 +497,18 @@ function construir_get ($variables) {
  * @todo Crear módulo que gestione el enrutamiento a paginas de error.
  *
  * @param $accion     Acción a realizar
+ * @param $modulo     Módulo que realiza la acción
  * @param $salir En caso de no tener permisos enrutamos
  * @param $mensaje Presentar mensaje en caso de no tener permisos T/F
  *
  * @return TRUE/FALSE
  */
 
-function permiso($accion='administrar', $salir=FALSE, $mensaje=FALSE) {
+function permiso($accion='administrar', $modulo = 'admin', $salir=FALSE, $mensaje=FALSE) {
 
    global $gcm;
 
-   if ( $gcm->au->permiso($accion) ) return TRUE;
+   if ( $gcm->au->permiso($accion, $modulo) ) return TRUE;
 
    if ( $salir  ) {
       registrar(__FILE__,__LINE__,'Se necesitan permisos para esta acción','ERROR');

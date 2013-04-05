@@ -2,12 +2,13 @@
 
 /**
  * @file Autentificacion.php
+ * @brief Sistema de autentificación de usuarios.
+ *
+ * Sistema basado en roles de usuario.
  * 
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  24/11/09
- *  Revision  SVN $Id: Autentificacion.php 650 2012-10-04 07:17:48Z eduardo $
  * Copyright  Copyright (c) 2009, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -30,7 +31,15 @@ class Autentificacion {
 
    public $sufijo;
 
-   /** Lista de acciones con roles permitidos */ 
+   /** 
+    * Lista de acciones con roles permitidos
+    *
+    * formato del array:
+    * @code
+    * $acciones[modulo][accion] = array(roles);
+    * @endcode
+    */ 
+
 
    private $acciones;
 
@@ -50,7 +59,7 @@ class Autentificacion {
       $this->pdo = $pdo;
       $this->sufijo = $sufijo;
 
-      $this->acciones = ( $acciones ) ? $acciones : array('administrar' => array('administrador') ) ;
+      $this->acciones = ( $acciones ) ? $acciones : array('admin' => array('administrar' => array('administrador')) ) ;
 
       /* Comprobar existencia de tabla de usuarios */
 
@@ -73,6 +82,16 @@ class Autentificacion {
       if ( $num_admnistradores < 1  ) 
          $this->crear_admin_defecto();
 
+      }
+
+   /**
+    * Recibir array con acciones que seran sumadas a las que ya tenemos
+    *
+    * @param $acciones Array con las $acciones
+    */
+
+   function set_acciones($acciones) {
+      $this->acciones = array_merge($this->acciones, $acciones);
       }
 
    /**
@@ -318,14 +337,15 @@ class Autentificacion {
     *
     * Devolver array con los roles de la acción
     *
+    * @param $modulo Módulo
     * @param $accion Acción
     */
 
-   function roles_accion($accion) {
+   function roles_accion($modulo, $accion) {
 
       global $gcm;
 
-      if ( isset($this->acciones[$accion]) ) return $this->acciones[$accion];
+      if ( isset($this->acciones[$modulo][$accion]) ) return $this->acciones[$modulo][$accion];
 
       return FALSE;
 
@@ -334,10 +354,11 @@ class Autentificacion {
    /**
     * Comprobar permiso para usuario segun accion a realizar
     *
-    * @param $accion Accion a realizar
+    * @param $accion Accion a realizar, por defecto 'administrar'
+    * @param $modulo Módulo al que pertenece la acción, por defecto 'admin'
     */
 
-   function permiso($accion) {
+   function permiso($accion = 'administrar', $modulo = 'admin') {
 
       global $gcm;
 
@@ -352,10 +373,10 @@ class Autentificacion {
       if ( $gcm->au->es_admin() ) return TRUE;
 
       $roles_usuario = $this->roles_usuario();
-      $roles_accion  = $this->roles_accion($accion);
+      $roles_accion  = $this->roles_accion($modulo,$accion);
 
       if ( ! $roles_accion ) {
-         registrar(__FILE__,__LINE__,'Sin permisos para ['.$accion.']','DEBUG');
+         registrar(__FILE__,__LINE__,'Sin permisos para ['.$modulo.'->'.$accion.'()]','DEBUG');
          return FALSE;
          }
 
@@ -411,6 +432,9 @@ class Autentificacion {
 
       $sql = "INSERT INTO ".$this->sufijo."roles VALUES (1,'administrador','El administrador tiene todos los privilegios');";
       $sql .= "INSERT INTO ".$this->sufijo."roles VALUES (2,'usuario','Usuario registrado');";
+      $sql .= "INSERT INTO ".$this->sufijo."roles VALUES (3,'editor','Puede añadir su propio contenido');";
+      $sql .= "INSERT INTO ".$this->sufijo."roles VALUES (4,'traductor','Puede modificar las traducciones');";
+
       $comando = $this->pdo->prepare($sql);
       if ( !$comando ) {
          $err = $this->pdo->errorInfo();
@@ -424,24 +448,36 @@ class Autentificacion {
          throw new Exception('Error al insertar registro: '.$men_error);
          }
 
+      unset($comando);
 
-      $sql = "INSERT INTO ".$this->sufijo."r_usuarios_roles VALUES (1,1);";
-      $sql .= "INSERT INTO ".$this->sufijo."r_usuarios_roles VALUES (1,2);";
-      $comando = $this->pdo->prepare($sql);
-      if ( !$comando ) {
-         $err = $this->pdo->errorInfo();
-         $men_error = $err[2];
-         throw new Exception('Error al preparar sql'.$men_error);
-         }
-
-      if ( ! $comando->execute() ) {
-         $err = $this->pdo->errorInfo();
-         $men_error = $err[2];
-         throw new Exception('Error al insertar registro: '.$men_error);
-         }
+      $this->insertar_rol_usuario(1,1);
+      $this->insertar_rol_usuario(1,2);
 
       }
 
+   /**
+    * Añadir un nuevo rol a usuario
+    */
+
+   function insertar_rol_usuario($usuario_id, $rol_id) {
+
+      $sql = "INSERT INTO ".$this->sufijo."r_usuarios_roles VALUES (".$usuario_id.",".$rol_id.")";
+
+      $comando = $this->pdo->exec($sql);
+
+      if ( !$comando ) {
+         $err = $this->pdo->errorInfo();
+         $men_error = $err[2];
+         throw new Exception('Error al wjwcutar sql: '.$sql."\n\n<br />".depurar($err));
+         }
+
+      // if ( ! $comando->execute() ) {
+      //    $err = $this->pdo->errorInfo();
+      //    $men_error = $err[2];
+      //    throw new Exception('Error al insertar registro: '.$men_error);
+      //    }
+
+      }
    }
 
 ?>

@@ -40,7 +40,25 @@ class Usuarios extends Crud {
 
       $this->sql_listado = 'SELECT u.id, u.usuario, u.nombre,u.apellidos, fecha_modificacion as modificación FROM '.$gcm->au->sufijo.'usuarios u';
 
+      $this->evento_guardar = 'rol_minimo';
+
       parent::__construct($objPDO, $id);
+
+      }
+
+   /**
+    * Añadimos el rol de 'usuario' al insertar un nuevo usuario
+    *
+    * @param $id Identificador de nuevo usuario
+    */
+
+   function rol_minimo($id) {
+
+      global $gcm;
+
+      $gcm->au->insertar_rol_usuario($id,2);
+
+      registrar(__FILE__,__LINE__,'Añadimos rol "usuario"','AVISO');
 
       }
 

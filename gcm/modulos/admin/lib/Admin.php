@@ -231,6 +231,8 @@ class Admin extends Modulos {
             $usuario->save();
             $resultado['id'] = $usuario->ultimo_identificador();
 
+            $gcm->au->insertar_rol_usuario($resultado['id'],2);
+
             registrar(__FILE__,__LINE__,literal('Usuario insertado'),'AVISO');
 
          } else {

@@ -1,11 +1,19 @@
-<p>La gesti&oacute;n de los permisos se realiza seg&uacute;n roles, el rol administrativo que es el que tiene el administrador por defecto, permite cualquier acci&oacute;n.</p>
+<p>La gesti&oacute;n de los permisos se realiza seg&uacute;n roles, el rol administrativo que es el que tiene el administrador por defecto, permite cualquier acci&oacute;n.Eventos es el encargado de pedir permisos para todas las acciones que no esten definidas en los archivos de eventos_usuario.php de los m&oacute;dulos.</p>
+<p>Los eventos definidos en 'eventos_admin.php' en los m&oacute;dulos tendran que pasar la verificaci&oacute;n antes de ser lanzados.</p>
+<h3>Configuraci&oacute;n por defecto</h3>
 <p>Roles por defecto:</p>
 <ul>
 <li>administrador: Se le permiten todas las acciones.</li>
 <li>usuario: Limitado</li>
+<li>editor: Puede a&ntilde;adir contenido propio</li>
+<li>traductor: Se le permite a&ntilde;adir o modificar traducciones</li>
 </ul>
-<p>Formas de uso:</p>
-<pre>permiso('editar_contenido', TRUE);</pre>
-<p>En este caso la acci&oacute;n a realizar esta relacionada con la edici&oacute;n de contenido, en caso de que el usuario actual no tenga permiso se enruta con aviso de que no tiene permisos.</p>
+<h3>Formas de uso</h3>
+<pre>permiso('editar_contenido', 'modulo',TRUE);</pre>
+<p>En este caso la acci&oacute;n a realizar esta relacionada con la edici&oacute;n de contenido del m&oacute;dulo 'contenido', en caso de que el usuario actual no tenga permiso se enruta con aviso de que no tiene permisos.</p>
 <p>El valor TRUE del segundo parametro es el que nos indica que debe enrutarse en caso de tener permisos, si no pasamos este parametro simplemente la funci&oacute;n nos devolver&iacute;a un FALSE y seriamos nosotros los que gestionasemos la respuesta.</p>
+<h3>&nbsp;Configuraci&oacute;n</h3>
+<p>Dentro de los archivos 'eventos_admin.php' de los m&oacute;dulos podemos definir a que roles pertenecen las acciones de los m&oacute;dulos.</p>
+<p>Ejemplo en m&oacute;dulo literales</p>
+<pre>/**<br /> * Configuraci&oacute;n para los permisos de usuario<br /> *<br /> * permitimos administrar literales a editores y traductores<br /> */<br /><br />$acciones['literales']['panel_literales'][] = 'editor';<br />$acciones['literales']['panel_literales'][] = 'traductor';</pre>
 <p>&nbsp;</p>

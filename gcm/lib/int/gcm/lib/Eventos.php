@@ -14,8 +14,8 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
-/** @class Eventos
- *
+/** 
+ * @class Eventos
  * @brief Módulo Eventos para conectar acciones con los módulos
  *
  * Utilizamos los archivos eventos_usuario.php y eventos_admin.php de
@@ -26,23 +26,22 @@
  *
  * Comportamiento de eventos:
  *
- * Podemos configurar diferentes comportamientos
- *
+ * Podemos configurar diferentes comportamientos:
  * - unico:  Deja de ejecutarse acciones para el mismo evento.
  * - anular: Se anula cualquier acción de evento.
  *
  * Ejemplo de fichero de eventos de un módulo.
  *
- * <pre>
+ * @code
  * $eventos['cabecerad']['formulario_busqueda'][1]='';
  * $eventos['columna']['ultimas_entradas'][2]="num=7&seccion=".Router::$s."&formato=1";
  * $eventos['contenido_dinamico']['contenido_dinamico'][1]='';
  * $eventos['precarga']['presentar_busquedas'][3]='';
  *
  * // Comportamiento de eventos
- * $cEventos['<evento>']['unico'] = '<nombre del modulo>';
- * $cEventos['<evento>']['anular'] = '<nombre del modulo>';
- * </pre>
+ * $cEventos['evento']['unico'] = '<nombre del modulo>';
+ * $cEventos['evento']['anular'] = '<nombre del modulo>';
+ * @endcode
  *
  * Tambien se puede especificar comportamientos en tiempo de ejecución:
  *
@@ -53,8 +52,6 @@
  *
  * @see modulos/contenido/eventos_usuario.php
  *
- * @todo El pasarle el directorio de los modulos no afecta al funcionamiento, 
- *       hay un desfase entre el comportamiento antiguo y el actual.
  */
 
 class Eventos {
@@ -117,6 +114,25 @@ class Eventos {
 
    public $instancias = array();
 
+   /**
+    * Lista blanca de acciones
+    *
+    * Todos los eventos que esten definidos en los archivos de los módulos 
+    * 'eventos_usuarios.php' serán añadidos a la lista_blanca para evitar 
+    * comprobar permisos sobre ellos.
+    *
+    * Esta lista es ampliable desde el método set_lista_blanca('módulo','acción'), o colsultable
+    * desde get_lista_blanca('módulo','acción').
+    *
+    * Estructura del array:
+    * @code
+    * lista_blanca[módulo][0] = 'acción' 
+    * lista_blanca[módulo][1] = 'acción' 
+    * @endcode
+    */
+
+   private $lista_blanca = array();
+
    /** 
     * Llenamos el array eventos con la información de los archivos
     * de eventos de cada modulo
@@ -168,12 +184,40 @@ class Eventos {
       }
 
    /**
+    * Comprobar si una acción está en la lista_blanca
+    *
+    * @param $modulo Módulo
+    * @param $accion Acción
+    * @return TRUE/FALSE
+    */
+
+   public function get_lista_blanca($modulo, $accion) {
+      if ( isset($this->lista_blanca[$modulo]) && in_array($accion, $this->lista_blanca[$modulo]) ) return TRUE;
+      return FALSE;
+      }
+
+   /**
+    * Añadir una acción a la lista blanca
+    *
+    * @param $modulo Módulo
+    * @param $accion Acción
+    */
+
+   public function set_lista_blanca($modulo,$accion) {
+      if ( ! $get_lista_blanca($modulo, $accion) ) $this->lista_blanca[$modulo][] = $accion;
+      }
+
+   /**
     * Buscamos dentro de modulos los archivos directorio módulo/eventos_usuario.php
     * que tienen la información del módulo.
     *
     * Construimos: $this->eventos, $this->cEventos, $this->ubicaciones
     *
-    * @param $nivel Usuario o Administración
+    * En caso haber un array de $acciones las sumamos a las ya definidas en Autentificacion
+    *
+    * @see Autentificacion
+    *
+    * @param $nivel usuario o admin
     * @param $directorio Directorio donde se encuantran los módulos
     */
 
@@ -227,16 +271,25 @@ class Eventos {
                }
             }
 
+         // Para recoger los permisos configurados en los módulos
+         $acciones = FALSE;
+
          if ( $this->leer_eventos_proyecto ) {
             include($fichero_evento);
          } else {
             include($fichero_modulo);
             }
 
+         if ( $acciones ) {
+            $gcm->au->set_acciones($acciones);
+            }
+
          if ( isset($eventos) && is_array($eventos) ) {
             foreach ( $eventos as $e => $accion ) {
                foreach ( $accion as $a => $valor ) {
                   foreach ( $valor as $prioridad => $argumentos ) {
+                     // Si son eventos de usuario añadimos acciones a lista_blanca
+                     if ( $nivel == 'usuario' ) $this->lista_blanca[$modulo][] = $a;
                      $this->eventos[$e][$modulo][$a][$prioridad] = $argumentos; 
                      $this->ubicaciones[$modulo] = $directorio.$modulo; 
                      $n++;
@@ -297,7 +350,7 @@ class Eventos {
 
       $evento = $e;
 
-      if ( $this->visualizar ) echo '<div class="visualizar_evento" style="background: yellow;"><p style="font-size: 12px; color: red;">'.$e.'</p>';
+      if ( $this->visualizar ) echo '<div class="visualizar_evento" ><p style="font-size: 12px; color: red;">'.$e.'</p>';
 
       $parametros_eventos = $args;
 
@@ -428,7 +481,7 @@ class Eventos {
     * Devolver instancia de un módulo, nos permite interactuar entre
     * componentes sin reacrgar la aplicación
     *
-    * @param $modulo Modulo a instanciar
+    * @param $m Modulo a instanciar
     */
 
    function instancia_modulo($m) {
@@ -523,6 +576,20 @@ class Eventos {
 
       if ( ! in_array($m,$this->modulos_activados) ) return;
 
+      // Comprobar permisos
+      if ( ! $this->get_lista_blanca($m,$a) ) {
+
+         if ( ! permiso($a) ) {
+            registrar(__FILE__,__LINE__,$m.'->'.$a.'() sin permisos','ERROR');
+            return FALSE;
+         // } else {
+         //    registrar(__FILE__,__LINE__,$m.'->'.$a.'()  con permisos','AVISO');
+            }
+
+      // } else {
+      //    registrar(__FILE__,__LINE__,$m.'->'.$a.'()  en lista_blanca','AVISO');
+         }
+
       if ( $this->instancia_modulo($m) ) {
 
          if ( method_exists($this->instancias[$m], $a ) ) {
@@ -583,7 +650,7 @@ class Eventos {
    /**
     * Comprobar si un evento esta anula o no
     *
-    * @param $evento
+    * @param $e
     */
 
    function anulado($e) {

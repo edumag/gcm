@@ -6,9 +6,13 @@ $menuAdmin['Administración']['boton']['Editar perfil']['activado']= 1;
 $menuAdmin['Administración']['boton']['Editar perfil']['title']="Editar información de usuario";
 $menuAdmin['Administración']['boton']['Editar perfil']['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
 
+if ( permiso('test','admin') ) {
+
 $menuAdmin['Administración']['boton']['Tests']['activado']= 1;
 $menuAdmin['Administración']['boton']['Tests']['title']="Ejecutar tests";
 $menuAdmin['Administración']['boton']['Tests']['link']=dirname($_SERVER['PHP_SELF'])."/test";
+
+   }
 
 if ( permiso() ) {
 

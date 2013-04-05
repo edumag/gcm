@@ -64,6 +64,16 @@ border-left:1px solid <?=$this->color("body-13")?>;
 border-right:1px solid <?=$this->color("body-13")?>;
 border-top:1px solid <?=$this->color("body-14")?>;
 }
+fieldset {
+    padding: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px 5px 5px 5px;
+}
+fieldset fieldset {
+    margin: 8px 0 8px 8px;
+    padding: 2px;
+}
+
 /* class para bloques de codigo, por ejemplo */
 pre {
 border: 1px solid <?=$this->color("body-06")?>;
