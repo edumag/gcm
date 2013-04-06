@@ -15,6 +15,12 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
+/**
+ * @defgroup autentificacion Autentificación
+ * @ingroup usuarios
+ * @{
+ */
+
 /** @brief Componente Autentificacion
  *
  * Mecanismo para la autentificación de usuarios.
@@ -320,6 +326,17 @@ class Autentificacion {
       return ( isset($_SESSION[$this->sufijo.'_id']) ) ? $_SESSION[$this->sufijo.'_id']: FALSE ;
       }
 
+   /**
+    * @defgroup permisos Permisos 
+    *
+    * Gestión de permisos de usuarios.
+    *
+    *
+    *
+    * @ingroup usuarios
+    * @{
+    */
+
    /** 
     * Devolvemos array con roles de usuario
     */
@@ -356,6 +373,7 @@ class Autentificacion {
     *
     * @param $accion Accion a realizar, por defecto 'administrar'
     * @param $modulo Módulo al que pertenece la acción, por defecto 'admin'
+    *
     */
 
    function permiso($accion = 'administrar', $modulo = 'admin') {
@@ -387,6 +405,8 @@ class Autentificacion {
       return FALSE;
 
       }
+
+   /** @} */
 
    /**
     * salir
@@ -479,5 +499,7 @@ class Autentificacion {
 
       }
    }
+
+/** @} */
 
 ?>

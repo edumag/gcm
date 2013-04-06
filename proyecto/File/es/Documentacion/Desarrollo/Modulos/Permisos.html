@@ -1,4 +1,8 @@
 <p>La gesti&oacute;n de los permisos se realiza seg&uacute;n roles, el rol administrativo que es el que tiene el administrador por defecto, permite cualquier acci&oacute;n.Eventos es el encargado de pedir permisos para todas las acciones que no esten definidas en los archivos de eventos_usuario.php de los m&oacute;dulos.</p>
+<p>Algunas acciones que no estan contempladas en eventos_usuario.php pero que deben tener acceso abierto, pueden definirse en el archivo eventos_usuario.php incluyendolas a la lista blanca de eventos.</p>
+<p>En el m&oacute;dulo 'menu' podemos ver un ejemplo:</p>
+<p>modulos/menu/eventos_usuario.php</p>
+<pre>// a&ntilde;adimos metodo menu_ajax a la lista blanca, para que no se necesiten <br />// permisos para lanzarlo.<br /><br />$this-&gt;set_lista_blanca('menu','menu_ajax');</pre>
 <p>Los eventos definidos en 'eventos_admin.php' en los m&oacute;dulos tendran que pasar la verificaci&oacute;n antes de ser lanzados.</p>
 <h3>Configuraci&oacute;n por defecto</h3>
 <p>Roles por defecto:</p>

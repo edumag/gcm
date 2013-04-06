@@ -199,12 +199,25 @@ class Eventos {
    /**
     * Añadir una acción a la lista blanca
     *
+    * Nos permite añadir métodos que no estan definidos en los eventos de usuario
+    * pero que se utilizan y no requieres permisos.
+    *
+    * Un ejemplo, en el archivo modulos/menu/eventos_usuario.php añadimos el método
+    * 'menu_ajax' a la lista, sino lo hicieramos nos daria error la aplicación por
+    * falta de permisos al selecccionar una sección en el menú.
+    * @code
+    * $this->set_lista_blanca('menu','menu_ajax');
+    * @endcode
+    *
     * @param $modulo Módulo
     * @param $accion Acción
+    *
+    * @ingroup permisos
     */
 
    public function set_lista_blanca($modulo,$accion) {
-      if ( ! $get_lista_blanca($modulo, $accion) ) $this->lista_blanca[$modulo][] = $accion;
+      if ( ! $this->get_lista_blanca($modulo, $accion) ) $this->lista_blanca[$modulo][] = $accion;
+      // registrar(__FILE__,__LINE__,'<pre>'.depurar($this->lista_blanca).'</pre>','AVISO');
       }
 
    /**

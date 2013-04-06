@@ -7,8 +7,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  04/10/10
- *  Revision  SVN $Id: $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -491,8 +489,13 @@ function construir_get ($variables) {
 
    }
 
-/** 
+if( ! function_exists("permiso") ) {
+
+/**
  * Determinar si tiene un rol con los permisos especificados para la acción.
+ *
+ * Comprobamos si la función ya existe, de esta manera permitimos con facilidad
+ * implementar otro sistema de verificación de permisos diferente.
  *
  * @todo Crear módulo que gestione el enrutamiento a paginas de error.
  *
@@ -502,6 +505,8 @@ function construir_get ($variables) {
  * @param $mensaje Presentar mensaje en caso de no tener permisos T/F
  *
  * @return TRUE/FALSE
+ *
+ * @ingroup permisos
  */
 
 function permiso($accion='administrar', $modulo = 'admin', $salir=FALSE, $mensaje=FALSE) {
@@ -521,6 +526,8 @@ function permiso($accion='administrar', $modulo = 'admin', $salir=FALSE, $mensaj
    return FALSE;
 
    }
+
+}
 
 /**
 * Limpiamos el texto preparandolo para ser guardado o presentado
@@ -779,15 +786,14 @@ function borrar_contenido_tabla($pdo, $tabla) {
 /**
  * Glob recursiva ()
  *
- * @Http://php.net/glob enlace
- * @Autor HM2K <hm2k@php.net>
- * @Version $ Revision: 1.2 $
- * @Requiere PHP 4.3.0 (globalización)
+ * Http://php.net/glob
  *
- * @Param int $patrón El modelo pasa a glob ()
- * @Param int $banderas Las banderas pasa a glob ()
- * @Param string $ruta El camino de la exploración
- * @Return mixtos Una serie de archivos en la ruta dada coinciden con el patrón.
+ * @author HM2K <hm2k@php.net>
+ *
+ * @param $pattern El modelo pasa a glob ()
+ * @param $flags Las banderas pasa a glob ()
+ * @param $path El camino de la exploración
+ * @return mixtos Una serie de archivos en la ruta dada coinciden con el patrón.
  */
 
 function rglob($pattern='*', $flags = 0, $path=false) {
@@ -984,6 +990,9 @@ function minutos2tiempo($minutos) {
  * campos.
  *
  * Cada array debe llevar una variable llamada peso con el valor correspondiente
+ *
+ * @param $a Variable a
+ * @param $b Variable b
  */
 
 function ordenar_por_peso($a, $b) {

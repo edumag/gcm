@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Thu Apr 4 12:08:09 CEST 2013
+// Archivo generado automaticamente por GcmConfig Fri Apr 5 12:54:47 CEST 2013
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia';
@@ -77,8 +77,11 @@ $LG_es['Entrada_de_prueba_2']='Entrada de prueba 2';
 $LG_es['Una_mas']='Una más';
 $LG_es['index']='index';
 $LG_es['TinyTable']='';
-$LG_es['Sustitucion_en_enlaces_en_caso_de_ser_llamados_mediante_ajax']='';
-$LG_es['Modificar_secciones_definidas_en_la_plantilla_dinamicamente']='';
-$LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='';
-$LG_es['Pagina_de_registro']='';
+$LG_es['Sustitucion_en_enlaces_en_caso_de_ser_llamados_mediante_ajax']='Sustitucion en enlaces en caso de ser llamados mediante ajax';
+$LG_es['Modificar_secciones_definidas_en_la_plantilla_dinamicamente']='Modificar secciones definidas en la plantilla dinamicamente';
+$LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='Evitar reenvios a formulario al actualizar una pagina';
+$LG_es['Pagina_de_registro']='Pagina de registro';
+$LG_es['Forzar_eventos_por_omision']='';
+$LG_es['Crud']='Crud';
+$LG_es['crud']='crud';
 ?>

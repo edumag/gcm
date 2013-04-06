@@ -16,6 +16,10 @@ $menuAdmin['Administración']['boton']['Tests']['link']=dirname($_SERVER['PHP_SE
 
 if ( permiso() ) {
 
+   $menuAdmin['Administración']['boton']['Roles']['activado']= 1;
+   $menuAdmin['Administración']['boton']['Roles']['title']="Administración de roles";
+   $menuAdmin['Administración']['boton']['Roles']['link']=dirname($_SERVER['PHP_SELF'])."/admin/roles/";
+
    $menuAdmin['Administración']['boton']['Usuarios']['activado']= 1;
    $menuAdmin['Administración']['boton']['Usuarios']['title']="Administración de usuarios";
    $menuAdmin['Administración']['boton']['Usuarios']['link']=dirname($_SERVER['PHP_SELF'])."/admin/usuarios/";

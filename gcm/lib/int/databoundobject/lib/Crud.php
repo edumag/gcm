@@ -13,6 +13,10 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @defgroup crud Creación, CRUD modificación y borrado de registros
+ *
+ * @{
  */
 
 require_once(dirname(__FILE__).'/DataBoundObject.php');
@@ -1183,5 +1187,7 @@ class Crud extends DataBoundObject {
       }
 
    }
+
+/** @} */
 
 ?>

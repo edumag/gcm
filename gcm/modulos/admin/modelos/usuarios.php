@@ -3,24 +3,17 @@
 /**
  * @file      usuarios.php
  * @brief     Modelo para usuarios
- *
- * @author    Eduardo Magrané 
- *
- * @internal
- *   Created  05/05/10
- *  Revision  SVN $Id: usuarios.php 650 2012-10-04 07:17:48Z eduardo $
- * Copyright  Copyright (c) 2010, Eduardo Magrané
- *
- * This source code is released for free distribution under the terms of the
- * GNU General Public License as published by the Free Software Foundation.
  */
-
-/** DataBoundObject */
 
 require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
 
 /**
- * @class Usuarios.php
+ * @defgroup usuarios Usuarios
+ * @{
+ */
+
+/**
+ * @class Usuarios
  * @brief Modelo para los usuarios de la aplicación.
  * @version 0.1
  */
@@ -70,6 +63,31 @@ class Usuarios extends Crud {
 
 class Roles extends Crud {
 
+   function DefineTableName() {
+
+      global $gcm;
+
+      return $gcm->au->sufijo.'r_usuarios_roles';
+      }
+
+   function DefineRelationMap($pdo) {
+
+      $retorno['usuarios_id'] = 'ID';
+      $retorno['roles_id'] = 'Roles_id';
+
+      return $retorno;
+
+      }
+
+   // function visualizar_registro() {
+
+   //    // echo 'Hola: '.$this->ID;
+   //    echo "Rol: ".$this->GetAccessor('Nombre');
+
+   //    }
+
    }
+
+/** @} */
 
 ?>

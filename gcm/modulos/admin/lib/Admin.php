@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file Admin
+ * @file Admin.php
  *
  * @author    Eduardo Magrané 
  *
@@ -12,6 +12,8 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @todo Hacer limpieza, se pueden eliminar métodos en desuso
  */
 
 /**
@@ -54,6 +56,7 @@ class Admin extends Modulos {
     *
     * @todo Validar email
     *
+    * @param $aDatos Array con los datos a validar
     */
 
    function validar_datos($aDatos) {
@@ -415,6 +418,9 @@ class Admin extends Modulos {
     * Mostrar formulario de registro 
     *
     * Para evento registro
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function formulario_registro($e, $args=NULL) {
@@ -471,6 +477,9 @@ class Admin extends Modulos {
     * Comprobar que el administrador no es aun el por defecto
     *
     * @todo Enrutar a pagina de sin privilegios
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function confirmar_configuracion($e, $args) {
@@ -515,13 +524,16 @@ class Admin extends Modulos {
     * Usuarios
     *
     * Formulario para administrar los usuarios
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function usuarios($e, $args) {
 
       global $gcm;
 
-      if ( permiso('administrar') ) {
+      if ( permiso('administrar','admin') ) {
 
          $gcm->event->anular('contenido','admin');
          $gcm->event->anular('titulo','admin');
@@ -550,6 +562,9 @@ class Admin extends Modulos {
 
    /**
     * Presentar información de servidor
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function infoserver($e,$args) {
@@ -605,6 +620,9 @@ class Admin extends Modulos {
     * Ejecutar métodos cron de los módulos
     *
     * Buscamos en todos los módulos si hay un metodo cron en tal caso se lanza
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function ejecutar_cron_modulos($e = FALSE, $args = FALSE) {
