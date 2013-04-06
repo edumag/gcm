@@ -1,0 +1,12 @@
+<p>Con crud conseguimos automatizar la creaci&oacute;n, modificaci&oacute;n y eliminaci&oacute;n de registros en la base de datos.</p>
+<p>Un ejemplo sencillo:</p>
+<pre>/**<br /> * @file      usuarios.php<br /> * @brief     Modelo para usuarios<br /> */<br /><br />require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');<br /><br />/**<br /> * @defgroup usuarios Usuarios<br /> * @{<br /> */<br /><br />/**<br /> * @class Usuarios<br /> * @brief Modelo para los usuarios de la aplicaci&oacute;n.<br /> * @version 0.1<br /> */<br /><br />class Usuarios extends Crud {<br /><br />   function DefineTableName() {<br /><br />      global $gcm;<br /><br />      return $gcm-&gt;au-&gt;sufijo.'usuarios';<br />      }<br /><br />   function __construct(PDO $objPDO, $id=NULL) {<br /><br />      global $gcm;<br /><br />      $this-&gt;sql_listado = 'SELECT u.id, u.usuario, u.nombre,u.apellidos, fecha_modificacion as modificaci&oacute;n <br />                                  FROM '.$gcm-&gt;au-&gt;sufijo.'usuarios u';<br /><br />      $this-&gt;evento_guardar = 'rol_minimo';<br /><br />      parent::__construct($objPDO, $id);<br /><br />      }<br /><br />   /**<br />    * A&ntilde;adimos el rol de 'usuario' al insertar un nuevo usuario<br />    *<br />    * @param $id Identificador de nuevo usuario<br />    */<br /><br />   function rol_minimo($id) {<br /><br />      global $gcm;<br /><br />      $gcm-&gt;au-&gt;insertar_rol_usuario($id,2);<br /><br />      registrar(__FILE__,__LINE__,'A&ntilde;adimos rol "usuario"','AVISO');<br /><br />      }<br /><br />   }</pre>
+<ul>
+<li>Primero incluimos Crud ya que los m&oacute;delos que creamos heredan de &eacute;l.</li>
+<li>Creamos el m&oacute;delo</li>
+<li>Definimos el nombre de la tabla, si coincide con el de la clase no hara falta.</li>
+<li>En el constructor definimos la sql que nos servira para generar los listados, por defecto presentar&iacute;a todos los campos</li>
+<li>Creamos un enlace al m&eacute;todo rol_minimo para que sea llamado al crear un registro nuevo, el parametro que recibiŕa ser&aacute; el identificador del registro.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>

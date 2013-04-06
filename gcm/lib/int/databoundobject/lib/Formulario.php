@@ -13,6 +13,8 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @ingroup crud
  */
 
 /**
@@ -110,7 +112,7 @@
  *
  * @todo La validación en javascript de mail no funciona
  *        
- *
+ * @ingroup crud
  */
 
 

@@ -13,13 +13,16 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @ingroup crud
  */
 
 
 /**
  * @class DataBoundObject
  * @brief Abstracción para manipilación de datos con PDO
- * @version 0.1
+ *
+ * @ingroup crud
  */
 
 abstract class DataBoundObject {

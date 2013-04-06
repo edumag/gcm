@@ -21,6 +21,10 @@
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
    <textarea readonly="readonly" rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
 
+   <?php } elseif ( $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
+   
+      <?php // si es el campo con contraseña no se presenta ?>
+
    <?php } elseif ( $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
       <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>

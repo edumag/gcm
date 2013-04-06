@@ -1,0 +1,11 @@
+/**
+
+@file readme.dox
+@brief Documentación para gcm
+@page manual Manual
+
+- @subpage instalacion Instalación
+- @subpage configuracion Configuración
+- @subpage crud
+
+*/
