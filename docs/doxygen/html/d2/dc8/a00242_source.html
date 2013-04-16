@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_nuevo.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_mover.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,27 +87,25 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_nuevo.html</div>  </div>
+<div class="title">form_mover.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span>&gt;
-<a name="l00002"></a>00002    &lt;fieldset&gt;
-<a name="l00003"></a>00003       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Contenido nuevo&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00004"></a>00004       &lt;?php include (<a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_secciones.html&#39;</span>))?&gt;
-<a name="l00005"></a>00005       &lt;?php include (<a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_titulo.html&#39;</span>))?&gt;
-<a name="l00006"></a>00006       &lt;?php include (<a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_contenido.html&#39;</span>))?&gt;
-<a name="l00007"></a>00007       &lt;fieldset&gt;
-<a name="l00008"></a>00008          &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00009"></a>00009          &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;ejecutar_nuevo&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00010"></a>00010          &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;guardar_como_borrador&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar como borrador&#39;</span>)?&gt;&lt;/button&gt;
-<a name="l00011"></a>00011       &lt;/fieldset&gt;
-<a name="l00012"></a>00012    &lt;/fieldset&gt;
-<a name="l00013"></a>00013 &lt;/form&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;h3&gt;&lt;?=literal(<span class="stringliteral">&#39;Renombrar o mover contenido&#39;</span>,3)?&gt;&lt;/h3&gt;
+<a name="l00002"></a>00002 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&quot;</span>&gt;
+<a name="l00003"></a>00003    &lt;?php include (<a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_secciones.html&#39;</span>))?&gt;
+<a name="l00004"></a>00004    &lt;?php include (<a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_titulo.html&#39;</span>))?&gt;
+<a name="l00005"></a>00005    &lt;fieldset&gt;
+<a name="l00006"></a>00006       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00007"></a>00007       &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;ejecutar_mover&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Ejecutar&#39;</span>,3)?&gt;&lt;/button&gt;
+<a name="l00008"></a>00008    &lt;/fieldset&gt;
+<a name="l00009"></a>00009    &lt;textarea style=<span class="stringliteral">&quot;display: none;&quot;</span> name=<span class="stringliteral">&quot;areaTexto&quot;</span> &gt;&lt;?=$contenido?&gt;&lt;/textarea&gt;
+<a name="l00010"></a>00010    &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;origen&quot;</span> value=<span class="stringliteral">&quot;&lt;?=Router::$f?&gt;&quot;</span> /&gt;
+<a name="l00011"></a>00011 &lt;/form&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

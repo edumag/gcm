@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/css/thickbox.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/imagenes/config/config_ca.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,161 +81,26 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_925a7c03a73672f2b14aa59d01f20b70.html">imagenes</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_13f4cfbc66bfdbea420c2ff541de55b5.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4e6ca1276f3ded4918c928f0e5f707c1.html">config</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">thickbox.css</div>  </div>
+<div class="title">config_ca.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002 <span class="comment">/* ----------------------------------------------------------------------------------------------------------------*/</span>
-<a name="l00003"></a>00003 <span class="comment">/* ----------&gt;&gt;&gt; global settings needed for thickbox &lt;&lt;&lt;-----------------------------------------------------------*/</span>
-<a name="l00004"></a>00004 <span class="comment">/* ----------------------------------------------------------------------------------------------------------------*/</span>
-<a name="l00005"></a>00005 *{padding: 0; margin: 0;}
-<a name="l00006"></a>00006 <span class="comment">/* ----------------------------------------------------------------------------------------------------------------*/</span>
-<a name="l00007"></a>00007 <span class="comment">/* ----------&gt;&gt;&gt; thickbox specific link and font settings &lt;&lt;&lt;------------------------------------------------------*/</span>
-<a name="l00008"></a>00008 <span class="comment">/* ----------------------------------------------------------------------------------------------------------------*/</span>
-<a name="l00009"></a>00009 <span class="preprocessor">#TB_window {</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span>   font: 12px Arial, Helvetica, sans-serif;
-<a name="l00011"></a>00011    color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;thickbox-00&quot;</span>)?&gt;;
-<a name="l00012"></a>00012 }
-<a name="l00013"></a>00013 <span class="preprocessor">#TB_secondLine {</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span>   font: 10px Arial, Helvetica, sans-serif;
-<a name="l00015"></a>00015    color:&lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-17&quot;</span>)?&gt;;
-<a name="l00016"></a>00016 }
-<a name="l00017"></a>00017 <span class="preprocessor">#TB_window a:link {color: #666666;}</span>
-<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="preprocessor">#TB_window a:visited {color: #666666;}</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span><span class="preprocessor">#TB_window a:hover {color: #000;}</span>
-<a name="l00020"></a>00020 <span class="preprocessor"></span><span class="preprocessor">#TB_window a:active {color: #666666;}</span>
-<a name="l00021"></a>00021 <span class="preprocessor"></span><span class="preprocessor">#TB_window a:focus{color: #666666;}</span>
-<a name="l00022"></a>00022 <span class="preprocessor"></span><span class="comment">/* ----------------------------------------------------------------------------------------------------------------*/</span>
-<a name="l00023"></a>00023 <span class="comment">/* ----------&gt;&gt;&gt; thickbox settings &lt;&lt;&lt;-----------------------------------------------------------------------------*/</span>
-<a name="l00024"></a>00024 <span class="comment">/* ----------------------------------------------------------------------------------------------------------------*/</span>
-<a name="l00025"></a>00025 <span class="preprocessor">#TB_overlay {</span>
-<a name="l00026"></a>00026 <span class="preprocessor"></span>   position: fixed;
-<a name="l00027"></a>00027    z-index:100;
-<a name="l00028"></a>00028    top: 0px;
-<a name="l00029"></a>00029    left: 0px;
-<a name="l00030"></a>00030    height:100%;
-<a name="l00031"></a>00031    width:100%;
-<a name="l00032"></a>00032 }
-<a name="l00033"></a>00033 .TB_overlayBG {
-<a name="l00034"></a>00034    background-color:&lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00035"></a>00035    filter:alpha(opacity=75);
-<a name="l00036"></a>00036    -moz-opacity: 0.75;
-<a name="l00037"></a>00037    opacity: 0.75;
-<a name="l00038"></a>00038 }
-<a name="l00039"></a>00039 * html #TB_overlay { <span class="comment">/* ie6 hack */</span>
-<a name="l00040"></a>00040      position: absolute;
-<a name="l00041"></a>00041      height: expression(document.body.scrollHeight &gt; document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + <span class="stringliteral">&#39;px&#39;</span>);
-<a name="l00042"></a>00042 }
-<a name="l00043"></a>00043 <span class="preprocessor">#TB_window {</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>   position: fixed;
-<a name="l00045"></a>00045    background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;thickbox-01&quot;</span>)?&gt;;
-<a name="l00046"></a>00046    z-index: 102;
-<a name="l00047"></a>00047    color:&lt;?=$this-&gt;color(<span class="stringliteral">&quot;thickbox-02&quot;</span>)?&gt;;
-<a name="l00048"></a>00048    display:none;
-<a name="l00049"></a>00049    border: 4px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;thickbox-03&quot;</span>)?&gt;;
-<a name="l00050"></a>00050    text-align:left;
-<a name="l00051"></a>00051    top:50%;
-<a name="l00052"></a>00052    left:50%;
-<a name="l00053"></a>00053 }
-<a name="l00054"></a>00054 * html #TB_window { <span class="comment">/* ie6 hack */</span>
-<a name="l00055"></a>00055 position: absolute;
-<a name="l00056"></a>00056 margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = document.documentElement &amp;&amp; document.documentElement.scrollTop || document.body.scrollTop) + <span class="stringliteral">&#39;px&#39;</span>);
-<a name="l00057"></a>00057 }
-<a name="l00058"></a>00058 <span class="preprocessor">#TB_window img#TB_Image {</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span>   display:block;
-<a name="l00060"></a>00060    margin: 15px 0 0 15px;
-<a name="l00061"></a>00061    border-right: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-01&quot;</span>)?&gt;;
-<a name="l00062"></a>00062    border-bottom: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-01&quot;</span>)?&gt;;
-<a name="l00063"></a>00063    border-top: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-00&quot;</span>)?&gt;;
-<a name="l00064"></a>00064    border-left: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-00&quot;</span>)?&gt;;
-<a name="l00065"></a>00065 }
-<a name="l00066"></a>00066 <span class="preprocessor">#TB_caption{</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>   height:25px;
-<a name="l00068"></a>00068    padding:7px 30px 10px 25px;
-<a name="l00069"></a>00069    <span class="keywordtype">float</span>:left;
-<a name="l00070"></a>00070 }
-<a name="l00071"></a>00071 <span class="preprocessor">#TB_closeWindow{</span>
-<a name="l00072"></a>00072 <span class="preprocessor"></span>   height:25px;
-<a name="l00073"></a>00073    padding:11px 25px 10px 0;
-<a name="l00074"></a>00074    <span class="keywordtype">float</span>:right;
-<a name="l00075"></a>00075 }
-<a name="l00076"></a>00076 <span class="preprocessor">#TB_closeAjaxWindow{</span>
-<a name="l00077"></a>00077 <span class="preprocessor"></span>   padding:7px 10px 5px 0;
-<a name="l00078"></a>00078    margin-bottom:1px;
-<a name="l00079"></a>00079    text-align:right;
-<a name="l00080"></a>00080    <span class="keywordtype">float</span>:right;
-<a name="l00081"></a>00081 }
-<a name="l00082"></a>00082 <span class="preprocessor">#TB_ajaxWindowTitle{</span>
-<a name="l00083"></a>00083 <span class="preprocessor"></span>   <span class="keywordtype">float</span>:left;
-<a name="l00084"></a>00084    padding:7px 0 5px 10px;
-<a name="l00085"></a>00085    margin-bottom:1px;
-<a name="l00086"></a>00086 }
-<a name="l00087"></a>00087 <span class="preprocessor">#TB_title{</span>
-<a name="l00088"></a>00088 <span class="preprocessor"></span>   background-color:&lt;?=$this-&gt;color(<span class="stringliteral">&quot;thickbox-04&quot;</span>)?&gt;;
-<a name="l00089"></a>00089    height:27px;
-<a name="l00090"></a>00090 }
-<a name="l00091"></a>00091 <span class="preprocessor">#TB_ajaxContent{</span>
-<a name="l00092"></a>00092 <span class="preprocessor"></span>   clear:both;
-<a name="l00093"></a>00093    padding:2px 15px 15px 15px;
-<a name="l00094"></a>00094    overflow:<span class="keyword">auto</span>;
-<a name="l00095"></a>00095    text-align:left;
-<a name="l00096"></a>00096    line-height:1.4em;
-<a name="l00097"></a>00097 }
-<a name="l00098"></a>00098 <span class="preprocessor">#TB_ajaxContent.TB_modal{</span>
-<a name="l00099"></a>00099 <span class="preprocessor"></span>   padding:15px;
-<a name="l00100"></a>00100 }
-<a name="l00101"></a>00101 <span class="preprocessor">#TB_ajaxContent p{</span>
-<a name="l00102"></a>00102 <span class="preprocessor"></span>   padding:5px 0px 5px 0px;
-<a name="l00103"></a>00103 }
-<a name="l00104"></a>00104 <span class="preprocessor">#TB_load{</span>
-<a name="l00105"></a>00105 <span class="preprocessor"></span>   position: fixed;
-<a name="l00106"></a>00106    display:none;
-<a name="l00107"></a>00107    height:13px;
-<a name="l00108"></a>00108    width:208px;
-<a name="l00109"></a>00109    z-index:103;
-<a name="l00110"></a>00110    top: 50%;
-<a name="l00111"></a>00111    left: 50%;
-<a name="l00112"></a>00112    margin: -6px 0 0 -104px; <span class="comment">/* -height/2 0 0 -width/2 */</span>
-<a name="l00113"></a>00113 }
-<a name="l00114"></a>00114 * html #TB_load { <span class="comment">/* ie6 hack */</span>
-<a name="l00115"></a>00115 position: absolute;
-<a name="l00116"></a>00116 margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = document.documentElement &amp;&amp; document.documentElement.scrollTop || document.body.scrollTop) + <span class="stringliteral">&#39;px&#39;</span>);
-<a name="l00117"></a>00117 }
-<a name="l00118"></a>00118 <span class="preprocessor">#TB_HideSelect{</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span>   z-index:99;
-<a name="l00120"></a>00120    position:fixed;
-<a name="l00121"></a>00121    top: 0;
-<a name="l00122"></a>00122    left: 0;
-<a name="l00123"></a>00123    background-color:&lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
-<a name="l00124"></a>00124    border:none;
-<a name="l00125"></a>00125    filter:alpha(opacity=0);
-<a name="l00126"></a>00126    -moz-opacity: 0;
-<a name="l00127"></a>00127    opacity: 0;
-<a name="l00128"></a>00128    height:100%;
-<a name="l00129"></a>00129    width:100%;
-<a name="l00130"></a>00130 }
-<a name="l00131"></a>00131 * html #TB_HideSelect { <span class="comment">/* ie6 hack */</span>
-<a name="l00132"></a>00132      position: absolute;
-<a name="l00133"></a>00133      height: expression(document.body.scrollHeight &gt; document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + <span class="stringliteral">&#39;px&#39;</span>);
-<a name="l00134"></a>00134 }
-<a name="l00135"></a>00135 <span class="preprocessor">#TB_iframeContent{</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span>   clear:both;
-<a name="l00137"></a>00137    border:none;
-<a name="l00138"></a>00138    margin-bottom:-1px;
-<a name="l00139"></a>00139    margin-top:1px;
-<a name="l00140"></a>00140    _margin-bottom:1px;
-<a name="l00141"></a>00141 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 $config_DESC[<span class="stringliteral">&#39;anchoMaxImg&#39;</span>]=<span class="stringliteral">&#39;amplada màxima de les imatges&#39;</span>;
+<a name="l00003"></a>00003 $config_DESC[<span class="stringliteral">&#39;altoMaxImg&#39;</span>]=<span class="stringliteral">&#39;Altura màxima de les imatges&#39;</span>;
+<a name="l00004"></a>00004 $config_DESC[<span class="stringliteral">&#39;anchoMaxMiniatura&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00005"></a>00005 $config_DESC[<span class="stringliteral">&#39;altoMaxMiniatura&#39;</span>]=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00006"></a>00006 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

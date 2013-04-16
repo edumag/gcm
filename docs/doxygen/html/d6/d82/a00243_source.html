@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/listar_contenido_seccion.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_mover_seccion.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,29 +87,22 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">listar_contenido_seccion.html</div>  </div>
+<div class="title">form_mover_seccion.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;ul&gt;
-<a name="l00002"></a>00002 &lt;?php <span class="keywordflow">foreach</span> ( $subsecciones as $subseccion ) { ?&gt;
-<a name="l00003"></a>00003 
-<a name="l00004"></a>00004 &lt;li&gt;&lt;h3&gt;&lt;a href=<span class="stringliteral">&#39;&lt;?php echo Router::$enlace_relativo.$subseccion.&#39;</span>/<span class="stringliteral">&#39;; ?&gt;&#39;</span>&gt;&lt;?php echo literal(<a class="code" href="../../df/d98/a00107_a6ab4ae106b6ebf5769bc3390aa8ac287.html#a6ab4ae106b6ebf5769bc3390aa8ac287" title="comprobar_barra()">comprobar_barra</a>($subseccion,<span class="stringliteral">&#39;eliminar&#39;</span>)).<span class="charliteral">&#39;/&#39;</span>; ?&gt;&lt;/a&gt;&lt;/h3&gt;&lt;/li&gt;
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 &lt;?php } ?&gt;
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 &lt;?php <span class="keywordflow">foreach</span> ( $documentos as $documento ) { ?&gt;
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 &lt;li&gt;&lt;h4&gt;&lt;a href=<span class="stringliteral">&#39;&lt;?php echo Router::$enlace_relativo.$documento; ?&gt;&#39;</span>&gt;&lt;?php echo literal(str_replace(<span class="stringliteral">&#39;.html&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,$documento)); ?&gt;&lt;/a&gt;&lt;/h4&gt;&lt;/li&gt;
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 &lt;?php } ?&gt;
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 &lt;/ul&gt;
-<a name="l00015"></a>00015 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&quot;</span>&gt;
+<a name="l00002"></a>00002    &lt;?php include (<a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_secciones.html&#39;</span>))?&gt;
+<a name="l00003"></a>00003    &lt;?php include (<a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_titulo_seccion.html&#39;</span>))?&gt;
+<a name="l00004"></a>00004    &lt;fieldset&gt;
+<a name="l00005"></a>00005       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00006"></a>00006       &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;ejecutar_mover_seccion&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Ejecutar&#39;</span>,3)?&gt;&lt;/button&gt;
+<a name="l00007"></a>00007    &lt;/fieldset&gt;
+<a name="l00008"></a>00008 &lt;/form&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
