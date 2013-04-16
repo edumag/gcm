@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/menu/css/menuPrincipal.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/menu/alt/menuPrincipal-decagora.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,64 +81,73 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_e0b90d1017353e67ec406a3e12ca4962.html">menu</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c79e4658021f234f9fbe8febb6dae4fa.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_82e9c533c296fd83ffba12a8bfa1e8b9.html">alt</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">menuPrincipal.css</div>  </div>
+<div class="title">menuPrincipal-decagora.css</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
 <a name="l00002"></a>00002 <span class="comment">/* menuPrincipal.css */</span>
 <a name="l00003"></a>00003 <span class="preprocessor">#menu_principal {</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-18&quot;</span>)?&gt;;
-<a name="l00005"></a>00005 }
-<a name="l00006"></a>00006 table#menu {
-<a name="l00007"></a>00007 margin-top: 3px;
-<a name="l00008"></a>00008 border: 0px;
-<a name="l00009"></a>00009 padding: 0px;
-<a name="l00010"></a>00010 background: #EED8AE ;
-<a name="l00011"></a>00011 background: transparent ;
-<a name="l00012"></a>00012 }
-<a name="l00013"></a>00013 <span class="preprocessor">#menu td {</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span>text-align: center;
-<a name="l00015"></a>00015 background: #EED8AE ;
-<a name="l00016"></a>00016 background: transparent ;
-<a name="l00017"></a>00017 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00018"></a>00018 padding: 3px;
-<a name="l00019"></a>00019 margin: 0;
-<a name="l00020"></a>00020 }
-<a name="l00021"></a>00021 <span class="preprocessor">#menu td a {</span>
-<a name="l00022"></a>00022 <span class="preprocessor"></span>margin: 15px 15px;
-<a name="l00023"></a>00023 padding: 3px 15px 3px 15px;
-<a name="l00024"></a>00024 color:&lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00025"></a>00025 text-decoration: none;
-<a name="l00026"></a>00026 background: #EED8AE;
-<a name="l00027"></a>00027 background: transparent ;
-<a name="l00028"></a>00028 border: 1px solid transparent;
+<a name="l00004"></a>00004 <span class="preprocessor"></span>padding: 0;
+<a name="l00005"></a>00005 margin:0;
+<a name="l00006"></a>00006 position: absolute;
+<a name="l00007"></a>00007 top: 80px;
+<a name="l00008"></a>00008 left: -6px;
+<a name="l00009"></a>00009 z-index: 10;
+<a name="l00010"></a>00010 }
+<a name="l00011"></a>00011 table#menu {
+<a name="l00012"></a>00012 margin-top: 3px;
+<a name="l00013"></a>00013 border: 0px;
+<a name="l00014"></a>00014 padding: 0px;
+<a name="l00015"></a>00015 background: #EED8AE;
+<a name="l00016"></a>00016 background: transparent;
+<a name="l00017"></a>00017 }
+<a name="l00018"></a>00018 <span class="preprocessor">#menu td {</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>text-align: center;
+<a name="l00020"></a>00020 font-size: 90%;
+<a name="l00021"></a>00021 background: #EED8AE;
+<a name="l00022"></a>00022 background: transparent;
+<a name="l00023"></a>00023 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00024"></a>00024 padding: 1px;
+<a name="l00025"></a>00025 background: no-repeat url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$gcm-&gt;event-&gt;instancias[&quot;temas&quot;]-&gt;ruta(&quot;menu&quot;,&quot;img&quot;,&quot;boton_desactivado.gif&quot;)?&gt;&#39;</span>);
+<a name="l00026"></a>00026 width: 70px;
+<a name="l00027"></a>00027 height: 70px;
+<a name="l00028"></a>00028 vertical-align: middle;
 <a name="l00029"></a>00029 }
-<a name="l00030"></a>00030 <span class="preprocessor">#menu td a:hover {</span>
-<a name="l00031"></a>00031 <span class="preprocessor"></span>background: #4B87AD ;
-<a name="l00032"></a>00032 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
-<a name="l00033"></a>00033 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00034"></a>00034 }
-<a name="l00035"></a>00035 <span class="preprocessor">#menu td a:active {</span>
-<a name="l00036"></a>00036 <span class="preprocessor"></span>background: #EED8AE;
-<a name="l00037"></a>00037 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00038"></a>00038 }
-<a name="l00039"></a>00039 <span class="comment">/* Estamos aqui del menu principal */</span>
-<a name="l00040"></a>00040 <span class="preprocessor">#menu td#menuOff a {</span>
-<a name="l00041"></a>00041 <span class="preprocessor"></span>background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-12&quot;</span>)?&gt;;
-<a name="l00042"></a>00042 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00043"></a>00043 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;; 
-<a name="l00044"></a>00044 }
+<a name="l00030"></a>00030 <span class="preprocessor">#menu td a {</span>
+<a name="l00031"></a>00031 <span class="preprocessor"></span>margin: 0px;
+<a name="l00032"></a>00032 padding: 0px;
+<a name="l00033"></a>00033 color:#E0AD14;
+<a name="l00034"></a>00034 text-decoration: none;
+<a name="l00035"></a>00035 border: 1px solid transparent;
+<a name="l00036"></a>00036 margin: 1px;
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 <span class="preprocessor">#menu td a:hover {</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>background: #4B87AD;
+<a name="l00040"></a>00040 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;0&quot;</span>)?&gt;;
+<a name="l00041"></a>00041 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00042"></a>00042 }
+<a name="l00043"></a>00043 <span class="preprocessor">#menu td a:active {</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span>background: #EED8AE;
+<a name="l00045"></a>00045 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00046"></a>00046 }
+<a name="l00047"></a>00047 <span class="comment">/* Estamos aqui del menu principal */</span>
+<a name="l00048"></a>00048 <span class="preprocessor">#menu td#menuOff {</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span>background: no-repeat url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$gcm-&gt;event-&gt;instancias[&quot;temas&quot;]-&gt;ruta(&quot;menu&quot;,&quot;img&quot;,&quot;boton_activado.gif&quot;)?&gt;&#39;</span>);
+<a name="l00050"></a>00050 }
+<a name="l00051"></a>00051 <span class="preprocessor">#menu td#menuOff a {</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00053"></a>00053 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 3 de Abril de 2013 09:33:13 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 16 de Abril de 2013 13:19:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
