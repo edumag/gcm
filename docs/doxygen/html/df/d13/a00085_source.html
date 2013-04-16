@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/autentificacion/lib/Autentificacion.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/array2table/lib/Array2table.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,468 +81,399 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_eaaa6dfd94a87d9a122239ab0efda13e.html">autentificacion</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_f42b1da15759a3b6b46fd9d1d2ec57fe.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_9e2b0a5ed21a9930c23570b5c6adb3b5.html">array2table</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_b0b5fefa5ea6cf5ba4366389ead165c4.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Autentificacion.php</div>  </div>
+<div class="title">Array2table.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="../../df/d13/a00085.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file Autentificacion.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * </span>
-<a name="l00006"></a>00006 <span class="comment"> * @author    Eduardo Magrané </span>
-<a name="l00007"></a>00007 <span class="comment"> *</span>
-<a name="l00008"></a>00008 <span class="comment"> * @internal</span>
-<a name="l00009"></a>00009 <span class="comment"> *   Created  24/11/09</span>
-<a name="l00010"></a>00010 <span class="comment"> *  Revision  SVN $Id: Autentificacion.php 650 2012-10-04 07:17:48Z eduardo $</span>
-<a name="l00011"></a>00011 <span class="comment"> * Copyright  Copyright (c) 2009, Eduardo Magrané</span>
-<a name="l00012"></a>00012 <span class="comment"> *</span>
-<a name="l00013"></a>00013 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
-<a name="l00014"></a>00014 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
-<a name="l00015"></a>00015 <span class="comment"> */</span>
-<a name="l00016"></a>00016 <span class="comment"></span>
-<a name="l00017"></a>00017 <span class="comment">/** @brief Componente Autentificacion</span>
-<a name="l00018"></a>00018 <span class="comment"> *</span>
-<a name="l00019"></a>00019 <span class="comment"> * Mecanismo para la autentificación de usuarios.</span>
-<a name="l00020"></a>00020 <span class="comment"> *</span>
-<a name="l00021"></a>00021 <span class="comment"> */</span>
-<a name="l00022"></a>00022 
-<a name="l00023"></a><a class="code" href="../../de/d21/a00006.html">00023</a> <span class="keyword">class </span><a class="code" href="../../de/d21/a00006.html" title="Componente Autentificacion.">Autentificacion</a> {
-<a name="l00024"></a>00024 <span class="comment"></span>
-<a name="l00025"></a>00025 <span class="comment">   /** Conexión con base de datos  */</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027    <span class="keyword">private</span> $pdo;
-<a name="l00028"></a>00028 <span class="comment"></span>
-<a name="l00029"></a>00029 <span class="comment">   /** Sufijo para diferenciar entre proyectos */</span>
-<a name="l00030"></a>00030 
-<a name="l00031"></a><a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782">00031</a>    <span class="keyword">public</span> <a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>;
-<a name="l00032"></a>00032 <span class="comment"></span>
-<a name="l00033"></a>00033 <span class="comment">   /** Lista de acciones con roles permitidos */</span> 
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035    <span class="keyword">private</span> $acciones;
-<a name="l00036"></a>00036 <span class="comment"></span>
-<a name="l00037"></a>00037 <span class="comment">   /** constructor</span>
-<a name="l00038"></a>00038 <span class="comment">    *</span>
-<a name="l00039"></a>00039 <span class="comment">    * Llenamos el array eventos con la información de los archivos</span>
-<a name="l00040"></a>00040 <span class="comment">    * de eventos de cada modulo</span>
-<a name="l00041"></a>00041 <span class="comment">    *</span>
-<a name="l00042"></a>00042 <span class="comment">    * @param $pdo      Conexión con base de datos</span>
-<a name="l00043"></a>00043 <span class="comment">    * @param $sufijo   Para diferenciar entre sesiones de diferentes proyectos</span>
-<a name="l00044"></a>00044 <span class="comment">    * @param $acciones Por defecto administrar para administrador</span>
-<a name="l00045"></a>00045 <span class="comment">    *</span>
-<a name="l00046"></a>00046 <span class="comment">    */</span>
-<a name="l00047"></a>00047 
-<a name="l00048"></a><a class="code" href="../../de/d21/a00006_a70411eda6655614ac34062f8f605645d.html#a70411eda6655614ac34062f8f605645d">00048</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a70411eda6655614ac34062f8f605645d.html#a70411eda6655614ac34062f8f605645d" title="constructor">__construct</a>(PDO $pdo, <a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>=<span class="stringliteral">&#39;au&#39;</span>, $acciones = FALSE) {
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050       $this-&gt;pdo = $pdo;
-<a name="l00051"></a>00051       $this-&gt;sufijo = <a class="code" href="../../de/d21/a00006_a7fd243d1be16552e82e319a146f6d782.html#a7fd243d1be16552e82e319a146f6d782" title="Sufijo para diferenciar entre proyectos.">$sufijo</a>;
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053       $this-&gt;acciones = ( $acciones ) ? $acciones : array(<span class="stringliteral">&#39;administrar&#39;</span> =&gt; array(<span class="stringliteral">&#39;administrador&#39;</span>) ) ;
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055       <span class="comment">/* Comprobar existencia de tabla de usuarios */</span>
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($this-&gt;sufijo.<span class="stringliteral">&#39;usuarios&#39;</span>)  ) $this-&gt;<a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059       <span class="comment">/* Comprobar existencia de al menos un usuarios administratico */</span>
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061       $sql = <span class="stringliteral">&#39;SELECT COUNT(*) FROM &#39;</span>.$this-&gt;sufijo.<span class="stringliteral">&#39;usuarios u LEFT JOIN &#39;</span>.$this-&gt;sufijo.<span class="stringliteral">&#39;r_usuarios_roles rur ON rur.usuarios_id = u.id WHERE rur.roles_id=1&#39;</span>;
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063       <span class="keywordflow">if</span> ( ! $sth = $this-&gt;pdo-&gt;prepare($sql) ) <span class="keywordflow">return</span>;
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065       <span class="keywordflow">if</span> (!$sth-&gt;execute()) <span class="keywordflow">return</span>;
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067       $arRow = $sth-&gt;fetch();
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069       <span class="keywordflow">foreach</span>($arRow as $key =&gt; $value) {
-<a name="l00070"></a>00070          $num_admnistradores = $value;
-<a name="l00071"></a>00071          }
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073       <span class="keywordflow">if</span> ( $num_admnistradores &lt; 1  ) 
-<a name="l00074"></a>00074          $this-&gt;<a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>();
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076       }
-<a name="l00077"></a>00077 <span class="comment"></span>
-<a name="l00078"></a>00078 <span class="comment">   /**</span>
-<a name="l00079"></a>00079 <span class="comment">    * Existe tabla</span>
-<a name="l00080"></a>00080 <span class="comment">    */</span>
-<a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4">00082</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($tabla) {
-<a name="l00083"></a>00083 
-<a name="l00084"></a>00084       <span class="keywordflow">try</span> {
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086          $sql = <span class="stringliteral">&#39;SELECT COUNT(*) FROM &#39;</span>.$tabla;
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088          <span class="keywordflow">if</span> ( ! $sth = $this-&gt;pdo-&gt;prepare($sql) ) {
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090             registrar(__FILE__,__LINE__, <span class="stringliteral">&#39;No existe tabla para usuarios la creamos&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
-<a name="l00091"></a>00091             $this-&gt;<a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093          } <span class="keywordflow">else</span> {
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095             <span class="keywordflow">if</span> (!$sth-&gt;execute()) {
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097                $this-&gt;<a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>();
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099                }
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101             }
-<a name="l00102"></a>00102       } <span class="keywordflow">catch</span> (Exception $ex) {
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104          <span class="keywordflow">return</span> FALSE;
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106          }
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108       <span class="keywordflow">return</span> TRUE;
-<a name="l00109"></a>00109 
-<a name="l00110"></a>00110       }
-<a name="l00111"></a>00111 <span class="comment"></span>
-<a name="l00112"></a>00112 <span class="comment">   /**</span>
-<a name="l00113"></a>00113 <span class="comment">    * crear_tabla</span>
-<a name="l00114"></a>00114 <span class="comment">    *</span>
-<a name="l00115"></a>00115 <span class="comment">    * En caso de que no exista aun la tabla de la base de datos hay que crearla.</span>
-<a name="l00116"></a>00116 <span class="comment">    *</span>
-<a name="l00117"></a>00117 <span class="comment">    */</span>
-<a name="l00118"></a>00118 
-<a name="l00119"></a><a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0">00119</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a2d05954872ca18c1e6f338e5c4a9b0a0.html#a2d05954872ca18c1e6f338e5c4a9b0a0" title="crear_tabla">crear_tabla</a>() {
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($this-&gt;sufijo.<span class="stringliteral">&#39;roles&#39;</span>) ) {
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123          $SQL = <span class="stringliteral">&quot;CREATE TABLE &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;roles (</span>
-<a name="l00124"></a>00124 <span class="stringliteral">            id  INT PRIMARY KEY,</span>
-<a name="l00125"></a>00125 <span class="stringliteral">            nombre varchar(150) NOT NULL,</span>
-<a name="l00126"></a>00126 <span class="stringliteral">            descripcion varchar(500) NOT NULL</span>
-<a name="l00127"></a>00127 <span class="stringliteral">            )</span>
-<a name="l00128"></a>00128 <span class="stringliteral">            &quot;</span>;
-<a name="l00129"></a>00129 
-<a name="l00130"></a>00130          <span class="keywordflow">if</span> ( ! $sqlResult = $this-&gt;pdo-&gt;query($SQL) ) {
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;Error al crear tabla de &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;roles\n&quot;</span>.$pdo_error);
-<a name="l00133"></a>00133             <span class="keywordflow">return</span> FALSE;
-<a name="l00134"></a>00134 
-<a name="l00135"></a>00135             }
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137          }
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d21/a00006_a2a0464b96d19356dbce690e539bd81c4.html#a2a0464b96d19356dbce690e539bd81c4" title="Existe tabla.">existe_tabla</a>($this-&gt;sufijo.<span class="stringliteral">&#39;r_usuarios_roles&#39;</span>) ) {
-<a name="l00140"></a>00140 
-<a name="l00141"></a>00141          $SQL = <span class="stringliteral">&quot;CREATE TABLE &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;r_usuarios_roles (</span>
-<a name="l00142"></a>00142 <span class="stringliteral">            usuarios_id int(11) NOT NULL,</span>
-<a name="l00143"></a>00143 <span class="stringliteral">            roles_id int(11) NOT NULL,</span>
-<a name="l00144"></a>00144 <span class="stringliteral">            PRIMARY KEY (usuarios_id,roles_id)</span>
-<a name="l00145"></a>00145 <span class="stringliteral">            )</span>
-<a name="l00146"></a>00146 <span class="stringliteral">            &quot;</span>;
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148          <span class="keywordflow">if</span> ( ! $sqlResult = $this-&gt;pdo-&gt;query($SQL) ) {
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;Error al crear tabla de &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;r_usuarios_roles\n&quot;</span>.$pdo_error);
-<a name="l00151"></a>00151             <span class="keywordflow">return</span> FALSE;
-<a name="l00152"></a>00152 
-<a name="l00153"></a>00153             }
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155          }
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157       $SQL=<span class="stringliteral">&quot;CREATE TABLE &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;usuarios (</span>
-<a name="l00158"></a>00158 <span class="stringliteral">         id INT  PRIMARY KEY AUTO_INCREMENT ,</span>
-<a name="l00159"></a>00159 <span class="stringliteral">         usuario CHAR(50) , </span>
-<a name="l00160"></a>00160 <span class="stringliteral">         pass_md5 CHAR(32) ,</span>
-<a name="l00161"></a>00161 <span class="stringliteral">         nombre CHAR(50) , </span>
-<a name="l00162"></a>00162 <span class="stringliteral">         apellidos CHAR(50) , </span>
-<a name="l00163"></a>00163 <span class="stringliteral">         fecha_creacion datetime  NOT NULL,</span>
-<a name="l00164"></a>00164 <span class="stringliteral">         fecha_modificacion timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,</span>
-<a name="l00165"></a>00165 <span class="stringliteral">         mail CHAR(60) ,</span>
-<a name="l00166"></a>00166 <span class="stringliteral">         telefono CHAR(15)</span>
-<a name="l00167"></a>00167 <span class="stringliteral">         )&quot;</span>;
-<a name="l00168"></a>00168 
-<a name="l00169"></a>00169       <span class="keywordflow">if</span> ( ! $sqlResult = $this-&gt;pdo-&gt;query($SQL) ) {
-<a name="l00170"></a>00170 
-<a name="l00171"></a>00171          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;Error al crear tabla de &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;usuarios\n&quot;</span>.$pdo_error);
-<a name="l00172"></a>00172          <span class="keywordflow">return</span> FALSE;
+<a name="l00004"></a>00004 <span class="comment"> * @file      Array2table.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Pasar contenido de un array a tabla</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  07/05/10</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: Array2table.php 650 2012-10-04 07:17:48Z eduardo $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 <span class="comment"></span>
+<a name="l00018"></a>00018 <span class="comment">/** </span>
+<a name="l00019"></a>00019 <span class="comment"> * Transformar contenido array en tabla html</span>
+<a name="l00020"></a>00020 <span class="comment"> */</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="../../de/d21/a00006.html">00022</a> <span class="keyword">class </span><a class="code" href="../../de/d21/a00006.html" title="Transformar contenido array en tabla html.">Array2table</a> {
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024    <span class="keyword">public</span> <span class="keyword">static</span> $base_imagenes ;                <span class="comment">//&lt; Directorio de imágenes </span>
+<a name="l00025"></a>00025    <span class="keyword">public</span> <span class="keyword">static</span> $img_modificar ;                <span class="comment">//&lt; Imagen para modificación</span>
+<a name="l00026"></a>00026    <span class="keyword">public</span> <span class="keyword">static</span> $img_borrar    ;                <span class="comment">//&lt; Imagen para borrado</span>
+<a name="l00027"></a>00027    <span class="keyword">public</span> <span class="keyword">static</span> $img_ver       ;                <span class="comment">//&lt; Imagen para visualizar detalles</span>
+<a name="l00028"></a>00028    <span class="keyword">public</span> $sufijo               ;                <span class="comment">//&lt; sufijo para añadir a los enlaces</span>
+<a name="l00029"></a>00029 <span class="comment"></span>
+<a name="l00030"></a>00030 <span class="comment">   /**</span>
+<a name="l00031"></a>00031 <span class="comment">    * Constructor</span>
+<a name="l00032"></a>00032 <span class="comment">    *</span>
+<a name="l00033"></a>00033 <span class="comment">    * @param $base_imagenes Directorio donde se encuentran las imágenes desde html </span>
+<a name="l00034"></a>00034 <span class="comment">    *                  </span>
+<a name="l00035"></a>00035 <span class="comment">    */</span>
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="../../de/d21/a00006_ad52b3f27065bd570a2f7cd6ba8bb4ad5.html#ad52b3f27065bd570a2f7cd6ba8bb4ad5">00037</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_ad52b3f27065bd570a2f7cd6ba8bb4ad5.html#ad52b3f27065bd570a2f7cd6ba8bb4ad5" title="Constructor.">__construct</a>($sufijo=<span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039       $this-&gt;sufijo        = $sufijo         ;
+<a name="l00040"></a>00040       self::$img_modificar = <span class="stringliteral">&#39;modificar.png&#39;</span> ;
+<a name="l00041"></a>00041       self::$img_borrar    = <span class="stringliteral">&#39;borrar.png&#39;</span>    ;
+<a name="l00042"></a>00042       self::$img_ver       = <span class="stringliteral">&#39;ver.png&#39;</span>       ;
+<a name="l00043"></a>00043       self::$base_imagenes = <a class="code" href="../../df/d03/a00062_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.GCM_DIR.<span class="stringliteral">&#39;lib/int/array2table/img/&#39;</span>;
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045       }
+<a name="l00046"></a>00046 <span class="comment"></span>
+<a name="l00047"></a>00047 <span class="comment">   /**</span>
+<a name="l00048"></a>00048 <span class="comment">    * Generar tabla.</span>
+<a name="l00049"></a>00049 <span class="comment">    *</span>
+<a name="l00050"></a>00050 <span class="comment">    * - Si un campo se llama &quot;%&quot; se vera de forma grafica su contenido.</span>
+<a name="l00051"></a>00051 <span class="comment">    *</span>
+<a name="l00052"></a>00052 <span class="comment">    * - Los enlaces de las acciones se pasaran mediante $url.$identificador&amp;accion=modificar</span>
+<a name="l00053"></a>00053 <span class="comment">    *   Si se desea cambiar &#39;accion&#39; por otra palabra se puede especificar en opciones.</span>
+<a name="l00054"></a>00054 <span class="comment">    *</span>
+<a name="l00055"></a>00055 <span class="comment">    * </span>
+<a name="l00056"></a>00056 <span class="comment">    * @param $res Array con el contenido</span>
+<a name="l00057"></a>00057 <span class="comment">    *        Formato del array $resultado[0][columna]=valor</span>
+<a name="l00058"></a>00058 <span class="comment">    *</span>
+<a name="l00059"></a>00059 <span class="comment">    * @param $opciones Array con las diferentes opciones:</span>
+<a name="l00060"></a>00060 <span class="comment">    *</span>
+<a name="l00061"></a>00061 <span class="comment">    *     identificador  Nombre columna que hace de identificador&gt;&#39;, por defecto &#39;id&#39;.</span>
+<a name="l00062"></a>00062 <span class="comment">    *     ver            Nombre de la acción para entrar en detalles de un registro&gt;&#39;</span>
+<a name="l00063"></a>00063 <span class="comment">    *     modificar      Nombre de la acción para modificar&gt;&#39;, es necesario tener identificador</span>
+<a name="l00064"></a>00064 <span class="comment">    *     eliminar       Nombre de la acción para eliminar registro&gt;&#39;, Es necesario identificador</span>
+<a name="l00065"></a>00065 <span class="comment">    *     ocultar_id     TRUE/FALSE Ocultar columna de identificador.</span>
+<a name="l00066"></a>00066 <span class="comment">    *     url            Url para enlaces de registro&#39;</span>
+<a name="l00067"></a>00067 <span class="comment">    *     accion         Nombre de variable GET que se pasara en url, por defecto &#39;accion&#39;</span>
+<a name="l00068"></a>00068 <span class="comment">    *     dir_imag       Url del directorio donde se encuentran los iconos modificar, eliminar, etc...</span>
+<a name="l00069"></a>00069 <span class="comment">    *     enlaces        Array con el contenido de los campos que contienen un enlace.</span>
+<a name="l00070"></a>00070 <span class="comment">    *</span>
+<a name="l00071"></a>00071 <span class="comment">    *                    Estructura de ejemplo:</span>
+<a name="l00072"></a>00072 <span class="comment">    *</span>
+<a name="l00073"></a>00073 <span class="comment">    *                    array(&#39;url&#39; =&gt; array(                            // Nombre del campo con el enlace</span>
+<a name="l00074"></a>00074 <span class="comment">    *                                   &#39;campo_enlazado&#39;=&gt;&#39;contenido&#39;     // Nombre del campo que se mostrara en el enlace</span>
+<a name="l00075"></a>00075 <span class="comment">    *                                  ,&#39;titulo_columna&#39;=&gt;&#39;Contenido&#39;     // Titulo de la columna</span>
+<a name="l00076"></a>00076 <span class="comment">    *                                  ,&#39;base_url&#39;=&gt;Router::$base         // Base de la url </span>
+<a name="l00077"></a>00077 <span class="comment">    *                                    )</span>
+<a name="l00078"></a>00078 <span class="comment">    *                                  )</span>
+<a name="l00079"></a>00079 <span class="comment">    *        Importaante:</span>
+<a name="l00080"></a>00080 <span class="comment">    *           Para que funcione correctamente el campo url debe llegar primero desde la sql que el campo al que enlaza</span>
+<a name="l00081"></a>00081 <span class="comment">    *</span>
+<a name="l00082"></a>00082 <span class="comment">    *     $fila_unica   Campo que deseamos que se muestre en una sola fila de la tabla, util para cuando </span>
+<a name="l00083"></a>00083 <span class="comment">    *                   es un campo con mucho texto, sin necesidad de ordenarse por él.</span>
+<a name="l00084"></a>00084 <span class="comment">    * </span>
+<a name="l00085"></a>00085 <span class="comment">    * @param $orden Nombre de la columna por la que se esta ordenando</span>
+<a name="l00086"></a>00086 <span class="comment">    * @param $tipo_orden (asc/desc) </span>
+<a name="l00087"></a>00087 <span class="comment">    */</span>
+<a name="l00088"></a>00088 
+<a name="l00089"></a><a class="code" href="../../de/d21/a00006_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c">00089</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_acedf861480ae281ebbc740b0df8c394c.html#acedf861480ae281ebbc740b0df8c394c" title="Generar tabla.">generar_tabla</a>($res, $opciones=NULL, $orden = FALSE , $tipo_orden = FALSE) {
+<a name="l00090"></a>00090       
+<a name="l00091"></a>00091       $num_registros = count($res);
+<a name="l00092"></a>00092       $num_columnas  = count($res[0]);
+<a name="l00093"></a>00093 <span class="comment"></span>
+<a name="l00094"></a>00094 <span class="comment">      /** Se presenta en una sola fila, para permitir gran cantidad de datos */</span>
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096       $salida_fila_unica = FALSE ;
+<a name="l00097"></a>00097 <span class="comment"></span>
+<a name="l00098"></a>00098 <span class="comment">      /** Identificador htnl de la tabla, añadiremos id=&quot;$table_id&quot; Para distinguirlas*/</span>
+<a name="l00099"></a>00099       $table_id      = ( isset($opciones[<span class="stringliteral">&#39;table_id&#39;</span>]))      ? $opciones[<span class="stringliteral">&#39;table_id&#39;</span>]      : FALSE ;
+<a name="l00100"></a>00100 <span class="comment"></span>
+<a name="l00101"></a>00101 <span class="comment">      /** url base para enlaces */</span>
+<a name="l00102"></a>00102       $url           = ( isset($opciones[<span class="stringliteral">&#39;url&#39;</span>]))           ? $opciones[<span class="stringliteral">&#39;url&#39;</span>]           : FALSE ;
+<a name="l00103"></a>00103 <span class="comment"></span>
+<a name="l00104"></a>00104 <span class="comment">      /** Nombre de variable get que lleva la acción */</span>
+<a name="l00105"></a>00105       $accion        = ( isset($opciones[<span class="stringliteral">&#39;accion&#39;</span>]))        ? $opciones[<span class="stringliteral">&#39;accion&#39;</span>]        : FALSE ;
+<a name="l00106"></a>00106 <span class="comment"></span>
+<a name="l00107"></a>00107 <span class="comment">      /** identificador base para enlaces */</span>
+<a name="l00108"></a>00108       $identificador = ( isset($opciones[<span class="stringliteral">&#39;identificador&#39;</span>])) ? $opciones[<span class="stringliteral">&#39;identificador&#39;</span>] : FALSE ;
+<a name="l00109"></a>00109 <span class="comment"></span>
+<a name="l00110"></a>00110 <span class="comment">      /** ver base para enlaces */</span>
+<a name="l00111"></a>00111       $ver           = ( isset($opciones[<span class="stringliteral">&#39;ver&#39;</span>]))           ? $opciones[<span class="stringliteral">&#39;ver&#39;</span>]           : FALSE ;
+<a name="l00112"></a>00112 <span class="comment"></span>
+<a name="l00113"></a>00113 <span class="comment">      /** modificar base para enlaces */</span>
+<a name="l00114"></a>00114       $modificar     = ( isset($opciones[<span class="stringliteral">&#39;modificar&#39;</span>]))     ? $opciones[<span class="stringliteral">&#39;modificar&#39;</span>]     : FALSE ;
+<a name="l00115"></a>00115 <span class="comment"></span>
+<a name="l00116"></a>00116 <span class="comment">      /** eliminar base para enlaces */</span>
+<a name="l00117"></a>00117       $eliminar      = ( isset($opciones[<span class="stringliteral">&#39;eliminar&#39;</span>]))      ? $opciones[<span class="stringliteral">&#39;eliminar&#39;</span>]      : FALSE ;
+<a name="l00118"></a>00118 <span class="comment"></span>
+<a name="l00119"></a>00119 <span class="comment">      /** ocultar_id base para enlaces */</span>
+<a name="l00120"></a>00120       $ocultar_id    = ( isset($opciones[<span class="stringliteral">&#39;ocultar_id&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;ocultar_id&#39;</span>]    : FALSE ;
+<a name="l00121"></a>00121 <span class="comment"></span>
+<a name="l00122"></a>00122 <span class="comment">      /** Generar colgroup en la cabecera de la tabla */</span>
+<a name="l00123"></a>00123       $colgroup    = ( isset($opciones[<span class="stringliteral">&#39;colgroup&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;colgroup&#39;</span>]    : FALSE ;
+<a name="l00124"></a>00124 <span class="comment"></span>
+<a name="l00125"></a>00125 <span class="comment">      /** Url del directorio de los iconos */</span>
+<a name="l00126"></a>00126       self::$base_imagenes = ( isset($opciones[<span class="stringliteral">&#39;dir_img&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;dir_img&#39;</span>]    : self::$base_imagenes ;
+<a name="l00127"></a>00127 <span class="comment"></span>
+<a name="l00128"></a>00128 <span class="comment">      /** Enlaces definidos desde opciones */</span>
+<a name="l00129"></a>00129       $enlaces = ( isset($opciones[<span class="stringliteral">&#39;enlaces&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;enlaces&#39;</span>]    : FALSE ;
+<a name="l00130"></a>00130 <span class="comment"></span>
+<a name="l00131"></a>00131 <span class="comment">      /** Campos que se desean mostrar en una sola fila */</span>
+<a name="l00132"></a>00132       $fila_unica = ( isset($opciones[<span class="stringliteral">&#39;fila_unica&#39;</span>]))    ? $opciones[<span class="stringliteral">&#39;fila_unica&#39;</span>]    : FALSE ;
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134       <span class="comment">/* Si no se indica el campo identificador cogemos id por defecto */</span>
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136       $identificador = ( $identificador ) ? $identificador : <span class="stringliteral">&#39;id&#39;</span>;
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138       $simbolo = ( strrpos($url,<span class="charliteral">&#39;?&#39;</span>) === FALSE ) ? <span class="charliteral">&#39;?&#39;</span> : <span class="charliteral">&#39;&amp;&#39;</span>;        <span class="comment">//&lt; Evitar colocar dos veces el interrogante en la url</span>
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140       ?&gt;
+<a name="l00141"></a>00141          &lt;table cellpadding=<span class="stringliteral">&quot;0&quot;</span> cellspacing=<span class="stringliteral">&quot;0&quot;</span> border=<span class="stringliteral">&quot;0&quot;</span> &lt;?php <span class="keywordflow">if</span> ( $table_id ) echo <span class="stringliteral">&#39;id=&quot;&#39;</span>.$table_id.<span class="charliteral">&#39;&quot;&#39;</span>;?&gt; <span class="keyword">class</span>=<span class="stringliteral">&quot;dataTable&quot;</span>&gt;
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143          &lt;?php <span class="comment">// Elementos colgroup nos permite modificar presentación por columnas ?&gt;</span>
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145          &lt;?php <span class="keywordflow">if</span> ( $colgroup ) { ?&gt;
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147             &lt;colgroup&gt;
+<a name="l00148"></a>00148             &lt;?php <span class="keywordflow">foreach</span> ( $res[0] as $columna =&gt; $valor ) { ?&gt;
+<a name="l00149"></a>00149             &lt;?php <span class="keywordflow">if</span> ( $columna == $identificador  &amp;&amp; $ocultar_id ) <span class="keywordflow">continue</span>; ?&gt;
+<a name="l00150"></a>00150             &lt;col <span class="keywordtype">id</span>=<span class="stringliteral">&quot;col_&lt;?php echo htmlspecialchars($columna,ENT_QUOTES);?&gt;&quot;</span>&gt; 
+<a name="l00151"></a>00151             &lt;?php } ?&gt;
+<a name="l00152"></a>00152             &lt;/colgroup&gt;
+<a name="l00153"></a>00153 
+<a name="l00154"></a>00154          &lt;?php } ?&gt;
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156          &lt;thead&gt;
+<a name="l00157"></a>00157             &lt;tr&gt;
+<a name="l00158"></a>00158       &lt;?php
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160       <span class="keywordflow">if</span> ( $res ) {
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162          <span class="keywordflow">foreach</span> ( $res[0] as $columna =&gt; $valor ) {         <span class="comment">// Encabezado de tabla</span>
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164             <span class="comment">/* Columna de identificador sin ordenación</span>
+<a name="l00165"></a>00165 <span class="comment"></span>
+<a name="l00166"></a>00166 <span class="comment">            if ( $columna == $identificador  ) {</span>
+<a name="l00167"></a>00167 <span class="comment">               $clase=&quot; class=&#39;nosort&#39;&quot;;</span>
+<a name="l00168"></a>00168 <span class="comment">            } else {</span>
+<a name="l00169"></a>00169 <span class="comment">               $clase=NULL;</span>
+<a name="l00170"></a>00170 <span class="comment">               }</span>
+<a name="l00171"></a>00171 <span class="comment"></span>
+<a name="l00172"></a>00172 <span class="comment">             */</span>
 <a name="l00173"></a>00173 
-<a name="l00174"></a>00174          }
+<a name="l00174"></a>00174             <span class="keywordflow">if</span> ( $columna == $identificador  &amp;&amp; $ocultar_id ) <span class="keywordflow">continue</span>;
 <a name="l00175"></a>00175 
-<a name="l00176"></a>00176       $this-&gt;<a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>();
+<a name="l00176"></a>00176             $clase = ( $columna == $orden ) ? <span class="stringliteral">&#39; class=&quot;&#39;</span>.$tipo_orden.<span class="stringliteral">&#39;&quot; &#39;</span> : <span class="stringliteral">&#39; class=&quot;head&quot; &#39;</span>;
 <a name="l00177"></a>00177 
-<a name="l00178"></a>00178       }
-<a name="l00179"></a>00179 <span class="comment"></span>
-<a name="l00180"></a>00180 <span class="comment">   /**</span>
-<a name="l00181"></a>00181 <span class="comment">    * entrar</span>
-<a name="l00182"></a>00182 <span class="comment">    *</span>
-<a name="l00183"></a>00183 <span class="comment">    * Se pide autentificación para usuario, hay que comprobar que este registrado.</span>
-<a name="l00184"></a>00184 <span class="comment">    *</span>
-<a name="l00185"></a>00185 <span class="comment">    * @param usuario Nombre de usuario</span>
-<a name="l00186"></a>00186 <span class="comment">    * @param pass    Contraseña de usuario</span>
-<a name="l00187"></a>00187 <span class="comment">    */</span>
+<a name="l00178"></a>00178             if ( $columna == $orden ) {
+<a name="l00179"></a>00179 
+<a name="l00180"></a>00180                $tipo_orden2 = ( $tipo_orden == <span class="stringliteral">&#39;asc&#39;</span> ) ? <span class="stringliteral">&#39;desc&#39;</span> : <span class="stringliteral">&#39;asc&#39;</span>;
+<a name="l00181"></a>00181             } <span class="keywordflow">else</span> {
+<a name="l00182"></a>00182                $tipo_orden2 = <span class="stringliteral">&#39;asc&#39;</span>;
+<a name="l00183"></a>00183                }
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185             $url_orden = <a class="code" href="../../d4/d13/a00377_gab8443697c2560d5e86b5f6014a22864e.html#gab8443697c2560d5e86b5f6014a22864e" title="Generamos url segun las variables de GET que ya tenemos.">construir_get</a>( array ($this-&gt;sufijo.<span class="stringliteral">&#39;orden&#39;</span> =&gt; $columna
+<a name="l00186"></a>00186                , $this-&gt;sufijo.<span class="stringliteral">&#39;tipo_orden&#39;</span> =&gt; $tipo_orden2
+<a name="l00187"></a>00187                , $this-&gt;sufijo.<span class="stringliteral">&#39;pagina&#39;</span> =&gt; 1)) ;
 <a name="l00188"></a>00188 
-<a name="l00189"></a><a class="code" href="../../de/d21/a00006_ad54d6ca833d286d08529b363cfc55844.html#ad54d6ca833d286d08529b363cfc55844">00189</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_ad54d6ca833d286d08529b363cfc55844.html#ad54d6ca833d286d08529b363cfc55844" title="entrar">entrar</a>($usuario, $pass) {
-<a name="l00190"></a>00190 
-<a name="l00191"></a>00191       global $_SESSION;
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193       $sql = <span class="stringliteral">&quot;SELECT id, usuario FROM &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;usuarios WHERE usuario=? AND pass_md5=? LIMIT 1&quot;</span>;
-<a name="l00194"></a>00194       $comando = $this-&gt;pdo-&gt;prepare($sql);
-<a name="l00195"></a>00195       <span class="keywordflow">if</span> ( ! $comando-&gt;execute(array($usuario, md5($pass)) ) ) {
-<a name="l00196"></a>00196          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00197"></a>00197          $men_error = $err[2];
-<a name="l00198"></a>00198          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al insertar registro: &#39;</span>.$men_error);
-<a name="l00199"></a>00199          }
-<a name="l00200"></a>00200 
-<a name="l00201"></a>00201       $retorno = $comando-&gt;fetchAll(PDO::FETCH_NUM);
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203       <span class="keywordflow">if</span> (!$comando) {
+<a name="l00189"></a>00189             <span class="keywordflow">if</span> ( $enlaces &amp;&amp; isset($enlaces[$columna]) ) {
+<a name="l00190"></a>00190                $titulo_columna = $enlaces[$columna][<span class="stringliteral">&#39;titulo_columna&#39;</span>];
+<a name="l00191"></a>00191                $campo_enlazado = $enlaces[$columna][<span class="stringliteral">&#39;campo_enlazado&#39;</span>];
+<a name="l00192"></a>00192                $enlaces_iniciados[] = $campo_enlazado;
+<a name="l00193"></a>00193             } elseif ( isset($enlaces_iniciados) &amp;&amp; in_array($columna, $enlaces_iniciados) ) {
+<a name="l00194"></a>00194                $num_columnas--;
+<a name="l00195"></a>00195                <span class="keywordflow">continue</span>;
+<a name="l00196"></a>00196             } elseif ( isset($fila_unica) &amp;&amp; $fila_unica == $columna ) {
+<a name="l00197"></a>00197                <span class="comment">// Si es un campo que se desea presentar en una sola linea de la tabla</span>
+<a name="l00198"></a>00198                <span class="comment">// no se debe mostrar su cabecera</span>
+<a name="l00199"></a>00199                $num_columnas--;
+<a name="l00200"></a>00200                <span class="keywordflow">continue</span>;
+<a name="l00201"></a>00201             } <span class="keywordflow">else</span> {
+<a name="l00202"></a>00202                $titulo_columna = $columna;
+<a name="l00203"></a>00203                }
 <a name="l00204"></a>00204 
-<a name="l00205"></a>00205          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00206"></a>00206          $men_error = $err[2];
-<a name="l00207"></a>00207          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error ejecutando query: &#39;</span>.$men_error. <span class="stringliteral">&#39; sql: &#39;</span>.$consulta);
-<a name="l00208"></a>00208          <span class="keywordflow">return</span> FALSE;
-<a name="l00209"></a>00209 
-<a name="l00210"></a>00210       } elseif ( count($retorno) &lt; 1 ) {
-<a name="l00211"></a>00211 
-<a name="l00212"></a>00212          $this-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&#39;Usuario o contraseña incorrecta&#39;</span>,<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00205"></a>00205             echo <span class="stringliteral">&quot;\n\t\t\t&quot;</span>;
+<a name="l00206"></a>00206             echo <span class="stringliteral">&quot;&lt;th&quot;</span>.$clase.<span class="stringliteral">&quot;&gt;&quot;</span>;
+<a name="l00207"></a>00207             <span class="keywordflow">if</span> ( $url ) echo <span class="stringliteral">&quot;&lt;a href=&#39;&quot;</span>.htmlspecialchars($url_orden,ENT_QUOTES).<span class="stringliteral">&quot;&#39;&gt;&quot;</span>;
+<a name="l00208"></a>00208             echo <span class="stringliteral">&quot;&lt;h3&gt;&quot;</span>;
+<a name="l00209"></a>00209             echo $titulo_columna;
+<a name="l00210"></a>00210             echo <span class="stringliteral">&quot;&lt;/h3&gt;&quot;</span>;
+<a name="l00211"></a>00211             <span class="keywordflow">if</span> ( $url ) echo <span class="stringliteral">&quot;&lt;/a&gt;&quot;</span>;
+<a name="l00212"></a>00212             echo <span class="stringliteral">&quot;&lt;/th&gt;&quot;</span>;
 <a name="l00213"></a>00213 
-<a name="l00214"></a>00214          <span class="keywordflow">return</span> FALSE;
+<a name="l00214"></a>00214             }
 <a name="l00215"></a>00215 
 <a name="l00216"></a>00216          }
 <a name="l00217"></a>00217 
-<a name="l00218"></a>00218       list($id,$usuario) = $retorno[0];
-<a name="l00219"></a>00219 
-<a name="l00220"></a>00220       <span class="comment">// Buscamos roles de usuario</span>
-<a name="l00221"></a>00221       
-<a name="l00222"></a>00222       $sql = <span class="stringliteral">&quot;SELECT r.nombre FROM &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;roles r LEFT JOIN &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;r_usuarios_roles rur ON rur.roles_id=r.id WHERE rur.usuarios_id=?&quot;</span>;
-<a name="l00223"></a>00223       $comando = $this-&gt;pdo-&gt;prepare($sql);
-<a name="l00224"></a>00224 
-<a name="l00225"></a>00225       <span class="keywordflow">if</span> ( ! $comando-&gt;execute(array($id)) ) {
-<a name="l00226"></a>00226          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00227"></a>00227          $men_error = $err[2];
-<a name="l00228"></a>00228          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al insertar registro: &#39;</span>.$men_error);
+<a name="l00218"></a>00218       <span class="keywordflow">if</span> ( $ver ) {
+<a name="l00219"></a>00219          $num_columnas++;
+<a name="l00220"></a>00220          ?&gt;
+<a name="l00221"></a>00221          &lt;th&gt;
+<a name="l00222"></a>00222             &lt;h3&gt;
+<a name="l00223"></a>00223                &lt;img src=<span class="stringliteral">&#39;&lt;?=self::$base_imagenes.self::$img_ver?&gt;&#39;</span>
+<a name="l00224"></a>00224                width=<span class="stringliteral">&#39;16&#39;</span> height=<span class="stringliteral">&#39;16&#39;</span> border=<span class="charliteral">&#39;0&#39;</span> title=<span class="stringliteral">&#39;Visualizar&#39;</span> 
+<a name="l00225"></a>00225                alt=<span class="stringliteral">&#39;[*]&#39;</span> /&gt;
+<a name="l00226"></a>00226             &lt;/h3&gt;
+<a name="l00227"></a>00227          &lt;/th&gt;
+<a name="l00228"></a>00228          &lt;?php
 <a name="l00229"></a>00229          }
 <a name="l00230"></a>00230 
-<a name="l00231"></a>00231       $retorno = $comando-&gt;fetchAll(PDO::FETCH_NUM);
-<a name="l00232"></a>00232 
-<a name="l00233"></a>00233       <span class="keywordflow">if</span> (!$comando) {
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00236"></a>00236          $men_error = $err[2];
-<a name="l00237"></a>00237          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error ejecutando query: &#39;</span>.$men_error. <span class="stringliteral">&#39; sql: &#39;</span>.$consulta);
-<a name="l00238"></a>00238          <span class="keywordflow">return</span> FALSE;
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240       } elseif ( count($retorno) &lt; 1 ) {
-<a name="l00241"></a>00241 
-<a name="l00242"></a>00242          <span class="comment">// Si es un usuario sin rol le adjudicamos el de usuario que es el mínimo.</span>
-<a name="l00243"></a>00243          $roles[] = <span class="stringliteral">&#39;usuario&#39;</span>;
-<a name="l00244"></a>00244 
-<a name="l00245"></a>00245       } <span class="keywordflow">else</span> {
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247          <span class="keywordflow">foreach</span> ( $retorno as $rol ) {
-<a name="l00248"></a>00248             $roles[] = $rol[0];
-<a name="l00249"></a>00249             }
-<a name="l00250"></a>00250          }
-<a name="l00251"></a>00251 
-<a name="l00252"></a>00252       <span class="comment">/* Cramos sessión para usuario */</span>
-<a name="l00253"></a>00253 
-<a name="l00254"></a>00254       $_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>] = $id;
-<a name="l00255"></a>00255       $_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_usario&#39;</span>] = $usuario;
-<a name="l00256"></a>00256       $_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>] = serialize($roles);
-<a name="l00257"></a>00257 
-<a name="l00258"></a>00258       <span class="keywordflow">return</span> TRUE;
-<a name="l00259"></a>00259 
-<a name="l00260"></a>00260       }
-<a name="l00261"></a>00261 <span class="comment"></span>
-<a name="l00262"></a>00262 <span class="comment">   /**</span>
-<a name="l00263"></a>00263 <span class="comment">    * logeado</span>
-<a name="l00264"></a>00264 <span class="comment">    *</span>
-<a name="l00265"></a>00265 <span class="comment">    * Comprobar que se esta logeado</span>
-<a name="l00266"></a>00266 <span class="comment">    */</span>
-<a name="l00267"></a>00267 
-<a name="l00268"></a><a class="code" href="../../de/d21/a00006_aa2da21e35438b304d35187baf13668fc.html#aa2da21e35438b304d35187baf13668fc">00268</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_aa2da21e35438b304d35187baf13668fc.html#aa2da21e35438b304d35187baf13668fc" title="logeado">logeado</a>() {
-<a name="l00269"></a>00269 
-<a name="l00270"></a>00270        global $_SESSION;
+<a name="l00231"></a>00231       <span class="keywordflow">if</span> ( $modificar ) {
+<a name="l00232"></a>00232          $num_columnas++;
+<a name="l00233"></a>00233          ?&gt;
+<a name="l00234"></a>00234          &lt;th&gt;
+<a name="l00235"></a>00235             &lt;h3&gt;
+<a name="l00236"></a>00236                &lt;img src=<span class="stringliteral">&#39;&lt;?=self::$base_imagenes.self::$img_modificar?&gt;&#39;</span>
+<a name="l00237"></a>00237                width=<span class="stringliteral">&#39;16&#39;</span> height=<span class="stringliteral">&#39;16&#39;</span> border=<span class="charliteral">&#39;0&#39;</span> title=<span class="stringliteral">&#39;Modificar&#39;</span> 
+<a name="l00238"></a>00238                alt=<span class="stringliteral">&#39;[#]&#39;</span> /&gt;
+<a name="l00239"></a>00239             &lt;/h3&gt;
+<a name="l00240"></a>00240          &lt;/th&gt;
+<a name="l00241"></a>00241          &lt;?php
+<a name="l00242"></a>00242          }
+<a name="l00243"></a>00243 
+<a name="l00244"></a>00244       <span class="keywordflow">if</span> ( $eliminar ) {
+<a name="l00245"></a>00245          $num_columnas++;
+<a name="l00246"></a>00246          ?&gt;
+<a name="l00247"></a>00247          &lt;th&gt;
+<a name="l00248"></a>00248             &lt;h3&gt;
+<a name="l00249"></a>00249                &lt;img src=<span class="stringliteral">&#39;&lt;?=self::$base_imagenes.self::$img_borrar?&gt;&#39;</span>
+<a name="l00250"></a>00250                width=<span class="stringliteral">&#39;16&#39;</span> height=<span class="stringliteral">&#39;16&#39;</span> border=<span class="charliteral">&#39;0&#39;</span> title=<span class="stringliteral">&#39;Eliminar&#39;</span> 
+<a name="l00251"></a>00251                alt=<span class="stringliteral">&#39;[-]&#39;</span> /&gt;
+<a name="l00252"></a>00252             &lt;/h3&gt;
+<a name="l00253"></a>00253          &lt;/th&gt;
+<a name="l00254"></a>00254          &lt;?php
+<a name="l00255"></a>00255          }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257       <span class="comment">//echo &quot;\n\t\t&lt;/tr&gt;&quot;;</span>
+<a name="l00258"></a>00258       echo <span class="stringliteral">&quot;\n\t&lt;/thead&gt;&quot;</span>;
+<a name="l00259"></a>00259       echo <span class="stringliteral">&quot;\n\t&lt;tbody&gt;&quot;</span>;
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261       $fpi = <span class="stringliteral">&#39;evenrow&#39;</span>;
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263       <span class="keywordflow">foreach</span> ( $res as $fila ) {          <span class="comment">// filas del body de la tabla</span>
+<a name="l00264"></a>00264 
+<a name="l00265"></a>00265          $enlace = FALSE;
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267          echo <span class="stringliteral">&quot;\n\t\t&lt;tr class=&#39;&quot;</span>.$fpi.<span class="stringliteral">&quot;&#39;&gt;&quot;</span>;
+<a name="l00268"></a>00268 
+<a name="l00269"></a>00269          $col = 0;
+<a name="l00270"></a>00270          <span class="keywordflow">foreach</span> ( $fila as $key_columna =&gt; $columna ) {       <span class="comment">// columnas</span>
 <a name="l00271"></a>00271 
-<a name="l00272"></a>00272        <span class="keywordflow">return</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]) ) ? $_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>] : FALSE ;
-<a name="l00273"></a>00273 
-<a name="l00274"></a>00274       }
-<a name="l00275"></a>00275 <span class="comment"></span>
-<a name="l00276"></a>00276 <span class="comment">   /**</span>
-<a name="l00277"></a>00277 <span class="comment">    * es_admin</span>
-<a name="l00278"></a>00278 <span class="comment">    *</span>
-<a name="l00279"></a>00279 <span class="comment">    * Comprobar si tiene permisos de administración</span>
-<a name="l00280"></a>00280 <span class="comment">    *</span>
-<a name="l00281"></a>00281 <span class="comment">    * @return TRUE/FALSE</span>
-<a name="l00282"></a>00282 <span class="comment">    */</span>
+<a name="l00272"></a>00272             $col++;
+<a name="l00273"></a>00273             <span class="comment">// Si estamos en la columna que ordena añadimos clase especial</span>
+<a name="l00274"></a>00274 
+<a name="l00275"></a>00275             $clase_columna =  ( $key_columna == $orden ) ? <span class="stringliteral">&#39; class=&quot;col_&#39;</span>.$col.<span class="stringliteral">&#39; oddselected&quot; &#39;</span> : <span class="stringliteral">&#39; class=&quot;col_&#39;</span>.$col.<span class="charliteral">&#39;&quot;&#39;</span> ;
+<a name="l00276"></a>00276 
+<a name="l00277"></a>00277             <span class="comment">/* Si estamos en la columna id definimos enlaces hacia el elemento */</span>
+<a name="l00278"></a>00278 
+<a name="l00279"></a>00279             if ( $identificador &amp;&amp; $key_columna == $identificador &amp;&amp; $url ) {
+<a name="l00280"></a>00280 
+<a name="l00281"></a>00281                <span class="comment">/* Añadimos identificador a url */</span>
+<a name="l00282"></a>00282                $enlace = $url.$columna;
 <a name="l00283"></a>00283 
-<a name="l00284"></a><a class="code" href="../../de/d21/a00006_a8e468a825ddd6494c37ed14e98cab43e.html#a8e468a825ddd6494c37ed14e98cab43e">00284</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a8e468a825ddd6494c37ed14e98cab43e.html#a8e468a825ddd6494c37ed14e98cab43e" title="es_admin">es_admin</a>() {
+<a name="l00284"></a>00284                }
 <a name="l00285"></a>00285 
-<a name="l00286"></a>00286       <span class="keywordflow">if</span> ( ! isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]) ) <span class="keywordflow">return</span> FALSE;
+<a name="l00286"></a>00286             <span class="comment">/* Si tenemos columna con % Añadimos efecto visual para representarlo */</span>
 <a name="l00287"></a>00287 
-<a name="l00288"></a>00288       $roles = unserialize($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]);
-<a name="l00289"></a>00289 
-<a name="l00290"></a>00290       <span class="keywordflow">return</span> in_array(<span class="stringliteral">&#39;administrador&#39;</span>,$roles) ;
+<a name="l00288"></a>00288             <span class="keywordflow">if</span> ( $key_columna == $identificador  &amp;&amp; $ocultar_id ) { <span class="comment">// id oculto</span>
+<a name="l00289"></a>00289                $col--;
+<a name="l00290"></a>00290                echo <span class="stringliteral">&#39;&#39;</span>; 
 <a name="l00291"></a>00291 
-<a name="l00292"></a>00292       }
-<a name="l00293"></a>00293 <span class="comment"></span>
-<a name="l00294"></a>00294 <span class="comment">   /** Identificador de usuario</span>
-<a name="l00295"></a>00295 <span class="comment">    *</span>
-<a name="l00296"></a>00296 <span class="comment">    * Devolvemos el identificador de usuario actual</span>
-<a name="l00297"></a>00297 <span class="comment">    *</span>
-<a name="l00298"></a>00298 <span class="comment">    */</span>
-<a name="l00299"></a>00299 
-<a name="l00300"></a><a class="code" href="../../de/d21/a00006_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d">00300</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d" title="Identificador de usuario.">id</a>() {
-<a name="l00301"></a>00301       <span class="keywordflow">return</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]) ) ? $_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]: FALSE ;
-<a name="l00302"></a>00302       }
-<a name="l00303"></a>00303 <span class="comment"></span>
-<a name="l00304"></a>00304 <span class="comment">   /** </span>
-<a name="l00305"></a>00305 <span class="comment">    * Devolvemos array con roles de usuario</span>
-<a name="l00306"></a>00306 <span class="comment">    */</span>
-<a name="l00307"></a>00307 
-<a name="l00308"></a><a class="code" href="../../de/d21/a00006_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99">00308</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99" title="Devolvemos array con roles de usuario.">roles_usuario</a>() {
-<a name="l00309"></a>00309 
-<a name="l00310"></a>00310       <span class="keywordflow">if</span> ( ! isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]) ) <span class="keywordflow">return</span> FALSE;
-<a name="l00311"></a>00311 
-<a name="l00312"></a>00312       <span class="keywordflow">return</span> unserialize($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]);
-<a name="l00313"></a>00313 
-<a name="l00314"></a>00314       }
-<a name="l00315"></a>00315 <span class="comment"></span>
-<a name="l00316"></a>00316 <span class="comment">   /**</span>
-<a name="l00317"></a>00317 <span class="comment">    * Roles de acción</span>
-<a name="l00318"></a>00318 <span class="comment">    *</span>
-<a name="l00319"></a>00319 <span class="comment">    * Devolver array con los roles de la acción</span>
-<a name="l00320"></a>00320 <span class="comment">    *</span>
-<a name="l00321"></a>00321 <span class="comment">    * @param $accion Acción</span>
-<a name="l00322"></a>00322 <span class="comment">    */</span>
-<a name="l00323"></a>00323 
-<a name="l00324"></a><a class="code" href="../../de/d21/a00006_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48">00324</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48" title="Roles de acción.">roles_accion</a>($accion) {
-<a name="l00325"></a>00325 
-<a name="l00326"></a>00326       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00327"></a>00327 
-<a name="l00328"></a>00328       <span class="keywordflow">if</span> ( isset($this-&gt;acciones[$accion]) ) <span class="keywordflow">return</span> $this-&gt;acciones[$accion];
+<a name="l00292"></a>00292             } elseif ( $enlaces &amp;&amp; isset($enlaces[$key_columna]) ) {
+<a name="l00293"></a>00293                $DATO=trim($columna);
+<a name="l00294"></a>00294                $campo_enlazado = $enlaces[$key_columna][<span class="stringliteral">&#39;campo_enlazado&#39;</span>];
+<a name="l00295"></a>00295                $enlaces_creados[$campo_enlazado][<span class="stringliteral">&#39;inicio&#39;</span>] = sprintf(<span class="stringliteral">&quot;\n\t\t\t&lt;td %s&gt;&lt;a href=&#39;%s%s&#39;&gt;&quot;</span>,$clase_columna,$enlaces[$key_columna][<span class="stringliteral">&#39;base_url&#39;</span>],$DATO);
+<a name="l00296"></a>00296                <span class="keywordflow">if</span> ( isset($enlaces_creados[$campo_enlazado][<span class="stringliteral">&#39;inicio&#39;</span>]) &amp;&amp; isset($enlaces_creados[$campo_enlazado][<span class="stringliteral">&#39;final&#39;</span>]) ) 
+<a name="l00297"></a>00297                   echo $enlaces_creados[$campo_enlazado][<span class="stringliteral">&#39;inicio&#39;</span>].$enlaces_creados[$campo_enlazado][<span class="stringliteral">&#39;final&#39;</span>];
+<a name="l00298"></a>00298 
+<a name="l00299"></a>00299             } elseif ( isset($enlaces_creados[$key_columna]) ) {
+<a name="l00300"></a>00300                $DATO=trim($columna);
+<a name="l00301"></a>00301                $clave_enlace = $key_columna;
+<a name="l00302"></a>00302                $enlaces_creados[$clave_enlace][<span class="stringliteral">&#39;final&#39;</span>] = sprintf(<span class="stringliteral">&quot;%s&lt;/a&gt;&lt;/td&gt;&quot;</span>,$DATO);
+<a name="l00303"></a>00303                <span class="keywordflow">if</span> ( isset($enlaces_creados[$clave_enlace][<span class="stringliteral">&#39;inicio&#39;</span>]) &amp;&amp; isset($enlaces_creados[$clave_enlace][<span class="stringliteral">&#39;final&#39;</span>]) ) 
+<a name="l00304"></a>00304                   echo $enlaces_creados[$clave_enlace][<span class="stringliteral">&#39;inicio&#39;</span>].$enlaces_creados[$clave_enlace][<span class="stringliteral">&#39;final&#39;</span>];
+<a name="l00305"></a>00305 
+<a name="l00306"></a>00306             } elseif ( isset($fila_unica) &amp;&amp; $fila_unica == $key_columna ) {
+<a name="l00307"></a>00307                $DATO=trim($columna);
+<a name="l00308"></a>00308                $salida_fila_unica .= sprintf(<span class="stringliteral">&quot;\n\t\t&lt;tr&gt;&lt;td colspan=&#39;%s&#39; %s&gt;%s&lt;/td&gt;&lt;/tr&gt;&quot;</span>,$num_columnas,$clase_columna,$DATO);
+<a name="l00309"></a>00309                
+<a name="l00310"></a>00310             } elseif ($key_columna == <span class="stringliteral">&quot;img&quot;</span> ) {
+<a name="l00311"></a>00311                $DATO=trim($columna);
+<a name="l00312"></a>00312                printf(<span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot;&gt; &lt;img width=&#39;60px&#39; src=&#39;%s&#39; /&gt;&lt;/td&gt;&quot;</span>,$DATO);
+<a name="l00313"></a>00313                
+<a name="l00314"></a>00314             } elseif ($key_columna == <span class="stringliteral">&quot;%&quot;</span>) {
+<a name="l00315"></a>00315                $DATO=trim($columna);
+<a name="l00316"></a>00316                printf(<span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot; style=&#39;border:0;&#39;&gt; &lt;div style=&#39;background-color: #5db02d; width: \</span>
+<a name="l00317"></a>00317 <span class="stringliteral">               %spx&#39;&gt;%s&lt;/div&gt;&lt;/td&gt;&quot;</span>,$DATO,$DATO,$DATO);
+<a name="l00318"></a>00318                
+<a name="l00319"></a>00319             } <span class="keywordflow">else</span> {
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321                <span class="keywordflow">if</span> ( $enlace ) {
+<a name="l00322"></a>00322                   echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot;&gt;&quot;</span>;
+<a name="l00323"></a>00323                   echo <span class="stringliteral">&quot;&lt;a href=&#39;&quot;</span>.$enlace.<span class="stringliteral">&quot;&#39;&gt;&quot;</span>;
+<a name="l00324"></a>00324                   echo $columna;
+<a name="l00325"></a>00325                   echo <span class="stringliteral">&quot;&lt;/a&gt;&lt;/td&gt; &quot;</span> ;
+<a name="l00326"></a>00326                } <span class="keywordflow">else</span> {
+<a name="l00327"></a>00327                   echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&quot;</span>.$clase_columna.<span class="stringliteral">&quot;&gt;&quot;</span>.$columna.<span class="stringliteral">&quot;&lt;/td&gt; &quot;</span> ;
+<a name="l00328"></a>00328                   }
 <a name="l00329"></a>00329 
-<a name="l00330"></a>00330       <span class="keywordflow">return</span> FALSE;
+<a name="l00330"></a>00330                }
 <a name="l00331"></a>00331 
-<a name="l00332"></a>00332       }
-<a name="l00333"></a>00333 <span class="comment"></span>
-<a name="l00334"></a>00334 <span class="comment">   /**</span>
-<a name="l00335"></a>00335 <span class="comment">    * Comprobar permiso para usuario segun accion a realizar</span>
-<a name="l00336"></a>00336 <span class="comment">    *</span>
-<a name="l00337"></a>00337 <span class="comment">    * @param $accion Accion a realizar</span>
-<a name="l00338"></a>00338 <span class="comment">    */</span>
-<a name="l00339"></a>00339 
-<a name="l00340"></a><a class="code" href="../../de/d21/a00006_a150138f49806ca23b5c5633e33c7271a.html#a150138f49806ca23b5c5633e33c7271a">00340</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_a150138f49806ca23b5c5633e33c7271a.html#a150138f49806ca23b5c5633e33c7271a" title="Comprobar permiso para usuario segun accion a realizar.">permiso</a>($accion) {
-<a name="l00341"></a>00341 
-<a name="l00342"></a>00342       global <a class="code" href="../../d4/d63/a00082_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00343"></a>00343 
-<a name="l00344"></a>00344       $usuario_id    = $this-&gt;<a class="code" href="../../de/d21/a00006_a087060b582403885d08e89ad894ecc5d.html#a087060b582403885d08e89ad894ecc5d" title="Identificador de usuario.">id</a>();
-<a name="l00345"></a>00345 
-<a name="l00346"></a>00346       <span class="comment">// Si no hay identificador de usuario salimos</span>
-<a name="l00347"></a>00347 
-<a name="l00348"></a>00348       <span class="keywordflow">if</span> ( ! $usuario_id ) <span class="keywordflow">return</span> FALSE;
+<a name="l00332"></a>00332             }
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334          <span class="keywordflow">if</span> ($enlace)  {
+<a name="l00335"></a>00335 
+<a name="l00336"></a>00336             <span class="keywordflow">if</span> ( $modificar ) {
+<a name="l00337"></a>00337                echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&gt;&lt;a href=&#39;$enlace&amp;$accion=&quot;</span>.$modificar.<span class="stringliteral">&quot;&#39;&gt;</span>
+<a name="l00338"></a>00338 <span class="stringliteral">               &lt;img src=&#39;&quot;</span>.self::$base_imagenes.self::$img_modificar.<span class="stringliteral">&quot;&#39;</span>
+<a name="l00339"></a>00339 <span class="stringliteral">               width=&#39;16&#39; height=&#39;16&#39; border=&#39;0&#39; title=&#39;Modificar&#39; </span>
+<a name="l00340"></a>00340 <span class="stringliteral">               alt=&#39;[#]&#39; &gt;&lt;/a&gt;&lt;/td&gt;&quot;</span>;  
+<a name="l00341"></a>00341                }
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343             <span class="keywordflow">if</span> ( $eliminar ) {
+<a name="l00344"></a>00344                echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&gt;&lt;a href=&#39;$enlace&amp;$accion=$eliminar&#39;&gt;</span>
+<a name="l00345"></a>00345 <span class="stringliteral">               &lt;img src=&#39;&quot;</span>.self::$base_imagenes.self::$img_borrar.<span class="stringliteral">&quot;&#39;</span>
+<a name="l00346"></a>00346 <span class="stringliteral">               width=&#39;16&#39; height=&#39;16&#39; border=&#39;0&#39; title=&#39;Eliminar&#39; </span>
+<a name="l00347"></a>00347 <span class="stringliteral">               alt=&#39;[-]&#39; &gt;&lt;/a&gt;&lt;/td&gt;&quot;</span>;
+<a name="l00348"></a>00348                }
 <a name="l00349"></a>00349 
-<a name="l00350"></a>00350       <span class="comment">// Si el usuario de sesión es administrador no hace falta seguir</span>
-<a name="l00351"></a>00351 
-<a name="l00352"></a>00352       <span class="keywordflow">if</span> ( $gcm-&gt;au-&gt;es_admin() ) <span class="keywordflow">return</span> TRUE;
-<a name="l00353"></a>00353 
-<a name="l00354"></a>00354       $roles_usuario = $this-&gt;<a class="code" href="../../de/d21/a00006_a39a3a4eabc4a341c2d71b05a46230c99.html#a39a3a4eabc4a341c2d71b05a46230c99" title="Devolvemos array con roles de usuario.">roles_usuario</a>();
-<a name="l00355"></a>00355       $roles_accion  = $this-&gt;<a class="code" href="../../de/d21/a00006_aece557f7219af43791e3cd557d6aca48.html#aece557f7219af43791e3cd557d6aca48" title="Roles de acción.">roles_accion</a>($accion);
+<a name="l00350"></a>00350             <span class="keywordflow">if</span> ( $ver ) {
+<a name="l00351"></a>00351                echo <span class="stringliteral">&quot;\n\t\t\t&lt;td&gt;&lt;a href=&#39;$enlace&amp;$accion=ver&#39;&gt;</span>
+<a name="l00352"></a>00352 <span class="stringliteral">               &lt;img src=&#39;&quot;</span>.self::$base_imagenes.self::$img_ver.<span class="stringliteral">&quot;&#39; </span>
+<a name="l00353"></a>00353 <span class="stringliteral">               width=&#39;16&#39; height=&#39;16&#39; border=&#39;0&#39; title=&#39;ver&#39; </span>
+<a name="l00354"></a>00354 <span class="stringliteral">               alt=&#39;[*]&#39; &gt;&lt;/a&gt;&lt;/td&gt;&quot;</span>;
+<a name="l00355"></a>00355                }
 <a name="l00356"></a>00356 
-<a name="l00357"></a>00357       <span class="keywordflow">if</span> ( ! $roles_accion ) {
-<a name="l00358"></a>00358          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Sin permisos para [&#39;</span>.$accion.<span class="charliteral">&#39;]&#39;</span>,<span class="stringliteral">&#39;DEBUG&#39;</span>);
-<a name="l00359"></a>00359          <span class="keywordflow">return</span> FALSE;
-<a name="l00360"></a>00360          }
-<a name="l00361"></a>00361 
-<a name="l00362"></a>00362       <span class="keywordflow">foreach</span> ( $roles_accion as $rol_accion ) {
-<a name="l00363"></a>00363          <span class="keywordflow">if</span> ( in_array($rol_accion, $roles_usuario) ) <span class="keywordflow">return</span> TRUE;
-<a name="l00364"></a>00364          }
-<a name="l00365"></a>00365 
-<a name="l00366"></a>00366       <span class="keywordflow">return</span> FALSE;
-<a name="l00367"></a>00367 
-<a name="l00368"></a>00368       }
-<a name="l00369"></a>00369 <span class="comment"></span>
-<a name="l00370"></a>00370 <span class="comment">   /**</span>
-<a name="l00371"></a>00371 <span class="comment">    * salir</span>
-<a name="l00372"></a>00372 <span class="comment">    *</span>
-<a name="l00373"></a>00373 <span class="comment">    * Cerrar sessión.</span>
-<a name="l00374"></a>00374 <span class="comment">    */</span>
+<a name="l00357"></a>00357             $enlace = NULL;
+<a name="l00358"></a>00358                
+<a name="l00359"></a>00359             } 
+<a name="l00360"></a>00360 
+<a name="l00361"></a>00361          echo <span class="stringliteral">&quot;\n\t\t&lt;/tr&gt;&quot;</span>;
+<a name="l00362"></a>00362 
+<a name="l00363"></a>00363          $enlaces_creados = array();
+<a name="l00364"></a>00364          <span class="keywordflow">if</span> ( $salida_fila_unica ) echo $salida_fila_unica;
+<a name="l00365"></a>00365          $salida_fila_unica = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00366"></a>00366 
+<a name="l00367"></a>00367          $fpi = ( $fpi == <span class="stringliteral">&#39;evenrow&#39;</span> ) ? <span class="stringliteral">&#39;oddrow&#39;</span> : <span class="stringliteral">&#39;evenrow&#39;</span>;
+<a name="l00368"></a>00368 
+<a name="l00369"></a>00369          }
+<a name="l00370"></a>00370 
+<a name="l00371"></a>00371          echo <span class="stringliteral">&quot;\n\t&lt;/tbody&gt;&quot;</span>;
+<a name="l00372"></a>00372          echo <span class="stringliteral">&quot;&lt;/table&gt;&quot;</span>;
+<a name="l00373"></a>00373 
+<a name="l00374"></a>00374       }
 <a name="l00375"></a>00375 
-<a name="l00376"></a><a class="code" href="../../de/d21/a00006_ae640d82759dd7439b2d6611c41f6478b.html#ae640d82759dd7439b2d6611c41f6478b">00376</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_ae640d82759dd7439b2d6611c41f6478b.html#ae640d82759dd7439b2d6611c41f6478b" title="salir">salir</a>() {
+<a name="l00376"></a>00376    }
 <a name="l00377"></a>00377 
-<a name="l00378"></a>00378       <span class="keywordflow">if</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>])  ) unset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_id&#39;</span>]);
-<a name="l00379"></a>00379       <span class="keywordflow">if</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_admin&#39;</span>])  ) unset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_admin&#39;</span>]);
-<a name="l00380"></a>00380       <span class="keywordflow">if</span> ( isset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>])  ) unset($_SESSION[$this-&gt;sufijo.<span class="stringliteral">&#39;_roles&#39;</span>]);
-<a name="l00381"></a>00381       session_destroy();
-<a name="l00382"></a>00382       <span class="keywordflow">return</span> TRUE;
-<a name="l00383"></a>00383 
-<a name="l00384"></a>00384       }
-<a name="l00385"></a>00385 <span class="comment"></span>
-<a name="l00386"></a>00386 <span class="comment">   /**</span>
-<a name="l00387"></a>00387 <span class="comment">    * Crear administrador por defecto</span>
-<a name="l00388"></a>00388 <span class="comment">    *</span>
-<a name="l00389"></a>00389 <span class="comment">    * usuario:  admin</span>
-<a name="l00390"></a>00390 <span class="comment">    * password: admin</span>
-<a name="l00391"></a>00391 <span class="comment">    */</span>
-<a name="l00392"></a>00392 
-<a name="l00393"></a><a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b">00393</a>    <span class="keyword">function</span> <a class="code" href="../../de/d21/a00006_aacbe353e70b94107ae8305bf60fa743b.html#aacbe353e70b94107ae8305bf60fa743b" title="Crear administrador por defecto.">crear_admin_defecto</a>() {
-<a name="l00394"></a>00394 
-<a name="l00395"></a>00395       <span class="comment">/* Insertar un administrador por defecto */</span>
-<a name="l00396"></a>00396 
-<a name="l00397"></a>00397       $sql = <span class="stringliteral">&quot;INSERT INTO &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;usuarios (id, usuario, pass_md5, fecha_creacion, mail) VALUES &quot;</span>;
-<a name="l00398"></a>00398       $sql .= <span class="stringliteral">&quot;(?,?,?,?,?)&quot;</span>;
-<a name="l00399"></a>00399       $comando = $this-&gt;pdo-&gt;prepare($sql);
-<a name="l00400"></a>00400       <span class="keywordflow">if</span> ( !$comando ) {
-<a name="l00401"></a>00401          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00402"></a>00402          $men_error = $err[2];
-<a name="l00403"></a>00403          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al preparar sql&#39;</span>.$men_error);
-<a name="l00404"></a>00404          }
-<a name="l00405"></a>00405 
-<a name="l00406"></a>00406       <span class="keywordflow">if</span> ( ! $comando-&gt;execute(array(1,<span class="stringliteral">&#39;admin&#39;</span>,md5(<span class="stringliteral">&#39;admin&#39;</span>),date(<span class="stringliteral">&#39;Y-m-d H:i&#39;</span>), <span class="stringliteral">&#39;root@localhost&#39;</span>) ) ) {
-<a name="l00407"></a>00407          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00408"></a>00408          $men_error = $err[2];
-<a name="l00409"></a>00409          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al insertar registro: &#39;</span>.$men_error);
-<a name="l00410"></a>00410          }
-<a name="l00411"></a>00411 
-<a name="l00412"></a>00412       $sql = <span class="stringliteral">&quot;INSERT INTO &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;roles VALUES (1,&#39;administrador&#39;,&#39;El administrador tiene todos los privilegios&#39;);&quot;</span>;
-<a name="l00413"></a>00413       $sql .= <span class="stringliteral">&quot;INSERT INTO &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;roles VALUES (2,&#39;usuario&#39;,&#39;Usuario registrado&#39;);&quot;</span>;
-<a name="l00414"></a>00414       $comando = $this-&gt;pdo-&gt;prepare($sql);
-<a name="l00415"></a>00415       <span class="keywordflow">if</span> ( !$comando ) {
-<a name="l00416"></a>00416          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00417"></a>00417          $men_error = $err[2];
-<a name="l00418"></a>00418          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al preparar sql&#39;</span>.$men_error);
-<a name="l00419"></a>00419          }
-<a name="l00420"></a>00420 
-<a name="l00421"></a>00421       <span class="keywordflow">if</span> ( ! $comando-&gt;execute() ) {
-<a name="l00422"></a>00422          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00423"></a>00423          $men_error = $err[2];
-<a name="l00424"></a>00424          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al insertar registro: &#39;</span>.$men_error);
-<a name="l00425"></a>00425          }
-<a name="l00426"></a>00426 
-<a name="l00427"></a>00427 
-<a name="l00428"></a>00428       $sql = <span class="stringliteral">&quot;INSERT INTO &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;r_usuarios_roles VALUES (1,1);&quot;</span>;
-<a name="l00429"></a>00429       $sql .= <span class="stringliteral">&quot;INSERT INTO &quot;</span>.$this-&gt;sufijo.<span class="stringliteral">&quot;r_usuarios_roles VALUES (1,2);&quot;</span>;
-<a name="l00430"></a>00430       $comando = $this-&gt;pdo-&gt;prepare($sql);
-<a name="l00431"></a>00431       <span class="keywordflow">if</span> ( !$comando ) {
-<a name="l00432"></a>00432          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00433"></a>00433          $men_error = $err[2];
-<a name="l00434"></a>00434          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al preparar sql&#39;</span>.$men_error);
-<a name="l00435"></a>00435          }
-<a name="l00436"></a>00436 
-<a name="l00437"></a>00437       <span class="keywordflow">if</span> ( ! $comando-&gt;execute() ) {
-<a name="l00438"></a>00438          $err = $this-&gt;pdo-&gt;errorInfo();
-<a name="l00439"></a>00439          $men_error = $err[2];
-<a name="l00440"></a>00440          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Error al insertar registro: &#39;</span>.$men_error);
-<a name="l00441"></a>00441          }
-<a name="l00442"></a>00442 
-<a name="l00443"></a>00443       }
-<a name="l00444"></a>00444 
-<a name="l00445"></a>00445    }
-<a name="l00446"></a>00446 
-<a name="l00447"></a>00447 ?&gt;
+<a name="l00378"></a>00378 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

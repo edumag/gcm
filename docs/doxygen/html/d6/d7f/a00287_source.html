@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/js/imagenes.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/imagenes/html/columna.phtml</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,213 +81,100 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_925a7c03a73672f2b14aa59d01f20b70.html">imagenes</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_de20fcd8a6095289c79b19d4f689a2a7.html">js</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_ea4b87253bed8fbd44721e10617605a0.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">imagenes.js</div>  </div>
+<div class="title">columna.phtml</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/** imagenes.js.php </span>
-<a name="l00002"></a>00002 <span class="comment">*</span>
-<a name="l00003"></a>00003 <span class="comment">* javascript para la administración de imagenes</span>
-<a name="l00004"></a>00004 <span class="comment">*</span>
-<a name="l00005"></a>00005 <span class="comment">* @author Eduardo Magrané</span>
-<a name="l00006"></a>00006 <span class="comment">* @version 1.0</span>
-<a name="l00007"></a>00007 <span class="comment">*/</span>
-<a name="l00008"></a>00008 <span class="comment"></span>
-<a name="l00009"></a>00009 <span class="comment">/**</span>
-<a name="l00010"></a>00010 <span class="comment">* Presentar imágenes de la sección que estamos editando</span>
-<a name="l00011"></a>00011 <span class="comment">* en la columna, para poder ser insertadas comodamente</span>
-<a name="l00012"></a>00012 <span class="comment">* en el editor.</span>
-<a name="l00013"></a>00013 <span class="comment">*/</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="keyword">function</span> galeria_columna(){
+<a href="../../d6/d7f/a00287.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/**</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file columna.phtml</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief Plantilla para mostrar imagenes en columna y poder </span>
+<a name="l00006"></a>00006 <span class="comment"> *        ser incluidas al editar contenido</span>
+<a name="l00007"></a>00007 <span class="comment"> *</span>
+<a name="l00008"></a>00008 <span class="comment"> * Recibimos los datos en un array</span>
+<a name="l00009"></a>00009 <span class="comment"> *</span>
+<a name="l00010"></a>00010 <span class="comment"> */</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 ?&gt;
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 &lt;br /&gt;
+<a name="l00015"></a>00015 &lt;b&gt;&lt;?php echo literal($datos[<span class="stringliteral">&#39;estamos&#39;</span>]) ; ?&gt;&lt;/b&gt;
 <a name="l00016"></a>00016 
-<a name="l00017"></a>00017    <span class="keywordflow">if</span> (pedido.readyState == 4 ) {
-<a name="l00018"></a>00018       <span class="keywordflow">if</span> ( pedido.status == 200 ) {
-<a name="l00019"></a>00019          <span class="comment">// Imagenes del diectoio las tenemos en listaImg.js</span>
-<a name="l00020"></a>00020          var container = document.getElementById(<span class="stringliteral">&#39;thumbnails_columna&#39;</span>);
-<a name="l00021"></a>00021          var datos = pedido.responseText;
-<a name="l00022"></a>00022          <span class="keywordflow">if</span> ( datos ) {
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024             container.innerHTML = datos ;
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026          } <span class="keywordflow">else</span> {
-<a name="l00027"></a>00027             container.innerHTML = <span class="stringliteral">&quot;&lt;p class=&#39;aviso&#39; style=&#39;width: 100px&#39;&gt;Sin Imágenes&lt;/p&gt;&quot;</span>;
-<a name="l00028"></a>00028          }
-<a name="l00029"></a>00029          } <span class="keywordflow">else</span> {
-<a name="l00030"></a>00030             alert(<span class="stringliteral">&#39;Fallo&#39;</span>);
-<a name="l00031"></a>00031          }
-<a name="l00032"></a>00032       }
-<a name="l00033"></a>00033    }
-<a name="l00034"></a>00034 <span class="comment"></span>
-<a name="l00035"></a>00035 <span class="comment">/**</span>
-<a name="l00036"></a>00036 <span class="comment">* Presentar imágenes de la sección que estamos editando</span>
-<a name="l00037"></a>00037 <span class="comment">* en el administrador de imágenes</span>
-<a name="l00038"></a>00038 <span class="comment">*/</span>
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="keyword">function</span> galeria(){
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042    <span class="keywordflow">if</span> (pedido.readyState == 4 ) {
-<a name="l00043"></a>00043       <span class="keywordflow">if</span> ( pedido.status == 200 ) {
-<a name="l00044"></a>00044          <span class="comment">// Imagenes del diectoio las tenemos en listaImg.js</span>
-<a name="l00045"></a>00045          var container = document.getElementById(<span class="stringliteral">&#39;contenido&#39;</span>);
-<a name="l00046"></a>00046          var datos = pedido.responseText;
-<a name="l00047"></a>00047          <span class="keywordflow">if</span> ( datos ) {
+<a name="l00017"></a>00017 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;navegador&quot;</span>&gt;
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 &lt;?php <span class="comment">// Otras secciones ?&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021    &lt;?php <span class="keywordflow">foreach</span> ( $datos[<span class="stringliteral">&#39;otras_secciones&#39;</span>] as $otraseccion ) { ?&gt;
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023       &lt;?php <span class="keywordflow">if</span> ( $otraseccion[0] == literal(<span class="stringliteral">&#39;subir&#39;</span>) ) { ?&gt;
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025          &lt;a <span class="keyword">class</span>=<span class="stringliteral">&quot;boton&quot;</span> href=<span class="stringliteral">&quot;#&quot;</span> 
+<a name="l00026"></a>00026             onclick=<span class="stringliteral">&quot;pedirDatos(&#39;?formato=ajax&amp;m=imagenes&amp;a=galeria_columna&amp;s=&lt;?php echo $otraseccion[1];?&gt;&#39;,&#39;galeria_columna&#39;);return false;&quot;</span>&gt;
+<a name="l00027"></a>00027             &lt;?php echo $otraseccion[0]; ?&gt;
+<a name="l00028"></a>00028          &lt;/a&gt;
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030       &lt;?php } <span class="keywordflow">else</span> { ?&gt;
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032          &lt;a <span class="keyword">class</span>=<span class="stringliteral">&quot;boton&quot;</span>  href=<span class="stringliteral">&quot;#&quot;</span> 
+<a name="l00033"></a>00033             onclick=<span class="stringliteral">&quot;pedirDatos(&#39;?formato=ajax&amp;m=imagenes&amp;a=galeria_columna&amp;s=&lt;?php echo $otraseccion[0];?&gt;&#39;,&#39;galeria_columna&#39;);return false;&quot;</span>&gt;
+<a name="l00034"></a>00034             &lt;?php echo $otraseccion[1]; ?&gt;
+<a name="l00035"></a>00035          &lt;/a&gt;
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037       &lt;?php } ?&gt;
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039    &lt;?php } ?&gt;
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041 &lt;/div&gt;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043 &lt;?php <span class="comment">// listado de imágenes ?&gt;</span>
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;cajaImg&quot;</span>&gt;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 &lt;?php <span class="keywordflow">if</span> ( isset($datos[<span class="stringliteral">&#39;lista&#39;</span>]) &amp;&amp; $datos[<span class="stringliteral">&#39;lista&#39;</span>] ) {
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049             container.innerHTML = datos ;
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051             <span class="comment">// Si tenemos una ventana abierta la cerramos</span>
-<a name="l00052"></a>00052             var v = document.getElementById(<span class="stringliteral">&#39;ventana_subeImagen&#39;</span>);
-<a name="l00053"></a>00053             <span class="keywordflow">if</span> ( v ) v.parentNode.removeChild(v);
-<a name="l00054"></a>00054          } <span class="keywordflow">else</span> {
-<a name="l00055"></a>00055             container.innerHTML = <span class="stringliteral">&quot;&lt;p class=&#39;aviso&#39; style=&#39;width: 100px&#39;&gt;Sin Imágenes&lt;/p&gt;&quot;</span>;
-<a name="l00056"></a>00056          }
-<a name="l00057"></a>00057          } <span class="keywordflow">else</span> {
-<a name="l00058"></a>00058             alert(<span class="stringliteral">&#39;Fallo&#39;</span>);
-<a name="l00059"></a>00059          }
-<a name="l00060"></a>00060       }
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062    <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064    }
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="comment"></span>
-<a name="l00067"></a>00067 <span class="comment">/**</span>
-<a name="l00068"></a>00068 <span class="comment">* borrar imagen desde columna</span>
-<a name="l00069"></a>00069 <span class="comment">*/</span>
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 <span class="keyword">function</span> borrar_imagen_columna(img){
+<a name="l00049"></a>00049    $conta=0;
+<a name="l00050"></a>00050    <span class="keywordflow">foreach</span> ( $datos[<span class="stringliteral">&#39;lista&#39;</span>] as $img ) {
+<a name="l00051"></a>00051          ?&gt;
+<a name="l00052"></a>00052          &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;img_editar&quot;</span>&gt;
+<a name="l00053"></a>00053          &lt;a href=<span class="stringliteral">&quot;&lt;?php echo $img[1];?&gt;&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;galeria_imagenes&quot;</span>&gt;
+<a name="l00054"></a>00054          &lt;img <span class="keywordtype">id</span>=<span class="stringliteral">&quot;thumb_&lt;?php echo $conta;?&gt;&quot;</span> src=<span class="stringliteral">&quot;&lt;?php echo $img[2];?&gt;&quot;</span> alt=<span class="stringliteral">&quot;Imagen &lt;?php echo $img[0] ?&gt;&quot;</span> /&gt;
+<a name="l00055"></a>00055          &lt;/a&gt;
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058          &lt;a title=<span class="stringliteral">&quot;&lt;?php echo literal(&#39;Insertar&#39;).&#39; &#39;.literal(&#39;miniatura&#39;)?&gt;&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;boton&quot;</span> 
+<a name="l00059"></a>00059          onclick=<span class="stringliteral">&quot;tinyMCE.execCommand(&#39;mceInsertContent&#39;,&#39;false&#39;,&#39;&lt;a href=\&#39;&lt;?php echo $img[1];?&gt;\&#39; class=\&#39;botonImg\&#39; &gt;&lt;img src=\&#39;&lt;?php echo $img[2]; ?&gt;\&#39; /&gt;&lt;/a&gt;&#39;)&quot;</span> &gt;
+<a name="l00060"></a>00060             &lt;-
+<a name="l00061"></a>00061          &lt;/a&gt;
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063          &lt;a title=<span class="stringliteral">&quot;&lt;?php echo literal(&#39;Insertar&#39;).&#39; &#39;.literal(&#39;con tamaño original&#39;)?&gt;&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;boton&quot;</span> 
+<a name="l00064"></a>00064             onclick=<span class="stringliteral">&quot;tinyMCE.execCommand(&#39;mceInsertContent&#39;,&#39;false&#39;,&#39;&lt;img src=\&#39;&lt;?php echo $img[1]; ?&gt;\&#39; /&gt;&#39;)&quot;</span> &gt;
+<a name="l00065"></a>00065             &lt;-(
+<a name="l00066"></a>00066          &lt;/a&gt;
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069          &lt;a <span class="keyword">class</span>=<span class="stringliteral">&quot;boton&quot;</span>  href=<span class="stringliteral">&quot;javascript:;&quot;</span> onclick=<span class="stringliteral">&quot;pedirDatos(&#39;?formato=ajax&amp;m=imagenes&amp;a=borrarImg&amp;img=&lt;?php echo $img[1] ?&gt;&#39;,&#39;borrar_imagen_columna&#39;,&#39;Borrar imagen&#39;)&quot;</span> &gt;
+<a name="l00070"></a>00070             [X]
+<a name="l00071"></a>00071          &lt;/a&gt;
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073    <span class="keywordflow">if</span> (pedido.readyState == 4 ) {
-<a name="l00074"></a>00074       <span class="keywordflow">if</span> ( pedido.status == 200 ) {
-<a name="l00075"></a>00075          var estado = eval(pedido.responseText);
-<a name="l00076"></a>00076          <span class="keywordflow">if</span> ( estado[0] == 0 ) { <span class="comment">// la imagen se borro bien</span>
-<a name="l00077"></a>00077             <span class="comment">// actualizar caja de imagenes</span>
-<a name="l00078"></a>00078             pedirDatos(<span class="stringliteral">&#39;?formato=ajax&amp;m=imagenes&amp;a=galeria_columna&amp;s=&#39;</span>+estado[1],<span class="stringliteral">&#39;galeria_columna&#39;</span>);
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074          &lt;/div&gt;
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076       &lt;?php $conta++ ; } <span class="comment">// Acaba imágenes ?&gt;</span>
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078    &lt;?php } ?&gt;
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080          } <span class="keywordflow">else</span> {
-<a name="l00081"></a>00081             var res = <span class="stringliteral">&quot;Error al borrar imágen&quot;</span>;
-<a name="l00082"></a>00082             <span class="keywordflow">for</span>(x=0;x&lt;estado.length;x++) {
-<a name="l00083"></a>00083                res += <span class="charliteral">&#39;\n&#39;</span>+estado[x];
-<a name="l00084"></a>00084             }
-<a name="l00085"></a>00085             <span class="comment">//res += estado[0];</span>
-<a name="l00086"></a>00086             alert(res);
-<a name="l00087"></a>00087          }
-<a name="l00088"></a>00088       }
-<a name="l00089"></a>00089    }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 }
-<a name="l00092"></a>00092 <span class="comment"></span>
-<a name="l00093"></a>00093 <span class="comment">/**</span>
-<a name="l00094"></a>00094 <span class="comment">* borrar imagen</span>
-<a name="l00095"></a>00095 <span class="comment">*/</span>
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097 <span class="keyword">function</span> borrar_imagen(img){
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099    <span class="keywordflow">if</span> (pedido.readyState == 4 ) {
-<a name="l00100"></a>00100       <span class="keywordflow">if</span> ( pedido.status == 200 ) {
-<a name="l00101"></a>00101          var estado = eval(pedido.responseText);
-<a name="l00102"></a>00102          <span class="keywordflow">if</span> ( estado[0] == 0 ) { <span class="comment">// la imagen se borro bien</span>
-<a name="l00103"></a>00103             <span class="comment">// actualizar caja de imagenes</span>
-<a name="l00104"></a>00104             pedirDatos(<span class="stringliteral">&#39;?formato=ajax&amp;m=imagenes&amp;a=galeria&amp;s=&#39;</span>+estado[1],<span class="stringliteral">&#39;galeria&#39;</span>);
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106          } <span class="keywordflow">else</span> {
-<a name="l00107"></a>00107             var res = <span class="stringliteral">&quot;Error al borrar imágen&quot;</span>;
-<a name="l00108"></a>00108             <span class="keywordflow">for</span>(x=0;x&lt;estado.length;x++) {
-<a name="l00109"></a>00109                res += <span class="charliteral">&#39;\n&#39;</span>+estado[x];
-<a name="l00110"></a>00110             }
-<a name="l00111"></a>00111             <span class="comment">//res += estado[0];</span>
-<a name="l00112"></a>00112             alert(res);
-<a name="l00113"></a>00113          }
-<a name="l00114"></a>00114       }
-<a name="l00115"></a>00115    }
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117 }
-<a name="l00118"></a>00118 <span class="comment"></span>
-<a name="l00119"></a>00119 <span class="comment">/**</span>
-<a name="l00120"></a>00120 <span class="comment"> * Transformamos los enlaces de las miniaturas de imágenes para que se muestre la</span>
-<a name="l00121"></a>00121 <span class="comment"> * ampliación en la misma pagina utilizando colorbox.</span>
-<a name="l00122"></a>00122 <span class="comment"> *</span>
-<a name="l00123"></a>00123 <span class="comment"> * Podemos ver una lista de opciones de colorbox en http://www.jacklmoore.com/colorbox</span>
-<a name="l00124"></a>00124 <span class="comment"> */</span>
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126 <span class="keyword">function</span> img2thickbox() {
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128    var links = document.links;
-<a name="l00129"></a>00129    var num   = 0;
-<a name="l00130"></a>00130 
-<a name="l00131"></a>00131    <span class="keywordflow">for</span> (var x=0 ; x&lt;links.length ; x++ ) {
-<a name="l00132"></a>00132 
-<a name="l00133"></a>00133       var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);
-<a name="l00134"></a>00134       <span class="keywordflow">if</span> ( tipo == <span class="stringliteral">&#39;.gif&#39;</span> || tipo == <span class="stringliteral">&#39;.jpg&#39;</span> || tipo == <span class="stringliteral">&#39;jpeg&#39;</span> || tipo == <span class="stringliteral">&#39;.png&#39;</span> || tipo == <span class="stringliteral">&#39;tiff&#39;</span> || tipo == <span class="stringliteral">&#39;.JPG&#39;</span> || tipo == <span class="stringliteral">&#39;.GIF&#39;</span>  ) {
-<a name="l00135"></a>00135          var ancla = links[x];
-<a name="l00136"></a>00136          <span class="comment">//ancla.setAttribute(&#39;onclick&#39;,&#39;verImgEnGaleria(\&#39;&#39;+links[x].href+&#39;\&#39;); return false;&#39;);</span>
-<a name="l00137"></a>00137          <span class="comment">// ancla.setAttribute(&#39;rel&#39;,&#39;galeria_imagenes&#39;);</span>
-<a name="l00138"></a>00138          ancla.setAttribute(<span class="stringliteral">&#39;class&#39;</span>,<span class="stringliteral">&quot;galeria_imagenes&quot;</span>);
-<a name="l00139"></a>00139          num++;
-<a name="l00140"></a>00140       }
-<a name="l00141"></a>00141    }
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143    $(document).ready(<span class="keyword">function</span>(){
-<a name="l00144"></a>00144       <span class="comment">//Examples of how to assign the ColorBox event to elements</span>
-<a name="l00145"></a>00145       $(<span class="stringliteral">&quot;.galeria_imagenes&quot;</span>).colorbox({
-<a name="l00146"></a>00146          rel:<span class="stringliteral">&#39;galeria_imagenes&#39;</span>
-<a name="l00147"></a>00147          , slideshow:true
-<a name="l00148"></a>00148          , slideshowSpeed: 5000
-<a name="l00149"></a>00149       });
-<a name="l00150"></a>00150    });
-<a name="l00151"></a>00151 
-<a name="l00152"></a>00152 }
-<a name="l00153"></a>00153 <span class="comment"></span>
-<a name="l00154"></a>00154 <span class="comment">/**</span>
-<a name="l00155"></a>00155 <span class="comment"> * Procesamos la subida de imágenes</span>
-<a name="l00156"></a>00156 <span class="comment"> *</span>
-<a name="l00157"></a>00157 <span class="comment"> * @param id_input Identificador del input de las imágenes</span>
-<a name="l00158"></a>00158 <span class="comment"> * @param barra_progreso Identificador dei id de progreso</span>
-<a name="l00159"></a>00159 <span class="comment"> * @param metodo_retorno Método del módulo a llamar al acabar el proceso</span>
-<a name="l00160"></a>00160 <span class="comment"> * @param seccion Sección en la que estamos</span>
-<a name="l00161"></a>00161 <span class="comment"> */</span>
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163 <span class="keyword">function</span> subida_imagenes_jquery(id_input, barra_progreso, metodo_retorno, seccion) {
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165        $(<span class="charliteral">&#39;#&#39;</span>+id_input).fileupload({
-<a name="l00166"></a>00166            dataType: <span class="stringliteral">&#39;json&#39;</span>,
-<a name="l00167"></a>00167            done: <span class="keyword">function</span> (e, data) {
-<a name="l00168"></a>00168                $.each(data.result.files, <span class="keyword">function</span> xborrar_(index, file) {
-<a name="l00169"></a>00169                    <span class="comment">//$(&#39;&lt;p/&gt;&#39;).text(file.name).appendTo(document.body);</span>
-<a name="l00170"></a>00170                    $(<span class="stringliteral">&#39;&lt;p/&gt;&#39;</span>).html(<span class="stringliteral">&#39;&lt;img src=&quot;&#39;</span>+file.thumbnail_url+<span class="stringliteral">&#39;&quot; /&gt;&#39;</span>).appendTo(<span class="stringliteral">&#39;#mensajes&#39;</span>);
-<a name="l00171"></a>00171                });
-<a name="l00172"></a>00172 
-<a name="l00173"></a>00173             <span class="comment">//pedirDatos(&#39;?m=imagenes&amp;a=ajaxImg&amp;s=&#39;+estado[1],&#39;galeria&#39;);</span>
-<a name="l00174"></a>00174             pedirDatos(<span class="stringliteral">&#39;?formato=ajax&amp;m=imagenes&amp;a=&#39;</span>+metodo_retorno+<span class="stringliteral">&#39;&amp;s=&#39;</span>+seccion,metodo_retorno);
-<a name="l00175"></a>00175            },
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177           progressall: <span class="keyword">function</span> (e, data) {
-<a name="l00178"></a>00178               var progress = parseInt(data.loaded / data.total * 100, 10);
-<a name="l00179"></a>00179               $(<span class="charliteral">&#39;#&#39;</span>+barra_progreso+<span class="stringliteral">&#39; .bar&#39;</span>).css(
-<a name="l00180"></a>00180                   <span class="stringliteral">&#39;width&#39;</span>,
-<a name="l00181"></a>00181                   progress + <span class="charliteral">&#39;%&#39;</span>
-<a name="l00182"></a>00182               );
-<a name="l00183"></a>00183           },
-<a name="l00184"></a>00184           add: <span class="keyword">function</span> (e, data) {
-<a name="l00185"></a>00185                <span class="comment">// data.context = $(&#39;&lt;p/&gt;&#39;).text(&#39;Uploading...&#39;).appendTo(document.body);</span>
-<a name="l00186"></a>00186                <span class="comment">// $(&#39;&lt;p/&gt;&#39;).text(&#39;Subiendo...&#39;).appendTo(&#39;#mensajes&#39;);</span>
-<a name="l00187"></a>00187                data.submit();
-<a name="l00188"></a>00188            },
-<a name="l00189"></a>00189        });
-<a name="l00190"></a>00190 
-<a name="l00191"></a>00191        <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00192"></a>00192 
-<a name="l00193"></a>00193    }
+<a name="l00080"></a>00080 &lt;/div&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 3 de Abril de 2013 09:33:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
