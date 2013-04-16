@@ -234,7 +234,7 @@ class Autentificacion {
 
       } elseif ( count($retorno) < 1 ) {
 
-         $this->registra(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
+         registrar(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
 
          return FALSE;
 

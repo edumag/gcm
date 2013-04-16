@@ -542,6 +542,14 @@ class Admin extends Modulos {
          require_once(dirname(__FILE__).'/../modelos/usuarios.php');
          $usuarios = new Usuarios($gcm->pdo_conexion());
          $usuarios->administrar(FALSE,FALSE,FALSE,TRUE);
+
+         // Roles de usuario
+         if ( $usuarios->getID() ) {
+            echo'<br /><br />';
+            echo '<h3>Roles de usuario</h3>';
+            $this->roles_usuario('interno', $usuarios->getID());
+            }
+
          return;
 
       } else {
@@ -550,6 +558,26 @@ class Admin extends Modulos {
 
          }
 
+      }
+
+   /**
+    * Roles de usuario
+    */
+
+   function roles_usuario($e, $args=FALSE) {
+      
+      global $gcm;
+
+      $gcm->event->anular('contenido','admin');
+      $gcm->event->anular('titulo','admin');
+      $gcm->titulo = literal('Administración de roles de usuarios');
+
+      require_once(dirname(__FILE__).'/../modelos/usuarios.php');
+
+      $condicion = ( $args ) ? 'rur.usuarios_id = '.$args : FALSE ;
+
+      $roles = new R_usuarios_roles($gcm->pdo_conexion());
+      $roles->administrar($condicion,FALSE,FALSE,TRUE);
       }
 
    /**

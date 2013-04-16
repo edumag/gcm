@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Sat Sep 15 9:22:25 CEST 2012
+// Archivo generado automaticamente por GcmConfig Mon Apr 15 16:02:56 CEST 2013
 $GCM_LG_ca['Administracion de los diferentes idiomas']='';
 $GCM_LG_ca['Administración']='';
 $GCM_LG_ca['Administración de usuarios']='';
@@ -82,4 +82,10 @@ $GCM_LG_ca['Campo obligatorio']='';
 $GCM_LG_ca['Longitud máxima']='';
 $GCM_LG_ca['Registros en base de datos']='';
 $GCM_LG_ca['Galería de imágenes']='';
+$GCM_LG_ca['Insertar']='';
+$GCM_LG_ca['comentarios']='';
+$GCM_LG_ca['ver_registros']='';
+$GCM_LG_ca['Administración de roles']='';
+$GCM_LG_ca['Configuración de comentarios']='';
+$GCM_LG_ca['Configuración de ver_registros']='';
 ?>

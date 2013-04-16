@@ -146,6 +146,15 @@ class Formulario {
 
    protected $mensajes;
 
+   /**
+    * Constructor
+    *
+    * @param $campos        Array con los campos y sus especificaciones @see $campos
+    * @param $displayHash   @see $displayHash
+    * @param $restricciones @see $restricciones
+    * @param $mensajes      @see $mensajes
+    */
+
    function __construct($campos, $displayHash=NULL, $restricciones=FALSE, $mensajes=FALSE) {
 
       $this->restricciones = $restricciones;
@@ -163,6 +172,12 @@ class Formulario {
 
       }
 
+   /**
+    * Recoger los valores de los campos
+    *
+    * @param $campo Nombre del campo
+    */
+
    function valores($campo) {
 
       return ( isset($this->campos[$campo]['valor']) ) ? $this->campos[$campo]['valor'] : NULL ;
@@ -172,7 +187,8 @@ class Formulario {
    /**
     * Generar formulario para registro
     *
-    * @param $ver   Visualizar o editar, por defecto es editar, si es TRUE utilizamos plantilla de visualizar
+    * @param $ver    Visualizar o editar, por defecto es editar, si es TRUE utilizamos plantilla de visualizar
+    * @param $accion Acción que se esta realizando, por defecto 'insertando'
     */
 
    function genera_formulario($ver = FALSE, $accion = 'insertando') {
@@ -233,67 +249,69 @@ class Formulario {
 
       $men= "";
 
-      foreach ( $this->mensajes as $campo => $mensajes ) {
+      if ( isset($this->mensajes) ) {
+         foreach ( $this->mensajes as $campo => $mensajes ) {
 
-         foreach ( $mensajes as $restriccion => $mensaje ) {
+            foreach ( $mensajes as $restriccion => $mensaje ) {
 
-            switch ($restriccion) {
+               switch ($restriccion) {
 
-            case RT_MAIL:
-               $men.= "\nvalidator.setMessage('valid_email', '%s $mensaje');";
-               break;
+               case RT_MAIL:
+                  $men.= "\nvalidator.setMessage('valid_email', '%s $mensaje');";
+                  break;
 
-            case RT_LONG_MIN:
-               $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
-               break;
+               case RT_LONG_MIN:
+                  $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+                  break;
 
-            case RT_LONG_MAX:
-               $men.= "\nvalidator.setMessage('max_length', '%s $mensaje');";
-               break;
+               case RT_LONG_MAX:
+                  $men.= "\nvalidator.setMessage('max_length', '%s $mensaje');";
+                  break;
 
-            // case RT_CARACTERES_PERMITIDOS:
-            //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
-            //    break;
+               // case RT_CARACTERES_PERMITIDOS:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
 
-            // case RT_CARACTERES_NO_PERMITIDOS:
-            //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
-            //    break;
+               // case RT_CARACTERES_NO_PERMITIDOS:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
 
-            case RT_MENOR_QUE:
-               $men.= "\nvalidator.setMessage('greater_than', '%s $mensaje');";
-               break;
+               case RT_MENOR_QUE:
+                  $men.= "\nvalidator.setMessage('greater_than', '%s $mensaje');";
+                  break;
 
-            case RT_MAYOR_QUE:
-               $men.= "\nvalidator.setMessage('less_than', '%s $mensaje');";
-               break;
+               case RT_MAYOR_QUE:
+                  $men.= "\nvalidator.setMessage('less_than', '%s $mensaje');";
+                  break;
 
-            case RT_IGUAL_QUE:
-               $men.= "\nvalidator.setMessage('matches', '%s $mensaje');";
-               break;
+               case RT_IGUAL_QUE:
+                  $men.= "\nvalidator.setMessage('matches', '%s $mensaje');";
+                  break;
 
-            // case RT_NO_IGUAL:
-            //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
-            //    break;
+               // case RT_NO_IGUAL:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
 
-            // case RT_PASA_EXPRESION_REGULAR:
-            //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
-            //    break;
+               // case RT_PASA_EXPRESION_REGULAR:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
 
-            // case RT_NO_PASA_EXPRESION_REGULAR:
-            //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
-            //    break;
+               // case RT_NO_PASA_EXPRESION_REGULAR:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
 
-            case RT_NO_ES_NUMERO:
-               $men.= "\nvalidator.setMessage('numeric', '%s $mensaje');";
-               break;
+               case RT_NO_ES_NUMERO:
+                  $men.= "\nvalidator.setMessage('numeric', '%s $mensaje');";
+                  break;
 
-            case RT_REQUERIDO:
-               $men.= "\nvalidator.setMessage('required', '%s $mensaje');";
-               break;
+               case RT_REQUERIDO:
+                  $men.= "\nvalidator.setMessage('required', '%s $mensaje');";
+                  break;
 
+                  }
                }
-            }
 
+            }
          }
 
       if ( empty($men) ) return FALSE;
@@ -322,105 +340,108 @@ class Formulario {
 
       require_once(dirname(__FILE__)."/../../solicitud/lib/constantes.php");
 
-      foreach ( $this->restricciones as $campo => $restricciones ) {
+      if ( isset($this->restricciones) ) {
 
-         foreach ($restricciones as $restriccion => $valor) {
+         foreach ( $this->restricciones as $campo => $restricciones ) {
 
-            switch ($restriccion) {
+            foreach ($restricciones as $restriccion => $valor) {
 
-            case RT_MAIL:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'valid_email'
-                  },";
-               break;
+               switch ($restriccion) {
 
-            case RT_LONG_MIN:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'min_length[$valor]'
-                  },";
-               break;
+               case RT_MAIL:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'valid_email'
+                     },";
+                  break;
 
-            case RT_LONG_MAX:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'max_length[$valor]'
-                  },";
-               break;
+               case RT_LONG_MIN:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'min_length[$valor]'
+                     },";
+                  break;
 
-            // case RT_CARACTERES_PERMITIDOS:
-            //    $salida .= "{
-            //       name: '$campo',
-            //       rules: 'min_length[$valor]'
-            //       },";
-            //    break;
+               case RT_LONG_MAX:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'max_length[$valor]'
+                     },";
+                  break;
 
-            // case RT_CARACTERES_NO_PERMITIDOS:
-            //    $salida .= "{
-            //       name: '$campo',
-            //       rules: 'min_length[$valor]'
-            //       },";
-            //    break;
+               // case RT_CARACTERES_PERMITIDOS:
+               //    $salida .= "{
+               //       name: '$campo',
+               //       rules: 'min_length[$valor]'
+               //       },";
+               //    break;
 
-            case RT_MENOR_QUE:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'greater_than[$valor]'
-                  },";
-               break;
+               // case RT_CARACTERES_NO_PERMITIDOS:
+               //    $salida .= "{
+               //       name: '$campo',
+               //       rules: 'min_length[$valor]'
+               //       },";
+               //    break;
 
-            case RT_MAYOR_QUE:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'less_than[$valor]'
-                  },";
-               break;
+               case RT_MENOR_QUE:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'greater_than[$valor]'
+                     },";
+                  break;
 
-            case RT_IGUAL_QUE:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'matches[$valor]'
-                  },";
-               break;
+               case RT_MAYOR_QUE:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'less_than[$valor]'
+                     },";
+                  break;
 
-            // case RT_NO_IGUAL:
-            //    $salida .= "{
-            //       name: '$campo',
-            //       rules: 'min_length[$valor]'
-            //       },";
-            //    break;
+               case RT_IGUAL_QUE:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'matches[$valor]'
+                     },";
+                  break;
 
-            // case RT_PASA_EXPRESION_REGULAR:
-            //    $salida .= "{
-            //       name: '$campo',
-            //       rules: 'min_length[$valor]'
-            //       },";
-            //    break;
+               // case RT_NO_IGUAL:
+               //    $salida .= "{
+               //       name: '$campo',
+               //       rules: 'min_length[$valor]'
+               //       },";
+               //    break;
 
-            // case RT_NO_PASA_EXPRESION_REGULAR:
-            //    $salida .= "{
-            //       name: '$campo',
-            //       rules: 'min_length[$valor]'
-            //       },";
-            //    break;
+               // case RT_PASA_EXPRESION_REGULAR:
+               //    $salida .= "{
+               //       name: '$campo',
+               //       rules: 'min_length[$valor]'
+               //       },";
+               //    break;
 
-            case RT_NO_ES_NUMERO:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'numeric[$valor]'
-                  },";
-               break;
+               // case RT_NO_PASA_EXPRESION_REGULAR:
+               //    $salida .= "{
+               //       name: '$campo',
+               //       rules: 'min_length[$valor]'
+               //       },";
+               //    break;
 
-            case RT_REQUERIDO:
-               $salida .= "{
-                  name: '$campo',
-                  rules: 'required'
-                  },";
-               break;
+               case RT_NO_ES_NUMERO:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'numeric[$valor]'
+                     },";
+                  break;
+
+               case RT_REQUERIDO:
+                  $salida .= "{
+                     name: '$campo',
+                     rules: 'required'
+                     },";
+                  break;
+
+                  }
 
                }
-
             }
          }
 
