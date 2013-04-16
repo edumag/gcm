@@ -33,7 +33,7 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  *
  * - id: Necesario en cada tabla como identifiador unico
  * - nombre: Campo con el nombre
- * - <tabla>_id: Para relaciones con otras tablas, esto nos permite por ejemplo
+ * - tabla_id: Para relaciones con otras tablas, esto nos permite por ejemplo
  *   presentar automáticamente un select con las opciones de los registros de la
  *   tabla relacionada.
  * - fecha_creacion como timestamp.
@@ -51,6 +51,32 @@ class Crud extends DataBoundObject {
    public $css_formulario   = FALSE ;     ///< Añadimos css para Formulario o no.
 
    public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
+
+   /**
+    * Tipo de tabla: 
+    *
+    * - normal, por defecto.
+    * - combinatoria
+    *
+    * Una tabla combinatoria nos permite gusrdar relaciones multiples (*,*) entre dos tablas,
+    * las cararcteristicas de estas tablas es que tienen dos indices y cada uno apunta al indice
+    * de otra tabla.
+    *
+    * Automaticamente intentaremos deducir las relaciones de sus indices con la referencia de su
+    * nombre, por ejemplo un indice que se llama usuarios_id deduciremos que apunta a la tabla
+    * usuarios. No obstante podrá especificarse manualmente su relación.
+    *
+    * En una tabla combinatoria será necesario definir sus indices, ejemplo:
+    * @code
+    * function DefineRelationMap($pdo) {
+    *       $retorno['usuarios_id,roles_id'] = 'ID';
+    *       return $retorno;
+    *       }
+    * @endcode
+    *
+    */
+
+   protected $tipo_tabla = 'normal';
 
    /**
     * Podemos definir un metodo personalizado para la visualización de los registros 
@@ -97,7 +123,7 @@ class Crud extends DataBoundObject {
    /**
     * Array con los atributos publicos que deamos pasar a paginador
     *
-    * Para ver las posibilidades @see paginadorPDO
+    * Para ver las posibilidades @see paginarPDO
     */
 
    public $conf_paginador = FALSE;        
@@ -113,6 +139,8 @@ class Crud extends DataBoundObject {
     * Desde los modelos podemos definir los tipos campos para Formulario.
     *
     * Ejemplo: protected $tipos_formulario = array( 'nIdLocalitzacio' => array('oculto_form' => 1));
+    *
+    * @see Formulario
     */
 
    protected $tipos_formulario;
@@ -134,7 +162,7 @@ class Crud extends DataBoundObject {
    protected $fichero_css;
 
    /**
-    * SQL para generar listado, por defecto 'SELECT * FROM <tabla> ORDER BY id desc' 
+    * SQL para generar listado, por defecto 'SELECT * FROM tabla ORDER BY id desc' 
     *
     * Nos permite tener un listado personalizado desde los modelos, para evitar un exceso
     * de campos no necesarios en los lidtados.
@@ -182,7 +210,78 @@ class Crud extends DataBoundObject {
 
    protected $galeria = FALSE;            ///< Instancia de Galeria, para las imágenes, en caso de ser TRUE en modelo
 
-   protected $tipos_campos;               ///< Especificaciones de los campos de la tabla
+   /**
+    * Especificaciones de los campos de la tabla
+    *
+    * Esta información nos permite añadir automaticamente las condiciones de 
+    * los campos del formulario, asi como conocer el formato en que se deben 
+    * presentar.
+    *
+    * Definición de los tipos de campo y sus carateristicas.
+    *
+    * Ejemplo:
+    * @code
+    *
+    * [usuario] => Array
+    *     (
+    *         [tipo] => char(50)
+    *         [null] => YES
+    *         [max] => 50
+    *     )
+    *
+    * [pass_md5] => Array
+    *     (
+    *         [tipo] => char(32)
+    *         [null] => YES
+    *         [max] => 32
+    *     )
+    *
+    * [nombre] => Array
+    *     (
+    *         [tipo] => char(50)
+    *         [null] => YES
+    *         [max] => 50
+    *     )
+    *
+    * [apellidos] => Array
+    *     (
+    *         [tipo] => char(50)
+    *         [null] => YES
+    *         [max] => 50
+    *     )
+    *
+    * [fecha_creacion] => Array
+    *     (
+    *         [tipo] => datetime
+    *         [null] => NO
+    *         [max] => 20
+    *     )
+    *
+    * [fecha_modificacion] => Array
+    *     (
+    *         [tipo] => timestamp
+    *         [null] => NO
+    *         [default] => CURRENT_TIMESTAMP
+    *         [max] => 20
+    *     )
+    *
+    * [mail] => Array
+    *     (
+    *         [tipo] => char(60)
+    *         [null] => YES
+    *         [max] => 60
+    *     )
+    *
+    * [telefono] => Array
+    *     (
+    *         [tipo] => char(15)
+    *         [null] => YES
+    *         [max] => 15
+    *     ) 
+    * @endcode
+    */
+
+   protected $tipos_campos;
 
    protected $permisos = FALSE;           ///< Tenemos permisos de edición (T/F)  
 
@@ -200,10 +299,31 @@ class Crud extends DataBoundObject {
 
    function __construct(PDO $objPdo, $id = NULL) {
 
+      global $gcm;
+
       parent::__construct($objPdo, $id);
  
+      // Para tamblas combinatorias, relacionar los indices con sus tablas
+
+      if ( $this->tipo_tabla == 'combinatoria' ) {
+
+         foreach ( $this->campos_indices as $indice ) {
+            if ( ! isset($this->tipos_formulario[$indice]) ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['tabla'] = str_replace($this->id_relacion,'',$indice);
+               $modelo_relacionado = ucfirst($this->tipos_formulario[$indice]['tabla']);
+               $id_relacionado = FALSE; // @todo Añadir valor
+               $relacion = new $modelo_relacionado($this->objPDO,$id_relacionado);
+               $this->tipos_formulario[$indice]['opciones'] = $relacion->listado_para_select();
+               }
+            }
+         }
+
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
+
+
+
       //$this->plantilla   = dirname(__FILE__).'/../html/form_registro.html';
       //$this->fichero_css = dirname(__FILE__).'/../css/crud.css';
 
@@ -330,11 +450,12 @@ class Crud extends DataBoundObject {
     * Definir tipos de campo especificado
     *
     * Las carateristicas de los campos definidas en el modelo no se chafan con las automaticas
+    * @see $tipos_campos
     *
     * @param $row Array con los datos del campo de la base de datos
     */
 
-   function definir_tipos_campo($row, $objPDO) {
+   private function definir_tipos_campo($row, $objPDO) {
 
       $driver = $objPDO->getAttribute(constant("PDO::ATTR_DRIVER_NAME"));
 
@@ -415,7 +536,8 @@ class Crud extends DataBoundObject {
     *
     * Si un campo ya tiene definido un valor desde el modelo no se chafa
     *
-    * @param $row Array con los datos del campo en la base de datos
+    * @param $row    Array con los datos del campo en la base de datos
+    * @param $objPDO Instancia de PDO
     */
 
    function definir_tipos_formulario($row, $objPDO) {
@@ -565,6 +687,7 @@ class Crud extends DataBoundObject {
             }
 
          }
+
       }
 
    /**
@@ -735,8 +858,16 @@ class Crud extends DataBoundObject {
 
       foreach ( $this->arRelationMap as $campo => $R ) {
 
-         if ( $campo != 'id' ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
+         if ( $campo != array_search('ID',$this->arRelationMap) ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
 
+         // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
+         // que probablemente no haya nada más que presentar.
+         if ( count($this->campos_indices) > 1 ) {
+            foreach ( $this->campos_indices as $indice ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['valor'] = $this->valores[$indice];
+               }
+            }
          if ( isset($this->tipos_formulario[$campo]['tabla'])  ) {
             $modelo_relacionado = ucfirst($this->tipos_formulario[$campo]['tabla']);
             $id_relacionado = $this->GetAccessor($campo);
@@ -780,7 +911,16 @@ class Crud extends DataBoundObject {
             $this->tipos_formulario[$this->DefineTableName().'_id']['oculto_form'] = 1;
             }
 
-         if ( $campo != 'id' ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
+         // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
+         // que probablemente no haya nada más que presentar.
+         if ( count($this->campos_indices) > 1 ) {
+            foreach ( $this->campos_indices as $indice ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['valor'] = $this->valores[$indice];
+               }
+            }
+
+         if ( $campo != array_search('ID',$this->arRelationMap) ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
 
          if ( isset($this->tipos_formulario[$campo]['tabla'])  ) {
             $modelo_relacionado = ucfirst($this->tipos_formulario[$campo]['tabla']);
@@ -815,9 +955,11 @@ class Crud extends DataBoundObject {
    /**
     * Administrar 
     *
-    * @param $condicion  Condicion para el listado
-    * @param $order      Orden para presentar el listado
-    * @param $dir_img    Directorio de las imagenes de iconos
+    * @param $condicion         Condicion para el listado
+    * @param $order             Orden para presentar el listado
+    * @param $dir_img           Directorio de las imagenes de iconos
+    * @param $permisos          Especificar si tenemos permisos para modificar T/F
+    * @param $accion_directa    Acción por defecto.
     */
 
    function administrar($condicion = FALSE, $order = FALSE, $dir_img = '', $permisos = FALSE, $accion_directa = FALSE) {
@@ -885,12 +1027,14 @@ class Crud extends DataBoundObject {
          $solicitud->SetRedirectOnConstraintFailure(true);
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
-         $conta=0;
-         foreach ( $this->restricciones() as $campo => $restriccion ) {
-            foreach ( $restriccion as $tipo => $valor ) {
-               $restricciones[$conta] = new Restricciones($tipo, $valor);
-               $solicitud->AddConstraint($campo, ENTRADAS_POST, $restricciones[$conta]);
-               $conta++;
+         if ( isset($this->restricciones) && ! empty($this->restricciones) ) {
+            $conta=0;
+            foreach ( $this->restricciones() as $campo => $restriccion ) {
+               foreach ( $restriccion as $tipo => $valor ) {
+                  $restricciones[$conta] = new Restricciones($tipo, $valor);
+                  $solicitud->AddConstraint($campo, ENTRADAS_POST, $restricciones[$conta]);
+                  $conta++;
+                  }
                }
             }
 
@@ -931,7 +1075,7 @@ class Crud extends DataBoundObject {
                      // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
                      continue;
                      }
-                  if ( $campo != 'id'  ) {
+                  if ( $campo != array_search('ID',$this->arRelationMap)  ) {
                      if (get_magic_quotes_gpc() == 1) {
                         $this->SetAccessor($rCampo, stripslashes($resultado[$campo]));
                      } else {
@@ -940,6 +1084,7 @@ class Crud extends DataBoundObject {
                      }
 
                   }
+
 
                if ( $this->save() ) {
 
@@ -1129,7 +1274,7 @@ class Crud extends DataBoundObject {
 
          }
 
-      $order = ( $order ) ? ' ORDER BY '.$order : ' ORDER BY id desc';
+      $order = ( $order ) ? ' ORDER BY '.$order : ' ORDER BY '.array_search('ID',$this->arRelationMap).' desc';
 
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 

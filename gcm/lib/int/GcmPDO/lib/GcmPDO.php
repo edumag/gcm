@@ -29,6 +29,12 @@ class GcmPDO {
    protected $pdo;                          ///< Instancia de PDO
    protected $num_total_registros;          ///< Número total de registro
 
+   /**
+    * Constructor
+    * @param $pdo Instancia de PDO
+    * @param $sql sql
+    */
+
    function __construct (PDO $pdo, $sql) {
 
       $this->num_total_registros = 0;
