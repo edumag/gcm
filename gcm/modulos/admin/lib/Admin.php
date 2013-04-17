@@ -428,6 +428,12 @@ class Admin extends Modulos {
       global $gcm;
 
       if (! $gcm->au->logeado() ) {
+
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->unico('titulo','admin');
+         $gcm->titulo = literal('Formulario de entrada');
+
+
          $formulario = '<form name="entrada" action="" method="post"> 
                <br />'.literal("Usuario",3).':
                <br /><input type="text" size="10" name="loginPro" id="loginPro" value="" />
