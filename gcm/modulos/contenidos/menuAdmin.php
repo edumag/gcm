@@ -52,8 +52,6 @@ $menuAdmin['Contenidos']['boton']['Ver todo']['link']=Router::$dir.Router::$url.
 $menuAdmin['Administración']['title']='Administrar proyecto';
 $menuAdmin['Configuración']['title']='Configurar proyecto';
 $menuAdmin['Seguimiento']['title']='Seguimiento del proyecto';
-$menuAdmin['Salir']['title']="Cerrar sessión";
-$menuAdmin['Salir']['link']='./?salir=1';
 
 ?>
 

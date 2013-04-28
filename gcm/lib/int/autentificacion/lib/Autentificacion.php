@@ -277,7 +277,7 @@ class Autentificacion {
       /* Cramos sessión para usuario */
 
       $_SESSION[$this->sufijo.'_id'] = $id;
-      $_SESSION[$this->sufijo.'_usario'] = $usuario;
+      $_SESSION[$this->sufijo.'usuario'] = $usuario;
       $_SESSION[$this->sufijo.'_roles'] = serialize($roles);
 
       return TRUE;
