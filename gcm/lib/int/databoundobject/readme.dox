@@ -1,0 +1,14 @@
+/**
+
+@file readme.dox
+@brief CRUD
+@page crud  CRUD automatización de gestión de registros
+
+Crud
+----
+
+Con crud se automatiza al máximo la gestión de registros en la base de datos, 
+procurando perder el mínimo de personalización.
+
+
+*/

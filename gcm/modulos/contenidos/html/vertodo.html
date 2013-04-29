@@ -13,6 +13,7 @@ function contraer_lista() { $(".toggle").fadeOut(); }
    <div id='listar_dir_recur'>
       <?php $this->mostrarSecciones($path, $path_seleccionado,TRUE); ?>
    </div>
+   <?php if ( permiso('editar_contenido') ) { ?>
    <br /><br />
    <fieldset>
       <legend><?php echo literal('Acciones sobre contenidos',3);?></legend>
@@ -20,5 +21,6 @@ function contraer_lista() { $(".toggle").fadeOut(); }
       <button type='submit' name="e" value='borrar'><?=literal('Borrar',3)?></button>
       <button type='submit' name="e" value='mover'><?=literal('Cambiar nombre',3)?></button>
    </fieldset>
+   <?php } ?>
 </form>
 

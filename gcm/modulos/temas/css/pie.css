@@ -1,9 +1,13 @@
 #pie {
-   color: <?=$this->color("2")?>;
-   background: <?=$this->color("3")?>;
-   border: 1px solid <?=$this->color("20")?>;
+   float: left;
+   width: 100%;
+   margin-top:10px;
+   margin-bottom:10px;
+   color: <?=$this->color("body-06")?>;
+   background: <?=$this->color("body-07")?>;
+   border: 1px solid <?=$this->color("pie-00")?>;
    }
-/* logo pequeÃ±o */
+/* logo pequeýo */
 #pie img:first-child	{ 
    float: left;
    width: 40px:
@@ -13,14 +17,12 @@
    border: 0;
    }
 #pie a {
-   color: <?=$this->color("2")?>;
+   color: <?=$this->color("body-06")?>;
    }
-
 #pie_derecho {
     text-align: center;
     margin-top: 9px;
 }
-
 #pie_derecho img {
     border-width: 0;
     float: right!IMPORTANT;

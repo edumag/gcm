@@ -702,9 +702,7 @@ class Gcm {
       /* Comprobar administrador que nos llega */
 
       if ( isset($_POST['loginPro']) ){
-         if ( ! $this->au->entrar($_POST["loginPro"],$_POST["passwd"]) ) {
-            $this->registra(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
-         } else {
+         if ( $this->au->entrar($_POST["loginPro"],$_POST["passwd"]) ) {
             $this->registra(__FILE__,__LINE__,'gcm->inicia: Usuario [ '.$_POST['loginPro'].' ] registrado');
             }
          }

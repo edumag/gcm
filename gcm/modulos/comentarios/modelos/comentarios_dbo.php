@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file      comentarios.php
+ * @file      comentarios_dbo.php
  * @brief     Modelo para comentarios
  *
  * @author    Eduardo Magrané 
@@ -15,43 +15,57 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
-/** DataBoundObject */
+/* DataBoundObject */
 
-require_once(GCM_DIR.'lib/int/databoundobject/lib/DataBoundObject.php');
+require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
+
+/* añadimos modelo de usuarios ya que estan relacionados con comentarios */
+
+require_once(GCM_DIR.'modulos/admin/modelos/usuarios.php');
 
 /**
- * @class Comentarios.php
+ * @class Comentarios_dbo
  * @brief Modelo para los comentarios de las entradas.
- * @version 0.1
+ * @ingroup modulo_comentarios
  */
 
-class Comentarios_dbo extends DataBoundObject {
+class Comentarios_dbo extends Crud {
 
-   protected $Url;
-   protected $Fecha;
-   protected $Nombre;
-   protected $Mail;
-   protected $Contenido;
-   protected $Comentario;
+   function __construct(PDO $objPdo, $id = NULL) {
 
-   protected function DefineTableName() {
+      global $gcm;
+
+      parent::__construct($objPdo, $id);
+
+      $this->url_ajax = '&formato=ajax';
+
+      $this->sql_listado = 'SELECT c.id, c.fecha_creacion `fecha creación`, 
+         c.url, c.contenido , 
+         c.nombre, c.mail, c.comentario  
+         FROM '.$gcm->sufijo.'comentarios c';
+
+      $this->opciones_array2table = array(
+         'op' => array (
+            'ocultar_id'=>TRUE
+            , 'eliminar'=>'eliminar'
+            , 'fila_unica'=>'comentario'
+            , 'enlaces'=> array(
+               'url' => array(
+                  'campo_enlazado'=>'contenido'
+                  ,'titulo_columna'=>'Contenido'
+                  ,'base_url'=>Router::$base
+                  )
+               )
+            )
+         );
+
+      }
+
+   function DefineTableName() {
       global $gcm;
       return($gcm->sufijo.'comentarios');
       }
 
-   protected function DefineRelationMap($pdo) {
-
-      return (array(
-         "id"=>"ID",
-         "url"=>"Url",
-         "fecha"=>"Fecha",
-         "nombre"=>"Nombre",
-         "mail"=>"Mail",
-         "contenido"=>"Contenido",
-         "comentario"=>"Comentario"
-         ));
-
-      }
 
    }
 

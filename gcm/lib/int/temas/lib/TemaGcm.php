@@ -83,19 +83,29 @@ class TemaGcm {
 
    /**
     * Devolver color para archivos css, en caso de no existir devolvemos
-    * 'red' y añadimos color a $this->colores_faltantes
+    * 'red' y añadimos color a $this->colores_faltantes.
+    *
+    * En caso de que recibamos valor suponemos que es el archivo css por 
+    * defecto pero si tenemos otro color definido prevalece el del tema.
     *
     * @param $color Identificador de color
     */
     
-   function color($color) {
+   function color($color, $valor = FALSE) {
 
       if ( isset($this->colores[$color])  ) {
          return $this->colores[$color];
       } else {
+
+         if ( $valor ) {
+            $this->colores[$color] = $valor;
+            registrar(__FILE__,__LINE__,'Color predefinido ('.$color.'): '.$valor,'DEBUG');
+            return $valor;
+            }
+
          $this->colores_faltantes[$color] = NULL;
-         //registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$color.') Color no definido');
-         trigger_error('Color ['.$ruta.'] no definido',E_USER_ERROR);
+         $this->colores[$color] = 'red';
+         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$color.') Color no definido','ADMIN');
          return 'red';
          }
 
@@ -149,9 +159,9 @@ class TemaGcm {
 
       } else {
          
-         echo "\n/* fichero:".$this->ficheros['css']['temas/css/body.css'].": */\n";
+         echo "\n/* fichero:temas/css/body.css: */\n";
          include($this->ficheros['css']['temas/css/body.css']);
-         echo "\n/* acaba:".$this->ficheros['css']['temas/css/body.css'].": */\n";
+         echo "\n/* acaba:temas/css/body.css: */\n";
 
          foreach ( $this->ficheros['css'] as $llave => $fichero) {
 
@@ -263,14 +273,24 @@ class TemaGcm {
     function ruta($modulo, $tipo, $fichero) {
 
        $ruta = $modulo.'/'.$tipo.'/'.$fichero;
-       $fichero_tema = ( isset($this->ficheros[$tipo][$ruta]) ) ? $this->ficheros[$tipo][$ruta] : NULL;
+       $fichero_tema = ( isset($this->ficheros[$tipo][$ruta]) ) ? $this->ficheros[$tipo][$ruta] : FALSE;
 
        if ( $fichero_tema ) {
           return $fichero_tema;
        } else {
-          trigger_error('Fichero del modulo: ['.$ruta.'] no definido',E_USER_ERROR);
-          //registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$modulo.','.$tipo.','.$fichero.') Fichero no encontrado','ADMIN');
+          // Si no encontramos en el módulo especificado, miramos en el módulo temas.
+          $ruta = 'temas/'.$tipo.'/'.$fichero;
+          $fichero_tema = ( isset($this->ficheros[$tipo][$ruta]) ) ? $this->ficheros[$tipo][$ruta] : FALSE;
+
+          if ( $fichero_tema ) {
+             return $fichero_tema;
+          } else {
+             $msg = 'Fichero del módulo ['.$modulo.'] tipo ['.$tipo.'] fichero ['.$fichero.'] ruta ['.$ruta.'] no encontrado';
+             trigger_error($msg,E_USER_ERROR);
+             //registrar(__FILE__,__LINE__,$msg,'ADMIN');
+            }
           }
+       return FALSE;
       }
 
     /**

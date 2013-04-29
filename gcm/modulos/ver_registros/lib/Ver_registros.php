@@ -95,7 +95,7 @@ class Ver_registros extends Modulos {
       <div class="registros_sesion">
       <fieldset>
       <legend><?=literal('Registros',3)?></legend>
-      <p>
+      <div class="ayuda">
       Podemos filtrar por id, sesion, fecha, tipo ('ERROR','AVISO','ADMIN','DEBUG'), fichero, mensaje
       <br />
       Ejemplos:
@@ -103,11 +103,11 @@ class Ver_registros extends Modulos {
          <li>sesion>100 AND tipo='ERROR' ORDER BY id desc</li>
          <li>mensaje LIKE "%ERROR%"</li>
       </ul> 
-      </p>
+      </div>
       <form name='form_ver_registros' action='' method='post' onSubmit='javascript: visualizar_registros(this,"<?=$gcm->reg->sesion?>"); return false;'>
       <fieldset>
       <legend><?php echo literal('Filtro',3);?></legend>
-         <input type="text" style='width:100%;' name='filtro' value="<?php echo $filtro; ?>">
+         <input type="text" style='width:98%;' name='filtro' value="<?php echo $filtro; ?>">
       </fieldset>
       <input type='hidden' name='m' value='ver_registros' />
       <input type='hidden' name='a' value='registros_ajax' />
@@ -164,66 +164,39 @@ class Ver_registros extends Modulos {
          }
 
          if ( !is_array($registros) || count($registros) < 1 ) {
+            echo "<div class='aviso'>Sin registros</div>";
             return FALSE;
             }
 
          $conta = 0;
-         $sesion_anterior = '';
-         $tipo_anterior = '';
-         $fecha_anterior = '';
-
-         $pie_tabla  = '   </tbody>';
-         $pie_tabla .= '</table>';
-
          reset($registros);
          while ( current($registros) ) {
-
-            $conta++;
             $registro = current($registros);
             list($id,$sesion,$fecha,$tipo,$fichero,$linea,$mensaje,$descripcion) = $registro;
-
-            if ( $sesion_anterior !== $sesion ) {  $this->cabecera_tabla($sesion) ; }
-
-            $sesion_anterior = $sesion ;
-
-            echo "\n".'<tr class="',strtolower($tipo),'">';
-
-            if ( $fecha == $fecha_anterior && $tipo == $tipo_anterior )  {
-               $colspan=3 ; 
-            } elseif ( $fecha == $fecha_anterior )  {
-               $colspan=2 ; 
-               echo "\n\t".'<td>',$tipo,'</td>';
-            } else {
-               $colspan=1 ; 
-               echo "\n\t".'<td>',$fecha,'</td>';
-               echo "\n\t".'<td>',$tipo,'</td>';
-               }
-            $fecha_anterior = $fecha;
-            $tipo_anterior = $tipo;
-            echo "\n\t".'<td colspan="',$colspan,'">';
-            echo "\n\t".'<a href="vim://'.$fichero.'@'.$linea.'">';
-            echo '<pre>';
-            //echo nl2br($mensaje);
-            while ( @substr($mensaje, -3) == '@->' ) {
-               echo str_replace('@->','',$mensaje);
-               next($registros);
-               $registro = current($registros);
-               list($id,$sesion,$fecha,$tipo,$fichero,$linea,$mensaje,$descripcion) = $registro;
-               }
-            echo $mensaje;
-            echo '</pre>';
-            echo "\n\t".'</a>';
-            echo "\n\t".'</td>';
-            echo "\n".'</tr>';
-
-            if ( $sesion_anterior !== $sesion ) {  echo $pie_tabla ; }
-
+            $resultado[$conta]['id'] = $id;
+            $resultado[$conta]['sesion'] = $sesion;
+            $resultado[$conta]['fecha'] = $fecha;
+            $resultado[$conta]['tipo'] = $tipo;
+            $resultado[$conta]['fichero'] = $fichero;
+            $resultado[$conta]['linea'] = $linea;
+            $resultado[$conta]['mensaje'] = $mensaje;
+            // $resultado[$conta]['descripcion'] = $descripcion;
+            $conta++;
             next($registros);
-
             }
 
-         echo $pie_tabla ;
-         return TRUE;
+         require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
+
+         //$opciones = array ('ocultar_id' => TRUE, 'fila_unica' => 'mensaje','table_id' => 'table');
+         $opciones = array ('ocultar_id' => TRUE,'table_id' => 'table');
+
+
+         $array2table = new Array2table();
+         $array2table->generar_tabla($resultado, $opciones);
+
+         $gcm->add_lib_js('temas', 'jquery.dataTables.js');
+         
+         return;
 
       } else {
          return FALSE;
@@ -238,7 +211,7 @@ class Ver_registros extends Modulos {
 
    function registros_ajax() {
 
-      if (  ! GCM_DEBUG && !permiso(3,NULL,FALSE,FALSE) ) {
+      if (  ! GCM_DEBUG && !permiso('ver_registros',NULL,FALSE,FALSE) ) {
          echo '<p class="error">'.literal('Sin permisos').'</p>';
          return FALSE;
          }
@@ -246,6 +219,14 @@ class Ver_registros extends Modulos {
       $filtro = ( isset($_GET['filtro']) ) ? $_GET['filtro'] : '';
 
       $this->tabla_registros($filtro);
+
+      ?>
+      <script>
+      $(document).ready(function() {
+      $('#table').dataTable();
+      } );
+      </script>
+      <?php
       exit();
       }
 
@@ -276,7 +257,6 @@ class Ver_registros extends Modulos {
       /* Panel de registros */
       ob_start();
       echo '<br />';
-      echo '<h3>'.literal('Registros de página actual',3).'</h3>';
       $this->tabla_registros(NULL,$gcm->reg->registros);
       $salida = ob_get_contents(); 
       ob_end_clean();
@@ -285,7 +265,7 @@ class Ver_registros extends Modulos {
 
          require_once(GCM_DIR.'/modulos/editar/lib/Editar.php');
 
-         Temas::panel( array( 'titulo' => literal('Registros',3), 
+         Temas::panel( array( 'titulo' => literal('Registros',3).' '.literal('de').' '.literal('página actual'), 
                                  'oculto' => TRUE, 
                                  'href' => 'javascript:visualizar(\'ver_registros_'.$gcm->reg->sesion.'\');', 
                                  'subpanel' => 'ver_registros_'.$gcm->reg->sesion, 
@@ -320,6 +300,8 @@ class Ver_registros extends Modulos {
    function visualizar() {
 
       global $gcm;
+
+      $gcm->add_lib_js('temas', 'jquery.dataTables.js');
 
       $this->javascripts('ver_registros.js');
 

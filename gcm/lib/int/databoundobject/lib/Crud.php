@@ -13,6 +13,10 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @defgroup crud Creación, CRUD modificación y borrado de registros
+ *
+ * @{
  */
 
 require_once(dirname(__FILE__).'/DataBoundObject.php');
@@ -29,11 +33,11 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  *
  * - id: Necesario en cada tabla como identifiador unico
  * - nombre: Campo con el nombre
- * - <tabla>_id: Para relaciones con otras tablas, esto nos permite por ejemplo
+ * - tabla_id: Para relaciones con otras tablas, esto nos permite por ejemplo
  *   presentar automáticamente un select con las opciones de los registros de la
  *   tabla relacionada.
  * - fecha_creacion como timestamp.
- * - fecha_modificacion como datetime
+ * - fecha_modificacion como timestamp
  * - imagen_url Campo para url de imagen.
  *
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
@@ -49,6 +53,32 @@ class Crud extends DataBoundObject {
    public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
 
    /**
+    * Tipo de tabla: 
+    *
+    * - normal, por defecto.
+    * - combinatoria
+    *
+    * Una tabla combinatoria nos permite gusrdar relaciones multiples (*,*) entre dos tablas,
+    * las cararcteristicas de estas tablas es que tienen dos indices y cada uno apunta al indice
+    * de otra tabla.
+    *
+    * Automaticamente intentaremos deducir las relaciones de sus indices con la referencia de su
+    * nombre, por ejemplo un indice que se llama usuarios_id deduciremos que apunta a la tabla
+    * usuarios. No obstante podrá especificarse manualmente su relación.
+    *
+    * En una tabla combinatoria será necesario definir sus indices, ejemplo:
+    * @code
+    * function DefineRelationMap($pdo) {
+    *       $retorno['usuarios_id,roles_id'] = 'ID';
+    *       return $retorno;
+    *       }
+    * @endcode
+    *
+    */
+
+   protected $tipo_tabla = 'normal';
+
+   /**
     * Podemos definir un metodo personalizado para la visualización de los registros 
     * individuales, en caso de no tenerlo se presentara el formulario en versión
     * de solo lectura
@@ -57,15 +87,27 @@ class Crud extends DataBoundObject {
    protected function visualizando_registro() { return FALSE ; }
 
    /**
-    * Opciones de presentación para el listado
+    * Opciones de presentación para el listado con array2table o
+    * una extensión de él.
     *
-    * Array con:
-    *
-    * $opciones_array2table = array(
-    * 'presentacion' => 'TinyTable' // Extensión de array2table,
-    * 'args' => array ( 'dir_tinytable' => GCM_DIR.'lib/ext/TinyTable/',
-    *                   'cargar_srcipt' => TRUE ),
-    *                   );
+    * Ejemplo:
+    * @code
+    * $this->opciones_array2table = array(
+    *    'presentacion' => 'Array2table',
+    *    'op' => array (
+    *       'ocultar_id'=>TRUE
+    *       , 'eliminar'=>'eliminar'
+    *       , 'fila_unica'=>'comentario'
+    *       , 'enlaces'=> array(
+    *          'url' => array(
+    *             'campo_enlazado'=>'contenido'
+    *             ,'titulo_columna'=>'Contenido'
+    *             ,'base_url'=>Router::$base
+    *             )
+    *          )
+    *       )
+    *    );
+    * @endcode
     *
     * El nombre de la presentación es el nombre de la clase que extiende
     * a array2table.
@@ -81,14 +123,14 @@ class Crud extends DataBoundObject {
    /**
     * Array con los atributos publicos que deamos pasar a paginador
     *
-    * Para ver las posibilidades @see paginadorPDO
+    * Para ver las posibilidades @see paginarPDO
     */
 
    public $conf_paginador = FALSE;        
 
-   protected $evento_guardar = FALSE;     ///< Metodo a lanzar al guardar registro
-   protected $evento_modificar = FALSE;   ///< Metodo a lanzar al modificar registro
-   protected $evento_borrar  = FALSE;     ///< Metodo a lanzar al borrar registro
+   protected $evento_guardar = FALSE;     ///< Metodo a lanzar al guardar registro, recibe identificador de registro como parametro
+   protected $evento_modificar = FALSE;   ///< Metodo a lanzar al modificar registro, recibe identificador de registro como parametro
+   protected $evento_borrar  = FALSE;     ///< Metodo a lanzar al borrar registro, recibe identificador de registro como parametro
 
    protected $restricciones;              ///< Restricciones para Solicitud
    protected $mensajes;                   ///< Mensajes de respuesta a fallos de restricciones
@@ -97,6 +139,8 @@ class Crud extends DataBoundObject {
     * Desde los modelos podemos definir los tipos campos para Formulario.
     *
     * Ejemplo: protected $tipos_formulario = array( 'nIdLocalitzacio' => array('oculto_form' => 1));
+    *
+    * @see Formulario
     */
 
    protected $tipos_formulario;
@@ -118,7 +162,7 @@ class Crud extends DataBoundObject {
    protected $fichero_css;
 
    /**
-    * SQL para generar listado, por defecto 'SELECT * FROM <tabla> ORDER BY id desc' 
+    * SQL para generar listado, por defecto 'SELECT * FROM tabla ORDER BY id desc' 
     *
     * Nos permite tener un listado personalizado desde los modelos, para evitar un exceso
     * de campos no necesarios en los lidtados.
@@ -166,7 +210,78 @@ class Crud extends DataBoundObject {
 
    protected $galeria = FALSE;            ///< Instancia de Galeria, para las imágenes, en caso de ser TRUE en modelo
 
-   protected $tipos_campos;               ///< Especificaciones de los campos de la tabla
+   /**
+    * Especificaciones de los campos de la tabla
+    *
+    * Esta información nos permite añadir automaticamente las condiciones de 
+    * los campos del formulario, asi como conocer el formato en que se deben 
+    * presentar.
+    *
+    * Definición de los tipos de campo y sus carateristicas.
+    *
+    * Ejemplo:
+    * @code
+    *
+    * [usuario] => Array
+    *     (
+    *         [tipo] => char(50)
+    *         [null] => YES
+    *         [max] => 50
+    *     )
+    *
+    * [pass_md5] => Array
+    *     (
+    *         [tipo] => char(32)
+    *         [null] => YES
+    *         [max] => 32
+    *     )
+    *
+    * [nombre] => Array
+    *     (
+    *         [tipo] => char(50)
+    *         [null] => YES
+    *         [max] => 50
+    *     )
+    *
+    * [apellidos] => Array
+    *     (
+    *         [tipo] => char(50)
+    *         [null] => YES
+    *         [max] => 50
+    *     )
+    *
+    * [fecha_creacion] => Array
+    *     (
+    *         [tipo] => datetime
+    *         [null] => NO
+    *         [max] => 20
+    *     )
+    *
+    * [fecha_modificacion] => Array
+    *     (
+    *         [tipo] => timestamp
+    *         [null] => NO
+    *         [default] => CURRENT_TIMESTAMP
+    *         [max] => 20
+    *     )
+    *
+    * [mail] => Array
+    *     (
+    *         [tipo] => char(60)
+    *         [null] => YES
+    *         [max] => 60
+    *     )
+    *
+    * [telefono] => Array
+    *     (
+    *         [tipo] => char(15)
+    *         [null] => YES
+    *         [max] => 15
+    *     ) 
+    * @endcode
+    */
+
+   protected $tipos_campos;
 
    protected $permisos = FALSE;           ///< Tenemos permisos de edición (T/F)  
 
@@ -184,10 +299,31 @@ class Crud extends DataBoundObject {
 
    function __construct(PDO $objPdo, $id = NULL) {
 
+      global $gcm;
+
       parent::__construct($objPdo, $id);
+ 
+      // Para tamblas combinatorias, relacionar los indices con sus tablas
+
+      if ( $this->tipo_tabla == 'combinatoria' ) {
+
+         foreach ( $this->campos_indices as $indice ) {
+            if ( ! isset($this->tipos_formulario[$indice]) ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['tabla'] = str_replace($this->id_relacion,'',$indice);
+               $modelo_relacionado = ucfirst($this->tipos_formulario[$indice]['tabla']);
+               $id_relacionado = FALSE; // @todo Añadir valor
+               $relacion = new $modelo_relacionado($this->objPDO,$id_relacionado);
+               $this->tipos_formulario[$indice]['opciones'] = $relacion->listado_para_select();
+               }
+            }
+         }
 
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
+
+
+
       //$this->plantilla   = dirname(__FILE__).'/../html/form_registro.html';
       //$this->fichero_css = dirname(__FILE__).'/../css/crud.css';
 
@@ -314,11 +450,12 @@ class Crud extends DataBoundObject {
     * Definir tipos de campo especificado
     *
     * Las carateristicas de los campos definidas en el modelo no se chafan con las automaticas
+    * @see $tipos_campos
     *
     * @param $row Array con los datos del campo de la base de datos
     */
 
-   function definir_tipos_campo($row, $objPDO) {
+   private function definir_tipos_campo($row, $objPDO) {
 
       $driver = $objPDO->getAttribute(constant("PDO::ATTR_DRIVER_NAME"));
 
@@ -399,7 +536,8 @@ class Crud extends DataBoundObject {
     *
     * Si un campo ya tiene definido un valor desde el modelo no se chafa
     *
-    * @param $row Array con los datos del campo en la base de datos
+    * @param $row    Array con los datos del campo en la base de datos
+    * @param $objPDO Instancia de PDO
     */
 
    function definir_tipos_formulario($row, $objPDO) {
@@ -433,6 +571,12 @@ class Crud extends DataBoundObject {
 
             }
 
+         /* Para campos pass_md5 */
+
+         if ( $row['name'] == 'pass_md5'  ) {
+            $this->tipos_formulario[$row['name']]['tipo'] = 'pass_md5';
+            }
+
          /* Para campos mail */
 
          if ( $row['name'] == 'mail'  ) {
@@ -447,7 +591,7 @@ class Crud extends DataBoundObject {
 
          // Campos 'text' seran 'textarea'
          
-         if ( $row['type'] == 'text' ) {
+         if ( ! isset($this->tipos_formulario[$row['name']]['tipo'])  && $row['type'] == 'text' ) {
 
             $this->tipos_formulario[$row['name']]['tipo'] = 'textarea';
             $this->tipos_formulario[$row['name']]['cols'] = '30';
@@ -498,6 +642,12 @@ class Crud extends DataBoundObject {
 
             }
 
+         /* Para campos pass_md5 */
+
+         if ( $row['Field'] == 'pass_md5'  ) {
+            $this->tipos_formulario[$row['Field']]['tipo'] = 'pass_md5';
+            }
+
          /* Para campos mail */
 
          if ( $row['Field'] == 'mail'  ) {
@@ -537,6 +687,7 @@ class Crud extends DataBoundObject {
             }
 
          }
+
       }
 
    /**
@@ -552,6 +703,8 @@ class Crud extends DataBoundObject {
       foreach ( $this->arRelationMap as $campo => $referencia) {
 
          if ( $campo == 'mail' ) $this->restricciones[$campo][RT_MAIL] = 1;
+
+         if ( $campo == 'pass_md5' ) $this->restricciones[$campo][RT_PASSWORD] = 1;
 
          if ( $campo == 'fecha_creacion' || $campo == 'fecha_modificacion'  ) continue;
 
@@ -638,6 +791,10 @@ class Crud extends DataBoundObject {
                         $this->mensajes[$campo][$tipo] = literal('Contenido no permitido',3);
                         break;
 
+                     case RT_PASSWORD:
+                        $this->mensajes[$campo][$tipo] = literal('Contraseña no pasa verificación',3);
+                        break;
+
                      }
 
                   }
@@ -701,8 +858,16 @@ class Crud extends DataBoundObject {
 
       foreach ( $this->arRelationMap as $campo => $R ) {
 
-         if ( $campo != 'id' ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
+         if ( $campo != array_search('ID',$this->arRelationMap) ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
 
+         // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
+         // que probablemente no haya nada más que presentar.
+         if ( count($this->campos_indices) > 1 ) {
+            foreach ( $this->campos_indices as $indice ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['valor'] = $this->valores[$indice];
+               }
+            }
          if ( isset($this->tipos_formulario[$campo]['tabla'])  ) {
             $modelo_relacionado = ucfirst($this->tipos_formulario[$campo]['tabla']);
             $id_relacionado = $this->GetAccessor($campo);
@@ -746,7 +911,16 @@ class Crud extends DataBoundObject {
             $this->tipos_formulario[$this->DefineTableName().'_id']['oculto_form'] = 1;
             }
 
-         if ( $campo != 'id' ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
+         // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
+         // que probablemente no haya nada más que presentar.
+         if ( count($this->campos_indices) > 1 ) {
+            foreach ( $this->campos_indices as $indice ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['valor'] = $this->valores[$indice];
+               }
+            }
+
+         if ( $campo != array_search('ID',$this->arRelationMap) ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
 
          if ( isset($this->tipos_formulario[$campo]['tabla'])  ) {
             $modelo_relacionado = ucfirst($this->tipos_formulario[$campo]['tabla']);
@@ -765,7 +939,7 @@ class Crud extends DataBoundObject {
       if ( isset($this->plantilla_editar) ) $form->plantilla = $this->plantilla_editar;
 
       ?>
-         <form name="crud" action="<?=$_SERVER['REDIRECT_URL']?>" method="post">
+         <form name="crud" action="<?php if ( isset($_SERVER['REDIRECT_URL']) ) echo $_SERVER['REDIRECT_URL'];?>" method="post">
       <?php
 
       $form->genera_formulario(FALSE, $this->accion);
@@ -781,12 +955,14 @@ class Crud extends DataBoundObject {
    /**
     * Administrar 
     *
-    * @param $condicion  Condicion para el listado
-    * @param $order      Orden para presentar el listado
-    * @param $dir_img    Directorio de las imagenes de iconos
+    * @param $condicion         Condicion para el listado
+    * @param $order             Orden para presentar el listado
+    * @param $dir_img           Directorio de las imagenes de iconos
+    * @param $permisos          Especificar si tenemos permisos para modificar T/F
+    * @param $accion_directa    Acción por defecto.
     */
 
-   function administrar($condicion = FALSE, $order = FALSE, $dir_img = '', $permisos = FALSE) {
+   function administrar($condicion = FALSE, $order = FALSE, $dir_img = '', $permisos = FALSE, $accion_directa = FALSE) {
 
       global $gcm;
 
@@ -795,6 +971,20 @@ class Crud extends DataBoundObject {
       $displayHash = array();
 
       if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) $this->ID = $_REQUEST[$this->DefineTableName().'_id'];
+
+      // El identificador puede que venga por sesión.
+      if ( ! $this->ID && isset($_SESSION['VALORES'][$this->DefineTableName().'_id']) ) 
+         $this->ID = isset($_SESSION['VALORES'][$this->DefineTableName().'_id']);
+
+      // Verificar registro
+      if ( $this->ID ) {
+         if ( ! $this->blIsLoaded ) {
+            if ( ! $this->Load() ) {
+               registrar(__FILE__,__LINE__,'No esiste registro ['.$this->ID.']','ERROR');
+               return FALSE;
+               }
+            }
+      }
 
       // Determinar acción actual
 
@@ -812,6 +1002,8 @@ class Crud extends DataBoundObject {
          $this->accion = 'eliminar';
       } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'editar') {
          $this->accion = 'editar';
+      } elseif ( $accion_directa ) {
+         $this->accion = $accion_directa;
       } else {
          if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) {
             $this->accion = 'ver';
@@ -835,12 +1027,14 @@ class Crud extends DataBoundObject {
          $solicitud->SetRedirectOnConstraintFailure(true);
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
-         $conta=0;
-         foreach ( $this->restricciones() as $campo => $restriccion ) {
-            foreach ( $restriccion as $tipo => $valor ) {
-               $restricciones[$conta] = new Restricciones($tipo, $valor);
-               $solicitud->AddConstraint($campo, ENTRADAS_POST, $restricciones[$conta]);
-               $conta++;
+         if ( isset($this->restricciones) && ! empty($this->restricciones) ) {
+            $conta=0;
+            foreach ( $this->restricciones() as $campo => $restriccion ) {
+               foreach ( $restriccion as $tipo => $valor ) {
+                  $restricciones[$conta] = new Restricciones($tipo, $valor);
+                  $solicitud->AddConstraint($campo, ENTRADAS_POST, $restricciones[$conta]);
+                  $conta++;
+                  }
                }
             }
 
@@ -866,11 +1060,31 @@ class Crud extends DataBoundObject {
                      continue;
                      }
 
-                  if ( $campo != 'id'  ) {
-                     $this->SetAccessor($rCampo, $resultado[$campo]);
+                  // pass_md5: password debe ser igual a la verificación y lo convertimos 
+                  // con md5()
+                  if ( $campo == 'pass_md5' && !empty($resultado[$campo]) ) {
+                     $this->SetAccessor($rCampo, md5($resultado[$campo]));
+                     // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
+                     continue;
+                     }
+
+                  // Si viene la contraseña vacia la eliminamos de los datos a modificar sino
+                  // la modifica sin ser lo que queremos.
+                  if ( $campo == 'pass_md5' && empty($resultado[$campo]) ) {
+                     $this->DelAccessor($rCampo);
+                     // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
+                     continue;
+                     }
+                  if ( $campo != array_search('ID',$this->arRelationMap)  ) {
+                     if (get_magic_quotes_gpc() == 1) {
+                        $this->SetAccessor($rCampo, stripslashes($resultado[$campo]));
+                     } else {
+                        $this->SetAccessor($rCampo, $resultado[$campo]);
+                        }
                      }
 
                   }
+
 
                if ( $this->save() ) {
 
@@ -895,6 +1109,7 @@ class Crud extends DataBoundObject {
 
                   $mens = ( $this->accion == 'modificando' ) ? 'Registro modificado' : 'Registro incluido';
                   registrar(__FILE__,__LINE__,literal($mens,3),'AVISO');
+                  unset($_SESSION['VALORES']);
                } else {
                   registrar(__FILE__,__LINE__,'ERROR al añadir o modificar registro','ERROR');
                   }
@@ -903,7 +1118,8 @@ class Crud extends DataBoundObject {
 
          $_SESSION['dh'] = $displayHash;
          $_SESSION['mens'] = $gcm->reg->sesion;
-         header("Location: ".$_SERVER['PHP_SELF']);
+         $redireccion = $_SERVER['REDIRECT_URL'];
+         header("Location: ".$redireccion);
          exit(0);
 
       /* LLega con errores de formulario o se esta insertando */
@@ -950,10 +1166,20 @@ class Crud extends DataBoundObject {
 
       } elseif ( $this->accion == 'ver' ) {
 
+         if ( ! $this->ID ) {
+            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            return FALSE;
+            }
+
          $this->visualizar_registro();
          $this->botones_acciones($this->accion);
 
       } elseif ( $this->accion == 'eliminar' ) {
+
+         if ( ! $this->ID ) {
+            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            return FALSE;
+            }
 
          /* Si tenemos evento_guardar lo lanzamos */
          if ( $this->evento_borrar ) {
@@ -965,12 +1191,17 @@ class Crud extends DataBoundObject {
          $this->__destruct();
 
          registrar(__FILE__,__LINE__,"Registro eliminado",'AVISO');
-         header("Location: ".$_SERVER['PHP_SELF']);
+         header("Location: ".$_SERVER['REDIRECT_URL']);
          exit(0);
 
-      } elseif ( $this->accion == 'editar' || $this->accion == 'insertar' ) {
-
+      } elseif ( $this->accion == 'editar' ) {
+         
          $this->generar_formulario();
+         $this->botones_acciones($this->accion);
+
+      } elseif ( $this->accion == 'insertar' ) {
+
+         $this->generar_formulario(NULL);
          $this->botones_acciones($this->accion);
 
       } else {
@@ -998,22 +1229,22 @@ class Crud extends DataBoundObject {
 
          // Boton insertar
          if ( $this->accion == "ver" || $this->accion == "inicio" ) {
-            echo '<a class="formulari2" href="?'.$this->DefineTableName().'_insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
+            echo '<a class="formulari2 boton" href="?'.$this->DefineTableName().'_insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
             }
 
          // Boton editar
          if ( $this->accion != "editar" && $this->ID ) {
-            echo ' <a class="formulari2" href="?'.$this->DefineTableName().'_accion=editar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
+            echo ' <a class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=editar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
             }
 
          // Boton borrar
          if (  $this->ID ) {
-            echo ' <a class="formulari2" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
+            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->DefineTableName().'" class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
             }
 
          // Boton Cancelar
          if ( $this->accion == "editar" || $this->accion == 'insertar' ) {
-            echo ' <a class="formulari2" href="'.$_SERVER['PHP_SELF'].'">'.literal('Cancelar',3).' </a> ';
+            echo ' <a class="formulari2 boton" href="'.$_SERVER['PHP_SELF'].'">'.literal('Cancelar',3).' </a> ';
             }
 
          echo '</div>';
@@ -1043,7 +1274,7 @@ class Crud extends DataBoundObject {
 
          }
 
-      $order = ( $order ) ? ' ORDER BY '.$order : ' ORDER BY id desc';
+      $order = ( $order ) ? ' ORDER BY '.$order : ' ORDER BY '.array_search('ID',$this->arRelationMap).' desc';
 
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/paginarPDO.php');
 
@@ -1051,6 +1282,7 @@ class Crud extends DataBoundObject {
 
       $pd = new PaginarPDO($this->objPDO, $sql, $this->strTableName.'_', $this->elementos_pagina, $order, $this->sql_listado_relacion);
 
+      // Configuración de paginador
       if ( $this->conf_paginador ) {
          foreach($this->conf_paginador as $atr => $valor ) {
             $pd->$atr = $valor;
@@ -1064,7 +1296,7 @@ class Crud extends DataBoundObject {
                'url'           => '?'.$this->DefineTableName().'_id='
                ,'identifiador' => 'id'
                ,'modificar'    => 'editar'  
-               ,'eliminar'     => 'eliminar'
+               // ,'eliminar'     => 'eliminar'
                //,'ver'          => 'ver'
                ,'accion'       => $this->DefineTableName().'_accion'
                ,'ocultar_id'   => 1
@@ -1081,7 +1313,17 @@ class Crud extends DataBoundObject {
                );
          }
 
-         $pd->generar_pagina($this->url_ajax, $opciones, $this->opciones_array2table);
+         // Opciones personalizadas para presentación de datos
+         if ( isset($this->opciones_array2table['op']) ) 
+            $opciones = array_merge($opciones, $this->opciones_array2table['op']);
+
+         // echo "<pre>opciones: " ; print_r($opciones) ; echo "</pre>"; // DEV  
+
+         $presentacion = ( isset($this->opciones_array2table['presentacion']) ) ?
+            $this->opciones_array2table['presentacion'] :
+            'Array2table' ;
+
+         $pd->generar_pagina($this->url_ajax, $opciones, $presentacion);
 
       } else {
          registrar(__FILE__,__LINE__,"Tabla sin contenido",'AVISO');
@@ -1090,5 +1332,7 @@ class Crud extends DataBoundObject {
       }
 
    }
+
+/** @} */
 
 ?>

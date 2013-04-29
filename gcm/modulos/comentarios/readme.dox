@@ -1,0 +1,21 @@
+/**
+
+@defgroup modulo_comentarios Módulo Comentarios
+
+@ingroup modulos_aplicacion
+@ingroup modulo_comentarios
+
+Los comentarios son guardados en la base de datos cogiendo la url de contenido 
+para identificar a que pagina pertenecen. Esto nos da la flexibilidad de no depender
+de que los contenidos se guarden en base de datos o en en ficheros.
+
+Configuración
+-------------
+
+- Moderación: Podemos activar o desactivar la moderación de comentarios, si se encuentra desactivada
+              tal como un usuario entra un comentarios, se podrá visualizar en la web, si está activada,
+              se espera a que el moderador active el comentarios para poder ser visualizado.
+
+- Número paginación: Número de comentarios que se muestran en cada página.
+
+@} */

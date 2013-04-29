@@ -7,8 +7,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  04/10/10
- *  Revision  SVN $Id: $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -152,7 +150,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
 }
 
-if( ! function_exists("registrar") ) {
+if ( ! function_exists("registrar") ) {
 
 /** registrar 
  *
@@ -371,10 +369,14 @@ function presentarBytes($bytes) {
  *
  * @param $time tiempo unix
  * @param $formato_salida Formato de salida 
- * 1- 08 de May, 2008
- * 2- 08 de May, 2008 23.34
- * 3- 08 May
- * @param $formato_entrada Formato de entrada, por defecto unix
+ *                        1- 08 de May, 2008
+ *                        2- 08 de May, 2008 23.34
+ *                        3- 08 May
+ * @param $formato_entrada Formatos de entrada (por defecto unix):
+ *                         - unix
+ *                         - mysql   datatime
+ *                         - sqlite  se espera unix
+ *                         - deducir Intentaremos deducir cual es
  *
  * @return fecha formateada
  *
@@ -383,6 +385,17 @@ function presentarBytes($bytes) {
 function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
    registrar(__FILE__,__LINE__, "<br>time: $time / formato_entrada: $formato_entrada / formato_salida: $formato_salida");
+
+   if ( $formato_entrada == 'sqlite' ) $formato_entrada = 'unix';
+
+   if ( $formato_entrada == 'deducir' ) {
+
+      if ( is_int($time) ) {
+         $formato_entrada = 'unix';
+      } else {
+         registrar(__FILE__,__LINE__, "No se pudo dedicir el formato de la fecha [".$time."]",'ADMIN');
+         }
+      }
 
    if ( $formato_entrada != 'unix' ) {
 
@@ -476,23 +489,31 @@ function construir_get ($variables) {
 
    }
 
-/** 
+if( ! function_exists("permiso") ) {
+
+/**
  * Determinar si tiene un rol con los permisos especificados para la acción.
+ *
+ * Comprobamos si la función ya existe, de esta manera permitimos con facilidad
+ * implementar otro sistema de verificación de permisos diferente.
  *
  * @todo Crear módulo que gestione el enrutamiento a paginas de error.
  *
  * @param $accion     Acción a realizar
+ * @param $modulo     Módulo que realiza la acción
  * @param $salir En caso de no tener permisos enrutamos
  * @param $mensaje Presentar mensaje en caso de no tener permisos T/F
  *
  * @return TRUE/FALSE
+ *
+ * @ingroup permisos
  */
 
-function permiso($accion='administrar', $salir=FALSE, $mensaje=FALSE) {
+function permiso($accion='administrar', $modulo = 'admin', $salir=FALSE, $mensaje=FALSE) {
 
    global $gcm;
 
-   if ( $gcm->au->permiso($accion) ) return TRUE;
+   if ( $gcm->au->permiso($accion, $modulo) ) return TRUE;
 
    if ( $salir  ) {
       registrar(__FILE__,__LINE__,'Se necesitan permisos para esta acción','ERROR');
@@ -505,6 +526,8 @@ function permiso($accion='administrar', $salir=FALSE, $mensaje=FALSE) {
    return FALSE;
 
    }
+
+}
 
 /**
 * Limpiamos el texto preparandolo para ser guardado o presentado
@@ -763,15 +786,14 @@ function borrar_contenido_tabla($pdo, $tabla) {
 /**
  * Glob recursiva ()
  *
- * @Http://php.net/glob enlace
- * @Autor HM2K <hm2k@php.net>
- * @Version $ Revision: 1.2 $
- * @Requiere PHP 4.3.0 (globalización)
+ * Http://php.net/glob
  *
- * @Param int $patrón El modelo pasa a glob ()
- * @Param int $banderas Las banderas pasa a glob ()
- * @Param string $ruta El camino de la exploración
- * @Return mixtos Una serie de archivos en la ruta dada coinciden con el patrón.
+ * @author HM2K <hm2k@php.net>
+ *
+ * @param $pattern El modelo pasa a glob ()
+ * @param $flags Las banderas pasa a glob ()
+ * @param $path El camino de la exploración
+ * @return mixtos Una serie de archivos en la ruta dada coinciden con el patrón.
  */
 
 function rglob($pattern='*', $flags = 0, $path=false) {
@@ -968,6 +990,9 @@ function minutos2tiempo($minutos) {
  * campos.
  *
  * Cada array debe llevar una variable llamada peso con el valor correspondiente
+ *
+ * @param $a Variable a
+ * @param $b Variable b
  */
 
 function ordenar_por_peso($a, $b) {
@@ -1025,5 +1050,34 @@ function borrar_archivos_viejos($horas, $patron) {
       }
 
    }
+
+if ( ! function_exists("sesion") ) {
+
+/**
+ * Con session() podemos recoger comodamente variables de sesión sin 
+ * preocuparnos de que choquen entre proyectos.
+ *
+ * Una posible aplicación puede ser utilizar cookies para mantener las
+ * sesiones de un día para otro.
+ */
+
+function sesion($elemento, $valor=FALSE) {
+
+   global $gcm;
+
+   if ( $valor ) {
+      $_SESSION[$gcm->sufijo.$elemento] = $valor ;
+      return;
+      }
+
+   if ( isset($_SESSION[$gcm->sufijo.$elemento]) ) 
+      return $_SESSION[$gcm->sufijo.$elemento];
+
+   return FALSE;
+
+   }
+
+
+}
 
 ?>

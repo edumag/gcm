@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file Admin
+ * @file Admin.php
  *
  * @author    Eduardo Magrané 
  *
@@ -12,6 +12,8 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @todo Hacer limpieza, se pueden eliminar métodos en desuso
  */
 
 /**
@@ -54,13 +56,12 @@ class Admin extends Modulos {
     *
     * @todo Validar email
     *
+    * @param $aDatos Array con los datos a validar
     */
 
    function validar_datos($aDatos) {
 
       global $gcm;
-
-      permiso(1);
 
       $vale = TRUE;
 
@@ -92,40 +93,26 @@ class Admin extends Modulos {
       }
 
    /**
-    * Borrar usuario
-    */
-
-   function borrar_usuario() {
-
-      permiso(1, $usuario_id);
-
-      }
-
-   /**
-    * Añadir usuario
-    */
-
-   function anyadir_usuario() {
-
-      permiso(10);
-
-      }
-
-   /**
     * Cambio de contraseña
     */
 
-   function cambio_password() {
+   function cambio_password($usuario_id=FALSE) {
 
       global $gcm;
 
-      permiso(1);
+      // Si no tenemos permisos, tenemos que ser el usuario que edita
+      if ( ! permiso() ) {
+         $usuario_id = $gcm->au->logeado();
+         }
+
+      if ( ! $usuario_id ) return ;
 
       ?>
       <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
          <?php include($gcm->event->instancias['temas']->ruta('admin','html','form_cambio_pass.html')); ?>
          <input type="hidden" name="a" value="ejecutar_cambio_password" />
          <input type="hidden" name="m" value="admin" />
+         <input type="hidden" name="id" value="<?php echo $usuario_id; ?>" />
       </form>
       <?php
 
@@ -139,11 +126,12 @@ class Admin extends Modulos {
 
       global $gcm;
 
+      $usuario_id = is_numeric($_POST['id'] );
+
+      // Si no tenemos permisos, tenemos que ser el usuario que edita
+      if ( ! permiso() && $usuario_id != $gcm->au->logeado()) return ;
+
       require_once(dirname(__FILE__).'/../modelos/usuarios.php');
-
-      $usuario_id = $gcm->au->logeado();
-
-      permiso(1, $usuario_id);
 
       $gcm->event->anular('contenido','admin');
       $gcm->event->unico('titulo','admin');
@@ -175,7 +163,9 @@ class Admin extends Modulos {
 
       global $gcm;
 
-      permiso(1, $usuario_id);
+      // Si no tenemos permisos, tenemos que ser el usuario que edita
+      if ( ! permiso() && $usuario_id != $gcm->au->logeado()) return ;
+
 
       $presentar_form = TRUE;          ///< Presentamos formulario
       $anyadir_usuario = FALSE;        ///< Si se desea añadir un usuario
@@ -243,6 +233,8 @@ class Admin extends Modulos {
             $usuario->setTelefono($resultado['telefono']);
             $usuario->save();
             $resultado['id'] = $usuario->ultimo_identificador();
+
+            $gcm->au->insertar_rol_usuario($resultado['id'],2);
 
             registrar(__FILE__,__LINE__,literal('Usuario insertado'),'AVISO');
 
@@ -383,6 +375,9 @@ class Admin extends Modulos {
             }
          }
 
+      // Ordenamos según peso de la sección del menú
+      uasort($menuAdmin, 'ordenar_por_peso');
+
       include($gcm->event->instancias['temas']->ruta('admin','html','menuAdmin.html'));
       }
 
@@ -426,6 +421,9 @@ class Admin extends Modulos {
     * Mostrar formulario de registro 
     *
     * Para evento registro
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function formulario_registro($e, $args=NULL) {
@@ -433,6 +431,12 @@ class Admin extends Modulos {
       global $gcm;
 
       if (! $gcm->au->logeado() ) {
+
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->unico('titulo','admin');
+         $gcm->titulo = literal('Formulario de entrada');
+
+
          $formulario = '<form name="entrada" action="" method="post"> 
                <br />'.literal("Usuario",3).':
                <br /><input type="text" size="10" name="loginPro" id="loginPro" value="" />
@@ -458,31 +462,23 @@ class Admin extends Modulos {
     * @param $args Identificador de usuario a mostrar, sino pasamos niinguno sera el logeado.
     */
 
-   function perfil_usuario($e, $args=NULL) {
+   function perfil_usuario($e, $args=FALSE) {
 
       global $gcm;
 
       $usuario_id = ( $args ) ? $args : $gcm->au->logeado();
 
-      permiso(1, $usuario_id);
+      if ( $usuario_id ) {
 
-      $gcm->event->anular('contenido','admin');
-      $gcm->event->unico('titulo','admin');
-      $gcm->titulo = literal('Perfil de usuario');
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->unico('titulo','admin');
+         $gcm->titulo = literal('Perfil de usuario');
 
-      $this->gestionar_usuario($usuario_id);
+         $this->gestionar_usuario($usuario_id);
 
-      $this->cambio_password();
+         $this->cambio_password();
 
-      }
-
-   /**
-    * Listar usuarios para administrar
-    */
-
-   function listar_usuarios() {
-
-      permiso(10);
+         }
 
       }
 
@@ -490,6 +486,9 @@ class Admin extends Modulos {
     * Comprobar que el administrador no es aun el por defecto
     *
     * @todo Enrutar a pagina de sin privilegios
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function confirmar_configuracion($e, $args) {
@@ -508,14 +507,13 @@ class Admin extends Modulos {
 
             $aviso = literal("Es necesario modificar los datos del administrador por seguridad");
 
-            registrar(__FILE__,__LINE__,$aviso,'AVISO');
+            if ( empty($_POST['pass_md5']) ) registrar(__FILE__,__LINE__,$aviso,'AVISO');
 
-            $this->anularEvento('contenido','admin');
-            $this->anularEvento('contenido_dinamico','admin');
-            $this->anularEvento('titulo','admin');
-            $gcm->titulo = literal('Configurar proyecto');
+            $usuarios = new Usuarios($gcm->pdo_conexion(),1);
+            $usuarios->administrar(FALSE,FALSE,FALSE,TRUE,'editar');
+            // $usuarios->generar_formulario();
+            // $usuarios->botones_acciones('editar');
 
-            $this->gestionar_usuario($usuario_id);
 
             }
 
@@ -536,69 +534,81 @@ class Admin extends Modulos {
     *
     * Formulario para administrar los usuarios
     *
-    * @todo Seleccionar los campos que deben salir y paginarlos
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function usuarios($e, $args) {
 
       global $gcm;
 
-      permiso(NULL,TRUE);
+      if ( permiso('administrar','admin') ) {
+
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->anular('titulo','admin');
+         $gcm->titulo = literal('Administración de usuarios');
+
+         require_once(dirname(__FILE__).'/../modelos/usuarios.php');
+         $usuarios = new Usuarios($gcm->pdo_conexion());
+         $usuarios->administrar(FALSE,FALSE,FALSE,TRUE);
+
+         // Roles de usuario
+         if ( $usuarios->getID() ) {
+            echo'<br /><br />';
+            echo '<h3>Roles de usuario</h3>';
+            $this->roles_usuario('interno', $usuarios->getID());
+            }
+
+         return;
+
+      } else {
+
+         $this->perfil_usuario('interno');
+
+         }
+
+      }
+
+   /**
+    * Roles de usuario
+    */
+
+   function roles_usuario($e, $args=FALSE) {
+      
+      global $gcm;
 
       $gcm->event->anular('contenido','admin');
       $gcm->event->anular('titulo','admin');
-      $gcm->titulo = literal('Usuarios');
-
-      if ( isset($_GET['id'])  ) {
-         $usuario_id = $_GET['id'];
-      } elseif ( isset($_POST['id']) ) {
-         $usuario_id = $_POST['id'];
-      } else {
-         $usuario_id = $gcm->au->id();
-         }
-
-      $this->gestionar_usuario($usuario_id);
+      $gcm->titulo = literal('Administración de roles de usuarios');
 
       require_once(dirname(__FILE__).'/../modelos/usuarios.php');
-      require_once(GCM_DIR.'lib/int/array2table/lib/TinyTable.php');
 
-      $usuarios = new Usuarios($gcm->pdo_conexion());
+      $condicion = ( $args ) ? 'rur.usuarios_id = '.$args : FALSE ;
 
-      $usuarios->listado();
-      return;
-      $arUsuarios = $usuarios->find();
-
-      $numUsuarios = count($arUsuarios);
-
-      if ( $numUsuarios > 0 ) {
-         $array2table = new TinyTable();
-         $array2table->generar_tabla($arUsuarios, array('url'=>'?m=admin&a=usuarios&id='));
-         }
-
-      return;
-
+      $roles = new R_usuarios_roles($gcm->pdo_conexion());
+      $roles->administrar($condicion,FALSE,FALSE,TRUE);
       }
 
    /**
     * Presentar acciones sin realizarlas
     */
 
-   function eventos_sin_accion($e, $args) {
-
-      global $gcm;
-
-
-      }
+   // function eventos_sin_accion($e, $args) {
+   //    global $gcm;
+   //    }
 
    /**
     * Presentar información de servidor
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function infoserver($e,$args) {
 
       global $gcm;
 
-      permiso(5);
+      permiso('administrar',TRUE);
 
       $gcm->event->anular('titulo','admin');
       $gcm->event->anular('contenido','admin');
@@ -647,6 +657,9 @@ class Admin extends Modulos {
     * Ejecutar métodos cron de los módulos
     *
     * Buscamos en todos los módulos si hay un metodo cron en tal caso se lanza
+    *
+    * @param $e Evento que lo llama
+    * @param $args Argumentos
     */
 
    function ejecutar_cron_modulos($e = FALSE, $args = FALSE) {

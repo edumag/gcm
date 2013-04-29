@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/literales/css/panel_literales.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/indexador/html/elemento_lista_indexar.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,25 +80,29 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_afbe9c3df42c178bad19e2ac0ea49e56.html">literales</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_97eae04069acc61cf6760a8d22e9501a.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_9b052a3440b154b2392779948b3a8c54.html">indexador</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1417f59272386799b39d2b0614ce1793.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">panel_literales.css</div>  </div>
+<div class="title">elemento_lista_indexar.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002 .subpanelNegativo a {
-<a name="l00003"></a>00003    color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;4&quot;</span>)?&gt;;
-<a name="l00004"></a>00004 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;p <span class="keyword">class</span>=<span class="stringliteral">&quot;por_indexar&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;&lt;?=htmlentities($elemento)?&gt;&quot;</span>&gt;
+<a name="l00002"></a>00002 &lt;a href=<span class="stringliteral">&quot;javascript:&lt;?=$funcion_js_indexar?&gt;(&#39;&lt;?=htmlentities($elemento)?&gt;&#39;)&quot;</span>&gt;
+<a name="l00003"></a>00003    &lt;?=$camino?&gt;
+<a name="l00004"></a>00004 &lt;/a&gt;
+<a name="l00005"></a>00005 &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja_&lt;?=htmlentities($elemento)?&gt;&quot;</span>&gt;
+<a name="l00006"></a>00006 &lt;/span&gt;
+<a name="l00007"></a>00007 &lt;/p&gt;
+<a name="l00008"></a>00008 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

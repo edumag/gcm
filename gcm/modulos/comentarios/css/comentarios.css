@@ -1,100 +1,81 @@
+
 #caja_ultimos_comentarios {
 	font-size: x-small;
 	padding: 2px;
 }
-
 #autor_comentario {
-   color: #000;
+   color: <?=$this->color("body-11")?>;
    font-weight: bold;
 	display: inline;
 }
-
 #fecha_comentario {
 	display: inline;
 }
-
 #titulo_contenido {
 	font-weight: bold;
-	background: #f0e7ca ;
+	background: <?=$this->color("comentarios-00")?> ;
 	color: black;
-	border: dotted  #dcd9c5;
+	border: dotted  <?=$this->color("comentarios-01")?>;
 }
-
 #cuerpo_comentario {
 	font-size: smaller;
 }
-
-
 #caja_comentarios {
    padding: 10px;
    margin: 10px;
 }
-
 .caja_comentario_ind {
-   /* border-bottom: 3px dotted  #8385b5; */
+   /* border-bottom: 3px dotted  <?=$this->color("comentarios-02")?>; */
    padding: 5px;
    margin: 5px;
-
 }
 .encabezado_comentario {
-   border-bottom: 1px solid #000;
+   border-bottom: 1px solid <?=$this->color("body-11")?>;
 }
-
 .encabezado_comentario a, img, a:hover  {
    text-decoration: none;
    border: 0px;
 }
-
 .fecha_comentario {
    display: inline;
    float: right;
    margin: 0;
-
 }
-
 .texto_comentario {
    margin: 15px;
 }
-
-/* Formulario para aÃ±adir comentarios */
-
+/* Formulario para aýadir comentarios */
 .form_comentario {
    width: 100%;
    padding: 0;
-   border-top: 1px solid #777;
-   border-bottom: 1px solid #789;
+   border-top: 1px solid <?=$this->color("comentarios-03")?>;
+   border-bottom: 1px solid <?=$this->color("comentarios-04")?>;
    margin: 0;
    margin-bottom: 10px;
-   background: #ddd;
+   background: <?=$this->color("body-12")?>;
 }
-
 .form_comentario form {
    padding: 10px;
    margin: 10px;
 }
-
 .form_comentario input, .form_comentario textarea {
-   border: 1px solid #eee;
+   border: 1px solid <?=$this->color("body-18")?>;
    margin: 5px;
    display: block;
    margin-left: 100px;
 }
-
 .form_comentario textarea {
    width: 450px;
    height: 200px;
    display: block;
 }
-
 #titulo_form_comentarios {
-   color: #789;
+   color: <?=$this->color("comentarios-04")?>;
    margin-left: 10px;
 }
-
 .form_comentario label {
    width: 90px;
    float: left;
    text-align: right;
    margin-right: 2px;
 }
-

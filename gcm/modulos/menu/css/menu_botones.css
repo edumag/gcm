@@ -1,3 +1,4 @@
+
 /* Root = Horizontal, Secondary = Vertical */
 ul#menu_botones_horizontal {
    margin: 0;
@@ -21,7 +22,6 @@ ul#menu_botones_horizontal li {
    z-index:100;
 	position: relative;
 	display: inline-block;
-
 }
 ul#menu_botones_horizontal ul {
    line-height: 26px; /* Asegurarnos que tienen espacio */
@@ -55,7 +55,6 @@ ul#menu_botones_horizontal li:hover ul {
 	display: block;
 	position: absolute;
 }
-
 ul#menu_botones_horizontal ul ul {
    display: none;
 }
@@ -70,4 +69,3 @@ ul#menu_botones_horizontal li ul li a {
    display: block;
    width: 100%;
 }
-

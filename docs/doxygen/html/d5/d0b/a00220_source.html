@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/comentarios/html/form_comentario.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/ver_registros/menuAdmin.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,39 +80,26 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e363b1922071f2f95404829d0400fcd6.html">comentarios</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c85c6ef99c18558fb130209efefd0db8.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_7a6a9dd989122f1a21582e97cb95937e.html">ver_registros</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_comentario.html</div>  </div>
+<div class="title">menuAdmin.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form method=<span class="stringliteral">&#39;post&#39;</span> action=<span class="stringliteral">&quot;&lt;?=Router::$dir.Router::$url?&gt;&quot;</span> &gt;
-<a name="l00002"></a>00002 &lt;?=anyadirCaptcha();?&gt;
-<a name="l00003"></a>00003 &lt;input style=<span class="stringliteral">&#39;display: none;&#39;</span> type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;a&#39;</span> value=<span class="stringliteral">&#39;&lt;?=$accion?&gt;&#39;</span> /&gt;
-<a name="l00004"></a>00004 &lt;input style=<span class="stringliteral">&#39;display: none;&#39;</span> type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="charliteral">&#39;m&#39;</span> value=<span class="stringliteral">&#39;comentarios&#39;</span> /&gt;
-<a name="l00005"></a>00005 &lt;?php <span class="keywordflow">if</span> ( $id ) { ?&gt;
-<a name="l00006"></a>00006 &lt;input style=<span class="stringliteral">&#39;display: none;&#39;</span> type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="stringliteral">&#39;id&#39;</span> value=<span class="stringliteral">&#39;&lt;?=$id?&gt;&#39;</span> /&gt;
-<a name="l00007"></a>00007 &lt;?php } ?&gt;
-<a name="l00008"></a>00008 &lt;label <span class="keywordflow">for</span>=<span class="stringliteral">&#39;usuario&#39;</span> &gt;&lt;?=literal(<span class="stringliteral">&#39;Nombre&#39;</span>)?&gt;: &lt;/label&gt;
-<a name="l00009"></a>00009 &lt;input maxlength=<span class="stringliteral">&#39;60&#39;</span> type=<span class="stringliteral">&#39;text&#39;</span> name=<span class="stringliteral">&#39;usuario&#39;</span> value=<span class="stringliteral">&quot;&lt;?=$usuario?&gt;&quot;</span> /&gt;
-<a name="l00010"></a>00010 &lt;label <span class="keywordflow">for</span>=<span class="stringliteral">&#39;mail&#39;</span>&gt;*Email: &lt;/label&gt;
-<a name="l00011"></a>00011 &lt;input maxlength=<span class="stringliteral">&#39;40&#39;</span> type=<span class="stringliteral">&#39;text&#39;</span> name=<span class="stringliteral">&#39;mail&#39;</span> value=<span class="stringliteral">&quot;&lt;?=$mail?&gt;&quot;</span>/&gt;
-<a name="l00012"></a>00012 &lt;label <span class="keywordflow">for</span>=<span class="stringliteral">&#39;texto&#39;</span>&gt;Comentario: &lt;/label&gt;
-<a name="l00013"></a>00013 &lt;textarea <span class="keyword">class</span>=<span class="stringliteral">&#39;editor_simple&#39;</span> maxlength=<span class="stringliteral">&#39;50&#39;</span> name=<span class="stringliteral">&#39;texto&#39;</span>&gt;&lt;?=$texto?&gt;&lt;/textarea&gt;
-<a name="l00014"></a>00014 &lt;input type=<span class="stringliteral">&#39;submit&#39;</span> /&gt;
-<a name="l00015"></a>00015 &lt;br /&gt;
-<a name="l00016"></a>00016 * El email es opcional.
-<a name="l00017"></a>00017 &lt;/form&gt;
-<a name="l00018"></a>00018 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002    <a class="code" href="../../da/de7/a00210_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]=1;
+<a name="l00003"></a>00003    <a class="code" href="../../da/de7/a00210_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Visualización de los registros de la aplicación&quot;</span>;
+<a name="l00004"></a>00004    <a class="code" href="../../da/de7/a00210_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<a class="code" href="../../df/d5f/a00064_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.<span class="stringliteral">&#39;ver_registros/visualizar/&#39;</span>.<a class="code" href="../../df/d5f/a00064_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">Router::$url</a>;
+<a name="l00005"></a>00005 ?&gt;
+<a name="l00006"></a>00006 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

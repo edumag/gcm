@@ -17,11 +17,6 @@
 
 /** 
  * Transformar contenido array en tabla html
- *
- * @category Gcm
- * @author Eduardo Magrané
- * @version 0.1
- *
  */
 
 class Array2table {
@@ -42,10 +37,10 @@ class Array2table {
    function __construct($sufijo='') {
 
       $this->sufijo        = $sufijo         ;
-      self::$base_imagenes = ''              ;
       self::$img_modificar = 'modificar.png' ;
       self::$img_borrar    = 'borrar.png'    ;
       self::$img_ver       = 'ver.png'       ;
+      self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
 
       }
 
@@ -61,15 +56,31 @@ class Array2table {
     * @param $res Array con el contenido
     *        Formato del array $resultado[0][columna]=valor
     *
-    * @param $opciones Array con las diferentes opciones
-    *         identificador = '<nombre columna que hace de identificador>', por defecto 'id'.
-    *         ver           = '<nombre de la acción para entrar en detalles de un registro>'
-    *         modificar     = '<nombre de la acción para modificar>', es necesario tener identificador
-    *         eliminar      = '<nombre de la acción para eliminar registro>', Es necesario identificador
-    *         ocultar_id    = TRUE/FALSE Ocultar columna de identificador.
-    *         url           = 'Url para enlaces de registro'
-    *         accion        = 'Nombre de variable GET que se pasara en url, por defecto 'accion'
-    *         dir_imag      = 'Url del directorio donde se encuentran los iconos modificar, eliminar, etc...
+    * @param $opciones Array con las diferentes opciones:
+    *
+    *     identificador  Nombre columna que hace de identificador>', por defecto 'id'.
+    *     ver            Nombre de la acción para entrar en detalles de un registro>'
+    *     modificar      Nombre de la acción para modificar>', es necesario tener identificador
+    *     eliminar       Nombre de la acción para eliminar registro>', Es necesario identificador
+    *     ocultar_id     TRUE/FALSE Ocultar columna de identificador.
+    *     url            Url para enlaces de registro'
+    *     accion         Nombre de variable GET que se pasara en url, por defecto 'accion'
+    *     dir_imag       Url del directorio donde se encuentran los iconos modificar, eliminar, etc...
+    *     enlaces        Array con el contenido de los campos que contienen un enlace.
+    *
+    *                    Estructura de ejemplo:
+    *
+    *                    array('url' => array(                            // Nombre del campo con el enlace
+    *                                   'campo_enlazado'=>'contenido'     // Nombre del campo que se mostrara en el enlace
+    *                                  ,'titulo_columna'=>'Contenido'     // Titulo de la columna
+    *                                  ,'base_url'=>Router::$base         // Base de la url 
+    *                                    )
+    *                                  )
+    *        Importaante:
+    *           Para que funcione correctamente el campo url debe llegar primero desde la sql que el campo al que enlaza
+    *
+    *     $fila_unica   Campo que deseamos que se muestre en una sola fila de la tabla, util para cuando 
+    *                   es un campo con mucho texto, sin necesidad de ordenarse por él.
     * 
     * @param $orden Nombre de la columna por la que se esta ordenando
     * @param $tipo_orden (asc/desc) 
@@ -80,22 +91,45 @@ class Array2table {
       $num_registros = count($res);
       $num_columnas  = count($res[0]);
 
+      /** Se presenta en una sola fila, para permitir gran cantidad de datos */
+
+      $salida_fila_unica = FALSE ;
+
+      /** Identificador htnl de la tabla, añadiremos id="$table_id" Para distinguirlas*/
+      $table_id      = ( isset($opciones['table_id']))      ? $opciones['table_id']      : FALSE ;
+
       /** url base para enlaces */
       $url           = ( isset($opciones['url']))           ? $opciones['url']           : FALSE ;
+
       /** Nombre de variable get que lleva la acción */
       $accion        = ( isset($opciones['accion']))        ? $opciones['accion']        : FALSE ;
+
       /** identificador base para enlaces */
       $identificador = ( isset($opciones['identificador'])) ? $opciones['identificador'] : FALSE ;
+
       /** ver base para enlaces */
       $ver           = ( isset($opciones['ver']))           ? $opciones['ver']           : FALSE ;
+
       /** modificar base para enlaces */
       $modificar     = ( isset($opciones['modificar']))     ? $opciones['modificar']     : FALSE ;
+
       /** eliminar base para enlaces */
       $eliminar      = ( isset($opciones['eliminar']))      ? $opciones['eliminar']      : FALSE ;
+
       /** ocultar_id base para enlaces */
       $ocultar_id    = ( isset($opciones['ocultar_id']))    ? $opciones['ocultar_id']    : FALSE ;
+
+      /** Generar colgroup en la cabecera de la tabla */
+      $colgroup    = ( isset($opciones['colgroup']))    ? $opciones['colgroup']    : FALSE ;
+
       /** Url del directorio de los iconos */
       self::$base_imagenes = ( isset($opciones['dir_img']))    ? $opciones['dir_img']    : self::$base_imagenes ;
+
+      /** Enlaces definidos desde opciones */
+      $enlaces = ( isset($opciones['enlaces']))    ? $opciones['enlaces']    : FALSE ;
+
+      /** Campos que se desean mostrar en una sola fila */
+      $fila_unica = ( isset($opciones['fila_unica']))    ? $opciones['fila_unica']    : FALSE ;
 
       /* Si no se indica el campo identificador cogemos id por defecto */
 
@@ -104,16 +138,20 @@ class Array2table {
       $simbolo = ( strrpos($url,'?') === FALSE ) ? '?' : '&';        //< Evitar colocar dos veces el interrogante en la url
 
       ?>
-     <table cellpadding="0" cellspacing="0" border="0" id="table" class="tinytable">
+         <table cellpadding="0" cellspacing="0" border="0" <?php if ( $table_id ) echo 'id="'.$table_id.'"';?> class="dataTable">
 
          <?php // Elementos colgroup nos permite modificar presentación por columnas ?>
 
-         <colgroup>
-         <?php foreach ( $res[0] as $columna => $valor ) { ?>
-         <?php if ( $columna == $identificador  && $ocultar_id ) continue; ?>
-         <col id="col_<?php echo htmlspecialchars($columna,ENT_QUOTES);?>"> 
+         <?php if ( $colgroup ) { ?>
+
+            <colgroup>
+            <?php foreach ( $res[0] as $columna => $valor ) { ?>
+            <?php if ( $columna == $identificador  && $ocultar_id ) continue; ?>
+            <col id="col_<?php echo htmlspecialchars($columna,ENT_QUOTES);?>"> 
+            <?php } ?>
+            </colgroup>
+
          <?php } ?>
-         </colgroup>
 
          <thead>
             <tr>
@@ -121,7 +159,7 @@ class Array2table {
 
       if ( $res ) {
 
-         foreach ( $res[0] as $columna => $valor ) {
+         foreach ( $res[0] as $columna => $valor ) {         // Encabezado de tabla
 
             /* Columna de identificador sin ordenación
 
@@ -148,20 +186,50 @@ class Array2table {
                , $this->sufijo.'tipo_orden' => $tipo_orden2
                , $this->sufijo.'pagina' => 1)) ;
 
+            if ( $enlaces && isset($enlaces[$columna]) ) {
+               $titulo_columna = $enlaces[$columna]['titulo_columna'];
+               $campo_enlazado = $enlaces[$columna]['campo_enlazado'];
+               $enlaces_iniciados[] = $campo_enlazado;
+            } elseif ( isset($enlaces_iniciados) && in_array($columna, $enlaces_iniciados) ) {
+               $num_columnas--;
+               continue;
+            } elseif ( isset($fila_unica) && $fila_unica == $columna ) {
+               // Si es un campo que se desea presentar en una sola linea de la tabla
+               // no se debe mostrar su cabecera
+               $num_columnas--;
+               continue;
+            } else {
+               $titulo_columna = $columna;
+               }
+
             echo "\n\t\t\t";
             echo "<th".$clase.">";
-            echo "<a href='".htmlspecialchars($url_orden,ENT_QUOTES)."'>";
+            if ( $url ) echo "<a href='".htmlspecialchars($url_orden,ENT_QUOTES)."'>";
             echo "<h3>";
-            echo $columna;
+            echo $titulo_columna;
             echo "</h3>";
-            echo "</a>";
+            if ( $url ) echo "</a>";
             echo "</th>";
 
             }
 
          }
 
+      if ( $ver ) {
+         $num_columnas++;
+         ?>
+         <th>
+            <h3>
+               <img src='<?=self::$base_imagenes.self::$img_ver?>'
+               width='16' height='16' border='0' title='Visualizar' 
+               alt='[*]' />
+            </h3>
+         </th>
+         <?php
+         }
+
       if ( $modificar ) {
+         $num_columnas++;
          ?>
          <th>
             <h3>
@@ -174,24 +242,13 @@ class Array2table {
          }
 
       if ( $eliminar ) {
+         $num_columnas++;
          ?>
          <th>
             <h3>
                <img src='<?=self::$base_imagenes.self::$img_borrar?>'
                width='16' height='16' border='0' title='Eliminar' 
                alt='[-]' />
-            </h3>
-         </th>
-         <?php
-         }
-
-      if ( $ver ) {
-         ?>
-         <th>
-            <h3>
-               <img src='<?=self::$base_imagenes.self::$img_ver?>'
-               width='16' height='16' border='0' title='Visualizar' 
-               alt='[*]' />
             </h3>
          </th>
          <?php
@@ -205,7 +262,7 @@ class Array2table {
 
       foreach ( $res as $fila ) {          // filas del body de la tabla
 
-         $enlace = NULL;
+         $enlace = FALSE;
 
          echo "\n\t\t<tr class='".$fpi."'>";
 
@@ -232,6 +289,24 @@ class Array2table {
                $col--;
                echo ''; 
 
+            } elseif ( $enlaces && isset($enlaces[$key_columna]) ) {
+               $DATO=trim($columna);
+               $campo_enlazado = $enlaces[$key_columna]['campo_enlazado'];
+               $enlaces_creados[$campo_enlazado]['inicio'] = sprintf("\n\t\t\t<td %s><a href='%s%s'>",$clase_columna,$enlaces[$key_columna]['base_url'],$DATO);
+               if ( isset($enlaces_creados[$campo_enlazado]['inicio']) && isset($enlaces_creados[$campo_enlazado]['final']) ) 
+                  echo $enlaces_creados[$campo_enlazado]['inicio'].$enlaces_creados[$campo_enlazado]['final'];
+
+            } elseif ( isset($enlaces_creados[$key_columna]) ) {
+               $DATO=trim($columna);
+               $clave_enlace = $key_columna;
+               $enlaces_creados[$clave_enlace]['final'] = sprintf("%s</a></td>",$DATO);
+               if ( isset($enlaces_creados[$clave_enlace]['inicio']) && isset($enlaces_creados[$clave_enlace]['final']) ) 
+                  echo $enlaces_creados[$clave_enlace]['inicio'].$enlaces_creados[$clave_enlace]['final'];
+
+            } elseif ( isset($fila_unica) && $fila_unica == $key_columna ) {
+               $DATO=trim($columna);
+               $salida_fila_unica .= sprintf("\n\t\t<tr><td colspan='%s' %s>%s</td></tr>",$num_columnas,$clase_columna,$DATO);
+               
             } elseif ($key_columna == "img" ) {
                $DATO=trim($columna);
                printf("\n\t\t\t<td".$clase_columna."> <img width='60px' src='%s' /></td>",$DATO);
@@ -284,6 +359,10 @@ class Array2table {
             } 
 
          echo "\n\t\t</tr>";
+
+         $enlaces_creados = array();
+         if ( $salida_fila_unica ) echo $salida_fila_unica;
+         $salida_fila_unica = '';
 
          $fpi = ( $fpi == 'evenrow' ) ? 'oddrow' : 'evenrow';
 

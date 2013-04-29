@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/js/general.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/farbtastic.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,181 +81,101 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e0a24ccc065b8a3374588f0638fa40a0.html">js</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1d927d548771ddffa1e7287445c148df.html">css</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">general.js</div>  </div>
+<div class="title">farbtastic.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/** gcm.js</span>
-<a name="l00002"></a>00002 <span class="comment"> *</span>
-<a name="l00003"></a>00003 <span class="comment"> * Funciones javascript imprescindibles para el funcionamiento de gcm</span>
-<a name="l00004"></a>00004 <span class="comment"> *</span>
-<a name="l00005"></a>00005 <span class="comment"> */</span>
-<a name="l00006"></a>00006 <span class="comment"></span>
-<a name="l00007"></a>00007 <span class="comment">/** Ajax</span>
-<a name="l00008"></a>00008 <span class="comment"> *</span>
-<a name="l00009"></a>00009 <span class="comment"> * Funciones javascript para la administración de la aplización</span>
-<a name="l00010"></a>00010 <span class="comment"> * </span>
-<a name="l00011"></a>00011 <span class="comment"> * @author Eduardo Magrané</span>
-<a name="l00012"></a>00012 <span class="comment"> */</span>
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="keyword">function</span> newAjax() {
-<a name="l00015"></a>00015    var xmlhttp = <span class="keyword">false</span>;
-<a name="l00016"></a>00016    <span class="keywordflow">try</span> {
-<a name="l00017"></a>00017       xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="stringliteral">&quot;Msxml2.XMLHTTP&quot;</span>);
-<a name="l00018"></a>00018    } <span class="keywordflow">catch</span> (e1) {
-<a name="l00019"></a>00019       <span class="keywordflow">try</span> {
-<a name="l00020"></a>00020          xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="stringliteral">&quot;Microsoft.XMLHTTP&quot;</span>);
-<a name="l00021"></a>00021       } <span class="keywordflow">catch</span> (e2) {
-<a name="l00022"></a>00022          xmlhttp = <span class="keyword">false</span>;
-<a name="l00023"></a>00023       }
-<a name="l00024"></a>00024    }
-<a name="l00025"></a>00025    <span class="keywordflow">if</span> (!xmlhttp &amp;&amp; (typeof XMLHttpRequest != <span class="stringliteral">&#39;undefined&#39;</span> || window.XMLHttpRequest)) {
-<a name="l00026"></a>00026       xmlhttp = <span class="keyword">new</span> XMLHttpRequest();
-<a name="l00027"></a>00027    }
-<a name="l00028"></a>00028    <span class="keywordflow">return</span> xmlhttp ;
-<a name="l00029"></a>00029 }
-<a name="l00030"></a>00030 <span class="comment"></span>
-<a name="l00031"></a>00031 <span class="comment">/**</span>
-<a name="l00032"></a>00032 <span class="comment">* pedirDatos</span>
-<a name="l00033"></a>00033 <span class="comment">*/</span>
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 var nSolicitud = 0;
-<a name="l00036"></a>00036 var pedido;
-<a name="l00037"></a>00037 <span class="comment"></span>
-<a name="l00038"></a>00038 <span class="comment">/** pedirDatos()</span>
-<a name="l00039"></a>00039 <span class="comment"> *</span>
-<a name="l00040"></a>00040 <span class="comment"> * Solicitar una respuesta</span>
-<a name="l00041"></a>00041 <span class="comment"> *</span>
-<a name="l00042"></a>00042 <span class="comment"> * @param url url al servidor</span>
-<a name="l00043"></a>00043 <span class="comment"> * @param accion funcion allamar al recibir los resultados</span>
-<a name="l00044"></a>00044 <span class="comment"> * @param confirmacion Mensaje que se presenta para confirmar la acción</span>
-<a name="l00045"></a>00045 <span class="comment"> *        si no hay no se pide.</span>
-<a name="l00046"></a>00046 <span class="comment"> *</span>
-<a name="l00047"></a>00047 <span class="comment"> * @autor Eduardo Magrané</span>
-<a name="l00048"></a>00048 <span class="comment"> * @version 0.2</span>
-<a name="l00049"></a>00049 <span class="comment"> *</span>
-<a name="l00050"></a>00050 <span class="comment"> */</span>
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="keyword">function</span> pedirDatos(url , accion , confirmacion){
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054    var <span class="keyword">self</span> = <span class="keyword">this</span>;
-<a name="l00055"></a>00055    nSolicitud++ ;
-<a name="l00056"></a>00056    var indicador=<span class="keyword">false</span>;
-<a name="l00057"></a>00057    var temporizador=<span class="keyword">false</span>;
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059    <span class="keywordflow">if</span> ( confirmacion ) {
-<a name="l00060"></a>00060       <span class="keywordflow">if</span> ( ! confirm(confirmacion) ) {
-<a name="l00061"></a>00061          <span class="keywordflow">return</span> FALSE;
-<a name="l00062"></a>00062       }
-<a name="l00063"></a>00063    }
-<a name="l00064"></a>00064    <span class="keyword">self</span>.pedido = newAjax();
-<a name="l00065"></a>00065    <span class="keywordflow">if</span> ( ! <span class="keyword">self</span>.pedido ) {
-<a name="l00066"></a>00066       alert(<span class="stringliteral">&#39;ERROR::No se pudo crear una conexión con ajax&#39;</span>);
-<a name="l00067"></a>00067       <span class="keywordflow">return</span> FALSE;
-<a name="l00068"></a>00068    }
-<a name="l00069"></a>00069    <span class="keyword">self</span>.pedido.open(<span class="stringliteral">&#39;GET&#39;</span>,url, <span class="keyword">true</span>);
-<a name="l00070"></a>00070    <span class="comment">//pedido.open(&#39;GET&#39;,url, false);</span>
-<a name="l00071"></a>00071    <span class="keyword">self</span>.pedido.onreadystatechange=eval(accion) ;
-<a name="l00072"></a>00072    <span class="keyword">self</span>.pedido.send(null);
-<a name="l00073"></a>00073 }
-<a name="l00074"></a>00074 <span class="comment"></span>
-<a name="l00075"></a>00075 <span class="comment">/**</span>
-<a name="l00076"></a>00076 <span class="comment"> * Con esta función podemos conmutar la visualización de una capa</span>
-<a name="l00077"></a>00077 <span class="comment"> */</span>
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079 <span class="keyword">function</span> visualizar( <span class="keywordtype">id</span> ) {
-<a name="l00080"></a>00080    <span class="keywordflow">if</span> (document.getElementById){
-<a name="l00081"></a>00081       var elemento = document.getElementById(<span class="keywordtype">id</span>);
-<a name="l00082"></a>00082       <span class="keywordflow">if</span> (elemento.style.display == <span class="stringliteral">&quot;none&quot;</span>) {
-<a name="l00083"></a>00083          <span class="comment">//elemento.style.display = &quot;&quot;;</span>
-<a name="l00084"></a>00084          $(elemento).fadeIn(500);
-<a name="l00085"></a>00085       } <span class="keywordflow">else</span> {
-<a name="l00086"></a>00086          <span class="comment">//elemento.style.display = &quot;none&quot;;</span>
-<a name="l00087"></a>00087          $(elemento).fadeOut(100);
-<a name="l00088"></a>00088       }
-<a name="l00089"></a>00089    }
-<a name="l00090"></a>00090 }
-<a name="l00091"></a>00091 <span class="comment"></span>
-<a name="l00092"></a>00092 <span class="comment">/**</span>
-<a name="l00093"></a>00093 <span class="comment">* Crear una ventana con javascript con el contenido de un div existente</span>
-<a name="l00094"></a>00094 <span class="comment">* centrarlo en la ventana y añadir un boton de cierre</span>
-<a name="l00095"></a>00095 <span class="comment">*</span>
-<a name="l00096"></a>00096 <span class="comment">* @param titulo Titulo a mostrar en la ventana</span>
-<a name="l00097"></a>00097 <span class="comment">* @param contenido Contenido de la ventana</span>
-<a name="l00098"></a>00098 <span class="comment">* @oaram identificador Id de la ventana</span>
-<a name="l00099"></a>00099 <span class="comment">*</span>
-<a name="l00100"></a>00100 <span class="comment">* @todo Hacer la ventana arrastrable y evitar que se repira una ventana con el mismo identifiador</span>
-<a name="l00101"></a>00101 <span class="comment">*/</span>
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103 <span class="keyword">function</span> ventana(titulo,contenido, identificador) {
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105    <span class="comment">// centramos ventana</span>
-<a name="l00106"></a>00106    var topp = 40 ;
-<a name="l00107"></a>00107    var leftt = 30 ;
-<a name="l00108"></a>00108    win = document.createElement(<span class="stringliteral">&#39;div&#39;</span>);
-<a name="l00109"></a>00109    <span class="comment">//document.getElementById(&#39;contenido&#39;).appendChild(win);</span>
-<a name="l00110"></a>00110    <span class="keywordflow">if</span> ( document.getElementById(<span class="stringliteral">&#39;editando&#39;</span>) ) {
-<a name="l00111"></a>00111       document.getElementById(<span class="stringliteral">&#39;editando&#39;</span>).appendChild(win);
-<a name="l00112"></a>00112    } <span class="keywordflow">else</span> {
-<a name="l00113"></a>00113       document.getElementById(<span class="stringliteral">&#39;contenido&#39;</span>).appendChild(win);
-<a name="l00114"></a>00114    }
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116    win.id = <span class="stringliteral">&#39;ventana_&#39;</span>+identificador;
-<a name="l00117"></a>00117    win.className+=<span class="stringliteral">&#39; ventana_flotante&#39;</span>;
-<a name="l00118"></a>00118    contenido = <span class="stringliteral">&#39;&lt;div class=&quot;titulo_ventana_flotante&quot; style=&quot;text-align:right&quot;&gt;&lt;span style=&quot;float:left&quot;&gt;&#39;</span>+titulo+<span class="stringliteral">&#39;&lt;/span&gt;&lt;span style=&quot;position:relative;left: 0px; &quot; &gt;&lt;a href=&quot;javascript:this.cerrar(\&#39;&#39;</span>+win.id+<span class="charliteral">&#39;\&#39;</span>)<span class="stringliteral">&quot;&gt;X&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;</span>padding: 15px<span class="stringliteral">&quot;&gt;&#39; + contenido + &#39;&lt;/div&gt;&#39;;</span>
-<a name="l00119"></a>00119 <span class="stringliteral">   win.innerHTML = contenido;</span>
-<a name="l00120"></a>00120 <span class="stringliteral"></span>
-<a name="l00121"></a>00121 <span class="stringliteral">   this.cerrar = function(id){</span>
-<a name="l00122"></a>00122 <span class="stringliteral">     cr = document.getElementById(id);</span>
-<a name="l00123"></a>00123 <span class="stringliteral">     cr.parentNode.removeChild(cr);</span>
-<a name="l00124"></a>00124 <span class="stringliteral"></span>
-<a name="l00125"></a>00125 <span class="stringliteral">   }</span>
-<a name="l00126"></a>00126 <span class="stringliteral"></span>
-<a name="l00127"></a>00127 <span class="stringliteral">}</span>
-<a name="l00128"></a>00128 <span class="stringliteral"></span>
-<a name="l00129"></a>00129 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00130"></a>00130 <span class="comment">/**</span>
-<a name="l00131"></a>00131 <span class="comment"> * Enviar email oculto</span>
-<a name="l00132"></a>00132 <span class="comment"> */</span>
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134 function enviarEmail(nom,dominio){
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136    window.open(&#39;mailto:&#39;+nom+&#39;@&#39;+dominio,&#39;_self&#39;);
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138 }
-<a name="l00139"></a>00139 <span class="comment"></span>
-<a name="l00140"></a>00140 <span class="comment">/**</span>
-<a name="l00141"></a>00141 <span class="comment"> * Comprobar si una variable es array o no</span>
-<a name="l00142"></a>00142 <span class="comment"> *</span>
-<a name="l00143"></a>00143 <span class="comment"> * @return true/false</span>
-<a name="l00144"></a>00144 <span class="comment"> */</span>
-<a name="l00145"></a>00145 
-<a name="l00146"></a>00146 function is_array(obj) {
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148    if (obj.constructor.toString().indexOf(&quot;Array<span class="stringliteral">&quot;) == -1)</span>
-<a name="l00149"></a>00149 <span class="stringliteral">      return false;</span>
-<a name="l00150"></a>00150 <span class="stringliteral">   else</span>
-<a name="l00151"></a>00151 <span class="stringliteral">      return true;</span>
-<a name="l00152"></a>00152 <span class="stringliteral">}</span>
-<a name="l00153"></a>00153 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00154"></a>00154 <span class="comment">/** </span>
-<a name="l00155"></a>00155 <span class="comment"> * Funciones que se inician al cargar la pagina</span>
-<a name="l00156"></a>00156 <span class="comment"> */</span>
-<a name="l00157"></a>00157 
-<a name="l00158"></a>00158 addLoadEvent(function(){
-<a name="l00159"></a>00159    paneles();
-<a name="l00160"></a>00160    });
-<a name="l00161"></a>00161 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment"></span>
+<a name="l00002"></a>00002 <span class="comment">/**</span>
+<a name="l00003"></a>00003 <span class="comment"> * Farbtastic Color Picker 1.2</span>
+<a name="l00004"></a>00004 <span class="comment"> * � 2008 Steven Wittens</span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
+<a name="l00006"></a>00006 <span class="comment"> * This program is free software; you can redistribute it and/or modify</span>
+<a name="l00007"></a>00007 <span class="comment"> * it under the terms of the GNU General Public License as published by</span>
+<a name="l00008"></a>00008 <span class="comment"> * the Free Software Foundation; either version 2 of the License, or</span>
+<a name="l00009"></a>00009 <span class="comment"> * (at your option) any later version.</span>
+<a name="l00010"></a>00010 <span class="comment"> *</span>
+<a name="l00011"></a>00011 <span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="l00012"></a>00012 <span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="l00013"></a>00013 <span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="l00014"></a>00014 <span class="comment"> * GNU General Public License for more details.</span>
+<a name="l00015"></a>00015 <span class="comment"> *</span>
+<a name="l00016"></a>00016 <span class="comment"> * You should have received a copy of the GNU General Public License</span>
+<a name="l00017"></a>00017 <span class="comment"> * along with this program; if not, write to the Free Software</span>
+<a name="l00018"></a>00018 <span class="comment"> * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</span>
+<a name="l00019"></a>00019 <span class="comment"> */</span>
+<a name="l00020"></a>00020 .farbtastic {
+<a name="l00021"></a>00021   position: relative;
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 .farbtastic * {
+<a name="l00024"></a>00024   position: absolute;
+<a name="l00025"></a>00025   cursor: crosshair;
+<a name="l00026"></a>00026 }
+<a name="l00027"></a>00027 .farbtastic, .farbtastic .wheel {
+<a name="l00028"></a>00028   width: 195px;
+<a name="l00029"></a>00029   height: 195px;
+<a name="l00030"></a>00030 }
+<a name="l00031"></a>00031 .farbtastic .color, .farbtastic .overlay {
+<a name="l00032"></a>00032   top: 47px;
+<a name="l00033"></a>00033   left: 47px;
+<a name="l00034"></a>00034   width: 101px;
+<a name="l00035"></a>00035   height: 101px;
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 .farbtastic .wheel {
+<a name="l00038"></a>00038   background: url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$this-&gt;ruta(&quot;temas&quot;,&quot;img&quot;,&quot;wheel.png&quot;)?&gt;&#39;</span>) no-repeat;
+<a name="l00039"></a>00039   width: 195px;
+<a name="l00040"></a>00040   height: 195px;
+<a name="l00041"></a>00041 }
+<a name="l00042"></a>00042 .farbtastic .overlay {
+<a name="l00043"></a>00043   background: url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$this-&gt;ruta(&quot;temas&quot;,&quot;img&quot;,&quot;mask.png&quot;)?&gt;&#39;</span>) no-repeat;
+<a name="l00044"></a>00044 }
+<a name="l00045"></a>00045 .farbtastic .marker {
+<a name="l00046"></a>00046   width: 17px;
+<a name="l00047"></a>00047   height: 17px;
+<a name="l00048"></a>00048   margin: -8px 0 0 -8px;
+<a name="l00049"></a>00049   overflow: hidden; 
+<a name="l00050"></a>00050   background: url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$this-&gt;ruta(&quot;temas&quot;,&quot;img&quot;,&quot;marker.png&quot;)?&gt;&#39;</span>) no-repeat;
+<a name="l00051"></a>00051 }
+<a name="l00052"></a>00052 .colorwell {
+<a name="l00053"></a>00053  border: 2px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
+<a name="l00054"></a>00054  width: 6em;
+<a name="l00055"></a>00055  text-align: center;
+<a name="l00056"></a>00056  cursor: pointer;
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 body .colorwell-selected {
+<a name="l00059"></a>00059  border: 2px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-18&quot;</span>)?&gt;;
+<a name="l00060"></a>00060  font-weight: bold;
+<a name="l00061"></a>00061 }
+<a name="l00062"></a>00062 <span class="preprocessor">#selector_colores table {</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span>display: table-cell;
+<a name="l00064"></a>00064  border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
+<a name="l00065"></a>00065 }
+<a name="l00066"></a>00066 <span class="preprocessor">#selector_colores thead td {</span>
+<a name="l00067"></a>00067 <span class="preprocessor"></span> border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
+<a name="l00068"></a>00068  background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
+<a name="l00069"></a>00069  color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
+<a name="l00070"></a>00070  text-align: center;
+<a name="l00071"></a>00071  font-weight: bold;
+<a name="l00072"></a>00072 }
+<a name="l00073"></a>00073 <span class="preprocessor">#picker {</span>
+<a name="l00074"></a>00074 <span class="preprocessor"></span>   padding: 5px;
+<a name="l00075"></a>00075    <span class="keywordtype">float</span>: right;
+<a name="l00076"></a>00076 }
+<a name="l00077"></a>00077 <span class="preprocessor">#selector_colores {</span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span>    display: block;
+<a name="l00079"></a>00079     height: 300px;
+<a name="l00080"></a>00080     overflow: <span class="keyword">auto</span>;
+<a name="l00081"></a>00081 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

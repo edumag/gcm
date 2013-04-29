@@ -4,6 +4,8 @@
 
 <br />
 
+   <?php // echo "<pre>" ; print_r($this->campos) ; echo "</pre>"; // DEV  ?>
+
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
     <?php if ( isset($this->campos[$campo]['privado']) && $this->campos[$campo]['privado'] == 1 ) { continue; } ?>
@@ -16,12 +18,16 @@
 
    <div class="caja_campo" id="caja_campo_<?=$campo?>">
 
-   <?php if ( $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
+   <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
 
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
    <textarea readonly="readonly" rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
 
-   <?php } elseif ( $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
+   
+      <?php // si es el campo con contraseña no se presenta ?>
+
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
       <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>
       <select disabled name="<?=$campo?>">
@@ -38,12 +44,12 @@
          <?php } ?>
       </select>
 
-   <?php } elseif ( $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
    
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
    <input readonly="readonly" name="<?=$campo?>"  type="date" value="<?=str_replace(' ','T',$this->valores($campo))?>"/>
 
-   <?php } elseif ( $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
    <input readonly="readonly" name="<?=$campo?>"  type="datetime-local" value="<?php if ( $this->valores($campo) !== '0000-00-00 00:00:00' ) { echo strftime("%Y-%m-%dT%H:%M",strtotime($this->valores($campo))); } else { echo ''; } ?>"/>

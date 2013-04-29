@@ -2,16 +2,23 @@
 
 /**
  * @file Autentificacion.php
+ * @brief Sistema de autentificación de usuarios.
+ *
+ * Sistema basado en roles de usuario.
  * 
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  24/11/09
- *  Revision  SVN $Id: Autentificacion.php 650 2012-10-04 07:17:48Z eduardo $
  * Copyright  Copyright (c) 2009, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ */
+
+/**
+ * @defgroup autentificacion Autentificación
+ * @ingroup usuarios
+ * @{
  */
 
 /** @brief Componente Autentificacion
@@ -30,7 +37,15 @@ class Autentificacion {
 
    public $sufijo;
 
-   /** Lista de acciones con roles permitidos */ 
+   /** 
+    * Lista de acciones con roles permitidos
+    *
+    * formato del array:
+    * @code
+    * $acciones[modulo][accion] = array(roles);
+    * @endcode
+    */ 
+
 
    private $acciones;
 
@@ -50,7 +65,7 @@ class Autentificacion {
       $this->pdo = $pdo;
       $this->sufijo = $sufijo;
 
-      $this->acciones = ( $acciones ) ? $acciones : array('administrar' => array('administrador') ) ;
+      $this->acciones = ( $acciones ) ? $acciones : array('admin' => array('administrar' => array('administrador')) ) ;
 
       /* Comprobar existencia de tabla de usuarios */
 
@@ -73,6 +88,16 @@ class Autentificacion {
       if ( $num_admnistradores < 1  ) 
          $this->crear_admin_defecto();
 
+      }
+
+   /**
+    * Recibir array con acciones que seran sumadas a las que ya tenemos
+    *
+    * @param $acciones Array con las $acciones
+    */
+
+   function set_acciones($acciones) {
+      $this->acciones = array_merge($this->acciones, $acciones);
       }
 
    /**
@@ -118,41 +143,49 @@ class Autentificacion {
 
    function crear_tabla() {
 
-      $SQL = "CREATE TABLE ".$this->sufijo."roles (
-         id  INT PRIMARY KEY,
-         nombre varchar(150) NOT NULL,
-         descripcion varchar(500) NOT NULL
-         )
-         ";
+      if ( ! $this->existe_tabla($this->sufijo.'roles') ) {
 
-      if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+         $SQL = "CREATE TABLE ".$this->sufijo."roles (
+            id  INT PRIMARY KEY,
+            nombre varchar(150) NOT NULL,
+            descripcion varchar(500) NOT NULL
+            )
+            ";
 
-         throw new Exception("Error al crear tabla de ".$this->sufijo."roles\n".$pdo_error);
-         return FALSE;
+         if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+
+            throw new Exception("Error al crear tabla de ".$this->sufijo."roles\n".$pdo_error);
+            return FALSE;
+
+            }
 
          }
 
-      $SQL = "CREATE TABLE ".$this->sufijo."r_usuarios_roles (
-         usuarios_id int(11) NOT NULL,
-         roles_id int(11) NOT NULL,
-         PRIMARY KEY (usuarios_id,roles_id)
-         )
-         ";
+      if ( ! $this->existe_tabla($this->sufijo.'r_usuarios_roles') ) {
 
-      if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+         $SQL = "CREATE TABLE ".$this->sufijo."r_usuarios_roles (
+            usuarios_id int(11) NOT NULL,
+            roles_id int(11) NOT NULL,
+            PRIMARY KEY (usuarios_id,roles_id)
+            )
+            ";
 
-         throw new Exception("Error al crear tabla de ".$this->sufijo."r_usuarios_roles\n".$pdo_error);
-         return FALSE;
+         if ( ! $sqlResult = $this->pdo->query($SQL) ) {
+
+            throw new Exception("Error al crear tabla de ".$this->sufijo."r_usuarios_roles\n".$pdo_error);
+            return FALSE;
+
+            }
 
          }
 
       $SQL="CREATE TABLE ".$this->sufijo."usuarios (
-         id INT PRIMARY KEY,
+         id INT  PRIMARY KEY AUTO_INCREMENT ,
          usuario CHAR(50) , 
          pass_md5 CHAR(32) ,
          nombre CHAR(50) , 
          apellidos CHAR(50) , 
-         fecha_creacion datetime DEFAULT NULL,
+         fecha_creacion datetime  NOT NULL,
          fecha_modificacion timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ,
          mail CHAR(60) ,
          telefono CHAR(15)
@@ -201,6 +234,8 @@ class Autentificacion {
 
       } elseif ( count($retorno) < 1 ) {
 
+         registrar(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
+
          return FALSE;
 
          }
@@ -229,19 +264,21 @@ class Autentificacion {
 
       } elseif ( count($retorno) < 1 ) {
 
-         return FALSE;
+         // Si es un usuario sin rol le adjudicamos el de usuario que es el mínimo.
+         $roles[] = 'usuario';
 
-         }
+      } else {
 
-      foreach ( $retorno as $rol ) {
-         $roles[] = $rol[0];
+         foreach ( $retorno as $rol ) {
+            $roles[] = $rol[0];
+            }
          }
 
       /* Cramos sessión para usuario */
 
-      $_SESSION[$this->sufijo.'_id'] = $id;
-      $_SESSION[$this->sufijo.'_usario'] = $usuario;
-      $_SESSION[$this->sufijo.'_roles'] = serialize($roles);
+      $_SESSION[$this->sufijo.'id'] = $id;
+      $_SESSION[$this->sufijo.'usuario'] = $usuario;
+      $_SESSION[$this->sufijo.'roles'] = serialize($roles);
 
       return TRUE;
 
@@ -257,7 +294,7 @@ class Autentificacion {
 
        global $_SESSION;
 
-       return ( isset($_SESSION[$this->sufijo.'_id']) ) ? $_SESSION[$this->sufijo.'_id'] : FALSE ;
+       return ( isset($_SESSION[$this->sufijo.'id']) ) ? $_SESSION[$this->sufijo.'id'] : FALSE ;
 
       }
 
@@ -271,9 +308,9 @@ class Autentificacion {
 
    function es_admin() {
 
-      if ( ! isset($_SESSION[$this->sufijo.'_roles']) ) return FALSE;
+      if ( ! isset($_SESSION[$this->sufijo.'roles']) ) return FALSE;
 
-      $roles = unserialize($_SESSION[$this->sufijo.'_roles']);
+      $roles = unserialize($_SESSION[$this->sufijo.'roles']);
 
       return in_array('administrador',$roles) ;
 
@@ -286,8 +323,19 @@ class Autentificacion {
     */
 
    function id() {
-      return ( isset($_SESSION[$this->sufijo.'_id']) ) ? $_SESSION[$this->sufijo.'_id']: FALSE ;
+      return ( isset($_SESSION[$this->sufijo.'id']) ) ? $_SESSION[$this->sufijo.'id']: FALSE ;
       }
+
+   /**
+    * @defgroup permisos Permisos 
+    *
+    * Gestión de permisos de usuarios.
+    *
+    *
+    *
+    * @ingroup usuarios
+    * @{
+    */
 
    /** 
     * Devolvemos array con roles de usuario
@@ -295,9 +343,9 @@ class Autentificacion {
 
    function roles_usuario() {
 
-      if ( ! isset($_SESSION[$this->sufijo.'_roles']) ) return FALSE;
+      if ( ! isset($_SESSION[$this->sufijo.'roles']) ) return FALSE;
 
-      return unserialize($_SESSION[$this->sufijo.'_roles']);
+      return unserialize($_SESSION[$this->sufijo.'roles']);
 
       }
 
@@ -306,14 +354,15 @@ class Autentificacion {
     *
     * Devolver array con los roles de la acción
     *
+    * @param $modulo Módulo
     * @param $accion Acción
     */
 
-   function roles_accion($accion) {
+   function roles_accion($modulo, $accion) {
 
       global $gcm;
 
-      if ( isset($this->acciones[$accion]) ) return $this->acciones[$accion];
+      if ( isset($this->acciones[$modulo][$accion]) ) return $this->acciones[$modulo][$accion];
 
       return FALSE;
 
@@ -322,10 +371,12 @@ class Autentificacion {
    /**
     * Comprobar permiso para usuario segun accion a realizar
     *
-    * @param $accion Accion a realizar
+    * @param $accion Accion a realizar, por defecto 'administrar'
+    * @param $modulo Módulo al que pertenece la acción, por defecto 'admin'
+    *
     */
 
-   function permiso($accion) {
+   function permiso($accion = 'administrar', $modulo = 'admin') {
 
       global $gcm;
 
@@ -340,7 +391,12 @@ class Autentificacion {
       if ( $gcm->au->es_admin() ) return TRUE;
 
       $roles_usuario = $this->roles_usuario();
-      $roles_accion  = $this->roles_accion($accion);
+      $roles_accion  = $this->roles_accion($modulo,$accion);
+
+      if ( ! $roles_accion ) {
+         registrar(__FILE__,__LINE__,'Sin permisos para ['.$modulo.'->'.$accion.'()]','DEBUG');
+         return FALSE;
+         }
 
       foreach ( $roles_accion as $rol_accion ) {
          if ( in_array($rol_accion, $roles_usuario) ) return TRUE;
@@ -350,6 +406,8 @@ class Autentificacion {
 
       }
 
+   /** @} */
+
    /**
     * salir
     *
@@ -358,9 +416,9 @@ class Autentificacion {
 
    function salir() {
 
-      if ( isset($_SESSION[$this->sufijo.'_id'])  ) unset($_SESSION[$this->sufijo.'_id']);
-      if ( isset($_SESSION[$this->sufijo.'_admin'])  ) unset($_SESSION[$this->sufijo.'_admin']);
-      if ( isset($_SESSION[$this->sufijo.'_roles'])  ) unset($_SESSION[$this->sufijo.'_roles']);
+      if ( isset($_SESSION[$this->sufijo.'id'])  ) unset($_SESSION[$this->sufijo.'id']);
+      if ( isset($_SESSION[$this->sufijo.'admin'])  ) unset($_SESSION[$this->sufijo.'admin']);
+      if ( isset($_SESSION[$this->sufijo.'roles'])  ) unset($_SESSION[$this->sufijo.'roles']);
       session_destroy();
       return TRUE;
 
@@ -394,6 +452,9 @@ class Autentificacion {
 
       $sql = "INSERT INTO ".$this->sufijo."roles VALUES (1,'administrador','El administrador tiene todos los privilegios');";
       $sql .= "INSERT INTO ".$this->sufijo."roles VALUES (2,'usuario','Usuario registrado');";
+      $sql .= "INSERT INTO ".$this->sufijo."roles VALUES (3,'editor','Puede añadir su propio contenido');";
+      $sql .= "INSERT INTO ".$this->sufijo."roles VALUES (4,'traductor','Puede modificar las traducciones');";
+
       $comando = $this->pdo->prepare($sql);
       if ( !$comando ) {
          $err = $this->pdo->errorInfo();
@@ -407,24 +468,38 @@ class Autentificacion {
          throw new Exception('Error al insertar registro: '.$men_error);
          }
 
+      unset($comando);
 
-      $sql = "INSERT INTO ".$this->sufijo."r_usuarios_roles VALUES (1,1);";
-      $sql .= "INSERT INTO ".$this->sufijo."r_usuarios_roles VALUES (1,2);";
-      $comando = $this->pdo->prepare($sql);
-      if ( !$comando ) {
-         $err = $this->pdo->errorInfo();
-         $men_error = $err[2];
-         throw new Exception('Error al preparar sql'.$men_error);
-         }
-
-      if ( ! $comando->execute() ) {
-         $err = $this->pdo->errorInfo();
-         $men_error = $err[2];
-         throw new Exception('Error al insertar registro: '.$men_error);
-         }
+      $this->insertar_rol_usuario(1,1);
+      $this->insertar_rol_usuario(1,2);
 
       }
 
+   /**
+    * Añadir un nuevo rol a usuario
+    */
+
+   function insertar_rol_usuario($usuario_id, $rol_id) {
+
+      $sql = "INSERT INTO ".$this->sufijo."r_usuarios_roles VALUES (".$usuario_id.",".$rol_id.")";
+
+      $comando = $this->pdo->exec($sql);
+
+      if ( !$comando ) {
+         $err = $this->pdo->errorInfo();
+         $men_error = $err[2];
+         throw new Exception('Error al wjwcutar sql: '.$sql."\n\n<br />".depurar($err));
+         }
+
+      // if ( ! $comando->execute() ) {
+      //    $err = $this->pdo->errorInfo();
+      //    $men_error = $err[2];
+      //    throw new Exception('Error al insertar registro: '.$men_error);
+      //    }
+
+      }
    }
+
+/** @} */
 
 ?>

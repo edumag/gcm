@@ -1,18 +1,18 @@
 <?php
 
-/** Comentarios.php
- *
- * Modulo Comentarios
- *
+/** 
+ * @file ComentariosAdmin.php
+ * @brief Administración para los comentarios
  */
 
 require_once(dirname(__FILE__).'/Comentarios.php');
+require_once(dirname(__FILE__).'/Comentarios.php');
 
-/** Comentarios
+/** 
+ * @class ComentariosAdmin
+ * @brief Métodos administrativos para comentarios
  *
- * Este módulo nos permite que los usuarios entren comentarios, los mismos se guardaran en
- * una carpeta oculta de la sección correspondiente.
- *
+ * @ingroup modulo_comentarios
  */
 
 class ComentariosAdmin extends Comentarios {
@@ -25,111 +25,15 @@ class ComentariosAdmin extends Comentarios {
 
       }
 
-
    /**
-    * Eliminar comentario
-    */
-
-   function eliminar($e, $args=NULL) {
-
-      permiso(8);
-   
-      global $gcm;
-
-      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
-
-      if ( !empty($args) ) {
-         $id = $args ;
-      } elseif ( !empty(Router::$args) ) {
-         $id = Router::$args;
-      } else {
-         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Sin identificaor no se puede borrar comentario','ERROR');
-         echo "FALSE";
-         exit();
-         }
-
-      $comentario = new Comentarios_dbo($this->pdo, $id);
-      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_eliminado',$id);
-
-      $comentario->MarkForDeletion();
-      registrar(__FILE__,__LINE__,literal('Comentario borrado'),'AVISO');
-      if ( Router::$formato == 'ajax' ) {
-         echo $id;
-         exit();
-         }
-
-      }
-
-   /**
-    * Modificar comentario
-    */
-
-   function modificar($e, $args=NULL) {
-
-      permiso(8);
-   
-      global $gcm;
-
-      $id = $args;
-      $this->formulario('modificar_comentario',$id);
-
-      }
-
-   /**
-    * Ejecutar Modificar comentario
-    */
-
-   function ejecutar_modificar_comentario($e, $args=NULL) {
-
-      permiso(8);
-   
-      global $gcm;
-
-      $mens="Modificar comentario";
-      registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') '.$mens);
-
-      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
-
-      $resultado = $this->validar_datos($_POST);
-
-      if ( isset($resultado['id']) ) {
-
-         $comentario = new Comentarios_dbo($this->pdo, $resultado['id']);
-
-         if ( $resultado ) {
-
-            $comentario->setFecha(time());
-            $comentario->setNombre($resultado['usuario']);
-            $comentario->setMail($resultado['mail']);
-            $comentario->setUrl(Router::$s.Router::$c);
-            $comentario->setContenido(str_replace('.html','',Router::$c));
-            $comentario->setComentario($resultado['texto']);
-            $comentario->save();
-
-            registrar(__FILE__,__LINE__,literal('Comentario Modificado'),'AVISO');
-
-            $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_modificado',Router::$url);
-            }
-
-      } else {
-         
-         $mens=literal("Sin Identificador no se puede borrar comentario",3);
-         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') '.$mens);
-
-         }
-
-
-      }
-
-   /**
-    * Listar comentarios
+    * Listar comentarios para administración
     */
 
    function listar($e, $args) {
 
       global $gcm;
 
-      permiso(8);
+      permiso('moderar_comentarios');
 
       $gcm->event->anular('titulo','contenido');
       $gcm->event->anular('contenido','contenido');
@@ -140,29 +44,62 @@ class ComentariosAdmin extends Comentarios {
 
       $gcm->titulo = literal('Listado de comentarios',3);
 
-      require_once(GCM_DIR.'lib/int/array2table/lib/TinyTable.php');
+      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
+
+      $comentarios = new Comentarios_dbo($this->pdo, $args['id']);
+
+      $this->conf_paginador = array ('url'=>'?comentario='
+         , 'Identificador'=>'id'
+         , 'table_id'=>'commentarios'
+         , 'ver'=>'ver'
+         , 'modificar'=>'modificar'
+         , 'eliminar'=>'eliminar'
+         , 'ocultar_id'=>TRUE
+         , 'accion'=>'accion'
+         , 'fila_unica'=>'comentario'
+         , 'enlaces'=> array('url' => array('campo_enlazado'=>'contenido'
+                                           ,'titulo_columna'=>'Contenido'
+                                           ,'base_url'=>Router::$base
+                                        )
+                            )
+         );
+
+      $comentarios->administrar(FALSE,'fecha_creacion desc',FALSE,TRUE);
+
+      return
+
+      require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
       require_once(GCM_DIR.'lib/int/GcmPDO/lib/GcmPDO.php');
 
       $condicion = ( $args['id'] ) ? " AND c.id=".$args['id'] : '';
       // $campo =  ( ! $id_proyecto ) ? " p.nombre as Proyecto," : '';
 
-      $sql = "SELECT c.id, c.url, c.fecha, c.nombre, c.mail, c.contenido, c.comentario  
-         FROM ".$this->tabla." c ORDER BY c.fecha desc";
+      $sql = 'SELECT c.id,c. fecha_creacion `fecha creación`, 
+         c.url, c.contenido , 
+         c.nombre, c.mail, c.comentario  
+         FROM '.$this->tabla.' c ORDER BY c.fecha_creacion desc';
 
       $gcmpdo = new GcmPDO($this->pdo, $sql);
       $array = $gcmpdo->to_array();
-      $opciones = array (
-         'url'=>'?comentario='
-         , 'identificador'=>'id'
+      $opciones = array ('url'=>'?comentario='
+         , 'Identificador'=>'id'
+         , 'table_id'=>'commentarios'
+         , 'ver'=>'ver'
          , 'modificar'=>'modificar'
          , 'eliminar'=>'eliminar'
-         , 'ver'=>'ver'
+         , 'ocultar_id'=>TRUE
          , 'accion'=>'accion'
+         , 'fila_unica'=>'comentario'
+         , 'enlaces'=> array('url' => array('campo_enlazado'=>'contenido'
+                                           ,'titulo_columna'=>'Contenido'
+                                           ,'base_url'=>Router::$base
+                                        )
+                            )
          );
 
 
       if ( $gcmpdo->validar() ) {
-         $array2table = new TinyTable();
+         $array2table = new Array2table();
          $array2table->generar_tabla($array, $opciones);
       } else {
          echo literal('No hay comentarios para listar');
@@ -171,4 +108,43 @@ class ComentariosAdmin extends Comentarios {
       return;
 
       }
+
+   /**
+    * Activación de un comentarios
+    */
+
+   function activar($e, $args) {
+
+      if ( ! permiso('moderar_comentarios') ) return ;
+   
+      global $gcm;
+
+      require_once(dirname(__FILE__).'/../modelos/comentarios_dbo.php');
+
+      if ( !empty($args) && is_array($args) ) {
+         $id = $args[0] ;
+      } elseif ( !empty($args) && ! is_array($args) ) {
+         $id = $args ;
+      } elseif ( !empty(Router::$args) ) {
+         $id = Router::$args[0];
+      } else {
+         registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Sin identificaor no se puede borrar comentario','ERROR');
+         echo "FALSE";
+         exit();
+         }
+
+      $comentario = new Comentarios_dbo($this->pdo, $id);
+      $comentario->setActivado(1);
+      $comentario->save();
+
+      $gcm->event->lanzar_accion_modulo('cache_http','borrar','comentario_activado',Router::$s.Router::$c);
+      if ( Router::$formato == 'ajax' ) {
+         echo $id;
+         exit();
+      } else {
+         registrar(__FILE__,__LINE__,literal('comentario').' '.literal('activado'),'AVISO');
+         }
+
+      }
+
    }

@@ -53,6 +53,14 @@
 
 class TemasAdmin extends Temas {
 
+   /**
+    * Array con los colores optenidos del fichero css
+    *
+    * @todo dar la opción de mantener los colores que tenemos. 
+    */
+
+   private $colores_recopilados = FALSE;
+
    function __construct($tema_actual='') {
 
       parent::__construct($tema_actual);
@@ -102,9 +110,32 @@ class TemasAdmin extends Temas {
       }
 
    /**
+    * Incluir color a sección
+    */
+
+   private function incluir_color($seccion, $valor) {
+
+      if ( ! isset($this->colores_recopilados[$seccion]) || ! in_array($valor, $this->colores_recopilados[$seccion]) ) {
+         $this->colores_recopilados[$seccion][] = $valor;
+         }
+
+      return $seccion.'-'.sprintf("%02d",array_search($valor, $this->colores_recopilados[$seccion]));
+      }
+
+   /**
     * Recogemos fichero proyecto.css modificado
     *
-    * @todo Procesar imágenes que vienen desde File/
+    * - El fichero debe llevar las marcas del fichero correspondiente en el tema.
+    *
+    *    + fichero:menu/css/body.css:
+    *    + acaba:menu/css/body.css:
+    *
+    * - Los colores se separaran por secciones, cada fichero es una sección
+    *
+    * - Si encontramos colores iguales en una misma sección los juntamos en una
+    *   sola variable, así colores como los fondos degradados que pueden tener
+    *   varias reglas por cada navegador, serám facilmente modificados en una 
+    *   sola variable.
     */
 
    function fichero_css($e,$args=NULL) {
@@ -131,7 +162,6 @@ class TemasAdmin extends Temas {
 
       $ficheros    = array();
       $fichero     = FALSE;
-      $colores     = array();
       $count_color = 0;
 
       foreach ($vlineas as $linea) {
@@ -140,36 +170,71 @@ class TemasAdmin extends Temas {
          if ( stripos($linea,'fichero:')  ) {
             list($literal,$fichero,$nada) = explode(':',$linea);
             $ficheros[$fichero] = '';
+            $count_color=0;
+            $seccion = basename($fichero,'.css'); 
+            // Ponemos a cero los colores del fichero
+            // No hace falta.
+            // foreach ( $colores as $seccion_color => $valor_color ) {
+            //    list($nom_seccion,$num_seccion) = explode("-",$seccion_color);
+            //    if ( $nom_seccion  == $nom_archivo ) {
+            //       unset($colores[$seccion_color]) ;
+            //       }
+            //    }
+
          // Si la linea contiene 'acaba:'
          } elseif ( stripos($linea,'acaba:') ) {
             $fichero = FALSE;
          // Si tenemos $fichero
          } elseif ( $fichero ) {
-            // Buscamos colores
+
             // Si tenemos color, background, border 
             if ( preg_match("/border|background|color/",$linea) ) {
-               // separamos palabras buscamos # con seis caracteres más o tres
+
                foreach ( explode(':',$linea) as $bloque ) {
                   foreach ( explode(' ',$bloque) as $palabra ) {
                      $palabra = str_replace(';','',$palabra);
                      $palabra = trim($palabra);
-                     if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
-                        if ( !in_array($palabra,$colores) ) {
-                           $colores[] = $palabra;
-                           $clave = $count_color;
-                           $count_color++;
-                        } else {
-                           $clave = array_search($palabra, $colores); 
-                           }
-                        $colores[$clave]=$palabra;
+                     // separamos palabras buscamos # con seis caracteres más o tres
+                     //if (preg_match ('/^#[a-f0-9]{6}$/', $palabra) || preg_match ('/^#[a-f0-9]{3}$/', $palabra) ) {
+                     if (preg_match ('/^#[a-f0-9]{6}$/i', $palabra) || preg_match ('/^#[a-f0-9]{3}$/i', $palabra) ) {
+                        // $clave = basename($fichero,'.css').'-'.sprintf("%02d",$count_color);
+                        // $colores[$clave]=$palabra;
+                        $color = $palabra;
+                        $clave = $this->incluir_color($seccion, $color);
                         $mod = '<?=$this->color("'.$clave.'")?>';
-                        $linea = str_replace($palabra,$mod,$linea);
+                        $count_color++;
+                        $linea = str_replace($color,$mod,$linea);
+                     } elseif ( preg_match("/transparent/i",$palabra,$resultado) ) {
+                        $color = $resultado[0];
+                        $clave = $this->incluir_color($seccion, $color);
+                        $mod = '<?=$this->color("'.$clave.'")?>';
+                        $linea = str_replace($color,$mod,$linea);
+                        $count_color++;
+                     } elseif ( preg_match("/rgba\((.*)\){1}/",$palabra,$resultado) ) {
+                        $color = "rgba(".str_replace(')','',$resultado[1]).")";
+                        $clave = $this->incluir_color($seccion, $color);
+                        $mod = '<?=$this->color("'.$clave.'")?>';
+                        $linea = str_replace($color,$mod,$linea);
+                        $count_color++;
                         }
                      }
                   }
-               }
+
+            }
+
+           // Buscamos colores en formato rgba()
+
+           if ( preg_match("/rgba\((.*)\){1}/",$linea,$resultado) ) {
+              $color = "rgba(".str_replace(')','',$resultado[1]).")";
+              $clave = $this->incluir_color($seccion, $color);
+              $mod = '<?=$this->color("'.$clave.'")?>';
+              $linea = str_replace($color,$mod,$linea);
+              $count_color++;
+              }
+
             // Buscamos iconos o imagenes de módulos
             if ( preg_match("/url\(.*\)/",$linea, $coincidencias, PREG_OFFSET_CAPTURE) ) {
+
                $url = str_replace('url(','',$coincidencias[0][0]);
                $url = str_replace(')','',$url);
                $url = str_replace('\'','',$url);
@@ -179,7 +244,6 @@ class TemasAdmin extends Temas {
                if ( empty($nombre) ) {
 
                   registrar(__FILE__,__LINE__,'Url de imagen sin contenido en '.$fichero."\nLinea: ".$linea,'AVISO');
-                  continue;
 
                } elseif ( in_array('File',$url_split) || in_array('http',$url_split) ) {
 
@@ -188,15 +252,25 @@ class TemasAdmin extends Temas {
 
                } else {
 
-                  $tipo = $url_split[count($url_split)-2];
-                  $modulo = $url_split[count($url_split)-3];
-                  $nueva_url = Router::$dir.$gcm->event->instancias['temas']->ruta($modulo,$tipo,$nombre);
-                  $remplazo = 'url(\'<?=Router::$dir.$gcm->event->instancias["temas"]->ruta("'.$modulo.'","'.$tipo.'","'.$nombre.'")?>\')';
-                  $imagenes[] = $nueva_url;
-                  $linea = str_replace($coincidencias[0][0],$remplazo,$linea);
+
+                  if ( count($url_split) < 3 ) {
+                     registrar(__FILE__,__LINE__,"Fichero: ".$fichero." Imagen fuera de sistema: ".depurar($url_split),'AVISO');
+                  } else {
+                     $tipo = $url_split[count($url_split)-2];
+                     $modulo = $url_split[count($url_split)-3];
+                     $nueva_url = Router::$dir.$gcm->event->instancias['temas']->ruta($modulo,$tipo,$nombre);
+                     if ( ! $nueva_url ) {
+                        registrar(__FILE__,__LINE__,"Fichero: ".$fichero." Imagen fuera de sistema: ".depurar($url_split),'AVISO');
+                     } else {
+                        $remplazo = 'url(\'<?=Router::$dir.$this->ruta("'.$modulo.'","'.$tipo.'","'.$nombre.'")?>\')';
+                        $imagenes[] = $nueva_url;
+                        $linea = str_replace($coincidencias[0][0],$remplazo,$linea);
+                        }
+                     }
 
                   }
                }
+
             $linea = trim($linea,"\n\r");
             if ( $linea != '' ) $ficheros[$fichero] .= "\n".$linea;
             }
@@ -204,6 +278,7 @@ class TemasAdmin extends Temas {
          }
 
       if ( empty($ficheros) ) {
+
          registrar(__FILE__,__LINE__,
             __CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') No se pudo especificar contenido'
             ,'ERROR');
@@ -212,9 +287,9 @@ class TemasAdmin extends Temas {
          }
 
 
-      echo '<br />Numero de colores  procesados: <b>'.count($colores).'</b>';
-      echo '<br />Numero de ficheros procesados: <b>'.count($ficheros).'</b>';
-      echo '<br />Numero de imágenes procesados: <b>'.count($imagenes).'</b>';
+      if ( isset( $this->colores_recopilados ) ) echo '<br />Numero de colores  procesados: <b>'.count($this->colores_recopilados).'</b>';
+      if ( isset( $ficheros ) ) echo '<br />Numero de ficheros procesados: <b>'.count($ficheros).'</b>';
+      if ( isset( $imagenes ) ) echo '<br />Numero de imágenes procesados: <b>'.count($imagenes).'</b>';
 
       echo '<br /><h2>Ficheros procesados</h2>';
       foreach ( $ficheros as $key => $valor ) {
@@ -226,8 +301,10 @@ class TemasAdmin extends Temas {
       $fichero_colores_tema = $this->dir_tema_actual.'modulos/temas/css/colores.php';
 
       $salida = "<?php\n\n/* Fichero procesado por TemasAdmin.php */";
-      foreach ( $colores as $key => $valor ) {
-         $salida .= "\n".'$colores[\''.$key.'\'] = \''.$valor.'\';';
+      foreach ( $this->colores_recopilados as $nombre_seccion => $seccion ) {
+         foreach ( $seccion as $numero_color => $color ) {
+            $salida .= "\n".'$colores[\''.$nombre_seccion.'-'.sprintf("%02d",$numero_color).'\'] = \''.$color.'\';';
+            }
          }
       $salida .= "\n?>";
       file_put_contents($fichero_colores_tema,$salida,LOCK_EX);
@@ -375,14 +452,14 @@ class TemasAdmin extends Temas {
 
    /** Pasar formato de colores de rgb a html */
 
-   function rgb2html($rgb) {
+   function rgb2html($rgba) {
 
-      if ( strpos($rgb,'rgb') === FALSE  ) return $rgb ;
+      if ( strpos($rgba,'rgba') === FALSE  ) return $rgba ;
 
-      $rgb = str_replace('rgb(','',$rgb);
-      $rgb = str_replace(')','',$rgb);
+      $rgba = str_replace('rgba(','',$rgba);
+      $rgba = str_replace(')','',$rgba);
 
-      list ($r,$g,$b) = explode(',',$rgb);
+      list ($r,$g,$b) = explode(',',$rgba);
 
       $r = intval($r); $g = intval($g);
       $b = intval($b);
@@ -412,6 +489,9 @@ class TemasAdmin extends Temas {
       $arch_colores = ( is_file($arch_colores_tema_actual) ) ? $arch_colores_tema_actual : $arch_colores_tema_xdefecto ;
 
       include ($arch_colores);
+
+      ksort($colores);
+      reset($colores);
 
       $salida = '';
 
@@ -459,6 +539,25 @@ class TemasAdmin extends Temas {
          return FALSE;
          }
 
+      // Procesar css de proyecto para obtener la lista de todos los colores
+      ob_start();
+      $this->contruir_lista_colores();
+      $this->tema->colores=$this->colores;
+      echo "\n/* fichero:".$this->tema->ficheros['css']['temas/css/body.css'].": */\n";
+      include($this->tema->ficheros['css']['temas/css/body.css']);
+      echo "\n/* acaba:".$this->tema->ficheros['css']['temas/css/body.css'].": */\n";
+
+      foreach ( $this->tema->ficheros['css'] as $llave => $fichero) {
+
+         if ( $llave != 'temas/css/body.css' ) {
+            echo "\n/* fichero:".$llave.": */\n";
+            include($fichero);
+            echo "\n/* acaba:".$llave.": */\n";
+            }
+
+         }
+      $proceso_css = ob_get_clean();
+
       /* Si se añade un nuevo color */
 
       if ( isset($_REQUEST['accion']) && $_REQUEST['accion'] == 'anyadir_color' ) {
@@ -476,9 +575,9 @@ class TemasAdmin extends Temas {
             registrar(__FILE__,__LINE__,literal('El color no es válido',3),'ERROR');
 
          } else {
-            $colores[$nuevo_color] = '#ffffff';
-            ksort($colores);
-            reset($colores);
+            $this->tema->colores[$nuevo_color] = '#ffffff';
+            ksort($this->tema->colores);
+            reset($this->tema->colores);
             registrar(__FILE__,__LINE__,literal('Añade un valor al nuevo color para que tenga efecto el cambio',3),'AVISO');
             }
 
@@ -488,68 +587,17 @@ class TemasAdmin extends Temas {
 
       if ( isset($_REQUEST['accion']) && $_REQUEST['accion'] == 'guardar_colores' ) {
 
-         try {
-
-            if ( ! ( $file = @fopen($arch_colores_tema_actual, "w") ) ) {
-
-               throw new Exception('No se pudo abrir archivo para editar');
-
-               }
-
-         $nombre_array = 'colores';
-         $datos = $_REQUEST['colores'];
-         ksort($datos);
-         reset($datos);
-
-
-         fputs($file, "<?php\n");
-         fputs($file, "// Archivo generado automaticamente por ".__FILE__."\n");
-
-         while (list($clave, $val)=each($datos)){
-
-            if ( is_array($val)) {   // si es un array 
-
-               while (list($claveArray, $valorArray)=each($val)) {
-
-                  $valorArray = str_replace("\\","",$valorArray);
-                  $valorArray = stripcslashes($valorArray);
-
-                  if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
-                     throw new Exception("No se puede escribir en ".$archivo);
-                     return FALSE;
-                     }
-                  }
-
-            } else {                   // No es un array
-
-               $val = str_replace("\\","",$val);
-               $val = stripcslashes($val);
-
-               if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
-                  throw new Exception("No se puede escribir en ".$archivo);
-                  return FALSE;
-                  }
-
-               }
-            }
-
-            fputs($file, "?>");
-            fclose($file);
-
-            registrar(__FILE__,__LINE__,'Colores guardados','AVISO');
-      
-         } catch (Exception $ex) {
-            registrar($ex->getFile(),$ex->getLine(),$ex->getMessage(),'ERROR');
-            }
-
-         $arch_colores = $arch_colores_tema_actual;
+         $this->guardar_colores();
 
       }
 
-      if ( $incluir_colores ) include ($arch_colores);
+      // if ( $incluir_colores ) include ($arch_colores);
+
+      ksort($this->tema->colores);
 
       include($this->ruta('temas','html','form_colores.html'));
 
+      if ( GCM_DEBUG ) echo "\n<br /><h3>Resultado de procesar archivos css</h3><br />\n<pre>\n$proceso_css\n</pre>";
       }
 
    /**
@@ -622,7 +670,6 @@ class TemasAdmin extends Temas {
     *
     * - Iconos:
     *   Panel de los iconos. ¿Hacer paquetes de iconos individual de temas?
-    *   Separar por directorios 16/ 24/ 48/
     */
 
    function administrar() {
@@ -706,6 +753,71 @@ class TemasAdmin extends Temas {
 
          }
 
+      }
+
+   /**
+    * Guardar los colores en el archivo del tema
+    */
+
+   function guardar_colores() {
+
+      $arch_colores_tema_actual = $this->dir_tema_actual.'/modulos/temas/css/colores.php';
+
+      try {
+
+         if ( ! ( $file = @fopen($arch_colores_tema_actual, "w") ) ) {
+
+            throw new Exception('No se pudo abrir archivo para editar');
+
+            }
+
+      $nombre_array = 'colores';
+      if ( isset($_POST['colores']) ) $this->tema->colores = $_REQUEST['colores'];
+      ksort($this->tema->colores);
+      reset($this->tema->colores);
+
+
+      fputs($file, "<?php\n");
+      fputs($file, "// Archivo generado automaticamente por ".__FILE__."\n");
+
+      while (list($clave, $val)=each($this->tema->colores)){
+
+         if ( is_array($val)) {   // si es un array 
+
+            while (list($claveArray, $valorArray)=each($val)) {
+
+               $valorArray = str_replace("\\","",$valorArray);
+               $valorArray = stripcslashes($valorArray);
+
+               if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
+                  throw new Exception("No se puede escribir en ".$archivo);
+                  return FALSE;
+                  }
+               }
+
+         } else {                   // No es un array
+
+            $val = str_replace("\\","",$val);
+            $val = stripcslashes($val);
+
+            if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
+               throw new Exception("No se puede escribir en ".$archivo);
+               return FALSE;
+               }
+
+            }
+         }
+
+         fputs($file, "?>");
+         fclose($file);
+
+         registrar(__FILE__,__LINE__,'Colores guardados','AVISO');
+   
+      } catch (Exception $ex) {
+         registrar($ex->getFile(),$ex->getLine(),$ex->getMessage(),'ERROR');
+         }
+
+      $arch_colores = $arch_colores_tema_actual;
       }
 
 

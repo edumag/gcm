@@ -1,0 +1,42 @@
+
+/* Comportamiento para diferentes resoluciones */
+
+@media screen and (max-width: 721px){
+   #lateral, #contenedor {
+   float: none;
+   margin: 0 auto;
+   width: 96%;
+   }
+   #lateral { 
+      margin-left: 10px;
+   }
+   .panel_titulo a:first-child  {
+   -moz-border-radius:10px;
+   -webkit-border-radius:10px;
+   border-radius:10px;
+   -moz-box-shadow:0 1px 0 #000000;
+   -webkit-box-shadow:0 1px 0 #000000;
+   box-shadow:0 1px 0 #000000;
+   background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+   background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+   color:<?=$this->color("medias-00")?>;
+   text-shadow:1px 1px 0 #ffffff;
+   padding: 5px;
+   display: block;
+   }
+   /* Tablas adaptables */
+   table, thead, tr, th, tbody, td{
+      display:block;
+   }
+   tr { border-bottom: 4px solid <?=$this->color("medias-01")?>; }
+   td { 
+      border: none;
+      border-bottom: 1px solid <?=$this->color("medias-02")?>; 
+      position: relative;
+   }
+}
+@media screen and (max-width: 500px){
+   body {
+      font-size: 140%;
+      }
+   }

@@ -34,4 +34,5 @@ define('RT_NO_PASA_EXPRESION_REGULAR',10);
 define('RT_NO_ES_NUMERO',11);
 define('RT_REQUERIDO',12);
 define('RT_MAIL',13);
+define('RT_PASSWORD',14);
 ?>

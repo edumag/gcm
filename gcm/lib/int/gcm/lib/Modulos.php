@@ -6,15 +6,20 @@
  *
  * @package Modulos Módulos
  *
+ * Todos los módulos de gcm deben heredar de está clase para tener todas las funcionalidades
+ * disponibles.
+ *
+ * @see Modulos Definicion de clase
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  21/10/10
- *  Revision  SVN $Id: Modulos.php 656 2012-10-27 09:52:30Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @defgroup modulos_aplicacion Módulos de la aplicación
+ * @{
  */
 
 /* GcmConfig */
@@ -168,7 +173,7 @@ abstract class Modulos {
 
       global $gcm;
 
-      if ( !permiso(10) ) return FALSE;
+      if ( !permiso('configuracion') ) return FALSE;
 
       if ( isset($_POST['accion']) && $_POST['accion'] == 'escribir_gcmconfig'  ) {
 
@@ -277,4 +282,6 @@ abstract class Modulos {
       }
 
    }
+
+/** @} */
 ?>

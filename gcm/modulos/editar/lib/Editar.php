@@ -77,7 +77,7 @@ class Editar extends Modulos {
          theme : "advanced",
          languages : 'es',
          apply_source_formatting : true,
-         content_css : "proyectos.css?css=temas/css/contenido.css",
+         content_css : "proyectos.css?css=contenidos/css/contenido.css",
          plugins : "table,advhr,advimage,advlink,insertdatetime,preview,searchreplace,print,contextmenu,fullscreen,spellchecker",
          theme_advanced_buttons1_add : "fontselect,fontsizeselect",
          theme_advanced_buttons2_add : "separator,insertdate,inserttime,preview,separator,forecolor,backcolor",

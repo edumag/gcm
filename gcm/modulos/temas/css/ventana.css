@@ -1,0 +1,24 @@
+/* Ventana flotante */
+.ventana_flotante {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   border: 1px solid <?=$this->color("body-06")?>;
+   background: <?=$this->color("body-11")?>;
+   color: white;
+   padding: 4px;
+   margin: -50px 0 0 -100px;
+	filter: alpha(opacity=85); /* internet explorer */
+	-khtml-opacity: 0.8;      /* khtml, version anterior de safari */
+	-moz-opacity: 0.8;       /* firefox, mozilla, netscape */
+	opacity: 0.8;           /* safari, chrome, opera */
+   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"; /*internet explorer 8 */ 
+   }
+.titulo_ventana_flotante {
+    border-bottom: 1px solid white;
+    margin-bottom: 4px;
+    min-width: 200px;
+   }
+ul input {
+   margin-right: 6px;
+}

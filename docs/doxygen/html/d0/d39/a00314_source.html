@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/menu/alt/menuPrincipal.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/indexador/js/indexador.js</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,74 +80,177 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e0b90d1017353e67ec406a3e12ca4962.html">menu</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_82e9c533c296fd83ffba12a8bfa1e8b9.html">alt</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_9b052a3440b154b2392779948b3a8c54.html">indexador</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_344086512384bed3530b2c9f042a6dad.html">js</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">menuPrincipal.css</div>  </div>
+<div class="title">indexador.js</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002 <span class="comment">/* menuPrincipal.css */</span>
-<a name="l00003"></a>00003 <span class="preprocessor">#menu_principal {</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>padding: 0;
-<a name="l00005"></a>00005 margin:0;
-<a name="l00006"></a>00006 position: absolute;
-<a name="l00007"></a>00007 top: 80px;
-<a name="l00008"></a>00008 left: -6px;
-<a name="l00009"></a>00009 z-index: 10;
-<a name="l00010"></a>00010 }
-<a name="l00011"></a>00011 table#menu {
-<a name="l00012"></a>00012 margin-top: 3px;
-<a name="l00013"></a>00013 border: 0px;
-<a name="l00014"></a>00014 padding: 0px;
-<a name="l00015"></a>00015 background: #EED8AE ;
-<a name="l00016"></a>00016 background: transparent ;
-<a name="l00017"></a>00017 }
-<a name="l00018"></a>00018 <span class="preprocessor">#menu td {</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span>text-align: center;
-<a name="l00020"></a>00020 font-size: 90%;
-<a name="l00021"></a>00021 background: #EED8AE ;
-<a name="l00022"></a>00022 background: transparent ;
-<a name="l00023"></a>00023 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
-<a name="l00024"></a>00024 padding: 1px;
-<a name="l00025"></a>00025 background: no-repeat url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$gcm-&gt;event-&gt;instancias[&quot;temas&quot;]-&gt;ruta(&quot;menu&quot;,&quot;img&quot;,&quot;boton_desactivado.gif&quot;)?&gt;&#39;</span>);
-<a name="l00026"></a>00026 width: 70px;
-<a name="l00027"></a>00027 height: 70px;
-<a name="l00028"></a>00028 vertical-align: middle;
-<a name="l00029"></a>00029 }
-<a name="l00030"></a>00030 <span class="preprocessor">#menu td a {</span>
-<a name="l00031"></a>00031 <span class="preprocessor"></span>margin: 0px;
-<a name="l00032"></a>00032 padding: 0px;
-<a name="l00033"></a>00033 color:#E0AD14;
-<a name="l00034"></a>00034 text-decoration: none;
-<a name="l00035"></a>00035 border: 1px solid transparent;
-<a name="l00036"></a>00036 margin: 1px;
-<a name="l00037"></a>00037 }
-<a name="l00038"></a>00038 <span class="preprocessor">#menu td a:hover {</span>
-<a name="l00039"></a>00039 <span class="preprocessor"></span>background: #4B87AD ;
-<a name="l00040"></a>00040 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;0&quot;</span>)?&gt;;
-<a name="l00041"></a>00041 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
-<a name="l00042"></a>00042 }
-<a name="l00043"></a>00043 <span class="preprocessor">#menu td a:active {</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>background: #EED8AE;
-<a name="l00045"></a>00045 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
-<a name="l00046"></a>00046 }
-<a name="l00047"></a>00047 <span class="comment">/* Estamos aqui del menu principal */</span>
-<a name="l00048"></a>00048 <span class="preprocessor">#menu td#menuOff {</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span>background: no-repeat url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$gcm-&gt;event-&gt;instancias[&quot;temas&quot;]-&gt;ruta(&quot;menu&quot;,&quot;img&quot;,&quot;boton_activado.gif&quot;)?&gt;&#39;</span>);
-<a name="l00050"></a>00050 }
-<a name="l00051"></a>00051 <span class="preprocessor">#menu td#menuOff a {</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
-<a name="l00053"></a>00053 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/**</span>
+<a name="l00002"></a>00002 <span class="comment"> * Mecanismo con ajax para ver todo el contenido de la entrada sin </span>
+<a name="l00003"></a>00003 <span class="comment"> * salir de página, se añade un botón para ejecutar ajax y se mantiene </span>
+<a name="l00004"></a>00004 <span class="comment"> * el enlace del titulo para ir a su contexto</span>
+<a name="l00005"></a>00005 <span class="comment"> */</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keyword">function</span> initListadoContenido(contexto) {
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009    <span class="comment">/* Evento click */</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011    $(<span class="stringliteral">&#39;.elemento_lista_off .titulo_articulo .enlace_entrada&#39;</span>, contexto ).click(<span class="keyword">function</span>(e) {
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013       var caja = $(<span class="keyword">this</span>).parent(<span class="stringliteral">&quot;div&quot;</span>).parent(<span class="stringliteral">&quot;div&quot;</span>);
+<a name="l00014"></a>00014       var titulo = $(<span class="keyword">this</span>).parent(<span class="stringliteral">&quot;div&quot;</span>);
+<a name="l00015"></a>00015       var contenido = caja.children(<span class="stringliteral">&quot;.contenido_articulo&quot;</span>);
+<a name="l00016"></a>00016       var url = titulo.children().attr(<span class="stringliteral">&quot;href&quot;</span>);
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018       <span class="comment">/* debug */</span>
+<a name="l00019"></a>00019       <span class="comment">// titulo.css(&#39;background&#39;, &#39;green&#39;);</span>
+<a name="l00020"></a>00020       <span class="comment">// caja.css(&#39;background&#39;, &#39;white&#39;);</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022       <span class="comment">/* Miramos la clase para saber el estado */</span>
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024       var estado = caja.attr(<span class="stringliteral">&quot;class&quot;</span>);
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026       <span class="keywordflow">if</span> ( estado == <span class="stringliteral">&#39;elemento_lista_off&#39;</span>  ) {
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028          caja.removeClass(<span class="stringliteral">&quot;elemento_lista_off&quot;</span>);
+<a name="l00029"></a>00029          caja.addClass(<span class="stringliteral">&quot;elemento_lista_on&quot;</span>);
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031          contenido.html(<span class="stringliteral">&quot;Buscando contenido...&quot;</span>);
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033          <span class="keywordflow">if</span> ( url ) {
+<a name="l00034"></a>00034             $.get(<span class="stringliteral">&#39;?e=contenido&amp;formato=ajax&amp;url=&#39;</span>+url,<span class="keyword">function</span>(data){
+<a name="l00035"></a>00035                contenido.html(data);
+<a name="l00036"></a>00036               });
+<a name="l00037"></a>00037             }
+<a name="l00038"></a>00038          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00039"></a>00039          }
+<a name="l00040"></a>00040  
+<a name="l00041"></a>00041       <span class="keywordflow">if</span> ( estado == <span class="stringliteral">&#39;elemento_lista_on&#39;</span>  ) {
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043          caja.removeClass(<span class="stringliteral">&quot;elemento_lista_on&quot;</span>);
+<a name="l00044"></a>00044          caja.addClass(<span class="stringliteral">&quot;elemento_lista_hide&quot;</span>);
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046          contenido.hide(<span class="stringliteral">&quot;slow&quot;</span>);
+<a name="l00047"></a>00047          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00048"></a>00048          }
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050       <span class="keywordflow">if</span> ( estado == <span class="stringliteral">&#39;elemento_lista_hide&#39;</span>  ) {
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052          caja.removeClass(<span class="stringliteral">&quot;elemento_lista_hide&quot;</span>);
+<a name="l00053"></a>00053          caja.addClass(<span class="stringliteral">&quot;elemento_lista_on&quot;</span>);
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055          contenido.show(<span class="stringliteral">&quot;slow&quot;</span>);
+<a name="l00056"></a>00056          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00057"></a>00057          }
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059       });
+<a name="l00060"></a>00060    }
+<a name="l00061"></a>00061 <span class="comment"></span>
+<a name="l00062"></a>00062 <span class="comment">/**</span>
+<a name="l00063"></a>00063 <span class="comment"> * Mecanismo con ajax para ver todo el contenido de la entrada sin </span>
+<a name="l00064"></a>00064 <span class="comment"> * salir de página, se convierte el enlace del titulo en enlace ajax</span>
+<a name="l00065"></a>00065 <span class="comment"> */</span>
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067 <span class="keyword">function</span> initListadoContenido_boton(contexto) {
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069    var boton_html = <span class="stringliteral">&quot;&lt;a title=&#39;&lt;?=literal(&#39;Ampliar contenido&#39;)?&gt;&#39; &quot;</span>;
+<a name="l00070"></a>00070    boton_html    += <span class="stringliteral">&quot;class=&#39;boton_ajax simb_abajo simb_neutro&#39; &quot;</span>;
+<a name="l00071"></a>00071    boton_html    += <span class="stringliteral">&quot;style=&#39;font-size: small; display: none ;&#39; href=&#39;&#39;&gt;&amp;nbsp;&lt;/a&gt;&quot;</span>;
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073    var titulos = $(<span class="stringliteral">&#39;.titulo_articulo&#39;</span>, contexto);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075    titulos.prepend(boton_html);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077    <span class="comment">/* Añadimos title a titulo */</span>
+<a name="l00078"></a>00078    titulos.attr(<span class="stringliteral">&#39;title&#39;</span>,<span class="stringliteral">&#39;Ver en contexto&#39;</span>);
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080    <span class="comment">/* Mostramos botón si estamos sobre elemento */</span>
+<a name="l00081"></a>00081    titulos.mouseover(<span class="keyword">function</span>(e) {
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083          $(<span class="keyword">this</span>).children(<span class="stringliteral">&#39;.boton_ajax&#39;</span>).css(<span class="stringliteral">&#39;display&#39;</span>,<span class="stringliteral">&#39;inline&#39;</span>);
+<a name="l00084"></a>00084          });
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086    <span class="comment">/* Ocultamos botón si no estamos sobre elemento */</span>
+<a name="l00087"></a>00087    titulos.mouseout(<span class="keyword">function</span>(e) {
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089          $(<span class="keyword">this</span>).children(<span class="stringliteral">&#39;.boton_ajax&#39;</span>).css(<span class="stringliteral">&#39;display&#39;</span>,<span class="stringliteral">&#39;none&#39;</span>);
+<a name="l00090"></a>00090          });
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092    $(<span class="stringliteral">&#39;.boton_ajax&#39;</span>, contexto).click(<span class="keyword">function</span>(e) {
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094       var caja = $(<span class="keyword">this</span>).parent().parent(<span class="stringliteral">&quot;div&quot;</span>);
+<a name="l00095"></a>00095       var titulo = $(<span class="keyword">this</span>).next(<span class="charliteral">&#39;a&#39;</span>);
+<a name="l00096"></a>00096       titulo.attr(<span class="stringliteral">&#39;title&#39;</span>,<span class="stringliteral">&#39;Ver en contexto&#39;</span>);
+<a name="l00097"></a>00097       <span class="comment">// caja.css(&#39;background&#39;,&#39;red&#39;);</span>
+<a name="l00098"></a>00098       <span class="comment">// titulo.css(&#39;background&#39;,&#39;yellow&#39;); </span>
+<a name="l00099"></a>00099       <span class="comment">// return false;</span>
+<a name="l00100"></a>00100       var contenido = caja.children(<span class="stringliteral">&quot;.contenido_articulo&quot;</span>);
+<a name="l00101"></a>00101       var url = titulo.attr(<span class="stringliteral">&quot;href&quot;</span>);
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103       <span class="comment">/* Miramos la clase para saber el estado */</span>
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105       var estado = caja.attr(<span class="stringliteral">&quot;class&quot;</span>);
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107       <span class="keywordflow">if</span> ( estado == <span class="stringliteral">&#39;elemento_lista_off&#39;</span>  ) {
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109          caja.removeClass(<span class="stringliteral">&quot;elemento_lista_off&quot;</span>);
+<a name="l00110"></a>00110          caja.addClass(<span class="stringliteral">&quot;elemento_lista_on&quot;</span>);
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112          contenido.html(<span class="stringliteral">&quot;Buscando contenido...&quot;</span>);
+<a name="l00113"></a>00113          $(<span class="keyword">this</span>).removeClass(<span class="stringliteral">&#39;simb_abajo&#39;</span>);
+<a name="l00114"></a>00114          $(<span class="keyword">this</span>).addClass(<span class="stringliteral">&#39;simb_arriba&#39;</span>);
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116          <span class="keywordflow">if</span> ( url ) {
+<a name="l00117"></a>00117             $.get(<span class="stringliteral">&#39;?e=contenido&amp;formato=ajax&amp;url=&#39;</span>+url,<span class="keyword">function</span>(data){
+<a name="l00118"></a>00118                contenido.html(data);
+<a name="l00119"></a>00119                });
+<a name="l00120"></a>00120             }
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00123"></a>00123          }
+<a name="l00124"></a>00124  
+<a name="l00125"></a>00125       <span class="keywordflow">if</span> ( estado == <span class="stringliteral">&#39;elemento_lista_on&#39;</span>  ) {
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127          caja.removeClass(<span class="stringliteral">&quot;elemento_lista_on&quot;</span>);
+<a name="l00128"></a>00128          caja.addClass(<span class="stringliteral">&quot;elemento_lista_hide&quot;</span>);
+<a name="l00129"></a>00129          $(<span class="keyword">this</span>).addClass(<span class="stringliteral">&#39;simb_abajo&#39;</span>);
+<a name="l00130"></a>00130          $(<span class="keyword">this</span>).removeClass(<span class="stringliteral">&#39;simb_arriba&#39;</span>);
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132          contenido.hide(<span class="stringliteral">&quot;slow&quot;</span>);
+<a name="l00133"></a>00133          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00134"></a>00134          }
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136       <span class="keywordflow">if</span> ( estado == <span class="stringliteral">&#39;elemento_lista_hide&#39;</span>  ) {
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138          caja.removeClass(<span class="stringliteral">&quot;elemento_lista_hide&quot;</span>);
+<a name="l00139"></a>00139          caja.addClass(<span class="stringliteral">&quot;elemento_lista_on&quot;</span>);
+<a name="l00140"></a>00140          $(<span class="keyword">this</span>).removeClass(<span class="stringliteral">&#39;simb_abajo&#39;</span>);
+<a name="l00141"></a>00141          $(<span class="keyword">this</span>).addClass(<span class="stringliteral">&#39;simb_arriba&#39;</span>);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143          contenido.show(<span class="stringliteral">&quot;slow&quot;</span>);
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00146"></a>00146          }
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148       });
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150    }
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152 $(document).ready(<span class="keyword">function</span>() { 
+<a name="l00153"></a>00153       <span class="keywordflow">if</span> ( !(jQuery.browser.msie &amp;&amp; jQuery.browser.version &lt; 7)) { <span class="comment">// take away IE6</span>
+<a name="l00154"></a>00154          initListadoContenido(<span class="stringliteral">&quot;#listado_de_contenido&quot;</span>);
+<a name="l00155"></a>00155          }
+<a name="l00156"></a>00156       });
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -29,6 +29,12 @@ class GcmPDO {
    protected $pdo;                          ///< Instancia de PDO
    protected $num_total_registros;          ///< Número total de registro
 
+   /**
+    * Constructor
+    * @param $pdo Instancia de PDO
+    * @param $sql sql
+    */
+
    function __construct (PDO $pdo, $sql) {
 
       $this->num_total_registros = 0;
@@ -113,6 +119,10 @@ class GcmPDO {
 
       $retorno = array();
 
+      if ( ! $this->resultado ) {
+         registrar(__FILE__,__LINE__,'Sin resultados');
+         return FALSE;
+      }
       $arAll = $this->resultado->fetchAll(PDO::FETCH_ASSOC);
 
       $conta = 0;

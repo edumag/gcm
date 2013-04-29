@@ -1,0 +1,12 @@
+/** Týtulo del contenido **/
+.titulo_principal {
+    margin: 10px 0 0 10px;
+    padding: 0px;
+}
+#titulo {
+color: <?=$this->color("body-07")?>;
+font-style: italic;
+line-height: 40px;
+margin-bottom: 10px;
+text-shadow: 2px 1px 1px #FFFFFF;
+}

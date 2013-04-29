@@ -135,8 +135,8 @@ padding: 2px;
 margin: 2px;
 font-size: small;
 /* Esquinas redondeadas */
-border-radius: 5px 5px 5px 5px ;
--moz-border-radius: 5px 5px 5px 5px ;
+border-radius: 5px 5px 5px 5px;
+-moz-border-radius: 5px 5px 5px 5px;
 -webkit-border-radius: 5px 5px 5px 5px;
 }
 .error {
@@ -160,7 +160,7 @@ color: <?=$this->color("4")?>;
 color: #fff !IMPORTANT;
 }
 .admin ul, .aviso ul, .error ul {
-list-style: none ;
+list-style: none;
 margin: 0;
 padding: 0;
 }
@@ -170,15 +170,15 @@ padding: 0;
 .simb_arriba {
    vertical-align:middle;
    border: 0px solid #000;
-   border-radius: 15px 15px 0 0 ;
-   -moz-border-radius: 15px 15px 0 0 ;
-   -webkit-border-radius: 15px 15px 0 0 ;
+   border-radius: 15px 15px 0 0;
+   -moz-border-radius: 15px 15px 0 0;
+   -webkit-border-radius: 15px 15px 0 0;
    }
 .simb_abajo {
    vertical-align:middle;
    border: 0px solid #000;
-   border-radius: 0 0 15px 15px ;
-   -moz-border-radius: 0 0 15px 15px ;
+   border-radius: 0 0 15px 15px;
+   -moz-border-radius: 0 0 15px 15px;
    -webkit-border-radius: 0 0 15px 15px;
    }
 .simb_neutro {

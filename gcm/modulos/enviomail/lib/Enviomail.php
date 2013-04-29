@@ -238,7 +238,7 @@ class Enviomail extends Modulos {
       } else {
          // Mirar si estamos en local o en servidor para enviar a uno u otro sitio
          if ( $_SERVER['HTTP_HOST'] == 'localhost' ) {
-            $mail = 'eduardo@localhost';
+            $mail = 'eduardo@mamedu.com';
          } else {
             $mail = 'eduardo@mamedu.com';
             }

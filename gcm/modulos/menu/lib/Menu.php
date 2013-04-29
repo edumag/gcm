@@ -266,7 +266,7 @@ class Menu extends Modulos {
    function MenuPaginas($sActual, $principal, $imagenes = FALSE) {
 
       // Preparamos la tabla
-      echo '<table id="menu" cellspacing="6px"><tr>';
+      echo '<table id="menu" cellspacing="0"><tr>';
 
       if ($principal=="si") {
 

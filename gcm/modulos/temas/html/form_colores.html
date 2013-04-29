@@ -1,16 +1,21 @@
 <h2>Colores</h3>
 
-<form method="post" action="<?=$_SERVER['PHP_SELF']?>" style="width: 500px;">
+<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
 <div id="picker"></div>
 
 <div id="selector_colores">
-<?php $nivel=FALSE ; ?>
-<?php foreach ( $colores as $key => $color ) { ?>
-<?php if ( $key == $nivel  ) { $nivel++ ; ?>
+<?php $nivel='' ; ?>
+<?php foreach ( $this->tema->colores as $key => $color ) { ?>
+<?php if ( stripos($key,'-') !== FALSE ) {  ?>
+<?php list($seccion,$numero) = explode('-',$key) ;?>
+<?php } else { ?>
+<?php $seccion = $key ; $numero = 0 ?>
+<?php } ?>
+<?php if ( $seccion != $nivel  ) { $nivel = $seccion ; ?>
 </table>
 <table>
 <thead>
-<td colspan="2">Colores: <?=$nivel-1?></td>
+<td colspan="2"><?php echo $seccion; ?></td>
 </thead>
 <?php } ?>
 <tr class="form-item">

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/html/panel.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/body.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,45 +81,111 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e333815ca684251e94807f1625b54517.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1d927d548771ddffa1e7287445c148df.html">css</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">panel.html</div>  </div>
+<div class="title">body.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;panel&#39;</span>&gt;
-<a name="l00002"></a>00002    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;panel_titulo&#39;</span>&gt;
-<a name="l00003"></a>00003       &lt;a href=<span class="stringliteral">&quot;&lt;?=$enlace?&gt;&quot;</span>&gt;&lt;?=$panel[<span class="stringliteral">&#39;titulo&#39;</span>]?&gt;&lt;/a&gt;
-<a name="l00004"></a>00004       &lt;?php <span class="keywordflow">if</span> ( isset($panel[<span class="stringliteral">&#39;ajax&#39;</span>]) ) { ?&gt;
-<a name="l00005"></a>00005       &lt;a name=<span class="stringliteral">&quot;ajax&quot;</span> href=<span class="stringliteral">&quot;&lt;?=$panel[&#39;ajax&#39;]?&gt;&quot;</span> &gt;&lt;/a&gt;
-<a name="l00006"></a>00006       &lt;?php } ?&gt;
-<a name="l00007"></a>00007       &lt;?php <span class="keywordflow">if</span> ( isset($panel[<span class="stringliteral">&#39;jajax&#39;</span>]) ) { ?&gt;
-<a name="l00008"></a>00008       &lt;a name=<span class="stringliteral">&quot;jajax&quot;</span> href=<span class="stringliteral">&quot;&lt;?=$panel[&#39;jajax&#39;]?&gt;&quot;</span> &gt;&lt;/a&gt;
-<a name="l00009"></a>00009       &lt;?php } ?&gt;
-<a name="l00010"></a>00010    &lt;/div&gt;
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&#39;&lt;?=$subpanel_class?&gt;&#39;</span> 
-<a name="l00013"></a>00013       
-<a name="l00014"></a>00014       &lt;?php <span class="keywordflow">if</span> ( isset($panel[<span class="stringliteral">&#39;altura_maxima&#39;</span>]) ) { ?&gt;
-<a name="l00015"></a>00015       style=<span class="stringliteral">&#39;max-height: &lt;?=$panel[&#39;</span>altura_maxima<span class="stringliteral">&#39;];?&gt;; overflow: auto;&#39;</span>
-<a name="l00016"></a>00016       &lt;?php } ?&gt;
-<a name="l00017"></a>00017       
-<a name="l00018"></a>00018       &gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 body {
+<a name="l00003"></a>00003 background-color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-00&quot;</span>)?&gt;;
+<a name="l00004"></a>00004 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-01&quot;</span>)?&gt;;
+<a name="l00005"></a>00005 font-family: Palatino, <span class="stringliteral">&#39;Book Antiqua&#39;</span>, serif;
+<a name="l00006"></a>00006 line-height: 20px;
+<a name="l00007"></a>00007 padding: 0;
+<a name="l00008"></a>00008 margin: 0;
+<a name="l00009"></a>00009 <span class="comment">/* Gradiante */</span>
+<a name="l00010"></a>00010 background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt;;
+<a name="l00011"></a>00011 background: -moz-linear-gradient(-45deg, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt; 0%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-03&quot;</span>)?&gt; 2%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-04&quot;</span>)?&gt; 45%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-05&quot;</span>)?&gt; 100%);
+<a name="l00012"></a>00012 background: -webkit-gradient(left top, right bottom, color-stop(0%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt;), color-stop(2%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-03&quot;</span>)?&gt;), color-stop(45%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-04&quot;</span>)?&gt;), color-stop(100%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-05&quot;</span>)?&gt;));
+<a name="l00013"></a>00013 background: -webkit-linear-gradient(-45deg, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt; 0%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-03&quot;</span>)?&gt; 2%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-04&quot;</span>)?&gt; 45%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-05&quot;</span>)?&gt; 100%);
+<a name="l00014"></a>00014 background: -o-linear-gradient(-45deg, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt; 0%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-03&quot;</span>)?&gt; 2%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-04&quot;</span>)?&gt; 45%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-05&quot;</span>)?&gt; 100%);
+<a name="l00015"></a>00015 background: -ms-linear-gradient(-45deg, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt; 0%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-03&quot;</span>)?&gt; 2%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-04&quot;</span>)?&gt; 45%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-05&quot;</span>)?&gt; 100%);
+<a name="l00016"></a>00016 background: linear-gradient(135deg, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-02&quot;</span>)?&gt; 0%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-03&quot;</span>)?&gt; 2%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-04&quot;</span>)?&gt; 45%, &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-05&quot;</span>)?&gt; 100%);
+<a name="l00017"></a>00017 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=<span class="stringliteral">&#39;#fefefe&#39;</span>, endColorstr=<span class="stringliteral">&#39;#818285&#39;</span>, GradientType=1 );
+<a name="l00018"></a>00018 }
 <a name="l00019"></a>00019 
-<a name="l00020"></a>00020    &lt;?php echo $panel[<span class="stringliteral">&#39;contenido&#39;</span>]; ?&gt;
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022    &lt;/div&gt; &lt;!-- Acaba subpanel --&gt;
-<a name="l00023"></a>00023 &lt;/div&gt; &lt;!-- Acaba Panel --&gt;
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 &lt;!-- &lt;script&gt;$(<span class="stringliteral">&quot;.subpanel_oculto&quot;</span>).css(<span class="stringliteral">&quot;display&quot;</span>,<span class="stringliteral">&quot;none&quot;</span>);&lt;/script&gt; --&gt;
+<a name="l00020"></a>00020 <span class="preprocessor">#contenido h1 {</span>
+<a name="l00021"></a>00021 <span class="preprocessor"></span>    margin: 18px 2px;
+<a name="l00022"></a>00022 }
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="preprocessor">#wrap{</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span>width: 100%;
+<a name="l00026"></a>00026 margin:0 <span class="keyword">auto</span>;
+<a name="l00027"></a>00027 }
+<a name="l00028"></a>00028 <span class="preprocessor">#contenedor {</span>
+<a name="l00029"></a>00029 <span class="preprocessor"></span>width: 70%;
+<a name="l00030"></a>00030 <span class="keywordtype">float</span>:left;
+<a name="l00031"></a>00031 padding: 20px 10px 10px 10px;
+<a name="l00032"></a>00032 min-height: 400px;
+<a name="l00033"></a>00033 height: <span class="keyword">auto</span> !important;
+<a name="l00034"></a>00034 }
+<a name="l00035"></a>00035 <span class="preprocessor">#lateral {</span>
+<a name="l00036"></a>00036 <span class="preprocessor"></span>width: 27%;
+<a name="l00037"></a>00037 color: #6F6137;
+<a name="l00038"></a>00038 <span class="keywordtype">float</span>:right;
+<a name="l00039"></a>00039 padding-top: 30px;
+<a name="l00040"></a>00040 }
+<a name="l00041"></a>00041 <span class="preprocessor">#lateral p{</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span>padding: 0 25px 25px 25px;
+<a name="l00043"></a>00043 }
+<a name="l00044"></a>00044 <span class="preprocessor">#scripts {</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span><span class="keywordtype">float</span>: left;
+<a name="l00046"></a>00046 width: 100%;
+<a name="l00047"></a>00047 }
+<a name="l00048"></a>00048 <span class="preprocessor">#lateral p, #lateral2 p{</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span>margin:0;
+<a name="l00050"></a>00050 padding: 0 15px 15px 15px;
+<a name="l00051"></a>00051 }
+<a name="l00052"></a>00052 a{
+<a name="l00053"></a>00053 text-decoration: none;
+<a name="l00054"></a>00054 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-07&quot;</span>)?&gt;;
+<a name="l00055"></a>00055 font-style: italic;
+<a name="l00056"></a>00056 }
+<a name="l00057"></a>00057 a:hover{
+<a name="l00058"></a>00058 color: #6F6137;
+<a name="l00059"></a>00059 }
+<a name="l00060"></a>00060 textarea {
+<a name="l00061"></a>00061 border-bottom:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-12&quot;</span>)?&gt;;
+<a name="l00062"></a>00062 border-left:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-13&quot;</span>)?&gt;;
+<a name="l00063"></a>00063 border-right:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-13&quot;</span>)?&gt;;
+<a name="l00064"></a>00064 border-top:1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-14&quot;</span>)?&gt;;
+<a name="l00065"></a>00065 }
+<a name="l00066"></a>00066 fieldset {
+<a name="l00067"></a>00067     padding: 10px;
+<a name="l00068"></a>00068     border: 1px solid rgb(204, 204, 204);
+<a name="l00069"></a>00069     border-radius: 5px 5px 5px 5px;
+<a name="l00070"></a>00070 }
+<a name="l00071"></a>00071 fieldset fieldset {
+<a name="l00072"></a>00072     margin: 8px 0 8px 8px;
+<a name="l00073"></a>00073     padding: 2px;
+<a name="l00074"></a>00074 }
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 <span class="comment">/* class para bloques de codigo, por ejemplo */</span>
+<a name="l00077"></a>00077 pre {
+<a name="l00078"></a>00078 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
+<a name="l00079"></a>00079 border-left: 3px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
+<a name="l00080"></a>00080 background-color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
+<a name="l00081"></a>00081 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;; 
+<a name="l00082"></a>00082 margin: 18px 2px;
+<a name="l00083"></a>00083 padding: 3px;
+<a name="l00084"></a>00084 overflow: <span class="keyword">auto</span>;
+<a name="l00085"></a>00085 max-height: 450px;
+<a name="l00086"></a>00086 margin-bottom: 10px;
+<a name="l00087"></a>00087 }
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089 .botones_acciones {
+<a name="l00090"></a>00090 margin-top: 20px;
+<a name="l00091"></a>00091 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

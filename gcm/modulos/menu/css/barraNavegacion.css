@@ -10,14 +10,13 @@ text-align: left;
 }
 #barraNavegacion a {
 border: 1px;
-color: <?=$this->color("4")?>;
+color: <?=$this->color("body-11")?>;
 }
 #barraNavegacion ul img {
    border: 0;
    width: 16px;
    height: 16px;
    }
-
 #barraNavegacion ul {
 list-style-position: outside;
 padding: 3px 0px 0px 2px;

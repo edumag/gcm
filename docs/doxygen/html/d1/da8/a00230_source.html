@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/css/titulo_articulo.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/comentarios/js/editorweb.js</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,35 +80,36 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_564572b1ce5d7fe7ca8c92124076e676.html">contenidos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_16c9c3cff4e4e0c997c817dc8545818a.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e363b1922071f2f95404829d0400fcd6.html">comentarios</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_3e51bc51ef8562b3bff0495df5379b5d.html">js</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">titulo_articulo.css</div>  </div>
+<div class="title">editorweb.js</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002 <span class="preprocessor">#listado_de_contenido .titulo_articulo {</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>font-size: 1.8em;
-<a name="l00004"></a>00004 }
-<a name="l00005"></a>00005 <span class="comment">/* Caja con informaciýn del documento */</span>
-<a name="l00006"></a>00006 <span class="comment">/* fecha,etc.. */</span>
-<a name="l00007"></a>00007 .titulo_articulo h3 {
-<a name="l00008"></a>00008 font-size: small;
-<a name="l00009"></a>00009 display: <span class="keyword">inline</span>;
-<a name="l00010"></a>00010 }
-<a name="l00011"></a>00011 .titulo_articulo a {
-<a name="l00012"></a>00012 <span class="comment">/* color: &lt;?=$this-&gt;color(&quot;4&quot;)?&gt;; */</span>
-<a name="l00013"></a>00013 font-weight: normal !IMPORTANT ;
-<a name="l00014"></a>00014 }
+<a href="../../d1/da8/a00230.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/** </span>
+<a name="l00002"></a>00002 <span class="comment"> * @file editorweb.js</span>
+<a name="l00003"></a>00003 <span class="comment"> * @brief Incluimos tinyMCE al textarea del formulario de comentario</span>
+<a name="l00004"></a>00004 <span class="comment"> * @ingroup modulo_comentarios</span>
+<a name="l00005"></a>00005 <span class="comment"> */</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 addLoadEvent(<span class="keyword">function</span>(){
+<a name="l00008"></a>00008    tinyMCE.init({
+<a name="l00009"></a>00009       mode : <span class="stringliteral">&quot;textareas&quot;</span>,
+<a name="l00010"></a>00010       editor_selector : <span class="stringliteral">&quot;editor_simple&quot;</span>,
+<a name="l00011"></a>00011       theme : <span class="stringliteral">&quot;simple&quot;</span>,
+<a name="l00012"></a>00012       languages : <span class="stringliteral">&#39;es&#39;</span>,
+<a name="l00013"></a>00013       });
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015    });
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -1,14 +1,32 @@
+<?php
+
+/** 
+ * @file listado.html
+ * @brief Plantilla para mostrar el listado de comentarios en la entrada
+ * @ingroup modulo_comentarios
+ */
+
+ ?>
 <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
 <div class='caja_comentario_ind' id="comentario_<?=$fila->id?>">
    <div class="encabezado_comentario">
-      <p class="fecha_comentario"><?=presentarFecha($fila->fecha,1,'mysql')?></p>
-      <?php if ( $gcm->au->logeado() ) { ?>
-      <!--<a href="javascript:pedirDatos('<?=Router::$dir?>comentarios/modificar/<?=$fila->id?>','modificarComentario');" title='<?=literal('Modificar')?>' >-->
+      <p class="fecha_comentario"><?=presentarFecha($fila->fecha_creacion,1,'mysql')?></p>
+      <?php if ( permiso('moderar_comentarios') || $fila->usuarios_id == session_id() ) { ?>
       <a href="?e=modificar_comentario&id=<?=$fila->id?>" title='<?=literal('Modificar')?>' >
-         <img src='<?=$gcm->event->instancias['temas']->icono('16/exclamacion')?>' alt=' [!] ' />
+         <img src='<?=$gcm->event->instancias['temas']->icono('editar')?>' alt=' [!] ' />
       </a>
-      <a href="javascript:pedirDatos('<?=Router::$dir?>ajax/comentarios/eliminar/<?=$fila->id?>','confirmarBorradoComentario');" title='<?=literal('Eliminar')?>' >
-         <img src='<?=$gcm->event->instancias['temas']->icono('16/borrar')?>' alt=' [X] ' />
+      <a href="javascript:pedirDatos('<?=Router::$dir?>ajax/comentarios/eliminar/<?=$fila->id?>','confirmarBorradoComentario');" 
+         title='<?=literal('Eliminar')?>' 
+         onclick="return confirm('<?php echo literal('Eliminar').' '.literal('comentario');?>');"
+         >
+         <img src='<?=$gcm->event->instancias['temas']->icono('borrar')?>' alt=' [X] ' />
+      </a>
+      <?php } ?>
+      <?php if ( permiso('moderar_comentarios') && $fila->activado != 1) { ?>
+      <a href="javascript:pedirDatos('<?=Router::$dir?>ajax/comentarios/activar/<?=$fila->id?>','confirmarActivacionComentario');" 
+         title='<?=literal('Activar').' '.literal('comentario')?>' 
+         >
+         <img src='<?=$gcm->event->instancias['temas']->icono('ok')?>' alt=' [X] ' />
       </a>
       <?php } ?>
       <?php if ( isset($fila->mail) AND $fila->mail != '' ) { 
@@ -20,6 +38,9 @@
       <?php } ?>
    </div>
    <p class='texto_comentario' ><?=$fila->comentario?></p>
+   <?php if ( $fila->activado != 1 ) { ?>
+   <p class='aviso'><?php echo literal('Pendiente de moderación');?></p>
+   <?php } ?>
 </div>
 <?php } ?>
 

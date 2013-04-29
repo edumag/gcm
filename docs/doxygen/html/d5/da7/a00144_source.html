@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/rst2html/lib/Rst2html.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/reproductorFlash/readme.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,106 +81,107 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_373d56ee7ecdd957186c6921e2451b3f.html">rst2html</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_cec5b1a3cf99bd00ce94541bdb3bec5d.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_cf10e6095567e168843208a9a9f4b55e.html">reproductorFlash</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Rst2html.php</div>  </div>
+<div class="title">readme.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d5/da7/a00144.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file Rst2html.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief Transfomar texto rst a html</span>
-<a name="l00006"></a>00006 <span class="comment"> *</span>
-<a name="l00007"></a>00007 <span class="comment"> * @category   Gcm</span>
-<a name="l00008"></a>00008 <span class="comment"> * @subpackage Rst2html</span>
-<a name="l00009"></a>00009 <span class="comment"> * @author     Eduardo Magrané eduardo@mamedu.com</span>
-<a name="l00010"></a>00010 <span class="comment"> *</span>
-<a name="l00011"></a>00011 <span class="comment"> * @internal</span>
-<a name="l00012"></a>00012 <span class="comment"> *   Created  23/11/09</span>
-<a name="l00013"></a>00013 <span class="comment"> *  Revision  SVN $Id: modulo.php 483 2011-03-30 08:56:20Z eduardo $</span>
-<a name="l00014"></a>00014 <span class="comment"> * Copyright  Copyright (c) 2009, Eduardo Magrané</span>
-<a name="l00015"></a>00015 <span class="comment"> *</span>
-<a name="l00016"></a>00016 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
-<a name="l00017"></a>00017 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
-<a name="l00018"></a>00018 <span class="comment"> */</span>
-<a name="l00019"></a>00019 <span class="comment"></span>
-<a name="l00020"></a>00020 <span class="comment">/**</span>
-<a name="l00021"></a>00021 <span class="comment"> * @class Rst2html</span>
-<a name="l00022"></a>00022 <span class="comment"> * @brief rst2html</span>
-<a name="l00023"></a>00023 <span class="comment"> *</span>
-<a name="l00024"></a>00024 <span class="comment"> * Código extraido de:</span>
-<a name="l00025"></a>00025 <span class="comment"> *</span>
-<a name="l00026"></a>00026 <span class="comment"> * reStructuredText to HTML</span>
-<a name="l00027"></a>00027 <span class="comment"> * version 0.1b (2008-01-31)</span>
-<a name="l00028"></a>00028 <span class="comment"> * by Paul Kippes</span>
-<a name="l00029"></a>00029 <span class="comment"> *</span>
-<a name="l00030"></a>00030 <span class="comment"> * Requires local installation of reStructuredText parser</span>
-<a name="l00031"></a>00031 <span class="comment"> * See: http://docutils.sourceforge.net/rst.html</span>
-<a name="l00032"></a>00032 <span class="comment"> *</span>
-<a name="l00033"></a>00033 <span class="comment"> * Update $rst2html for the appropriate location of rst2html.py</span>
-<a name="l00034"></a>00034 <span class="comment"> *</span>
-<a name="l00035"></a>00035 <span class="comment"> * @version 0.1</span>
-<a name="l00036"></a>00036 <span class="comment"> */</span>
-<a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="../../d1/d6f/a00063.html">00038</a> <span class="keyword">class </span><a class="code" href="../../d1/d6f/a00063.html" title="rst2html">Rst2html</a> {
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040    <span class="keyword">static</span> <span class="keyword">function</span> convertir($input) {
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042       $rst2html = <span class="stringliteral">&#39;/usr/bin/rst2html&#39;</span>;
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044       <span class="keywordflow">if</span> (!is_executable($rst2html)) {
-<a name="l00045"></a>00045          <span class="keywordflow">return</span> <span class="stringliteral">&quot;&lt;strong class=&#39;error&#39;&gt;&quot;</span> .
-<a name="l00046"></a>00046             <span class="stringliteral">&quot;reStructureText extension: No executable at $rst2html&quot;</span> .
-<a name="l00047"></a>00047             <span class="stringliteral">&quot;&lt;/strong&gt;&quot;</span>;
-<a name="l00048"></a>00048          }
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050 <span class="preprocessor">      # If pipe errors are reported, enable output to the file.</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span><span class="preprocessor">      # But make certain the file doesn&#39;t already exist or else</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="preprocessor">      # the webserver may not have permission to create it.</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span>      $io_desc = array(
-<a name="l00054"></a>00054          0 =&gt; array(<span class="stringliteral">&#39;pipe&#39;</span>, <span class="charliteral">&#39;r&#39;</span>),
-<a name="l00055"></a>00055          1 =&gt; array(<span class="stringliteral">&#39;pipe&#39;</span>, <span class="charliteral">&#39;w&#39;</span>),
-<a name="l00056"></a>00056                <span class="comment">/* 2 =&gt; array(&#39;file&#39;, &#39;/tmp/error-output.txt&#39;, &#39;a&#39;) */</span>);
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058       $res = proc_open($rst2html . <span class="stringliteral">&quot; --stylesheet-path=&#39;&#39; &quot;</span> .
-<a name="l00059"></a>00059          <span class="stringliteral">&quot;--initial-header-level=2 --no-doc-title &quot;</span> .
-<a name="l00060"></a>00060          <span class="stringliteral">&quot;--no-file-insertion --no-raw&quot;</span>,
-<a name="l00061"></a>00061          $io_desc, $pipes, <span class="stringliteral">&#39;/tmp&#39;</span>, NULL);
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063       <span class="keywordflow">if</span> (is_resource($res)) {
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065          fwrite($pipes[0], $input);
-<a name="l00066"></a>00066          fclose($pipes[0]);
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068          $html = stream_get_contents($pipes[1]);
-<a name="l00069"></a>00069          fclose($pipes[1]);
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071          $html = preg_replace(<span class="stringliteral">&#39;/.*&lt;body&gt;\n(.*)&lt;\/body&gt;.*/s&#39;</span>, <span class="stringliteral">&#39;${1}&#39;</span>, $html);
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;!DOCTYPE HTML PUBLIC <span class="stringliteral">&quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span>&gt;
+<a name="l00002"></a>00002 &lt;html xmlns=<span class="stringliteral">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;
+<a name="l00003"></a>00003 &lt;head&gt;
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005    &lt;title&gt;About the JW Player 5&lt;/title&gt;
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007    &lt;style type=<span class="stringliteral">&quot;text/css&quot;</span>&gt;
+<a name="l00008"></a>00008       body { background-color: #fff; padding: 0 20px; color:#000; font: 13px/18px Arial, sans-serif; }
+<a name="l00009"></a>00009       a { color: #360; }
+<a name="l00010"></a>00010       h3 { padding-top: 20px; }
+<a name="l00011"></a>00011       ol { margin:5px 0 15px 16px; padding:0; list-style-type:square; }
+<a name="l00012"></a>00012    &lt;/style&gt;
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 &lt;/head&gt;
+<a name="l00015"></a>00015 &lt;body&gt;
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017    &lt;h1&gt;About the JW Player 5&lt;/h1&gt;
+<a name="l00018"></a>00018    &lt;p&gt;Thank you <span class="keywordflow">for</span> downloading the JW Player, the leading open source video player <span class="keywordflow">for</span> Flash and HTML5 on the Web.  Not only is the JW Player the easiest way to put video on your website, but we offer a host of other products and services to assist in providing the best possible video experience <span class="keywordflow">for</span> your users.&lt;/p&gt;
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020    &lt;h3&gt;Quickstart&lt;/h3&gt;
+<a name="l00021"></a>00021    &lt;p&gt;The quickest way to <span class="keyword">get</span> started is to unzip the file you downloaded (you must have done that <span class="keywordflow">if</span> you<span class="stringliteral">&#39;re reading this!) and copy the contents into a folder called &#39;</span>jwplayer<span class="stringliteral">&#39; at the root of your website.  The end result should be:&lt;/p&gt;</span>
+<a name="l00022"></a>00022 <span class="stringliteral">   &lt;ol&gt;</span>
+<a name="l00023"></a>00023 <span class="stringliteral">     &lt;li&gt;{webroot}/jwplayer/player.swf&lt;/li&gt;</span>
+<a name="l00024"></a>00024 <span class="stringliteral">     &lt;li&gt;{webroot}/jwplayer/jwplayer.js&lt;/li&gt;</span>
+<a name="l00025"></a>00025 <span class="stringliteral">     &lt;li&gt;etc...&lt;/li&gt;</span>
+<a name="l00026"></a>00026 <span class="stringliteral">   &lt;/ol&gt;</span>
+<a name="l00027"></a>00027 <span class="stringliteral">    &lt;p&gt;You can then view the source of this page and copy the code from the example below onto your webpage.  That&#39;</span>s it!  You should see a player on your site.&lt;/p&gt;
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029    &lt;h3&gt;An Example of the JW Player&lt;/h3&gt;
+<a name="l00030"></a>00030    &lt;p&gt;Below you see a simple embedded example of the JW Player.&lt;/p&gt;
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032    &lt;!-- START OF THE PLAYER EMBEDDING TO COPY-PASTE --&gt;
+<a name="l00033"></a>00033    &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;mediaplayer&quot;</span>&gt;JW Player goes here&lt;/div&gt;
+<a name="l00034"></a>00034    
+<a name="l00035"></a>00035    &lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span> src=<span class="stringliteral">&quot;jwplayer.js&quot;</span>&gt;&lt;/script&gt;
+<a name="l00036"></a>00036    &lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span>&gt;
+<a name="l00037"></a>00037       jwplayer(<span class="stringliteral">&quot;mediaplayer&quot;</span>).setup({
+<a name="l00038"></a>00038          flashplayer: <span class="stringliteral">&quot;player.swf&quot;</span>,
+<a name="l00039"></a>00039          file: <span class="stringliteral">&quot;video.mp4&quot;</span>,
+<a name="l00040"></a>00040          image: <span class="stringliteral">&quot;preview.jpg&quot;</span>
+<a name="l00041"></a>00041       });
+<a name="l00042"></a>00042    &lt;/script&gt;
+<a name="l00043"></a>00043    &lt;!-- END OF THE PLAYER EMBEDDING --&gt;
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045    &lt;h3&gt;Support, Documentation and Source Code&lt;/h3&gt;
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047    &lt;p&gt;If you need help, the LongTail Support Community contains a wealth of information, include a large &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/jw-player/&quot;</span>&gt;library of documentation&lt;/a&gt;, a very active &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/forums/jw-player/&quot;</span>&gt;support forum&lt;/a&gt;, and a &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/blog&quot;</span>&gt;blog&lt;/a&gt; on the latest releases and tips on publishing video.&lt;/p&gt;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049    &lt;p&gt;Some documents you might find useful are:&lt;/p&gt;
+<a name="l00050"></a>00050    &lt;ol&gt;
+<a name="l00051"></a>00051       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12539/supported-video-and-audio-formats&quot;</span>&gt;Supported file formats&lt;/a&gt;.&lt;/li&gt;
+<a name="l00052"></a>00052       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12537/xml-playlist-support&quot;</span>&gt;Supported XML playlist formats&lt;/a&gt;.&lt;/li&gt;
+<a name="l00053"></a>00053       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12536/configuration-options&quot;</span>&gt;Complete list of configuration options&lt;/a&gt; (<span class="keywordflow">for</span> customizing the player).&lt;/li&gt;
+<a name="l00054"></a>00054       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/12540/javascript-api-reference&quot;</span>&gt;Supported JavaScript API calls&lt;/a&gt; (<span class="keywordflow">for</span> JavaScript interaction).&lt;/li&gt;
+<a name="l00055"></a>00055       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/jw-player/jw-player-for-flash-v5/14/skinning-the-jw-player-5&quot;</span>&gt;Supported skinning elements&lt;/a&gt; (<span class="keywordflow">for</span> creating your own graphics).&lt;/li&gt;
+<a name="l00056"></a>00056       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://developer.longtailvideo.com/trac/roadmap/&quot;</span>&gt;Roadmap with full changelogs&lt;/a&gt; <span class="keywordflow">for each</span> version.&lt;/li&gt;
+<a name="l00057"></a>00057    &lt;/ol&gt;
+<a name="l00058"></a>00058    &lt;p&gt;Last, the source code of all different versions of the player can &lt;a href=&quot;http://developer.longtailvideo.com/trac/browser/tags&quot;&gt;be found here&lt;/a&gt;. You can click a version and download the ZIP files (the links are at the bottom).&lt;/p&gt;
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060    &lt;h3&gt;Licensing&lt;/h3&gt;
+<a name="l00061"></a>00061    &lt;p&gt;The player is licensed under a &lt;a href=<span class="stringliteral">&quot;http://creativecommons.org/licenses/by-nc-sa/2.0/&quot;</span>&gt;Creative Commons License&lt;/a&gt;. It allows you to use, modify and redistribute the script, but only for &lt;b&gt;non-commercial&lt;/b&gt; purposes.&lt;/p&gt;
+<a name="l00062"></a>00062    &lt;p&gt;Examples of &lt;b&gt;commercial use&lt;/b&gt; include: 
+<a name="l00063"></a>00063    
+<a name="l00064"></a>00064    &lt;ul&gt;
+<a name="l00065"></a>00065    &lt;li&gt;websites with any advertisements; &lt;/li&gt;
+<a name="l00066"></a>00066    &lt;li&gt;websites owned or operated by corporations; &lt;/li&gt;
+<a name="l00067"></a>00067    &lt;li&gt;websites designed to promote other products, such as a band or artist;&lt;/li&gt;
+<a name="l00068"></a>00068    &lt;li&gt;products (e.g. a CMS) that bundle LongTail products into its offering. &lt;/li&gt;
+<a name="l00069"></a>00069    &lt;/ul&gt;
+<a name="l00070"></a>00070    
+<a name="l00071"></a>00071    If any of the above conditions apply to you, then &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/order/&quot;</span> title=<span class="stringliteral">&quot;Order commercial licenses&quot;</span>&gt;please purchase a license <span class="keywordflow">for</span> the player&lt;/a&gt;.  If you are still unsure whether you need to purchase a license, please &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/support/contact-us&quot;</span>&gt;contact us&lt;/a&gt;.&lt;/p&gt;
 <a name="l00072"></a>00072 
-<a name="l00073"></a>00073       } <span class="keywordflow">else</span> {
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075          $html = <span class="stringliteral">&quot;&lt;strong class=&#39;error&#39;&gt;&quot;</span> .
-<a name="l00076"></a>00076             <span class="stringliteral">&quot;reStructureText extension: error opening pipe&quot;</span> .
-<a name="l00077"></a>00077             <span class="stringliteral">&quot;&lt;/strong&gt;&quot;</span>;
-<a name="l00078"></a>00078          }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080       <span class="keywordflow">return</span> $html;
-<a name="l00081"></a>00081       }
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083    }
+<a name="l00073"></a>00073    &lt;h3&gt;Related Products&lt;/h3&gt;
+<a name="l00074"></a>00074     &lt;p&gt;In addition to the JW Player, &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com&quot;</span>&gt;LongTail Video&lt;/a&gt; has a suite of products to help you publish video.&lt;/p&gt;
+<a name="l00075"></a>00075    &lt;p&gt;Learn more about them here:&lt;/p&gt;
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077     &lt;ul&gt;
+<a name="l00078"></a>00078       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/addons/skins&quot;</span>&gt;Skins&lt;/a&gt; - Change the look of your player to match your site.  &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/addons/skins&quot;</span>&gt;View our library&lt;/a&gt;.&lt;/li&gt;
+<a name="l00079"></a>00079      &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/addons/plugins&quot;</span>&gt;Plugins&lt;/a&gt; - Add functionality to your player, like sharing, social networking, analytics, advertising and more.  &lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/addons/plugins&quot;</span>&gt;Find one <span class="keywordflow">for</span> you&lt;/a&gt;.&lt;/li&gt;
+<a name="l00080"></a>00080       &lt;li&gt;&lt;a href=<span class="stringliteral">&quot;http://www.longtailvideo.com/referral.aspx?page=pubreferral&amp;ref=xvwjuhgktajeelu&quot;</span>&gt;AdSolution&lt;/a&gt; - Monetize your videos with LongTail<span class="stringliteral">&#39;s AdSolution.  Integrate pre-roll, overlay and post-roll ads into your site and starting making money today.  &lt;a href=&quot;http://www.longtailvideo.com/referral.aspx?page=pubreferral&amp;ref=xvwjuhgktajeelu&quot;&gt;Sign up now&lt;/a&gt;.&lt;/li&gt;</span>
+<a name="l00081"></a>00081 <span class="stringliteral">      &lt;li&gt;&lt;a href=&quot;http://www.bitsontherun.com/via/longtailvideo&quot;&gt;Bits on the Run&lt;/a&gt; - Upload, encode, store, manage and stream your videos with Bits on the Run, LongTail&#39;</span>s end-to-end online video platform.  &lt;a href=<span class="stringliteral">&quot;http://www.bitsontherun.com/via/longtailvideo&quot;</span>&gt;Sign up now&lt;/a&gt;.&lt;/li&gt;
+<a name="l00082"></a>00082     &lt;/ul&gt;
+<a name="l00083"></a>00083 
 <a name="l00084"></a>00084 
-<a name="l00085"></a>00085 ?&gt;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 &lt;/body&gt;
+<a name="l00087"></a>00087 &lt;/html&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

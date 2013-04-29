@@ -620,7 +620,12 @@ class Router {
 
       /* Definir mime_type */
 
-      $mime_type = GUtil::tipo_de_archivo($dd.$url);
+      // La url puede venir con los subdirectorios de la dirección http, debe limpiarse sino nos dara error
+      // al ir a buscar información , ya que los subdirectorios son respectivos de la url pero desde php nos vamos 
+      // del directorio del proyecto.
+      $url_sin_subdirectorios = str_replace('../','',$url);
+      // registrar(__FILE__,__LINE__,'url: '.$url.' url_sin: '.$url_sin_subdirectorios,'ADMIN');  // DEV
+      $mime_type = GUtil::tipo_de_archivo($dd.$url_sin_subdirectorios);
 
       if ( substr_count($url,".btml") != 0) {
          $esBorrador = TRUE ;

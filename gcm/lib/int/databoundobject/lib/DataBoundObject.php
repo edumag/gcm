@@ -13,24 +13,37 @@
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
+ *
+ * @ingroup crud
  */
 
 
 /**
  * @class DataBoundObject
  * @brief Abstracción para manipilación de datos con PDO
- * @version 0.1
+ *
+ * @ingroup crud
  */
 
 abstract class DataBoundObject {
 
-   protected $ID;
+   protected $ID;                          ///< Identificador de registro
    protected $objPDO;                      ///< PDO
    protected $strTableName;                ///< Nombre de tabla
    protected $arRelationMap;               ///< Array con las relaciones campo tabla->nombre_variable
    protected $blForDeletion;               ///< Para saber si se debe borrar el registro
    protected $blIsLoaded;                  ///< Saber si ya se fue ha buscar a la BD
    protected $arModifiedRelations;         ///< listado de campos modificados
+
+   /**
+    * Array con los nombres de los campo que hacen de indice de la tabla, por lo general 
+    * suele ser id, pero dejamos las puertas abiertas a que sea otro nombre, he incluso que 
+    * el indice de la tabla conste de más de un indice, permitiendo gestionar tablas con 
+    * más de uno, como en el caso de tablas combinatorias, que se encargan de guardar las 
+    * relaciones entre dos tablas diferentes.
+    */
+
+   protected $campos_indices = array();
 
    /**
     * Valores de los campos del registro
@@ -51,10 +64,26 @@ abstract class DataBoundObject {
    abstract protected function DefineRelationMap($objPDO);
 
    /**
+    * Comprobar numero de indices de la tablas
+    *
+    * @see $numero_indices
+    */
+
+   function comprobar_indices() {
+
+      $campo_indice = array_search('ID',$this->arRelationMap);
+
+      $this->campos_indices = explode(",",$campo_indice);
+
+      }
+
+   /**
     * Constructor
     *
     * @param $objPDO Instancia de PDO
-    * @param $id     Identificador de registro, sino es uno nuevo
+    * @param $id     Identificador de registro, sino es uno nuevo, el identificador
+    *                puede ser de dos campos separados por comas para tablas con un
+    *                indice de dos campos.
     */
 
    public function __construct(PDO $objPDO, $id = NULL) {
@@ -63,10 +92,10 @@ abstract class DataBoundObject {
       $this->arRelationMap = $this->DefineRelationMap($objPDO);
       $this->objPDO = $objPDO;
       $this->blIsLoaded = false;
-      if (isset($id)) {
-         $this->ID = $id;
-      };
+      if (isset($id)) $this->ID = $id;
       $this->arModifiedRelations = array();
+      $this->comprobar_indices();
+
       }
 
    /**
@@ -77,30 +106,74 @@ abstract class DataBoundObject {
 
       if (isset($this->ID)) {
 
+         $indices = explode(",",$this->ID);
+
          $strQuery = "SELECT ";
          foreach ($this->arRelationMap as $key => $value) {
-            $strQuery .= '`'.$key . "`,";
+            if ( $value == 'ID' ) {
+               $strQuery .= $key . ",";
+            } else {
+               $strQuery .= '`'.$key . "`,";
+               }
          }
          $strQuery = substr($strQuery, 0, strlen($strQuery)-1);
-         $strQuery .= " FROM " . $this->strTableName . " WHERE
-            id = :eid";
+         $strQuery .= " FROM " . $this->strTableName . " WHERE ";
+
+         $condicion = "";
+         $conta = 0;
+         foreach ( $this->campos_indices as $indice ) {
+
+            // Si no hay valor en uno de los indices la condición 
+            // afectara a uno de ellos solo.
+            if ( isset($indices[$conta]) ) {
+               $condicion .= $indice. "=:".$indice." AND ";
+               }
+
+            $conta++;
+            }
+
+         $condicion = rtrim($condicion,"AND ");
+
+         $strQuery .= $condicion;
+
          $objStatement = $this->objPDO->prepare($strQuery);
-         $objStatement->bindParam(':eid', $this->ID,
-            PDO::PARAM_INT);
+
+         $conta = 0;
+         foreach ( $this->campos_indices as $indice ) {
+            // Si no hay valor en uno de los indices la condición 
+            // afectara a uno de ellos solo.
+            if ( isset($indices[$conta]) ) {
+               $objStatement->bindParam(':'.$indice, $indices[$conta],
+                  PDO::PARAM_INT);
+               }
+            $conta++;
+            }
+
          $objStatement->execute();
          $arRow = $objStatement->fetch(PDO::FETCH_ASSOC);
 
          if ( ! $arRow  ) {
-            trigger_error('No existe registro ['.$this->ID.'] en ['.$this->strTableName.']'."\nsql: ".$strQuery, E_USER_ERROR);
+            registrar(__FILE__,__LINE__,'No existe registro ['.$this->ID.'] en ['.$this->strTableName.']'."\nsql: ".$strQuery,'ADMIN');
+            $this->ID = FALSE;
             return FALSE;
             }
 
          foreach($arRow as $key => $value) {
-            $strMember = $this->arRelationMap[$key];
-            $this->valores[$strMember] = $value;
-         };
+            // Si tenemos más de un indice, la tabla es combiatoria,
+            // añadimos los indices al formulario para tener algo
+            // que presentar.
+            if ( in_array($key,$this->campos_indices) ) {
+               $strMember = $key;
+               $this->valores[$strMember] = $value;
+            } else {
+               $strMember = $this->arRelationMap[$key];
+               $this->valores[$strMember] = $value;
+               }
+            }
+
          $this->blIsLoaded = true;
-      };
+         return TRUE;
+      }
    }
 
    /**
@@ -111,24 +184,66 @@ abstract class DataBoundObject {
 
       $debug = '';
 
+      $indices = explode(",",$this->ID);
+
       if (isset($this->ID)) {
 
          $strQuery = 'UPDATE ' . $this->strTableName . ' SET ';
 
+         $salida = FALSE;
          foreach ($this->arRelationMap as $key => $value) {
             //eval('$actualVal = &$this->' . $value . ';');
             $actualVal = ( isset($this->valores[$value]) ) ? $this->valores[$value] : NULL ;
             if (array_key_exists($value, $this->arModifiedRelations)) {
-               $strQuery .= $key . " = :$value, ";
-            };
-         }
+               $salida .= $key . " = :$value, ";
+               };
+            }
 
-         $strQuery = substr($strQuery, 0, strlen($strQuery)-2);
-         $strQuery .= ' WHERE id = :eid';
+         // Si es una tabla combinatoria añadir los indices a modificar
+         if ( count($this->campos_indices) > 1 ) {
+            $conta = 0;
+            foreach ( $this->campos_indices as $indice ) {
+               if ( isset($indices[$conta]) ) {
+                  $salida .= $indice. "=:post_".$indice.", ";
+                  }
+               $conta++;
+               }
+            }
+
+         if ( $salida ) $strQuery .= substr($salida, 0, strlen($salida)-2);
+
+         $condicion = " WHERE ";
+         $conta = 0;
+         foreach ( $this->campos_indices as $indice ) {
+
+            // Si no hay valor en uno de los indices la condición 
+            // afectara a uno de ellos solo.
+            if ( isset($indices[$conta]) ) {
+               $condicion .= $indice. "=:".$indice." AND ";
+               }
+
+            $conta++;
+            }
+
+         $condicion = rtrim($condicion,"AND ");
+
+         $strQuery .= $condicion;
+
          unset($objStatement);
          $objStatement = $this->objPDO->prepare($strQuery);
-         $objStatement->bindValue(':eid', $this->ID, PDO::PARAM_INT);
 
+         $conta = 0;
+         foreach ( $this->campos_indices as $indice ) {
+            // Si no hay valor en uno de los indices la condición 
+            // afectara a uno de ellos solo.
+            if ( isset($indices[$conta]) ) {
+               $objStatement->bindParam(':'.$indice, $indices[$conta],
+                  PDO::PARAM_INT);
+               }
+            $conta++;
+            }
+
+         // Nuevos valores
          foreach ($this->arRelationMap as $key => $value) {
 
             $actualVal = ( isset($this->valores[$value]) ) ? $this->valores[$value] : NULL ; 
@@ -148,10 +263,32 @@ abstract class DataBoundObject {
                }
             }
 
-         // echo $debug; // DEV
-         return $objStatement->execute();
+         // Si es una tabla combinatoria añadir los indices a modificar
+         if ( count($this->campos_indices) > 1 ) {
+            $conta = 0;
+            foreach ( $this->campos_indices as $indice ) {
+               if ( isset($_POST[$indice]) ) {
+                  $objStatement->bindValue(':post_' . $indice, $_POST[$indice],
+                     PDO::PARAM_INT);
+                  }
+               $conta++;
+               }
+            }
 
-      } else {
+         try {
+
+            $objStatement->execute();
+
+         } catch (PDOException $e) {
+
+            $msg = $e->getMessage();
+            registrar(__FILE__,__LINE__,$msg,'ADMIN');
+            return FALSE;
+         }
+
+         return TRUE;
+
+      } else {  // Estamos insertando
 
          if ( $this->driverPDO() == 'mysql'  ) {
             $this->ID = NULL;
@@ -160,10 +297,25 @@ abstract class DataBoundObject {
             }
          $strValueList = "";
          if ( $this->driverPDO() == 'mysql'  ) {
-            $strQuery = 'INSERT INTO ' . $this->strTableName . '( ';
+            $strQuery = 'INSERT INTO ' . $this->strTableName . ' ( ';
          } else {
-            $strQuery = 'INSERT INTO ' . $this->strTableName . '( id,';
+            $strQuery = 'INSERT INTO ' . $this->strTableName . ' ( '.array_search('ID',$this->arRelationMap).',';
             }
+
+         // Si es una tabla combinatoria
+         if ( count($this->campos_indices) > 1 ) {
+            $conta = 0;
+            foreach ( $this->campos_indices as $indice ) {
+               if ( isset($_POST[$indice]) ) {
+                  // $salida .= $indice. "=:post_".$indice.", ";
+                  $strQuery .= $indice . ', ';
+                  $strValueList .= ":post_$indice, ";
+                  }
+               $conta++;
+               }
+            }
+
+
          foreach ($this->arRelationMap as $key => $value) {
             //eval('$actualVal = &$this->' . $value . ';');
             $actualVal = ( isset($this->valores[$value]) ) ? $this->valores[$value] : NULL ;
@@ -202,10 +354,24 @@ abstract class DataBoundObject {
                      if ( ! $objStatement->bindValue(':' . $value, $actualVal, PDO::PARAM_STR) ) {
                         registrar(__FILE__,__LINE__,"Error añadiendo datos: [$value] [$actualVal]",'ADMIN');
                         }
-                  };
-               };
-            };
+                  }
+               }
+            }
          }
+
+         // Si es una tabla combinatoria añadir los indices a modificar
+         if ( count($this->campos_indices) > 1 ) {
+            $conta = 0;
+            foreach ( $this->campos_indices as $indice ) {
+               if ( isset($_POST[$indice]) ) {
+                  $objStatement->bindValue(':post_' . $indice, $_POST[$indice],
+                     PDO::PARAM_INT);
+                  }
+               $conta++;
+               }
+            }
+
+
          return $objStatement->execute();
       }
    }
@@ -224,13 +390,51 @@ abstract class DataBoundObject {
     */
 
    public function __destruct() {
+
       if (isset($this->ID)) {   
+
+         $indices = explode(",",$this->ID);
+
          if ($this->blForDeletion == true) {
-            $strQuery = 'DELETE FROM ' . $this->strTableName . ' WHERE
-                         id = :eid';
+
+            $strQuery = 'DELETE FROM ' . $this->strTableName . ' WHERE ';
+
+            $condicion = "";
+            $conta = 0;
+            foreach ( $this->campos_indices as $indice ) {
+
+               // Si no hay valor en uno de los indices la condición 
+               // afectara a uno de ellos solo.
+               if ( isset($indices[$conta]) ) {
+                  $condicion .= $indice. "=:".$indice." AND ";
+                  }
+
+               $conta++;
+               }
+
+            $condicion = rtrim($condicion,"AND ");
+            $strQuery .= $condicion;
+
+
+
             $objStatement = $this->objPDO->prepare($strQuery);
-            $objStatement->bindValue(':eid', $this->ID, PDO::PARAM_INT);   
-                        $objStatement->execute();
+
+            $conta = 0;
+            foreach ( $this->campos_indices as $indice ) {
+               // Si no hay valor en uno de los indices la condición 
+               // afectara a uno de ellos solo.
+               if ( isset($indices[$conta]) ) {
+                  $objStatement->bindParam(':'.$indice, $indices[$conta],
+                     PDO::PARAM_INT);
+                  }
+               $conta++;
+               }
+
+            try {
+               $objStatement->execute();
+            } catch (Exception $ex) {
+               registrar(__FILE__,__LINE__,'Error con BD: '.$ex->getMessage(),'ERROR');
+               }
          };
       }
       }
@@ -238,7 +442,8 @@ abstract class DataBoundObject {
    /**
     * Para acceder o modificar los valores de los campos
     *
-    * @deprecated
+    * @param $strFunction Nombre de la función
+    * @param $arArguments Argumentos
     */
 
    public function __call($strFunction, $arArguments) {
@@ -263,6 +468,7 @@ abstract class DataBoundObject {
     */
 
    function SetAccessor($strMember, $strNewValue) {
+      if ( $strMember == 'ID' ) $strMember = 'id';
       $this->valores[$strMember] = $strNewValue;
       $this->arModifiedRelations[$strMember] = "1";
       }
@@ -277,7 +483,24 @@ abstract class DataBoundObject {
       if ($this->blIsLoaded != true) {
          $this->Load();
          }
+      if ( $strMember == 'ID' ) $strMember = 'id';
       return ( isset($this->valores[$strMember])  ) ? $this->valores[$strMember] : FALSE ;
+      }
+
+   /**
+    * Nos permite eliminar el valor de un campo, evitando así que al guardar las modificaciones
+    * no modifique un campo que deseamos mantener como esta.
+    *
+    * Útil en el caso por ejemplo de las contraseñas donde en caso de no poner contenido en el
+    * formulario implica que no se desea cambiar.
+    *
+    * @param $strMember Nombre del campo
+    */
+
+   function DelAccessor($strMember) {
+      if ( $strMember == 'ID' ) $strMember = 'id';
+      if ( isset($this->valores[$strMember]) ) unset($this->valores[$strMember]);
+
       }
 
    /**
@@ -320,7 +543,7 @@ abstract class DataBoundObject {
     *
     * @param $condicion Condición de busqueda
     * @param $campos    Array con los campos a presentar
-    * @param $condicion Condición de busqueda
+    * @param $orden     Orden
     *
     * @return Array con resultado
     */

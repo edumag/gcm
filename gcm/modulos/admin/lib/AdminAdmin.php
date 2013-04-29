@@ -1,17 +1,10 @@
 <?php
 
 /**
- * @file AdminAdmin
+ * @file AdminAdmin.php
+ * @brief Métodos administrativos para el módulo admin
  *
- * @author    Eduardo Magrané 
- *
- * @internal
- *   Created  23/11/09
- *  Revision  SVN $Id: Admin.php 478 2011-02-28 08:31:31Z eduardo $
- * Copyright  Copyright (c) 2009, Eduardo Magrané
- *
- * This source code is released for free distribution under the terms of the
- * GNU General Public License as published by the Free Software Foundation.
+ * @package modulos
  */
 
 require_once(dirname(__FILE__).'/Admin.php');
@@ -30,9 +23,12 @@ class AdminAdmin extends Admin {
 
    /**
     * Activamos tema admin para los metodos que lo necesiten
+    *
+    * @param $e Evento
+    * @param $args Argumentos
     */
 
-   function precarga() {
+   function activar_tema_admin($e, $args=FALSE) {
 
       global $gcm;
 
@@ -51,7 +47,7 @@ class AdminAdmin extends Admin {
 
    function test() {
 
-      permiso(2);
+      permiso('administrar',TRUE);
 
       global $gcm;
 
@@ -150,6 +146,9 @@ class AdminAdmin extends Admin {
     * Ejecutar métodos test de los módulos
     *
     * Buscamos en todos los módulos si hay un metodo test en tal caso se lanza
+    *
+    * @param $e Evento
+    * @param $args Argumentos
     */
 
    function ejecutar_tests_modulos($e = FALSE, $args = FALSE) {
@@ -221,7 +220,7 @@ class AdminAdmin extends Admin {
 
       global $gcm;
 
-      permiso(8);
+      permiso('administrar',TRUE);
 
       $gcm->tema = 'admin';
       $gcm->plantilla = 'administrando.html';
@@ -265,8 +264,6 @@ class AdminAdmin extends Admin {
    
       global $gcm;
 
-      permiso(8);
-
       $diff_usuario = FALSE;   ///< ¿Hay diferencias entre el archivo por defecto?
       $diff_admin   = FALSE;   ///< ¿Hay diferencias entre el archivo por defecto?
 
@@ -306,18 +303,20 @@ class AdminAdmin extends Admin {
                }
          }
 
-      if ( ! $diff_usuario ) echo '<p class="aviso">Sin diferencias con la versión por defecto</p>';
-
       ?>
       <form action="<? echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
       <fieldset>
       <legend  accesskey="s">Eventos para usuario</legend>
+      <?php if ( ! $diff_usuario ) echo '<div class="aviso">Sin diferencias con la versión por defecto</div>'; ?>
       <textarea name="contenido" style="width:100%;height:300px"><?=$contenido_usuario?></textarea>
+      <br /><br />
       <input type="hidden" name="m" value="admin">
       <input type="hidden" name="a" value="modificar_conexion">
       <input type="hidden" name="modulo" value="<?=$modulo?>">
       <input type="hidden" name="tipo" value="usuario">
+      <fieldset>
       <input type='submit' value='<?=literal('Guardar')?>' />
+      </fieldset>
       <?php
       if ( $contenido_usuario != $contenido_usuario_modulo ) {
          ?>
@@ -332,17 +331,21 @@ class AdminAdmin extends Admin {
 
       if ( $contenido_admin ) {
          
-         if ( ! $diff_admin ) echo '<p class="aviso">Sin diferencias con la versión por defecto</p>';
+
          ?>
          <form action="<? echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
          <fieldset>
          <legend  accesskey="s">Eventos para administración</legend>
+         <?php if ( ! $diff_admin ) echo '<div class="aviso">Sin diferencias con la versión por defecto</div>'; ?>
          <textarea name="contenido" style="width:100%;height:300px"><?=$contenido_admin?></textarea>
+         <br /><br />
          <input type="hidden" name="m" value="admin">
          <input type="hidden" name="a" value="modificar_conexion">
          <input type="hidden" name="modulo" value="<?=$modulo?>">
          <input type="hidden" name="tipo" value="admin">
+         <fieldset>
          <input type='submit' value='<?=literal('Guardar')?>' />
+         </fieldset>
          <?php
          if ( $contenido_admin != $contenido_admin_modulo ) {
             ?>
@@ -370,7 +373,7 @@ class AdminAdmin extends Admin {
    
       global $gcm;
 
-      permiso(8);
+      permiso('administrar',TRUE);
 
       $modulo    = $_POST['modulo'];
       $tipo      = $_POST['tipo'];
@@ -391,5 +394,24 @@ class AdminAdmin extends Admin {
 
       }
    
+
+   /**
+    * Administrar roles
+    */
+
+   function roles($e, $args = FALSE) {
+
+      global $gcm;
+
+         $gcm->event->anular('contenido','admin');
+         $gcm->event->anular('titulo','admin');
+         $gcm->titulo = literal('Roles');
+
+         require_once(dirname(__FILE__).'/../modelos/usuarios.php');
+         $usuarios = new Roles($gcm->pdo_conexion());
+         $usuarios->administrar(FALSE,FALSE,FALSE,TRUE);
+         return;
+      }
+
    }
 ?>

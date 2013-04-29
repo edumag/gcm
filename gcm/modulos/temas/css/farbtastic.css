@@ -35,42 +35,47 @@
   height: 101px;
 }
 .farbtastic .wheel {
-  background: url(<?=Router::$dir.$this->ruta('temas','img','wheel.png')?>) no-repeat;
+  background: url('<?=Router::$dir.$this->ruta("temas","img","wheel.png")?>') no-repeat;
   width: 195px;
   height: 195px;
 }
 .farbtastic .overlay {
-  background: url(<?=Router::$dir.$this->ruta('temas','img','mask.png')?>) no-repeat;
+  background: url('<?=Router::$dir.$this->ruta("temas","img","mask.png")?>') no-repeat;
 }
 .farbtastic .marker {
   width: 17px;
   height: 17px;
   margin: -8px 0 0 -8px;
   overflow: hidden; 
-  background: url(<?=Router::$dir.$this->ruta('temas','img','marker.png')?>) no-repeat;
+  background: url('<?=Router::$dir.$this->ruta("temas","img","marker.png")?>') no-repeat;
 }
 .colorwell {
- border: 2px solid <?=$this->color("4")?>;
+ border: 2px solid <?=$this->color("body-11")?>;
  width: 6em;
  text-align: center;
  cursor: pointer;
 }
 body .colorwell-selected {
- border: 2px solid <?=$this->color("15")?>;
+ border: 2px solid <?=$this->color("body-18")?>;
  font-weight: bold;
 }
 #selector_colores table {
-display: inline-block;
- border: 1px solid <?=$this->color("4")?>;
+display: table-cell;
+ border: 1px solid <?=$this->color("body-11")?>;
 }
 #selector_colores thead td {
- border: 1px solid <?=$this->color("2")?>;
- background: <?=$this->color("4")?>;
- color: <?=$this->color("2")?>;
+ border: 1px solid <?=$this->color("body-06")?>;
+ background: <?=$this->color("body-11")?>;
+ color: <?=$this->color("body-06")?>;
  text-align: center;
  font-weight: bold;
 }
 #picker {
    padding: 5px;
    float: right;
+}
+#selector_colores {
+    display: block;
+    height: 300px;
+    overflow: auto;
 }

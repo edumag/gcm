@@ -1,0 +1,27 @@
+#cabecera{
+color: <?=$this->color("body-06")?>;
+background: <?=$this->color("body-07")?>;
+padding: 15px;
+overflow: hidden;
+}
+#cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {
+display: inline;
+}
+#cabecera h1 {
+   font-size: 300%;
+}
+#cabecera h2 {
+   font-family: 'Droid Serif';
+   font-size: 100%;
+}
+#cabecera a {
+color: <?=$this->color("body-06")?>;
+}
+#cabeceraDerecha {
+float: right;
+width: 60%;
+text-align:right;
+}
+#subcabecera {
+background: #FBFBFB
+}

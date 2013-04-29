@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/admin/eventos_admin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/menu/config/config_es.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,35 +80,25 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e0b90d1017353e67ec406a3e12ca4962.html">menu</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_a1731249c4d48caa9e5398b51566e372.html">config</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">eventos_admin.php</div>  </div>
+<div class="title">config_es.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 $eventos[<span class="stringliteral">&#39;menuadmin&#39;</span>][<span class="stringliteral">&#39;presentar_menu_administrativo&#39;</span>][1]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00004"></a>00004 $eventos[<span class="stringliteral">&#39;infoserver&#39;</span>][<span class="stringliteral">&#39;infoserver&#39;</span>][1]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00005"></a>00005 $eventos[<span class="stringliteral">&#39;test&#39;</span>][<span class="stringliteral">&#39;ejecutar_tests_modulos&#39;</span>][1]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00006"></a>00006 $eventos[<span class="stringliteral">&#39;precarga&#39;</span>][<span class="stringliteral">&#39;precarga&#39;</span>][1]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 <span class="comment">/* Si no se ha confirmado el cambio del administrador por defecto */</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="keywordflow">if</span> ( ! <a class="code" href="../../df/d5d/a00084_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;configuracion_confirmada&#39;</span>) ) {
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012    $eventos[<span class="stringliteral">&#39;precontenido&#39;</span>][<span class="stringliteral">&#39;confirmar_configuracion&#39;</span>][1]=<span class="stringliteral">&#39;&#39;</span>;
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 }
-<a name="l00015"></a>00015 ?&gt;
+<a name="l00002"></a>00002 $config_DESC[<span class="stringliteral">&#39;descartar&#39;</span>] = <span class="stringliteral">&#39;Si un archivo o carpeta contiene uno de los contenidos a descartar no se incluyen en el menú&#39;</span>;
+<a name="l00003"></a>00003 $config_DESC[<span class="stringliteral">&#39;orden_presentacion&#39;</span>] = <span class="stringliteral">&#39;Especificar orden de presentación de los elementos del menú el formato es item@orden&#39;</span>;
+<a name="l00004"></a>00004 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 15 de Febrero de 2013 17:15:12 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

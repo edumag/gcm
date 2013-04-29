@@ -1,12 +1,26 @@
 
 body {
-background-color: <?=$this->color("0")?>;
-color: <?=$this->color("1")?>;
+background-color: <?=$this->color("body-00")?>;
+color: <?=$this->color("body-01")?>;
 font-family: Palatino, 'Book Antiqua', serif;
 line-height: 20px;
 padding: 0;
 margin: 0;
+/* Gradiante */
+background: <?=$this->color("body-02")?>;
+background: -moz-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, <?=$this->color("body-02")?>), color-stop(2%, <?=$this->color("body-03")?>), color-stop(45%, <?=$this->color("body-04")?>), color-stop(100%, <?=$this->color("body-05")?>));
+background: -webkit-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: -o-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: -ms-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+background: linear-gradient(135deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
 }
+
+#contenido h1 {
+    margin: 18px 2px;
+}
+
 #wrap{
 width: 100%;
 margin:0 auto;
@@ -18,14 +32,6 @@ padding: 20px 10px 10px 10px;
 min-height: 400px;
 height: auto !important;
 }
-#contenido {
-   padding: 10px;
-}
-
-#contenido > p {
-    margin: 10px;
-   }
-
 #lateral {
 width: 27%;
 color: #6F6137;
@@ -34,40 +40,6 @@ padding-top: 30px;
 }
 #lateral p{
 padding: 0 25px 25px 25px;
-}
-#cabecera{
-color: <?=$this->color("2")?>;
-background: <?=$this->color("3")?>;
-padding: 15px;
-overflow: hidden;
-}
-#cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {
-display: inline;
-}
-#cabecera h1 {
-   font-size: 300%;
-}
-#cabecera h2 {
-   font-family: 'Droid Serif';
-   font-size: 100%;
-}
-
-#cabecera a {
-color: <?=$this->color("2")?>;
-}
-#cabeceraDerecha {
-float: right;
-width: 60%;
-text-align:right;
-}
-#subcabecera {
-background: #FBFBFB
-}
-#pie {
-float: left;
-width: 100%;
-margin-top:10px;
-margin-bottom:10px;
 }
 #scripts {
 float: left;
@@ -79,213 +51,41 @@ padding: 0 15px 15px 15px;
 }
 a{
 text-decoration: none;
-color: <?=$this->color("3")?>;
+color: <?=$this->color("body-07")?>;
 font-style: italic;
-text-shadow: 0 1px 0 #fff;
 }
 a:hover{
 color: #6F6137;
 }
-#contenido :focus {
-outline: 0;
+textarea {
+border-bottom:1px solid <?=$this->color("body-12")?>;
+border-left:1px solid <?=$this->color("body-13")?>;
+border-right:1px solid <?=$this->color("body-13")?>;
+border-top:1px solid <?=$this->color("body-14")?>;
 }
-.boton{
--moz-border-radius:5px;
--webkit-border-radius:5px;
-border-radius:5px;
--moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
--webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
-background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
-color:#3D3C38;
-padding:3px 8px 3px 8px;
-margin: 2px;
-text-shadow:1px 1px 0 rgba(255, 255, 255, 1);
-font-family: sans-serif;
-font-size: 90%;
-font-style: normal;
-font-weight: normal;
-cursor: pointer;
+fieldset {
+    padding: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px 5px 5px 5px;
 }
-.boton:hover{
-background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
-background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D6D6D6));
-}
-/** Título del contenido **/
-.titulo_principal {
-    margin: 10px 0 0 10px;
-    padding: 0px;
+fieldset fieldset {
+    margin: 8px 0 8px 8px;
+    padding: 2px;
 }
 
-#titulo {
-color: <?=$this->color("3")?>;
-font-style: italic;
-line-height: 40px;
-margin-bottom: 10px;
-text-shadow: 2px 1px 1px #FFFFFF;
-}
-#camino a, #camino {
-color: <?=$this->color("4")?>;
-font-size: 100%;
-}
-textarea {
-border-bottom:1px solid <?=$this->color("5")?>;
-border-left:1px solid <?=$this->color("6")?>;
-border-right:1px solid <?=$this->color("6")?>;
-border-top:1px solid <?=$this->color("7")?>;
-}
 /* class para bloques de codigo, por ejemplo */
 pre {
-border: 1px solid <?=$this->color("2")?>;
-border-left: 3px solid <?=$this->color("2")?>;
-background-color: <?=$this->color("4")?>;
-color: <?=$this->color("2")?>; 
-margin-left: 10px;
-margin-right: 30px;
+border: 1px solid <?=$this->color("body-06")?>;
+border-left: 3px solid <?=$this->color("body-06")?>;
+background-color: <?=$this->color("body-11")?>;
+color: <?=$this->color("body-06")?>; 
+margin: 18px 2px;
 padding: 3px;
 overflow: auto;
 max-height: 450px;
 margin-bottom: 10px;
 }
 
-/* Cajas de aviso */
-
-.aviso , .error, .admin, .normal, .debug  {
-padding: 10px;
-background: transparent;
-border: 0;
-/* Esquinas redondeadas */
-border-radius: 5px 5px 5px 5px ;
--moz-border-radius: 5px 5px 5px 5px ;
--webkit-border-radius: 5px 5px 5px 5px;
+.botones_acciones {
+margin-top: 20px;
 }
-.aviso li, .error li, .admin li, .normal li , .debug li  {
-list-style: none ;
-border: 2px;
-padding: 8px;
-margin-top: 2px;
-}
-.error , .error a {
-background: red ;
-color: white;
-}
-.aviso , .aviso a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-.admin , .admin a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-.normal , .normal a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-.debug , .debug a {
-background: #5F6C5B ;
-color: #fff !IMPORTANT;
-}
-
-
-/* Clases para generar símbolos */
-
-.simb_arriba {
-   vertical-align:middle;
-   border: 0px solid #000;
-   border-radius: 15px 15px 0 0 ;
-   -moz-border-radius: 15px 15px 0 0 ;
-   -webkit-border-radius: 15px 15px 0 0 ;
-   }
-.simb_abajo {
-   vertical-align:middle;
-   border: 0px solid #000;
-   border-radius: 0 0 15px 15px ;
-   -moz-border-radius: 0 0 15px 15px ;
-   -webkit-border-radius: 0 0 15px 15px;
-   }
-.simb_neutro {
-   padding: 3px;
-   color: #000;
-   border-color: #000;
-   background: #dd0;
-   font-style:oblique;
-   }
-
-/* Comportamiento para diferentes resoluciones
- *
- * ipad 740px x 
- */
-@media screen and (max-width: 1160px){
-#contenedor{
-width: 65%;
-}
-#lateral {
-width: 33%;
-}
-}
-@media screen and (max-width: 1015px){
-#lateral, #contenedor {
-float: none;
-margin: 0 auto;
-width: 96%;
-}
-#lateral { 
-   margin-left: 10px;
-}
-
-.panel_titulo a {
--moz-border-radius:10px;
--webkit-border-radius:10px;
-border-radius:10px;
--moz-box-shadow:0 1px 0 rgba(0,0,0,0.3);
--webkit-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-box-shadow:0 1px 0 rgba(0,0,0,0.3);
-background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
-background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
-color:#4A4A4A;
-text-shadow:1px 1px 0 rgba(255, 255, 255, 0.7);
-padding: 5px;
-display: block;
-}
-
-/* Tablas adaptables */
-table, thead, tr, th, tbody, td{
-   display:block;
-}
-
-tr { border-bottom: 4px solid #666666; }
-td { 
-   border: none;
-   border-bottom: 1px solid #eee; 
-   position: relative;
-}
-}
-
-/* Ventana flotante */
-.ventana_flotante {
-
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   border: 1px solid #fff;
-   background: #000;
-   color: white;
-   padding: 4px;
-   margin: -50px 0 0 -100px;
-	filter: alpha(opacity=85); /* internet explorer */
-	-khtml-opacity: 0.8;      /* khtml, version anterior de safari */
-	-moz-opacity: 0.8;       /* firefox, mozilla, netscape */
-	opacity: 0.8;           /* safari, chrome, opera */
-   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"; /*internet explorer 8 */ 
-   }
-.titulo_ventana_flotante {
-    border-bottom: 1px solid white;
-    margin-bottom: 4px;
-    min-width: 200px;
-   }
-
-ul input {
-   margin-right: 6px;
-}
-

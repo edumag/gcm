@@ -79,3 +79,9 @@ BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   Header set Cache-Control "max-age=2678400, private"
   </filesmatch>
 </ifmodule>
+
+## Sense www
+RewriteCond %{HTTP_HOST} ^www.mamedu.com$ [NC]
+RewriteRule ^(.*)$ http://mamedu.com/dev/gcm/proyecto/$1 [L,R=301]
+
+
