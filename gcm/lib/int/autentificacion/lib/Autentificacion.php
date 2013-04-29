@@ -276,9 +276,9 @@ class Autentificacion {
 
       /* Cramos sessión para usuario */
 
-      $_SESSION[$this->sufijo.'_id'] = $id;
+      $_SESSION[$this->sufijo.'id'] = $id;
       $_SESSION[$this->sufijo.'usuario'] = $usuario;
-      $_SESSION[$this->sufijo.'_roles'] = serialize($roles);
+      $_SESSION[$this->sufijo.'roles'] = serialize($roles);
 
       return TRUE;
 
@@ -294,7 +294,7 @@ class Autentificacion {
 
        global $_SESSION;
 
-       return ( isset($_SESSION[$this->sufijo.'_id']) ) ? $_SESSION[$this->sufijo.'_id'] : FALSE ;
+       return ( isset($_SESSION[$this->sufijo.'id']) ) ? $_SESSION[$this->sufijo.'id'] : FALSE ;
 
       }
 
@@ -308,9 +308,9 @@ class Autentificacion {
 
    function es_admin() {
 
-      if ( ! isset($_SESSION[$this->sufijo.'_roles']) ) return FALSE;
+      if ( ! isset($_SESSION[$this->sufijo.'roles']) ) return FALSE;
 
-      $roles = unserialize($_SESSION[$this->sufijo.'_roles']);
+      $roles = unserialize($_SESSION[$this->sufijo.'roles']);
 
       return in_array('administrador',$roles) ;
 
@@ -323,7 +323,7 @@ class Autentificacion {
     */
 
    function id() {
-      return ( isset($_SESSION[$this->sufijo.'_id']) ) ? $_SESSION[$this->sufijo.'_id']: FALSE ;
+      return ( isset($_SESSION[$this->sufijo.'id']) ) ? $_SESSION[$this->sufijo.'id']: FALSE ;
       }
 
    /**
@@ -343,9 +343,9 @@ class Autentificacion {
 
    function roles_usuario() {
 
-      if ( ! isset($_SESSION[$this->sufijo.'_roles']) ) return FALSE;
+      if ( ! isset($_SESSION[$this->sufijo.'roles']) ) return FALSE;
 
-      return unserialize($_SESSION[$this->sufijo.'_roles']);
+      return unserialize($_SESSION[$this->sufijo.'roles']);
 
       }
 
@@ -416,9 +416,9 @@ class Autentificacion {
 
    function salir() {
 
-      if ( isset($_SESSION[$this->sufijo.'_id'])  ) unset($_SESSION[$this->sufijo.'_id']);
-      if ( isset($_SESSION[$this->sufijo.'_admin'])  ) unset($_SESSION[$this->sufijo.'_admin']);
-      if ( isset($_SESSION[$this->sufijo.'_roles'])  ) unset($_SESSION[$this->sufijo.'_roles']);
+      if ( isset($_SESSION[$this->sufijo.'id'])  ) unset($_SESSION[$this->sufijo.'id']);
+      if ( isset($_SESSION[$this->sufijo.'admin'])  ) unset($_SESSION[$this->sufijo.'admin']);
+      if ( isset($_SESSION[$this->sufijo.'roles'])  ) unset($_SESSION[$this->sufijo.'roles']);
       session_destroy();
       return TRUE;
 

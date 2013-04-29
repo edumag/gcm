@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_editar.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/_form_titulo.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,29 +87,18 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">form_editar.html</div>  </div>
+<div class="title">_form_titulo.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;caja_form_editar&quot;</span>&gt;
-<a name="l00002"></a>00002    &lt;form action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;formularioTexto&quot;</span> name=<span class="stringliteral">&quot;formularioTexto&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
-<a name="l00003"></a>00003       &lt;?php <span class="keywordflow">if</span> ( $evento == <span class="stringliteral">&#39;ejecutar_traducir&#39;</span> ) include (<a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_titulo.html&#39;</span>)); ?&gt;
-<a name="l00004"></a>00004       &lt;?php include (<a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_contenido.html&#39;</span>)); ?&gt;
-<a name="l00005"></a>00005       &lt;fieldset&gt;
-<a name="l00006"></a>00006          &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3)?&gt;&lt;/legend&gt;
-<a name="l00007"></a>00007          &lt;button title=<span class="stringliteral">&quot;&lt;?=literal(&#39;Guardar&#39;,3)?&gt;&quot;</span> type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="charliteral">&#39;e&#39;</span> value=<span class="stringliteral">&#39;&lt;?=$evento?&gt;&#39;</span>&gt;&lt;?=literal($boton,3)?&gt;&lt;/button&gt;
-<a name="l00008"></a>00008          &lt;?php <span class="keywordflow">if</span> ( substr_count(<a class="code" href="../../df/d03/a00062_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">Router::$c</a>,<span class="stringliteral">&quot;.btml&quot;</span>) != 0) { ?&gt;
-<a name="l00009"></a>00009          &lt;button title=<span class="stringliteral">&quot;&lt;?=literal(&#39;Guardar&#39;,3)?&gt;&quot;</span> type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="charliteral">&#39;e&#39;</span> value=<span class="stringliteral">&#39;publicar_borrador&#39;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Publicar&#39;</span>,3)?&gt;&lt;/button&gt;
-<a name="l00010"></a>00010          &lt;?php } ?&gt;
-<a name="l00011"></a>00011          &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;s&quot;</span> value=<span class="stringliteral">&quot;&lt;?=Router::$s?&gt;&quot;</span> /&gt;
-<a name="l00012"></a>00012          &lt;input type=<span class="stringliteral">&quot;hidden&quot;</span> name=<span class="stringliteral">&quot;c&quot;</span> value=<span class="stringliteral">&quot;&lt;?=Router::$c?&gt;&quot;</span> /&gt;
-<a name="l00013"></a>00013       &lt;/fieldset&gt;
-<a name="l00014"></a>00014    &lt;/form&gt;
-<a name="l00015"></a>00015 &lt;/div&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;fieldset&gt;
+<a name="l00002"></a>00002    &lt;legend  accesskey=<span class="stringliteral">&quot;t&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Título&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00003"></a>00003    &lt;input style=<span class="stringliteral">&#39;width: 100%;&#39;</span> title=<span class="stringliteral">&#39;&lt;?php echo literal(&#39;</span>Título del contenido<span class="stringliteral">&#39;,3);?&gt;&#39;</span> type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;titulo&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$titulo?&gt;&quot;</span> /&gt;
+<a name="l00004"></a>00004 &lt;/fieldset&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

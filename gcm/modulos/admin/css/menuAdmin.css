@@ -68,47 +68,29 @@ ul.navmenu-h a {
   height: 1%; /*For IE*/
 }
 
-/* Root Menu Hover Persistence */
-ul.navmenu-h a:hover {
-    background: #D1D7E7;
-    color: black;
+/* Botones desactivdos */
+ul.navmenu-h .ma_off a {
+   color: #585858;
 }
-ul.navmenu-h a:visited {
-    color: rgb(119, 186, 206);
+/* Root Menu Hover Persistence */
+ul.navmenu-h a:visited, ul.navmenu-h a:link{
+    color: white;
  }
+ul.navmenu-h a:hover {
+    background: #D1D7E7!IMPORTANT;
+    color: black!IMPORTANT;
+}
 
 /* 2nd Menu */
 ul.navmenu-h li:hover li a,
 ul.navmenu-h li.iehover li a {
   float: none;
 }
-/* Botones desactivdos */
-ul.navmenu-h ul li.ma_off a {
- 
-}
 /* 2nd Menu Hover Persistence */
 ul.navmenu-h li:hover li a:hover,
 ul.navmenu-h li:hover li:hover a,
 ul.navmenu-h li.iehover li a:hover,
 ul.navmenu-h li.iehover li.iehover a {
-}
-/* 3rd Menu */
-ul.navmenu-h li:hover li:hover li a,
-ul.navmenu-h li.iehover li.iehover li a {
-}
-/* 3rd Menu Hover Persistence */
-ul.navmenu-h li:hover li:hover li a:hover,
-ul.navmenu-h li:hover li:hover li:hover a,
-ul.navmenu-h li.iehover li.iehover li a:hover,
-ul.navmenu-h li.iehover li.iehover li.iehover a {
-}
-/* 4th Menu */
-ul.navmenu-h li:hover li:hover li:hover li a,
-ul.navmenu-h li.iehover li.iehover li.iehover li a {
-}
-/* 4th Menu Hover */
-ul.navmenu-h li:hover li:hover li:hover li a:hover,
-ul.navmenu-h li.iehover li.iehover li.iehover li a:hover {
 }
 ul.navmenu-h ul ul,
 ul.navmenu-h ul ul ul {

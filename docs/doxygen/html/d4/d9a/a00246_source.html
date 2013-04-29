@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/listar_contenido_seccion.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/form_guardar_como.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,29 +87,28 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">listar_contenido_seccion.html</div>  </div>
+<div class="title">form_guardar_como.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;ul&gt;
-<a name="l00002"></a>00002 &lt;?php <span class="keywordflow">foreach</span> ( $subsecciones as $subseccion ) { ?&gt;
-<a name="l00003"></a>00003 
-<a name="l00004"></a>00004 &lt;li&gt;&lt;h3&gt;&lt;a href=<span class="stringliteral">&#39;&lt;?php echo Router::$enlace_relativo.$subseccion.&#39;</span>/<span class="stringliteral">&#39;; ?&gt;&#39;</span>&gt;&lt;?php echo literal(<a class="code" href="../../dd/d6d/a00111_a6ab4ae106b6ebf5769bc3390aa8ac287.html#a6ab4ae106b6ebf5769bc3390aa8ac287" title="comprobar_barra()">comprobar_barra</a>($subseccion,<span class="stringliteral">&#39;eliminar&#39;</span>)).<span class="charliteral">&#39;/&#39;</span>; ?&gt;&lt;/a&gt;&lt;/h3&gt;&lt;/li&gt;
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 &lt;?php } ?&gt;
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 &lt;?php <span class="keywordflow">foreach</span> ( $documentos as $documento ) { ?&gt;
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 &lt;li&gt;&lt;h4&gt;&lt;a href=<span class="stringliteral">&#39;&lt;?php echo Router::$enlace_relativo.$documento; ?&gt;&#39;</span>&gt;&lt;?php echo literal(str_replace(<span class="stringliteral">&#39;.html&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,$documento)); ?&gt;&lt;/a&gt;&lt;/h4&gt;&lt;/li&gt;
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 &lt;?php } ?&gt;
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 &lt;/ul&gt;
-<a name="l00015"></a>00015 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;h2&gt;&lt;?=literal(<span class="stringliteral">&#39;Seleccionar sección y título&#39;</span>,3)?&gt;&lt;/h2&gt;
+<a name="l00002"></a>00002 &lt;form method=<span class="stringliteral">&quot;post&quot;</span> action=<span class="stringliteral">&quot;&lt;?=$_SERVER[&#39;PHP_SELF&#39;]?&gt;&quot;</span>&gt;
+<a name="l00003"></a>00003    &lt;fieldset&gt;
+<a name="l00004"></a>00004       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar como&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00005"></a>00005       &lt;?php include (<a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_secciones.html&#39;</span>));?&gt;
+<a name="l00006"></a>00006       &lt;?php include (<a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;contenidos&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;_form_titulo.html&#39;</span>));?&gt;
+<a name="l00007"></a>00007       &lt;textarea style=<span class="stringliteral">&quot;display: none;&quot;</span> name=<span class="stringliteral">&quot;areaTexto&quot;</span>&gt; &lt;?=<a class="code" href="../../d3/d00/a00113_a6b187a9ea17ea832effa5ef77497a74e.html#a6b187a9ea17ea832effa5ef77497a74e" title="Limpiamos el texto preparandolo para ser guardado o presentado.">limpiarContenido</a>($contenido)?&gt;&lt;/textarea&gt;
+<a name="l00008"></a>00008       &lt;fieldset&gt;
+<a name="l00009"></a>00009          &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Acciones&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00010"></a>00010          &lt;button type=<span class="stringliteral">&#39;submit&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&#39;ejecutar_nuevo&#39;</span> &gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar&#39;</span>)?&gt;&lt;/button&gt;
+<a name="l00011"></a>00011          &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;guardar_como_borrador&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Guardar como borrador&#39;</span>)?&gt;&lt;/button&gt;
+<a name="l00012"></a>00012       &lt;/fieldset&gt;
+<a name="l00013"></a>00013    &lt;/fieldset&gt;
+<a name="l00014"></a>00014 &lt;/form&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

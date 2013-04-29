@@ -4,84 +4,102 @@
 
 <ul id="mainMenu1" class="navmenu-h">
 
-<?php
-if (is_array($menuAdmin)) {
+   <?php if (is_array($menuAdmin)) { ?>
 
-    foreach ( $menuAdmin as $keySeccion => $seccion ) {
+   <?php foreach ( $menuAdmin as $keySeccion => $seccion ) { ?>
 
-      if ( is_array($seccion) ) {
+   <?php if ( is_array($seccion) ) { ?>
 
-         $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ;
-         $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#';
+   <?php $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ; ?>
+   <?php $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#'; ?>
 
-         echo "\n\t<li>";
-         echo "\n\t\t<a ";
-         if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' ";
-         echo '> ',literal($keySeccion,3),' </a>';
+   <li>
+      <a <?php if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' "; ?>>
+         <?php echo literal($keySeccion,3);?>
+      </a>
+      <ul>
 
-         echo "\n\t\t\t<ul>";
+         <?php if ( isset($seccion['boton']) ) { ?>
 
-         if ( isset($seccion['boton']) ) {
+         <?php foreach ($seccion['boton'] as $keyBoton => $boton) { ?>
 
-            foreach ($seccion['boton'] as $keyBoton => $boton) {
+         <?php $GCM_DEV[]='menuAdmin::'.$keySeccion.'::'.$keyBoton; ?>
 
-               $GCM_DEV[]='menuAdmin::'.$keySeccion.'::'.$keyBoton;
+         <?php if ( $boton['activado'] == 0 ) { ?>
 
-               if ( $boton['activado'] == 0 ) {
-                  echo "\n\t\t\t<li class='ma_off' ><a title='".literal($boton['title'],3)."' >".literal($keyBoton)."</a></li>";
-               } else {
-                  echo "\n\t\t\t<li class='ma_on' ><a title='".literal($boton['title'],3)."' href='".$boton['link']."'>".literal($keyBoton)."</a></li>";
-                  }
-               }
-            }
-         echo "\n\t\t\t</ul>";
-         }
-         echo "\n\t</li>";
-      }
-}
-?>
+         <li class='ma_off' ><a title='<?php echo literal($boton['title'],3);?>'><?php echo literal($keyBoton);?></a></li>
+
+         <?php } else { ?>
+         
+         <li class='ma_on' ><a title='<?php echo literal($boton['title'],3);?>' href='<?php echo $boton['link'];?>'><?php echo literal($keyBoton);?></a></li>
+
+         <?php } // end activado ?>
+
+         <?php } // end foreach boton ?>
+
+         <?php } // end seccion: boton ?>
+
+      </ul>
+
+      <?php } // end tenemos sección ?>
+      
+   </li>
+
+   <?php } // end recorremos menuAdmin ?>
+
+   <?php } // end Tenemos array menuAdmin ?>
+
 </ul>
+
+
 <ul id="mainMenu2" class="navmenu-h">
-<?php
 
-if (is_array($menuAdmin2)) {
+   <?php if (is_array($menuAdmin2)) { ?>
 
-    foreach ( $menuAdmin2 as $keySeccion => $seccion ) {
+   <?php foreach ( $menuAdmin2 as $keySeccion => $seccion ) { ?>
 
-      if ( is_array($seccion) ) {
+   <?php if ( is_array($seccion) ) { ?>
 
-         $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ;
-         $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#';
+   <?php $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ; ?>
+   <?php $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#'; ?>
 
-         echo "\n\t<li>";
-         echo "\n\t\t<a ";
-         if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' ";
-         echo '> ',literal($keySeccion,3),' </a>';
+   <li>
+      <a <?php if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' "; ?>>
+         <?php echo literal($keySeccion,3);?>
+      </a>
+      <ul>
 
-         echo "\n\t\t\t<ul>";
+         <?php if ( isset($seccion['boton']) ) { ?>
 
-         if ( isset($seccion['boton']) ) {
+         <?php foreach ($seccion['boton'] as $keyBoton => $boton) { ?>
 
-            foreach ($seccion['boton'] as $keyBoton => $boton) {
+         <?php $GCM_DEV[]='menuAdmin::'.$keySeccion.'::'.$keyBoton; ?>
 
-               $GCM_DEV[]='menuAdmin::'.$keySeccion.'::'.$keyBoton;
+         <?php if ( $boton['activado'] == 0 ) { ?>
 
-               if ( $boton['activado'] == 0 ) {
-                  echo "\n\t\t\t<li class='ma_off' ><a title='".literal($boton['title'],3)."' >".literal($keyBoton)."</a></li>";
-               } else {
-                  echo "\n\t\t\t<li class='ma_on' ><a title='".literal($boton['title'],3)."' href='".$boton['link']."'>".literal($keyBoton)."</a></li>";
-                  }
-               }
-            }
-         echo "\n\t\t\t</ul>";
-         }
-         echo "\n\t</li>";
-      }
-}
-?>
+         <li class='ma_off' ><a title='<?php echo literal($boton['title'],3);?>'><?php echo literal($keyBoton);?></a></li>
+
+         <?php } else { ?>
+         
+         <li class='ma_on' ><a title='<?php echo literal($boton['title'],3);?>' href='<?php echo $boton['link'];?>'><?php echo literal($keyBoton);?></a></li>
+
+         <?php } // end activado ?>
+
+         <?php } // end foreach boton ?>
+
+         <?php } // end seccion: boton ?>
+
+      </ul>
+
+      <?php } // end tenemos sección ?>
+      
+   </li>
+
+   <?php } // end recorremos menuAdmin ?>
+
+   <?php } // end Tenemos array menuAdmin ?>
 
 </ul>
-
 </div>
 <div style="clear: both"></div>
 <?php

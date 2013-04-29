@@ -375,6 +375,9 @@ class Admin extends Modulos {
             }
          }
 
+      // Ordenamos según peso de la sección del menú
+      uasort($menuAdmin, 'ordenar_por_peso');
+
       include($gcm->event->instancias['temas']->ruta('admin','html','menuAdmin.html'));
       }
 
