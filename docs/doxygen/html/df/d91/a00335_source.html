@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/css/pie.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/cabecera.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,44 +87,41 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">pie.css</div>  </div>
+<div class="title">cabecera.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#pie {</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span>   <span class="keywordtype">float</span>: left;
-<a name="l00003"></a>00003    width: 100%;
-<a name="l00004"></a>00004    margin-top:10px;
-<a name="l00005"></a>00005    margin-bottom:10px;
-<a name="l00006"></a>00006    color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
-<a name="l00007"></a>00007    background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-07&quot;</span>)?&gt;;
-<a name="l00008"></a>00008    border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;pie-00&quot;</span>)?&gt;;
-<a name="l00009"></a>00009    }
-<a name="l00010"></a>00010 <span class="comment">/* logo pequeýo */</span>
-<a name="l00011"></a>00011 <span class="preprocessor">#pie img:first-child { </span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span>   <span class="keywordtype">float</span>: left;
-<a name="l00013"></a>00013    width: 40px:
-<a name="l00014"></a>00014    height: 40px;
-<a name="l00015"></a>00015    margin: 0px;
-<a name="l00016"></a>00016    margin-right: 5px;
-<a name="l00017"></a>00017    border: 0;
-<a name="l00018"></a>00018    }
-<a name="l00019"></a>00019 <span class="preprocessor">#pie a {</span>
-<a name="l00020"></a>00020 <span class="preprocessor"></span>   color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
-<a name="l00021"></a>00021    }
-<a name="l00022"></a>00022 <span class="preprocessor">#pie_derecho {</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span>    text-align: center;
-<a name="l00024"></a>00024     margin-top: 9px;
-<a name="l00025"></a>00025 }
-<a name="l00026"></a>00026 <span class="preprocessor">#pie_derecho img {</span>
-<a name="l00027"></a>00027 <span class="preprocessor"></span>    border-width: 0;
-<a name="l00028"></a>00028     <span class="keywordtype">float</span>: right!IMPORTANT;
-<a name="l00029"></a>00029     margin-top: -4px !important;
-<a name="l00030"></a>00030 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#cabecera{</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
+<a name="l00003"></a>00003 background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-07&quot;</span>)?&gt;;
+<a name="l00004"></a>00004 padding: 15px;
+<a name="l00005"></a>00005 overflow: hidden;
+<a name="l00006"></a>00006 }
+<a name="l00007"></a>00007 <span class="preprocessor">#cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {</span>
+<a name="l00008"></a>00008 <span class="preprocessor"></span>display: <span class="keyword">inline</span>;
+<a name="l00009"></a>00009 }
+<a name="l00010"></a>00010 <span class="preprocessor">#cabecera h1 {</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>   font-size: 300%;
+<a name="l00012"></a>00012 }
+<a name="l00013"></a>00013 <span class="preprocessor">#cabecera h2 {</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>   font-family: <span class="stringliteral">&#39;Droid Serif&#39;</span>;
+<a name="l00015"></a>00015    font-size: 100%;
+<a name="l00016"></a>00016 }
+<a name="l00017"></a>00017 <span class="preprocessor">#cabecera a {</span>
+<a name="l00018"></a>00018 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
+<a name="l00019"></a>00019 }
+<a name="l00020"></a>00020 <span class="preprocessor">#cabeceraDerecha {</span>
+<a name="l00021"></a>00021 <span class="preprocessor"></span><span class="keywordtype">float</span>: right;
+<a name="l00022"></a>00022 width: 60%;
+<a name="l00023"></a>00023 text-align:right;
+<a name="l00024"></a>00024 }
+<a name="l00025"></a>00025 <span class="preprocessor">#subcabecera {</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>background: #FBFBFB
+<a name="l00027"></a>00027 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

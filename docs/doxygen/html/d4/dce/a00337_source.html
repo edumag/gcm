@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/css/ventana.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/colores.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,38 +87,58 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">ventana.css</div>  </div>
+<div class="title">colores.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/* Ventana flotante */</span>
-<a name="l00002"></a>00002 .ventana_flotante {
-<a name="l00003"></a>00003    position: absolute;
-<a name="l00004"></a>00004    top: 50%;
-<a name="l00005"></a>00005    left: 50%;
-<a name="l00006"></a>00006    border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-06&quot;</span>)?&gt;;
-<a name="l00007"></a>00007    background: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00008"></a>00008    color: white;
-<a name="l00009"></a>00009    padding: 4px;
-<a name="l00010"></a>00010    margin: -50px 0 0 -100px;
-<a name="l00011"></a>00011    filter: alpha(opacity=85); <span class="comment">/* internet explorer */</span>
-<a name="l00012"></a>00012    -khtml-opacity: 0.8;      <span class="comment">/* khtml, version anterior de safari */</span>
-<a name="l00013"></a>00013    -moz-opacity: 0.8;       <span class="comment">/* firefox, mozilla, netscape */</span>
-<a name="l00014"></a>00014    opacity: 0.8;           <span class="comment">/* safari, chrome, opera */</span>
-<a name="l00015"></a>00015    -ms-filter: <span class="stringliteral">&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=85)&quot;</span>; <span class="comment">/*internet explorer 8 */</span> 
-<a name="l00016"></a>00016    }
-<a name="l00017"></a>00017 .titulo_ventana_flotante {
-<a name="l00018"></a>00018     border-bottom: 1px solid white;
-<a name="l00019"></a>00019     margin-bottom: 4px;
-<a name="l00020"></a>00020     min-width: 200px;
-<a name="l00021"></a>00021    }
-<a name="l00022"></a>00022 ul input {
-<a name="l00023"></a>00023    margin-right: 6px;
-<a name="l00024"></a>00024 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="comment">/* Fichero procesado por TemasAdmin.php */</span>
+<a name="l00004"></a>00004 $colores[<span class="stringliteral">&#39;body-00&#39;</span>] = <span class="stringliteral">&#39;#e9eaec&#39;</span>;
+<a name="l00005"></a>00005 $colores[<span class="stringliteral">&#39;body-01&#39;</span>] = <span class="stringliteral">&#39;#161818&#39;</span>;
+<a name="l00006"></a>00006 $colores[<span class="stringliteral">&#39;body-02&#39;</span>] = <span class="stringliteral">&#39;rgba(254,254,254,1)&#39;</span>;
+<a name="l00007"></a>00007 $colores[<span class="stringliteral">&#39;body-03&#39;</span>] = <span class="stringliteral">&#39;rgba(252,252,252,1)&#39;</span>;
+<a name="l00008"></a>00008 $colores[<span class="stringliteral">&#39;body-04&#39;</span>] = <span class="stringliteral">&#39;rgba(219,219,219,1)&#39;</span>;
+<a name="l00009"></a>00009 $colores[<span class="stringliteral">&#39;body-05&#39;</span>] = <span class="stringliteral">&#39;rgba(129,130,133,1)&#39;</span>;
+<a name="l00010"></a>00010 $colores[<span class="stringliteral">&#39;body-06&#39;</span>] = <span class="stringliteral">&#39;#fff&#39;</span>;
+<a name="l00011"></a>00011 $colores[<span class="stringliteral">&#39;body-07&#39;</span>] = <span class="stringliteral">&#39;#646464&#39;</span>;
+<a name="l00012"></a>00012 $colores[<span class="stringliteral">&#39;body-08&#39;</span>] = <span class="stringliteral">&#39;rgba(0,0,0,0.3)&#39;</span>;
+<a name="l00013"></a>00013 $colores[<span class="stringliteral">&#39;body-09&#39;</span>] = <span class="stringliteral">&#39;rgba(0, 0, 0, 0.3)&#39;</span>;
+<a name="l00014"></a>00014 $colores[<span class="stringliteral">&#39;body-10&#39;</span>] = <span class="stringliteral">&#39;rgba(255, 255, 255, 1)&#39;</span>;
+<a name="l00015"></a>00015 $colores[<span class="stringliteral">&#39;body-11&#39;</span>] = <span class="stringliteral">&#39;#000&#39;</span>;
+<a name="l00016"></a>00016 $colores[<span class="stringliteral">&#39;body-12&#39;</span>] = <span class="stringliteral">&#39;#ddd&#39;</span>;
+<a name="l00017"></a>00017 $colores[<span class="stringliteral">&#39;body-13&#39;</span>] = <span class="stringliteral">&#39;#c3c3c3&#39;</span>;
+<a name="l00018"></a>00018 $colores[<span class="stringliteral">&#39;body-14&#39;</span>] = <span class="stringliteral">&#39;#7c7c7c&#39;</span>;
+<a name="l00019"></a>00019 $colores[<span class="stringliteral">&#39;body-15&#39;</span>] = <span class="stringliteral">&#39;#dd0&#39;</span>;
+<a name="l00020"></a>00020 $colores[<span class="stringliteral">&#39;body-16&#39;</span>] = <span class="stringliteral">&#39;rgba(255, 255, 255, 0.7)&#39;</span>;
+<a name="l00021"></a>00021 $colores[<span class="stringliteral">&#39;body-17&#39;</span>] = <span class="stringliteral">&#39;#666666&#39;</span>;
+<a name="l00022"></a>00022 $colores[<span class="stringliteral">&#39;body-18&#39;</span>] = <span class="stringliteral">&#39;#eee&#39;</span>;
+<a name="l00023"></a>00023 $colores[<span class="stringliteral">&#39;menuAdmin-00&#39;</span>] = <span class="stringliteral">&#39;#666&#39;</span>;
+<a name="l00024"></a>00024 $colores[<span class="stringliteral">&#39;menuAdmin-01&#39;</span>] = <span class="stringliteral">&#39;#ccc&#39;</span>;
+<a name="l00025"></a>00025 $colores[<span class="stringliteral">&#39;comentarios-00&#39;</span>] = <span class="stringliteral">&#39;#f0e7ca&#39;</span>;
+<a name="l00026"></a>00026 $colores[<span class="stringliteral">&#39;comentarios-01&#39;</span>] = <span class="stringliteral">&#39;#dcd9c5&#39;</span>;
+<a name="l00027"></a>00027 $colores[<span class="stringliteral">&#39;comentarios-02&#39;</span>] = <span class="stringliteral">&#39;#8385b5&#39;</span>;
+<a name="l00028"></a>00028 $colores[<span class="stringliteral">&#39;comentarios-03&#39;</span>] = <span class="stringliteral">&#39;#777&#39;</span>;
+<a name="l00029"></a>00029 $colores[<span class="stringliteral">&#39;comentarios-04&#39;</span>] = <span class="stringliteral">&#39;#789&#39;</span>;
+<a name="l00030"></a>00030 $colores[<span class="stringliteral">&#39;geshi-00&#39;</span>] = <span class="stringliteral">&#39;#222223&#39;</span>;
+<a name="l00031"></a>00031 $colores[<span class="stringliteral">&#39;geshi-01&#39;</span>] = <span class="stringliteral">&#39;#222&#39;</span>;
+<a name="l00032"></a>00032 $colores[<span class="stringliteral">&#39;geshi-02&#39;</span>] = <span class="stringliteral">&#39;#f8f8f8&#39;</span>;
+<a name="l00033"></a>00033 $colores[<span class="stringliteral">&#39;geshi-03&#39;</span>] = <span class="stringliteral">&#39;#202021&#39;</span>;
+<a name="l00034"></a>00034 $colores[<span class="stringliteral">&#39;geshi-04&#39;</span>] = <span class="stringliteral">&#39;#505e80&#39;</span>;
+<a name="l00035"></a>00035 $colores[<span class="stringliteral">&#39;thickbox-00&#39;</span>] = <span class="stringliteral">&#39;#333333&#39;</span>;
+<a name="l00036"></a>00036 $colores[<span class="stringliteral">&#39;thickbox-01&#39;</span>] = <span class="stringliteral">&#39;#ffffff&#39;</span>;
+<a name="l00037"></a>00037 $colores[<span class="stringliteral">&#39;thickbox-02&#39;</span>] = <span class="stringliteral">&#39;#000000&#39;</span>;
+<a name="l00038"></a>00038 $colores[<span class="stringliteral">&#39;thickbox-03&#39;</span>] = <span class="stringliteral">&#39;#525252&#39;</span>;
+<a name="l00039"></a>00039 $colores[<span class="stringliteral">&#39;thickbox-04&#39;</span>] = <span class="stringliteral">&#39;#e8e8e8&#39;</span>;
+<a name="l00040"></a>00040 $colores[<span class="stringliteral">&#39;botonera-00&#39;</span>] = <span class="stringliteral">&#39;#d9e6fc&#39;</span>;
+<a name="l00041"></a>00041 $colores[<span class="stringliteral">&#39;listado_contenidos-00&#39;</span>] = <span class="stringliteral">&#39;#eff0f0&#39;</span>;
+<a name="l00042"></a>00042 $colores[<span class="stringliteral">&#39;listado_contenidos-01&#39;</span>] = <span class="stringliteral">&#39;#2c2f3f&#39;</span>;
+<a name="l00043"></a>00043 $colores[<span class="stringliteral">&#39;pie-00&#39;</span>] = <span class="stringliteral">&#39;#eeeeee&#39;</span>;
+<a name="l00044"></a>00044 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

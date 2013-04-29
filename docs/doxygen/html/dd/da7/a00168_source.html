@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/admin/css/menuAdmin.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/menu/config/config_es.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,159 +80,25 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_44b3a77cbb9e6ca741ed77b6073e7309.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e0b90d1017353e67ec406a3e12ca4962.html">menu</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_a1731249c4d48caa9e5398b51566e372.html">config</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">menuAdmin.css</div>  </div>
+<div class="title">config_es.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002 <span class="comment">/* Root = Horizontal, Secondary = Vertical */</span>
-<a name="l00003"></a>00003 ul#navmenu-h {
-<a name="l00004"></a>00004   margin: 0;
-<a name="l00005"></a>00005   border: 0 none;
-<a name="l00006"></a>00006   padding: 0;
-<a name="l00007"></a>00007   width: 100%;
-<a name="l00008"></a>00008   list-style: none;
-<a name="l00009"></a>00009   height: 24px;
-<a name="l00010"></a>00010 }
-<a name="l00011"></a>00011 ul#navmenu-h li {
-<a name="l00012"></a>00012   margin: 0;
-<a name="l00013"></a>00013   border: 0 none;
-<a name="l00014"></a>00014   padding: 0;
-<a name="l00015"></a>00015   <span class="keywordtype">float</span>: left; <span class="comment">/*For Gecko*/</span>
-<a name="l00016"></a>00016   display: <span class="keyword">inline</span>;
-<a name="l00017"></a>00017   list-style: none;
-<a name="l00018"></a>00018   position: relative;
-<a name="l00019"></a>00019   height: 24px;
-<a name="l00020"></a>00020 }
-<a name="l00021"></a>00021 ul#navmenu-h ul {
-<a name="l00022"></a>00022   margin: 0;
-<a name="l00023"></a>00023   border: 0 none;
-<a name="l00024"></a>00024   padding: 0;
-<a name="l00025"></a>00025   width: 160px;
-<a name="l00026"></a>00026   list-style: none;
-<a name="l00027"></a>00027   display: none;
-<a name="l00028"></a>00028   position: absolute;
-<a name="l00029"></a>00029   top: 24px;
-<a name="l00030"></a>00030   left: 0;
-<a name="l00031"></a>00031 }
-<a name="l00032"></a>00032 ul#navmenu-h ul:after <span class="comment">/*From IE 7 lack of compliance*/</span>{
-<a name="l00033"></a>00033   clear: both;
-<a name="l00034"></a>00034   display: block;
-<a name="l00035"></a>00035   font: 1px/0px serif;
-<a name="l00036"></a>00036   content: <span class="stringliteral">&quot;.&quot;</span>;
-<a name="l00037"></a>00037   height: 0;
-<a name="l00038"></a>00038   visibility: hidden;
-<a name="l00039"></a>00039 }
-<a name="l00040"></a>00040 ul#navmenu-h ul li {
-<a name="l00041"></a>00041   width: 160px;
-<a name="l00042"></a>00042   z-index: 100;
-<a name="l00043"></a>00043   <span class="keywordtype">float</span>: left; <span class="comment">/*For IE 7 lack of compliance*/</span>
-<a name="l00044"></a>00044   display: block !important;
-<a name="l00045"></a>00045   display: <span class="keyword">inline</span>; <span class="comment">/*For IE*/</span>
-<a name="l00046"></a>00046 }
-<a name="l00047"></a>00047 <span class="comment">/* Root Menu */</span>
-<a name="l00048"></a>00048 ul#navmenu-h a {
-<a name="l00049"></a>00049   border: 1px solid #FFF;
-<a name="l00050"></a>00050   border-right-color: #CCC;
-<a name="l00051"></a>00051   border-bottom-color: #CCC;
-<a name="l00052"></a>00052   padding: 0 6px;
-<a name="l00053"></a>00053   <span class="keywordtype">float</span>: none !important; <span class="comment">/*For Opera*/</span>
-<a name="l00054"></a>00054   <span class="keywordtype">float</span>: left; <span class="comment">/*For IE*/</span>
-<a name="l00055"></a>00055   display: block;
-<a name="l00056"></a>00056   background: #EEE;
-<a name="l00057"></a>00057   color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-00&quot;</span>)?&gt;;
-<a name="l00058"></a>00058   font: bold 10px/22px Verdana, Arial, Helvetica, sans-serif;
-<a name="l00059"></a>00059   text-decoration: none;
-<a name="l00060"></a>00060   height: <span class="keyword">auto</span> !important;
-<a name="l00061"></a>00061   height: 1%; <span class="comment">/*For IE*/</span>
-<a name="l00062"></a>00062 }
-<a name="l00063"></a>00063 <span class="comment">/* Root Menu Hover Persistence */</span>
-<a name="l00064"></a>00064 ul#navmenu-h a:hover,
-<a name="l00065"></a>00065 ul#navmenu-h li:hover a,
-<a name="l00066"></a>00066 ul#navmenu-h li.iehover a {
-<a name="l00067"></a>00067   background: #CCC;
-<a name="l00068"></a>00068   color: #FFF;
-<a name="l00069"></a>00069 }
-<a name="l00070"></a>00070 <span class="comment">/* 2nd Menu */</span>
-<a name="l00071"></a>00071 ul#navmenu-h li:hover li a,
-<a name="l00072"></a>00072 ul#navmenu-h li.iehover li a {
-<a name="l00073"></a>00073   <span class="keywordtype">float</span>: none;
-<a name="l00074"></a>00074   background: #EEE;
-<a name="l00075"></a>00075   color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-00&quot;</span>)?&gt;;
-<a name="l00076"></a>00076 }
-<a name="l00077"></a>00077 <span class="comment">/* Botones desactivdos */</span>
-<a name="l00078"></a>00078 ul#navmenu-h ul li.ma_off a {
-<a name="l00079"></a>00079   background: #EEE;
-<a name="l00080"></a>00080   color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-01&quot;</span>)?&gt;;
-<a name="l00081"></a>00081  
-<a name="l00082"></a>00082 }
-<a name="l00083"></a>00083 <span class="comment">/* 2nd Menu Hover Persistence */</span>
-<a name="l00084"></a>00084 ul#navmenu-h li:hover li a:hover,
-<a name="l00085"></a>00085 ul#navmenu-h li:hover li:hover a,
-<a name="l00086"></a>00086 ul#navmenu-h li.iehover li a:hover,
-<a name="l00087"></a>00087 ul#navmenu-h li.iehover li.iehover a {
-<a name="l00088"></a>00088   background: #CCC;
-<a name="l00089"></a>00089   color: #FFF;
-<a name="l00090"></a>00090 }
-<a name="l00091"></a>00091 <span class="comment">/* 3rd Menu */</span>
-<a name="l00092"></a>00092 ul#navmenu-h li:hover li:hover li a,
-<a name="l00093"></a>00093 ul#navmenu-h li.iehover li.iehover li a {
-<a name="l00094"></a>00094   background: #EEE;
-<a name="l00095"></a>00095   color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-00&quot;</span>)?&gt;;
-<a name="l00096"></a>00096 }
-<a name="l00097"></a>00097 <span class="comment">/* 3rd Menu Hover Persistence */</span>
-<a name="l00098"></a>00098 ul#navmenu-h li:hover li:hover li a:hover,
-<a name="l00099"></a>00099 ul#navmenu-h li:hover li:hover li:hover a,
-<a name="l00100"></a>00100 ul#navmenu-h li.iehover li.iehover li a:hover,
-<a name="l00101"></a>00101 ul#navmenu-h li.iehover li.iehover li.iehover a {
-<a name="l00102"></a>00102   background: #CCC;
-<a name="l00103"></a>00103   color: #FFF;
-<a name="l00104"></a>00104 }
-<a name="l00105"></a>00105 <span class="comment">/* 4th Menu */</span>
-<a name="l00106"></a>00106 ul#navmenu-h li:hover li:hover li:hover li a,
-<a name="l00107"></a>00107 ul#navmenu-h li.iehover li.iehover li.iehover li a {
-<a name="l00108"></a>00108   background: #EEE;
-<a name="l00109"></a>00109   color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;menuAdmin-00&quot;</span>)?&gt;;
-<a name="l00110"></a>00110 }
-<a name="l00111"></a>00111 <span class="comment">/* 4th Menu Hover */</span>
-<a name="l00112"></a>00112 ul#navmenu-h li:hover li:hover li:hover li a:hover,
-<a name="l00113"></a>00113 ul#navmenu-h li.iehover li.iehover li.iehover li a:hover {
-<a name="l00114"></a>00114   background: #CCC;
-<a name="l00115"></a>00115   color: #FFF;
-<a name="l00116"></a>00116 }
-<a name="l00117"></a>00117 ul#navmenu-h ul ul,
-<a name="l00118"></a>00118 ul#navmenu-h ul ul ul {
-<a name="l00119"></a>00119   display: none;
-<a name="l00120"></a>00120   position: absolute;
-<a name="l00121"></a>00121   top: 0;
-<a name="l00122"></a>00122   left: 160px;
-<a name="l00123"></a>00123 }
-<a name="l00124"></a>00124 <span class="comment">/* Do Not Move - Must Come Before display:block for Gecko */</span>
-<a name="l00125"></a>00125 ul#navmenu-h li:hover ul ul,
-<a name="l00126"></a>00126 ul#navmenu-h li:hover ul ul ul,
-<a name="l00127"></a>00127 ul#navmenu-h li.iehover ul ul,
-<a name="l00128"></a>00128 ul#navmenu-h li.iehover ul ul ul {
-<a name="l00129"></a>00129   display: none;
-<a name="l00130"></a>00130 }
-<a name="l00131"></a>00131 ul#navmenu-h li:hover ul,
-<a name="l00132"></a>00132 ul#navmenu-h ul li:hover ul,
-<a name="l00133"></a>00133 ul#navmenu-h ul ul li:hover ul,
-<a name="l00134"></a>00134 ul#navmenu-h li.iehover ul,
-<a name="l00135"></a>00135 ul#navmenu-h ul li.iehover ul,
-<a name="l00136"></a>00136 ul#navmenu-h ul ul li.iehover ul {
-<a name="l00137"></a>00137   display: block;
-<a name="l00138"></a>00138 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 $config_DESC[<span class="stringliteral">&#39;descartar&#39;</span>] = <span class="stringliteral">&#39;Si un archivo o carpeta contiene uno de los contenidos a descartar no se incluyen en el menú&#39;</span>;
+<a name="l00003"></a>00003 $config_DESC[<span class="stringliteral">&#39;orden_presentacion&#39;</span>] = <span class="stringliteral">&#39;Especificar orden de presentación de los elementos del menú el formato es item@orden&#39;</span>;
+<a name="l00004"></a>00004 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

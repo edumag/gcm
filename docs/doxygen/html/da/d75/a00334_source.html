@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/css/paneles.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/temas/css/boton.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,28 +87,37 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">paneles.css</div>  </div>
+<div class="title">boton.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002 .panel {
-<a name="l00003"></a>00003    margin: 20px 0px 10px 0;
-<a name="l00004"></a>00004 }
-<a name="l00005"></a>00005 .panel_titulo { 
-<a name="l00006"></a>00006 font-size: 150%;
-<a name="l00007"></a>00007 margin-bottom: 10px;
-<a name="l00008"></a>00008 }
-<a name="l00009"></a>00009 <span class="comment">/* subpanel */</span>
-<a name="l00010"></a>00010 .subpanel_visible {
-<a name="l00011"></a>00011 margin-top: 4px;
-<a name="l00012"></a>00012 padding: 2px;
-<a name="l00013"></a>00013 text-align:left
-<a name="l00014"></a>00014 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 .boton{
+<a name="l00002"></a>00002 -moz-border-radius:5px;
+<a name="l00003"></a>00003 -webkit-border-radius:5px;
+<a name="l00004"></a>00004 border-radius:5px;
+<a name="l00005"></a>00005 -moz-box-shadow:0 1px 0 &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-08&quot;</span>)?&gt;;
+<a name="l00006"></a>00006 -webkit-box-shadow:0 1px 0 &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-08&quot;</span>)?&gt;;
+<a name="l00007"></a>00007 box-shadow: 2px 2px 0 &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-09&quot;</span>)?&gt;;
+<a name="l00008"></a>00008 background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+<a name="l00009"></a>00009 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+<a name="l00010"></a>00010 color:#3D3C38;
+<a name="l00011"></a>00011 padding:3px 8px 3px 8px;
+<a name="l00012"></a>00012 margin: 2px;
+<a name="l00013"></a>00013 text-shadow:1px 1px 0 &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-10&quot;</span>)?&gt;;
+<a name="l00014"></a>00014 font-family: sans-serif;
+<a name="l00015"></a>00015 font-size: 90%;
+<a name="l00016"></a>00016 font-style: normal;
+<a name="l00017"></a>00017 font-weight: normal;
+<a name="l00018"></a>00018 cursor: pointer;
+<a name="l00019"></a>00019 }
+<a name="l00020"></a>00020 .boton:hover{
+<a name="l00021"></a>00021 background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
+<a name="l00022"></a>00022 background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D6D6D6));
+<a name="l00023"></a>00023 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/inicio.php</title>
+<title>gcm: Fichero Fuente gcm/includes/blank.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -79,53 +79,75 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_08c86db5e4d2c8cca79a494f7931c94b.html">includes</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">inicio.php</div>  </div>
+<div class="title">blank.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="../../d2/d1f/a00083.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file      inicio.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief     Archivo principal para los proyectos</span>
-<a name="l00006"></a>00006 <span class="comment"> *</span>
-<a name="l00007"></a>00007 <span class="comment"> * Desde aqui se va construllendo todo el sistema.</span>
-<a name="l00008"></a>00008 <span class="comment"> *                                                                                                 </span>
-<a name="l00009"></a>00009 <span class="comment"> * @author    Eduardo Magrané </span>
-<a name="l00010"></a>00010 <span class="comment"> *</span>
-<a name="l00011"></a>00011 <span class="comment"> * @internal</span>
-<a name="l00012"></a>00012 <span class="comment"> *   Created  07/10/10</span>
-<a name="l00013"></a>00013 <span class="comment"> *  Revision  SVN $Id: inicio.php 468 2011-02-04 07:37:39Z eduardo $</span>
-<a name="l00014"></a>00014 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
-<a name="l00015"></a>00015 <span class="comment"> *</span>
-<a name="l00016"></a>00016 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
-<a name="l00017"></a>00017 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
-<a name="l00018"></a>00018 <span class="comment"> */</span>
+<a name="l00003"></a>00003 <span class="comment">   /** </span>
+<a name="l00004"></a>00004 <span class="comment">   * \file</span>
+<a name="l00005"></a>00005 <span class="comment">   * Archivo base para abrir una ventana por separado</span>
+<a name="l00006"></a>00006 <span class="comment">   * </span>
+<a name="l00007"></a>00007 <span class="comment">   * Este archivo nos sirve para lanzar una ventana con algun modulo y pueda comunicarse con</span>
+<a name="l00008"></a>00008 <span class="comment">   * la ventana principal.</span>
+<a name="l00009"></a>00009 <span class="comment">   *</span>
+<a name="l00010"></a>00010 <span class="comment">   * @author Eduardo Magrané</span>
+<a name="l00011"></a>00011 <span class="comment">   * @version 1.0</span>
+<a name="l00012"></a>00012 <span class="comment">   */</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014    $MODULO = (!empty($_POST[<span class="stringliteral">&#39;modul&#39;</span>])) ? $_POST[<span class="stringliteral">&#39;modul&#39;</span>] : $_GET[<span class="stringliteral">&#39;modul&#39;</span>];
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 ?&gt;
+<a name="l00017"></a>00017 &lt;!DOCTYPE html <span class="keyword">public</span> <span class="stringliteral">&quot;-//w3c//dtd xhtml 1.0 transitional//en&quot;</span> <span class="stringliteral">&quot;http://www.w3.org/tr/xhtml1/dtd/xhtml1-transitional.dtd&quot;</span>&gt;
+<a name="l00018"></a>00018 &lt;html xmlns=<span class="stringliteral">&quot;http://www.w3.org/1999/xhtml&quot;</span>&gt;
 <a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="comment">/* Clase Gcm */</span>
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 require(GCM_DIR.<span class="stringliteral">&#39;lib/int/gcm/lib/Gcm.php&#39;</span>);
+<a name="l00020"></a>00020 &lt;!--autor: eduardo magrane--&gt;
+<a name="l00021"></a>00021 &lt;!--email: eduardo@mamedu.com--&gt;
+<a name="l00022"></a>00022 &lt;!--inicio.php--&gt;
 <a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="../../d2/d1f/a00083_a546a5e7bea120c9a754f586c26764075.html#a546a5e7bea120c9a754f586c26764075">00024</a> <a class="code" href="../../d2/d1f/a00083_a546a5e7bea120c9a754f586c26764075.html#a546a5e7bea120c9a754f586c26764075" title="Literales de gcm.">$GCM_LG</a> = array();      <span class="comment">///&lt; Literales de gcm</span>
-<a name="l00025"></a><a class="code" href="../../d2/d1f/a00083_ace04dd6b8f596ad496608240dc47c0de.html#ace04dd6b8f596ad496608240dc47c0de">00025</a> <span class="comment"></span><a class="code" href="../../d2/d1f/a00083_ace04dd6b8f596ad496608240dc47c0de.html#ace04dd6b8f596ad496608240dc47c0de" title="Literales de proyecto.">$LG</a> = array();          <span class="comment">///&lt; Literales de proyecto</span>
-<a name="l00026"></a>00026 <span class="comment"></span>
-<a name="l00027"></a><a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86">00027</a> <a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a> = <span class="keyword">new</span> <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a>();       <span class="comment">///&lt; Instancia de Gcm</span>
-<a name="l00028"></a>00028 <span class="comment"></span>
-<a name="l00029"></a>00029 <span class="comment">/* Iniciamos aplicación */</span>
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <a class="code" href="../../d2/d1f/a00083_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;inicia();
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033 ?&gt;
-<a name="l00034"></a>00034 
+<a name="l00024"></a>00024 &lt;head&gt;
+<a name="l00025"></a>00025 &lt;meta http-equiv=<span class="stringliteral">&quot;Content-Type&quot;</span> content=<span class="stringliteral">&quot;text/html; charset=UTF-8&quot;</span>&gt;
+<a name="l00026"></a>00026       &lt;meta content=<span class="stringliteral">&quot;text/html; charset=utf-8&quot;</span> http-equiv=<span class="stringliteral">&quot;content-type&quot;</span> /&gt;
+<a name="l00027"></a>00027       &lt;meta content=<span class="stringliteral">&quot;es-es&quot;</span> http-equiv=<span class="stringliteral">&quot;content-language&quot;</span> /&gt;
+<a name="l00028"></a>00028       &lt;meta content=<span class="stringliteral">&quot;all&quot;</span> name=<span class="stringliteral">&quot;robots&quot;</span> /&gt;
+<a name="l00029"></a>00029       &lt;link type=<span class="stringliteral">&quot;image/x-icon&quot;</span> href=<span class="stringliteral">&quot;favicon.ico&quot;</span> rel=<span class="stringliteral">&quot;shortcut icon&quot;</span> /&gt;
+<a name="l00030"></a>00030       &lt;link title=<span class="stringliteral">&quot;GCM&quot;</span> /&gt;
+<a name="l00031"></a>00031       &lt;meta content=<span class="stringliteral">&quot;Eduardo magrané.&quot;</span> name=<span class="stringliteral">&quot;author&quot;</span> /&gt;
+<a name="l00032"></a>00032       &lt;meta content=<span class="stringliteral">&quot;gpl&quot;</span> name=<span class="stringliteral">&quot;copyright&quot;</span> /&gt;
+<a name="l00033"></a>00033       
+<a name="l00034"></a>00034       &lt;title&gt;&lt;?=$MODULO ?&gt;&lt;/title&gt;
+<a name="l00035"></a>00035       &lt;style type=<span class="stringliteral">&quot;text/css&quot;</span> media=<span class="stringliteral">&quot;screen, projection&quot;</span>&gt;@<span class="keyword">import</span> <span class="stringliteral">&quot;../admin/includes/proyectos/general.css&quot;</span>;&lt;/style&gt;
+<a name="l00036"></a>00036       &lt;style type=<span class="stringliteral">&quot;text/css&quot;</span> media=<span class="stringliteral">&quot;screen, projection&quot;</span>&gt;@<span class="keyword">import</span> <span class="stringliteral">&quot;./proyecto_css.php&quot;</span>;&lt;/style&gt;
+<a name="l00037"></a>00037       &lt;script src=<span class="stringliteral">&#39;../gcm.js&#39;</span> type=<span class="stringliteral">&quot;text/javascript&quot;</span> language=<span class="stringliteral">&quot;JavaScript&quot;</span>&gt;  &lt;/script&gt;
+<a name="l00038"></a>00038 &lt;/head&gt;
+<a name="l00039"></a>00039    
+<a name="l00040"></a>00040 &lt;body&gt;
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;principal&quot;</span>&gt;
+<a name="l00043"></a>00043 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;contenido&quot;</span>&gt;
+<a name="l00044"></a>00044 &lt;?php
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="keywordflow">if</span> (!empty($MODULO)) {
+<a name="l00047"></a>00047    include(<span class="stringliteral">&quot;../admin/modulos/&quot;</span>.$MODULO.<span class="stringliteral">&quot;/index.php&quot;</span>);
+<a name="l00048"></a>00048 } <span class="keywordflow">else</span> {
+<a name="l00049"></a>00049   echo <span class="stringliteral">&quot;No hay un modulo definido&quot;</span>;
+<a name="l00050"></a>00050 }
+<a name="l00051"></a>00051 ?&gt;
+<a name="l00052"></a>00052 &lt;/div&gt;
+<a name="l00053"></a>00053 &lt;/div&gt;
+<a name="l00054"></a>00054 &lt;/body&gt;
+<a name="l00055"></a>00055 &lt;/html&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Martes, 16 de Abril de 2013 13:19:04 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
