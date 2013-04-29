@@ -53,5 +53,12 @@ $menuAdmin['Administración']['title']='Administrar proyecto';
 $menuAdmin['Configuración']['title']='Configurar proyecto';
 $menuAdmin['Seguimiento']['title']='Seguimiento del proyecto';
 
+/** Especificamos peso para ordenar menú */
+
+$menuAdmin['Contenidos']     ['peso'] = -10;
+$menuAdmin['Administración'] ['peso'] = -8;
+$menuAdmin['Configuración']  ['peso'] = -6;
+$menuAdmin['Seguimiento']    ['peso'] = -4;
+
 ?>
 

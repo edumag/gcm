@@ -628,7 +628,7 @@ class Eventos {
                   }
 
                }
-            if ( GCM_DEBUG ) $tiempo_total = microtime(TRUE)-$tiempo_inicio;
+            if ( GCM_DEBUG ) $tiempo_total = round(microtime(TRUE)-$tiempo_inicio,4);
             if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,'Tiempo de ejecución de '.$m.'->'.$a.'('.$e.','.depurar($args).'): ('.$tiempo_total.')'); 
 
 

@@ -17,5 +17,6 @@ $eventos['columna']['barra_navegacion'][1] = '';
 // permisos para lanzarlo.
 
 $this->set_lista_blanca('menu','menu_ajax');
+$this->set_lista_blanca('menu','menu_ajax_off');
 
 ?>
