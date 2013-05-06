@@ -284,17 +284,10 @@ class Eventos {
                }
             }
 
-         // Para recoger los permisos configurados en los módulos
-         $acciones = FALSE;
-
          if ( $this->leer_eventos_proyecto ) {
             include($fichero_evento);
          } else {
             include($fichero_modulo);
-            }
-
-         if ( $acciones ) {
-            $gcm->au->set_acciones($acciones);
             }
 
          if ( isset($eventos) && is_array($eventos) ) {

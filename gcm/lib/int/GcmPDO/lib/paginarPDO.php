@@ -105,6 +105,11 @@ class PaginarPDO extends GcmPDO {
 
                }
 
+            // Si tenemos una relación del nombre del campo ordenado le indicamos a as_orden
+            if ( $sql_relaciones && array_search($this->as_orden,$sql_relaciones) ) {
+               $this->as_orden = array_search($this->as_orden,$sql_relaciones);
+               }
+
          } else {
             $this->as_orden = FALSE;
             }

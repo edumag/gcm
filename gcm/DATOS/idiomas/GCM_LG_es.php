@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Mon Apr 29 9:27:44 CEST 2013
+// Archivo generado automaticamente por GcmConfig Mon May 6 16:15:01 CEST 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -119,4 +119,6 @@ $GCM_LG_es['Contenido nuevo']='';
 $GCM_LG_es['Contenido añadido']='';
 $GCM_LG_es['Administración de roles']='';
 $GCM_LG_es['eduardotrabajos']='';
+$GCM_LG_es['victor']='';
+$GCM_LG_es['masmoedu']='';
 ?>

@@ -67,6 +67,9 @@ class Autentificacion {
 
       $this->acciones = ( $acciones ) ? $acciones : array('admin' => array('administrar' => array('administrador')) ) ;
 
+      // Recogemos configuración de acciones y permisos
+      $this->leer_permisos_acciones();
+
       /* Comprobar existencia de tabla de usuarios */
 
       if ( ! $this->existe_tabla($this->sufijo.'usuarios')  ) $this->crear_tabla();
@@ -87,6 +90,32 @@ class Autentificacion {
 
       if ( $num_admnistradores < 1  ) 
          $this->crear_admin_defecto();
+
+      }
+
+   /**
+    * Recogemos $acciones de archivo de configuración
+    */
+
+   function leer_permisos_acciones(){
+
+      global $gcm;
+
+      // Para recoger los permisos configurados en los módulos
+      $acciones = FALSE;
+
+      $fichero_acciones_proyecto = "DATOS/acciones_permisos.php";
+      $fichero_acciones          = GCM_DIR."modulos/admin/acciones_permisos.php";
+
+      if ( file_exists($fichero_acciones_proyecto) ) {
+         include($fichero_acciones_proyecto);
+      } else {
+         include($fichero_acciones);
+         }
+
+      if ( $acciones ) {
+         $this->set_acciones($acciones);
+         }
 
       }
 
@@ -380,6 +409,8 @@ class Autentificacion {
 
       global $gcm;
 
+      if ( GCM_DEBUG ) $tiempo_inicio = microtime(TRUE);
+
       $usuario_id    = $this->id();
 
       // Si no hay identificador de usuario salimos
@@ -395,6 +426,8 @@ class Autentificacion {
 
       if ( ! $roles_accion ) {
          registrar(__FILE__,__LINE__,'Sin permisos para ['.$modulo.'->'.$accion.'()]','DEBUG');
+         if ( GCM_DEBUG ) 
+            registrar(__FILE__,__LINE__,'Tiempo de ejecución de '.__CLASS__.'->'.__FUNCTION__.'('.$accion.','.$modulo.'): ('.round(microtime(TRUE)-$tiempo_inicio,4).')'); 
          return FALSE;
          }
 
