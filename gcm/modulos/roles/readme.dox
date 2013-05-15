@@ -1,0 +1,13 @@
+El módulo "roles" nos permite definir diferentes roles a los usuarios.
+
+Un ejemplo de su utilidad puede ser el querer permitir a un usuario la
+traducción de las paginas, no sería conveniente en un caso así darle la
+posibilidad de modificar cualquier cosa de la administración.
+
+Tenemos unos roles ya definidos por defecto que agrupan las acciones que se permiten para realizar ciertas tareas.
+
+admin:     Tiene todos los rivilegios.
+usuario:   Editar su perfil. (Todos los usuarios que se registran tiene este rol como minimo)
+editor:    Se le permite añadir contenido nuevo, modificarlo si es el autor o eliminarlo.
+traductor: Se le permite traducir contenido, pero no crear nuevo.
+

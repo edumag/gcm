@@ -2,7 +2,7 @@
 
 /** Configuración para el menú administrativo */
 
-if ( permiso('editar_contenido') ) {
+if ( permiso('editar','contenidos') ) {
 
    /* sección */
 

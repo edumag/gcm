@@ -19,19 +19,22 @@ $menuAdmin['Administración']['boton']['Tests']['link']=dirname($_SERVER['PHP_SE
 
    }
 
-if ( permiso() ) {
-
-   $menuAdmin['Administración']['boton']['Roles']['activado']= 1;
-   $menuAdmin['Administración']['boton']['Roles']['title']="Administración de roles";
-   $menuAdmin['Administración']['boton']['Roles']['link']=dirname($_SERVER['PHP_SELF'])."/admin/roles/";
+if ( permiso('usuarios','admin') ) {
 
    $menuAdmin['Administración']['boton']['Usuarios']['activado']= 1;
    $menuAdmin['Administración']['boton']['Usuarios']['title']="Administración de usuarios";
    $menuAdmin['Administración']['boton']['Usuarios']['link']=dirname($_SERVER['PHP_SELF'])."/admin/usuarios/";
+   }
+
+if ( permiso('infoserver','admin') ) {
 
    $menuAdmin['Administración']['boton']['Info server']['activado']= 1;
    $menuAdmin['Administración']['boton']['Info server']['title']="Información de servidor";
    $menuAdmin['Administración']['boton']['Info server']['link']=dirname($_SERVER['PHP_SELF'])."/admin/infoserver";
+   }
+
+if ( permiso('configurar_conexiones','admin') ) {
+
 
    $menuAdmin['Administración']['boton']['Visualizar conexiones']['activado']= 1;
    $menuAdmin['Administración']['boton']['Visualizar conexiones']['title']="Visualizar conexiones entre Eventos y módulos";

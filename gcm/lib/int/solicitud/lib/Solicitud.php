@@ -323,7 +323,7 @@ class Solicitud {
          switch ($intConstraintType) {
 
          case RT_MAIL:
-            if(! eregi("^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", (string)$varActualValue)) {
+            if (! filter_var( (string) $varActualValue, FILTER_VALIDATE_EMAIL) ) {
                $thisFail = true;
                registrar(__FILE__,__LINE__,'El email no parece valido');
                }
@@ -413,7 +413,7 @@ class Solicitud {
             break;
 
          case RT_REQUERIDO:
-            if ( ! isset($varActualValue) || empty($varActualValue) ) {
+            if ( ! isset($varActualValue) ) {
                $thisFail = true;
                registrar(__FILE__,__LINE__,$strThisParameter.' es requerido '.$strConstraintOperand);
                }

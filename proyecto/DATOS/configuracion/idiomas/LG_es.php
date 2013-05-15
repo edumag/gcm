@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Fri Apr 5 12:54:47 CEST 2013
+// Archivo generado automaticamente por GcmConfig Tue May 14 19:10:45 CEST 2013
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia';
@@ -84,4 +84,5 @@ $LG_es['Pagina_de_registro']='Pagina de registro';
 $LG_es['Forzar_eventos_por_omision']='';
 $LG_es['Crud']='Crud';
 $LG_es['crud']='crud';
+$LG_es['Subseccion']='Subsección';
 ?>

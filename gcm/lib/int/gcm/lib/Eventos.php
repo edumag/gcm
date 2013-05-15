@@ -87,7 +87,7 @@ class Eventos {
     * y los que esten activados por el módulo admin
     */
 
-   private $modulos_activados;
+   public $modulos_activados;
 
    private $dir_modulos;               ///< Directorio de módulos
    private $dir_modulos_proyecto;      ///< Directorio de módulos propios del proyecto
@@ -375,7 +375,7 @@ class Eventos {
 
          if ( !$this->verificar_evento($evento) ) {
 
-            throw new Exception('Sin eventos para ['.$evento.']');
+            registrar(__FILE__,__LINE__,'Sin eventos para ['.$evento.']');
 
          } else {
             
@@ -585,15 +585,11 @@ class Eventos {
       // Comprobar permisos
       if ( ! $this->get_lista_blanca($m,$a) ) {
 
-         if ( ! permiso($a) ) {
-            registrar(__FILE__,__LINE__,$m.'->'.$a.'() sin permisos','ERROR');
+         if ( ! permiso($a, $m) ) {
+            registrar(__FILE__,__LINE__,$m.'->'.$a.'() sin permisos','AVISO');
             return FALSE;
-         // } else {
-         //    registrar(__FILE__,__LINE__,$m.'->'.$a.'()  con permisos','AVISO');
             }
 
-      // } else {
-      //    registrar(__FILE__,__LINE__,$m.'->'.$a.'()  en lista_blanca','AVISO');
          }
 
       if ( $this->instancia_modulo($m) ) {
