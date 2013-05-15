@@ -100,7 +100,7 @@ class Roles extends Modulos {
 
       if ( ! empty(self::$acciones) && ! empty(self::$roles) ) return;
 
-      $usuario = $_SESSION[$gcm->sufijo.'usuario'];
+      $usuario_actual = $_SESSION[$gcm->sufijo.'usuario'];
 
       // Roles de usuario
 
@@ -119,13 +119,16 @@ class Roles extends Modulos {
             return FALSE;
             }
 
-         if ( isset($usuarios[$usuario]) ) {
-            self::$roles = $usuarios[$usuario];
+         if ( isset($usuarios[$usuario_actual]) ) {
+            self::$roles = $usuarios[$usuario_actual];
          } else {
-            registrar(__FILE__,__LINE__,"Usuario [$usuario] sin roles definidos");
+            registrar(__FILE__,__LINE__,"Usuario [$usuario_actual] sin roles definidos");
             return FALSE;
             }
          }
+
+      // Añadimos usuario como rol
+      self::$roles[] = 'usuario';
 
       // Guardar las acciones permitidas del usuario.
 
@@ -134,12 +137,16 @@ class Roles extends Modulos {
             if ( file_exists(self::$dir_roles.$rol.'.php') ) {
                include(self::$dir_roles.$rol.'.php');
                self::$acciones = array_merge(self::$acciones,${$rol});
+            } elseif ( file_exists(dirname(__FILE__).'/../config/roles/'.$rol.'.php') ) {
+               include(dirname(__FILE__).'/../config/roles/'.$rol.'.php');
+               self::$acciones = array_merge_recursive(self::$acciones,${$rol});
                }
             }
          }
 
       // echo "<pre>Roles: " ; print_r(self::$roles) ; echo "</pre>"; // DEV  
       // echo "<pre>Acciones: " ; print_r(self::$acciones) ; echo "</pre>"; // DEV  
+      
       }
 
    /** @} */
