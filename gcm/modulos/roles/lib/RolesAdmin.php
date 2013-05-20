@@ -111,7 +111,17 @@ class RolesAdmin extends Roles {
 
       if ( isset($_POST['nuevo_rol']) ) {
          $nuevo_rol = $_POST['nuevo_rol'];
-         $nuevo_rol_contenido = '<?php'."\n\n\$${nuevo_rol}[] = '';";
+         $nuevo_rol_contenido = '<?php'."\n\n";
+
+         ${$nuevo_rol} = array();
+         foreach ( $gcm->event->eventos as $evento ) {
+            foreach ( $evento as $modulo => $accion ) {
+               if ( isset($editor[$modulo]) && in_array(key($accion),$editor[$modulo]) ) continue;
+               //${$nuevo_rol}[$modulo][] = key($accion);
+               $nuevo_rol_contenido .= "\$${nuevo_rol}['".$modulo."'][] = '".key($accion)."';\n";
+               }
+            }
+
          $nuevo_rol_archivo = self::$dir_roles.$nuevo_rol.'.php';
          file_put_contents($nuevo_rol_archivo, $nuevo_rol_contenido);
          registrar(__FILE__,__LINE__,'Nuevo rol ['.$nuevo_rol.'] añadido','AVISO');

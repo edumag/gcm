@@ -1,13 +1,24 @@
-El módulo "roles" nos permite definir diferentes roles a los usuarios.
+El módulo "roles" nos permite definir diferentes roles a los usuarios, y
+definir las diferentes acciones que se permiten a cada rol.
 
 Un ejemplo de su utilidad puede ser el querer permitir a un usuario la
-traducción de las paginas, no sería conveniente en un caso así darle la
+traducción de las páginas, no sería conveniente en un caso así darle la
 posibilidad de modificar cualquier cosa de la administración.
 
-Tenemos unos roles ya definidos por defecto que agrupan las acciones que se permiten para realizar ciertas tareas.
+admin:     Tiene todos los privilegios.
+usuario:   Editar su perfil. (Todos los usuarios que se registran tiene este rol como mínimo)
 
-admin:     Tiene todos los rivilegios.
-usuario:   Editar su perfil. (Todos los usuarios que se registran tiene este rol como minimo)
-editor:    Se le permite añadir contenido nuevo, modificarlo si es el autor o eliminarlo.
-traductor: Se le permite traducir contenido, pero no crear nuevo.
+Archivos::
+
+gcm/modulos/roles/
+
+|-- config
+|   |-- roles
+|   |   |-- editor.php     Acciones del rol editor por defecto
+|   |   `-- usuario.php    Acciones del rol usuario por defecto
+|   `-- usuarios.php       Array con los usuarios con roles
+
+Al crear un nuevo rol se genera su archivo correspondiente en la carpeta del
+proyecto con todos las acciones permitidas. Será necesario editarlo y quitar
+las que no queramos que ejecute.
 

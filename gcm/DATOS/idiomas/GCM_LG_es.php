@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Wed May 15 19:22:26 CEST 2013
+// Archivo generado automaticamente por GcmConfig Mon May 20 12:30:16 CEST 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -117,4 +117,10 @@ $GCM_LG_es['Campo obligatorio']='';
 $GCM_LG_es['victor']='';
 $GCM_LG_es['Roles']='';
 $GCM_LG_es['masmoedu']='';
+$GCM_LG_es['Editar']='';
+$GCM_LG_es['Borrar']='';
+$GCM_LG_es['trabajosedu']='';
+$GCM_LG_es['Cancelar']='';
+$GCM_LG_es['Registro modificado']='';
+$GCM_LG_es['Sin contenido']='';
 ?>
