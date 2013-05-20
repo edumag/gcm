@@ -73,7 +73,7 @@ ul.navmenu-h .ma_off a {
    color: #585858;
 }
 /* Root Menu Hover Persistence */
-ul.navmenu-h a:visited, ul.navmenu-h a:link{
+ul.navmenu-h a, ul.navmenu-h a:visited, ul.navmenu-h a:link{
     color: white;
  }
 ul.navmenu-h a:hover {

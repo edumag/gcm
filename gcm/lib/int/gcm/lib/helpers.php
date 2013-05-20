@@ -1080,4 +1080,43 @@ function sesion($elemento, $valor=FALSE) {
 
 }
 
+/**
+ * #caja {
+ * 	border: 1px solid black;
+ * 	background: #fff;
+ *     <?php css3_write("border-radius", "5px"); ?>
+ * 	width: 50%;
+ *     <?php css3_write("box-shadow", "5px 5px 2px rgba(0, 0, 0, 0.5)"); ?>
+ * }
+ * 
+ * Lo que generará el siguiente código:
+ * 
+ * #caja {
+ * 	border: 1px solid black;
+ * 	background: #fff;
+ * 	-webkit-border-radius: 5px;
+ * 	-moz-border-radius: 5px;
+ * 	-o-border-radius: 5px;
+ * 	-ms-border-radius: 5px;
+ * 	border-radius: 5px; width: 50%;
+ * 	width: 50%;
+ * 	-webkit-box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5);
+ * 	-moz-box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5);
+ * 	-o-box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5);
+ * 	-ms-box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5);
+ * 	box-shadow: 5px 5px 2px rgba(0, 0, 0, 0.5);
+ * }
+ *
+ * Extrido de: http://webintenta.com/generar-prefijos-css3-con-php.html
+ */
+
+function css3_write ($property, $value) {
+	$css3 = "-webkit-".$property.": ".$value.";\n"
+	." -moz-".$property.": ".$value.";\n"
+	." -o-".$property.": ".$value.";\n"
+	." -ms-".$property.": ".$value.";\n"
+	." ".$property.": ".$value.";\n";
+	echo $css3;
+   } 
+
 ?>

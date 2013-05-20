@@ -328,7 +328,11 @@ abstract class ContenidosAbstract extends Modulos {
 
       if ( file_exists(Router::$dd) ) {
          $gcm->titulo = literal('Sin sección',3);
-         registrar(__FILE__,__LINE__,literal('Sección',3).' ['.Router::$s.'] '.literal('no encontrada',3),'ERROR');
+         registrar(__FILE__,__LINE__,literal('Sección',3).' ['.Router::$s.'] '.literal('no encontrada',3));
+         registrar(__FILE__,__LINE__,Router::$s.Router::$c.' '.literal('página no encontrada'),'ERROR');
+         header("HTTP/1.1 301 Moved Permanently");
+         header("Location: ".Router::$base);
+         exit();
       } else {
          registrar(__FILE__,__LINE__,literal('Creamos directorio para contenido',3).' ['.Router::$dd.']','ERROR');
          mkdir_recursivo(Router::$dd);
@@ -916,7 +920,7 @@ abstract class ContenidosAbstract extends Modulos {
             }
 
          try {
-            if ($this->verificar_contenido(Router::$f) !== FALSE) {
+            if ( $this->verificar_contenido(Router::$f) ) {
                $fecha = presentarFecha($this->getFechaActualizacion(Router::$f),1,'unix');
             } else {
                throw new Exception('El contendo no existe [ '.Router::$f.' ]');

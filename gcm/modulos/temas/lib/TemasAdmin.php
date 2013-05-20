@@ -416,6 +416,7 @@ class TemasAdmin extends Temas {
 
             $_SESSION['edit']='si'; // Para que podamos editar bien con tiny
             $nom_textarea = 'contenido_interno';
+            $gcm->event->lanzar_accion_modulo('editar','editor_web','Editando archivo de usuarios');
             include($this->ruta('temas','html','form_editar.html'));
 
             }

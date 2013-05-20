@@ -1,0 +1,22 @@
+/* Formularios */
+#contenido fieldset {
+    border-radius: 6px 6px 6px 6px;
+    padding: 10px;
+}
+
+#contenido legend {
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+fieldset input[type="text"] {
+    background-position: 10px 6px;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 2px 2px rgb(204, 204, 204) inset, 0 1px 0 rgb(255, 255, 255);
+    color: rgb(102, 102, 102);
+    display: block;
+    float: left;
+    height: 20px;
+    margin: 0 10px;
+}

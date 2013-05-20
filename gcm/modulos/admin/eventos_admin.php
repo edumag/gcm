@@ -21,12 +21,4 @@ if ( ! $gcm->config('admin','configuracion_confirmada') ) {
 
 }
 
-/**
- * Configuración para los permisos de usuario
- */
-
-$acciones['admin']['presentar_menu_administrativo'][] = 'usuario';
-$acciones['admin']['ejecutar_tests_modulos'][]        = 'usuario';
-$acciones['admin']['perfil_usuario'][]                = 'usuario';
-
 ?>

@@ -395,23 +395,6 @@ class AdminAdmin extends Admin {
       }
    
 
-   /**
-    * Administrar roles
-    */
-
-   function roles($e, $args = FALSE) {
-
-      global $gcm;
-
-         $gcm->event->anular('contenido','admin');
-         $gcm->event->anular('titulo','admin');
-         $gcm->titulo = literal('Roles');
-
-         require_once(dirname(__FILE__).'/../modelos/usuarios.php');
-         $usuarios = new Roles($gcm->pdo_conexion());
-         $usuarios->administrar(FALSE,FALSE,FALSE,TRUE);
-         return;
-      }
 
    }
 ?>

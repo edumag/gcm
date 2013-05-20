@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Mon Apr 29 9:27:44 CEST 2013
+// Archivo generado automaticamente por GcmConfig Mon May 20 13:15:58 CEST 2013
 $GCM_LG_es['Menú']='';
 $GCM_LG_es['Usuario']='';
 $GCM_LG_es['Contraseña']='';
@@ -105,18 +105,22 @@ $GCM_LG_es['Configuración de comentarios']='';
 $GCM_LG_es['Configuración de contenidos']='';
 $GCM_LG_es['Configuración de idiomas']='';
 $GCM_LG_es['Listado completo de contenido']='';
-$GCM_LG_es['Acciones sobre contenidos']='';
-$GCM_LG_es['Borrar']='';
-$GCM_LG_es['Cambiar nombre']='';
-$GCM_LG_es['Filtro']='';
-$GCM_LG_es['Campo obligatorio']='';
-$GCM_LG_es['Editar']='';
-$GCM_LG_es['Cancelar']='';
-$GCM_LG_es['Registro incluido']='';
-$GCM_LG_es['Registro modificado']='';
 $GCM_LG_es['Contraseña no pasa verificación']='';
+$GCM_LG_es['Administración de roles']='';
+$GCM_LG_es['mamedueduardo']='';
 $GCM_LG_es['Contenido nuevo']='';
 $GCM_LG_es['Contenido añadido']='';
-$GCM_LG_es['Administración de roles']='';
-$GCM_LG_es['eduardotrabajos']='';
+$GCM_LG_es['Confirmar borrado']='';
+$GCM_LG_es['Borrado de contenido']='';
+$GCM_LG_es['Contenido borrado']='';
+$GCM_LG_es['Campo obligatorio']='';
+$GCM_LG_es['victor']='';
+$GCM_LG_es['Roles']='';
+$GCM_LG_es['masmoedu']='';
+$GCM_LG_es['Editar']='';
+$GCM_LG_es['Borrar']='';
+$GCM_LG_es['trabajosedu']='';
+$GCM_LG_es['Cancelar']='';
+$GCM_LG_es['Registro modificado']='';
+$GCM_LG_es['Sin contenido']='';
 ?>
