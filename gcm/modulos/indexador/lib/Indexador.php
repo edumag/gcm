@@ -256,6 +256,9 @@ class Indexador extends Modulos {
          $nombre = $parametros['literal'];
       } else {
          $nombre = str_replace('.html','',basename($file) );
+         // Si el nombre del archivo es index, estamos ante el contenido de la sección
+         // debemos añadir el nombre de la sección como nombre del archivo.
+         if ( $nombre == 'index' ) $nombre = basename( dirname($file) );
          $nombre = literal($nombre);
          }
 
