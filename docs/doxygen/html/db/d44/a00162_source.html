@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/admin/config/config_es.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/menu/config/config.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,31 +80,26 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_406c13f9334d411137a984d45e973f8a.html">config</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e0b90d1017353e67ec406a3e12ca4962.html">menu</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_a1731249c4d48caa9e5398b51566e372.html">config</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">config_es.php</div>  </div>
+<div class="title">config.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 $config_DESC[<span class="stringliteral">&#39;Proyecto&#39;</span>]=<span class="stringliteral">&#39;Dominio del proyecto&#39;</span>;
-<a name="l00003"></a>00003 $config_DESC[<span class="stringliteral">&#39;Módulos activados&#39;</span>]=<span class="stringliteral">&#39;Desactivación de módulos&#39;</span>;
-<a name="l00004"></a>00004 $config_DESC[<span class="stringliteral">&#39;Palabra secreta para depurar&#39;</span>]=<span class="stringliteral">&#39;Añadiendo la palabra seleccionada a la url (?&lt;palabra_secreta&gt;=1), se inicia sesión de depuración, con un cero se termina&#39;</span>;
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 $config_DESC[<span class="stringliteral">&#39;bd_conexion&#39;</span>] = <span class="stringliteral">&#39;Producción: Driver a usar para conexión con base de datos (PDO). Ejemplos sqlite:/DATOS/proyecto.db o mysql:dbname=gcm&#39;</span>;
-<a name="l00007"></a>00007 $config_DESC[<span class="stringliteral">&#39;bd_usuario&#39;</span>]=<span class="stringliteral">&#39;Producción: Usuario para el servidor de base de datos, en caso de utilizar sqlite no es necesario&#39;</span>;
-<a name="l00008"></a>00008 $config_DESC[<span class="stringliteral">&#39;bd_pass&#39;</span>]=<span class="stringliteral">&#39;Producción: Contraseña para servidor de base de datos, en caso de sqlite no es necesario&#39;</span>;
-<a name="l00009"></a>00009 $config_DESC[<span class="stringliteral">&#39;Sufijo para base de datos&#39;</span>]=<span class="stringliteral">&#39;Producción: Nos permite diferenciar las tablas de los diferentes proyectos en una misma base de datos&#39;</span>;
-<a name="l00010"></a>00010 ?&gt;
+<a name="l00002"></a>00002 <a class="code" href="../../d7/d00/a00401_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;descartar&#39;</span>][] = <span class="stringliteral">&#39;gdoxygen&#39;</span>;
+<a name="l00003"></a>00003 <a class="code" href="../../d7/d00/a00401_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;descartar&#39;</span>][]=<span class="stringliteral">&#39;thumbnail&#39;</span>;
+<a name="l00004"></a>00004 <a class="code" href="../../d7/d00/a00401_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>[<span class="stringliteral">&#39;orden_presentacion&#39;</span>][] = <span class="stringliteral">&#39;inicio@1&#39;</span>;
+<a name="l00005"></a>00005 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/gdoxygen/js/busquedas.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/editar/html/form_insertar_email.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,30 +80,37 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_2567aefbfea8d85ace6b27112043dbc3.html">gdoxygen</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_569f3152799400fec92ab425d158d4d7.html">js</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_07570709bb750cc036227fc9d67b69f7.html">editar</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1985952cee154e581e42869d60ae3d1b.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">busquedas.js</div>  </div>
+<div class="title">form_insertar_email.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 $(document).ready(<span class="keyword">function</span>(){
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 $(<span class="stringliteral">&quot;#resultado_gdoxygen&quot;</span>).load(<span class="stringliteral">&quot;File/es/Proyectos/MagScripts/gdoxygen/search.php&quot;</span>, {query: <span class="stringliteral">&quot;script&quot;</span>, edad: 45}, <span class="keyword">function</span>(){
-<a name="l00004"></a>00004       alert(<span class="stringliteral">&quot;recibidos los datos por ajax&quot;</span>); 
-<a name="l00005"></a>00005 }
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 )}); 
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form <span class="keyword">class</span>=<span class="stringliteral">&quot;formAdmin&quot;</span> onSubmit=<span class="stringliteral">&quot;javascript: return insertaEmail(this); &quot;</span>&gt;
+<a name="l00002"></a>00002 &lt;fieldset&gt;
+<a name="l00003"></a>00003    &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Añadir email oculto a los spammers&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00004"></a>00004    &lt;fieldset&gt;
+<a name="l00005"></a>00005       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Nombre a mostrar&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00006"></a>00006          &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;nombre&quot;</span> /&gt;
+<a name="l00007"></a>00007    &lt;/fieldset&gt;
+<a name="l00008"></a>00008    &lt;fieldset&gt;
+<a name="l00009"></a>00009       &lt;legend&gt;&lt;?=literal(<span class="stringliteral">&#39;Email&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00010"></a>00010       &lt;input type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;email&quot;</span> /&gt;
+<a name="l00011"></a>00011    &lt;/fieldset&gt;
+<a name="l00012"></a>00012    &lt;br /&gt;
+<a name="l00013"></a>00013    &lt;input type=<span class="stringliteral">&quot;submit&quot;</span> value=<span class="stringliteral">&quot;&lt;?=literal(&#39;Insertar&#39;,3)?&gt;&quot;</span> /&gt;
+<a name="l00014"></a>00014 &lt;/fieldset&gt;
+<a name="l00015"></a>00015 &lt;/form&gt;
+<a name="l00016"></a>00016 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
