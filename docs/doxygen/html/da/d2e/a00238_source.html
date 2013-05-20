@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/_form_secciones.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/comentarios/lib/ComentariosAdmin.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,28 +80,171 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_564572b1ce5d7fe7ca8c92124076e676.html">contenidos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_a845b7d6e636d33255f017612c18fb71.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_e363b1922071f2f95404829d0400fcd6.html">comentarios</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_8cc23afc44fa3699c2b9338530b82370.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">_form_secciones.html</div>  </div>
+<div class="title">ComentariosAdmin.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php $seccion_seleccionada = ( isset($seccion_seleccionada) ) ? $seccion_seleccionada : <a class="code" href="../../df/d5f/a00064_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.<a class="code" href="../../df/d5f/a00064_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a> ;  ?&gt;
-<a name="l00002"></a>00002 &lt;?php $seccion_descartada   = ( isset($seccion_descartada) ) ? $seccion_descartada : FALSE ;  ?&gt;
-<a name="l00003"></a>00003 &lt;fieldset&gt;
-<a name="l00004"></a>00004    &lt;legend  accesskey=<span class="stringliteral">&quot;s&quot;</span>&gt;Seleccionar sección padre&lt;/legend&gt;
-<a name="l00005"></a>00005    &lt;?php $this-&gt;mostrarSecciones(<a class="code" href="../../df/d5f/a00064_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>,<a class="code" href="../../df/d5f/a00064_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a>,FALSE,TRUE,FALSE,TRUE,$seccion_seleccionada,FALSE,$seccion_descartada); ?&gt;
-<a name="l00006"></a>00006 &lt;/fieldset&gt;
+<a href="../../da/d2e/a00238.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 <span class="comment"></span>
+<a name="l00003"></a>00003 <span class="comment">/** </span>
+<a name="l00004"></a>00004 <span class="comment"> * @file ComentariosAdmin.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief Administración para los comentarios</span>
+<a name="l00006"></a>00006 <span class="comment"> */</span>
 <a name="l00007"></a>00007 
+<a name="l00008"></a>00008 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/Comentarios.php&#39;</span>);
+<a name="l00009"></a>00009 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/Comentarios.php&#39;</span>);
+<a name="l00010"></a>00010 <span class="comment"></span>
+<a name="l00011"></a>00011 <span class="comment">/** </span>
+<a name="l00012"></a>00012 <span class="comment"> * @class ComentariosAdmin</span>
+<a name="l00013"></a>00013 <span class="comment"> * @brief Métodos administrativos para comentarios</span>
+<a name="l00014"></a>00014 <span class="comment"> *</span>
+<a name="l00015"></a>00015 <span class="comment"> * @ingroup modulo_comentarios</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="../../d7/dd4/a00013.html">00018</a> <span class="keyword">class </span><a class="code" href="../../d7/dd4/a00013.html" title="Métodos administrativos para comentarios.">ComentariosAdmin</a> <span class="keyword">extends</span> <a class="code" href="../../da/d45/a00011.html" title="Este módulo nos permite que los usuarios entren comentarios.">Comentarios</a> {
+<a name="l00019"></a>00019 <span class="comment"></span>
+<a name="l00020"></a>00020 <span class="comment">   /** Constructor */</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="../../d7/dd4/a00013_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00022</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">__construct</a>() {
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024       <a class="code" href="../../d7/dd4/a00013_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026       }
+<a name="l00027"></a>00027 <span class="comment"></span>
+<a name="l00028"></a>00028 <span class="comment">   /**</span>
+<a name="l00029"></a>00029 <span class="comment">    * Listar comentarios para administración</span>
+<a name="l00030"></a>00030 <span class="comment">    */</span>
+<a name="l00031"></a>00031 
+<a name="l00032"></a><a class="code" href="../../d7/dd4/a00013_abd7a0e75f582fc0f09bbbae22dab15a2.html#abd7a0e75f582fc0f09bbbae22dab15a2">00032</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_abd7a0e75f582fc0f09bbbae22dab15a2.html#abd7a0e75f582fc0f09bbbae22dab15a2" title="Listar comentarios para administración.">listar</a>($e, $args) {
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036       permiso(<span class="stringliteral">&#39;moderar_comentarios&#39;</span>);
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038       $gcm-&gt;event-&gt;anular(<span class="stringliteral">&#39;titulo&#39;</span>,<span class="stringliteral">&#39;contenido&#39;</span>);
+<a name="l00039"></a>00039       $gcm-&gt;event-&gt;anular(<span class="stringliteral">&#39;contenido&#39;</span>,<span class="stringliteral">&#39;contenido&#39;</span>);
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041       <span class="keywordflow">if</span> ( isset($_GET[<span class="stringliteral">&#39;accion&#39;</span>]) &amp;&amp; $_GET[<span class="stringliteral">&#39;accion&#39;</span>] == <span class="stringliteral">&#39;eliminar&#39;</span> ) {
+<a name="l00042"></a>00042          $this-&gt;<a class="code" href="../../da/d45/a00011_a91a9292d8b1d7eb0bca4c86905b41be2.html#a91a9292d8b1d7eb0bca4c86905b41be2" title="Eliminar comentario.">eliminar</a>(<span class="stringliteral">&#39;interno&#39;</span>,$_GET[<span class="stringliteral">&#39;comentario&#39;</span>]);
+<a name="l00043"></a>00043          }
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045       $gcm-&gt;titulo = literal(<span class="stringliteral">&#39;Listado de comentarios&#39;</span>,3);
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047       require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../modelos/comentarios_dbo.php&#39;</span>);
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049       $comentarios = <span class="keyword">new</span> <a class="code" href="../../df/d86/a00012.html" title="Modelo para los comentarios de las entradas.">Comentarios_dbo</a>($this-&gt;pdo, $args[<span class="stringliteral">&#39;id&#39;</span>]);
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051       $this-&gt;conf_paginador = array (<span class="stringliteral">&#39;url&#39;</span>=&gt;<span class="stringliteral">&#39;?comentario=&#39;</span>
+<a name="l00052"></a>00052          , <span class="stringliteral">&#39;Identificador&#39;</span>=&gt;<span class="stringliteral">&#39;id&#39;</span>
+<a name="l00053"></a>00053          , <span class="stringliteral">&#39;table_id&#39;</span>=&gt;<span class="stringliteral">&#39;commentarios&#39;</span>
+<a name="l00054"></a>00054          , <span class="stringliteral">&#39;ver&#39;</span>=&gt;<span class="stringliteral">&#39;ver&#39;</span>
+<a name="l00055"></a>00055          , <span class="stringliteral">&#39;modificar&#39;</span>=&gt;<span class="stringliteral">&#39;modificar&#39;</span>
+<a name="l00056"></a>00056          , <span class="stringliteral">&#39;eliminar&#39;</span>=&gt;<span class="stringliteral">&#39;eliminar&#39;</span>
+<a name="l00057"></a>00057          , <span class="stringliteral">&#39;ocultar_id&#39;</span>=&gt;TRUE
+<a name="l00058"></a>00058          , <span class="stringliteral">&#39;accion&#39;</span>=&gt;<span class="stringliteral">&#39;accion&#39;</span>
+<a name="l00059"></a>00059          , <span class="stringliteral">&#39;fila_unica&#39;</span>=&gt;<span class="stringliteral">&#39;comentario&#39;</span>
+<a name="l00060"></a>00060          , <span class="stringliteral">&#39;enlaces&#39;</span>=&gt; array(<span class="stringliteral">&#39;url&#39;</span> =&gt; array(<span class="stringliteral">&#39;campo_enlazado&#39;</span>=&gt;<span class="stringliteral">&#39;contenido&#39;</span>
+<a name="l00061"></a>00061                                            ,<span class="stringliteral">&#39;titulo_columna&#39;</span>=&gt;<span class="stringliteral">&#39;Contenido&#39;</span>
+<a name="l00062"></a>00062                                            ,<span class="stringliteral">&#39;base_url&#39;</span>=&gt;<a class="code" href="../../de/de1/a00065_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>
+<a name="l00063"></a>00063                                         )
+<a name="l00064"></a>00064                             )
+<a name="l00065"></a>00065          );
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067       $comentarios-&gt;administrar(FALSE,<span class="stringliteral">&#39;fecha_creacion desc&#39;</span>,FALSE,TRUE);
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069       <span class="keywordflow">return</span>
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071       require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/array2table/lib/Array2table.php&#39;</span>);
+<a name="l00072"></a>00072       require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/GcmPDO/lib/GcmPDO.php&#39;</span>);
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074       $condicion = ( $args[<span class="stringliteral">&#39;id&#39;</span>] ) ? <span class="stringliteral">&quot; AND c.id=&quot;</span>.$args[<span class="stringliteral">&#39;id&#39;</span>] : <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00075"></a>00075       <span class="comment">// $campo =  ( ! $id_proyecto ) ? &quot; p.nombre as Proyecto,&quot; : &#39;&#39;;</span>
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077       $sql = <span class="stringliteral">&#39;SELECT c.id,c. fecha_creacion `fecha creación`, </span>
+<a name="l00078"></a>00078 <span class="stringliteral">         c.url, c.contenido , </span>
+<a name="l00079"></a>00079 <span class="stringliteral">         c.nombre, c.mail, c.comentario  </span>
+<a name="l00080"></a>00080 <span class="stringliteral">         FROM &#39;</span>.$this-&gt;tabla.<span class="stringliteral">&#39; c ORDER BY c.fecha_creacion desc&#39;</span>;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082       $gcmpdo = <span class="keyword">new</span> <a class="code" href="../../de/d8c/a00036.html" title="Extensión para PDO.">GcmPDO</a>($this-&gt;pdo, $sql);
+<a name="l00083"></a>00083       $array = $gcmpdo-&gt;to_array();
+<a name="l00084"></a>00084       $opciones = array (<span class="stringliteral">&#39;url&#39;</span>=&gt;<span class="stringliteral">&#39;?comentario=&#39;</span>
+<a name="l00085"></a>00085          , <span class="stringliteral">&#39;Identificador&#39;</span>=&gt;<span class="stringliteral">&#39;id&#39;</span>
+<a name="l00086"></a>00086          , <span class="stringliteral">&#39;table_id&#39;</span>=&gt;<span class="stringliteral">&#39;commentarios&#39;</span>
+<a name="l00087"></a>00087          , <span class="stringliteral">&#39;ver&#39;</span>=&gt;<span class="stringliteral">&#39;ver&#39;</span>
+<a name="l00088"></a>00088          , <span class="stringliteral">&#39;modificar&#39;</span>=&gt;<span class="stringliteral">&#39;modificar&#39;</span>
+<a name="l00089"></a>00089          , <span class="stringliteral">&#39;eliminar&#39;</span>=&gt;<span class="stringliteral">&#39;eliminar&#39;</span>
+<a name="l00090"></a>00090          , <span class="stringliteral">&#39;ocultar_id&#39;</span>=&gt;TRUE
+<a name="l00091"></a>00091          , <span class="stringliteral">&#39;accion&#39;</span>=&gt;<span class="stringliteral">&#39;accion&#39;</span>
+<a name="l00092"></a>00092          , <span class="stringliteral">&#39;fila_unica&#39;</span>=&gt;<span class="stringliteral">&#39;comentario&#39;</span>
+<a name="l00093"></a>00093          , <span class="stringliteral">&#39;enlaces&#39;</span>=&gt; array(<span class="stringliteral">&#39;url&#39;</span> =&gt; array(<span class="stringliteral">&#39;campo_enlazado&#39;</span>=&gt;<span class="stringliteral">&#39;contenido&#39;</span>
+<a name="l00094"></a>00094                                            ,<span class="stringliteral">&#39;titulo_columna&#39;</span>=&gt;<span class="stringliteral">&#39;Contenido&#39;</span>
+<a name="l00095"></a>00095                                            ,<span class="stringliteral">&#39;base_url&#39;</span>=&gt;<a class="code" href="../../de/de1/a00065_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>
+<a name="l00096"></a>00096                                         )
+<a name="l00097"></a>00097                             )
+<a name="l00098"></a>00098          );
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101       <span class="keywordflow">if</span> ( $gcmpdo-&gt;validar() ) {
+<a name="l00102"></a>00102          $array2table = <span class="keyword">new</span> <a class="code" href="../../de/d21/a00006.html" title="Transformar contenido array en tabla html.">Array2table</a>();
+<a name="l00103"></a>00103          $array2table-&gt;generar_tabla($array, $opciones);
+<a name="l00104"></a>00104       } <span class="keywordflow">else</span> {
+<a name="l00105"></a>00105          echo literal(<span class="stringliteral">&#39;No hay comentarios para listar&#39;</span>);
+<a name="l00106"></a>00106          }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108       <span class="keywordflow">return</span>;
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110       }
+<a name="l00111"></a>00111 <span class="comment"></span>
+<a name="l00112"></a>00112 <span class="comment">   /**</span>
+<a name="l00113"></a>00113 <span class="comment">    * Activación de un comentarios</span>
+<a name="l00114"></a>00114 <span class="comment">    */</span>
+<a name="l00115"></a>00115 
+<a name="l00116"></a><a class="code" href="../../d7/dd4/a00013_aa0dac6dda9b9ab66c1de93af6b0ba560.html#aa0dac6dda9b9ab66c1de93af6b0ba560">00116</a>    <span class="keyword">function</span> <a class="code" href="../../d7/dd4/a00013_aa0dac6dda9b9ab66c1de93af6b0ba560.html#aa0dac6dda9b9ab66c1de93af6b0ba560" title="Activación de un comentarios.">activar</a>($e, $args) {
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118       <span class="keywordflow">if</span> ( ! permiso(<span class="stringliteral">&#39;moderar_comentarios&#39;</span>) ) return ;
+<a name="l00119"></a>00119    
+<a name="l00120"></a>00120       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122       require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../modelos/comentarios_dbo.php&#39;</span>);
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124       <span class="keywordflow">if</span> ( !empty($args) &amp;&amp; is_array($args) ) {
+<a name="l00125"></a>00125          $id = $args[0] ;
+<a name="l00126"></a>00126       } elseif ( !empty($args) &amp;&amp; ! is_array($args) ) {
+<a name="l00127"></a>00127          $id = $args ;
+<a name="l00128"></a>00128       } elseif ( !empty(<a class="code" href="../../de/de1/a00065_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">Router::$args</a>) ) {
+<a name="l00129"></a>00129          $id = <a class="code" href="../../de/de1/a00065_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">Router::$args</a>[0];
+<a name="l00130"></a>00130       } <span class="keywordflow">else</span> {
+<a name="l00131"></a>00131          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../d2/da3/a00115_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) Sin identificaor no se puede borrar comentario&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00132"></a>00132          echo <span class="stringliteral">&quot;FALSE&quot;</span>;
+<a name="l00133"></a>00133          exit();
+<a name="l00134"></a>00134          }
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136       $comentario = <span class="keyword">new</span> <a class="code" href="../../df/d86/a00012.html" title="Modelo para los comentarios de las entradas.">Comentarios_dbo</a>($this-&gt;pdo, $id);
+<a name="l00137"></a>00137       $comentario-&gt;setActivado(1);
+<a name="l00138"></a>00138       $comentario-&gt;save();
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140       $gcm-&gt;event-&gt;lanzar_accion_modulo(<span class="stringliteral">&#39;cache_http&#39;</span>,<span class="stringliteral">&#39;borrar&#39;</span>,<span class="stringliteral">&#39;comentario_activado&#39;</span>,<a class="code" href="../../de/de1/a00065_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a>.<a class="code" href="../../de/de1/a00065_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">Router::$c</a>);
+<a name="l00141"></a>00141       <span class="keywordflow">if</span> ( <a class="code" href="../../de/de1/a00065_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">Router::$formato</a> == <span class="stringliteral">&#39;ajax&#39;</span> ) {
+<a name="l00142"></a>00142          echo $id;
+<a name="l00143"></a>00143          exit();
+<a name="l00144"></a>00144       } <span class="keywordflow">else</span> {
+<a name="l00145"></a>00145          registrar(__FILE__,__LINE__,literal(<span class="stringliteral">&#39;comentario&#39;</span>).<span class="charliteral">&#39; &#39;</span>.literal(<span class="stringliteral">&#39;activado&#39;</span>),<span class="stringliteral">&#39;AVISO&#39;</span>);
+<a name="l00146"></a>00146          }
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148       }
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150    }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

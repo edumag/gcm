@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/css/columna.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/roles/config/roles/editor.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,31 +80,34 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_1d927d548771ddffa1e7287445c148df.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_8cc779fe0f45a4c74260e8be0209f494.html">roles</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_01732567951c749796010ce59a27a482.html">config</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_6504ab80a37e89d76be8b1d4d49f2344.html">roles</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">columna.css</div>  </div>
+<div class="title">editor.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00002"></a>00002    
-<a name="l00003"></a>00003 <span class="preprocessor">#columna .panel ul {</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>list-style: none;
-<a name="l00005"></a>00005 padding: 3px 0px 5px 7px;
-<a name="l00006"></a>00006 margin: 0;
-<a name="l00007"></a>00007 }
-<a name="l00008"></a>00008 <span class="preprocessor">#columna .panel li {</span>
-<a name="l00009"></a>00009 <span class="preprocessor"></span>margin: 3px;
-<a name="l00010"></a>00010 }
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 $editor = array();
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="keywordflow">foreach</span> ( <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;event-&gt;eventos as $evento ) {
+<a name="l00008"></a>00008    <span class="keywordflow">foreach</span> ( $evento as $modulo =&gt; $accion ) {
+<a name="l00009"></a>00009       <span class="keywordflow">if</span> ( isset($editor[$modulo]) &amp;&amp; in_array(key($accion),$editor[$modulo]) ) <span class="keywordflow">continue</span>;
+<a name="l00010"></a>00010       $editor[$modulo][] = key($accion);
+<a name="l00011"></a>00011       }
+<a name="l00012"></a>00012    }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 29 de Abril de 2013 09:33:55 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
