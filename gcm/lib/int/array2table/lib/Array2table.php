@@ -161,6 +161,8 @@ class Array2table {
 
          foreach ( $res[0] as $columna => $valor ) {         // Encabezado de tabla
 
+            $columna = trim($columna);
+
             /* Columna de identificador sin ordenación
 
             if ( $columna == $identificador  ) {
@@ -182,8 +184,8 @@ class Array2table {
                $tipo_orden2 = 'asc';
                }
 
-            $url_orden = construir_get( array ($this->sufijo.'orden' => $columna
-               , $this->sufijo.'tipo_orden' => $tipo_orden2
+            $url_orden = construir_get( array ($this->sufijo.'orden' => trim($columna)
+               , $this->sufijo.'tipo_orden' => trim($tipo_orden2)
                , $this->sufijo.'pagina' => 1)) ;
 
             if ( $enlaces && isset($enlaces[$columna]) ) {
