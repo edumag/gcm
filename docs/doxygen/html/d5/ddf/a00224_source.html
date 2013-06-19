@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/temas/menuAdmin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/ver_registros/menuAdmin.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c9afd8915777f2f2952129c4e6ce1823.html">temas</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_7a6a9dd989122f1a21582e97cb95937e.html">ver_registros</a>      </li>
     </ul>
   </div>
 </div>
@@ -90,17 +90,16 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002    <a class="code" href="../../d3/dd1/a00214_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editor de temas&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]=1;
-<a name="l00003"></a>00003    <a class="code" href="../../d3/dd1/a00214_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editor de temas&#39;</span>][<span class="stringliteral">&#39;nombre&#39;</span>]=<span class="stringliteral">&quot;Editor&quot;</span>;
-<a name="l00004"></a>00004    <a class="code" href="../../d3/dd1/a00214_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editor de temas&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Editar ficheros del proyecto&quot;</span>;
-<a name="l00005"></a>00005    <a class="code" href="../../d3/dd1/a00214_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editor de temas&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<span class="stringliteral">&quot;?m=temas&amp;a=administrar&quot;</span>;
-<a name="l00006"></a>00006 ?&gt;
-<a name="l00007"></a>00007 
+<a name="l00002"></a>00002    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]=1;
+<a name="l00003"></a>00003    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Visualización de los registros de la aplicación&quot;</span>;
+<a name="l00004"></a>00004    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<a class="code" href="../../de/de1/a00065_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.<span class="stringliteral">&#39;ver_registros/visualizar/&#39;</span>.<a class="code" href="../../de/de1/a00065_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">Router::$url</a>;
+<a name="l00005"></a>00005 ?&gt;
+<a name="l00006"></a>00006 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
