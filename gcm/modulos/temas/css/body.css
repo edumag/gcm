@@ -1,11 +1,14 @@
-
+/*
+# body.css
+Estilos generales
+*/
 body {
 background-color: <?=$this->color("body-00")?>;
 color: <?=$this->color("body-01")?>;
 font-family: Palatino, 'Book Antiqua', serif;
 line-height: 20px;
 padding: 0;
-margin: 0;
+margin: 6px;
 /* Gradiante */
 background: <?=$this->color("body-02")?>;
 background: -moz-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
@@ -17,14 +20,15 @@ background: linear-gradient(135deg, <?=$this->color("body-02")?> 0%, <?=$this->c
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
 }
 
-#contenido h1 {
-    margin: 18px 2px;
-}
-
 #wrap{
 width: 100%;
 margin:0 auto;
 }
+
+#contenido h1 {
+    margin: 18px 2px;
+}
+
 #contenedor {
 width: 70%;
 float:left;
@@ -57,6 +61,19 @@ font-style: italic;
 a:hover{
 color: #6F6137;
 }
+/*
+## Formularios en general
+<form>
+   <fieldset>
+      <legend>Legend</legend>
+      <textarea></textarea>
+         <fieldset>
+         <legend>SubLegend</legend>
+         <boton></boton>
+         </fieldset>
+   </fieldset>
+</form>
+*/
 textarea {
 border-bottom:1px solid <?=$this->color("body-12")?>;
 border-left:1px solid <?=$this->color("body-13")?>;
@@ -73,7 +90,17 @@ fieldset fieldset {
     padding: 2px;
 }
 
-/* class para bloques de codigo, por ejemplo */
+/*
+## Bloques de código
+Cloques de código, por ejemplo 
+
+<pre>
+function foo() {
+   echo $bar;
+   }
+</pre>
+
+*/
 pre {
 border: 1px solid <?=$this->color("body-06")?>;
 border-left: 3px solid <?=$this->color("body-06")?>;

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/gcm/lib/Modulos.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/gcm/lib/Plantilla.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -88,301 +88,176 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Modulos.php</div>  </div>
+<div class="title">Plantilla.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="../../d4/d3e/a00116.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file      Modulos.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief     Clase abstracta para módulos</span>
+<a name="l00004"></a>00004 <span class="comment"> * @file      Plantilla.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Sistema de plantilla</span>
 <a name="l00006"></a>00006 <span class="comment"> *</span>
-<a name="l00007"></a>00007 <span class="comment"> * @package Modulos Módulos</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
 <a name="l00008"></a>00008 <span class="comment"> *</span>
-<a name="l00009"></a>00009 <span class="comment"> * Todos los módulos de gcm deben heredar de está clase para tener todas las funcionalidades</span>
-<a name="l00010"></a>00010 <span class="comment"> * disponibles.</span>
-<a name="l00011"></a>00011 <span class="comment"> *</span>
-<a name="l00012"></a>00012 <span class="comment"> * @see Modulos Definicion de clase</span>
-<a name="l00013"></a>00013 <span class="comment"> * @author    Eduardo Magrané </span>
-<a name="l00014"></a>00014 <span class="comment"> *</span>
-<a name="l00015"></a>00015 <span class="comment"> * @internal</span>
-<a name="l00016"></a>00016 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
-<a name="l00017"></a>00017 <span class="comment"> *</span>
-<a name="l00018"></a>00018 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
-<a name="l00019"></a>00019 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  22/10/10</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: Plantilla.php 511 2011-05-12 09:52:27Z eduardo $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 <span class="comment"></span>
+<a name="l00018"></a>00018 <span class="comment">/** </span>
+<a name="l00019"></a>00019 <span class="comment"> * Sistema de plantilla</span>
 <a name="l00020"></a>00020 <span class="comment"> *</span>
-<a name="l00021"></a>00021 <span class="comment"> * @defgroup modulos_aplicacion Módulos de la aplicación</span>
-<a name="l00022"></a>00022 <span class="comment"> * @{</span>
-<a name="l00023"></a>00023 <span class="comment"> */</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="comment">/* GcmConfig */</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027 require_once(GCM_DIR.<span class="stringliteral">&quot;lib/int/GcmConfig/lib/GcmConfigFactory.php&quot;</span>);
-<a name="l00028"></a>00028 <span class="comment"></span>
-<a name="l00029"></a>00029 <span class="comment">/** </span>
-<a name="l00030"></a>00030 <span class="comment"> * @class Modulos</span>
-<a name="l00031"></a>00031 <span class="comment"> * @brief Interface para los módulos</span>
-<a name="l00032"></a>00032 <span class="comment"> *</span>
-<a name="l00033"></a>00033 <span class="comment"> * Con los metodos que son iguales para todos ellos</span>
-<a name="l00034"></a>00034 <span class="comment"> *</span>
-<a name="l00035"></a>00035 <span class="comment"> * @version 0.3</span>
-<a name="l00036"></a>00036 <span class="comment"> *</span>
-<a name="l00037"></a>00037 <span class="comment"> * @todo Crear metodos comunes para tratar con eventos: lanzaEvento(), anularEvento()</span>
-<a name="l00038"></a>00038 <span class="comment"> *</span>
+<a name="l00021"></a>00021 <span class="comment"> * Añadir contenido sobre una plantilla html</span>
+<a name="l00022"></a>00022 <span class="comment"> *</span>
+<a name="l00023"></a>00023 <span class="comment"> * ejemplo de uso::</span>
+<a name="l00024"></a>00024 <span class="comment"> *</span>
+<a name="l00025"></a>00025 <span class="comment"> *     $plantilla = new Plantilla(GCM_DIR.&#39;modulos/gcm/temas/html/principal.html&#39;, $this);</span>
+<a name="l00026"></a>00026 <span class="comment"> *     echo $plantilla-&gt;procesaPlantilla();</span>
+<a name="l00027"></a>00027 <span class="comment"> *</span>
+<a name="l00028"></a>00028 <span class="comment"> * En la clase llamadora tendra que haber un metodo llamado procesaContenido($elemto)</span>
+<a name="l00029"></a>00029 <span class="comment"> * que retorne el contenido correspondiente.</span>
+<a name="l00030"></a>00030 <span class="comment"> *</span>
+<a name="l00031"></a>00031 <span class="comment"> * EL archivo de plantilla html debe tener entre corchetes el nombre del elemento, {elemento}</span>
+<a name="l00032"></a>00032 <span class="comment"> * IMPORTANTE: Solo debe tener caracteres alfanumericos.</span>
+<a name="l00033"></a>00033 <span class="comment"> *</span>
+<a name="l00034"></a>00034 <span class="comment"> * En caso de tener un elemento llamado contenido, se procesara el último, esto nos permite</span>
+<a name="l00035"></a>00035 <span class="comment"> * que cuando procesemos contenido haya pasado ya por todo lo demas y si hay algún mensaje</span>
+<a name="l00036"></a>00036 <span class="comment"> * que contenido deba de presentar lo tendra en cuenta.</span>
+<a name="l00037"></a>00037 <span class="comment"> *</span>
+<a name="l00038"></a>00038 <span class="comment"> * @package   Plantilla</span>
 <a name="l00039"></a>00039 <span class="comment"> */</span>
 <a name="l00040"></a>00040 
-<a name="l00041"></a><a class="code" href="../../d5/de0/a00050.html">00041</a> <span class="keyword">abstract</span> <span class="keyword">class </span><a class="code" href="../../d5/de0/a00050.html" title="Interface para los módulos.">Modulos</a> {
+<a name="l00041"></a><a class="code" href="../../dc/dee/a00053.html">00041</a> <span class="keyword">class </span><a class="code" href="../../dc/dee/a00053.html">Plantilla</a> {
 <a name="l00042"></a>00042 
-<a name="l00043"></a>00043    <span class="keyword">private</span> <span class="keyword">static</span> $contador_instancias = -1;     <span class="comment">///&lt; Contador de instancias</span>
-<a name="l00044"></a>00044 <span class="comment"></span><span class="comment"></span>
-<a name="l00045"></a>00045 <span class="comment">   /**</span>
-<a name="l00046"></a>00046 <span class="comment">    * Nombre de la clase hija, En caso de llevar el Admin se lo quitamos</span>
-<a name="l00047"></a>00047 <span class="comment">    * @see Eventos</span>
-<a name="l00048"></a>00048 <span class="comment">    */</span>
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050    <span class="keyword">private</span> $nombre_clase = <span class="stringliteral">&#39;&#39;</span>;
-<a name="l00051"></a>00051 <span class="comment"></span>
-<a name="l00052"></a>00052 <span class="comment">   /**</span>
-<a name="l00053"></a>00053 <span class="comment">    * Iniciamón módulos</span>
-<a name="l00054"></a>00054 <span class="comment">    *</span>
-<a name="l00055"></a>00055 <span class="comment">    * Registramos Inicio de modulo</span>
-<a name="l00056"></a>00056 <span class="comment">    */</span>
-<a name="l00057"></a>00057 
-<a name="l00058"></a><a class="code" href="../../d5/de0/a00050_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00058</a>    <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Iniciamón módulos.">__construct</a>() {
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062       self::$contador_instancias++;
-<a name="l00063"></a>00063       $this-&gt;nombre_clase = str_replace(<span class="stringliteral">&#39;Admin&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,get_class($this));
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065       <span class="keywordflow">if</span> ( $gcm ) {
-<a name="l00066"></a>00066          $gcm-&gt;registra(__FILE__,__LINE__,<span class="stringliteral">&quot;Iniciada clase hija::[&quot;</span>.$this-&gt;nombre_clase.<span class="stringliteral">&#39;] Numero de instancia: [&#39;</span>.self::$contador_instancias.<span class="charliteral">&#39;]&#39;</span>);
-<a name="l00067"></a>00067          }
+<a name="l00043"></a>00043    <span class="keyword">private</span> $cPlantilla;                  <span class="comment">///&lt; Contenido de la plantilla</span>
+<a name="l00044"></a>00044 <span class="comment"></span>   <span class="keyword">private</span> $elementos;                   <span class="comment">///&lt; Elementos a insertar en la plantilla</span>
+<a name="l00045"></a>00045 <span class="comment"></span>   <span class="keyword">private</span> $objeto;                      <span class="comment">///&lt; Referencia al objeto que genera el contenido</span>
+<a name="l00046"></a>00046 <span class="comment"></span>   <span class="keyword">private</span> $plantilla;                   <span class="comment">///&lt; fichero de plantilla</span>
+<a name="l00047"></a>00047 <span class="comment"></span>   <span class="keyword">private</span> $elementos_vitales_primeros;  <span class="comment">///&lt; lista de elementos imprescindibles primeros con el orden adecuado.</span>
+<a name="l00048"></a>00048 <span class="comment"></span><span class="comment"></span>
+<a name="l00049"></a>00049 <span class="comment">   /**</span>
+<a name="l00050"></a>00050 <span class="comment">    *  lista de elementos imprescindibles últimos con el orden adecuado, scripts el último para que no se</span>
+<a name="l00051"></a>00051 <span class="comment">    *  deje ningún archivo javascript</span>
+<a name="l00052"></a>00052 <span class="comment">    */</span>
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054    <span class="keyword">private</span> $elementos_vitales_ultimos;
+<a name="l00055"></a>00055    <span class="keyword">private</span> $contenido_elementos;         <span class="comment">///&lt; Contenido de los elementos despues de procesarlos</span>
+<a name="l00056"></a>00056 <span class="comment"></span><span class="comment"></span>
+<a name="l00057"></a>00057 <span class="comment">   /**</span>
+<a name="l00058"></a>00058 <span class="comment">    * Constructor</span>
+<a name="l00059"></a>00059 <span class="comment">    *</span>
+<a name="l00060"></a>00060 <span class="comment">    * Cargamos contenido de plantilla y lista de elementos</span>
+<a name="l00061"></a>00061 <span class="comment">    *</span>
+<a name="l00062"></a>00062 <span class="comment">    * @param $plantilla Fichero de plantilla</span>
+<a name="l00063"></a>00063 <span class="comment">    * @param $objeto Objeto que procesara el contenido</span>
+<a name="l00064"></a>00064 <span class="comment">    *</span>
+<a name="l00065"></a>00065 <span class="comment">    */</span>
+<a name="l00066"></a>00066 
+<a name="l00067"></a><a class="code" href="../../dc/dee/a00053_a88f176ab3744a2464f9b1c0ac7610b7d.html#a88f176ab3744a2464f9b1c0ac7610b7d">00067</a>    <span class="keyword">function</span> <a class="code" href="../../dc/dee/a00053_a88f176ab3744a2464f9b1c0ac7610b7d.html#a88f176ab3744a2464f9b1c0ac7610b7d" title="Constructor.">__construct</a>($plantilla, $objeto) {
 <a name="l00068"></a>00068 
-<a name="l00069"></a>00069       }
-<a name="l00070"></a>00070 <span class="comment"></span>
-<a name="l00071"></a>00071 <span class="comment">   /**</span>
-<a name="l00072"></a>00072 <span class="comment">    * anular evento</span>
-<a name="l00073"></a>00073 <span class="comment">    *</span>
-<a name="l00074"></a>00074 <span class="comment">    * @param $evento</span>
-<a name="l00075"></a>00075 <span class="comment">    */</span>
+<a name="l00069"></a>00069       $this-&gt;objeto = $objeto;
+<a name="l00070"></a>00070       $this-&gt;plantilla = $plantilla; 
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072       $this-&gt;elementos_vitales_primeros = array(<span class="stringliteral">&#39;contenido&#39;</span>,<span class="stringliteral">&#39;titulo&#39;</span>);
+<a name="l00073"></a>00073       $this-&gt;elementos_vitales_ultimos  = array(<span class="stringliteral">&#39;avisos&#39;</span>,<span class="stringliteral">&#39;debug&#39;</span>,<span class="stringliteral">&#39;scripts&#39;</span>);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075       <span class="comment">/* Los elementos los buscamos en plantilla */</span>
 <a name="l00076"></a>00076 
-<a name="l00077"></a><a class="code" href="../../d5/de0/a00050_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2">00077</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2" title="anular evento">anularEvento</a>($evento) {
+<a name="l00077"></a>00077       $this-&gt;cPlantilla = @file_get_contents($this-&gt;plantilla);
 <a name="l00078"></a>00078 
-<a name="l00079"></a>00079       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00079"></a>00079       preg_match_all(<span class="stringliteral">&#39;/\{[A-Za-z]+\}/&#39;</span>, $this-&gt;cPlantilla, $el, PREG_PATTERN_ORDER);
 <a name="l00080"></a>00080 
-<a name="l00081"></a>00081       <span class="keywordflow">if</span> ( $gcm &amp;&amp; $gcm instanceof <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a> ) {
-<a name="l00082"></a>00082          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$evento.<span class="stringliteral">&#39;) Evento anulado por &#39;</span>.$this-&gt;nombre_clase);
-<a name="l00083"></a>00083          $gcm-&gt;event-&gt;anular($evento,$this-&gt;nombre_clase);
-<a name="l00084"></a>00084       } <span class="keywordflow">else</span> {
-<a name="l00085"></a>00085          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Modulos-&gt;anularEvento(&#39;</span>.$evento.<span class="stringliteral">&#39;) Gcm no esta definido&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00086"></a>00086          }
-<a name="l00087"></a>00087       }
-<a name="l00088"></a>00088 <span class="comment"></span>
-<a name="l00089"></a>00089 <span class="comment">   /**</span>
-<a name="l00090"></a>00090 <span class="comment">    * Lanzar evento</span>
-<a name="l00091"></a>00091 <span class="comment">    *</span>
-<a name="l00092"></a>00092 <span class="comment">    * @param $evento</span>
-<a name="l00093"></a>00093 <span class="comment">    * @param $args Argumentos para evento</span>
-<a name="l00094"></a>00094 <span class="comment">    */</span>
-<a name="l00095"></a>00095 
-<a name="l00096"></a><a class="code" href="../../d5/de0/a00050_a224734f121a835f4db542d76f3c25979.html#a224734f121a835f4db542d76f3c25979">00096</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_a224734f121a835f4db542d76f3c25979.html#a224734f121a835f4db542d76f3c25979" title="Lanzar evento.">lanzarEvento</a>($evento, $args=<span class="stringliteral">&#39;&#39;</span>) {
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100       <span class="keywordflow">if</span> ( $gcm &amp;&amp; $gcm instanceof <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a> ) {
-<a name="l00101"></a>00101          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$evento.<span class="stringliteral">&#39;) Lanzado evento desde &#39;</span>.$this-&gt;nombre_clase);
-<a name="l00102"></a>00102          $gcm-&gt;event-&gt;lanzarEvento($evento,$args);
-<a name="l00103"></a>00103       } <span class="keywordflow">else</span> {
-<a name="l00104"></a>00104          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Modulos-&gt;anularEvento(&#39;</span>.$evento.<span class="charliteral">&#39;,&#39;</span>.$args.<span class="stringliteral">&#39;) Gcm no esta definido&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00081"></a>00081       $this-&gt;elementos = $el[0];
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083    }
+<a name="l00084"></a>00084 <span class="comment"></span>
+<a name="l00085"></a>00085 <span class="comment">   /**</span>
+<a name="l00086"></a>00086 <span class="comment">    * Procesamos la plantilla.</span>
+<a name="l00087"></a>00087 <span class="comment">    *</span>
+<a name="l00088"></a>00088 <span class="comment">    * Recogemos el contenido de cada elemento para despues remplazar los</span>
+<a name="l00089"></a>00089 <span class="comment">    * elementos de la plantilla con el contenido.</span>
+<a name="l00090"></a>00090 <span class="comment">    *</span>
+<a name="l00091"></a>00091 <span class="comment">    * Primero elementos vitales primeros despúes elementos vitales </span>
+<a name="l00092"></a>00092 <span class="comment">    * últimos y por último los elementos que encontrmos.</span>
+<a name="l00093"></a>00093 <span class="comment">    *</span>
+<a name="l00094"></a>00094 <span class="comment">    * Hacemos que contenido se reemplace el último para no dar </span>
+<a name="l00095"></a>00095 <span class="comment">    * problemas al editar el archivo de plantilla con los elementos</span>
+<a name="l00096"></a>00096 <span class="comment">    * dentro de ella.</span>
+<a name="l00097"></a>00097 <span class="comment">    */</span>
+<a name="l00098"></a>00098 
+<a name="l00099"></a><a class="code" href="../../dc/dee/a00053_a7405bde7ec13bdfb02e08a0030fadc2a.html#a7405bde7ec13bdfb02e08a0030fadc2a">00099</a>    <span class="keyword">function</span> <a class="code" href="../../dc/dee/a00053_a7405bde7ec13bdfb02e08a0030fadc2a.html#a7405bde7ec13bdfb02e08a0030fadc2a" title="Procesamos la plantilla.">procesaPlantilla</a>() {
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101       $salida = $this-&gt;cPlantilla;
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103       <span class="keywordflow">foreach</span> ( $this-&gt;elementos_vitales_primeros as $el) {
+<a name="l00104"></a>00104          $this-&gt;contenido_elementos[$el] = $this-&gt;objeto-&gt;procesaContenido($el);
 <a name="l00105"></a>00105          }
-<a name="l00106"></a>00106       }
-<a name="l00107"></a>00107 <span class="comment"></span>
-<a name="l00108"></a>00108 <span class="comment">   /**</span>
-<a name="l00109"></a>00109 <span class="comment">    * Añadir librerias javascript a la lista de Gcm</span>
-<a name="l00110"></a>00110 <span class="comment">    *</span>
-<a name="l00111"></a>00111 <span class="comment">    * @param $archivo Librería javascript a añadir</span>
-<a name="l00112"></a>00112 <span class="comment">    */</span>
-<a name="l00113"></a>00113 
-<a name="l00114"></a><a class="code" href="../../d5/de0/a00050_a4f2e94eecb524863dbfb9e24eb9dd3a6.html#a4f2e94eecb524863dbfb9e24eb9dd3a6">00114</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_a4f2e94eecb524863dbfb9e24eb9dd3a6.html#a4f2e94eecb524863dbfb9e24eb9dd3a6" title="Añadir librerias javascript a la lista de Gcm.">librerias_js</a>($archivo) {
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118       <span class="keywordflow">if</span> ( $gcm &amp;&amp; $gcm instanceof <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a> ) {
-<a name="l00119"></a>00119          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Modulos-&gt;librerias_js(&#39;</span>.$archivo.<span class="stringliteral">&#39;) modulo: &#39;</span>.$this-&gt;nombre_clase);
-<a name="l00120"></a>00120          $gcm-&gt;add_lib_js($this-&gt;nombre_clase,$archivo);
-<a name="l00121"></a>00121       } <span class="keywordflow">else</span> {
-<a name="l00122"></a>00122          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Modulos-&gt;libreria_javascripts(&#39;</span>.$archivo.<span class="stringliteral">&#39;) $gcm no esta definida&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00123"></a>00123          }
-<a name="l00124"></a>00124       }
-<a name="l00125"></a>00125 <span class="comment"></span>
-<a name="l00126"></a>00126 <span class="comment">   /**</span>
-<a name="l00127"></a>00127 <span class="comment">    * Añadir archivos javascript a la lista de Gcm</span>
-<a name="l00128"></a>00128 <span class="comment">    *</span>
-<a name="l00129"></a>00129 <span class="comment">    * @param $archivo Archivo javascript a añadir</span>
-<a name="l00130"></a>00130 <span class="comment">    */</span>
-<a name="l00131"></a>00131 
-<a name="l00132"></a><a class="code" href="../../d5/de0/a00050_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92">00132</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>($archivo) {
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107       <span class="keywordflow">foreach</span> ( $this-&gt;elementos as $el ) {
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109          $el = substr($el, 1, strlen($el)-2);
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111          <span class="keywordflow">if</span> ( !in_array($el,$this-&gt;elementos_vitales_ultimos) &amp;&amp; !in_array($el,$this-&gt;elementos_vitales_primeros) ) {
+<a name="l00112"></a>00112             $this-&gt;contenido_elementos[$el] = $this-&gt;objeto-&gt;procesaContenido($el);
+<a name="l00113"></a>00113             }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115          }
+<a name="l00116"></a>00116             
+<a name="l00117"></a>00117       <span class="keywordflow">foreach</span> ( $this-&gt;elementos_vitales_ultimos as $el) {
+<a name="l00118"></a>00118          $this-&gt;contenido_elementos[$el] = $this-&gt;objeto-&gt;procesaContenido($el);
+<a name="l00119"></a>00119          }
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121       <span class="keywordflow">foreach</span> ( $this-&gt;contenido_elementos as $key =&gt; $contenidos ) {
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123          <span class="comment">/* Dejamos contenido para el final */</span>
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125          <span class="keywordflow">if</span> ( $key == <span class="stringliteral">&#39;contenido&#39;</span>  ) continue ;
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127          <span class="keywordflow">if</span> ( !$contenidos ) {
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129             <span class="keywordflow">if</span> ( ( in_array($key,$this-&gt;elementos_vitales_primeros) || in_array($key,$this-&gt;elementos_vitales_ultimos ) &amp;&amp; $key !== <span class="stringliteral">&#39;scripts&#39;</span> ) ) {
+<a name="l00130"></a>00130                registrar(__FILE__,__LINE__,
+<a name="l00131"></a>00131                   <span class="stringliteral">&#39;No tenemos contenido vital para [&#39;</span>.$key.<span class="stringliteral">&#39;] de plantilla [&#39;</span>.$this-&gt;plantilla.<span class="stringliteral">&#39;] y es necesario para el correcto funcionamiento&#39;</span>);
+<a name="l00132"></a>00132             } <span class="keywordflow">else</span> {
+<a name="l00133"></a>00133                registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Elemento [&#39;</span>.$key.<span class="stringliteral">&#39;] de plantilla [&#39;</span>.$this-&gt;plantilla.<span class="stringliteral">&#39;] vacio&#39;</span>);
+<a name="l00134"></a>00134                }
 <a name="l00135"></a>00135 
-<a name="l00136"></a>00136       <span class="keywordflow">if</span> ( $gcm &amp;&amp; $gcm instanceof <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a> ) {
-<a name="l00137"></a>00137          $gcm-&gt;add_js($this-&gt;nombre_clase,$archivo);
-<a name="l00138"></a>00138          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Modulos-&gt;javas_cripts(&#39;</span>.$archivo.<span class="stringliteral">&#39;) modulo: &#39;</span>.$this-&gt;nombre_clase);
-<a name="l00139"></a>00139       } <span class="keywordflow">else</span> {
-<a name="l00140"></a>00140          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Modulos-&gt;javascripts(&#39;</span>.$archivo.<span class="stringliteral">&#39;) $gcm no esta definida&#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00141"></a>00141          }
-<a name="l00142"></a>00142       }
-<a name="l00143"></a>00143 <span class="comment"></span>
-<a name="l00144"></a>00144 <span class="comment">   /**</span>
-<a name="l00145"></a>00145 <span class="comment">    * Añadir o modificar elemento de configuración</span>
-<a name="l00146"></a>00146 <span class="comment">    */</span>
-<a name="l00147"></a>00147    
-<a name="l00148"></a><a class="code" href="../../d5/de0/a00050_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc">00148</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_a841e8831c531eb620a850d7cbbfe1acc.html#a841e8831c531eb620a850d7cbbfe1acc" title="Añadir o modificar elemento de configuración.">config</a>($elemento,$valor=NULL) {
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00151"></a>00151 
-<a name="l00152"></a>00152       <span class="keywordflow">if</span> ( $gcm &amp;&amp; $gcm instanceof <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a> ) {
-<a name="l00153"></a>00153          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$elemento.<span class="charliteral">&#39;,&#39;</span>.$valor.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00154"></a>00154       } <span class="keywordflow">else</span> {
-<a name="l00155"></a>00155          registrar(__FILE__,__LINE__,
-<a name="l00156"></a>00156             __CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$elemento.<span class="charliteral">&#39;,&#39;</span>.$valor.<span class="stringliteral">&#39;) Gcm no esta implementado para Modulo. &#39;</span>.$this-&gt;nombre_clase,
-<a name="l00157"></a>00157             <span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00158"></a>00158          <span class="keywordflow">return</span> FALSE;
-<a name="l00159"></a>00159          }
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161       registrar(__FILE__,__LINE__,
-<a name="l00162"></a>00162          <span class="stringliteral">&#39;Config, modulo: [&#39;</span>.$this-&gt;nombre_clase.<span class="stringliteral">&#39;] Elemento [&#39;</span>.$elemento.<span class="stringliteral">&#39;] valor: [&#39;</span>.$valor.<span class="charliteral">&#39;]&#39;</span>);
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164       <span class="keywordflow">return</span> $gcm-&gt;config($this-&gt;nombre_clase,$elemento,$valor);
-<a name="l00165"></a>00165 
-<a name="l00166"></a>00166       }
-<a name="l00167"></a>00167 <span class="comment"></span>
-<a name="l00168"></a>00168 <span class="comment">   /**</span>
-<a name="l00169"></a>00169 <span class="comment">    * Configuración de módulos</span>
-<a name="l00170"></a>00170 <span class="comment">    */</span>
-<a name="l00171"></a>00171 
-<a name="l00172"></a><a class="code" href="../../d5/de0/a00050_af6818eefc93ff6a5f3fb09f45d8c31e2.html#af6818eefc93ff6a5f3fb09f45d8c31e2">00172</a>    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_af6818eefc93ff6a5f3fb09f45d8c31e2.html#af6818eefc93ff6a5f3fb09f45d8c31e2" title="Configuración de módulos.">configuracion</a>($e, $args) {
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174       global <a class="code" href="../../da/d2a/a00086_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00175"></a>00175 
-<a name="l00176"></a>00176       <span class="keywordflow">if</span> ( !permiso(<span class="stringliteral">&#39;configuracion&#39;</span>) ) <span class="keywordflow">return</span> FALSE;
-<a name="l00177"></a>00177 
-<a name="l00178"></a>00178       <span class="keywordflow">if</span> ( isset($_POST[<span class="stringliteral">&#39;accion&#39;</span>]) &amp;&amp; $_POST[<span class="stringliteral">&#39;accion&#39;</span>] == <span class="stringliteral">&#39;escribir_gcmconfig&#39;</span>  ) {
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180          <span class="comment">/* Nos llega configuración modificada */</span>
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182          <span class="keywordflow">try</span> {
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184             require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/GcmConfig/lib/GcmConfigGui.php&#39;</span>);
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186             $configuracion = <span class="keyword">new</span> <a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a>($_POST[<span class="stringliteral">&#39;archivo&#39;</span>]);
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188             $configuracion-&gt;escribir_desde_post();
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190          } <span class="keywordflow">catch</span> (Exception $ex) {
-<a name="l00191"></a>00191             registrar($ex-&gt;getFile(),$ex-&gt;getLine(),$ex-&gt;getMessage(),<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00192"></a>00192             <span class="keywordflow">return</span> FALSE;
-<a name="l00193"></a>00193             }
-<a name="l00194"></a>00194 
-<a name="l00195"></a>00195          registrar(__FILE__,__LINE__,literal(<span class="stringliteral">&#39;Configuración guardada&#39;</span>,3),<span class="stringliteral">&#39;AVISO&#39;</span>);
-<a name="l00196"></a>00196 
-<a name="l00197"></a>00197       } <span class="keywordflow">else</span> {
-<a name="l00198"></a>00198          
-<a name="l00199"></a>00199          <span class="comment">/* Presentamos formulario para modificar configuración */</span>
-<a name="l00200"></a>00200 
-<a name="l00201"></a>00201          <span class="keywordflow">if</span> ( isset($args[<span class="stringliteral">&#39;modulo&#39;</span>]) ) {
-<a name="l00202"></a>00202             $modulo = $args[<span class="stringliteral">&#39;modulo&#39;</span>];
-<a name="l00203"></a>00203             $men = <span class="stringliteral">&#39;Desde args&#39;</span>;
-<a name="l00204"></a>00204          } elseif ( !empty(<a class="code" href="../../de/de1/a00065_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49" title="Modulo que se desea utilizar.">Router::$m</a>) ) {
-<a name="l00205"></a>00205             $modulo = <a class="code" href="../../de/de1/a00065_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49" title="Modulo que se desea utilizar.">Router::$m</a>;
-<a name="l00206"></a>00206             $men = <span class="stringliteral">&#39;Desde Router&#39;</span>;
-<a name="l00207"></a>00207          } <span class="keywordflow">else</span> {
-<a name="l00208"></a>00208             $modulo = $this-&gt;nombre_clase;
-<a name="l00209"></a>00209             $men = <span class="stringliteral">&#39;Desde el propio módulo&#39;</span>;
-<a name="l00210"></a>00210             }
-<a name="l00211"></a>00211 
-<a name="l00212"></a>00212          registrar(__FILE__,__LINE__,
-<a name="l00213"></a>00213             __CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$e.<span class="charliteral">&#39;,&#39;</span>.<a class="code" href="../../d2/da3/a00115_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($args).<span class="stringliteral">&#39;) &#39;</span>.$men.<span class="stringliteral">&#39; [&#39;</span>.$modulo.<span class="charliteral">&#39;]&#39;</span>);
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215          $this-&gt;<a class="code" href="../../d5/de0/a00050_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2" title="anular evento">anularEvento</a>(<span class="stringliteral">&#39;titulo&#39;</span>);
-<a name="l00216"></a>00216          $this-&gt;<a class="code" href="../../d5/de0/a00050_a71f51cc20870a7b7ab7eb4ed2d0d82e2.html#a71f51cc20870a7b7ab7eb4ed2d0d82e2" title="anular evento">anularEvento</a>(<span class="stringliteral">&#39;contenido&#39;</span>);
-<a name="l00217"></a>00217          $gcm-&gt;titulo = literal(<span class="stringliteral">&#39;Configuración&#39;</span>,3).<span class="charliteral">&#39; &#39;</span>.literal(<span class="stringliteral">&#39;de&#39;</span>,3).<span class="charliteral">&#39; &#39;</span>.$modulo;
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219          $archivo = <span class="stringliteral">&#39;DATOS/configuracion/&#39;</span>.$modulo.<span class="stringliteral">&#39;/config.php&#39;</span>;
-<a name="l00220"></a>00220 
-<a name="l00221"></a>00221          <span class="comment">/* Si se pide volver a los valores por defecto, borramos</span>
-<a name="l00222"></a>00222 <span class="comment">          * archivo de configuración del proyecto, para que se coja </span>
-<a name="l00223"></a>00223 <span class="comment">          * el del módulo</span>
-<a name="l00224"></a>00224 <span class="comment">          */</span>
-<a name="l00225"></a>00225 
-<a name="l00226"></a>00226          <span class="keywordflow">if</span> ( isset($_POST[<span class="stringliteral">&#39;reset&#39;</span>]) &amp;&amp; file_exists($archivo) ) unlink($archivo);
-<a name="l00227"></a>00227 
-<a name="l00228"></a>00228          <span class="keywordflow">if</span> ( !file_exists(<span class="stringliteral">&#39;DATOS/configuracion&#39;</span>)  ) mkdir(<span class="stringliteral">&#39;DATOS/configuracion&#39;</span>);
-<a name="l00229"></a>00229          <span class="keywordflow">if</span> ( !file_exists(<span class="stringliteral">&#39;DATOS/configuracion/&#39;</span>.$modulo)  ) mkdir(<span class="stringliteral">&#39;DATOS/configuracion/&#39;</span>.$modulo);
-<a name="l00230"></a>00230 
-<a name="l00231"></a>00231          <span class="keywordflow">if</span> ( !file_exists($archivo) ) copy(GCM_DIR.<span class="stringliteral">&#39;modulos/&#39;</span>.$modulo.<span class="stringliteral">&#39;/config/config.php&#39;</span>, $archivo);
-<a name="l00232"></a>00232 
-<a name="l00233"></a>00233          <span class="keywordflow">try</span> {
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235             require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/GcmConfig/lib/GcmConfigGui.php&#39;</span>);
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237             $configuracion = <span class="keyword">new</span> <a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a>($archivo);
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239             $args = array();
-<a name="l00240"></a>00240             $args[<span class="stringliteral">&#39;eliminar&#39;</span>] = <span class="stringliteral">&#39;si&#39;</span>;
-<a name="l00241"></a>00241 
-<a name="l00242"></a>00242             $configuracion-&gt;directorio_descripciones(GCM_DIR.<span class="stringliteral">&#39;modulos/&#39;</span>.$modulo.<span class="stringliteral">&#39;/config&#39;</span>);
-<a name="l00243"></a>00243 
-<a name="l00244"></a>00244             $configuracion-&gt;formulario($args);
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246             echo <span class="stringliteral">&#39;&lt;br /&gt;&lt;br /&gt;&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;&#39;</span>;
-<a name="l00247"></a>00247             echo <span class="stringliteral">&#39;&lt;input name=&quot;reset&quot; type=&quot;submit&quot; value=&quot;Valores por defecto&quot;/&gt;&#39;</span>;
-<a name="l00248"></a>00248             echo <span class="stringliteral">&#39;&lt;/form&gt;&#39;</span>;
-<a name="l00249"></a>00249 
-<a name="l00250"></a>00250          } <span class="keywordflow">catch</span> (Exception $ex) {
-<a name="l00251"></a>00251             registrar($ex-&gt;getFile(),$ex-&gt;getLine(),$ex-&gt;getMessage(),<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00252"></a>00252             }
-<a name="l00253"></a>00253          }
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255       }
-<a name="l00256"></a>00256 <span class="comment"></span>
-<a name="l00257"></a>00257 <span class="comment">   /**</span>
-<a name="l00258"></a>00258 <span class="comment">    * Test de módulos</span>
-<a name="l00259"></a>00259 <span class="comment">    *</span>
-<a name="l00260"></a>00260 <span class="comment">    * Se compara uno con dos si no son iguales</span>
-<a name="l00261"></a>00261 <span class="comment">    * presentamos mensaje de error</span>
-<a name="l00262"></a>00262 <span class="comment">    *</span>
-<a name="l00263"></a>00263 <span class="comment">    * @param $nombre Nombre del test</span>
-<a name="l00264"></a>00264 <span class="comment">    * @param $uno Primer parametro</span>
-<a name="l00265"></a>00265 <span class="comment">    * @param $dos Segundo parametro Si no existe solo se comprueba que el uno no es FALSE</span>
-<a name="l00266"></a>00266 <span class="comment">    */</span>
-<a name="l00267"></a>00267 
-<a name="l00268"></a><a class="code" href="../../d5/de0/a00050_a73d09724ce888beae9c3fe1d4b57327e.html#a73d09724ce888beae9c3fe1d4b57327e">00268</a>    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../d5/de0/a00050_a73d09724ce888beae9c3fe1d4b57327e.html#a73d09724ce888beae9c3fe1d4b57327e" title="Test de módulos.">ejecuta_test</a>($nombre, $uno, $dos = FALSE) {
-<a name="l00269"></a>00269 
-<a name="l00270"></a>00270       <span class="keywordflow">if</span> ( ( ! $dos &amp;&amp; $uno ) || ( $uno === $dos ) ) {
-<a name="l00271"></a>00271          echo <span class="stringliteral">&#39;&lt;div class=&quot;aviso&quot;&gt;&#39;</span>.$this-&gt;nombre_clase.<span class="charliteral">&#39; &#39;</span>.$nombre.<span class="stringliteral">&#39; bien&lt;/div&gt;&#39;</span>;
-<a name="l00272"></a>00272       } <span class="keywordflow">else</span> {
-<a name="l00273"></a>00273          echo <span class="stringliteral">&#39;&lt;div class=&quot;error&quot;&gt;&#39;</span>.$this-&gt;nombre_clase.<span class="stringliteral">&#39; &lt;b&gt;&#39;</span>.$nombre.<span class="stringliteral">&#39;&lt;/b&gt;: &#39;</span>;
-<a name="l00274"></a>00274          <span class="keywordflow">if</span> ( is_array($uno) ) {
-<a name="l00275"></a>00275             echo <span class="stringliteral">&#39;&lt;br /&gt;&#39;</span>.depurar($uno).<span class="stringliteral">&#39;&lt;br /&gt;diferente a &lt;br /&gt;&#39;</span>.<a class="code" href="../../d2/da3/a00115_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>($dos);
-<a name="l00276"></a>00276          } <span class="keywordflow">else</span> {
-<a name="l00277"></a>00277             echo <span class="charliteral">&#39;[&#39;</span>.$uno.<span class="stringliteral">&#39;] diferente a [&#39;</span>.$dos.<span class="charliteral">&#39;]&#39;</span>;
-<a name="l00278"></a>00278             }
-<a name="l00279"></a>00279          echo <span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
-<a name="l00280"></a>00280          }
-<a name="l00281"></a>00281 
-<a name="l00282"></a>00282       }
-<a name="l00283"></a>00283 
-<a name="l00284"></a>00284    }
-<a name="l00285"></a>00285 <span class="comment"></span>
-<a name="l00286"></a>00286 <span class="comment">/** @} */</span>
-<a name="l00287"></a>00287 ?&gt;
+<a name="l00136"></a>00136             }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138          $resultado = <span class="stringliteral">&quot;\n&lt;!-- Elemento:&quot;</span>.$key.<span class="stringliteral">&quot; --&gt;\n&quot;</span>.$contenidos.<span class="stringliteral">&quot;\n&lt;!-- Acaba:&quot;</span>.$key.<span class="stringliteral">&quot; --&gt;\n&quot;</span>;
+<a name="l00139"></a>00139          $salida = str_replace(<span class="charliteral">&#39;{&#39;</span>.$key.<span class="charliteral">&#39;}&#39;</span>, $resultado, $salida);
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Plantilla-&gt;procesaPlantilla()  Finaliza proceso en plantilla para elemento [&#39;</span>.$el.<span class="charliteral">&#39;]&#39;</span>);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144          }
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146       $key = <span class="stringliteral">&#39;contenido&#39;</span>;
+<a name="l00147"></a>00147       $contenidos = $this-&gt;contenido_elementos[<span class="stringliteral">&#39;contenido&#39;</span>];
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149       <span class="keywordflow">if</span> ( !$contenidos ) {
+<a name="l00150"></a>00150          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No tenemos contenido para contenido [&#39;</span>.$contenidos.<span class="stringliteral">&#39;] de plantilla [&#39;</span>.$this-&gt;plantilla.<span class="charliteral">&#39;]&#39;</span>);
+<a name="l00151"></a>00151       } <span class="keywordflow">else</span> {
+<a name="l00152"></a>00152          $resultado = <span class="stringliteral">&#39;&lt;div id=&quot;&#39;</span>.$key.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.$contenidos.<span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
+<a name="l00153"></a>00153          $salida = str_replace(<span class="charliteral">&#39;{&#39;</span>.$key.<span class="charliteral">&#39;}&#39;</span>, $resultado, $salida);
+<a name="l00154"></a>00154          }
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156       <span class="keywordflow">return</span> $salida;
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158       }
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160    }
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

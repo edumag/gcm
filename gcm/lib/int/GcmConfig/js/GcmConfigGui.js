@@ -75,7 +75,8 @@ function anadirVariable(idioma,CLAVE,NUM) {
    CONTA++;
 
    var subCaja = document.createElement('div');
-   subCaja.innerHTML = "<br />[<a href=\"javascript:anadirVariable('"+idioma+"','"+CLAVE+"','"+CONTA+"')\" >+</a>][<a href=\"javascript:eliminarVariable('"+CLAVE+"-"+CONTA+"') \" >-</a>]<br />";
+   //subCaja.innerHTML = "<br />[<a href=\"javascript:anadirVariable('"+idioma+"','"+CLAVE+"','"+CONTA+"')\" >+</a>][<a href=\"javascript:eliminarVariable('"+CLAVE+"-"+CONTA+"') \" >-</a>]<br />";
+   subCaja.innerHTML = "<br />[<a href=\"javascript:eliminarVariable('"+CLAVE+"-"+CONTA+"') \" >-</a>]<br />";
    subCaja.id = CLAVE+"-"+CONTA;
 
    var nuevaVarTextarea = document.createElement('textarea');

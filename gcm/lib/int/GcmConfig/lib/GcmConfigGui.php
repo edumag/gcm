@@ -34,9 +34,9 @@ require_once('GcmConfig.php');
 
 class GcmConfigGui extends GcmConfig {
 
-   function __construct($archivo) {
+   function __construct($archivo, $archivoxdefecto = FALSE) {
 
-      parent::__construct($archivo);
+      parent::__construct($archivo, $archivoxdefecto);
 
       }
 
@@ -61,7 +61,7 @@ class GcmConfigGui extends GcmConfig {
 
       $ampliar   = ( isset($args['ampliar']) ) ? $args['ampliar'] : FALSE;
       $eliminar  = ( isset($args['eliminar']) ) ? $args['eliminar'] : FALSE;
-      $plantilla = ( isset($args['plantilla']) ) ? $args['plantilla'] : dirname(__FILE__).'/../html/formGcmConfigGui.html';
+      $plantilla = ( isset($args['plantilla']) ) ? $args['plantilla'] : dirname(__FILE__).'/../html/formGcmConfigGui.phtml';
       $css       = ( isset($args['css']) ) ? $args['css'] : FALSE;
       $modificar_descripciones = ( isset($args['modificar_descripciones']) ) ? $args['modificar_descripciones'] : FALSE;
 

@@ -215,7 +215,7 @@ class PaginarPDO extends GcmPDO {
       if ( ! $this->resultado  ) $this->resultado();
 
       $this->url_base = construir_get( array(
-         $this->sufijo.'orden' => htmlspecialchars($this->as_orden,ENT_QUOTES)
+         $this->sufijo.'orden' => htmlspecialchars(trim($this->as_orden),ENT_QUOTES)
          , $this->sufijo.'tipo_orden' => $this->tipo_orden
       ));
 

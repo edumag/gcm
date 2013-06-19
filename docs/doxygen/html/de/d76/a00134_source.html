@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/GcmConfig/test/PhpTestGcmConfigGui.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/GcmPDO/html/botonera_paginador.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,117 +81,47 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c3d8fb5ec977952637af3fab714015e0.html">GcmConfig</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_dbd03bd1795b9f28d771191dcc08fa7c.html">test</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_6d74a9db0e209af2b3b4bf87264254c7.html">GcmPDO</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_711f5e31f6eb06185483fed92135e3b3.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">PhpTestGcmConfigGui.php</div>  </div>
+<div class="title">botonera_paginador.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file Test phpUnit para GcmConfigGui</span>
-<a name="l00005"></a>00005 <span class="comment"> */</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 require(dirname(__FILE__).<span class="stringliteral">&#39;/../lib/GcmConfigGui.php&#39;</span>);
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="keywordflow">if</span> ( $_POST[<span class="stringliteral">&#39;accion&#39;</span>] == <span class="stringliteral">&#39;escribir_gcmconfig&#39;</span> ) {
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011    $post_config = <span class="keyword">new</span> <a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a>($_POST[<span class="stringliteral">&#39;archivo&#39;</span>]);
-<a name="l00012"></a>00012    $post_config-&gt;idioma = $_POST[<span class="stringliteral">&#39;idioma&#39;</span>];
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014    <span class="keywordflow">if</span> ( $post_config-&gt;escribir_desde_post() ) {
-<a name="l00015"></a>00015       echo <span class="stringliteral">&#39;&lt;h1&gt;Archivo escrito&lt;/h1&gt;&#39;</span>;
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017       <span class="comment">/* Destruimos objeto para que escriba en archivo */</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019       $post_config = NULL;
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021    } <span class="keywordflow">else</span> {
-<a name="l00022"></a>00022       echo <span class="stringliteral">&#39;Error&#39;</span>;
-<a name="l00023"></a>00023       }
-<a name="l00024"></a>00024    }
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 DEFINE(ARCHIVO,<span class="stringliteral">&#39;/tmp/TGC.php&#39;</span>);
-<a name="l00027"></a>00027 DEFINE(ARCHIVO_DESC,<span class="stringliteral">&#39;/tmp/TGC_es.php&#39;</span>);
-<a name="l00028"></a>00028 DEFINE(ARCHIVO_DESC_ca,<span class="stringliteral">&#39;/tmp/TGC_ca.php&#39;</span>);
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="keywordflow">if</span> ( ! file_exists(ARCHIVO) ) {
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032    <span class="comment">/* construimos archivo para pruebas */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034    $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
-<a name="l00035"></a>00035    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v1]=&quot;variable1&quot;;&#39;</span>;
-<a name="l00036"></a>00036    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v2]=&quot;variable2&quot;;&#39;</span>;
-<a name="l00037"></a>00037    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v3]=&quot;variable3&quot;;&#39;</span>;
-<a name="l00038"></a>00038    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v4]=&quot;variable4&quot;;&#39;</span>;
-<a name="l00039"></a>00039    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v5][]=&quot;variable5a&quot;;&#39;</span>;
-<a name="l00040"></a>00040    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v5][]=&quot;variable5b&quot;;&#39;</span>;
-<a name="l00041"></a>00041    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v5][]=&quot;variable5c&quot;;&#39;</span>;
-<a name="l00042"></a>00042    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v6]=&quot;variable6&quot;;&#39;</span>;
-<a name="l00043"></a>00043    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045    file_put_contents(ARCHIVO, $contenido);
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047    }
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 <span class="keywordflow">if</span> ( ! file_exists(ARCHIVO_DESC) ) {
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051    $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
-<a name="l00052"></a>00052    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v1]=&quot;descripcion_variable1&quot;;&#39;</span>;
-<a name="l00053"></a>00053    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v2]=&quot;descripcion_variable2&quot;;&#39;</span>;
-<a name="l00054"></a>00054    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v3]=&quot;descripcion_variable3&quot;;&#39;</span>;
-<a name="l00055"></a>00055    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v4]=&quot;descripcion_variable4&quot;;&#39;</span>;
-<a name="l00056"></a>00056    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v5]=&quot;descripcion_variable5&quot;;&#39;</span>;
-<a name="l00057"></a>00057    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v6]=&quot;descripcion_variable6&quot;;&#39;</span>;
-<a name="l00058"></a>00058    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060    file_put_contents(ARCHIVO_DESC, $contenido);
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062    }
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064 <span class="keywordflow">if</span> ( ! file_exists(ARCHIVO_DESC_ca) ) {
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066    $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
-<a name="l00067"></a>00067    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v1]=&quot;descripcion_variable1_ca&quot;;&#39;</span>;
-<a name="l00068"></a>00068    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v2]=&quot;descripcion_variable2_ca&quot;;&#39;</span>;
-<a name="l00069"></a>00069    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v3]=&quot;descripcion_variable3_ca&quot;;&#39;</span>;
-<a name="l00070"></a>00070    $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072    file_put_contents(ARCHIVO_DESC_ca, $contenido);
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074    }
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076 <a class="code" href="../../d7/d00/a00401_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a> = <span class="keyword">new</span> <a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a>(ARCHIVO);
-<a name="l00077"></a>00077 $config_ca = <span class="keyword">new</span> <a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a>(ARCHIVO);
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079 echo <span class="stringliteral">&#39;&lt;h2&gt;Presentamos variables&lt;/h2&gt;&#39;</span>;
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081 echo <span class="stringliteral">&quot;&lt;pre&gt;&quot;</span> ; print_r(<a class="code" href="../../d7/d00/a00401_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>-&gt;variables()) ; echo <span class="stringliteral">&quot;&lt;/pre&gt;&quot;</span>; 
-<a name="l00082"></a>00082 <span class="comment"></span>
-<a name="l00083"></a>00083 <span class="comment">/** Comprobando valor de la primera variable */</span>
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 echo <span class="stringliteral">&#39;&lt;h2&gt;Formulario en idioma predeterminado Solo se puede modificar valores&lt;/h2&gt;&#39;</span>;
-<a name="l00086"></a>00086 echo <a class="code" href="../../d7/d00/a00401_ga75b9216a8dda3edf33d3eccceeaa07b0.html#ga75b9216a8dda3edf33d3eccceeaa07b0" title="Activación de la moderación de comentarios.">$config</a>-&gt;formulario();
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088 echo <span class="stringliteral">&#39;&lt;h2&gt;Formulario en catalan ampliable&lt;/h2&gt;&#39;</span>;
-<a name="l00089"></a>00089 $config_ca-&gt;idioma = <span class="stringliteral">&#39;ca&#39;</span>;
-<a name="l00090"></a>00090 $opciones = array(<span class="stringliteral">&#39;ampliar&#39;</span> =&gt; TRUE, <span class="stringliteral">&#39;eliminar&#39;</span> =&gt; TRUE, <span class="stringliteral">&#39;modificar_descripciones&#39;</span> =&gt; TRUE );
-<a name="l00091"></a>00091 echo $config_ca-&gt;formulario($opciones);
-<a name="l00092"></a>00092 
-<a name="l00093"></a>00093 echo <span class="stringliteral">&#39;&lt;h2&gt;POST&lt;/h2&gt;&#39;</span>;
-<a name="l00094"></a>00094 echo <span class="stringliteral">&quot;&lt;pre&gt;&quot;</span> ; print_r($_POST) ; echo <span class="stringliteral">&quot;&lt;/pre&gt;&quot;</span>; <span class="comment">// DEV  </span>
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096 ?&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php <span class="keywordflow">if</span> ($this-&gt;total_de_paginas &gt; 1) { ?&gt;
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;paginador&quot;</span>&gt;
+<a name="l00004"></a>00004    &lt;span <span class="keyword">class</span>=<span class="stringliteral">&quot;info_botonera&quot;</span>&gt;
+<a name="l00005"></a>00005       &lt;?php echo literal(<span class="stringliteral">&#39;Pàgina&#39;</span>);?&gt; &lt;?=$this-&gt;pagina;?&gt; de &lt;?=$this-&gt;total_de_paginas;?&gt; - 
+<a name="l00006"></a>00006       &lt;?php echo $this-&gt;num_total_registros.<span class="charliteral">&#39; &#39;</span>.literal(<span class="stringliteral">&#39;resultats&#39;</span>); ?&gt;
+<a name="l00007"></a>00007    &lt;/span&gt;
+<a name="l00008"></a>00008    &lt;span <span class="keyword">class</span>=<span class="stringliteral">&quot;botonera_paginador&quot;</span>&gt;
+<a name="l00009"></a>00009       &lt;?php <span class="keywordflow">if</span>($this-&gt;pagina&gt;1) { ?&gt;
+<a name="l00010"></a>00010       &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo.$this-&gt;sufijo; ?&gt;pagina=1&#39;</span>&gt;&amp;lt;&amp;lt;&lt;/a&gt;
+<a name="l00011"></a>00011          &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo.$this-&gt;sufijo; ?&gt;pagina=&lt;?php echo ($this-&gt;pagina-1)?&gt;&#39;</span>&gt;&amp;lt;&lt;/a&gt;
+<a name="l00012"></a>00012       &lt;?php } ?&gt;
+<a name="l00013"></a>00013       &lt;?php <span class="keywordflow">for</span> ($i=$this-&gt;elemento_inicio;(($i&lt;=$this-&gt;total_de_paginas)&amp;&amp;($i&lt;=$this-&gt;elemento_final));$i++){ ?&gt;
+<a name="l00014"></a>00014          &lt;?php <span class="keywordflow">if</span> ($this-&gt;pagina == $i) { ?&gt;
+<a name="l00015"></a>00015          &lt;span <span class="keyword">class</span>=<span class="stringliteral">&#39;pag_actual&#39;</span>&gt;&lt;b&gt;&lt;?php echo $this-&gt;pagina; ?&gt;&lt;/b&gt;&lt;/span&gt;
+<a name="l00016"></a>00016          &lt;?php } <span class="keywordflow">else</span> { ?&gt;
+<a name="l00017"></a>00017             &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo.$this-&gt;sufijo; ?&gt;pagina=&lt;?php echo $i; ?&gt;&#39;</span>&gt;&lt;?php echo $i; ?&gt;&lt;/a&gt;
+<a name="l00018"></a>00018          &lt;?php } ?&gt;
+<a name="l00019"></a>00019       &lt;?php } ?&gt;
+<a name="l00020"></a>00020       &lt;?php <span class="keywordflow">if</span>($this-&gt;pagina &lt; $this-&gt;total_de_paginas){ ?&gt;
+<a name="l00021"></a>00021       &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo.$this-&gt;sufijo; ?&gt;pagina=&lt;?php echo ($this-&gt;pagina+1); ?&gt;&#39;</span>&gt;&gt;&lt;/a&gt;
+<a name="l00022"></a>00022          &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo.$this-&gt;sufijo; ?&gt;pagina=&lt;?php echo $this-&gt;total_de_paginas; ?&gt;&#39;</span>&gt;&gt;&gt;&lt;/a&gt;
+<a name="l00023"></a>00023       &lt;?php } ?&gt;
+<a name="l00024"></a>00024    &lt;/span&gt;
+<a name="l00025"></a>00025 &lt;/div&gt;
+<a name="l00026"></a>00026 &lt;?php } ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
