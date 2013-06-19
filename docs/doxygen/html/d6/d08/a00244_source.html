@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/_form_secciones.html</title>
+<title>gcm: Fichero Fuente gcm/modulos/contenidos/html/_form_titulo.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -87,21 +87,18 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">_form_secciones.html</div>  </div>
+<div class="title">_form_titulo.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php $seccion_seleccionada = ( isset($seccion_seleccionada) ) ? $seccion_seleccionada : <a class="code" href="../../de/de1/a00065_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.<a class="code" href="../../de/de1/a00065_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a> ;  ?&gt;
-<a name="l00002"></a>00002 &lt;?php $seccion_descartada   = ( isset($seccion_descartada) ) ? $seccion_descartada : FALSE ;  ?&gt;
-<a name="l00003"></a>00003 &lt;fieldset&gt;
-<a name="l00004"></a>00004    &lt;legend  accesskey=<span class="stringliteral">&quot;s&quot;</span>&gt;Seleccionar sección padre&lt;/legend&gt;
-<a name="l00005"></a>00005    &lt;?php $this-&gt;mostrarSecciones(<a class="code" href="../../de/de1/a00065_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>,<a class="code" href="../../de/de1/a00065_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">Router::$s</a>,FALSE,TRUE,FALSE,TRUE,$seccion_seleccionada,FALSE,$seccion_descartada); ?&gt;
-<a name="l00006"></a>00006 &lt;/fieldset&gt;
-<a name="l00007"></a>00007 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;fieldset&gt;
+<a name="l00002"></a>00002    &lt;legend  accesskey=<span class="stringliteral">&quot;t&quot;</span>&gt;&lt;?=literal(<span class="stringliteral">&#39;Título&#39;</span>,3)?&gt;&lt;/legend&gt;
+<a name="l00003"></a>00003    &lt;input style=<span class="stringliteral">&#39;width: 100%;&#39;</span> title=<span class="stringliteral">&#39;&lt;?php echo literal(&#39;</span>Título del contenido<span class="stringliteral">&#39;,3);?&gt;&#39;</span> type=<span class="stringliteral">&quot;text&quot;</span> name=<span class="stringliteral">&quot;titulo&quot;</span> value=<span class="stringliteral">&quot;&lt;?=$titulo?&gt;&quot;</span> /&gt;
+<a name="l00004"></a>00004 &lt;/fieldset&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

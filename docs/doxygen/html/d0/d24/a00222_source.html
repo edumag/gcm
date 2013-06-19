@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/responsiveslides/menuAdmin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/roles/menuAdmin.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_f86fbb995b02d118c96ab8476bfc0866.html">responsiveslides</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_8cc779fe0f45a4c74260e8be0209f494.html">roles</a>      </li>
     </ul>
   </div>
 </div>
@@ -122,12 +122,20 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00031"></a>00031 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
 <a name="l00032"></a>00032 <span class="comment"> */</span>
 <a name="l00033"></a>00033 
-<a name="l00034"></a>00034 ?&gt;
+<a name="l00034"></a>00034 <span class="keywordflow">if</span> ( permiso(<span class="stringliteral">&#39;admin_roles&#39;</span>,<span class="stringliteral">&#39;roles&#39;</span>) ) {
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Roles&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>] = 1;
+<a name="l00037"></a>00037    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Roles&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]    = literal(<span class="stringliteral">&#39;Roles&#39;</span>);
+<a name="l00038"></a>00038    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Roles&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]     = <a class="code" href="../../de/de1/a00065_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.<span class="stringliteral">&#39;roles/admin_roles&#39;</span>;
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040    }
+<a name="l00041"></a>00041    
+<a name="l00042"></a>00042 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Lunes, 20 de Mayo de 2013 13:21:03 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
