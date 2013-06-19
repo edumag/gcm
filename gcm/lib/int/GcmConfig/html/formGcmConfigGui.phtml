@@ -1,0 +1,107 @@
+<script type="text/javascript">
+   <?php include(dirname(__FILE__).'/../js/GcmConfigGui.js'); ?>
+</script>
+
+<form id="formVar_<?php echo $this->idioma ?>" action="" method="POST">
+
+   <div id="cajaForm_<?php echo $this->idioma ?>" class="GcmConfigCajaForm">
+
+      <?php if ( isset($this->variables) ) { while (list($clave, $val)=each($this->variables)){ ?>
+
+      <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
+
+         <b><?php echo $clave?></b>
+         <?php if ( $eliminar ) { ?>
+         <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+         <?php   } ?>
+	<div >
+         <!-- <input type='text' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]' -->
+
+
+
+         <?php if ( is_array($val)) { ?>
+
+            <div class="textAreaDescripLLista">
+
+         <?php } else { ?>
+            <div class="textAreaDescrip">
+         <?php } ?>
+            <?php  
+            //Definimos el ancho que queramos en una variable
+            $ancho=37; 
+            $cadena=$this->getDescripcion($clave);
+
+            //hacemos comparaciones y ajustamos el contenido 
+            //y lo dividimos en lineas
+            if (strtoupper(substr(PHP_OS,0,3)=='WIN')) { 
+              $eol="\r\n"; 
+            } elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) { 
+              $eol="\r"; 
+            } else { 
+              $eol="\n"; 
+            } 
+            $cad=wordwrap($cadena, $ancho, $eol, 1); 
+            $lineas=substr_count($cad,$eol)+1; 
+            ?> 
+
+            <textarea rows='<?php echo $lineas ?>' style='border: 0;background:none repeat scroll 0 0 transparent;' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+         <?php if ( ! $modificar_descripciones ) { ?>
+         class='inputLectura' readonly
+         <?php } ?> ><?php echo $cadena?></textarea>
+         </div>
+
+         <?php // Si es un array se debe permitir añadir más valores o eliminarlos ?>
+
+         <?php if ( is_array($val)) { ?>
+
+         <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>'>
+
+            [<a title='Añadir más' href="javascript:anadirVariable('<?php echo $this->idioma ?>','<?php echo $clave ?>','<?php echo $conta?>')" >+</a>]
+
+            <?php $conta=0; while (list($claveArray, $valorArray)=each($val)) { $conta++; ?>
+
+            <div id='<?php echo $clave."-".$conta?>' >
+
+               <?php if ( 0 !== $conta ) { ?>
+               [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
+               <?php } ?>
+               <br />
+               <textarea class="formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+
+            </div>
+
+            <?php } ?>
+
+         </div>
+
+         <?php } else { ?>
+		<div class="textAreaDescrip">
+         <textarea class="formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $val?></textarea>
+		</div>
+         <?php } ?>
+	</div>
+   <hr class="clear" />
+      </div>
+
+      <?php } ?>
+
+      <?php } else { // No tenemos array valido ?>
+      <p class="error"><?php echo literal("Sin contenido",3)?></p>
+      <?php } ?>
+   </div>
+
+   <?php if ( $ampliar ) { ?>
+
+   <br /><br />
+   <a class='boton' onclick="javascript:nuevaVariable('<?php echo $this->idioma ?>'); return false;">Añadir nuevo elemento </a>
+
+   <?php } ?>
+
+   <br /><br />
+
+   <input type='hidden' name='archivo' value='<?php echo $this->archivo ?>' />
+   <input type='hidden' name='idioma' value='<?php echo $this->idioma ?>' />
+   <input type='hidden' name='accion' value='escribir_gcmconfig' />
+   <input type="submit" value="Enviar cambios" />
+
+</form>

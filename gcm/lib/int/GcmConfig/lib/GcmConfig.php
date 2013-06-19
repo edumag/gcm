@@ -70,10 +70,11 @@
 
 class GcmConfig {
 
-   protected $variables;                        ///< Variables del archivo de configuración
+   protected $variables = array();              ///< Variables del archivo de configuración
    protected $descripciones;                    ///< Descripciones de las variables
    protected $descripcionesxdefecto;            ///< Descripciones de las variables en el idioma por defecto
    protected $archivo;                          ///< Ruta de archivo que contiene el array con las variables
+   protected $archivoxdefecto;                  ///< Ruta de archivo que contiene el array con las variables por defecto
 
    /** 
     * Ruta de directorio que contiene los archivos de descripciones.
@@ -102,11 +103,45 @@ class GcmConfig {
  
    public $ordenar = FALSE;                     ///< Ordenar variables al escribir archivo (T/F)
 
-   function __construct($archivo) {
+
+   /**
+    * Constructor
+    *
+    * @param $archivo con las variables
+    * @param $archivoxdefecto Variables por defecto, necesario si deseamos que 
+    *        tener en cuenta variables por defecto que no esten en los archivos
+    *        definitivos.
+    */
+   function __construct($archivo, $archivoxdefecto = FALSE) {
 
       $this->archivo = $archivo;
       $this->nombre_array = str_replace('.php','',basename($this->archivo));
+      $this->directorio_descripciones = dirname($this->archivo);
+      $this->archivoxdefecto = $archivoxdefecto;
 
+      $this->leer_variables();
+
+      }
+
+   /**
+    * Recogemos las variables para obtener sus valores.
+    * 
+    * Si tenemos archivo de variables por defecto, primero recogemos
+    * estas para que en caso de que el archivo final no tenga alguna
+    * de ellas las recoga igualmente.
+    */
+
+   function leer_variables() {
+
+      $variablesxdefecto = FALSE;
+
+      // Variables por defecto
+      if ( $this->archivoxdefecto ) {
+         include ($this->archivoxdefecto);
+         $variablesxdefecto = ${$this->nombre_array};
+         ${$this->nombre_array} = array();
+         }
+         
       if ( !file_exists($this->archivo) ) {
          registrar(__FILE__,__LINE__,"Archivo de configuración [".$this->archivo."] no existe, lo creamos",'ADMIN');
          if ( ! file_exists(dirname($this->archivo)) ) mkdir_recursivo(dirname($this->archivo));
@@ -118,16 +153,24 @@ class GcmConfig {
 
       if ( ! isset(${$this->nombre_array}) ) {
          registrar(__FILE__,__LINE__,"Archivo de configuración [".$this->archivo."] sin contenido",'ADMIN');
+         return;
       } else {
          $this->variables = ${$this->nombre_array};
          }
-         
 
+      if ( ! $variablesxdefecto ) return ;
 
-      $this->directorio_descripciones = dirname($this->archivo);
+      // Combinar valores por defecto con los actuales.
+
+      foreach ( $variablesxdefecto as $key => $val ) {
+         if ( ! array_key_exists($key, $this->variables) ) {
+            $this->variables[$key] = $val;
+            // Variables que no se encuentran en destino, solo en default
+            // echo "<br>$key : $val";
+            }
+         }
 
       }
-
 
    /**
     * Para evitar guardar los nombres de los ficheros con acentos y otras cosas que pueda
@@ -174,9 +217,9 @@ class GcmConfig {
     * @param $archivo Archivo con las descripciones
     */
 
-   function directorio_descripciones($archivo) {
+   function directorio_descripciones($directorio) {
 
-      $this->directorio_descripciones = $archivo;
+      $this->directorio_descripciones = $directorio;
 
       }
 
@@ -482,26 +525,33 @@ class GcmConfig {
 
       try {
 
-         if ( ! $file = @fopen($archivo, "w") ) {
-            throw new Exception("No se pudo abrir archivo $file para incluir $nombre_array");
+         $ubicacion = dirname($_SERVER['SCRIPT_FILENAME']);
+
+         if ( ! $file = @fopen($ubicacion.'/'.$archivo, "w",TRUE) ) {
+            $error = error_get_last();
+            throw new Exception("No se pudo abrir archivo $archivo para incluir $nombre_array "
+               ."\n\n Directori actual: ".getcwd()
+               ."\n\n Error: ".$error['message']);
          } else {
 
             fputs($file, "<?php\n");
-            fputs($file, "// Archivo generado automaticamente por ".__CLASS__." ".date("D M j G:i:s T Y")."\n");
+            fputs($file, "// Archivo generado automáticamente por ".__CLASS__." ".date("D M j G:i:s T Y")."\n");
 
             while (list($clave, $val)=each($datos)){
 
                if ( is_array($val)) {   // si es un array 
 
+                  $conta=0;
                   while (list($claveArray, $valorArray)=each($val)) {
 
                      $valorArray = str_replace("\\","",$valorArray);
                      $valorArray = stripcslashes($valorArray);
 
-                     if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
+                     if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][".$conta."]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
                         throw new Exception("No se puede escribir en ".$archivo);
                         return FALSE;
                         }
+                     $conta++;
                      }
 
                } else {                   // No es un array
@@ -509,7 +559,7 @@ class GcmConfig {
                   $val = str_replace("\\","",$val);
                   $val = stripcslashes($val);
 
-                  if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
+                  if (fwrite($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']='".str_replace("'","\'",$val)."';\n") === FALSE ) {
                      throw new Exception("No se puede escribir en ".$archivo);
                      return FALSE;
                      }
