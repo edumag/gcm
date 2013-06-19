@@ -1,7 +1,4 @@
-/*
-# body.css
-Estilos generales
-*/
+/* Estilos generales */
 body {
 background-color: <?=$this->color("body-00")?>;
 color: <?=$this->color("body-01")?>;
@@ -28,7 +25,7 @@ margin:0 auto;
 #contenido h1 {
     margin: 18px 2px;
 }
-
+/* Contenedor */
 #contenedor {
 width: 70%;
 float:left;
@@ -36,6 +33,7 @@ padding: 20px 10px 10px 10px;
 min-height: 400px;
 height: auto !important;
 }
+/* Columna lateral */
 #lateral {
 width: 27%;
 color: #6F6137;
@@ -62,17 +60,17 @@ a:hover{
 color: #6F6137;
 }
 /*
-## Formularios en general
-<form>
-   <fieldset>
-      <legend>Legend</legend>
-      <textarea></textarea>
-         <fieldset>
-         <legend>SubLegend</legend>
-         <boton></boton>
-         </fieldset>
-   </fieldset>
-</form>
+##  Formularios en general
+    <form>
+       <fieldset>
+          <legend>Legend</legend>
+          <textarea></textarea>
+             <fieldset>
+             <legend>SubLegend</legend>
+             <boton></boton>
+             </fieldset>
+       </fieldset>
+    </form>
 */
 textarea {
 border-bottom:1px solid <?=$this->color("body-12")?>;
@@ -90,17 +88,15 @@ fieldset fieldset {
     padding: 2px;
 }
 
-/*
-## Bloques de código
-Cloques de código, por ejemplo 
+/* Bloques de código
 
-<pre>
-function foo() {
-   echo $bar;
-   }
-</pre>
-
+   <pre>
+   function foo() {
+      echo $bar;
+      }
+   </pre>
 */
+
 pre {
 border: 1px solid <?=$this->color("body-06")?>;
 border-left: 3px solid <?=$this->color("body-06")?>;
