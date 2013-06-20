@@ -1,3 +1,26 @@
+/*  ## Cabecera
+
+    <div id="cabecera">
+       <div id="cabeceraIzquierda">
+          <a title="Inicio" href="">
+          <h1>Mamedu</h1>
+          <h2>Apuntes de programación</h2>
+          </a>
+       </div>
+       <div id="cabeceraDerecha">
+          <div id="idiomas">
+             <form action="#"><select onchange="validaSelect(this);" name="idioma"><option value="ca">ca</option><option value="es" selected="">es</option></select>
+             </form>
+          </div> <!-- ACABA idiomas -->
+          <form action="/mamedu/index.php" method="get" class="quick_search" id="form_busqueda">
+             <input type="text" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" value="Buscar" name="buscar">
+             <input type="hidden" value="" name="proyectos_id">
+             <input type="submit" value="buscar" name="e" id="buscar_input" style="display: none">
+          </form>
+       </div>
+    </div>
+    
+ */
 #cabecera{
 color: <?=$this->color("body-06")?>;
 background: <?=$this->color("body-07")?>;

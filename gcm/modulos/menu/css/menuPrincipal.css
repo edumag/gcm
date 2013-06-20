@@ -1,5 +1,26 @@
+/*  ## Menú principal 
 
-/* menuPrincipal.css */
+    <div id="menu_principal">
+      <table id="menu" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><a title="inicio_title" href="./../">Bienvenidos</a></td>
+            <td id="Habitaciones"><a title="" href="./../Habitaciones/">Habitaciones</a></td>
+            <td id="casa_completa"><a title="" href="./../casa_completa/">casa
+                completa</a></td>
+            <td id="Apartamento"><a title="" href="./../Apartamento/">Apartamento</a></td>
+            <td id="Como_LLegar"><a title="" href="./../Como_LLegar/">Cómo LLegar </a></td>
+            <td id="menuOff"><a title="" href="./../Ofertas/">Ofertas</a></td>
+            <td id="Actividades"><a title="" href="./../Actividades/">Actividades</a></td>
+            <td id="Mercadillo"><a title="" href="./../Mercadillo/">Mercadillo</a></td>
+            <td id="Libro_de_visitas"><a title="" href="./../Libro_de_visitas/">Libro
+                de visitas</a></td>
+            <td id="Contacto"><a title="" href="./../Contacto/">Contacto</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+*/
 #menu_principal {
 background: <?=$this->color("body-18")?>;
 }

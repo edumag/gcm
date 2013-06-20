@@ -1,4 +1,29 @@
-/* Formularios */
+/*  ## Formularios 
+
+    <fieldset>
+       <legend>Registros</legend>
+       <div class="ayuda">
+          Podemos filtrar por id, sesion, fecha, tipo ('ERROR','AVISO','ADMIN','DEBUG'), fichero, mensaje
+          <br>
+          Ejemplos:
+          <ul>
+             <li>sesion&gt;100 AND tipo='ERROR' ORDER BY id desc</li>
+             <li>mensaje LIKE "%ERROR%"</li>
+          </ul> 
+       </div>
+       <form onsubmit="javascript: visualizar_registros(this,&quot;66130&quot;); return false;" method="post" action="" name="form_ver_registros">
+          <fieldset>
+             <legend>Filtro</legend>
+             <input type="text" value="sesion=66130" name="filtro" style="width:98%;">
+          </fieldset>
+          <br>
+          <br>
+          <input type="submit">
+       </form>
+       <div id="caja_registro_66130">
+       </div>
+    </fieldset>
+*/
 #contenido fieldset {
     border-radius: 6px 6px 6px 6px;
     padding: 10px;

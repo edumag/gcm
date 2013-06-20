@@ -1,10 +1,7 @@
-/* Alerts */
-
 .aviso ul, .error ul, .admin ul, .normal ul , .debug ul  {
    padding: 0;
    margin: 0;
    }
-
 .aviso li, .error li, .admin li, .normal li , .debug li  {
 list-style: none;
 border: 2px;
@@ -14,7 +11,6 @@ margin-left: 2px;
    padding: 0;
    margin: 0;
 }
-
 .error a {
 color: #7B040F;
 }
@@ -28,7 +24,7 @@ color: #796616;
 color: #32510F;
 }
 
-/* h4.alert_info { */
+/* h4.alert_info */
 div.aviso, div.admin, div.error, div.normal, div.ayuda {
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
@@ -70,6 +66,13 @@ border: 1px solid #79C20D;
 color: #32510F;
 }
 
+/*  ## Avisos
+
+    <div class="aviso">aviso</div>
+    <div class="error">error</div>
+    <div class="admin">admin</div>
+    <div class="normal">normal</div>
+*/
 div.ayuda {
 background: #B5E5EF url(<?=Router::$dir.$this->icono('ayuda')?>) no-repeat 10px 10px;
 border: 1px solid #77BACE;

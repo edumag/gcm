@@ -1,5 +1,60 @@
+/*  ## Administrador de imágenes 
 
-/* Administrador de im�genes */
+    <div id="thumbnails_columna">
+
+       <form>
+       <input type="submit" value="Subir imagen">
+       </form>
+
+       <div id="progreso_columna">
+          <div style="width: 0%;" class="bar"></div>
+       </div>
+
+       <div id="mensajes"></div>
+
+       <div id="cajaImg">
+
+          <br>
+          <b>plugins</b>
+          <div id="navegador">
+             <a class="boton">subir</a>
+          </div> 
+
+
+          <div class="img_editar">
+            <a class="galeria_imagenes" href="File/es/apuntes/Linux/Edicion_de_texto/vim/plugins/zoom-02.png">
+               <img alt="Imagen zoom-02.png" src="http://mamedu.com/gcm/File/es/apuntes/Linux/Edicion_de_texto/vim/plugins/thumbnail/zoom-02.png" id="thumb_0">
+            </a>
+            <a class="boton" title="Insertar miniatura">
+            &lt;-
+            </a>
+            <a class="boton" title="Insertar con tamaño original">
+            &lt;-(
+            </a>
+            <a class="boton">
+            [X]
+            </a>
+         </div>
+
+         <div class="img_editar">
+            <a class="galeria_imagenes" href="File/es/apuntes/Linux/Edicion_de_texto/vim/plugins/zoom-01.png">
+               <img alt="Imagen zoom-01.png" src="http://mamedu.com/gcm/File/es/apuntes/Linux/Edicion_de_texto/vim/plugins/thumbnail/zoom-01.png" id="thumb_1">
+            </a>
+            <a class="boton" title="Insertar miniatura">
+               &lt;-
+            </a>
+            <a class="boton" title="Insertar con tamaño original">
+               &lt;-(
+            </a>
+            <a class="boton">
+               [X]
+            </a>
+            </div>
+
+       </div> <!-- acaba cajaImg -->
+
+    </div>
+*/
 .img_editar {
    border: 1px solid threedshadow;
    border-radius: 8px;

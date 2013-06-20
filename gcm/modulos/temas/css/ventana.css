@@ -1,4 +1,10 @@
-/* Ventana flotante */
+/*  ## Ventana flotante
+
+    <div class="ventana_flotante">
+      <div class="titulo_ventana_flotante">Título</div>
+      Contenido de ventana
+    </div>
+*/
 .ventana_flotante {
    position: absolute;
    top: 50%;

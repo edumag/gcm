@@ -1,4 +1,16 @@
+/*  ## Barra de navegación
 
+    <div id="barraNavegacion">
+       <ul>
+          <li><a href="./Articulos/" class=""><img alt="+" src="../dev/gcm/gcm/modulos/temas/iconos/+.png"> </a><a href="./Articulos/">Articulos</a></li>
+          <li><a href="./Humor_linuxero_(Mafalda).html">Humor linuxero (Mafalda)</a></li>
+          <li><a href="./Proyectos/" class=""><img alt="+" src="../dev/gcm/gcm/modulos/temas/iconos/+.png"> </a><a href="./Proyectos/">Proyectos</a></li>
+          <li><a href="./Acerca_de.html">Acerca de</a></li>
+          <li><a href="./apuntes/" class=""><img alt="+" src="../dev/gcm/gcm/modulos/temas/iconos/+.png"> </a><a href="./apuntes/">Apuntes</a></li>
+          <li><a href="./Presentar_fecha_unix_en_formato_humano.html">Presentar fecha unix en formato humano</a></li>
+       </ul>
+    </div>
+*/
 #barraNavegacion	{
 width: 100%;
 padding: 5px 5px 5px 0px;
