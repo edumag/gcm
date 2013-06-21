@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Jun 21 8:35:10 CEST 2013
+// Archivo generado automaticamente por GcmConfig Fri Jun 21 9:41:07 CEST 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -9,10 +9,11 @@ $GCM_LG_es['Últimas entradas en']='';
 $GCM_LG_es['Sin sección']='';
 $GCM_LG_es['Sección']='';
 $GCM_LG_es['no encontrada']='';
-$GCM_LG_es['Campo obligatorio']='';
-$GCM_LG_es['Longitud máxima']='';
-$GCM_LG_es['Registros']='';
 $GCM_LG_es['Últimas entradas en']='';
+$GCM_LG_es['Menú']='';
+$GCM_LG_es['Usuario']='';
+$GCM_LG_es['Contraseña']='';
+$GCM_LG_es['Registros']='';
 $GCM_LG_es['Contraseña no pasa verificación']='';
 $GCM_LG_es['El correo no parece valido']='';
 $GCM_LG_es['Traducir documento actual']='';
@@ -50,7 +51,6 @@ $GCM_LG_es['Administrar imágenes']='';
 $GCM_LG_es['Roles']='';
 $GCM_LG_es['Editar ficheros del proyecto']='';
 $GCM_LG_es['Administracion de los diferentes idiomas']='';
-$GCM_LG_es['Roles']='';
 $GCM_LG_es['Configurar proyecto']='';
 $GCM_LG_es['Configuración']='';
 $GCM_LG_es['Editar constantes']='';
@@ -80,7 +80,6 @@ $GCM_LG_es['Por favor añade toda la información que puedas respecto a la acci�
 $GCM_LG_es['Gracias']='';
 $GCM_LG_es['Enviar error']='';
 $GCM_LG_es['Informe de errores']='';
-$GCM_LG_es['Registros']='';
 $GCM_LG_es['Filtro']='';
 $GCM_LG_es['Administración de temas']='';
 $GCM_LG_es['Temas actual']='';
