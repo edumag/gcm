@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/gdoxygen/js/busquedas.js</title>
+<title>gcm: Fichero Fuente gcm/modulos/enviomail/html/form_enviomail.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,30 +80,36 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_2567aefbfea8d85ace6b27112043dbc3.html">gdoxygen</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_569f3152799400fec92ab425d158d4d7.html">js</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_76861ef9e0d07d6c8f7b70e2e37e4ce6.html">enviomail</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_0f36bb1d595cfc3251c5598a67625ac3.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">busquedas.js</div>  </div>
+<div class="title">form_enviomail.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 $(document).ready(<span class="keyword">function</span>(){
-<a name="l00002"></a>00002 
-<a name="l00003"></a>00003 $(<span class="stringliteral">&quot;#resultado_gdoxygen&quot;</span>).load(<span class="stringliteral">&quot;File/es/Proyectos/MagScripts/gdoxygen/search.php&quot;</span>, {query: <span class="stringliteral">&quot;script&quot;</span>, edad: 45}, <span class="keyword">function</span>(){
-<a name="l00004"></a>00004       alert(<span class="stringliteral">&quot;recibidos los datos por ajax&quot;</span>); 
-<a name="l00005"></a>00005 }
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 )}); 
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;form action=<span class="stringliteral">&quot;&quot;</span> method=<span class="stringliteral">&quot;post&quot;</span>&gt;
+<a name="l00002"></a>00002    &lt;fieldset&gt;
+<a name="l00003"></a>00003       &lt;legend&gt;&lt;?php echo literal(<span class="stringliteral">&#39;Informar de error&#39;</span>,3);?&gt;&lt;/legend&gt;
+<a name="l00004"></a>00004       &lt;?php echo literal(<span class="stringliteral">&#39;Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error&#39;</span>,3);?&gt;
+<a name="l00005"></a>00005       &lt;br /&gt;
+<a name="l00006"></a>00006       &lt;?php echo literal(<span class="stringliteral">&#39;Gracias&#39;</span>,3);?&gt;
+<a name="l00007"></a>00007       &lt;br /&gt;
+<a name="l00008"></a>00008       &lt;textarea style=<span class="stringliteral">&quot;width: 100%;&quot;</span> name=<span class="stringliteral">&quot;comentario_usuario&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;comentario_usuario&quot;</span>&gt;&lt;/textarea&gt;
+<a name="l00009"></a>00009       &lt;br /&gt;
+<a name="l00010"></a>00010       &lt;input type=<span class="stringliteral">&#39;hidden&#39;</span> name=<span class="stringliteral">&quot;e&quot;</span> value=<span class="stringliteral">&quot;enviar_email_error&quot;</span> /&gt;
+<a name="l00011"></a>00011       &lt;br /&gt;
+<a name="l00012"></a>00012       &lt;button type=<span class="stringliteral">&quot;submit&quot;</span> &gt;&lt;?=literal(<span class="stringliteral">&#39;Enviar error&#39;</span>,3)?&gt;&lt;/button&gt;
+<a name="l00013"></a>00013    &lt;/fieldset&gt;
+<a name="l00014"></a>00014 &lt;/form&gt;
+<a name="l00015"></a>00015 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:15 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

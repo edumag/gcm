@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/gcm/test/RouterTest.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/gcm/lib/Plantilla.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -82,70 +82,182 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_8c0f41549cef124311c47fc5bc982f44.html">gcm</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_7809604b08a402f7c0978f2fdd0a789a.html">test</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_52cc94e8df8afb00ad75f11601475791.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">RouterTest.php</div>  </div>
+<div class="title">Plantilla.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a href="../../df/d6a/a00119.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file   Test phpUnit para Router.php</span>
-<a name="l00005"></a>00005 <span class="comment"> *</span>
-<a name="l00006"></a>00006 <span class="comment"> */</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 echo <span class="stringliteral">&quot;No funciona, crea directorio de log ara registros&quot;</span>;
-<a name="l00009"></a>00009 exit
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 define(<span class="stringliteral">&quot;GCM_DIR&quot;</span>,dirname(__FILE__).<span class="stringliteral">&#39;/../../../../../gcm/&#39;</span>);
-<a name="l00012"></a>00012 
-<a name="l00013"></a>00013 require_once <span class="stringliteral">&#39;PHPUnit/Framework.php&#39;</span>;
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="comment">//require(dirname(__FILE__).&#39;/../lib/Router.php&#39;);</span>
-<a name="l00016"></a>00016 require(dirname(__FILE__).<span class="stringliteral">&#39;/../lib/Gcm.php&#39;</span>);
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a> = <span class="keyword">new</span> <a class="code" href="../../d5/d16/a00029.html" title="Clase principal.">Gcm</a>();
-<a name="l00019"></a>00019 <span class="comment"></span>
-<a name="l00020"></a>00020 <span class="comment">/**</span>
-<a name="l00021"></a>00021 <span class="comment"> * @test Comprobando Router</span>
-<a name="l00022"></a>00022 <span class="comment"> */</span>
-<a name="l00023"></a>00023 
-<a name="l00024"></a><a class="code" href="../../d9/db3/a00066.html">00024</a> <span class="keyword">class </span><a class="code" href="../../d9/db3/a00066.html">RouterTest</a> <span class="keyword">extends</span> <a class="code" href="../../d1/d84/a00052.html">PHPUnit_Framework_TestCase</a>{
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026    <span class="keyword">protected</span> <span class="keyword">function</span> setUp() {
-<a name="l00027"></a>00027       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00028"></a>00028       }
-<a name="l00029"></a>00029 <span class="comment"></span>
-<a name="l00030"></a>00030 <span class="comment">   /**</span>
-<a name="l00031"></a>00031 <span class="comment">    * @test Comprobando valor de la primera variable</span>
-<a name="l00032"></a>00032 <span class="comment">    */</span>
-<a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="../../d9/db3/a00066_aeee74483d1e498c118e778e0e6fac6a9.html#aeee74483d1e498c118e778e0e6fac6a9">00034</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_aeee74483d1e498c118e778e0e6fac6a9.html#aeee74483d1e498c118e778e0e6fac6a9">testdesglosarUrl</a>() {
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038       $url = <span class="stringliteral">&#39;/index.html?e=buscar&amp;args=palabra_a_buscar&#39;</span>;
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040       <a class="code" href="../../de/de1/a00065_a195552575880fc9bbc4ab4ad6fea3a94.html#a195552575880fc9bbc4ab4ad6fea3a94" title="desglosarUrl nos devuelve una matriz con la información relevante de una url que pasemos como argumen...">Router::desglosarUrl</a>($url);
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042       $this-&gt;assertEquals(<a class="code" href="../../de/de1/a00065_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">Router::$url</a>,<span class="stringliteral">&#39;index.html&#39;</span>);
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044       }
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047    }
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049 ?&gt;
-<a name="l00050"></a>00050 
+<a name="l00004"></a>00004 <span class="comment"> * @file      Plantilla.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Sistema de plantilla</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  22/10/10</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: Plantilla.php 511 2011-05-12 09:52:27Z eduardo $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 <span class="comment"></span>
+<a name="l00018"></a>00018 <span class="comment">/** </span>
+<a name="l00019"></a>00019 <span class="comment"> * Sistema de plantilla</span>
+<a name="l00020"></a>00020 <span class="comment"> *</span>
+<a name="l00021"></a>00021 <span class="comment"> * Añadir contenido sobre una plantilla html</span>
+<a name="l00022"></a>00022 <span class="comment"> *</span>
+<a name="l00023"></a>00023 <span class="comment"> * ejemplo de uso::</span>
+<a name="l00024"></a>00024 <span class="comment"> *</span>
+<a name="l00025"></a>00025 <span class="comment"> *     $plantilla = new Plantilla(GCM_DIR.&#39;modulos/gcm/temas/html/principal.html&#39;, $this);</span>
+<a name="l00026"></a>00026 <span class="comment"> *     echo $plantilla-&gt;procesaPlantilla();</span>
+<a name="l00027"></a>00027 <span class="comment"> *</span>
+<a name="l00028"></a>00028 <span class="comment"> * En la clase llamadora tendra que haber un metodo llamado procesaContenido($elemto)</span>
+<a name="l00029"></a>00029 <span class="comment"> * que retorne el contenido correspondiente.</span>
+<a name="l00030"></a>00030 <span class="comment"> *</span>
+<a name="l00031"></a>00031 <span class="comment"> * EL archivo de plantilla html debe tener entre corchetes el nombre del elemento, {elemento}</span>
+<a name="l00032"></a>00032 <span class="comment"> * IMPORTANTE: Solo debe tener caracteres alfanumericos.</span>
+<a name="l00033"></a>00033 <span class="comment"> *</span>
+<a name="l00034"></a>00034 <span class="comment"> * En caso de tener un elemento llamado contenido, se procesara el último, esto nos permite</span>
+<a name="l00035"></a>00035 <span class="comment"> * que cuando procesemos contenido haya pasado ya por todo lo demas y si hay algún mensaje</span>
+<a name="l00036"></a>00036 <span class="comment"> * que contenido deba de presentar lo tendra en cuenta.</span>
+<a name="l00037"></a>00037 <span class="comment"> *</span>
+<a name="l00038"></a>00038 <span class="comment"> * @package   Plantilla</span>
+<a name="l00039"></a>00039 <span class="comment"> */</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="../../d1/dea/a00054.html">00041</a> <span class="keyword">class </span><a class="code" href="../../d1/dea/a00054.html">Plantilla</a> {
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043    <span class="keyword">private</span> $cPlantilla;                  <span class="comment">///&lt; Contenido de la plantilla</span>
+<a name="l00044"></a>00044 <span class="comment"></span>   <span class="keyword">private</span> $elementos;                   <span class="comment">///&lt; Elementos a insertar en la plantilla</span>
+<a name="l00045"></a>00045 <span class="comment"></span>   <span class="keyword">private</span> $objeto;                      <span class="comment">///&lt; Referencia al objeto que genera el contenido</span>
+<a name="l00046"></a>00046 <span class="comment"></span>   <span class="keyword">private</span> $plantilla;                   <span class="comment">///&lt; fichero de plantilla</span>
+<a name="l00047"></a>00047 <span class="comment"></span>   <span class="keyword">private</span> $elementos_vitales_primeros;  <span class="comment">///&lt; lista de elementos imprescindibles primeros con el orden adecuado.</span>
+<a name="l00048"></a>00048 <span class="comment"></span><span class="comment"></span>
+<a name="l00049"></a>00049 <span class="comment">   /**</span>
+<a name="l00050"></a>00050 <span class="comment">    *  lista de elementos imprescindibles últimos con el orden adecuado, scripts el último para que no se</span>
+<a name="l00051"></a>00051 <span class="comment">    *  deje ningún archivo javascript</span>
+<a name="l00052"></a>00052 <span class="comment">    */</span>
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054    <span class="keyword">private</span> $elementos_vitales_ultimos;
+<a name="l00055"></a>00055    <span class="keyword">private</span> $contenido_elementos;         <span class="comment">///&lt; Contenido de los elementos despues de procesarlos</span>
+<a name="l00056"></a>00056 <span class="comment"></span><span class="comment"></span>
+<a name="l00057"></a>00057 <span class="comment">   /**</span>
+<a name="l00058"></a>00058 <span class="comment">    * Constructor</span>
+<a name="l00059"></a>00059 <span class="comment">    *</span>
+<a name="l00060"></a>00060 <span class="comment">    * Cargamos contenido de plantilla y lista de elementos</span>
+<a name="l00061"></a>00061 <span class="comment">    *</span>
+<a name="l00062"></a>00062 <span class="comment">    * @param $plantilla Fichero de plantilla</span>
+<a name="l00063"></a>00063 <span class="comment">    * @param $objeto Objeto que procesara el contenido</span>
+<a name="l00064"></a>00064 <span class="comment">    *</span>
+<a name="l00065"></a>00065 <span class="comment">    */</span>
+<a name="l00066"></a>00066 
+<a name="l00067"></a><a class="code" href="../../d1/dea/a00054_a88f176ab3744a2464f9b1c0ac7610b7d.html#a88f176ab3744a2464f9b1c0ac7610b7d">00067</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dea/a00054_a88f176ab3744a2464f9b1c0ac7610b7d.html#a88f176ab3744a2464f9b1c0ac7610b7d" title="Constructor.">__construct</a>($plantilla, $objeto) {
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069       $this-&gt;objeto = $objeto;
+<a name="l00070"></a>00070       $this-&gt;plantilla = $plantilla; 
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072       $this-&gt;elementos_vitales_primeros = array(<span class="stringliteral">&#39;contenido&#39;</span>,<span class="stringliteral">&#39;titulo&#39;</span>);
+<a name="l00073"></a>00073       $this-&gt;elementos_vitales_ultimos  = array(<span class="stringliteral">&#39;avisos&#39;</span>,<span class="stringliteral">&#39;debug&#39;</span>,<span class="stringliteral">&#39;scripts&#39;</span>);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075       <span class="comment">/* Los elementos los buscamos en plantilla */</span>
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077       $this-&gt;cPlantilla = @file_get_contents($this-&gt;plantilla);
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079       preg_match_all(<span class="stringliteral">&#39;/\{[A-Za-z]+\}/&#39;</span>, $this-&gt;cPlantilla, $el, PREG_PATTERN_ORDER);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081       $this-&gt;elementos = $el[0];
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083    }
+<a name="l00084"></a>00084 <span class="comment"></span>
+<a name="l00085"></a>00085 <span class="comment">   /**</span>
+<a name="l00086"></a>00086 <span class="comment">    * Procesamos la plantilla.</span>
+<a name="l00087"></a>00087 <span class="comment">    *</span>
+<a name="l00088"></a>00088 <span class="comment">    * Recogemos el contenido de cada elemento para despues remplazar los</span>
+<a name="l00089"></a>00089 <span class="comment">    * elementos de la plantilla con el contenido.</span>
+<a name="l00090"></a>00090 <span class="comment">    *</span>
+<a name="l00091"></a>00091 <span class="comment">    * Primero elementos vitales primeros despúes elementos vitales </span>
+<a name="l00092"></a>00092 <span class="comment">    * últimos y por último los elementos que encontrmos.</span>
+<a name="l00093"></a>00093 <span class="comment">    *</span>
+<a name="l00094"></a>00094 <span class="comment">    * Hacemos que contenido se reemplace el último para no dar </span>
+<a name="l00095"></a>00095 <span class="comment">    * problemas al editar el archivo de plantilla con los elementos</span>
+<a name="l00096"></a>00096 <span class="comment">    * dentro de ella.</span>
+<a name="l00097"></a>00097 <span class="comment">    */</span>
+<a name="l00098"></a>00098 
+<a name="l00099"></a><a class="code" href="../../d1/dea/a00054_a7405bde7ec13bdfb02e08a0030fadc2a.html#a7405bde7ec13bdfb02e08a0030fadc2a">00099</a>    <span class="keyword">function</span> <a class="code" href="../../d1/dea/a00054_a7405bde7ec13bdfb02e08a0030fadc2a.html#a7405bde7ec13bdfb02e08a0030fadc2a" title="Procesamos la plantilla.">procesaPlantilla</a>() {
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101       $salida = $this-&gt;cPlantilla;
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103       <span class="keywordflow">foreach</span> ( $this-&gt;elementos_vitales_primeros as $el) {
+<a name="l00104"></a>00104          $this-&gt;contenido_elementos[$el] = $this-&gt;objeto-&gt;procesaContenido($el);
+<a name="l00105"></a>00105          }
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107       <span class="keywordflow">foreach</span> ( $this-&gt;elementos as $el ) {
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109          $el = substr($el, 1, strlen($el)-2);
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111          <span class="keywordflow">if</span> ( !in_array($el,$this-&gt;elementos_vitales_ultimos) &amp;&amp; !in_array($el,$this-&gt;elementos_vitales_primeros) ) {
+<a name="l00112"></a>00112             $this-&gt;contenido_elementos[$el] = $this-&gt;objeto-&gt;procesaContenido($el);
+<a name="l00113"></a>00113             }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115          }
+<a name="l00116"></a>00116             
+<a name="l00117"></a>00117       <span class="keywordflow">foreach</span> ( $this-&gt;elementos_vitales_ultimos as $el) {
+<a name="l00118"></a>00118          $this-&gt;contenido_elementos[$el] = $this-&gt;objeto-&gt;procesaContenido($el);
+<a name="l00119"></a>00119          }
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121       <span class="keywordflow">foreach</span> ( $this-&gt;contenido_elementos as $key =&gt; $contenidos ) {
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123          <span class="comment">/* Dejamos contenido para el final */</span>
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125          <span class="keywordflow">if</span> ( $key == <span class="stringliteral">&#39;contenido&#39;</span>  ) continue ;
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127          <span class="keywordflow">if</span> ( !$contenidos ) {
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129             <span class="keywordflow">if</span> ( ( in_array($key,$this-&gt;elementos_vitales_primeros) || in_array($key,$this-&gt;elementos_vitales_ultimos ) &amp;&amp; $key !== <span class="stringliteral">&#39;scripts&#39;</span> ) ) {
+<a name="l00130"></a>00130                registrar(__FILE__,__LINE__,
+<a name="l00131"></a>00131                   <span class="stringliteral">&#39;No tenemos contenido vital para [&#39;</span>.$key.<span class="stringliteral">&#39;] de plantilla [&#39;</span>.$this-&gt;plantilla.<span class="stringliteral">&#39;] y es necesario para el correcto funcionamiento&#39;</span>);
+<a name="l00132"></a>00132             } <span class="keywordflow">else</span> {
+<a name="l00133"></a>00133                registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Elemento [&#39;</span>.$key.<span class="stringliteral">&#39;] de plantilla [&#39;</span>.$this-&gt;plantilla.<span class="stringliteral">&#39;] vacio&#39;</span>);
+<a name="l00134"></a>00134                }
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136             }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138          $resultado = <span class="stringliteral">&quot;\n&lt;!-- Elemento:&quot;</span>.$key.<span class="stringliteral">&quot; --&gt;\n&quot;</span>.$contenidos.<span class="stringliteral">&quot;\n&lt;!-- Acaba:&quot;</span>.$key.<span class="stringliteral">&quot; --&gt;\n&quot;</span>;
+<a name="l00139"></a>00139          $salida = str_replace(<span class="charliteral">&#39;{&#39;</span>.$key.<span class="charliteral">&#39;}&#39;</span>, $resultado, $salida);
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Plantilla-&gt;procesaPlantilla()  Finaliza proceso en plantilla para elemento [&#39;</span>.$el.<span class="charliteral">&#39;]&#39;</span>);
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144          }
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146       $key = <span class="stringliteral">&#39;contenido&#39;</span>;
+<a name="l00147"></a>00147       $contenidos = $this-&gt;contenido_elementos[<span class="stringliteral">&#39;contenido&#39;</span>];
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149       <span class="keywordflow">if</span> ( !$contenidos ) {
+<a name="l00150"></a>00150          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;No tenemos contenido para contenido [&#39;</span>.$contenidos.<span class="stringliteral">&#39;] de plantilla [&#39;</span>.$this-&gt;plantilla.<span class="charliteral">&#39;]&#39;</span>);
+<a name="l00151"></a>00151       } <span class="keywordflow">else</span> {
+<a name="l00152"></a>00152          $resultado = <span class="stringliteral">&#39;&lt;div id=&quot;&#39;</span>.$key.<span class="stringliteral">&#39;&quot;&gt;&#39;</span>.$contenidos.<span class="stringliteral">&#39;&lt;/div&gt;&#39;</span>;
+<a name="l00153"></a>00153          $salida = str_replace(<span class="charliteral">&#39;{&#39;</span>.$key.<span class="charliteral">&#39;}&#39;</span>, $resultado, $salida);
+<a name="l00154"></a>00154          }
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156       <span class="keywordflow">return</span> $salida;
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158       }
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160    }
+<a name="l00161"></a>00161 
+<a name="l00162"></a>00162 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

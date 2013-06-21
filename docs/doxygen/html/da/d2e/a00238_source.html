@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/comentarios/modelos/comentarios_dbo.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/comentarios/js/editorweb.js</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,92 +81,35 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_e363b1922071f2f95404829d0400fcd6.html">comentarios</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_e40eed0476578fe28d92d5bbe1d6a300.html">modelos</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_3e51bc51ef8562b3bff0495df5379b5d.html">js</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">comentarios_dbo.php</div>  </div>
+<div class="title">editorweb.js</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../da/d2e/a00238.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file      comentarios_dbo.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief     Modelo para comentarios</span>
-<a name="l00006"></a>00006 <span class="comment"> *</span>
-<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
-<a name="l00008"></a>00008 <span class="comment"> *</span>
-<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
-<a name="l00010"></a>00010 <span class="comment"> *   Created  05/05/10</span>
-<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: usuarios.php 238 2010-05-13 08:25:10Z eduardo $</span>
-<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
-<a name="l00013"></a>00013 <span class="comment"> *</span>
-<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
-<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
-<a name="l00016"></a>00016 <span class="comment"> */</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 <span class="comment">/* DataBoundObject */</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/databoundobject/lib/Crud.php&#39;</span>);
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="comment">/* añadimos modelo de usuarios ya que estan relacionados con comentarios */</span>
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 require_once(GCM_DIR.<span class="stringliteral">&#39;modulos/admin/modelos/usuarios.php&#39;</span>);
-<a name="l00025"></a>00025 <span class="comment"></span>
-<a name="l00026"></a>00026 <span class="comment">/**</span>
-<a name="l00027"></a>00027 <span class="comment"> * @class Comentarios_dbo</span>
-<a name="l00028"></a>00028 <span class="comment"> * @brief Modelo para los comentarios de las entradas.</span>
-<a name="l00029"></a>00029 <span class="comment"> * @ingroup modulo_comentarios</span>
-<a name="l00030"></a>00030 <span class="comment"> */</span>
-<a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="../../df/d86/a00012.html">00032</a> <span class="keyword">class </span><a class="code" href="../../df/d86/a00012.html" title="Modelo para los comentarios de las entradas.">Comentarios_dbo</a> <span class="keyword">extends</span> <a class="code" href="../../dd/da2/a00019.html" title="Extendemos DataBoundObject para automatizar los procesos de insertar, modificar, y borrar registros d...">Crud</a> {
-<a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="../../df/d86/a00012_ae5f524bd83cdd54ec1d82bc58861799f.html#ae5f524bd83cdd54ec1d82bc58861799f">00034</a>    <span class="keyword">function</span> <a class="code" href="../../df/d86/a00012_ae5f524bd83cdd54ec1d82bc58861799f.html#ae5f524bd83cdd54ec1d82bc58861799f" title="Constructor.">__construct</a>(PDO $objPdo, $id = NULL) {
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038       <a class="code" href="../../df/d86/a00012_ae5f524bd83cdd54ec1d82bc58861799f.html#ae5f524bd83cdd54ec1d82bc58861799f" title="Constructor.">parent::__construct</a>($objPdo, $id);
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040       $this-&gt;url_ajax = <span class="stringliteral">&#39;&amp;formato=ajax&#39;</span>;
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042       $this-&gt;sql_listado = <span class="stringliteral">&#39;SELECT c.id, c.fecha_creacion `fecha creación`, </span>
-<a name="l00043"></a>00043 <span class="stringliteral">         c.url, c.contenido , </span>
-<a name="l00044"></a>00044 <span class="stringliteral">         c.nombre, c.mail, c.comentario  </span>
-<a name="l00045"></a>00045 <span class="stringliteral">         FROM &#39;</span>.$gcm-&gt;sufijo.<span class="stringliteral">&#39;comentarios c&#39;</span>;
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047       $this-&gt;opciones_array2table = array(
-<a name="l00048"></a>00048          <span class="stringliteral">&#39;op&#39;</span> =&gt; array (
-<a name="l00049"></a>00049             <span class="stringliteral">&#39;ocultar_id&#39;</span>=&gt;TRUE
-<a name="l00050"></a>00050             , <span class="stringliteral">&#39;eliminar&#39;</span>=&gt;<span class="stringliteral">&#39;eliminar&#39;</span>
-<a name="l00051"></a>00051             , <span class="stringliteral">&#39;fila_unica&#39;</span>=&gt;<span class="stringliteral">&#39;comentario&#39;</span>
-<a name="l00052"></a>00052             , <span class="stringliteral">&#39;enlaces&#39;</span>=&gt; array(
-<a name="l00053"></a>00053                <span class="stringliteral">&#39;url&#39;</span> =&gt; array(
-<a name="l00054"></a>00054                   <span class="stringliteral">&#39;campo_enlazado&#39;</span>=&gt;<span class="stringliteral">&#39;contenido&#39;</span>
-<a name="l00055"></a>00055                   ,<span class="stringliteral">&#39;titulo_columna&#39;</span>=&gt;<span class="stringliteral">&#39;Contenido&#39;</span>
-<a name="l00056"></a>00056                   ,<span class="stringliteral">&#39;base_url&#39;</span>=&gt;<a class="code" href="../../de/de1/a00065_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>
-<a name="l00057"></a>00057                   )
-<a name="l00058"></a>00058                )
-<a name="l00059"></a>00059             )
-<a name="l00060"></a>00060          );
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062       }
-<a name="l00063"></a>00063 
-<a name="l00064"></a><a class="code" href="../../df/d86/a00012_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76">00064</a>    <span class="keyword">function</span> <a class="code" href="../../df/d86/a00012_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>() {
-<a name="l00065"></a>00065       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00066"></a>00066       <span class="keywordflow">return</span>($gcm-&gt;sufijo.<span class="stringliteral">&#39;comentarios&#39;</span>);
-<a name="l00067"></a>00067       }
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070    }
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072 ?&gt;
+<a href="../../da/d2e/a00238.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/** </span>
+<a name="l00002"></a>00002 <span class="comment"> * @file editorweb.js</span>
+<a name="l00003"></a>00003 <span class="comment"> * @brief Incluimos tinyMCE al textarea del formulario de comentario</span>
+<a name="l00004"></a>00004 <span class="comment"> * @ingroup modulo_comentarios</span>
+<a name="l00005"></a>00005 <span class="comment"> */</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 addLoadEvent(<span class="keyword">function</span>(){
+<a name="l00008"></a>00008    tinyMCE.init({
+<a name="l00009"></a>00009       mode : <span class="stringliteral">&quot;textareas&quot;</span>,
+<a name="l00010"></a>00010       editor_selector : <span class="stringliteral">&quot;editor_simple&quot;</span>,
+<a name="l00011"></a>00011       theme : <span class="stringliteral">&quot;simple&quot;</span>,
+<a name="l00012"></a>00012       languages : <span class="stringliteral">&#39;es&#39;</span>,
+<a name="l00013"></a>00013       });
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015    });
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

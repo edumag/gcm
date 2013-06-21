@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/lib/ImagenesAdmin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/imagenes/js/aplicar_colorbox.js</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,180 +81,28 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_925a7c03a73672f2b14aa59d01f20b70.html">imagenes</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_a52005b3acb03cb3142cb40d71704fc0.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_de20fcd8a6095289c79b19d4f689a2a7.html">js</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">ImagenesAdmin.php</div>  </div>
+<div class="title">aplicar_colorbox.js</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d0/d61/a00302.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file ImagenesAdmin.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief Métodos administrativos para el módulo imagenes</span>
-<a name="l00006"></a>00006 <span class="comment"> */</span>
-<a name="l00007"></a>00007 
-<a name="l00008"></a>00008 require_once ( <span class="stringliteral">&#39;Imagenes.php&#39;</span> );
-<a name="l00009"></a>00009 <span class="comment"></span>
-<a name="l00010"></a>00010 <span class="comment">/** </span>
-<a name="l00011"></a>00011 <span class="comment"> * Administración para el módulo imagenes</span>
-<a name="l00012"></a>00012 <span class="comment"> */</span>
-<a name="l00013"></a>00013 
-<a name="l00014"></a><a class="code" href="../../d5/df9/a00044.html">00014</a> <span class="keyword">class </span><a class="code" href="../../d5/df9/a00044.html" title="Administración para el módulo imagenes.">ImagenesAdmin</a> <span class="keyword">extends</span> <a class="code" href="../../d5/db6/a00042.html" title="Tratamiento de imagenes.">Imagenes</a> {
-<a name="l00015"></a>00015 <span class="comment"></span>
-<a name="l00016"></a>00016 <span class="comment">   /** Constructor */</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a><a class="code" href="../../d5/df9/a00044_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685">00018</a>    <span class="keyword">function</span> <a class="code" href="../../d5/df9/a00044_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">__construct</a>() {
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022       <a class="code" href="../../d5/df9/a00044_a095c5d389db211932136b53f25f39685.html#a095c5d389db211932136b53f25f39685" title="Constructor.">parent::__construct</a>();
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024       }
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="comment"></span>
-<a name="l00027"></a>00027 <span class="comment">   /**</span>
-<a name="l00028"></a>00028 <span class="comment">   * Administrador de imagenes</span>
-<a name="l00029"></a>00029 <span class="comment">   *</span>
-<a name="l00030"></a>00030 <span class="comment">   * Que acompaña al formulario de tiny</span>
-<a name="l00031"></a>00031 <span class="comment">   * solo lo presentamos si estamos editando</span>
-<a name="l00032"></a>00032 <span class="comment">   *</span>
-<a name="l00033"></a>00033 <span class="comment">   */</span>
-<a name="l00034"></a>00034 
-<a name="l00035"></a><a class="code" href="../../d5/df9/a00044_ae1df6eb34afc352951e2406e47bd24f5.html#ae1df6eb34afc352951e2406e47bd24f5">00035</a>    <span class="keyword">function</span> <a class="code" href="../../d5/df9/a00044_ae1df6eb34afc352951e2406e47bd24f5.html#ae1df6eb34afc352951e2406e47bd24f5" title="Administrador de imagenes.">formulario</a>($e, $args = FALSE) {
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037       <span class="keywordflow">if</span> ( ! permiso(<span class="stringliteral">&#39;administrar_imagenes&#39;</span>) ) return ;
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040       $this-&gt;<a class="code" href="../../d5/de0/a00050_a4f2e94eecb524863dbfb9e24eb9dd3a6.html#a4f2e94eecb524863dbfb9e24eb9dd3a6" title="Añadir librerias javascript a la lista de Gcm.">librerias_js</a>(<span class="stringliteral">&#39;jquery.ui.widget.js&#39;</span>);
-<a name="l00041"></a>00041       $this-&gt;<a class="code" href="../../d5/de0/a00050_a4f2e94eecb524863dbfb9e24eb9dd3a6.html#a4f2e94eecb524863dbfb9e24eb9dd3a6" title="Añadir librerias javascript a la lista de Gcm.">librerias_js</a>(<span class="stringliteral">&#39;jquery.iframe-transport.js&#39;</span>);
-<a name="l00042"></a>00042       $this-&gt;<a class="code" href="../../d5/de0/a00050_a4f2e94eecb524863dbfb9e24eb9dd3a6.html#a4f2e94eecb524863dbfb9e24eb9dd3a6" title="Añadir librerias javascript a la lista de Gcm.">librerias_js</a>(<span class="stringliteral">&#39;jquery.fileupload.js&#39;</span>);
-<a name="l00043"></a>00043       $this-&gt;<a class="code" href="../../d5/de0/a00050_a4f2e94eecb524863dbfb9e24eb9dd3a6.html#a4f2e94eecb524863dbfb9e24eb9dd3a6" title="Añadir librerias javascript a la lista de Gcm.">librerias_js</a>(<span class="stringliteral">&#39;jquery.colorbox.js&#39;</span>);
-<a name="l00044"></a>00044       $this-&gt;<a class="code" href="../../d5/de0/a00050_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;imagenes.js&#39;</span>);
-<a name="l00045"></a>00045       $this-&gt;<a class="code" href="../../d5/de0/a00050_afde3a8df6c433ad68cc593072e489a92.html#afde3a8df6c433ad68cc593072e489a92" title="Añadir archivos javascript a la lista de Gcm.">javascripts</a>(<span class="stringliteral">&#39;aplicar_colorbox.js&#39;</span>);
-<a name="l00046"></a>00046       $contenido = <span class="stringliteral">&#39;&lt;div id=&quot;thumbnails_columna&quot;&gt;&lt;/div&gt;&#39;</span>;
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048       $panel = array();
-<a name="l00049"></a>00049       $panel[<span class="stringliteral">&#39;titulo&#39;</span>]    = literal(<span class="stringliteral">&#39;Imágenes&#39;</span>,3);
-<a name="l00050"></a>00050       $panel[<span class="stringliteral">&#39;href&#39;</span>]      = <span class="stringliteral">&#39;/imagenes/galeria&#39;</span>;
-<a name="l00051"></a>00051       $panel[<span class="stringliteral">&#39;oculto&#39;</span>]    = TRUE;
-<a name="l00052"></a>00052       $panel[<span class="stringliteral">&#39;jajax&#39;</span>]     = <a class="code" href="../../de/de1/a00065_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>.<span class="stringliteral">&#39;?formato=ajax&amp;m=imagenes&amp;a=galeria_columna&amp;s=&#39;</span>.<a class="code" href="../../de/de1/a00065_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.Router::$s;
-<a name="l00053"></a>00053       $panel[<span class="stringliteral">&#39;contenido&#39;</span>] = $contenido;
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055       <a class="code" href="../../d0/d89/a00071_ad3facc2fb6a91bd685681984a3a19602.html#ad3facc2fb6a91bd685681984a3a19602" title="panel">Temas::panel</a>($panel);
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058    }
-<a name="l00059"></a>00059 <span class="comment"></span>
-<a name="l00060"></a>00060 <span class="comment">   /**</span>
-<a name="l00061"></a>00061 <span class="comment">    * Borrado de imagenes con ajax</span>
-<a name="l00062"></a>00062 <span class="comment">    */</span>
-<a name="l00063"></a>00063 
-<a name="l00064"></a><a class="code" href="../../d5/df9/a00044_af3f4c7e5d1f2287c45a1679706fb3606.html#af3f4c7e5d1f2287c45a1679706fb3606">00064</a>    <span class="keyword">function</span> <a class="code" href="../../d5/df9/a00044_af3f4c7e5d1f2287c45a1679706fb3606.html#af3f4c7e5d1f2287c45a1679706fb3606" title="Borrado de imagenes con ajax.">borrarImg</a>() {
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068       ob_end_clean();
-<a name="l00069"></a>00069       include_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/gcm_imagen.php&#39;</span>);
-<a name="l00070"></a>00070       <span class="keywordflow">if</span> ( ! <a class="code" href="../../d4/d98/a00120_ab5f9ba0fac0522058d86b675faae5227.html#ab5f9ba0fac0522058d86b675faae5227" title="Borrar imagen.">gcm_borrarImagen</a>($_GET[<span class="stringliteral">&#39;img&#39;</span>]) ) {
-<a name="l00071"></a>00071          print json_encode(array(<span class="stringliteral">&#39;Error al borrar imagen&#39;</span>));
-<a name="l00072"></a>00072       } <span class="keywordflow">else</span> {
-<a name="l00073"></a>00073          $res[] = 0;
-<a name="l00074"></a>00074          $res[] = dirname($_GET[<span class="stringliteral">&#39;img&#39;</span>]) ;
-<a name="l00075"></a>00075          print json_encode($res);
-<a name="l00076"></a>00076       }
-<a name="l00077"></a>00077       exit();
-<a name="l00078"></a>00078    }
-<a name="l00079"></a>00079 <span class="comment"></span>
-<a name="l00080"></a>00080 <span class="comment">   /** </span>
-<a name="l00081"></a>00081 <span class="comment">    * Presentar galeria en columna </span>
-<a name="l00082"></a>00082 <span class="comment">    */</span>
-<a name="l00083"></a>00083 
-<a name="l00084"></a><a class="code" href="../../d5/df9/a00044_adf4fb846152cc87b8bc652173b439d42.html#adf4fb846152cc87b8bc652173b439d42">00084</a>    <span class="keyword">function</span> <a class="code" href="../../d5/df9/a00044_adf4fb846152cc87b8bc652173b439d42.html#adf4fb846152cc87b8bc652173b439d42" title="Presentar galeria en columna.">galeria_columna</a>($e, $args = FALSE) {
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088       $seccion = ( isset($_REQUEST[<span class="charliteral">&#39;s&#39;</span>]) ) ? $_REQUEST[<span class="charliteral">&#39;s&#39;</span>] : FALSE;
-<a name="l00089"></a>00089       <span class="keywordflow">if</span> ( ! $seccion ) $seccion = <a class="code" href="../../de/de1/a00065_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.Router::$s ;
-<a name="l00090"></a>00090       $seccion = <a class="code" href="../../d8/d17/a00114_a6ab4ae106b6ebf5769bc3390aa8ac287.html#a6ab4ae106b6ebf5769bc3390aa8ac287" title="comprobar_barra()">comprobar_barra</a>($seccion);
-<a name="l00091"></a>00091       <span class="keywordflow">if</span> ( strpos($seccion,<a class="code" href="../../de/de1/a00065_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>) === FALSE ) {
-<a name="l00092"></a>00092          $seccion = <a class="code" href="../../de/de1/a00065_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">Router::$dd</a>.$seccion;
-<a name="l00093"></a>00093          }
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095       ?&gt;
-<a name="l00096"></a>00096       &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&#39;thumbnails_columna&#39;</span> &gt;
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098       &lt;?php
-<a name="l00099"></a>00099       <span class="comment">// Formulario para la subida de una imagen con ajax</span>
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101       <span class="keywordflow">if</span> ( permiso(<span class="stringliteral">&#39;administrar_imagenes&#39;</span>) ) {
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103          ?&gt;
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105          &lt;form&gt;
-<a name="l00106"></a>00106          &lt;input style=<span class="stringliteral">&quot;display: none;&quot;</span> onclick=<span class="stringliteral">&quot;subida_imagenes_jquery(&#39;fileupload_columna&#39;,&#39;progreso_columna&#39;,&#39;galeria_columna&#39;,&#39;&lt;?php echo $seccion ?&gt;&#39;);&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;fileupload_columna&quot;</span> type=<span class="stringliteral">&quot;file&quot;</span> name=<span class="stringliteral">&quot;files[]&quot;</span> placeholder=<span class="stringliteral">&quot;Subir imágenes&quot;</span> data-url=<span class="stringliteral">&quot;?formato=ajax&amp;m=imagenes&amp;a=upload&amp;seccion=&lt;?php echo $seccion;?&gt;&quot;</span> multiple&gt;
-<a name="l00107"></a>00107          &lt;input onclick=<span class="stringliteral">&quot;$(&#39;#fileupload_columna&#39;).click();return false;&quot;</span> type=<span class="stringliteral">&quot;submit&quot;</span> value=<span class="stringliteral">&quot;&lt;?php echo literal(&#39;Subir imagen&#39;);?&gt;&quot;</span>&gt;
-<a name="l00108"></a>00108          &lt;/form&gt;
-<a name="l00109"></a>00109          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;progreso_columna&quot;</span>&gt;
-<a name="l00110"></a>00110              &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;bar&quot;</span> style=<span class="stringliteral">&quot;width: 0%;&quot;</span>&gt;&lt;/div&gt;
-<a name="l00111"></a>00111          &lt;/div&gt;
-<a name="l00112"></a>00112          &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;mensajes&quot;</span>&gt;&lt;/div&gt;
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114          &lt;?php } ?&gt;
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116       &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&#39;cajaImg&#39;</span>&gt;
-<a name="l00117"></a>00117 
-<a name="l00118"></a>00118       &lt;?php
-<a name="l00119"></a>00119       include_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/gcm_imagen.php&#39;</span>);
-<a name="l00120"></a>00120       $datos = <a class="code" href="../../d4/d98/a00120_a064bd0e7f3725fa21b98f3e1b51acad0.html#a064bd0e7f3725fa21b98f3e1b51acad0" title="Listamos imagenes.">gcm_listaImagenes</a>($seccion, 5);
-<a name="l00121"></a>00121       include($gcm-&gt;event-&gt;instancias[<span class="stringliteral">&#39;temas&#39;</span>]-&gt;ruta(<span class="stringliteral">&#39;imagenes&#39;</span>,<span class="stringliteral">&#39;html&#39;</span>,<span class="stringliteral">&#39;columna.phtml&#39;</span>));
-<a name="l00122"></a>00122       ?&gt;
-<a name="l00123"></a>00123       &lt;/div&gt; &lt;!-- Acaba cajaImg --&gt;
-<a name="l00124"></a>00124       &lt;/div&gt; &lt;!-- Acaba thumbnails --&gt;
-<a name="l00125"></a>00125       &lt;?php
-<a name="l00126"></a>00126 
-<a name="l00127"></a>00127       }
-<a name="l00128"></a>00128 <span class="comment"></span>
-<a name="l00129"></a>00129 <span class="comment">   /**</span>
-<a name="l00130"></a>00130 <span class="comment">    * Recoger la subida de imagenes</span>
-<a name="l00131"></a>00131 <span class="comment">    */</span>
-<a name="l00132"></a>00132 
-<a name="l00133"></a><a class="code" href="../../d5/df9/a00044_a168fb754c207632e474037c978672129.html#a168fb754c207632e474037c978672129">00133</a>    <span class="keyword">function</span> <a class="code" href="../../d5/df9/a00044_a168fb754c207632e474037c978672129.html#a168fb754c207632e474037c978672129" title="Recoger la subida de imagenes.">upload</a>($e, $args = FALSE) {
-<a name="l00134"></a>00134 
-<a name="l00135"></a>00135       global <a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
-<a name="l00136"></a>00136 
-<a name="l00137"></a>00137       require(<span class="stringliteral">&#39;UploadHandler.php&#39;</span>);
-<a name="l00138"></a>00138       $opciones = array(
-<a name="l00139"></a>00139          <span class="stringliteral">&#39;image_versions&#39;</span> =&gt; array(
-<a name="l00140"></a>00140             <span class="stringliteral">&#39;&#39;</span> =&gt; array(
-<a name="l00141"></a>00141                 <span class="stringliteral">&#39;max_width&#39;</span> =&gt; $this-&gt;anchoMaxImg,
-<a name="l00142"></a>00142                 <span class="stringliteral">&#39;max_height&#39;</span> =&gt; $this-&gt;altoMaxImg,
-<a name="l00143"></a>00143                 <span class="stringliteral">&#39;jpeg_quality&#39;</span> =&gt; 100
-<a name="l00144"></a>00144                ),
-<a name="l00145"></a>00145             <span class="stringliteral">&#39;thumbnail&#39;</span> =&gt; array(
-<a name="l00146"></a>00146                 <span class="stringliteral">&#39;max_width&#39;</span> =&gt; $this-&gt;anchoMaxMiniatura,
-<a name="l00147"></a>00147                 <span class="stringliteral">&#39;max_height&#39;</span> =&gt; $this-&gt;altoMaxMiniatura
-<a name="l00148"></a>00148                )
-<a name="l00149"></a>00149             )
-<a name="l00150"></a>00150          );
-<a name="l00151"></a>00151 
-<a name="l00152"></a>00152       $upload_handler = <span class="keyword">new</span> <a class="code" href="../../d1/d6e/a00073.html">UploadHandler</a>($opciones);
-<a name="l00153"></a>00153       <span class="keywordflow">return</span>;
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155       }
-<a name="l00156"></a>00156       
-<a name="l00157"></a>00157 
-<a name="l00158"></a>00158    }
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160 ?&gt;
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 $(document).ready(<span class="keyword">function</span>(){
+<a name="l00002"></a>00002    <span class="comment">//Examples of how to assign the ColorBox event to elements</span>
+<a name="l00003"></a>00003    $(<span class="stringliteral">&quot;.galeria_imagenes&quot;</span>).colorbox({
+<a name="l00004"></a>00004       rel:<span class="stringliteral">&#39;galeria_imagenes&#39;</span>
+<a name="l00005"></a>00005       , slideshow:<span class="keyword">true</span>
+<a name="l00006"></a>00006    });
+<a name="l00007"></a>00007 });
+<a name="l00008"></a>00008 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:15 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

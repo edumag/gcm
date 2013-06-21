@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/admin/menuAdmin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/admin/html/menuAdmin.html</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,64 +81,127 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_7f61e9d3050f164be4a96f683a51de32.html">html</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">menuAdmin.php</div>  </div>
+<div class="title">menuAdmin.html</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;!-- <a class="code" href="../../d5/de0/a00050.html" title="Esta clase compondrá un menú a partir del contenido de un directorio, ofreciendo varios estilos:...">Menu</a> administratico --&gt;
 <a name="l00002"></a>00002 
-<a name="l00003"></a>00003 <span class="preprocessor"># $menuAdmin[&#39;Administración&#39;][&#39;title&#39;]=&#39;Administrar proyecto&#39;;</span>
-<a name="l00004"></a>00004 <span class="preprocessor"></span>
-<a name="l00005"></a>00005 $usuario = $_SESSION[<a class="code" href="../../df/d13/a00085_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>-&gt;sufijo.<span class="stringliteral">&#39;usuario&#39;</span>];
+<a name="l00003"></a>00003 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;mainMenu&quot;</span>&gt;
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 &lt;ul <span class="keywordtype">id</span>=<span class="stringliteral">&quot;mainMenu1&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;navmenu-h&quot;</span>&gt;
 <a name="l00006"></a>00006 
-<a name="l00007"></a>00007 $menuAdmin2[$usuario][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editar perfil&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]= 1;
-<a name="l00008"></a>00008 $menuAdmin2[$usuario][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editar perfil&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Editar información de usuario&quot;</span>;
-<a name="l00009"></a>00009 $menuAdmin2[$usuario][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Editar perfil&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]).<span class="stringliteral">&quot;/admin/perfil_usuario&quot;</span>;
+<a name="l00007"></a>00007    &lt;?php <span class="keywordflow">if</span> (is_array(<a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>)) { ?&gt;
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009    &lt;?php <span class="keywordflow">foreach</span> ( <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a> as $keySeccion =&gt; $seccion ) { ?&gt;
 <a name="l00010"></a>00010 
-<a name="l00011"></a>00011 $menuAdmin2[<span class="stringliteral">&#39;Salir&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Cerrar sessión&quot;</span>;
-<a name="l00012"></a>00012 $menuAdmin2[<span class="stringliteral">&#39;Salir&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<span class="stringliteral">&#39;./?salir=1&#39;</span>;
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="keywordflow">if</span> ( permiso(<span class="stringliteral">&#39;test&#39;</span>,<span class="stringliteral">&#39;admin&#39;</span>) ) {
+<a name="l00011"></a>00011    &lt;?php <span class="keywordflow">if</span> ( is_array($seccion) ) { ?&gt;
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013    &lt;?php $title = ( isset($seccion[<span class="stringliteral">&#39;title&#39;</span>]) ) ? literal($seccion[<span class="stringliteral">&#39;title&#39;</span>],3) : NULL ; ?&gt;
+<a name="l00014"></a>00014    &lt;?php $enlace_seccion = ( isset($seccion[<span class="stringliteral">&#39;link&#39;</span>]) ) ? $seccion[<span class="stringliteral">&#39;link&#39;</span>] : <span class="charliteral">&#39;#&#39;</span>; ?&gt;
 <a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Tests&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]= 1;
-<a name="l00017"></a>00017 <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Tests&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Ejecutar tests&quot;</span>;
-<a name="l00018"></a>00018 <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Tests&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]).<span class="stringliteral">&quot;/test&quot;</span>;
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020    }
+<a name="l00016"></a>00016    &lt;li&gt;
+<a name="l00017"></a>00017       &lt;a &lt;?php <span class="keywordflow">if</span> ( isset($title) ) echo <span class="stringliteral">&quot;title=&#39;&quot;</span>.$title.<span class="stringliteral">&quot;&#39; href=&#39;&quot;</span>.$enlace_seccion.<span class="stringliteral">&quot;&#39; &quot;</span>; ?&gt;&gt;
+<a name="l00018"></a>00018          &lt;?php echo literal($keySeccion,3);?&gt;
+<a name="l00019"></a>00019       &lt;/a&gt;
+<a name="l00020"></a>00020       &lt;ul&gt;
 <a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="keywordflow">if</span> ( permiso(<span class="stringliteral">&#39;usuarios&#39;</span>,<span class="stringliteral">&#39;admin&#39;</span>) ) {
+<a name="l00022"></a>00022          &lt;?php <span class="keywordflow">if</span> ( isset($seccion[<span class="stringliteral">&#39;boton&#39;</span>]) ) { ?&gt;
 <a name="l00023"></a>00023 
-<a name="l00024"></a>00024    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Usuarios&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]= 1;
-<a name="l00025"></a>00025    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Usuarios&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Administración de usuarios&quot;</span>;
-<a name="l00026"></a>00026    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Usuarios&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]).<span class="stringliteral">&quot;/admin/usuarios/&quot;</span>;
-<a name="l00027"></a>00027    }
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="keywordflow">if</span> ( permiso(<span class="stringliteral">&#39;infoserver&#39;</span>,<span class="stringliteral">&#39;admin&#39;</span>) ) {
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Info server&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]= 1;
-<a name="l00032"></a>00032    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Info server&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Información de servidor&quot;</span>;
-<a name="l00033"></a>00033    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Info server&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]).<span class="stringliteral">&quot;/admin/infoserver&quot;</span>;
-<a name="l00034"></a>00034    }
+<a name="l00024"></a>00024          &lt;?php <span class="keywordflow">foreach</span> ($seccion[<span class="stringliteral">&#39;boton&#39;</span>] as $keyBoton =&gt; $boton) { ?&gt;
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026          &lt;?php $GCM_DEV[]=<span class="stringliteral">&#39;menuAdmin::&#39;</span>.$keySeccion.<span class="stringliteral">&#39;::&#39;</span>.$keyBoton; ?&gt;
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028          &lt;?php <span class="keywordflow">if</span> ( $boton[<span class="stringliteral">&#39;activado&#39;</span>] == 0 ) { ?&gt;
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030          &lt;li <span class="keyword">class</span>=<span class="stringliteral">&#39;ma_off&#39;</span> &gt;&lt;a title=<span class="stringliteral">&#39;&lt;?php echo literal($boton[&#39;</span>title<span class="stringliteral">&#39;],3);?&gt;&#39;</span>&gt;&lt;?php echo literal($keyBoton);?&gt;&lt;/a&gt;&lt;/li&gt;
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032          &lt;?php } <span class="keywordflow">else</span> { ?&gt;
+<a name="l00033"></a>00033          
+<a name="l00034"></a>00034          &lt;li <span class="keyword">class</span>=<span class="stringliteral">&#39;ma_on&#39;</span> &gt;&lt;a title=<span class="stringliteral">&#39;&lt;?php echo literal($boton[&#39;</span>title<span class="stringliteral">&#39;],3);?&gt;&#39;</span> href=<span class="stringliteral">&#39;&lt;?php echo $boton[&#39;</span>link<span class="stringliteral">&#39;];?&gt;&#39;</span>&gt;&lt;?php echo literal($keyBoton);?&gt;&lt;/a&gt;&lt;/li&gt;
 <a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="keywordflow">if</span> ( permiso(<span class="stringliteral">&#39;configurar_conexiones&#39;</span>,<span class="stringliteral">&#39;admin&#39;</span>) ) {
+<a name="l00036"></a>00036          &lt;?php } <span class="comment">// end activado ?&gt;</span>
 <a name="l00037"></a>00037 
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Visualizar conexiones&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]= 1;
-<a name="l00040"></a>00040    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Visualizar conexiones&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Visualizar conexiones entre Eventos y módulos&quot;</span>;
-<a name="l00041"></a>00041    <a class="code" href="../../d1/de1/a00213_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Visualizar conexiones&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]).<span class="stringliteral">&quot;/admin/configurar_conexiones&quot;</span>;
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043    }
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045 ?&gt;
+<a name="l00038"></a>00038          &lt;?php } <span class="comment">// end foreach boton ?&gt;</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040          &lt;?php } <span class="comment">// end seccion: boton ?&gt;</span>
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042       &lt;/ul&gt;
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044       &lt;?php } <span class="comment">// end tenemos sección ?&gt;</span>
+<a name="l00045"></a>00045       
+<a name="l00046"></a>00046    &lt;/li&gt;
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048    &lt;?php } <span class="comment">// end recorremos menuAdmin ?&gt;</span>
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050    &lt;?php } <span class="comment">// end Tenemos array menuAdmin ?&gt;</span>
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 &lt;/ul&gt;
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 &lt;ul <span class="keywordtype">id</span>=<span class="stringliteral">&quot;mainMenu2&quot;</span> <span class="keyword">class</span>=<span class="stringliteral">&quot;navmenu-h&quot;</span>&gt;
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057    &lt;?php <span class="keywordflow">if</span> (is_array($menuAdmin2)) { ?&gt;
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059    &lt;?php <span class="keywordflow">foreach</span> ( $menuAdmin2 as $keySeccion =&gt; $seccion ) { ?&gt;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061    &lt;?php <span class="keywordflow">if</span> ( is_array($seccion) ) { ?&gt;
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063    &lt;?php $title = ( isset($seccion[<span class="stringliteral">&#39;title&#39;</span>]) ) ? literal($seccion[<span class="stringliteral">&#39;title&#39;</span>],3) : NULL ; ?&gt;
+<a name="l00064"></a>00064    &lt;?php $enlace_seccion = ( isset($seccion[<span class="stringliteral">&#39;link&#39;</span>]) ) ? $seccion[<span class="stringliteral">&#39;link&#39;</span>] : <span class="charliteral">&#39;#&#39;</span>; ?&gt;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066    &lt;li&gt;
+<a name="l00067"></a>00067       &lt;a &lt;?php <span class="keywordflow">if</span> ( isset($title) ) echo <span class="stringliteral">&quot;title=&#39;&quot;</span>.$title.<span class="stringliteral">&quot;&#39; href=&#39;&quot;</span>.$enlace_seccion.<span class="stringliteral">&quot;&#39; &quot;</span>; ?&gt;&gt;
+<a name="l00068"></a>00068          &lt;?php echo literal($keySeccion,3);?&gt;
+<a name="l00069"></a>00069       &lt;/a&gt;
+<a name="l00070"></a>00070       &lt;ul&gt;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072          &lt;?php <span class="keywordflow">if</span> ( isset($seccion[<span class="stringliteral">&#39;boton&#39;</span>]) ) { ?&gt;
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074          &lt;?php <span class="keywordflow">foreach</span> ($seccion[<span class="stringliteral">&#39;boton&#39;</span>] as $keyBoton =&gt; $boton) { ?&gt;
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076          &lt;?php $GCM_DEV[]=<span class="stringliteral">&#39;menuAdmin::&#39;</span>.$keySeccion.<span class="stringliteral">&#39;::&#39;</span>.$keyBoton; ?&gt;
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078          &lt;?php <span class="keywordflow">if</span> ( $boton[<span class="stringliteral">&#39;activado&#39;</span>] == 0 ) { ?&gt;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080          &lt;li <span class="keyword">class</span>=<span class="stringliteral">&#39;ma_off&#39;</span> &gt;&lt;a title=<span class="stringliteral">&#39;&lt;?php echo literal($boton[&#39;</span>title<span class="stringliteral">&#39;],3);?&gt;&#39;</span>&gt;&lt;?php echo literal($keyBoton);?&gt;&lt;/a&gt;&lt;/li&gt;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082          &lt;?php } <span class="keywordflow">else</span> { ?&gt;
+<a name="l00083"></a>00083          
+<a name="l00084"></a>00084          &lt;li <span class="keyword">class</span>=<span class="stringliteral">&#39;ma_on&#39;</span> &gt;&lt;a title=<span class="stringliteral">&#39;&lt;?php echo literal($boton[&#39;</span>title<span class="stringliteral">&#39;],3);?&gt;&#39;</span> href=<span class="stringliteral">&#39;&lt;?php echo $boton[&#39;</span>link<span class="stringliteral">&#39;];?&gt;&#39;</span>&gt;&lt;?php echo literal($keyBoton);?&gt;&lt;/a&gt;&lt;/li&gt;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086          &lt;?php } <span class="comment">// end activado ?&gt;</span>
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088          &lt;?php } <span class="comment">// end foreach boton ?&gt;</span>
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090          &lt;?php } <span class="comment">// end seccion: boton ?&gt;</span>
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092       &lt;/ul&gt;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094       &lt;?php } <span class="comment">// end tenemos sección ?&gt;</span>
+<a name="l00095"></a>00095       
+<a name="l00096"></a>00096    &lt;/li&gt;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098    &lt;?php } <span class="comment">// end recorremos menuAdmin ?&gt;</span>
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100    &lt;?php } <span class="comment">// end Tenemos array menuAdmin ?&gt;</span>
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102 &lt;/ul&gt;
+<a name="l00103"></a>00103 &lt;/div&gt;
+<a name="l00104"></a>00104 &lt;div style=<span class="stringliteral">&quot;clear: both&quot;</span>&gt;&lt;/div&gt;
+<a name="l00105"></a>00105 &lt;?php
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

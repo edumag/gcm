@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/gcm_imagen.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/gcm/lib/Router.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,718 +81,742 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_8c0f41549cef124311c47fc5bc982f44.html">gcm</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_52cc94e8df8afb00ad75f11601475791.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">gcm_imagen.php</div>  </div>
+<div class="title">Router.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="../../d4/d98/a00120.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment">* @file gcm_imagen.php</span>
-<a name="l00005"></a>00005 <span class="comment">* @brief Funciones para el tratamiento de imagenes</span>
-<a name="l00006"></a>00006 <span class="comment">*</span>
-<a name="l00007"></a>00007 <span class="comment">* @author Eduardo Magrané</span>
-<a name="l00008"></a>00008 <span class="comment">*/</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="comment"></span>
-<a name="l00011"></a>00011 <span class="comment">/**</span>
-<a name="l00012"></a>00012 <span class="comment">* Copiar imágen a una ubicación</span>
-<a name="l00013"></a>00013 <span class="comment">*</span>
-<a name="l00014"></a>00014 <span class="comment">* Esta función esta pensada para recoger la imágen del directorio</span>
-<a name="l00015"></a>00015 <span class="comment">* temporal despues de ser subida desde un formulario y copiarla</span>
-<a name="l00016"></a>00016 <span class="comment">* al directorio de destino indicado o moverla con un nombre diferente</span>
-<a name="l00017"></a>00017 <span class="comment">*</span>
-<a name="l00018"></a>00018 <span class="comment">* @todo Se podra indicar si queremos una miniatura que en caso de ser afirmativo</span>
-<a name="l00019"></a>00019 <span class="comment">* la crearemos en el subdirectorio con el nombre indicado</span>
-<a name="l00020"></a>00020 <span class="comment">*</span>
-<a name="l00021"></a>00021 <span class="comment">* Se podra indicar si queremos una altura o anchura max que en el caso de tener</span>
-<a name="l00022"></a>00022 <span class="comment">* alguno de estos valores definidos, transformaremos la imagen.</span>
-<a name="l00023"></a>00023 <span class="comment">*</span>
-<a name="l00024"></a>00024 <span class="comment">* Para lasthumbnail tambien se puede especificar alto o ancho maximo</span>
-<a name="l00025"></a>00025 <span class="comment">*</span>
-<a name="l00026"></a>00026 <span class="comment">* @param $imagen Nombre del campo de formulario con la imagen</span>
-<a name="l00027"></a>00027 <span class="comment">* @param $destino Carpeta en la que se desea copiar, &quot;/&quot; final incluida</span>
-<a name="l00028"></a>00028 <span class="comment">* @param $imagenAlto Alto maximo de la imagen, por defecto ninguno.</span>
-<a name="l00029"></a>00029 <span class="comment">* @param $imagenAncho Ancho maximo de la imagen, por defecto ninguno.</span>
-<a name="l00030"></a>00030 <span class="comment">* @param $miniatura Si es diferente a no el nombre de la subcarpeta sera el valor de la variable.</span>
-<a name="l00031"></a>00031 <span class="comment">* @param $miniaturaAlto Alto maximo de la miniatura, por defecto ninguno.</span>
-<a name="l00032"></a>00032 <span class="comment">* @param $miniaturaAncho Ancho maximo de la miniatura, por defecto ninguno.</span>
-<a name="l00033"></a>00033 <span class="comment">*/</span>
-<a name="l00034"></a>00034 
-<a name="l00035"></a><a class="code" href="../../d4/d98/a00120_a3a58f4a41a844643755e8de25b20e258.html#a3a58f4a41a844643755e8de25b20e258">00035</a> <span class="keyword">function</span> <a class="code" href="../../d4/d98/a00120_a3a58f4a41a844643755e8de25b20e258.html#a3a58f4a41a844643755e8de25b20e258" title="Copiar imágen a una ubicación.">gcm_imagen_copiar</a>($imagen, $destino, $imagenAlto=<span class="charliteral">&#39;0&#39;</span>, $imagenAncho=<span class="charliteral">&#39;0&#39;</span>, $miniatura=<span class="stringliteral">&#39;no&#39;</span>, $miniaturaAlto=<span class="charliteral">&#39;0&#39;</span>, $miniaturaAncho=<span class="charliteral">&#39;0&#39;</span>) {
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037    global $_FILES;
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039    $imagenFile      = $imagen[<span class="stringliteral">&#39;tmp_name&#39;</span>];
-<a name="l00040"></a>00040    $imagenName      = $imagen[<span class="stringliteral">&#39;name&#39;</span>];
-<a name="l00041"></a>00041    $imagenSize      = $imagen[<span class="stringliteral">&#39;size&#39;</span>];
-<a name="l00042"></a>00042    $imagenType      = $imagen[<span class="stringliteral">&#39;type&#39;</span>];
-<a name="l00043"></a>00043    $imagenError     = $imagen[<span class="stringliteral">&#39;error&#39;</span>];
-<a name="l00044"></a>00044 
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046    <span class="keywordflow">if</span> ( is_dir($destino) ) { <span class="comment">// Si es un directorio</span>
-<a name="l00047"></a>00047       $dirFinal = $destino.<span class="stringliteral">&quot;/&quot;</span>;
-<a name="l00048"></a>00048       $nombreFinal = $dirFinal.$imagenName ;
-<a name="l00049"></a>00049    } <span class="keywordflow">else</span> { <span class="comment">// Si no lo es se guarda con el nombre pasadp</span>
-<a name="l00050"></a>00050       $dirFinal = $destino;
-<a name="l00051"></a>00051       $nombreFinal = $dirFinal;
-<a name="l00052"></a>00052    }
-<a name="l00053"></a>00053 
-<a name="l00054"></a>00054    <span class="keywordflow">if</span> ( $imagenError == 4 ) {
-<a name="l00055"></a>00055 
-<a name="l00056"></a>00056       $imagenFile      = null;
-<a name="l00057"></a>00057       $imagenName      = null;
-<a name="l00058"></a>00058       $imagenSize      = null;
-<a name="l00059"></a>00059       $imagenType      = null;
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061       $mens = <span class="stringliteral">&quot;No se subio ningún fichero&quot;</span>;
-<a name="l00062"></a>00062       registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064       <span class="keywordflow">return</span> NULL ;
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066    }
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068    <span class="comment">// *** Control de errores</span>
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070    <span class="keywordflow">if</span> ($imagenError&gt;0){
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072       <span class="keywordflow">switch</span> ($imagenError){
-<a name="l00073"></a>00073          <span class="keywordflow">case</span> 1:
-<a name="l00074"></a>00074             $mens = <span class="stringliteral">&quot;Tamaño excesivo de archivo&quot;</span>;
-<a name="l00075"></a>00075             registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00076"></a>00076             echo <span class="stringliteral">&#39;&lt;script&gt;alert(&quot;Tamaño del archivo excesivo\nMax permitido: &#39;</span>.ini_get(<span class="stringliteral">&#39;upload_max_filesize&#39;</span>).<span class="stringliteral">&#39;&quot;);&lt;/script&gt;&#39;</span>;
-<a name="l00077"></a>00077             <span class="keywordflow">return</span> NULL ;
-<a name="l00078"></a>00078             <span class="keywordflow">break</span>;
-<a name="l00079"></a>00079          <span class="keywordflow">case</span> 2:
-<a name="l00080"></a>00080             $mens = <span class="stringliteral">&quot;Tamaño excesivo de archivo&quot;</span>;
-<a name="l00081"></a>00081             registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00082"></a>00082             echo <span class="stringliteral">&#39;&lt;script&gt;alert(&quot;Tamaño del archivo excesivo\nMax permitido: &#39;</span>.ini_get(<span class="stringliteral">&#39;upload_max_filesize&#39;</span>).<span class="stringliteral">&#39;&quot;);&lt;/script&gt;&#39;</span>;
-<a name="l00083"></a>00083             <span class="keywordflow">return</span> NULL ;
-<a name="l00084"></a>00084             <span class="keywordflow">break</span>;
-<a name="l00085"></a>00085          <span class="keywordflow">default</span>:
-<a name="l00086"></a>00086             $mens = <span class="stringliteral">&quot;Error al subir la imágen&quot;</span>;
-<a name="l00087"></a>00087             registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00088"></a>00088             <span class="keywordflow">return</span> NULL ;
-<a name="l00089"></a>00089             <span class="keywordflow">break</span>;
-<a name="l00090"></a>00090        }
-<a name="l00091"></a>00091        $mens = <span class="stringliteral">&quot;Error al subir la imágen&quot;</span>;
-<a name="l00092"></a>00092        registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00093"></a>00093        <span class="keywordflow">return</span> NULL ;
-<a name="l00094"></a>00094    }
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096    <span class="comment">// *** Control de seguridad</span>
-<a name="l00097"></a>00097    <span class="keywordflow">if</span> (!is_uploaded_file($imagenFile)){
-<a name="l00098"></a>00098      $mens = <span class="stringliteral">&quot;Acceso no permitido, posible violación de seguridad&quot;</span>;
-<a name="l00099"></a>00099      registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00100"></a>00100      <span class="keywordflow">return</span> NULL ;
-<a name="l00101"></a>00101    }
-<a name="l00102"></a>00102 
-<a name="l00103"></a>00103    <span class="comment">// Si es un archivo zip lo descomprimimos</span>
-<a name="l00104"></a>00104    <span class="keywordflow">if</span> ( $imagenType == <span class="stringliteral">&#39;application/zip&#39;</span> ) {
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106       $zip = <span class="keyword">new</span> ZipArchive;
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108       <span class="comment">// listar archivos incluidos para procesarlos despues</span>
-<a name="l00109"></a>00109       <span class="keywordflow">if</span> ( $zip-&gt;open($imagenFile) === TRUE ) {
-<a name="l00110"></a>00110          $num_imagenes = $zip-&gt;numFiles;
-<a name="l00111"></a>00111       } <span class="keywordflow">else</span> {
-<a name="l00112"></a>00112          $mens = <span class="stringliteral">&#39;No se pudo abrir el archivo zip: &#39;</span>.$imagenName;
-<a name="l00113"></a>00113          registrar(__FILE__,__LINE__,$mens,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00114"></a>00114          echo <span class="stringliteral">&#39;&lt;script&gt;alert(\&#39;No se pudo abrir el archivo zip: &#39;</span>.$imagenName.<span class="charliteral">&#39;\&#39;</span>);&lt;/script&gt;<span class="stringliteral">&#39;;</span>
-<a name="l00115"></a>00115 <span class="stringliteral">         return null ;</span>
-<a name="l00116"></a>00116 <span class="stringliteral">      }</span>
-<a name="l00117"></a>00117 <span class="stringliteral"></span>
-<a name="l00118"></a>00118 <span class="stringliteral">      if ( $num_imagenes &lt; 1 ) {</span>
-<a name="l00119"></a>00119 <span class="stringliteral">         $mens = $imagenName.&#39;</span> vacio<span class="stringliteral">&#39;;</span>
-<a name="l00120"></a>00120 <span class="stringliteral">         registrar(__FILE__,__LINE__,$mens,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00121"></a>00121 <span class="stringliteral">         echo &#39;</span>&lt;script&gt;alert(\<span class="stringliteral">&#39;Vacio &#39;</span>.$imagenName.<span class="charliteral">&#39;\&#39;</span>);&lt;/script&gt;<span class="stringliteral">&#39;;</span>
-<a name="l00122"></a>00122 <span class="stringliteral">         return null ;</span>
-<a name="l00123"></a>00123 <span class="stringliteral">      }</span>
-<a name="l00124"></a>00124 <span class="stringliteral"></span>
-<a name="l00125"></a>00125 <span class="stringliteral"></span>
-<a name="l00126"></a>00126 <span class="stringliteral">      if ( $zip-&gt;extractTo($dirFinal) ) {</span>
-<a name="l00127"></a>00127 <span class="stringliteral">         echo &#39;</span>&lt;script&gt;parent.resultadoUpload (\<span class="stringliteral">&#39;0\&#39;, \&#39;&#39;</span>.$imagenName.<span class="charliteral">&#39;\&#39;</span>);&lt;/script&gt;<span class="stringliteral">&#39;;</span>
-<a name="l00128"></a>00128 <span class="stringliteral">      } else {</span>
-<a name="l00129"></a>00129 <span class="stringliteral">         $mens = &#39;</span>Archivo <span class="stringliteral">&#39;.$imagenName.&#39;</span> no se pudo descomprimir<span class="stringliteral">&#39;;</span>
-<a name="l00130"></a>00130 <span class="stringliteral">         registrar(__FILE__,__LINE__,$mens,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00131"></a>00131 <span class="stringliteral">         echo &#39;</span>&lt;script&gt;parent.resultadoUpload (\<span class="stringliteral">&#39;4\&#39;, \&#39;No se pudo descomprimir &#39;</span>.$imagenName.<span class="charliteral">&#39;\&#39;</span>);&lt;/script&gt;<span class="stringliteral">&#39;;</span>
-<a name="l00132"></a>00132 <span class="stringliteral">         return NULL ;</span>
-<a name="l00133"></a>00133 <span class="stringliteral">      }</span>
-<a name="l00134"></a>00134 <span class="stringliteral"></span>
-<a name="l00135"></a>00135 <span class="stringliteral">      echo &quot;gcm_imagen_copiar::Numero de imagenes: &lt;b&gt;$num_imagenes&lt;/b&gt;&quot;;</span>
-<a name="l00136"></a>00136 <span class="stringliteral">      if ( $num_imagenes &gt; 0 ) {</span>
-<a name="l00137"></a>00137 <span class="stringliteral">         for ($i=0 ; $i!=$num_imagenes; $i++) {</span>
-<a name="l00138"></a>00138 <span class="stringliteral">            $filename = $zip-&gt;getNameIndex($i);</span>
-<a name="l00139"></a>00139 <span class="stringliteral">            $fileinfo = pathinfo($filename);</span>
-<a name="l00140"></a>00140 <span class="stringliteral">            $imagen = $dirFinal.$filename ;</span>
-<a name="l00141"></a>00141 <span class="stringliteral">            $salida.=$imagen.&#39;</span>\n<span class="stringliteral">&#39;;</span>
-<a name="l00142"></a>00142 <span class="stringliteral"></span>
-<a name="l00143"></a>00143 <span class="stringliteral">            // Generamos imagen</span>
-<a name="l00144"></a>00144 <span class="stringliteral">            generarImagen($imagen, $dirFinal, $imagenAlto, $imagenAncho);</span>
-<a name="l00145"></a>00145 <span class="stringliteral"></span>
-<a name="l00146"></a>00146 <span class="stringliteral">            // Especificar las acciones a realizar.</span>
-<a name="l00147"></a>00147 <span class="stringliteral">            $hacerMiniatura   = NULL;</span>
-<a name="l00148"></a>00148 <span class="stringliteral"></span>
-<a name="l00149"></a>00149 <span class="stringliteral">            if ( $miniatura != &quot;&quot; &amp;&amp; $miniatura != &#39;</span>no<span class="stringliteral">&#39; ) {</span>
-<a name="l00150"></a>00150 <span class="stringliteral">              $hacerMiniatura = TRUE;</span>
-<a name="l00151"></a>00151 <span class="stringliteral">              generarImagen($imagen, $miniatura, $miniaturaAlto, $miniaturaAncho);</span>
-<a name="l00152"></a>00152 <span class="stringliteral">            }</span>
-<a name="l00153"></a>00153 <span class="stringliteral"></span>
-<a name="l00154"></a>00154 <span class="stringliteral">         }</span>
-<a name="l00155"></a>00155 <span class="stringliteral">      }</span>
-<a name="l00156"></a>00156 <span class="stringliteral"></span>
-<a name="l00157"></a>00157 <span class="stringliteral">      echo &#39;</span>&lt;script&gt;parent.resultadoUpload (\<span class="stringliteral">&#39;0\&#39;, \&#39;&#39;</span>.$imagenName.<span class="charliteral">&#39; &#39;</span>.$num_imagenes.<span class="stringliteral">&#39; imagenes\\n&#39;</span>.$salida.<span class="charliteral">&#39;\&#39;</span>);&lt;/script&gt;<span class="stringliteral">&#39;;</span>
-<a name="l00158"></a>00158 <span class="stringliteral"></span>
-<a name="l00159"></a>00159 <span class="stringliteral">      return TRUE ;</span>
-<a name="l00160"></a>00160 <span class="stringliteral"></span>
-<a name="l00161"></a>00161 <span class="stringliteral">   } else { // Acaba si es un archivo zip</span>
-<a name="l00162"></a>00162 <span class="stringliteral"></span>
-<a name="l00163"></a>00163 <span class="stringliteral">      // Copiar imagen a destino antes de tratar</span>
-<a name="l00164"></a>00164 <span class="stringliteral"></span>
-<a name="l00165"></a>00165 <span class="stringliteral">      if (!copy($imagenFile ,$nombreFinal)) {</span>
-<a name="l00166"></a>00166 <span class="stringliteral">        trigger_error(&#39;</span>Error al copiar imagen [<span class="stringliteral">&#39;.$imagenFile.&#39;</span>] a [<span class="stringliteral">&#39;.$nombreFinal.&#39;</span>]<span class="stringliteral">&#39;, E_USER_ERROR);</span>
-<a name="l00167"></a>00167 <span class="stringliteral">        return NULL ;</span>
-<a name="l00168"></a>00168 <span class="stringliteral">         }</span>
-<a name="l00169"></a>00169 <span class="stringliteral"></span>
-<a name="l00170"></a>00170 <span class="stringliteral">      $imagen = $nombreFinal ;</span>
-<a name="l00171"></a>00171 <span class="stringliteral"></span>
-<a name="l00172"></a>00172 <span class="stringliteral">      // Generamos imagen en el caso de tener Alto o ancho, sino no hace falta</span>
-<a name="l00173"></a>00173 <span class="stringliteral">      if ( $imagenAlto != 0 &amp;&amp; $imagenAncho != 0 ) {</span>
-<a name="l00174"></a>00174 <span class="stringliteral">         generarImagen($imagen, $dirFinal, $imagenAlto, $imagenAncho);</span>
-<a name="l00175"></a>00175 <span class="stringliteral">         }</span>
-<a name="l00176"></a>00176 <span class="stringliteral"></span>
-<a name="l00177"></a>00177 <span class="stringliteral">      // Especificar las acciones a realizar.</span>
-<a name="l00178"></a>00178 <span class="stringliteral">      $hacerMiniatura   = NULL;</span>
-<a name="l00179"></a>00179 <span class="stringliteral"></span>
-<a name="l00180"></a>00180 <span class="stringliteral">      if ( $miniatura != &quot;&quot; &amp;&amp; $miniatura != &#39;</span>no<span class="stringliteral">&#39; ) {</span>
-<a name="l00181"></a>00181 <span class="stringliteral">        $hacerMiniatura = TRUE;</span>
-<a name="l00182"></a>00182 <span class="stringliteral">        generarImagen($imagen, $miniatura, $miniaturaAlto, $miniaturaAncho);</span>
-<a name="l00183"></a>00183 <span class="stringliteral">         }</span>
-<a name="l00184"></a>00184 <span class="stringliteral"></span>
-<a name="l00185"></a>00185 <span class="stringliteral">      return TRUE ;</span>
-<a name="l00186"></a>00186 <span class="stringliteral"></span>
-<a name="l00187"></a>00187 <span class="stringliteral">      } // Acaba sino es un archivo zip</span>
-<a name="l00188"></a>00188 <span class="stringliteral"></span>
-<a name="l00189"></a>00189 <span class="stringliteral">   }</span>
-<a name="l00190"></a>00190 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00191"></a>00191 <span class="comment">/**</span>
-<a name="l00192"></a>00192 <span class="comment">* Generar imagen</span>
-<a name="l00193"></a>00193 <span class="comment">*</span>
-<a name="l00194"></a>00194 <span class="comment">* Generamos una imagen a partir de una origen con las dimensiones y ubicación pasados</span>
-<a name="l00195"></a>00195 <span class="comment">* como argumento.</span>
-<a name="l00196"></a>00196 <span class="comment">*</span>
-<a name="l00197"></a>00197 <span class="comment">* @author Eduardo Magrané</span>
-<a name="l00198"></a>00198 <span class="comment">* @version 1.0</span>
-<a name="l00199"></a>00199 <span class="comment">*</span>
-<a name="l00200"></a>00200 <span class="comment">* @param $imagen imagen origen</span>
-<a name="l00201"></a>00201 <span class="comment">* @param $destino Carpeta de destino</span>
-<a name="l00202"></a>00202 <span class="comment">* @param $alto Alto maximo de la imagen</span>
-<a name="l00203"></a>00203 <span class="comment">* @param $ancho Ancho maximo de la imagen</span>
-<a name="l00204"></a>00204 <span class="comment">* @param $minuatura Por defecto se crea una miniatura en directorio nuevo.</span>
-<a name="l00205"></a>00205 <span class="comment">*</span>
-<a name="l00206"></a>00206 <span class="comment">* @return TRUE/NULL</span>
-<a name="l00207"></a>00207 <span class="comment">*</span>
-<a name="l00208"></a>00208 <span class="comment">*/</span>
-<a name="l00209"></a>00209 
-<a name="l00210"></a><a class="code" href="../../d4/d98/a00120_a3cd6fd081fb056bbbb253b164da2c8a4.html#a3cd6fd081fb056bbbb253b164da2c8a4">00210</a> function generarImagen($imagen, $destino, $alto, $ancho, $miniatura=&#39;si<span class="stringliteral">&#39;) {</span>
-<a name="l00211"></a>00211 <span class="stringliteral"></span>
-<a name="l00212"></a>00212 <span class="stringliteral">   $dirFinal = comprobar_barra($destino);</span>
-<a name="l00213"></a>00213 <span class="stringliteral"></span>
-<a name="l00214"></a>00214 <span class="stringliteral">   // Cogemos los datos de la imagen</span>
-<a name="l00215"></a>00215 <span class="stringliteral">   $vDatosImg = getimagesize($imagen);</span>
-<a name="l00216"></a>00216 <span class="stringliteral">   $imagenName = basename($imagen);</span>
-<a name="l00217"></a>00217 <span class="stringliteral"></span>
-<a name="l00218"></a>00218 <span class="stringliteral">   if (!$vDatosImg) {</span>
-<a name="l00219"></a>00219 <span class="stringliteral">      $mens = literal(&#39;</span>Error con las datos de la imagen<span class="stringliteral">&#39;,3);</span>
-<a name="l00220"></a>00220 <span class="stringliteral">      registrar(__FILE__,__LINE__,$mens,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00221"></a>00221 <span class="stringliteral">      return NULL ;</span>
-<a name="l00222"></a>00222 <span class="stringliteral">      }</span>
-<a name="l00223"></a>00223 <span class="stringliteral"></span>
-<a name="l00224"></a>00224 <span class="stringliteral">   $imgAncho      = $vDatosImg[0];</span>
-<a name="l00225"></a>00225 <span class="stringliteral">   $imgAlto       = $vDatosImg[1];</span>
-<a name="l00226"></a>00226 <span class="stringliteral"></span>
-<a name="l00227"></a>00227 <span class="stringliteral">   // Recogemos el Tipo Mime</span>
-<a name="l00228"></a>00228 <span class="stringliteral">   if ( isset($vDatosImg[&#39;</span>mime<span class="stringliteral">&#39;]) ) {</span>
-<a name="l00229"></a>00229 <span class="stringliteral">      $sTipo = $vDatosImg[&#39;</span>mime<span class="stringliteral">&#39;];</span>
-<a name="l00230"></a>00230 <span class="stringliteral">   } elseif ( isset($vDatosImg[2]) ) {</span>
-<a name="l00231"></a>00231 <span class="stringliteral">      $sTipo = image_type_to_mime_type($vDatosImg[2]);</span>
-<a name="l00232"></a>00232 <span class="stringliteral">   } elseif ( isset($iTipo) ) {</span>
-<a name="l00233"></a>00233 <span class="stringliteral">      $sTipo = image_type_to_mime_type($iTipo);</span>
-<a name="l00234"></a>00234 <span class="stringliteral">   } else {</span>
-<a name="l00235"></a>00235 <span class="stringliteral">      $mens = literal(&#39;</span>Error con datos mime de la imagen<span class="stringliteral">&#39;,3);</span>
-<a name="l00236"></a>00236 <span class="stringliteral">      registrar(__FILE__,__LINE__,$mens,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00237"></a>00237 <span class="stringliteral">      return NULL ;</span>
-<a name="l00238"></a>00238 <span class="stringliteral">   }</span>
-<a name="l00239"></a>00239 <span class="stringliteral"></span>
-<a name="l00240"></a>00240 <span class="stringliteral">   // Especificar las acciones a realizar.</span>
-<a name="l00241"></a>00241 <span class="stringliteral">   $cambiarMiniatura = NULL;</span>
-<a name="l00242"></a>00242 <span class="stringliteral"></span>
-<a name="l00243"></a>00243 <span class="stringliteral">   if ( $ancho &lt; $imgAncho ) {</span>
-<a name="l00244"></a>00244 <span class="stringliteral">     $cambiarMiniatura=TRUE;</span>
-<a name="l00245"></a>00245 <span class="stringliteral">   } elseif ( $alto &lt; $imgAlto) {</span>
-<a name="l00246"></a>00246 <span class="stringliteral">     $cambiarMiniatura=TRUE;</span>
-<a name="l00247"></a>00247 <span class="stringliteral">   }</span>
-<a name="l00248"></a>00248 <span class="stringliteral"></span>
-<a name="l00249"></a>00249 <span class="stringliteral">   // Creamos directorio de miniaturas con el nombre del directorio que</span>
-<a name="l00250"></a>00250 <span class="stringliteral">   // nos han pasado si se pide miniatura</span>
-<a name="l00251"></a>00251 <span class="stringliteral"></span>
-<a name="l00252"></a>00252 <span class="stringliteral">   if ( $miniatura == &#39;</span>si<span class="stringliteral">&#39; ) {</span>
-<a name="l00253"></a>00253 <span class="stringliteral">      if ( ! is_dir($dirFinal) ) {</span>
-<a name="l00254"></a>00254 <span class="stringliteral">        if ( ! mkdir(comprobar_barra($dirFinal,&#39;</span>eliminar<span class="stringliteral">&#39;)) ) {</span>
-<a name="l00255"></a>00255 <span class="stringliteral">           $mens = literal(&#39;</span>Error al crear directorio destino<span class="stringliteral">&#39;,3).&#39;</span>[<span class="stringliteral">&#39;.$dirFinal.&#39;</span>]<span class="stringliteral">&#39;;</span>
-<a name="l00256"></a>00256 <span class="stringliteral">           registrar(__FILE__,__LINE__,$mens,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00257"></a>00257 <span class="stringliteral">           return NULL ;</span>
-<a name="l00258"></a>00258 <span class="stringliteral">           }</span>
-<a name="l00259"></a>00259 <span class="stringliteral">         }</span>
-<a name="l00260"></a>00260 <span class="stringliteral">      }</span>
-<a name="l00261"></a>00261 <span class="stringliteral"></span>
-<a name="l00262"></a>00262 <span class="stringliteral">   // Si hay que cambiar el tamaño se buscan los datos</span>
-<a name="l00263"></a>00263 <span class="stringliteral">   if ( $cambiarMiniatura ) {</span>
-<a name="l00264"></a>00264 <span class="stringliteral"></span>
-<a name="l00265"></a>00265 <span class="stringliteral">     switch($sTipo){</span>
-<a name="l00266"></a>00266 <span class="stringliteral">         case &quot;image/gif&quot;:</span>
-<a name="l00267"></a>00267 <span class="stringliteral">             $fuente = imagecreatefromgif($imagen) ;</span>
-<a name="l00268"></a>00268 <span class="stringliteral">             break;</span>
-<a name="l00269"></a>00269 <span class="stringliteral">         case &quot;image/jpeg&quot;:</span>
-<a name="l00270"></a>00270 <span class="stringliteral">             $fuente = imagecreatefromjpeg($imagen) ;</span>
-<a name="l00271"></a>00271 <span class="stringliteral">             break;</span>
-<a name="l00272"></a>00272 <span class="stringliteral">         case &quot;image/png&quot;:</span>
-<a name="l00273"></a>00273 <span class="stringliteral">             $fuente = imagecreatefrompng($imagen) ;</span>
-<a name="l00274"></a>00274 <span class="stringliteral">             break;</span>
-<a name="l00275"></a>00275 <span class="stringliteral">         default:</span>
-<a name="l00276"></a>00276 <span class="stringliteral">             break;</span>
-<a name="l00277"></a>00277 <span class="stringliteral">     }</span>
-<a name="l00278"></a>00278 <span class="stringliteral"></span>
-<a name="l00279"></a>00279 <span class="stringliteral">     if ( !$fuente ) {</span>
-<a name="l00280"></a>00280 <span class="stringliteral">        registrar(__FILE__,__LINE__,literal(&#39;</span>Error con datos mime<span class="stringliteral">&#39;,3).&#39;</span>[<span class="stringliteral">&#39;.$sTipo.&#39;</span>]<span class="charliteral">&#39;,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00281"></a>00281 <span class="stringliteral">        return NULL ;</span>
-<a name="l00282"></a>00282 <span class="stringliteral">     }</span>
-<a name="l00283"></a>00283 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00284"></a>00284 <span class="comment">     /// Comprobar que la imágen no pase ni alto maximo ni el ancho definido</span>
-<a name="l00285"></a>00285 <span class="comment"></span>     if ( $ancho &gt; 0 )  {
-<a name="l00286"></a>00286         $anchoFinal = $ancho;
-<a name="l00287"></a>00287         $altoFinal = $imgAlto * $ancho / $imgAncho ;
-<a name="l00288"></a>00288         // comprobar altoFinal no sea mayor al especificado
-<a name="l00289"></a>00289         if ( $altoFinal &gt; $alto ) {
-<a name="l00290"></a>00290            $altoFinal = $alto;
-<a name="l00291"></a>00291            $anchoFinal = $imgAncho * $alto / $imgAlto ;
-<a name="l00292"></a>00292         }
-<a name="l00293"></a>00293      } elseif ( $alto &gt; 0 ) {
-<a name="l00294"></a>00294         $altoFinal = $alto;
-<a name="l00295"></a>00295         $anchoFinal = $imgAncho * $alto / $imgAlto ;
-<a name="l00296"></a>00296         if ( $anchoFinal &gt; $ancho ) {
-<a name="l00297"></a>00297            $anchoFinal = $ancho ;
-<a name="l00298"></a>00298            $altoFinal = $imgAlto * $ancho / $imgAncho ;
-<a name="l00299"></a>00299         }
-<a name="l00300"></a>00300      }
-<a name="l00301"></a>00301 
-<a name="l00302"></a>00302      $imagen= ImageCreateTrueColor($anchoFinal, $altoFinal)
-<a name="l00303"></a>00303        or $imagen=ImageCreate($anchoFinal, $altoFinal);
+<a name="l00004"></a>00004 <span class="comment"> * @file      Router.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Enrutar segun url</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * Detailed description starts here.</span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00010"></a>00010 <span class="comment"> *</span>
+<a name="l00011"></a>00011 <span class="comment"> * @internal</span>
+<a name="l00012"></a>00012 <span class="comment"> *   Created  23/07/10</span>
+<a name="l00013"></a>00013 <span class="comment"> *  Revision  SVN $Id: Router.php 554 2012-01-17 17:12:56Z eduardo $</span>
+<a name="l00014"></a>00014 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
+<a name="l00015"></a>00015 <span class="comment"> *</span>
+<a name="l00016"></a>00016 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00017"></a>00017 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00018"></a>00018 <span class="comment"> */</span>
+<a name="l00019"></a>00019 <span class="comment"></span>
+<a name="l00020"></a>00020 <span class="comment">/**</span>
+<a name="l00021"></a>00021 <span class="comment"> * @class Router</span>
+<a name="l00022"></a>00022 <span class="comment"> * @brief Clase destinada a determinar donde estamos, y que queremos hacer.</span>
+<a name="l00023"></a>00023 <span class="comment"> * </span>
+<a name="l00024"></a>00024 <span class="comment"> * Podemos definir desde la url los eventos a lanzar, formatos, idioma, etc.., </span>
+<a name="l00025"></a>00025 <span class="comment"> * indicando al inicio de la url es decir justo antes de la sección especificada.</span>
+<a name="l00026"></a>00026 <span class="comment"> *</span>
+<a name="l00027"></a>00027 <span class="comment"> * Ejemplos:</span>
+<a name="l00028"></a>00028 <span class="comment"> *</span>
+<a name="l00029"></a>00029 <span class="comment"> * http://localhost/proyecto/ajax/test/Seccion/contenido.html</span>
+<a name="l00030"></a>00030 <span class="comment"> * .</span>
+<a name="l00031"></a>00031 <span class="comment"> * - formato: ajax</span>
+<a name="l00032"></a>00032 <span class="comment"> * - evento: test</span>
+<a name="l00033"></a>00033 <span class="comment"> * - seccion: Seccion</span>
+<a name="l00034"></a>00034 <span class="comment"> * - Contenido: contenido.html</span>
+<a name="l00035"></a>00035 <span class="comment"> *</span>
+<a name="l00036"></a>00036 <span class="comment"> * Tambien podemos pasar argumentos tanto a modulos como a evento, el truco esta en que</span>
+<a name="l00037"></a>00037 <span class="comment"> * si se indentifica un evento o módulo existente, se verifica contenido de las </span>
+<a name="l00038"></a>00038 <span class="comment"> * siguientes partes de la url, en caso de no existir como sección o contenido, se </span>
+<a name="l00039"></a>00039 <span class="comment"> * interpretara que son argumentos, guardandolos en router::args[].</span>
+<a name="l00040"></a>00040 <span class="comment"> *</span>
+<a name="l00041"></a>00041 <span class="comment"> * http://localhost/proyecto/contenidos/borrar/12/34/Seccion/contenido.html</span>
+<a name="l00042"></a>00042 <span class="comment"> * .</span>
+<a name="l00043"></a>00043 <span class="comment"> * - Módulo: contenidos</span>
+<a name="l00044"></a>00044 <span class="comment"> * - acción: borrar</span>
+<a name="l00045"></a>00045 <span class="comment"> * - argumentos: array(&#39;12&#39;,&#39;34&#39;)</span>
+<a name="l00046"></a>00046 <span class="comment"> * - sección: Seccion</span>
+<a name="l00047"></a>00047 <span class="comment"> * - Contenido: contenido.html</span>
+<a name="l00048"></a>00048 <span class="comment"> *</span>
+<a name="l00049"></a>00049 <span class="comment"> * @warning Los parametros pasados por GET o POST tienen preferencia ante los de la url</span>
+<a name="l00050"></a>00050 <span class="comment"> * </span>
+<a name="l00051"></a>00051 <span class="comment"> * Para que todo funcione correctamente es necesario tener en el directorio principal</span>
+<a name="l00052"></a>00052 <span class="comment"> * de cada proyecto un archivo .htaccess con el siguiente contenido y tener activado</span>
+<a name="l00053"></a>00053 <span class="comment"> * RewriteRule en apache.</span>
+<a name="l00054"></a>00054 <span class="comment"> *</span>
+<a name="l00055"></a>00055 <span class="comment"> * &lt;pre&gt;</span>
+<a name="l00056"></a>00056 <span class="comment"> * RewriteEngine on</span>
+<a name="l00057"></a>00057 <span class="comment"> * RewriteOptions MaxRedirects=20</span>
+<a name="l00058"></a>00058 <span class="comment"> * </span>
+<a name="l00059"></a>00059 <span class="comment"> * RewriteRule .*favicon.ico favicon.ico [L]</span>
+<a name="l00060"></a>00060 <span class="comment"> * RewriteRule .*temas/(.*)$ temas/$1 [L]</span>
+<a name="l00061"></a>00061 <span class="comment"> * RewriteRule .*DATOS/(.*)$ DATOS/$1 [L]</span>
+<a name="l00062"></a>00062 <span class="comment"> * RewriteRule .*copiasSeguridad/(.*)$ copiasSeguridad/$1 [L]</span>
+<a name="l00063"></a>00063 <span class="comment"> * </span>
+<a name="l00064"></a>00064 <span class="comment"> * # Si estamos llamando a un directorio existenete no ejecutamos reglas</span>
+<a name="l00065"></a>00065 <span class="comment"> * RewriteCond %{REQUEST_FILENAME} !-d</span>
+<a name="l00066"></a>00066 <span class="comment"> * # Si estamos llamando a un archivo no ejecutamos rewrite</span>
+<a name="l00067"></a>00067 <span class="comment"> * RewriteCond %{REQUEST_FILENAME} !-f</span>
+<a name="l00068"></a>00068 <span class="comment"> * </span>
+<a name="l00069"></a>00069 <span class="comment"> * RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]</span>
+<a name="l00070"></a>00070 <span class="comment"> * &lt;/pre&gt;</span>
+<a name="l00071"></a>00071 <span class="comment"> *</span>
+<a name="l00072"></a>00072 <span class="comment"> */</span>
+<a name="l00073"></a>00073 
+<a name="l00074"></a><a class="code" href="../../d9/db3/a00066.html">00074</a> <span class="keyword">class </span><a class="code" href="../../d9/db3/a00066.html" title="Clase destinada a determinar donde estamos, y que queremos hacer.">Router</a> {
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076    <span class="keyword">private</span> <span class="keyword">static</span> $referencia = NULL;      <span class="comment">///&lt; Referancia al objeto (singleton)</span>
+<a name="l00077"></a>00077 <span class="comment"></span><span class="comment"></span>
+<a name="l00078"></a>00078 <span class="comment">   /**</span>
+<a name="l00079"></a>00079 <span class="comment">    * Listado de modulos que nos permite reconer segun la url si se esta pidiendo </span>
+<a name="l00080"></a>00080 <span class="comment">    * la acción de alguno de ellos.</span>
+<a name="l00081"></a>00081 <span class="comment">    *</span>
+<a name="l00082"></a>00082 <span class="comment">    * En caso de detectar que la url lleva un módulo como por ejemplo: </span>
+<a name="l00083"></a>00083 <span class="comment">    * proyecto/contenido/indexar/Seccion/contenido.html, de determina que la acción</span>
+<a name="l00084"></a>00084 <span class="comment">    * demandada es la siguiente al nombre del módulo.</span>
+<a name="l00085"></a>00085 <span class="comment">    */</span>
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087    <span class="keyword">private</span> <span class="keyword">static</span> $modulos = NULL;
+<a name="l00088"></a>00088 <span class="comment"></span>
+<a name="l00089"></a>00089 <span class="comment">   /**</span>
+<a name="l00090"></a>00090 <span class="comment">    * Array con argumentos pasados mediante url como ejemplo:</span>
+<a name="l00091"></a>00091 <span class="comment">    *</span>
+<a name="l00092"></a>00092 <span class="comment">    * proyecto/cache_http/borrar/todo</span>
+<a name="l00093"></a>00093 <span class="comment">    *</span>
+<a name="l00094"></a>00094 <span class="comment">    * Al pasar un módulo y una acción se mira que la siguiente</span>
+<a name="l00095"></a>00095 <span class="comment">    * sección no exista si es así la añadimos a Router::$args</span>
+<a name="l00096"></a>00096 <span class="comment">    *</span>
+<a name="l00097"></a>00097 <span class="comment">    */</span>
+<a name="l00098"></a>00098    
+<a name="l00099"></a><a class="code" href="../../d9/db3/a00066_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10">00099</a>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">$args</a>;
+<a name="l00100"></a>00100 <span class="comment"></span>
+<a name="l00101"></a>00101 <span class="comment">   /**</span>
+<a name="l00102"></a>00102 <span class="comment">    * Listado con los posibles eventos.</span>
+<a name="l00103"></a>00103 <span class="comment">    */</span>
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105    <span class="keyword">private</span> <span class="keyword">static</span> $eventos = NULL;
+<a name="l00106"></a>00106 <span class="comment"></span>
+<a name="l00107"></a>00107 <span class="comment">   /**</span>
+<a name="l00108"></a>00108 <span class="comment">    * Formatos posibles a la hora de presentar la información</span>
+<a name="l00109"></a>00109 <span class="comment">    *</span>
+<a name="l00110"></a>00110 <span class="comment">    * Ejemplo: html, ajax, rss, ..., por defecto html</span>
+<a name="l00111"></a>00111 <span class="comment">    */</span>
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113    <span class="keyword">private</span> <span class="keyword">static</span> $formatos = NULL;
+<a name="l00114"></a>00114 <span class="comment"></span>
+<a name="l00115"></a>00115 <span class="comment">   /**</span>
+<a name="l00116"></a>00116 <span class="comment">    * Listado de idiomas activados</span>
+<a name="l00117"></a>00117 <span class="comment">    */</span>
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119    <span class="keyword">private</span> <span class="keyword">static</span> $idiomas = NULL ;
+<a name="l00120"></a>00120 
+<a name="l00121"></a><a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909">00121</a>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>;                     <span class="comment">///&lt; Url que nos llega</span>
+<a name="l00122"></a><a class="code" href="../../d9/db3/a00066_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62">00122</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">$dir</a>;                     <span class="comment">///&lt; Base de url relativa al directorio</span>
+<a name="l00123"></a><a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e">00123</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a>;                      <span class="comment">///&lt; Directorio con idioma por defecto</span>
+<a name="l00124"></a><a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe">00124</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a>;                       <span class="comment">///&lt; Directorio con idioma actual</span>
+<a name="l00125"></a><a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634">00125</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>;                       <span class="comment">///&lt; Sección</span>
+<a name="l00126"></a><a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b">00126</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">$c</a>;                       <span class="comment">///&lt; Contenido</span>
+<a name="l00127"></a><a class="code" href="../../d9/db3/a00066_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99">00127</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a23c42e7d231a63025b55e4eb7e3d4c99.html#a23c42e7d231a63025b55e4eb7e3d4c99" title="Url del contenido que se pide.">$f</a>;                       <span class="comment">///&lt; Url del contenido que se pide</span>
+<a name="l00128"></a><a class="code" href="../../d9/db3/a00066_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49">00128</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49" title="Modulo que se desea utilizar.">$m</a>;                       <span class="comment">///&lt; Modulo que se desea utilizar</span>
+<a name="l00129"></a><a class="code" href="../../d9/db3/a00066_acebf83966ef6d7e5645a6b62ba368f9f.html#acebf83966ef6d7e5645a6b62ba368f9f">00129</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_acebf83966ef6d7e5645a6b62ba368f9f.html#acebf83966ef6d7e5645a6b62ba368f9f" title="Accion que se desea realizar.">$a</a>;                       <span class="comment">///&lt; Accion que se desea realizar</span>
+<a name="l00130"></a><a class="code" href="../../d9/db3/a00066_ab74076a9b7e1d23d12b9e8d65e60315a.html#ab74076a9b7e1d23d12b9e8d65e60315a">00130</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_ab74076a9b7e1d23d12b9e8d65e60315a.html#ab74076a9b7e1d23d12b9e8d65e60315a" title="Evento que se desea realizar.">$e</a>;                       <span class="comment">///&lt; Evento que se desea realizar</span>
+<a name="l00131"></a><a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f">00131</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">$i</a>;                       <span class="comment">///&lt; Idioma actual</span>
+<a name="l00132"></a><a class="code" href="../../d9/db3/a00066_a088fc18ad150c02f45bb46c5dc472aa9.html#a088fc18ad150c02f45bb46c5dc472aa9">00132</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a088fc18ad150c02f45bb46c5dc472aa9.html#a088fc18ad150c02f45bb46c5dc472aa9" title="Idioma por defecto.">$ii</a>;                      <span class="comment">///&lt; Idioma por defecto</span>
+<a name="l00133"></a><a class="code" href="../../d9/db3/a00066_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63">00133</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">$base</a>;                    <span class="comment">///&lt; $enlace_relativo + $dir </span>
+<a name="l00134"></a><a class="code" href="../../d9/db3/a00066_a3e27950a38c37fafd70fca40524972ec.html#a3e27950a38c37fafd70fca40524972ec">00134</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a3e27950a38c37fafd70fca40524972ec.html#a3e27950a38c37fafd70fca40524972ec" title="http://dominio/ + $dir">$base_absoluta</a>;           <span class="comment">///&lt; http://dominio/ + $dir </span>
+<a name="l00135"></a><a class="code" href="../../d9/db3/a00066_a65c95b6917e9fdcead66313c9faa5942.html#a65c95b6917e9fdcead66313c9faa5942">00135</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a65c95b6917e9fdcead66313c9faa5942.html#a65c95b6917e9fdcead66313c9faa5942" title="Nombre de la sección actual.">$estamos</a>;                 <span class="comment">///&lt; Nombre de la sección actual</span>
+<a name="l00136"></a><a class="code" href="../../d9/db3/a00066_a4b58cdf7fbd5c2016867ad65adb48445.html#a4b58cdf7fbd5c2016867ad65adb48445">00136</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a4b58cdf7fbd5c2016867ad65adb48445.html#a4b58cdf7fbd5c2016867ad65adb48445" title="Editamos o vemos.">$editar</a>;                  <span class="comment">///&lt; Editamos o vemos</span>
+<a name="l00137"></a><a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a">00137</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a>;               <span class="comment">///&lt; Tipo de archivo</span>
+<a name="l00138"></a><a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71">00138</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">$formato</a>;                 <span class="comment">///&lt; Formato de presentación, ejemplo html, ajax, rss, etc...</span>
+<a name="l00139"></a><a class="code" href="../../d9/db3/a00066_ad837fd69f5921416cf6f2a2f90caf890.html#ad837fd69f5921416cf6f2a2f90caf890">00139</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_ad837fd69f5921416cf6f2a2f90caf890.html#ad837fd69f5921416cf6f2a2f90caf890" title="Saber si el contenido es un borrador.">$esBorrador</a> = FALSE;      <span class="comment">///&lt; Saber si el contenido es un borrador</span>
+<a name="l00140"></a><a class="code" href="../../d9/db3/a00066_a4e25f7a540bfc9c6e5556abf6b8331f9.html#a4e25f7a540bfc9c6e5556abf6b8331f9">00140</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a4e25f7a540bfc9c6e5556abf6b8331f9.html#a4e25f7a540bfc9c6e5556abf6b8331f9" title="En caso de no encontrar contenido definimos variable a TRUE.">$sin_contenido</a> = FALSE;   <span class="comment">///&lt; En caso de no encontrar contenido definimos variable a TRUE</span>
+<a name="l00141"></a><a class="code" href="../../d9/db3/a00066_a8c1c864e7f0c6e71717c038396765bb8.html#a8c1c864e7f0c6e71717c038396765bb8">00141</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a8c1c864e7f0c6e71717c038396765bb8.html#a8c1c864e7f0c6e71717c038396765bb8" title="En caso de pedirse un texto en idioma no predeterminado y no tenerlo.">$sin_traduccion</a> = FALSE;  <span class="comment">///&lt; En caso de pedirse un texto en idioma no predeterminado y no tenerlo.</span>
+<a name="l00142"></a><a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d">00142</a> <span class="comment"></span>   <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">$forma_comentarios</a> = <span class="stringliteral">&#39;&lt;!-- %s --&gt;&#39;</span>;  <span class="comment">///&lt; Formato para los comentarios.</span>
+<a name="l00143"></a>00143 <span class="comment"></span><span class="comment"></span>
+<a name="l00144"></a>00144 <span class="comment">   /**</span>
+<a name="l00145"></a>00145 <span class="comment">    * prefijo para el enlace relativo, para tener en cuenta si acaba la url con barra o sin ella</span>
+<a name="l00146"></a>00146 <span class="comment">    *</span>
+<a name="l00147"></a>00147 <span class="comment">    */</span>
+<a name="l00148"></a>00148 
+<a name="l00149"></a><a class="code" href="../../d9/db3/a00066_aab3fe4237c8eed37504f28f8541c9c79.html#aab3fe4237c8eed37504f28f8541c9c79">00149</a>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d9/db3/a00066_aab3fe4237c8eed37504f28f8541c9c79.html#aab3fe4237c8eed37504f28f8541c9c79" title="prefijo para el enlace relativo, para tener en cuenta si acaba la url con barra o sin ella...">$enlace_relativo</a>;
+<a name="l00150"></a>00150 <span class="comment"></span>
+<a name="l00151"></a>00151 <span class="comment">   /**</span>
+<a name="l00152"></a>00152 <span class="comment">    * Construir lista de idiomas activados</span>
+<a name="l00153"></a>00153 <span class="comment">    *</span>
+<a name="l00154"></a>00154 <span class="comment">    * @todo La lista a de venir del módulo idiomas</span>
+<a name="l00155"></a>00155 <span class="comment">    */</span>
+<a name="l00156"></a>00156 
+<a name="l00157"></a><a class="code" href="../../d9/db3/a00066_aef59ac00a9caf2bbc31c49f5967939d8.html#aef59ac00a9caf2bbc31c49f5967939d8">00157</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_aef59ac00a9caf2bbc31c49f5967939d8.html#aef59ac00a9caf2bbc31c49f5967939d8" title="Construir lista de idiomas activados.">set_idiomas</a>() {
+<a name="l00158"></a>00158       self::$idiomas = array(<span class="stringliteral">&#39;es&#39;</span>,<span class="stringliteral">&#39;ca&#39;</span>);
+<a name="l00159"></a>00159       }
+<a name="l00160"></a>00160 <span class="comment"></span>
+<a name="l00161"></a>00161 <span class="comment">   /**</span>
+<a name="l00162"></a>00162 <span class="comment">    * Construir lista de formatos</span>
+<a name="l00163"></a>00163 <span class="comment">    */</span>
+<a name="l00164"></a>00164 
+<a name="l00165"></a><a class="code" href="../../d9/db3/a00066_a96874542c56231ee90bd8bad92425997.html#a96874542c56231ee90bd8bad92425997">00165</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_a96874542c56231ee90bd8bad92425997.html#a96874542c56231ee90bd8bad92425997" title="Construir lista de formatos.">set_formatos</a>() {
+<a name="l00166"></a>00166       self::$formatos = array(<span class="stringliteral">&#39;html&#39;</span>, <span class="stringliteral">&#39;ajax&#39;</span>, <span class="stringliteral">&#39;rst&#39;</span>);
+<a name="l00167"></a>00167       }
+<a name="l00168"></a>00168 <span class="comment"></span>
+<a name="l00169"></a>00169 <span class="comment">   /**</span>
+<a name="l00170"></a>00170 <span class="comment">    * Construir lista de eventos</span>
+<a name="l00171"></a>00171 <span class="comment">    *</span>
+<a name="l00172"></a>00172 <span class="comment">    * @todo Recoger los eventos de la clase Eventos</span>
+<a name="l00173"></a>00173 <span class="comment">    */</span>
+<a name="l00174"></a>00174 
+<a name="l00175"></a><a class="code" href="../../d9/db3/a00066_ad04f38f78478b22c30e2416fa19181d0.html#ad04f38f78478b22c30e2416fa19181d0">00175</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_ad04f38f78478b22c30e2416fa19181d0.html#ad04f38f78478b22c30e2416fa19181d0" title="Construir lista de eventos.">set_eventos</a>() {
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00178"></a>00178 
+<a name="l00179"></a>00179       <span class="keywordflow">if</span> ( isset($gcm-&gt;event-&gt;eventos) ) {
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181          <a class="code" href="../../d1/d8b/a00406_ga8f8e958e17e5ad25607f7a3313f76b3f.html#ga8f8e958e17e5ad25607f7a3313f76b3f" title="Presentamos últimos comentarios.">self::$eventos</a> = array_keys($gcm-&gt;event-&gt;eventos);
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183          }
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185       <span class="comment">// $ficheros_gcm = glob(GCM_DIR.&#39;modulos/*/eventos_*.php&#39;);</span>
+<a name="l00186"></a>00186       <span class="comment">// $ficheros_pro = glob(&#39;DATOS/eventos/*/eventos_*.php&#39;);</span>
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188       <span class="comment">// if ( ! empty($ficheros_pro)  ) {</span>
+<a name="l00189"></a>00189       <span class="comment">//    $ficheros_eventos = array_merge($ficheros_gcm, $ficheros_pro);</span>
+<a name="l00190"></a>00190       <span class="comment">// } else {</span>
+<a name="l00191"></a>00191       <span class="comment">//    $ficheros_eventos = $ficheros_gcm;</span>
+<a name="l00192"></a>00192       <span class="comment">// }</span>
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194       <span class="comment">// foreach ($ficheros_eventos as $fichero) {</span>
+<a name="l00195"></a>00195       <span class="comment">//    $eventos = FALSE;</span>
+<a name="l00196"></a>00196       <span class="comment">//    include($fichero);</span>
+<a name="l00197"></a>00197       <span class="comment">//    if ( $eventos ) {</span>
+<a name="l00198"></a>00198       <span class="comment">//       foreach ($eventos as $key =&gt; $evento) {</span>
+<a name="l00199"></a>00199       <span class="comment">//          if ( ! self::$eventos || ! in_array($key,self::$eventos) ) self::$eventos[] = $key;</span>
+<a name="l00200"></a>00200       <span class="comment">//          }</span>
+<a name="l00201"></a>00201       <span class="comment">//       }</span>
+<a name="l00202"></a>00202       <span class="comment">//    }</span>
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204       }
+<a name="l00205"></a>00205 <span class="comment"></span>
+<a name="l00206"></a>00206 <span class="comment">   /**</span>
+<a name="l00207"></a>00207 <span class="comment">    * Construir listado de módulos</span>
+<a name="l00208"></a>00208 <span class="comment">    *</span>
+<a name="l00209"></a>00209 <span class="comment">    * Hay dos posibles directorios de módulos el de gcm y el del proyecto</span>
+<a name="l00210"></a>00210 <span class="comment">    * recorremos los dos para crear la lista</span>
+<a name="l00211"></a>00211 <span class="comment">    *</span>
+<a name="l00212"></a>00212 <span class="comment">    * @see modulos</span>
+<a name="l00213"></a>00213 <span class="comment">    */</span>
+<a name="l00214"></a>00214 
+<a name="l00215"></a><a class="code" href="../../d9/db3/a00066_a4cabff2a45fa0965a4bec6d51d76a543.html#a4cabff2a45fa0965a4bec6d51d76a543">00215</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_a4cabff2a45fa0965a4bec6d51d76a543.html#a4cabff2a45fa0965a4bec6d51d76a543" title="Construir listado de módulos.">set_modulos</a>() {
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219       <span class="keywordflow">if</span> ( isset($gcm-&gt;event-&gt;eventos) ) {
+<a name="l00220"></a>00220 
+<a name="l00221"></a>00221          <span class="keywordflow">foreach</span> ( $gcm-&gt;event-&gt;eventos as $evento ) {
+<a name="l00222"></a>00222             <span class="keywordflow">foreach</span> ( $evento as $modulo =&gt; $accion ) {
+<a name="l00223"></a>00223                <span class="keywordflow">if</span> ( ! self::$modulos || ! in_array($modulo,self::$modulos) ) {
+<a name="l00224"></a>00224                   self::$modulos[] = $modulo;
+<a name="l00225"></a>00225                   }
+<a name="l00226"></a>00226                }
+<a name="l00227"></a>00227             }
+<a name="l00228"></a>00228 
+<a name="l00229"></a>00229          }
+<a name="l00230"></a>00230 
+<a name="l00231"></a>00231       <span class="keywordflow">return</span>;
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233       <span class="comment">// $modulos = glob(GCM_DIR.&#39;modulos/*&#39;);</span>
+<a name="l00234"></a>00234       <span class="comment">// $modulos2 = glob(&#39;modulos/*&#39;);</span>
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236       <span class="comment">// if ( ! empty($modulos2)  ) $modulos = array_merge($modulos, $modulos2);</span>
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238       <span class="comment">// foreach ($modulos as $modulo) {</span>
+<a name="l00239"></a>00239       <span class="comment">//    self::$modulos[] = basename($modulo);</span>
+<a name="l00240"></a>00240       <span class="comment">//    }</span>
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242       }
+<a name="l00243"></a>00243 <span class="comment"></span>
+<a name="l00244"></a>00244 <span class="comment">   /**</span>
+<a name="l00245"></a>00245 <span class="comment">    * Comprobar que no coincidan palabras reservadas de diferentes secciones</span>
+<a name="l00246"></a>00246 <span class="comment">    */</span>
+<a name="l00247"></a>00247 
+<a name="l00248"></a><a class="code" href="../../d9/db3/a00066_afe9b88e358677479da6bb622f8a41e14.html#afe9b88e358677479da6bb622f8a41e14">00248</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_afe9b88e358677479da6bb622f8a41e14.html#afe9b88e358677479da6bb622f8a41e14" title="Comprobar que no coincidan palabras reservadas de diferentes secciones.">comprobar_reservadas</a>() {
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250       $msg = FALSE;
+<a name="l00251"></a>00251       $msg_comun = <span class="stringliteral">&quot;\nLas coincidencias en las palabras reservadas que utiliza Router pueden afectar </span>
+<a name="l00252"></a>00252 <span class="stringliteral">         al comportamiento de Router a la hora de seleccionar la acción que se desea realizar, para </span>
+<a name="l00253"></a>00253 <span class="stringliteral">         más información vease la documentación de &quot;</span>.GUtil::enlace_documentacion(<span class="stringliteral">&#39;Router&#39;</span>);
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255       $reservadas = array(<span class="stringliteral">&#39;modulos&#39;</span>, <span class="stringliteral">&#39;eventos&#39;</span>, <span class="stringliteral">&#39;idiomas&#39;</span>, <span class="stringliteral">&#39;formatos&#39;</span>);
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257       <span class="keywordflow">foreach</span> ( $reservadas as $reservada ) {
+<a name="l00258"></a>00258 
+<a name="l00259"></a>00259          <span class="keywordflow">foreach</span> ( <span class="keyword">self</span>::$$reservada as $elemento ) {
+<a name="l00260"></a>00260             <span class="keywordflow">if</span> ( $reservada != <span class="stringliteral">&#39;eventos&#39;</span> &amp;&amp; in_array($elemento, <a class="code" href="../../d1/d8b/a00406_ga8f8e958e17e5ad25607f7a3313f76b3f.html#ga8f8e958e17e5ad25607f7a3313f76b3f" title="Presentamos últimos comentarios.">self::$eventos</a>)  ) {
+<a name="l00261"></a>00261                $msg .= <span class="stringliteral">&quot;$reservada: $elemento coincide con eventos\n&quot;</span>;
+<a name="l00262"></a>00262                }
+<a name="l00263"></a>00263             <span class="keywordflow">if</span> ( $reservada != <span class="stringliteral">&#39;modulos&#39;</span> &amp;&amp;  in_array($elemento, self::$modulos)  ) {
+<a name="l00264"></a>00264                $msg .= <span class="stringliteral">&quot;$reservada: $elemento coincide con modulos\n&quot;</span>;
+<a name="l00265"></a>00265                }
+<a name="l00266"></a>00266             <span class="keywordflow">if</span> ( $reservada != <span class="stringliteral">&#39;idiomas&#39;</span> &amp;&amp;  in_array($elemento, self::$idiomas)  ) {
+<a name="l00267"></a>00267                $msg .= <span class="stringliteral">&quot;$reservada: $elemento coincide con idiomas\n&quot;</span>;
+<a name="l00268"></a>00268                }
+<a name="l00269"></a>00269             <span class="keywordflow">if</span> ( $reservada != <span class="stringliteral">&#39;formatos&#39;</span> &amp;&amp;  in_array($elemento, self::$formatos)  ) {
+<a name="l00270"></a>00270                $msg .= <span class="stringliteral">&quot;$reservada: $elemento coincide con formatos\n&quot;</span>;
+<a name="l00271"></a>00271                }
+<a name="l00272"></a>00272             }
+<a name="l00273"></a>00273          }
+<a name="l00274"></a>00274 
+<a name="l00275"></a>00275       <span class="keywordflow">if</span> ( $msg ) registrar(__FILE__,__LINE__,$msg.$msg_comun,<span class="stringliteral">&#39;ADMIN&#39;</span>);
+<a name="l00276"></a>00276 
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278       }
+<a name="l00279"></a>00279 <span class="comment"></span>
+<a name="l00280"></a>00280 <span class="comment">   /** </span>
+<a name="l00281"></a>00281 <span class="comment">    * Solo permitimos una instancia de Router</span>
+<a name="l00282"></a>00282 <span class="comment">    */</span>
+<a name="l00283"></a>00283 
+<a name="l00284"></a><a class="code" href="../../d9/db3/a00066_ac93fbec81f07e5d15f80db907e63dc10.html#ac93fbec81f07e5d15f80db907e63dc10">00284</a>    <span class="keyword">static</span> <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_ac93fbec81f07e5d15f80db907e63dc10.html#ac93fbec81f07e5d15f80db907e63dc10" title="Solo permitimos una instancia de Router.">getInstance</a>() {
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286       <span class="keywordflow">if</span> (  !self::$referencia instanceof <span class="keyword">self</span> ) {
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288          $clase = __CLASS__;
+<a name="l00289"></a>00289          self::$referencia = <span class="keyword">new</span> $clase;
+<a name="l00290"></a>00290 
+<a name="l00291"></a>00291          }
+<a name="l00292"></a>00292 
+<a name="l00293"></a>00293       <span class="keywordflow">return</span> self::$referencia;
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295       }
+<a name="l00296"></a>00296 <span class="comment"></span>
+<a name="l00297"></a>00297 <span class="comment">   /** </span>
+<a name="l00298"></a>00298 <span class="comment">    * Inicia</span>
+<a name="l00299"></a>00299 <span class="comment">    *</span>
+<a name="l00300"></a>00300 <span class="comment">    * Desglosamos la url, en caso de tener tambien parametros en REQUEST</span>
+<a name="l00301"></a>00301 <span class="comment">    * prevaleceran a los de la misma url</span>
+<a name="l00302"></a>00302 <span class="comment">    *</span>
+<a name="l00303"></a>00303 <span class="comment">    */</span>
 <a name="l00304"></a>00304 
-<a name="l00305"></a>00305      ImageCopyResized($imagen,$fuente,0,0,0,0,$anchoFinal,$altoFinal,$imgAncho,$imgAlto);
-<a name="l00306"></a>00306      // Un tercer parametro podemos definir la calidad
-<a name="l00307"></a>00307      // que es de 0 a 100 siendo 100 la max calidad.
-<a name="l00308"></a>00308      // Por defecto es 75.
-<a name="l00309"></a>00309      // imagejpeg($imagen,$userImagen);
+<a name="l00305"></a><a class="code" href="../../d9/db3/a00066_afccd051fe18096704b4849ac7e670ed2.html#afccd051fe18096704b4849ac7e670ed2">00305</a>    <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_afccd051fe18096704b4849ac7e670ed2.html#afccd051fe18096704b4849ac7e670ed2" title="Inicia.">inicia</a>(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>=NULL) {
+<a name="l00306"></a>00306 
+<a name="l00307"></a>00307       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00308"></a>00308 
+<a name="l00309"></a>00309       $proyecto = $gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>);
 <a name="l00310"></a>00310 
-<a name="l00311"></a>00311      // Se pinta la imagen según el tipo
-<a name="l00312"></a>00312       switch($sTipo){
-<a name="l00313"></a>00313           case &quot;image/gif&quot;:
-<a name="l00314"></a>00314               imagegif($imagen,$dirFinal.$imagenName);
-<a name="l00315"></a>00315               break;
-<a name="l00316"></a>00316           case &quot;image/jpeg&quot;:
-<a name="l00317"></a>00317               imagejpeg($imagen,$dirFinal.$imagenName, 100);
-<a name="l00318"></a>00318               break;
-<a name="l00319"></a>00319           case &quot;image/png&quot;:
-<a name="l00320"></a>00320               imagepng($imagen,$dirFinal.$imagenName);
-<a name="l00321"></a>00321               break;
-<a name="l00322"></a>00322           default:
-<a name="l00323"></a>00323               registrar(__FILE__,__LINE__,literal(&#39;Tipo de imagen no soportada<span class="stringliteral">&#39;,3).&#39;</span> [<span class="stringliteral">&#39;.$sTipo.&#39;</span>]<span class="charliteral">&#39;,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00324"></a>00324 <span class="stringliteral">              return NULL ;</span>
-<a name="l00325"></a>00325 <span class="stringliteral">              break;</span>
-<a name="l00326"></a>00326 <span class="stringliteral">     }</span>
-<a name="l00327"></a>00327 <span class="stringliteral"></span>
-<a name="l00328"></a>00328 <span class="stringliteral">   } else { // si no hay que cambiar el tamaño</span>
-<a name="l00329"></a>00329 <span class="stringliteral"></span>
-<a name="l00330"></a>00330 <span class="stringliteral">      if (!copy($imagen ,comprobar_barra($dirFinal).$imagenName)) {</span>
-<a name="l00331"></a>00331 <span class="stringliteral">         registrar(__FILE__,__LINE__,literal(&#39;</span>Fallo al generar imagen<span class="stringliteral">&#39;,3),&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00332"></a>00332 <span class="stringliteral">         trigger_error(&quot;Error al copiar imagen&quot;, E_USER_ERROR);</span>
-<a name="l00333"></a>00333 <span class="stringliteral"></span>
-<a name="l00334"></a>00334 <span class="stringliteral">         return NULL ;</span>
-<a name="l00335"></a>00335 <span class="stringliteral">         }</span>
-<a name="l00336"></a>00336 <span class="stringliteral"></span>
-<a name="l00337"></a>00337 <span class="stringliteral">      } // ACABA if $cambiarMiniatura</span>
-<a name="l00338"></a>00338 <span class="stringliteral"></span>
-<a name="l00339"></a>00339 <span class="stringliteral">   } // Acaba generarMiniatura</span>
-<a name="l00340"></a>00340 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00341"></a>00341 <span class="comment">/** Listamos imagenes</span>
-<a name="l00342"></a>00342 <span class="comment"> *</span>
-<a name="l00343"></a>00343 <span class="comment"> * Crear una lista de las imagenes de un directorio</span>
-<a name="l00344"></a>00344 <span class="comment"> *</span>
-<a name="l00345"></a>00345 <span class="comment"> * @param path Directorio donde buscar imagenes</span>
-<a name="l00346"></a>00346 <span class="comment"> * @param tipo tipop de salida:</span>
-<a name="l00347"></a>00347 <span class="comment"> *             1: tiny </span>
-<a name="l00348"></a>00348 <span class="comment"> *             3: JSON </span>
-<a name="l00349"></a>00349 <span class="comment"> *             4: JSON con variable </span>
-<a name="l00350"></a>00350 <span class="comment"> *             5: Array PHP</span>
-<a name="l00351"></a>00351 <span class="comment"> *             default: JSON a pelo</span>
-<a name="l00352"></a>00352 <span class="comment"> */</span>
+<a name="l00311"></a>00311       $this-&gt;<a class="code" href="../../d9/db3/a00066_a4cabff2a45fa0965a4bec6d51d76a543.html#a4cabff2a45fa0965a4bec6d51d76a543" title="Construir listado de módulos.">set_modulos</a>();
+<a name="l00312"></a>00312       $this-&gt;<a class="code" href="../../d9/db3/a00066_ad04f38f78478b22c30e2416fa19181d0.html#ad04f38f78478b22c30e2416fa19181d0" title="Construir lista de eventos.">set_eventos</a>();
+<a name="l00313"></a>00313       $this-&gt;<a class="code" href="../../d9/db3/a00066_a96874542c56231ee90bd8bad92425997.html#a96874542c56231ee90bd8bad92425997" title="Construir lista de formatos.">set_formatos</a>();
+<a name="l00314"></a>00314       $this-&gt;<a class="code" href="../../d9/db3/a00066_aef59ac00a9caf2bbc31c49f5967939d8.html#aef59ac00a9caf2bbc31c49f5967939d8" title="Construir lista de idiomas activados.">set_idiomas</a>();
+<a name="l00315"></a>00315 
+<a name="l00316"></a>00316       <span class="comment">// Desglosamos url</span>
+<a name="l00317"></a>00317       <span class="keywordflow">if</span> ( ! isset(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>) ) <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = stripslashes((isset($_REQUEST[<span class="stringliteral">&#39;url&#39;</span>])) ? $_REQUEST[<span class="stringliteral">&#39;url&#39;</span>] : <span class="stringliteral">&#39;&#39;</span> );
+<a name="l00318"></a>00318       $retorno = <a class="code" href="../../d9/db3/a00066_a195552575880fc9bbc4ab4ad6fea3a94.html#a195552575880fc9bbc4ab4ad6fea3a94" title="desglosarUrl nos devuelve una matriz con la información relevante de una url que pasemos como argumen...">self::desglosarUrl</a>(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00319"></a>00319 
+<a name="l00320"></a>00320       <span class="comment">// echo &quot;&lt;p&gt;&quot;.$url.&quot;&lt;/p&gt;&lt;pre&gt;&quot; ; print_r($retorno) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  &quot;&quot;)&quot;&quot;</span>
+<a name="l00321"></a>00321       <span class="comment">/* Definir url */</span>
+<a name="l00322"></a>00322       self::$url = $retorno[<span class="stringliteral">&#39;url&#39;</span>];
+<a name="l00323"></a>00323       self::$s = $retorno[<span class="charliteral">&#39;s&#39;</span>];
+<a name="l00324"></a>00324       self::$c = $retorno[<span class="charliteral">&#39;c&#39;</span>];
+<a name="l00325"></a>00325       self::$a = $retorno[<span class="charliteral">&#39;a&#39;</span>];
+<a name="l00326"></a>00326       self::$e = $retorno[<span class="charliteral">&#39;e&#39;</span>];
+<a name="l00327"></a>00327       self::$i = $retorno[<span class="charliteral">&#39;i&#39;</span>];
+<a name="l00328"></a>00328       self::$ii = $retorno[<span class="stringliteral">&#39;ii&#39;</span>];
+<a name="l00329"></a>00329       self::$d = $retorno[<span class="charliteral">&#39;d&#39;</span>];
+<a name="l00330"></a>00330       self::$dd = $retorno[<span class="stringliteral">&#39;dd&#39;</span>];
+<a name="l00331"></a>00331       self::$m = $retorno[<span class="charliteral">&#39;m&#39;</span>];
+<a name="l00332"></a>00332       self::$args = $retorno[<span class="stringliteral">&#39;args&#39;</span>];
+<a name="l00333"></a>00333       self::$formato = $retorno[<span class="stringliteral">&#39;formato&#39;</span>];
+<a name="l00334"></a>00334       self::$enlace_relativo = $retorno[<span class="stringliteral">&#39;enlace_relativo&#39;</span>];
+<a name="l00335"></a>00335       self::$mime_type = $retorno[<span class="stringliteral">&#39;mime_type&#39;</span>];
+<a name="l00336"></a>00336       self::$esBorrador = $retorno[<span class="stringliteral">&#39;esBorrador&#39;</span>];
+<a name="l00337"></a>00337       self::$forma_comentarios = $retorno[<span class="stringliteral">&#39;forma_comentarios&#39;</span>];
+<a name="l00338"></a>00338 
+<a name="l00339"></a>00339       <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="charliteral">&#39;i&#39;</span>])  ) {
+<a name="l00340"></a>00340          self::$i = $_REQUEST[<span class="charliteral">&#39;i&#39;</span>];
+<a name="l00341"></a>00341       } elseif ( isset($_REQUEST[<span class="stringliteral">&#39;idioma&#39;</span>]) ) {
+<a name="l00342"></a>00342          self::$i = $_REQUEST[<span class="stringliteral">&#39;idioma&#39;</span>];
+<a name="l00343"></a>00343       } elseif ( isset($_SESSION[$proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>]) ) {
+<a name="l00344"></a>00344          self::$i = $_SESSION[$proyecto.<span class="stringliteral">&quot;-idioma&quot;</span>];
+<a name="l00345"></a>00345          }
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347       <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]) ) { self::$formato = $_REQUEST[<span class="stringliteral">&#39;formato&#39;</span>]; }
+<a name="l00348"></a>00348 
+<a name="l00349"></a>00349       <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="charliteral">&#39;a&#39;</span>]) ) { self::$a = $_REQUEST[<span class="charliteral">&#39;a&#39;</span>]; }
+<a name="l00350"></a>00350       <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="charliteral">&#39;e&#39;</span>]) ) { self::$e = $_REQUEST[<span class="charliteral">&#39;e&#39;</span>]; }
+<a name="l00351"></a>00351       <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="charliteral">&#39;m&#39;</span>]) ) { self::$m = $_REQUEST[<span class="charliteral">&#39;m&#39;</span>]; }
+<a name="l00352"></a>00352       <span class="keywordflow">if</span> ( isset($_REQUEST[<span class="stringliteral">&#39;args&#39;</span>]) ) { self::$args = $_REQUEST[<span class="stringliteral">&#39;args&#39;</span>]; }
 <a name="l00353"></a>00353 
-<a name="l00354"></a><a class="code" href="../../d4/d98/a00120_a064bd0e7f3725fa21b98f3e1b51acad0.html#a064bd0e7f3725fa21b98f3e1b51acad0">00354</a> function gcm_listaImagenes($path, $tipo=1) {
-<a name="l00355"></a>00355 
-<a name="l00356"></a>00356    global $gcm;
-<a name="l00357"></a>00357 <span class="comment"></span>
-<a name="l00358"></a>00358 <span class="comment">   /** Lista que se genera con las imágenes */</span>
-<a name="l00359"></a>00359 
-<a name="l00360"></a>00360    $lista = array();
-<a name="l00361"></a>00361 
-<a name="l00362"></a>00362    $altoMaxMiniatura = $gcm-&gt;config(&#39;imagenes<span class="charliteral">&#39;,&#39;</span>altoMaxMiniatura<span class="stringliteral">&#39;);</span>
-<a name="l00363"></a>00363 <span class="stringliteral">   $anchoMaxMiniatura = $gcm-&gt;config(&#39;</span>imagenes<span class="charliteral">&#39;,&#39;</span>anchoMaxMiniatura<span class="stringliteral">&#39;);</span>
-<a name="l00364"></a>00364 <span class="stringliteral"></span>
-<a name="l00365"></a>00365 <span class="stringliteral">   $extensiones           = array(&quot;jpg&quot;, &quot;jpeg&quot;, &quot;JPG&quot;, &quot;JPEG&quot;, &quot;GIF&quot;, &quot;gif&quot;, &quot;png&quot;, &quot;PNG&quot;, &quot;tiff&quot;, &quot;TIFF&quot;);</span>
-<a name="l00366"></a>00366 <span class="stringliteral">   $extensiones_para_exif = array(&quot;jpg&quot;, &quot;jpeg&quot;, &quot;JPG&quot;, &quot;JPEG&quot;, &quot;tiff&quot;, &quot;TIFF&quot;);</span>
-<a name="l00367"></a>00367 <span class="stringliteral"></span>
-<a name="l00368"></a>00368 <span class="stringliteral">   $base_imagenes=&#39;</span><span class="stringliteral">&#39;;</span>
-<a name="l00369"></a>00369 <span class="stringliteral"></span>
-<a name="l00370"></a>00370 <span class="stringliteral">   if ( ! is_dir($path) ) {</span>
-<a name="l00371"></a>00371 <span class="stringliteral">      registrar(__FILE__,__LINE__,$path.&#39;</span> <span class="stringliteral">&#39;.literal(&#39;</span>No es un directorio<span class="stringliteral">&#39;,3),&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00372"></a>00372 <span class="stringliteral">      return NULL;</span>
-<a name="l00373"></a>00373 <span class="stringliteral">   }</span>
-<a name="l00374"></a>00374 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00375"></a>00375 <span class="comment">   /// Secciones posibles para editor de imagenes en ajax</span>
-<a name="l00376"></a>00376 <span class="comment"></span>   $otrasSecciones = array() ;
-<a name="l00377"></a>00377    // La primera sección de imagenes que listamos para ajax es la actual
-<a name="l00378"></a>00378    $uri = explode(&quot;/&quot;,$path);
-<a name="l00379"></a>00379    $ultimo = ( $uri[count($uri)-1] ) ? $uri[count($uri)-1] : $uri[count($uri)-2];
-<a name="l00380"></a>00380    unset($uri[count($uri)-1]);
-<a name="l00381"></a>00381    unset($uri[count($uri)-1]);
-<a name="l00382"></a>00382    $arriba = implode(&quot;/&quot;,$uri);
-<a name="l00383"></a>00383 
-<a name="l00384"></a>00384    // Listado de otras secciones, que podamos presentar si queremos ver imagenes de otra seccion
-<a name="l00385"></a>00385    //
-<a name="l00386"></a>00386    // Añadimos como primera opción subir de directorio si lo hay.
-<a name="l00387"></a>00387    // Tambien definimos donde estamos, si es la carpeta raiz del contenido es &#39;inicio<span class="stringliteral">&#39; sino</span>
-<a name="l00388"></a>00388 <span class="stringliteral">   // la sección actual.</span>
-<a name="l00389"></a>00389 <span class="stringliteral"></span>
-<a name="l00390"></a>00390 <span class="stringliteral">   if ( $ultimo !== $gcm-&gt;config(&#39;</span>idiomas<span class="charliteral">&#39;,&#39;</span>Idioma por defecto<span class="stringliteral">&#39;) ) {</span>
-<a name="l00391"></a>00391 <span class="stringliteral">      $otrasSecciones[] = array (literal(&#39;</span>subir<span class="stringliteral">&#39;),implode(&quot;/&quot;,$uri));</span>
-<a name="l00392"></a>00392 <span class="stringliteral">      $estamos = $ultimo;</span>
-<a name="l00393"></a>00393 <span class="stringliteral">   } else {</span>
-<a name="l00394"></a>00394 <span class="stringliteral">      $estamos = &#39;</span>inicio<span class="stringliteral">&#39;;</span>
-<a name="l00395"></a>00395 <span class="stringliteral">      }</span>
-<a name="l00396"></a>00396 <span class="stringliteral"></span>
-<a name="l00397"></a>00397 <span class="stringliteral">   // Añadimos barra en caso de no haberla</span>
-<a name="l00398"></a>00398 <span class="stringliteral">   $path = comprobar_barra($path);</span>
-<a name="l00399"></a>00399 <span class="stringliteral"></span>
-<a name="l00400"></a>00400 <span class="stringliteral">   $directorio = dir($path);</span>
-<a name="l00401"></a>00401 <span class="stringliteral"></span>
-<a name="l00402"></a>00402 <span class="stringliteral">    while ($archivo = $directorio-&gt;read()) {</span>
-<a name="l00403"></a>00403 <span class="stringliteral"></span>
-<a name="l00404"></a>00404 <span class="stringliteral">       $file = $path.$archivo ;</span>
-<a name="l00405"></a>00405 <span class="stringliteral">       // Si es un directorio lo añadimos a otrasSecciones</span>
-<a name="l00406"></a>00406 <span class="stringliteral">       if ( $archivo != &quot;.svn&quot; &amp;&amp; is_dir($file) &amp;&amp; $archivo != &quot;thumbnail&quot; &amp;&amp; $file != $path  &amp;&amp; $archivo != &quot;.&quot; &amp;&amp; $archivo != &quot;..&quot; ) {</span>
-<a name="l00407"></a>00407 <span class="stringliteral">          $otrasSecciones[]= array ($file,literal($archivo));</span>
-<a name="l00408"></a>00408 <span class="stringliteral">       }</span>
-<a name="l00409"></a>00409 <span class="stringliteral">       $fileInfo = pathinfo($file);</span>
-<a name="l00410"></a>00410 <span class="stringliteral">       $ext = ( ! empty($fileInfo[&#39;</span>extension<span class="stringliteral">&#39;]) ) ? $fileInfo[&#39;</span>extension<span class="stringliteral">&#39;] : NULL ;</span>
-<a name="l00411"></a>00411 <span class="stringliteral"></span>
-<a name="l00412"></a>00412 <span class="stringliteral">       if ( in_array($ext,$extensiones) ) {</span>
-<a name="l00413"></a>00413 <span class="stringliteral">          // Comprobar que existe la miniatura</span>
-<a name="l00414"></a>00414 <span class="stringliteral">          $min=$path.&#39;</span>thumbnail/<span class="stringliteral">&#39;.$archivo;</span>
-<a name="l00415"></a>00415 <span class="stringliteral">          if ( ! is_file($min) ) {</span>
-<a name="l00416"></a>00416 <span class="stringliteral">            if ( ! is_dir($path.&#39;</span>thumbnail<span class="stringliteral">&#39;) ) {</span>
-<a name="l00417"></a>00417 <span class="stringliteral">              if ( ! mkdir($path.&#39;</span>thumbnail<span class="stringliteral">&#39;) ) {</span>
-<a name="l00418"></a>00418 <span class="stringliteral">                 $mens = literal(&#39;</span>Error al crear directorio destino<span class="stringliteral">&#39;,3).&#39;</span>[<span class="stringliteral">&#39;.$path.&#39;</span>thumbnail<span class="charliteral">&#39;.&#39;</span>]<span class="stringliteral">&#39;;</span>
-<a name="l00419"></a>00419 <span class="stringliteral">                 registrar(__FILE__,__LINE__,$mens,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00420"></a>00420 <span class="stringliteral">                 return NULL ;</span>
-<a name="l00421"></a>00421 <span class="stringliteral">                 }</span>
-<a name="l00422"></a>00422 <span class="stringliteral">               }</span>
-<a name="l00423"></a>00423 <span class="stringliteral">             if ( generarImagen($file, $path.&#39;</span>thumbnail<span class="stringliteral">&#39;, $altoMaxMiniatura, $anchoMaxMiniatura) === FALSE ) {</span>
-<a name="l00424"></a>00424 <span class="stringliteral">                registrar(__FILE__,__LINE__,literal(&#39;</span>Error al generar miniatura<span class="stringliteral">&#39;,3).&#39;</span> [<span class="stringliteral">&#39;.$file.&#39;</span>] en [<span class="stringliteral">&#39;.$path.&#39;</span>thumbnail<span class="charliteral">&#39;.&#39;</span>]<span class="charliteral">&#39;,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00425"></a>00425 <span class="stringliteral">             }</span>
-<a name="l00426"></a>00426 <span class="stringliteral">          }</span>
-<a name="l00427"></a>00427 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00428"></a>00428 <span class="comment">         /// @todo Añadir width, heigth, size, exif al array</span>
-<a name="l00429"></a>00429 <span class="comment">         /// @todo Utilizar libreria nueva para buscar datos de imagenes</span>
-<a name="l00430"></a>00430 <span class="comment"></span>         if ( in_array($ext,$extensiones_para_exif) ) {
-<a name="l00431"></a>00431             $exif = @exif_read_data($path.&#39;/<span class="stringliteral">&#39;.$archivo, 0, true);</span>
-<a name="l00432"></a>00432 <span class="stringliteral">         } else {</span>
-<a name="l00433"></a>00433 <span class="stringliteral">            $exif = FALSE;</span>
-<a name="l00434"></a>00434 <span class="stringliteral">            }</span>
-<a name="l00435"></a>00435 <span class="stringliteral">         $i_size = getfilesize(filesize($path.&#39;</span>/<span class="stringliteral">&#39;.$archivo));</span>
-<a name="l00436"></a>00436 <span class="stringliteral">         $i_area = getimagesize($path.&#39;</span>/<span class="stringliteral">&#39;.$archivo);</span>
-<a name="l00437"></a>00437 <span class="stringliteral">         $i_width = $i_area[0];</span>
-<a name="l00438"></a>00438 <span class="stringliteral">         $i_height = $i_area[1];</span>
-<a name="l00439"></a>00439 <span class="stringliteral">         $lista[]=array($archivo, $base_imagenes.$path.$archivo, $base_imagenes.$path.&#39;</span>thumbnail/<span class="stringliteral">&#39;.$archivo, $i_width, $i_height, $i_size, $exif) ;</span>
-<a name="l00440"></a>00440 <span class="stringliteral">       }</span>
-<a name="l00441"></a>00441 <span class="stringliteral"></span>
-<a name="l00442"></a>00442 <span class="stringliteral">    }</span>
-<a name="l00443"></a>00443 <span class="stringliteral"></span>
-<a name="l00444"></a>00444 <span class="stringliteral">    $directorio-&gt;close();</span>
-<a name="l00445"></a>00445 <span class="stringliteral"></span>
-<a name="l00446"></a>00446 <span class="stringliteral">    // Añadir número de imágenes encontradas en subdirectorios</span>
-<a name="l00447"></a>00447 <span class="stringliteral"></span>
-<a name="l00448"></a>00448 <span class="stringliteral">    foreach ( $otrasSecciones as &amp;$seccion_con_imagenes ) {</span>
-<a name="l00449"></a>00449 <span class="stringliteral">       if ( is_dir($seccion_con_imagenes[0]) &amp;&amp; $seccion_con_imagenes[0] != &#39;</span>..<span class="stringliteral">&#39; ) {</span>
-<a name="l00450"></a>00450 <span class="stringliteral">          $seccion_con_imagenes[1] = $seccion_con_imagenes[1]. &#39;</span> (<span class="stringliteral">&#39;.contabilizar_imagenes_directorio($seccion_con_imagenes[0]).&#39;</span>)<span class="stringliteral">&#39;;</span>
-<a name="l00451"></a>00451 <span class="stringliteral">          }</span>
-<a name="l00452"></a>00452 <span class="stringliteral">      }</span>
-<a name="l00453"></a>00453 <span class="stringliteral"></span>
-<a name="l00454"></a>00454 <span class="stringliteral">    if ( $tipo == 1 ) {                    // escribir archivo para tiny</span>
-<a name="l00455"></a>00455 <span class="stringliteral"></span>
-<a name="l00456"></a>00456 <span class="stringliteral">       $num = count($lista);</span>
-<a name="l00457"></a>00457 <span class="stringliteral">       if ( $num &gt; 0 ) {</span>
-<a name="l00458"></a>00458 <span class="stringliteral"></span>
-<a name="l00459"></a>00459 <span class="stringliteral">          $archivo = $path.&quot;/.listaImg.js&quot;;</span>
-<a name="l00460"></a>00460 <span class="stringliteral">          registrar(__FILE__,__LINE__,&#39;</span>Archivo de lista de img, <span class="stringliteral">&#39;.$archivo);</span>
-<a name="l00461"></a>00461 <span class="stringliteral">         // escribir archivo de javascript para tener una lista de imagenes</span>
-<a name="l00462"></a>00462 <span class="stringliteral">         if (!$file = fopen($archivo, &quot;w&quot;)) {</span>
-<a name="l00463"></a>00463 <span class="stringliteral">            registrar(__FILE__,__LINE__,&#39;</span>No se puede abrir el archivo para escribir<span class="charliteral">&#39;,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00464"></a>00464 <span class="stringliteral">            return FALSE;</span>
-<a name="l00465"></a>00465 <span class="stringliteral">         }</span>
-<a name="l00466"></a>00466 <span class="stringliteral">         fputs($file, &quot;var tinyMCEImageList = new Array (\n&quot;);</span>
-<a name="l00467"></a>00467 <span class="stringliteral"></span>
-<a name="l00468"></a>00468 <span class="stringliteral">          for ($i=0 ; $i!=$num-1; $i++) {</span>
-<a name="l00469"></a>00469 <span class="stringliteral">             fputs($file, &quot;[\&quot;mini/&quot;.$lista[$i][0].&quot;\&quot;,\&quot;&quot;.$lista[$i][2].&quot;\&quot;],\n&quot;);</span>
-<a name="l00470"></a>00470 <span class="stringliteral">             fputs($file, &quot;[\&quot;&quot;.$lista[$i][0].&quot;\&quot;,\&quot;&quot;.$lista[$i][1].&quot;\&quot;],\n&quot;);</span>
-<a name="l00471"></a>00471 <span class="stringliteral">          }</span>
-<a name="l00472"></a>00472 <span class="stringliteral">          fputs($file, &quot;[\&quot;mini/&quot;.$lista[$i][0].&quot;\&quot;,\&quot;&quot;.$lista[$i][2].&quot;\&quot;],\n&quot;);</span>
-<a name="l00473"></a>00473 <span class="stringliteral">          fputs($file, &quot;[\&quot;&quot;.$lista[$i][0].&quot;\&quot;,\&quot;&quot;.$lista[$i][1].&quot;\&quot;]&quot;);</span>
-<a name="l00474"></a>00474 <span class="stringliteral"></span>
-<a name="l00475"></a>00475 <span class="stringliteral">         fputs($file, &quot;);\n&quot;);</span>
-<a name="l00476"></a>00476 <span class="stringliteral">         fclose($file);</span>
-<a name="l00477"></a>00477 <span class="stringliteral">         return TRUE;</span>
-<a name="l00478"></a>00478 <span class="stringliteral"></span>
-<a name="l00479"></a>00479 <span class="stringliteral">       }</span>
-<a name="l00480"></a>00480 <span class="stringliteral"></span>
-<a name="l00481"></a>00481 <span class="stringliteral">    } elseif ( $tipo == 5 ) {              // Array PHP</span>
-<a name="l00482"></a>00482 <span class="stringliteral"></span>
-<a name="l00483"></a>00483 <span class="stringliteral">       $retorno[&#39;</span>estamos<span class="stringliteral">&#39;] = $estamos ;</span>
-<a name="l00484"></a>00484 <span class="stringliteral">       $retorno[&#39;</span>otras_secciones<span class="stringliteral">&#39;] = $otrasSecciones;</span>
-<a name="l00485"></a>00485 <span class="stringliteral">       $retorno[&#39;</span>lista<span class="stringliteral">&#39;] = $lista;</span>
-<a name="l00486"></a>00486 <span class="stringliteral">       return $retorno;</span>
-<a name="l00487"></a>00487 <span class="stringliteral"></span>
-<a name="l00488"></a>00488 <span class="stringliteral">    } elseif ( $tipo == 3 ) {              // Salida para modulo de imagenes ajax</span>
-<a name="l00489"></a>00489 <span class="stringliteral">       $devolver = array ();</span>
-<a name="l00490"></a>00490 <span class="stringliteral">       $devolver[&#39;</span>imgs<span class="stringliteral">&#39;] = ( isset($lista) ) ? $lista : NULL;</span>
-<a name="l00491"></a>00491 <span class="stringliteral">       $devolver[&#39;</span>sec<span class="stringliteral">&#39;]= $otrasSecciones;</span>
-<a name="l00492"></a>00492 <span class="stringliteral">       print json_encode($devolver);</span>
-<a name="l00493"></a>00493 <span class="stringliteral"></span>
-<a name="l00494"></a>00494 <span class="stringliteral">    } elseif ( $tipo == 4 ) {              // Incluimos listado en una variable llamada lista, para javascript</span>
-<a name="l00495"></a>00495 <span class="stringliteral">       echo &quot;\nvar lista = &quot;.json_encode($lista);</span>
-<a name="l00496"></a>00496 <span class="stringliteral"></span>
-<a name="l00497"></a>00497 <span class="stringliteral">    } else {                               // Salida para ajax</span>
-<a name="l00498"></a>00498 <span class="stringliteral">       print json_encode($lista);</span>
-<a name="l00499"></a>00499 <span class="stringliteral">    }</span>
-<a name="l00500"></a>00500 <span class="stringliteral"></span>
-<a name="l00501"></a>00501 <span class="stringliteral">   }</span>
-<a name="l00502"></a>00502 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00503"></a>00503 <span class="comment">/**</span>
-<a name="l00504"></a>00504 <span class="comment"> * Contabilizar las imágenes que hay dentro de un directorio</span>
-<a name="l00505"></a>00505 <span class="comment"> *</span>
-<a name="l00506"></a>00506 <span class="comment"> * Para ello hay que recorrerlos todos recursivamente para obtener</span>
-<a name="l00507"></a>00507 <span class="comment"> * el numero</span>
-<a name="l00508"></a>00508 <span class="comment"> *</span>
-<a name="l00509"></a>00509 <span class="comment"> * @param $directorio    Directorio </span>
-<a name="l00510"></a>00510 <span class="comment"> * @param $numero_actual Número que ya tenemos de imágenes encontradas</span>
-<a name="l00511"></a>00511 <span class="comment"> */</span>
-<a name="l00512"></a>00512 
-<a name="l00513"></a><a class="code" href="../../d4/d98/a00120_a07f1e188a35e97ab5a7b5f5397666016.html#a07f1e188a35e97ab5a7b5f5397666016">00513</a> function contabilizar_imagenes_directorio($directorio, $numero_actual=0) {
-<a name="l00514"></a>00514 
-<a name="l00515"></a>00515    $extensiones = array(&quot;jpg&quot;, &quot;jpeg&quot;, &quot;JPG&quot;, &quot;JPEG&quot;, &quot;GIF&quot;, &quot;gif&quot;, &quot;png&quot;, &quot;PNG&quot;, &quot;tiff&quot;, &quot;TIFF&quot;);
+<a name="l00354"></a>00354       <span class="comment">/* Definir directorios de contenido */</span>
+<a name="l00355"></a>00355       self::$d = <span class="stringliteral">&quot;File/&quot;</span>.self::$i.<span class="charliteral">&#39;/&#39;</span>;
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357       <span class="comment">/*</span>
+<a name="l00358"></a>00358 <span class="comment">       * A REQUEST_URI Hay que quitarle las variables que vienen por GET</span>
+<a name="l00359"></a>00359 <span class="comment">       * sino se confunde e interpreta que hay mas secciones, como cuando viene por</span>
+<a name="l00360"></a>00360 <span class="comment">       * GET ?mod=admin/menuAdmin</span>
+<a name="l00361"></a>00361 <span class="comment">       */</span>
+<a name="l00362"></a>00362 
+<a name="l00363"></a>00363       <span class="comment">// $uri_p=ereg_replace(&#39;\?(.*)$&#39;, &#39;&#39;, $_SERVER[&#39;REQUEST_URI&#39;]);</span>
+<a name="l00364"></a>00364 
+<a name="l00365"></a>00365       $uri_p=preg_replace(<span class="stringliteral">&#39;/\?(.*)$/&#39;</span>, <span class="stringliteral">&#39;&#39;</span>, $_SERVER[<span class="stringliteral">&#39;REQUEST_URI&#39;</span>]);
+<a name="l00366"></a>00366       $uri = explode(<span class="stringliteral">&quot;/&quot;</span>,$uri_p);
+<a name="l00367"></a>00367       $scriptName = explode(<span class="stringliteral">&quot;/&quot;</span>,$_SERVER[<span class="stringliteral">&#39;SCRIPT_NAME&#39;</span>] );
+<a name="l00368"></a>00368       $sec = array_diff($uri, $scriptName);
+<a name="l00369"></a>00369       $diferencia = count($uri)-count($scriptName);
+<a name="l00370"></a>00370 <span class="comment"></span>
+<a name="l00371"></a>00371 <span class="comment">      /// Para crear urls relativas al directorio</span>
+<a name="l00372"></a>00372 <span class="comment"></span>      self::$dir = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00373"></a>00373       <span class="keywordflow">for</span> ($x=0;$x&lt;$diferencia;$x++) {
+<a name="l00374"></a>00374          self::$dir .= <span class="stringliteral">&quot;../&quot;</span>;
+<a name="l00375"></a>00375          }
+<a name="l00376"></a>00376 
+<a name="l00377"></a>00377       self::$base = self::$enlace_relativo.self::$dir;
+<a name="l00378"></a>00378 
+<a name="l00379"></a>00379       <span class="comment">// Si es una dirección no relativo hay que quitar</span>
+<a name="l00380"></a>00380       <span class="comment">// hasta la carpeta de proyecto</span>
+<a name="l00381"></a>00381       $aCarpeta_base=explode(<span class="charliteral">&#39;/&#39;</span>,$_SERVER[<span class="stringliteral">&#39;SCRIPT_FILENAME&#39;</span>]);
+<a name="l00382"></a>00382       $carpeta_base = $aCarpeta_base[count($aCarpeta_base)-2];
+<a name="l00383"></a>00383       <span class="comment">// Buscar la primera aparición de la carpeta_base en la url</span>
+<a name="l00384"></a>00384       $aUrl = explode(<span class="charliteral">&#39;/&#39;</span>,self::$url);
+<a name="l00385"></a>00385       $clave = array_search($carpeta_base, $aUrl); 
+<a name="l00386"></a>00386       <span class="keywordflow">if</span> ( $clave &gt; 0 ) {
+<a name="l00387"></a>00387          self::$url=implode(<span class="charliteral">&#39;/&#39;</span>,array_slice($aUrl,$clave+1));
+<a name="l00388"></a>00388          }
+<a name="l00389"></a>00389 
+<a name="l00390"></a>00390       <span class="comment">// Si es una dirección con ../../... hay que quitarlos</span>
+<a name="l00391"></a>00391       <span class="comment">//$url = substr($url,strpos($url,&#39;File/&#39;)); </span>
+<a name="l00392"></a>00392       self::$url = str_replace(<span class="stringliteral">&#39;../&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,self::$url); 
+<a name="l00393"></a>00393 <span class="comment"></span>
+<a name="l00394"></a>00394 <span class="comment">      /**</span>
+<a name="l00395"></a>00395 <span class="comment">       * Si viene definido $s o $c desde POST o GET Tiene prioridad</span>
+<a name="l00396"></a>00396 <span class="comment">       */</span>
+<a name="l00397"></a>00397 
+<a name="l00398"></a>00398       self::$s = ( isset($_REQUEST[<span class="charliteral">&#39;s&#39;</span>]) ) ? stripslashes($_REQUEST[<span class="charliteral">&#39;s&#39;</span>]) : <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">self::$s</a>;
+<a name="l00399"></a>00399       self::$c = ( isset($_REQUEST[<span class="charliteral">&#39;c&#39;</span>]) ) ? stripslashes($_REQUEST[<span class="charliteral">&#39;c&#39;</span>]) : <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">self::$c</a>;
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401       <span class="keywordflow">if</span> ( self::$s == <span class="charliteral">&#39;/&#39;</span> ) self::$s = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00402"></a>00402 
+<a name="l00403"></a>00403       <span class="comment">/* </span>
+<a name="l00404"></a>00404 <span class="comment">       * Si el fichero final es una imagen la presentamos o un archivo javascript</span>
+<a name="l00405"></a>00405 <span class="comment">       * Estos tipos de archivos hay que buscarlos en la carpeta del idioma predeterminado.</span>
+<a name="l00406"></a>00406 <span class="comment">       */</span>
+<a name="l00407"></a>00407 
+<a name="l00408"></a>00408       <span class="keywordflow">if</span> ( <a class="code" href="../../d9/d4b/a00117_ad4691c145a42085229f6da545f5aeee7.html#ad4691c145a42085229f6da545f5aeee7" title="esImagen">esImagen</a>( self::$url) ) {
+<a name="l00409"></a>00409 
+<a name="l00410"></a>00410          $archivo = self::$dd.self::$url;
+<a name="l00411"></a>00411          <span class="keywordflow">if</span> ( !is_file($archivo) ) {
+<a name="l00412"></a>00412             <span class="comment">// Si no se encuentra la imagen el directorio de la sección actual</span>
+<a name="l00413"></a>00413             <span class="comment">// intentamos encontrarla creando una dirección absoluta.</span>
+<a name="l00414"></a>00414             registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Router::No encontrado:......&#39;</span>.$archivo);
+<a name="l00415"></a>00415             <span class="comment">// Quitar la parte de la seccion</span>
+<a name="l00416"></a>00416             $archivo_array = explode(<span class="stringliteral">&#39;File&#39;</span>,$archivo);
+<a name="l00417"></a>00417             <span class="comment">//$archivo = &#39;http://&#39;.$_SERVER[&#39;SERVER_NAME&#39;].dirname($_SERVER[&#39;PHP_SELF&#39;]).&#39;/File&#39;.$archivo_array[count($archivo_array)-1];</span>
+<a name="l00418"></a>00418             $archivo = <span class="stringliteral">&#39;File&#39;</span>.$archivo_array[count($archivo_array)-1];
+<a name="l00419"></a>00419             <span class="keywordflow">if</span> ( ! file_exists($archivo) ) {
+<a name="l00420"></a>00420                registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Router::Tampoco encuentro:..&#39;</span>.$archivo);
+<a name="l00421"></a>00421                <span class="comment">// Suprimimos posible seccion de la url del archivo</span>
+<a name="l00422"></a>00422                $archivo = str_replace(self::$s,<span class="stringliteral">&#39;&#39;</span>,$archivo);
+<a name="l00423"></a>00423                <span class="keywordflow">if</span> ( ! file_exists($archivo) ) {
+<a name="l00424"></a>00424                   registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Router::inicia::Tampoco encuentro:..&#39;</span>.$archivo.
+<a name="l00425"></a>00425                              <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39; Salimos&#39;</span>);
+<a name="l00426"></a>00426                   exit();
+<a name="l00427"></a>00427                   }
+<a name="l00428"></a>00428                }
+<a name="l00429"></a>00429             }
+<a name="l00430"></a>00430          $archivo_contenido = file_get_contents($archivo);
+<a name="l00431"></a>00431          header(<span class="stringliteral">&#39;Content-type: &#39;</span>. self::$mime_type);
+<a name="l00432"></a>00432          header (<span class="stringliteral">&quot;Expires: &quot;</span>.gmdate(<span class="stringliteral">&quot;D, d M Y H:i:s&quot;</span>,time()+86400).<span class="stringliteral">&#39; GMT&#39;</span>); <span class="comment">// 86400 segundos, 24 horas 24x60x60</span>
+<a name="l00433"></a>00433          echo $archivo_contenido;
+<a name="l00434"></a>00434          exit();
+<a name="l00435"></a>00435          }
+<a name="l00436"></a>00436 
+<a name="l00437"></a>00437       <span class="comment">/* Definir fichero final */</span>
+<a name="l00438"></a>00438 
+<a name="l00439"></a>00439       <span class="keywordflow">if</span> (!self::$s &amp;&amp; !self::$c) {
+<a name="l00440"></a>00440          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Router::inicia::No hay sección ni contenido&#39;</span>);
+<a name="l00441"></a>00441          self::$f=self::$d.<span class="stringliteral">&quot;index.html&quot;</span>;
+<a name="l00442"></a>00442          self::$c = <span class="stringliteral">&quot;index.html&quot;</span>;
+<a name="l00443"></a>00443          self::$estamos=<span class="stringliteral">&quot;inicio&quot;</span>;
+<a name="l00444"></a>00444 
+<a name="l00445"></a>00445       } elseif (!self::$s &amp;&amp; self::$c){
+<a name="l00446"></a>00446          self::$f=self::$d.self::$c;
+<a name="l00447"></a>00447          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Router::inicia::No hay seccion&quot;</span>);
+<a name="l00448"></a>00448 
+<a name="l00449"></a>00449       } elseif (self::$c &amp;&amp; !self::$s) {
+<a name="l00450"></a>00450          self::$f=self::$d.self::$c;
+<a name="l00451"></a>00451          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Router::inicia::No hay seccion, pero si contenido&quot;</span>);
+<a name="l00452"></a>00452 
+<a name="l00453"></a>00453       } elseif (self::$s &amp;&amp; !self::$c) {
+<a name="l00454"></a>00454          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Router::inicia::Hay seccion, pero no hay contenido&quot;</span>);
+<a name="l00455"></a>00455          self::$f=self::$d.self::$s.<span class="stringliteral">&quot;index.html&quot;</span>;
+<a name="l00456"></a>00456          self::$c = <span class="stringliteral">&quot;index.html&quot;</span>;
+<a name="l00457"></a>00457       } elseif (self::$c &amp;&amp; self::$s) {
+<a name="l00458"></a>00458          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Router::inicia::Hay seccion, y hay contenido&quot;</span>);
+<a name="l00459"></a>00459          self::$f=self::$d.self::$s.self::$c;
+<a name="l00460"></a>00460          }
+<a name="l00461"></a>00461 
+<a name="l00462"></a>00462       <span class="comment">/* </span>
+<a name="l00463"></a>00463 <span class="comment">       * Si hay una seccion estamos es el nombre del directorio para que la clase menu</span>
+<a name="l00464"></a>00464 <span class="comment">       * diferencie con los botones</span>
+<a name="l00465"></a>00465 <span class="comment">       */</span>
+<a name="l00466"></a>00466 
+<a name="l00467"></a>00467       <span class="keywordflow">if</span> (!empty(self::$s)) {
+<a name="l00468"></a>00468          self::$estamos = basename(self::$d.self::$s);
+<a name="l00469"></a>00469          }
+<a name="l00470"></a>00470 
+<a name="l00471"></a>00471       <span class="comment">// if ( $gcm-&gt;au-&gt;logeado() ) {</span>
+<a name="l00472"></a>00472           $this-&gt;<a class="code" href="../../d9/db3/a00066_afe9b88e358677479da6bb622f8a41e14.html#afe9b88e358677479da6bb622f8a41e14" title="Comprobar que no coincidan palabras reservadas de diferentes secciones.">comprobar_reservadas</a>();
+<a name="l00473"></a>00473       <span class="comment">//    }</span>
+<a name="l00474"></a>00474 
+<a name="l00475"></a>00475       <span class="comment">// Crear $base_absoluta</span>
+<a name="l00476"></a>00476       <a class="code" href="../../d9/db3/a00066_a3e27950a38c37fafd70fca40524972ec.html#a3e27950a38c37fafd70fca40524972ec" title="http://dominio/ + $dir">$base_absoluta</a> = rtrim(<span class="stringliteral">&#39;http://&#39;</span>.$_SERVER[<span class="stringliteral">&#39;HTTP_HOST&#39;</span>].dirname($_SERVER[<span class="stringliteral">&#39;PHP_SELF&#39;</span>]),<span class="charliteral">&#39;/&#39;</span>);
+<a name="l00477"></a>00477       self::$base_absoluta = <a class="code" href="../../d9/db3/a00066_a3e27950a38c37fafd70fca40524972ec.html#a3e27950a38c37fafd70fca40524972ec" title="http://dominio/ + $dir">$base_absoluta</a>.<span class="charliteral">&#39;/&#39;</span>.<a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">self::$s</a>;
+<a name="l00478"></a>00478 
+<a name="l00479"></a>00479       <span class="comment">// echo &quot;&lt;br&gt;absoluta: &quot;.self::$base_absoluta;</span>
+<a name="l00480"></a>00480       <span class="comment">// echo &quot;&lt;pre&gt;&quot; ; print_r($_SERVER) ; echo &quot;&lt;/pre&gt;&quot;; // DEV  </span>
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482       registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Router:&#39;</span>.<a class="code" href="../../d9/d4b/a00117_a7031d9d8dc6290aa33d665d7daced6c8.html#a7031d9d8dc6290aa33d665d7daced6c8" title="Formatemaos salida de array.">depurar</a>(get_class_vars(__CLASS__),<span class="stringliteral">&#39;Variables&#39;</span>));
+<a name="l00483"></a>00483 
+<a name="l00484"></a>00484       }
+<a name="l00485"></a>00485 <span class="comment"></span>
+<a name="l00486"></a>00486 <span class="comment">   /** </span>
+<a name="l00487"></a>00487 <span class="comment">    * desglosarUrl nos devuelve una matriz con la información</span>
+<a name="l00488"></a>00488 <span class="comment">    * relevante de una url que pasemos como argumento</span>
+<a name="l00489"></a>00489 <span class="comment">    *</span>
+<a name="l00490"></a>00490 <span class="comment">    * @param url Url del archivo que deseamos inspeccionar</span>
+<a name="l00491"></a>00491 <span class="comment">    *</span>
+<a name="l00492"></a>00492 <span class="comment">    * @return Array Arreglo con la información</span>
+<a name="l00493"></a>00493 <span class="comment">    */</span>
+<a name="l00494"></a>00494 
+<a name="l00495"></a><a class="code" href="../../d9/db3/a00066_a195552575880fc9bbc4ab4ad6fea3a94.html#a195552575880fc9bbc4ab4ad6fea3a94">00495</a>    <span class="keyword">static</span> <span class="keyword">function</span> <a class="code" href="../../d9/db3/a00066_a195552575880fc9bbc4ab4ad6fea3a94.html#a195552575880fc9bbc4ab4ad6fea3a94" title="desglosarUrl nos devuelve una matriz con la información relevante de una url que pasemos como argumen...">desglosarUrl</a>(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>) {
+<a name="l00496"></a>00496 
+<a name="l00497"></a>00497       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00498"></a>00498 <span class="comment"></span>
+<a name="l00499"></a>00499 <span class="comment">      /** Instancia de contenidos para poder verificarlos */</span>
+<a name="l00500"></a>00500 
+<a name="l00501"></a>00501       $contenidos = $gcm-&gt;event-&gt;instancia_modulo(<span class="stringliteral">&#39;contenidos&#39;</span>);
+<a name="l00502"></a>00502 
+<a name="l00503"></a>00503       <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>               = NULL;            
+<a name="l00504"></a>00504       <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">$c</a>               = NULL;            
+<a name="l00505"></a>00505       <a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a>              = NULL;            
+<a name="l00506"></a>00506       <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a>               = NULL;            
+<a name="l00507"></a>00507       <a class="code" href="../../d9/db3/a00066_a088fc18ad150c02f45bb46c5dc472aa9.html#a088fc18ad150c02f45bb46c5dc472aa9" title="Idioma por defecto.">$ii</a>              = NULL;            
+<a name="l00508"></a>00508       <a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">$i</a>               = NULL;            
+<a name="l00509"></a>00509       <a class="code" href="../../d9/db3/a00066_acebf83966ef6d7e5645a6b62ba368f9f.html#acebf83966ef6d7e5645a6b62ba368f9f" title="Accion que se desea realizar.">$a</a>               = NULL;            
+<a name="l00510"></a>00510       <a class="code" href="../../d9/db3/a00066_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49" title="Modulo que se desea utilizar.">$m</a>               = NULL;            
+<a name="l00511"></a>00511       <a class="code" href="../../d9/db3/a00066_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">$args</a>            = NULL;
+<a name="l00512"></a>00512       <a class="code" href="../../d9/db3/a00066_ab74076a9b7e1d23d12b9e8d65e60315a.html#ab74076a9b7e1d23d12b9e8d65e60315a" title="Evento que se desea realizar.">$e</a>               = NULL;            
+<a name="l00513"></a>00513       <a class="code" href="../../d9/db3/a00066_aab3fe4237c8eed37504f28f8541c9c79.html#aab3fe4237c8eed37504f28f8541c9c79" title="prefijo para el enlace relativo, para tener en cuenta si acaba la url con barra o sin ella...">$enlace_relativo</a> = NULL;
+<a name="l00514"></a>00514       <a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a>       = NULL;      
+<a name="l00515"></a>00515       <a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">$formato</a>         = NULL;      
 <a name="l00516"></a>00516 
-<a name="l00517"></a>00517    // Añadimos barra en caso de no haberla
-<a name="l00518"></a>00518    $path = rtrim($directorio,&#39;/<span class="stringliteral">&#39;).&#39;</span>/<span class="stringliteral">&#39;;</span>
-<a name="l00519"></a>00519 <span class="stringliteral"></span>
-<a name="l00520"></a>00520 <span class="stringliteral">   $imagenes = glob($path.&quot;{*.GIF,*.JPG,*.PNG,*.gif,*.jpg,*.png}&quot;, GLOB_BRACE);</span>
-<a name="l00521"></a>00521 <span class="stringliteral"></span>
-<a name="l00522"></a>00522 <span class="stringliteral">   $numero = $numero_actual + sizeof($imagenes);</span>
-<a name="l00523"></a>00523 <span class="stringliteral"></span>
-<a name="l00524"></a>00524 <span class="stringliteral">   $dir = glob($path.&#39;</span>*<span class="stringliteral">&#39;);</span>
-<a name="l00525"></a>00525 <span class="stringliteral"></span>
-<a name="l00526"></a>00526 <span class="stringliteral">   $tenemos_subdirectorio = FALSE ;</span>
-<a name="l00527"></a>00527 <span class="stringliteral"></span>
-<a name="l00528"></a>00528 <span class="stringliteral">   if ( $dir ) {</span>
-<a name="l00529"></a>00529 <span class="stringliteral"></span>
-<a name="l00530"></a>00530 <span class="stringliteral">      foreach ( $dir as $item ) {</span>
-<a name="l00531"></a>00531 <span class="stringliteral"></span>
-<a name="l00532"></a>00532 <span class="stringliteral">         if ( is_dir($item) ) {</span>
-<a name="l00533"></a>00533 <span class="stringliteral">            contabilizar_imagenes_directorio($item, $numero);</span>
-<a name="l00534"></a>00534 <span class="stringliteral">            $tenemos_subdirectorio = TRUE ;</span>
-<a name="l00535"></a>00535 <span class="stringliteral">            }</span>
-<a name="l00536"></a>00536 <span class="stringliteral">         }</span>
-<a name="l00537"></a>00537 <span class="stringliteral"></span>
-<a name="l00538"></a>00538 <span class="stringliteral">      }</span>
-<a name="l00539"></a>00539 <span class="stringliteral"></span>
-<a name="l00540"></a>00540 <span class="stringliteral">   return $numero;</span>
-<a name="l00541"></a>00541 <span class="stringliteral">   }</span>
-<a name="l00542"></a>00542 <span class="stringliteral"></span>
-<a name="l00543"></a>00543 <span class="stringliteral"></span>
-<a name="l00544"></a>00544 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00545"></a>00545 <span class="comment">/**</span>
-<a name="l00546"></a>00546 <span class="comment">* Borrar imagen</span>
-<a name="l00547"></a>00547 <span class="comment">*</span>
-<a name="l00548"></a>00548 <span class="comment">* @version 1.0</span>
-<a name="l00549"></a>00549 <span class="comment">*</span>
-<a name="l00550"></a>00550 <span class="comment">* @param url url de la imágen</span>
-<a name="l00551"></a>00551 <span class="comment">*</span>
-<a name="l00552"></a>00552 <span class="comment">* @return true/false</span>
-<a name="l00553"></a>00553 <span class="comment">*</span>
-<a name="l00554"></a>00554 <span class="comment">*/</span>
-<a name="l00555"></a>00555 
-<a name="l00556"></a><a class="code" href="../../d4/d98/a00120_ab5f9ba0fac0522058d86b675faae5227.html#ab5f9ba0fac0522058d86b675faae5227">00556</a> function gcm_borrarImagen($url) {
+<a name="l00517"></a>00517       $retorno = array();
+<a name="l00518"></a>00518       <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = str_replace(<span class="stringliteral">&#39;//&#39;</span>,<span class="charliteral">&#39;/&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00519"></a>00519 <span class="comment"></span>
+<a name="l00520"></a>00520 <span class="comment">      /** Definir idioma predeterminado e idioma actual */</span>
+<a name="l00521"></a>00521 
+<a name="l00522"></a>00522       <a class="code" href="../../d9/db3/a00066_a088fc18ad150c02f45bb46c5dc472aa9.html#a088fc18ad150c02f45bb46c5dc472aa9" title="Idioma por defecto.">$ii</a> = $gcm-&gt;config(<span class="stringliteral">&#39;idiomas&#39;</span>,<span class="stringliteral">&#39;Idioma por defecto&#39;</span>);
+<a name="l00523"></a>00523 
+<a name="l00524"></a>00524       $proyecto = $gcm-&gt;config(<span class="stringliteral">&#39;admin&#39;</span>,<span class="stringliteral">&#39;Proyecto&#39;</span>);
+<a name="l00525"></a>00525 
+<a name="l00526"></a>00526       <span class="comment">/* Si tenemos Sección antes de File/ la quitamos */</span>
+<a name="l00527"></a>00527 
+<a name="l00528"></a>00528       <span class="keywordflow">if</span> ( strpos(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>,<span class="stringliteral">&#39;/File/&#39;</span>) !== FALSE ) {
+<a name="l00529"></a>00529          <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = substr(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>,strpos(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>,<span class="stringliteral">&#39;/File/&#39;</span>));
+<a name="l00530"></a>00530          }
+<a name="l00531"></a>00531 
+<a name="l00532"></a>00532       <span class="comment">/* Comprobar palabras reservadas en url */</span>
+<a name="l00533"></a>00533 
+<a name="l00534"></a>00534       $continuar = TRUE;
+<a name="l00535"></a>00535 
+<a name="l00536"></a>00536       <span class="keywordflow">while</span> ( $continuar ) {
+<a name="l00537"></a>00537 
+<a name="l00538"></a>00538          $continuar = FALSE;
+<a name="l00539"></a>00539 
+<a name="l00540"></a>00540          <span class="comment">/* Comprobar modulos */</span>
+<a name="l00541"></a>00541 
+<a name="l00542"></a>00542          $secciones = explode(<span class="charliteral">&#39;/&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00543"></a>00543 
+<a name="l00544"></a>00544          <span class="keywordflow">if</span> ( end($secciones) != <span class="stringliteral">&#39;proyecto.js&#39;</span>  &amp;&amp; end($secciones) != <span class="stringliteral">&#39;proyectos.css&#39;</span> ) {
+<a name="l00545"></a>00545 
+<a name="l00546"></a>00546             <span class="keywordflow">if</span> ( in_array($secciones[0], self::$modulos)  ) {
+<a name="l00547"></a>00547                <a class="code" href="../../d9/db3/a00066_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49" title="Modulo que se desea utilizar.">$m</a> = $secciones[0];
+<a name="l00548"></a>00548                array_shift($secciones);
+<a name="l00549"></a>00549                <a class="code" href="../../d9/db3/a00066_acebf83966ef6d7e5645a6b62ba368f9f.html#acebf83966ef6d7e5645a6b62ba368f9f" title="Accion que se desea realizar.">$a</a> = ( isset($secciones[0]) ) ? $secciones[0] : FALSE;
+<a name="l00550"></a>00550                array_shift($secciones);
+<a name="l00551"></a>00551 
+<a name="l00552"></a>00552                <span class="comment">/* Si la siguiente sección no existe es un argumento */</span>
+<a name="l00553"></a>00553                <span class="keywordflow">while</span> ( isset($secciones[0]) &amp;&amp; ! $contenidos-&gt;verificar_seccion($secciones[0]) &amp;&amp; $secciones[0] != <span class="stringliteral">&#39;proyectos.css&#39;</span> &amp;&amp; $secciones[0] != <span class="stringliteral">&#39;proyecto.js&#39;</span> ) {
+<a name="l00554"></a>00554                   <a class="code" href="../../d9/db3/a00066_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">$args</a>[] = $secciones[0];
+<a name="l00555"></a>00555                   array_shift($secciones);
+<a name="l00556"></a>00556                   }
 <a name="l00557"></a>00557 
-<a name="l00558"></a>00558    if ( ! is_file($url) ) {
-<a name="l00559"></a>00559       // La imagén no se encuentra
-<a name="l00560"></a>00560       // Buscar imagen con la dirección relativa, dejamos solo de File/es para alante
-<a name="l00561"></a>00561       $url = ereg_replace(&#39;.*<span class="stringliteral">&#39;.$dd,$dd,$url);</span>
-<a name="l00562"></a>00562 <span class="stringliteral">      if ( ! is_file($url) ) {</span>
-<a name="l00563"></a>00563 <span class="stringliteral">         $error=literal($dd.&quot;La imágen no existe&quot;).&#39;</span>::<span class="stringliteral">&#39;.$url;</span>
-<a name="l00564"></a>00564 <span class="stringliteral">         registrar(__FILE__,__LINE__,$error,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00565"></a>00565 <span class="stringliteral">         return NULL ;</span>
-<a name="l00566"></a>00566 <span class="stringliteral">      }</span>
-<a name="l00567"></a>00567 <span class="stringliteral">   }</span>
-<a name="l00568"></a>00568 <span class="stringliteral"></span>
-<a name="l00569"></a>00569 <span class="stringliteral">   if ( ! unlink($url) ) {</span>
-<a name="l00570"></a>00570 <span class="stringliteral">      registrar(__FILE__,__LINE__,literal(&#39;</span>No se pudo borrar el fichero<span class="stringliteral">&#39;,3).&#39;</span> [<span class="stringliteral">&#39;.$url.&#39;</span>]<span class="charliteral">&#39;,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00571"></a>00571 <span class="stringliteral">   } else {</span>
-<a name="l00572"></a>00572 <span class="stringliteral">      // Si hay miniatura la borramos tambien.</span>
-<a name="l00573"></a>00573 <span class="stringliteral">      $min = dirname($url).&#39;</span>/thumbnail/<span class="stringliteral">&#39;.basename($url);</span>
-<a name="l00574"></a>00574 <span class="stringliteral">      if ( is_file($min) ) {</span>
-<a name="l00575"></a>00575 <span class="stringliteral">         if ( ! unlink($min) ) {</span>
-<a name="l00576"></a>00576 <span class="stringliteral">            registrar(__FILE__,__LINE__,literal(&#39;</span>No se borrar el fichero<span class="stringliteral">&#39;,3).&#39;</span> [<span class="stringliteral">&#39;.$min.&#39;</span>]<span class="charliteral">&#39;,&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00577"></a>00577 <span class="stringliteral">            return null ;</span>
-<a name="l00578"></a>00578 <span class="stringliteral">         } else {</span>
-<a name="l00579"></a>00579 <span class="stringliteral">            // actualizamos lista del directorio</span>
-<a name="l00580"></a>00580 <span class="stringliteral">            gcm_listaImagenes(dirname($url));</span>
-<a name="l00581"></a>00581 <span class="stringliteral">            return TRUE;</span>
-<a name="l00582"></a>00582 <span class="stringliteral">         }</span>
-<a name="l00583"></a>00583 <span class="stringliteral">      } else {</span>
-<a name="l00584"></a>00584 <span class="stringliteral">         // actualizamos lista del directorio</span>
-<a name="l00585"></a>00585 <span class="stringliteral">         gcm_listaImagenes(dirname($url));</span>
-<a name="l00586"></a>00586 <span class="stringliteral">         return TRUE;</span>
-<a name="l00587"></a>00587 <span class="stringliteral">      }</span>
-<a name="l00588"></a>00588 <span class="stringliteral">   }</span>
-<a name="l00589"></a>00589 <span class="stringliteral"></span>
-<a name="l00590"></a>00590 <span class="stringliteral">   }</span>
-<a name="l00591"></a>00591 <span class="stringliteral"></span><span class="comment"></span>
-<a name="l00592"></a>00592 <span class="comment">/**</span>
-<a name="l00593"></a>00593 <span class="comment">*</span>
-<a name="l00594"></a>00594 <span class="comment">* ver imágenes como en una galería</span>
-<a name="l00595"></a>00595 <span class="comment">*</span>
-<a name="l00596"></a>00596 <span class="comment">* @todo Esta función ha sido sustituida por javascript, pendiente de borrado</span>
-<a name="l00597"></a>00597 <span class="comment">*</span>
-<a name="l00598"></a>00598 <span class="comment">* @author Eduardo Magrané</span>
-<a name="l00599"></a>00599 <span class="comment">* @version 1.0</span>
-<a name="l00600"></a>00600 <span class="comment">*</span>
-<a name="l00601"></a>00601 <span class="comment">* @param $path Sección que deseamos ver.</span>
-<a name="l00602"></a>00602 <span class="comment">*</span>
-<a name="l00603"></a>00603 <span class="comment">* @return true/null</span>
-<a name="l00604"></a>00604 <span class="comment">*</span>
-<a name="l00605"></a>00605 <span class="comment">*/</span>
+<a name="l00558"></a>00558                <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = implode(<span class="charliteral">&#39;/&#39;</span>,$secciones);
+<a name="l00559"></a>00559                $continuar = TRUE;
+<a name="l00560"></a>00560                }
+<a name="l00561"></a>00561 
+<a name="l00562"></a>00562             }
+<a name="l00563"></a>00563 
+<a name="l00564"></a>00564          <span class="comment">/* Comprobar eventos en url */</span>
+<a name="l00565"></a>00565 
+<a name="l00566"></a>00566          $secciones = explode(<span class="charliteral">&#39;/&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00567"></a>00567 
+<a name="l00568"></a>00568          <span class="keywordflow">if</span> ( in_array($secciones[0], <a class="code" href="../../d1/d8b/a00406_ga8f8e958e17e5ad25607f7a3313f76b3f.html#ga8f8e958e17e5ad25607f7a3313f76b3f" title="Presentamos últimos comentarios.">self::$eventos</a>)  ) {
+<a name="l00569"></a>00569             <a class="code" href="../../d9/db3/a00066_ab74076a9b7e1d23d12b9e8d65e60315a.html#ab74076a9b7e1d23d12b9e8d65e60315a" title="Evento que se desea realizar.">$e</a> = $secciones[0];
+<a name="l00570"></a>00570             array_shift($secciones);
+<a name="l00571"></a>00571 
+<a name="l00572"></a>00572             <span class="comment">/* Si la siguiente sección no existe es un argumento */</span>
+<a name="l00573"></a>00573             <span class="keywordflow">while</span> ( isset($secciones[0]) &amp;&amp; ! $contenidos-&gt;verificar_seccion($secciones[0]) &amp;&amp; $secciones[0] != <span class="stringliteral">&#39;proyectos.css&#39;</span> &amp;&amp; $secciones[0] != <span class="stringliteral">&#39;proyecto.js&#39;</span> ) {
+<a name="l00574"></a>00574                <a class="code" href="../../d9/db3/a00066_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">$args</a>[] = $secciones[0];
+<a name="l00575"></a>00575                array_shift($secciones);
+<a name="l00576"></a>00576                }
+<a name="l00577"></a>00577 
+<a name="l00578"></a>00578             <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = implode(<span class="charliteral">&#39;/&#39;</span>,$secciones);
+<a name="l00579"></a>00579             $continuar = TRUE;
+<a name="l00580"></a>00580             }
+<a name="l00581"></a>00581 
+<a name="l00582"></a>00582          <span class="comment">/* Comprobar formatos en url */</span>
+<a name="l00583"></a>00583 
+<a name="l00584"></a>00584          $secciones = explode(<span class="charliteral">&#39;/&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00585"></a>00585 
+<a name="l00586"></a>00586          <span class="keywordflow">if</span> ( in_array($secciones[0], self::$formatos)  ) {
+<a name="l00587"></a>00587             <a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">$formato</a> = $secciones[0];
+<a name="l00588"></a>00588             array_shift($secciones);
+<a name="l00589"></a>00589             <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = implode(<span class="charliteral">&#39;/&#39;</span>,$secciones);
+<a name="l00590"></a>00590             $continuar = TRUE;
+<a name="l00591"></a>00591             }
+<a name="l00592"></a>00592 
+<a name="l00593"></a>00593          <span class="comment">// Si no tenemos formato por defecto html</span>
+<a name="l00594"></a>00594          <span class="keywordflow">if</span> ( !<a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">$formato</a>  ) { <a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">$formato</a> = <span class="stringliteral">&#39;html&#39;</span>; }
+<a name="l00595"></a>00595 
+<a name="l00596"></a>00596          <span class="comment">/* Comprobar idiomas en url */</span>
+<a name="l00597"></a>00597 
+<a name="l00598"></a>00598          $secciones = explode(<span class="charliteral">&#39;/&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00599"></a>00599 
+<a name="l00600"></a>00600          <span class="keywordflow">if</span> ( in_array($secciones[0], self::$idiomas)  ) {
+<a name="l00601"></a>00601             <a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">$i</a> = $secciones[0];
+<a name="l00602"></a>00602             array_shift($secciones);
+<a name="l00603"></a>00603             <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> = implode(<span class="charliteral">&#39;/&#39;</span>,$secciones);
+<a name="l00604"></a>00604             $continuar = TRUE;
+<a name="l00605"></a>00605             }
 <a name="l00606"></a>00606 
-<a name="l00607"></a><a class="code" href="../../d4/d98/a00120_a750c9cb388af8cd4ebe889904485230c.html#a750c9cb388af8cd4ebe889904485230c">00607</a> function gcm_verImagenes($path = &quot;Image&quot;) {
+<a name="l00607"></a>00607          }
 <a name="l00608"></a>00608 
-<a name="l00609"></a>00609    global $gcm;
-<a name="l00610"></a>00610 
-<a name="l00611"></a>00611    $extensiones = array(&quot;jpg&quot;, &quot;jpeg&quot;, &quot;JPG&quot;, &quot;JPEG&quot;, &quot;GIF&quot;, &quot;gif&quot;, &quot;png&quot;, &quot;PNG&quot;, &quot;tiff&quot;, &quot;TIFF&quot;);
-<a name="l00612"></a>00612 
-<a name="l00613"></a>00613    if ( ! is_dir($path) ) {
-<a name="l00614"></a>00614       registrar(__FILE__,__LINE__,$path.&#39;, <span class="stringliteral">&#39;.literal(&#39;</span>No es un directorio<span class="stringliteral">&#39;,3),&#39;</span>ERROR<span class="stringliteral">&#39;);</span>
-<a name="l00615"></a>00615 <span class="stringliteral">      return NULL;</span>
-<a name="l00616"></a>00616 <span class="stringliteral">   }</span>
-<a name="l00617"></a>00617 <span class="stringliteral">   $directorio=dir($path);</span>
-<a name="l00618"></a>00618 <span class="stringliteral"></span>
-<a name="l00619"></a>00619 <span class="stringliteral">    while ($archivo = $directorio-&gt;read()) {</span>
-<a name="l00620"></a>00620 <span class="stringliteral"></span>
-<a name="l00621"></a>00621 <span class="stringliteral">       $file = $path.&quot;/&quot;.$archivo ;</span>
-<a name="l00622"></a>00622 <span class="stringliteral">       $fileInfo = pathinfo($file);</span>
-<a name="l00623"></a>00623 <span class="stringliteral">       $ext = $fileInfo[&#39;</span>extension<span class="stringliteral">&#39;];</span>
-<a name="l00624"></a>00624 <span class="stringliteral"></span>
-<a name="l00625"></a>00625 <span class="stringliteral">       if ( in_array($ext,$extensiones) ) {</span>
-<a name="l00626"></a>00626 <span class="stringliteral">          // Comprobar que existe la miniatura</span>
-<a name="l00627"></a>00627 <span class="stringliteral">          $min=$path.&#39;</span>/thumbnail/<span class="stringliteral">&#39;.$archivo;</span><span class="comment"></span>
-<a name="l00628"></a>00628 <span class="comment">          /// @todo comparar tambien que son de la misma fecha</span>
-<a name="l00629"></a>00629 <span class="comment"></span>          if ( ! is_file($min) ) {
-<a name="l00630"></a>00630              generarImagen($file, $path.&#39;/thumbnail<span class="stringliteral">&#39;, $altoMaxMiniatura, $anchoMaxMiniatura);</span>
-<a name="l00631"></a>00631 <span class="stringliteral">          }</span>
-<a name="l00632"></a>00632 <span class="stringliteral">          // Información sobre la imágen</span>
-<a name="l00633"></a>00633 <span class="stringliteral">         $exif = @exif_read_data($path.&#39;</span>/<span class="stringliteral">&#39;.$archivo, 0, true);</span>
-<a name="l00634"></a>00634 <span class="stringliteral">         $exif = ( $exif === FALSE ) ? FALSE : $exif ;</span>
-<a name="l00635"></a>00635 <span class="stringliteral">         $lista[]=array($archivo, $path.&quot;/&quot;.$archivo, $min, $exif) ;</span>
-<a name="l00636"></a>00636 <span class="stringliteral">       }</span>
-<a name="l00637"></a>00637 <span class="stringliteral"></span>
-<a name="l00638"></a>00638 <span class="stringliteral">    }</span>
-<a name="l00639"></a>00639 <span class="stringliteral"></span>
-<a name="l00640"></a>00640 <span class="stringliteral">    $directorio-&gt;close();</span>
-<a name="l00641"></a>00641 <span class="stringliteral"></span>
-<a name="l00642"></a>00642 <span class="stringliteral">    $num = count($lista);</span>
-<a name="l00643"></a>00643 <span class="stringliteral">    echo &quot;Numero de imagenes: &lt;b&gt;$num&lt;/b&gt;&quot;;</span>
-<a name="l00644"></a>00644 <span class="stringliteral">    if ( $num &gt; 0 ) {</span>
-<a name="l00645"></a>00645 <span class="stringliteral"></span>
-<a name="l00646"></a>00646 <span class="stringliteral">       echo &quot;\n&lt;div id=&#39;</span>thumbnails<span class="stringliteral">&#39;&gt;&quot;;</span>
-<a name="l00647"></a>00647 <span class="stringliteral">       for ($i=0 ; $i!=$num; $i++) {</span>
-<a name="l00648"></a>00648 <span class="stringliteral">          $i_size = getfilesize(filesize($lista[$i][1]));</span>
-<a name="l00649"></a>00649 <span class="stringliteral">          $i_area = getimagesize($lista[$i][1]);</span>
-<a name="l00650"></a>00650 <span class="stringliteral">          $i_width = $i_area[0];</span>
-<a name="l00651"></a>00651 <span class="stringliteral">          $i_height = $i_area[1];</span>
-<a name="l00652"></a>00652 <span class="stringliteral">          echo &quot;\n&lt;p class=&#39;</span>thumb<span class="stringliteral">&#39; &gt;&lt;tt&gt;&quot;;</span>
-<a name="l00653"></a>00653 <span class="stringliteral">          echo &quot;&lt;a rel=&#39;</span>thumbnail<span class="stringliteral">&#39; onclick=\&quot;javascript:open(&#39;</span><span class="stringliteral">&quot;,$lista[$i][1],&quot;</span><span class="charliteral">&#39;,&#39;</span><span class="stringliteral">&quot;,$lista[$i][0],&quot;</span><span class="charliteral">&#39;,&#39;</span>toolbar=no,scrollbars=no,width=<span class="stringliteral">&quot;,$i_width + 20 ,&quot;</span>,height=<span class="stringliteral">&quot;,$i_height + 20,&quot;</span><span class="stringliteral">&#39;)\&quot; &gt;&quot;;</span>
-<a name="l00654"></a>00654 <span class="stringliteral">          echo &quot;&lt;img id=&#39;</span>thumb_<span class="stringliteral">&quot;,$i,&quot;</span><span class="stringliteral">&#39; src=&#39;</span><span class="stringliteral">&quot;,$lista[$i][2],&quot;</span><span class="stringliteral">&#39; &quot;;</span>
-<a name="l00655"></a>00655 <span class="stringliteral">          echo &quot;alt=&#39;</span>Imagen<span class="stringliteral">&#39; /&gt;  &lt;/a&gt;&quot;;</span>
-<a name="l00656"></a>00656 <span class="stringliteral">          echo &quot;&lt;br /&gt;&lt;span class=&#39;</span>idim<span class="stringliteral">&#39;&gt;[&quot;,$i_width,&quot;x&quot;,$i_height,&quot;] &quot;,$i_size;</span>
-<a name="l00657"></a>00657 <span class="stringliteral">          if ( count($lista[$i][3]) &gt; 1 ) {</span>
-<a name="l00658"></a>00658 <span class="stringliteral">             echo &quot; [&lt;a onclick=&#39;</span>visualizar(\<span class="stringliteral">&quot;exif_&quot;</span>,$i,<span class="stringliteral">&quot;\&quot;);visualizar(\&quot;thumb_&quot;</span>,$i,<span class="stringliteral">&quot;\&quot;)&#39; &gt;exif&lt;/a&gt;]&quot;</span>;
-<a name="l00659"></a>00659              echo <span class="stringliteral">&quot;&lt;/span&gt;&quot;</span>;
-<a name="l00660"></a>00660              echo <span class="stringliteral">&quot;&lt;br/&gt;  &lt;span id=&#39;exif_&quot;</span>,$i,<span class="stringliteral">&quot;&#39; class=&#39;isize&#39; style=&#39;display: none&#39;&gt;&lt;p&gt;&quot;</span>;
-<a name="l00661"></a>00661              <span class="keywordflow">foreach</span> ($lista[$i][3] as $key =&gt; $section) {
-<a name="l00662"></a>00662                  <span class="keywordflow">foreach</span> ($section as $name =&gt; $val) {
-<a name="l00663"></a>00663                      echo <span class="stringliteral">&quot;&lt;b&gt;$key.$name:&lt;/b&gt; $val&lt;br /&gt;\n&quot;</span>;
-<a name="l00664"></a>00664                  }
-<a name="l00665"></a>00665              }
-<a name="l00666"></a>00666              echo <span class="stringliteral">&quot;&lt;/p&gt;&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;&quot;</span>;
-<a name="l00667"></a>00667           } <span class="keywordflow">else</span> {
-<a name="l00668"></a>00668              echo <span class="stringliteral">&quot;&lt;/span&gt;&lt;/tt&gt;&lt;/p&gt;&quot;</span>;
-<a name="l00669"></a>00669           }
-<a name="l00670"></a>00670        }
-<a name="l00671"></a>00671        echo <span class="stringliteral">&quot;\n&lt;/div&gt; &lt;!-- Acaba thumbnails --&gt;&quot;</span>;
-<a name="l00672"></a>00672       <span class="keywordflow">return</span> TRUE;
-<a name="l00673"></a>00673 
-<a name="l00674"></a>00674     } <span class="keywordflow">else</span> {
-<a name="l00675"></a>00675        <span class="keywordflow">return</span> TRUE;
-<a name="l00676"></a>00676     }
-<a name="l00677"></a>00677 
-<a name="l00678"></a>00678    }
-<a name="l00679"></a>00679 <span class="comment"></span>
-<a name="l00680"></a>00680 <span class="comment">/**</span>
-<a name="l00681"></a>00681 <span class="comment">*</span>
-<a name="l00682"></a>00682 <span class="comment">* Devuelve el peso de la imágen</span>
-<a name="l00683"></a>00683 <span class="comment">*</span>
-<a name="l00684"></a>00684 <span class="comment">* @author www.teayudo.cl</span>
-<a name="l00685"></a>00685 <span class="comment">*</span>
-<a name="l00686"></a>00686 <span class="comment">* @param $size Peso de la imágen en bytes</span>
-<a name="l00687"></a>00687 <span class="comment">*</span>
-<a name="l00688"></a>00688 <span class="comment">* @return peso</span>
-<a name="l00689"></a>00689 <span class="comment">*</span>
-<a name="l00690"></a>00690 <span class="comment">*/</span>
-<a name="l00691"></a>00691 
-<a name="l00692"></a><a class="code" href="../../d4/d98/a00120_a62ceeb6414f8bfd5efc48fd5ca840ab5.html#a62ceeb6414f8bfd5efc48fd5ca840ab5">00692</a> <span class="keyword">function</span> <a class="code" href="../../d4/d98/a00120_a62ceeb6414f8bfd5efc48fd5ca840ab5.html#a62ceeb6414f8bfd5efc48fd5ca840ab5" title="Devuelve el peso de la imágen.">getfilesize</a>($size) { <span class="comment">// gets file size for each image</span>
-<a name="l00693"></a>00693 
-<a name="l00694"></a>00694    $units = array(<span class="stringliteral">&#39; B&#39;</span>, <span class="stringliteral">&#39; KB&#39;</span>, <span class="stringliteral">&#39; MB&#39;</span>, <span class="stringliteral">&#39; GB&#39;</span>, <span class="stringliteral">&#39; TB&#39;</span>);
-<a name="l00695"></a>00695    <span class="keywordflow">for</span> ($i = 0; $size &gt; 1024; $i++) { $size /= 1024; }
-<a name="l00696"></a>00696    <span class="keywordflow">return</span> round($size, 2).$units[$i];
-<a name="l00697"></a>00697    }
-<a name="l00698"></a>00698 
-<a name="l00699"></a>00699 ?&gt;
+<a name="l00609"></a>00609       <span class="comment">/* </span>
+<a name="l00610"></a>00610 <span class="comment">       * Comprobar si la url lleva con sigo el idioma especificado.</span>
+<a name="l00611"></a>00611 <span class="comment">       * si es así debemos especificar idioma actual y carpeta de contenido</span>
+<a name="l00612"></a>00612 <span class="comment">       * del idioma actual</span>
+<a name="l00613"></a>00613 <span class="comment">       */</span>
+<a name="l00614"></a>00614 
+<a name="l00615"></a>00615       <span class="keywordflow">if</span>(stristr(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>, <span class="stringliteral">&#39;File/&#39;</span>) !== FALSE) {
+<a name="l00616"></a>00616          <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a> = substr(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>,0,7);
+<a name="l00617"></a>00617          <a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">$i</a> = str_replace(<span class="stringliteral">&#39;File/&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,<a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a>);
+<a name="l00618"></a>00618          <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a> = <a class="code" href="../../d9/d4b/a00117_a6ab4ae106b6ebf5769bc3390aa8ac287.html#a6ab4ae106b6ebf5769bc3390aa8ac287" title="comprobar_barra()">comprobar_barra</a>(<a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a>);
+<a name="l00619"></a>00619          }
+<a name="l00620"></a>00620 
+<a name="l00621"></a>00621       <a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a> = <span class="stringliteral">&#39;File/&#39;</span>.$ii.<span class="charliteral">&#39;/&#39;</span>;
+<a name="l00622"></a>00622 
+<a name="l00623"></a>00623       <span class="comment">/* Limpiar url de carpeta inicial File/&lt;idioma&gt; */</span>
+<a name="l00624"></a>00624 
+<a name="l00625"></a>00625       <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>=str_replace(<a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a>,<span class="stringliteral">&#39;&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00626"></a>00626 
+<a name="l00627"></a>00627       <span class="keywordflow">if</span> ( <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a> ) <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>=str_replace(<a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a>,<span class="stringliteral">&#39;&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00628"></a>00628 
+<a name="l00629"></a>00629       <span class="comment">/* Definir mime_type */</span>
+<a name="l00630"></a>00630 
+<a name="l00631"></a>00631       <span class="comment">// La url puede venir con los subdirectorios de la dirección http, debe limpiarse sino nos dara error</span>
+<a name="l00632"></a>00632       <span class="comment">// al ir a buscar información , ya que los subdirectorios son respectivos de la url pero desde php nos vamos </span>
+<a name="l00633"></a>00633       <span class="comment">// del directorio del proyecto.</span>
+<a name="l00634"></a>00634       $url_sin_subdirectorios = str_replace(<span class="stringliteral">&#39;../&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00635"></a>00635       <span class="comment">// registrar(__FILE__,__LINE__,&#39;url: &#39;.$url.&#39; url_sin: &#39;.$url_sin_subdirectorios,&#39;ADMIN&#39;);  // DEV</span>
+<a name="l00636"></a>00636       <a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a> = <a class="code" href="../../d3/de7/a00039_a8ed8e1620ffce5a87583cb24d01a4bca.html#a8ed8e1620ffce5a87583cb24d01a4bca" title="Descubrir el tipo mime del archivo.">GUtil::tipo_de_archivo</a>(<a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a>.$url_sin_subdirectorios);
+<a name="l00637"></a>00637 
+<a name="l00638"></a>00638       <span class="keywordflow">if</span> ( substr_count(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>,<span class="stringliteral">&quot;.btml&quot;</span>) != 0) {
+<a name="l00639"></a>00639          <a class="code" href="../../d9/db3/a00066_ad837fd69f5921416cf6f2a2f90caf890.html#ad837fd69f5921416cf6f2a2f90caf890" title="Saber si el contenido es un borrador.">$esBorrador</a> = TRUE ;
+<a name="l00640"></a>00640       } <span class="keywordflow">else</span> {
+<a name="l00641"></a>00641          <a class="code" href="../../d9/db3/a00066_ad837fd69f5921416cf6f2a2f90caf890.html#ad837fd69f5921416cf6f2a2f90caf890" title="Saber si el contenido es un borrador.">$esBorrador</a> = FALSE ;
+<a name="l00642"></a>00642          }
+<a name="l00643"></a>00643 
+<a name="l00644"></a>00644       <span class="comment">/* definir formato de comentarios */</span>
+<a name="l00645"></a>00645 
+<a name="l00646"></a>00646       <span class="keywordflow">switch</span>(<a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a>) {
+<a name="l00647"></a>00647 
+<a name="l00648"></a>00648          <span class="keywordflow">case</span> <span class="stringliteral">&#39;text/css&#39;</span>:
+<a name="l00649"></a>00649             <a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">$forma_comentarios</a> = <span class="stringliteral">&#39;/* %s */&#39;</span>;
+<a name="l00650"></a>00650             <span class="keywordflow">break</span>;
+<a name="l00651"></a>00651          <span class="keywordflow">case</span> <span class="stringliteral">&#39;application/x-javascript&#39;</span>:
+<a name="l00652"></a>00652             <a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">$forma_comentarios</a> = <span class="stringliteral">&#39;/* %s */&#39;</span>;
+<a name="l00653"></a>00653             <span class="keywordflow">break</span>;
+<a name="l00654"></a>00654          <span class="keywordflow">default</span>:
+<a name="l00655"></a>00655             <a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">$forma_comentarios</a> = <a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">self::$forma_comentarios</a>;
+<a name="l00656"></a>00656             <span class="keywordflow">break</span>;
+<a name="l00657"></a>00657          }
+<a name="l00658"></a>00658 
+<a name="l00659"></a>00659       <span class="comment">/* Si es un archivo separamos seccion de contenido */</span>
+<a name="l00660"></a>00660 
+<a name="l00661"></a>00661       <span class="keywordflow">if</span> ( empty(<a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a>) || <a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a> != <span class="stringliteral">&#39;text/directory&#39;</span> ) {
+<a name="l00662"></a>00662 
+<a name="l00663"></a>00663          $url_array = explode(<span class="stringliteral">&quot;/&quot;</span>,<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>);
+<a name="l00664"></a>00664          $ultimo = $url_array[count($url_array)-1];
+<a name="l00665"></a>00665          unset($url_array[count($url_array)-1]);
+<a name="l00666"></a>00666          <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> = implode(<span class="charliteral">&#39;/&#39;</span>,$url_array);
+<a name="l00667"></a>00667          <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">$c</a> = $ultimo;
+<a name="l00668"></a>00668 
+<a name="l00669"></a>00669       } <span class="keywordflow">else</span> {
+<a name="l00670"></a>00670 
+<a name="l00671"></a>00671          <span class="keywordflow">if</span> ( <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> == <span class="stringliteral">&#39;index.html&#39;</span> ) {
+<a name="l00672"></a>00672             <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00673"></a>00673             <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">$c</a> = <span class="stringliteral">&#39;index.html&#39;</span>;
+<a name="l00674"></a>00674          } <span class="keywordflow">else</span> {
+<a name="l00675"></a>00675             <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> = <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>;
+<a name="l00676"></a>00676             <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">$c</a>= <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00677"></a>00677             }
+<a name="l00678"></a>00678 
+<a name="l00679"></a>00679          }
+<a name="l00680"></a>00680 
+<a name="l00681"></a>00681       <span class="comment">/* Limpiamos sección */</span>
+<a name="l00682"></a>00682 
+<a name="l00683"></a>00683       <span class="keywordflow">if</span> ( !empty(<a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>) ) <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> = ( <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>{strlen(<a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>)-1} == <span class="charliteral">&#39;/&#39;</span> ) ? <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> : <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>.<span class="charliteral">&#39;/&#39;</span> ;
+<a name="l00684"></a>00684       if ( <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> == <span class="charliteral">&#39;/&#39;</span> ) <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00685"></a>00685       <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a> = str_replace(<span class="stringliteral">&#39;../&#39;</span>,<span class="stringliteral">&#39;&#39;</span>,<a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>);
+<a name="l00686"></a>00686 
+<a name="l00687"></a>00687       <span class="comment">/* Prefijo para enlaces */</span>
+<a name="l00688"></a>00688 
+<a name="l00689"></a>00689       <span class="keywordflow">if</span> ( <a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a> == <span class="stringliteral">&#39;text/directory&#39;</span> &amp;&amp; <a class="code" href="../../d9/d4b/a00117_a6ab4ae106b6ebf5769bc3390aa8ac287.html#a6ab4ae106b6ebf5769bc3390aa8ac287" title="comprobar_barra()">comprobar_barra</a>(<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>) != <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a> ) {
+<a name="l00690"></a>00690          $secciones = explode(<span class="charliteral">&#39;/&#39;</span>,<a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>);
+<a name="l00691"></a>00691          $ultimo = $secciones[count($secciones)-2];
+<a name="l00692"></a>00692          <a class="code" href="../../d9/db3/a00066_aab3fe4237c8eed37504f28f8541c9c79.html#aab3fe4237c8eed37504f28f8541c9c79" title="prefijo para el enlace relativo, para tener en cuenta si acaba la url con barra o sin ella...">$enlace_relativo</a> = ( empty($ultimo) ) ? <span class="stringliteral">&#39;&#39;</span> : <span class="stringliteral">&#39;./&#39;</span>;
+<a name="l00693"></a>00693       } <span class="keywordflow">else</span> {
+<a name="l00694"></a>00694          <a class="code" href="../../d9/db3/a00066_aab3fe4237c8eed37504f28f8541c9c79.html#aab3fe4237c8eed37504f28f8541c9c79" title="prefijo para el enlace relativo, para tener en cuenta si acaba la url con barra o sin ella...">$enlace_relativo</a> = <span class="stringliteral">&#39;./&#39;</span>;
+<a name="l00695"></a>00695          }
+<a name="l00696"></a>00696 
+<a name="l00697"></a>00697       $retorno[<span class="stringliteral">&#39;url&#39;</span>] = <a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">$url</a>;
+<a name="l00698"></a>00698       $retorno[<span class="charliteral">&#39;s&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a50b05cf2e02ef0b67fcad97106dd7634.html#a50b05cf2e02ef0b67fcad97106dd7634" title="Sección.">$s</a>;
+<a name="l00699"></a>00699       $retorno[<span class="charliteral">&#39;c&#39;</span>] = <a class="code" href="../../d9/db3/a00066_ab73d7f4f2dae233dd561e7fdaab3a77b.html#ab73d7f4f2dae233dd561e7fdaab3a77b" title="Contenido.">$c</a>;
+<a name="l00700"></a>00700       $retorno[<span class="stringliteral">&#39;dd&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a>;
+<a name="l00701"></a>00701       $retorno[<span class="charliteral">&#39;d&#39;</span>] = ( <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a> ) ? <a class="code" href="../../d9/db3/a00066_a0cf5dd496d9f5ff1edf00d234771dcfe.html#a0cf5dd496d9f5ff1edf00d234771dcfe" title="Directorio con idioma actual.">$d</a> : <a class="code" href="../../d9/db3/a00066_a53c89bcf51a9d61cb1c76b91e42aac4e.html#a53c89bcf51a9d61cb1c76b91e42aac4e" title="Directorio con idioma por defecto.">$dd</a> ;
+<a name="l00702"></a>00702       $retorno[<span class="stringliteral">&#39;ii&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a088fc18ad150c02f45bb46c5dc472aa9.html#a088fc18ad150c02f45bb46c5dc472aa9" title="Idioma por defecto.">$ii</a>;
+<a name="l00703"></a>00703       $retorno[<span class="charliteral">&#39;i&#39;</span>] = ( <a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">$i</a> ) ? <a class="code" href="../../d9/db3/a00066_a83018d9153d17d91fbcf3bc10158d34f.html#a83018d9153d17d91fbcf3bc10158d34f" title="Idioma actual.">$i</a> : <a class="code" href="../../d9/db3/a00066_a088fc18ad150c02f45bb46c5dc472aa9.html#a088fc18ad150c02f45bb46c5dc472aa9" title="Idioma por defecto.">$ii</a> ;
+<a name="l00704"></a>00704       $retorno[<span class="charliteral">&#39;a&#39;</span>] = <a class="code" href="../../d9/db3/a00066_acebf83966ef6d7e5645a6b62ba368f9f.html#acebf83966ef6d7e5645a6b62ba368f9f" title="Accion que se desea realizar.">$a</a>;
+<a name="l00705"></a>00705       $retorno[<span class="charliteral">&#39;m&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a0c788ee1ad50aa3f1b2c28bb7a00db49.html#a0c788ee1ad50aa3f1b2c28bb7a00db49" title="Modulo que se desea utilizar.">$m</a>;
+<a name="l00706"></a>00706       $retorno[<span class="stringliteral">&#39;args&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a67e94494731d99ed23b123e95175bc10.html#a67e94494731d99ed23b123e95175bc10" title="Array con argumentos pasados mediante url como ejemplo:">$args</a>;
+<a name="l00707"></a>00707       $retorno[<span class="charliteral">&#39;e&#39;</span>] = <a class="code" href="../../d9/db3/a00066_ab74076a9b7e1d23d12b9e8d65e60315a.html#ab74076a9b7e1d23d12b9e8d65e60315a" title="Evento que se desea realizar.">$e</a>;
+<a name="l00708"></a>00708       $retorno[<span class="stringliteral">&#39;enlace_relativo&#39;</span>] = <a class="code" href="../../d9/db3/a00066_aab3fe4237c8eed37504f28f8541c9c79.html#aab3fe4237c8eed37504f28f8541c9c79" title="prefijo para el enlace relativo, para tener en cuenta si acaba la url con barra o sin ella...">$enlace_relativo</a>;
+<a name="l00709"></a>00709       $retorno[<span class="stringliteral">&#39;mime_type&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a4d1985caafb49b059e3ca3dedfee257a.html#a4d1985caafb49b059e3ca3dedfee257a" title="Tipo de archivo.">$mime_type</a>;
+<a name="l00710"></a>00710       $retorno[<span class="stringliteral">&#39;formato&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a5972ce25233a2f1fcd6d68a139b28f71.html#a5972ce25233a2f1fcd6d68a139b28f71" title="Formato de presentación, ejemplo html, ajax, rss, etc...">$formato</a>;
+<a name="l00711"></a>00711       $retorno[<span class="stringliteral">&#39;esBorrador&#39;</span>] = <a class="code" href="../../d9/db3/a00066_ad837fd69f5921416cf6f2a2f90caf890.html#ad837fd69f5921416cf6f2a2f90caf890" title="Saber si el contenido es un borrador.">$esBorrador</a>;
+<a name="l00712"></a>00712       $retorno[<span class="stringliteral">&#39;forma_comentarios&#39;</span>] = <a class="code" href="../../d9/db3/a00066_a5c34af4963f7cfe74fb6a3e9e0915b8d.html#a5c34af4963f7cfe74fb6a3e9e0915b8d" title="Formato para los comentarios.">$forma_comentarios</a>;
+<a name="l00713"></a>00713 
+<a name="l00714"></a>00714       <span class="keywordflow">return</span> $retorno;
+<a name="l00715"></a>00715 
+<a name="l00716"></a>00716       }
+<a name="l00717"></a>00717 
+<a name="l00718"></a>00718 
+<a name="l00719"></a>00719    }
+<a name="l00720"></a>00720 
+<a name="l00721"></a>00721 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

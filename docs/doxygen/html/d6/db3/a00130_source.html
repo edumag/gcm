@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/GcmConfig/test/GcmConfigGuiTest.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/GcmConfig/lib/GcmConfigFactory.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -82,102 +82,75 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_c3d8fb5ec977952637af3fab714015e0.html">GcmConfig</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_dbd03bd1795b9f28d771191dcc08fa7c.html">test</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_db8acf50837bfca640092178dd4bc5e1.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">GcmConfigGuiTest.php</div>  </div>
+<div class="title">GcmConfigFactory.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a href="../../d6/db3/a00130.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 <span class="comment"></span>
 <a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file Test phpUnit para GcmConfigGui</span>
-<a name="l00005"></a>00005 <span class="comment"> */</span>
-<a name="l00006"></a>00006 
-<a name="l00007"></a>00007 DEFINE(ARCHIVO,<span class="stringliteral">&#39;/tmp/TGC.php&#39;</span>);
-<a name="l00008"></a>00008 DEFINE(ARCHIVO_DESC,<span class="stringliteral">&#39;/tmp/TGC_es.php&#39;</span>);
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="comment">/* construimos archivo para pruebas */</span>
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
-<a name="l00013"></a>00013 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v1]=&quot;variable1&quot;;&#39;</span>;
-<a name="l00014"></a>00014 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v2]=&quot;variable2&quot;;&#39;</span>;
-<a name="l00015"></a>00015 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v3]=&quot;variable3&quot;;&#39;</span>;
-<a name="l00016"></a>00016 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v4]=&quot;variable4&quot;;&#39;</span>;
-<a name="l00017"></a>00017 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v5]=&quot;variable5&quot;;&#39;</span>;
-<a name="l00018"></a>00018 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC[v6]=&quot;variable6&quot;;&#39;</span>;
-<a name="l00019"></a>00019 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
-<a name="l00020"></a>00020 
-<a name="l00021"></a>00021 file_put_contents(ARCHIVO, $contenido);
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 $contenido = <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;?php &#39;</span>;
-<a name="l00024"></a>00024 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v1]=&quot;descripcion_variable1&quot;;&#39;</span>;
-<a name="l00025"></a>00025 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v2]=&quot;descripcion_variable2&quot;;&#39;</span>;
-<a name="l00026"></a>00026 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v3]=&quot;descripcion_variable3&quot;;&#39;</span>;
-<a name="l00027"></a>00027 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v4]=&quot;descripcion_variable4&quot;;&#39;</span>;
-<a name="l00028"></a>00028 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v5]=&quot;descripcion_variable5&quot;;&#39;</span>;
-<a name="l00029"></a>00029 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;$TGC_DESC[v6]=&quot;descripcion_variable6&quot;;&#39;</span>;
-<a name="l00030"></a>00030 $contenido .= <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;?&gt;&#39;</span>;
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 file_put_contents(ARCHIVO_DESC, $contenido);
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 require_once <span class="stringliteral">&#39;PHPUnit/Framework.php&#39;</span>;
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 require(dirname(__FILE__).<span class="stringliteral">&#39;/../lib/GcmConfigGui.php&#39;</span>);
-<a name="l00037"></a>00037 
-<a name="l00038"></a><a class="code" href="../../db/df3/a00034.html">00038</a> <span class="keyword">class </span><a class="code" href="../../db/df3/a00034.html">GcmConfigGuiTest</a> <span class="keyword">extends</span> <a class="code" href="../../d1/d84/a00052.html">PHPUnit_Framework_TestCase</a>{
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040    <span class="keyword">public</span> $config;
-<a name="l00041"></a>00041    <span class="keyword">public</span> $archivo;
-<a name="l00042"></a>00042    <span class="keyword">public</span> $archivo_descripcion;
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044    <span class="keyword">function</span> __construct() {
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046       $this-&gt;archivo = ARCHIVO;
-<a name="l00047"></a>00047       $this-&gt;archivo_descripcion  = ARCHIVO_DESC; 
+<a name="l00004"></a>00004 <span class="comment"> * @file      GcmConfigFactory.php</span>
+<a name="l00005"></a>00005 <span class="comment"> * @brief     Patron Factory para la clase GcmConfig</span>
+<a name="l00006"></a>00006 <span class="comment"> *</span>
+<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
+<a name="l00008"></a>00008 <span class="comment"> *</span>
+<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
+<a name="l00010"></a>00010 <span class="comment"> *   Created  22/01/10</span>
+<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: GcmConfigFactory.php 220 2010-04-09 11:24:21Z eduardo $</span>
+<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2010, Eduardo Magrané</span>
+<a name="l00013"></a>00013 <span class="comment"> *</span>
+<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
+<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
+<a name="l00016"></a>00016 <span class="comment"> */</span>
+<a name="l00017"></a>00017 <span class="comment"></span>
+<a name="l00018"></a>00018 <span class="comment">/** Añadimos GcmConfig */</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 require_once(<span class="stringliteral">&#39;GcmConfig.php&#39;</span>);
+<a name="l00021"></a>00021 <span class="comment"></span>
+<a name="l00022"></a>00022 <span class="comment">/**</span>
+<a name="l00023"></a>00023 <span class="comment"> * @class GcmConfigFactory</span>
+<a name="l00024"></a>00024 <span class="comment"> * @brief Patron Factory para la clase GcmConfig</span>
+<a name="l00025"></a>00025 <span class="comment"> *</span>
+<a name="l00026"></a>00026 <span class="comment"> * Para asegurarnos que recogemos la misma instancia para cada fichero de </span>
+<a name="l00027"></a>00027 <span class="comment"> * configuración</span>
+<a name="l00028"></a>00028 <span class="comment"> *</span>
+<a name="l00029"></a>00029 <span class="comment"> * Uso:</span>
+<a name="l00030"></a>00030 <span class="comment"> * &lt;pre&gt;</span>
+<a name="l00031"></a>00031 <span class="comment"> * $conf = GcmConfigFactory::GetGcmConfig(&#39;archivo&#39;);</span>
+<a name="l00032"></a>00032 <span class="comment"> * &lt;/pre&gt;</span>
+<a name="l00033"></a>00033 <span class="comment"> *</span>
+<a name="l00034"></a>00034 <span class="comment"> * @version 0.1</span>
+<a name="l00035"></a>00035 <span class="comment"> */</span>
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="../../dc/d87/a00032.html">00037</a> <span class="keyword">class </span><a class="code" href="../../dc/d87/a00032.html" title="Añadimos GcmConfig.">GcmConfigFactory</a> {
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> GetGcmConfig($archivo) {
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041       $key = md5(serialize($archivo));
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043       <span class="keywordflow">if</span> ( ! isset($GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key]) || ! ($GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key] instanceof <a class="code" href="../../df/d61/a00031.html" title="Lectura y edición de archivos de configuración.">GcmConfig</a>) ) {
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045          $GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key] = <span class="keyword">new</span> GcmConfig($archivo);
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047          }
 <a name="l00048"></a>00048 
-<a name="l00049"></a>00049       $this-&gt;config = <span class="keyword">new</span> <a class="code" href="../../d0/dc0/a00033.html">GcmConfigGui</a>($this-&gt;archivo);
+<a name="l00049"></a>00049       <span class="keywordflow">return</span> $GLOBALS[<span class="stringliteral">&#39;GcmConfig&#39;</span>][$key];
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051       }
-<a name="l00052"></a>00052 <span class="comment"></span>
-<a name="l00053"></a>00053 <span class="comment">   /** Comprobando valor de la primera variable */</span>
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053    }
 <a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="../../db/df3/a00034_a9b50095563423ef0494805999672431a.html#a9b50095563423ef0494805999672431a">00055</a>    <span class="keyword">function</span> <a class="code" href="../../db/df3/a00034_a9b50095563423ef0494805999672431a.html#a9b50095563423ef0494805999672431a" title="Comprobando valor de la primera variable.">testVerValores</a>() {
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057       $this-&gt;assertEquals($this-&gt;config-&gt;get(<span class="stringliteral">&#39;v1&#39;</span>), <span class="stringliteral">&#39;variable1&#39;</span>);
-<a name="l00058"></a>00058       $this-&gt;assertEquals($this-&gt;config-&gt;getDescripcion(<span class="stringliteral">&#39;v6&#39;</span>), <span class="stringliteral">&#39;descripcion_variable6&#39;</span>);
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060       $nuevo_valor = <span class="stringliteral">&#39;Nuevo valor para v1&#39;</span>;
-<a name="l00061"></a>00061       $this-&gt;config-&gt;set(<span class="stringliteral">&#39;v1&#39;</span>,$nuevo_valor);
-<a name="l00062"></a>00062       $this-&gt;assertEquals($this-&gt;config-&gt;get(<span class="stringliteral">&#39;v1&#39;</span>), $nuevo_valor);
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064       $nuevo_valor = <span class="stringliteral">&#39;Nuevo valor para v1&#39;</span>;
-<a name="l00065"></a>00065       $this-&gt;config-&gt;setDescripcion(<span class="stringliteral">&#39;v1&#39;</span>,$nuevo_valor);
-<a name="l00066"></a>00066       $this-&gt;assertEquals($this-&gt;config-&gt;getDescripcion(<span class="stringliteral">&#39;v1&#39;</span>), $nuevo_valor);
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068       $this-&gt;assertTrue($this-&gt;config-&gt;del(<span class="stringliteral">&#39;v4&#39;</span>));
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070       $this-&gt;assertTrue($this-&gt;config-&gt;delDescripcion(<span class="stringliteral">&#39;v4&#39;</span>));
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072       $this-&gt;config-&gt;setDescripcion(<span class="stringliteral">&#39;v1&#39;</span>,<span class="stringliteral">&#39;MODIFICADA&#39;</span>);
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074       <span class="comment">// echo &#39;Formulario&#39;;</span>
-<a name="l00075"></a>00075 
-<a name="l00076"></a>00076       <span class="comment">// echo $this-&gt;config-&gt;formulario();</span>
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078       }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 
-<a name="l00081"></a>00081    }
-<a name="l00082"></a>00082 ?&gt;
+<a name="l00055"></a>00055 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Miércoles, 19 de Junio de 2013 12:07:14 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
