@@ -1,5 +1,3 @@
-@mainpage gcm
-
 Gestor de contenido mamedu
 
 Framework de PHP.

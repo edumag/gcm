@@ -3,9 +3,10 @@
 @file readme.dox
 @brief Documentación para gcm
 @page manual Manual
+@mainpage
 
-- @subpage instalacion Instalación
-- @subpage configuracion Configuración
+- @subpage instalacion
+- @subpage configuracion
 - @subpage crud
 
 */
