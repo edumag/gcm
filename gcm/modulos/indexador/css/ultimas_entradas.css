@@ -1,5 +1,23 @@
-
-/* Listado de ultimas entradas */
+/*  ## Listado de ultimas entradas 
+    <div id="listado_de_contenido">
+       <div id="elemento_apuntes/Linux/X/Awesome_escritorio_ultraligero.html" class="elemento_lista_off">
+          <div class="titulo_articulo">
+             <a ondblclick="location.href='apuntes/Linux/X/Awesome_escritorio_ultraligero.html'" href="apuntes/Linux/X/Awesome_escritorio_ultraligero.html" class="enlace_entrada">Awesome escritorio ultraligero</a>   
+             <div class="doc_info">
+                <h3>09 de June, 2013</h3>
+                <h3><a href="./apuntes/">Apuntes</a> / <a href="./apuntes/Linux/">Linux</a> / <a href="./apuntes/Linux/X/">X</a></h3>
+             </div>
+          </div>
+          <div class="contenido_articulo">
+             Una vez instalado copiamos archivo de configuración a nuestro directorio.
+             mkdir ~/.config/awesome &amp;&amp; cp /etc/xdg/awesome/rc.lua ~/.config/awesome/
+             &nbsp;
+             Atajos de teclado y ratón de Awesome
+             ModkeyEs la más importante, se combina con el resto para distintas acciones:Modkey + [0-9]Cambiar de escritorio, por ejemplo: Modkey+1 escritorio 1.Modkey + EnterAbrir una terminal sin importar dónde uno se encuentre.Modkey + Barria de EspacioCambiar el layout, de ho..      
+          </div>
+       </div>
+    </div>
+*/
 .contenido_articulo {
    margin: 10px;
 }

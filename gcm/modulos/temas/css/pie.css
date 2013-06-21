@@ -1,3 +1,13 @@
+/*  ## Pie de página
+
+    <div id="pie">
+       <img src="http://www.mamedu.com/gcm/File/es//ojo.gif" />
+       <div id="pie_derecho">
+          <a>Pie de página</a>
+         <img src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
+       </div>
+    </div>
+*/
 #pie {
    float: left;
    width: 100%;
@@ -7,7 +17,6 @@
    background: <?=$this->color("body-07")?>;
    border: 1px solid <?=$this->color("pie-00")?>;
    }
-/* logo peque�o */
 #pie img:first-child	{ 
    float: left;
    width: 40px:

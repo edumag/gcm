@@ -131,6 +131,7 @@ class Router {
    public static $i;                       ///< Idioma actual
    public static $ii;                      ///< Idioma por defecto
    public static $base;                    ///< $enlace_relativo + $dir 
+   public static $base_absoluta;           ///< http://dominio/ + $dir 
    public static $estamos;                 ///< Nombre de la sección actual
    public static $editar;                  ///< Editamos o vemos
    public static $mime_type;               ///< Tipo de archivo
@@ -470,6 +471,13 @@ class Router {
       // if ( $gcm->au->logeado() ) {
           $this->comprobar_reservadas();
       //    }
+
+      // Crear $base_absoluta
+      $base_absoluta = rtrim('http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']),'/');
+      self::$base_absoluta = $base_absoluta.'/'.self::$s;
+
+      // echo "<br>absoluta: ".self::$base_absoluta;
+      // echo "<pre>" ; print_r($_SERVER) ; echo "</pre>"; // DEV  
 
       registrar(__FILE__,__LINE__,'Router:'.depurar(get_class_vars(__CLASS__),'Variables'));
 

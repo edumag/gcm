@@ -1,3 +1,14 @@
+/*  ## Lista para idiomas
+
+    <div id="lista_idiomas">
+       <ul>
+           <li><a>lista 01</a></li>
+           <li><a>lista 02</a></li>
+           <li><a>lista 03</a></li>
+       </ul>
+    </div>
+
+*/
 
 #lista_idiomas ul {
    border: 5px solid <?=$this->color("body-11")?>;
@@ -5,7 +16,7 @@
    text-align: center;
 }
 #lista_idiomas a {
-   color: red;
+   color: #000;
 }
 #lista_idiomas li {
    color: <?=$this->color("body-11")?>;

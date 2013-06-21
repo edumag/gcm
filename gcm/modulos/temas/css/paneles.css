@@ -1,4 +1,15 @@
+/* ## Paneles
 
+    <div class="panel">
+       <div class="panel_titulo">
+          <a href="#" class="panel_iniciado">Informe de errores</a>
+       </div>
+       <div class="subpanel" style="">
+         Contenido del panel
+       </div> <!-- Acaba subpanel -->
+    </div>
+
+*/
 .panel {
    margin: 20px 0px 10px 0;
 }

@@ -1,4 +1,19 @@
+/*  ## Comentarios
 
+    <div style="label: Añadir comentario;" class="form_comentario">
+       <form action="../../../../../apuntes/Linux/Edicion_de_texto/vim/plugins/tagbar,_listado_para_los_tags_creados_con_ctags.html" method="post">
+          <label for="usuario">Nombre: </label>
+          <input type="text" value="" name="usuario" maxlength="60">
+          <label for="mail">*Email: </label>
+          <input type="text" value="" name="mail" maxlength="60">
+          <label for="texto">Comentario: </label>
+          <textarea name="texto" maxlength="500" class="editor_simple"></textarea>
+          <input type="submit">
+          <br>
+          * El email es opcional.
+       </form>
+    </div>
+*/
 #caja_ultimos_comentarios {
 	font-size: x-small;
 	padding: 2px;
@@ -44,7 +59,7 @@
 .texto_comentario {
    margin: 15px;
 }
-/* Formulario para a�adir comentarios */
+/* Formulario para añadir comentarios */
 .form_comentario {
    width: 100%;
    padding: 0;

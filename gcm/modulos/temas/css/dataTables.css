@@ -1,13 +1,8 @@
-
-/*
- * Table
- */
 table.dataTable {
 	margin: 0 auto;
 	clear: both;
 	width: 100%;
 }
-
 table.dataTable thead th {
 	padding: 3px 18px 3px 10px;
 	border-bottom: 1px solid black;
@@ -15,78 +10,46 @@ table.dataTable thead th {
 	cursor: pointer;
 	*cursor: hand;
 }
-
 table.dataTable tfoot th {
 	padding: 3px 18px 3px 10px;
 	border-top: 1px solid black;
 	font-weight: bold;
 }
-
 table.dataTable td {
 	padding: 3px 10px;
 }
-
 table.dataTable td.center,
 table.dataTable td.dataTables_empty {
 	text-align: center;
 }
-
 table.dataTable tr.odd { background-color: #E2E4FF; }
 table.dataTable tr.even { background-color: white; }
-
 table.dataTable tr.odd td.sorting_1 { background-color: #D3D6FF; }
 table.dataTable tr.odd td.sorting_2 { background-color: #DADCFF; }
 table.dataTable tr.odd td.sorting_3 { background-color: #E0E2FF; }
 table.dataTable tr.even td.sorting_1 { background-color: #EAEBFF; }
 table.dataTable tr.even td.sorting_2 { background-color: #F2F3FF; }
 table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
-
-
-/*
- * Table wrapper
- */
 .dataTables_wrapper {
 	position: relative;
 	clear: both;
 	*zoom: 1;
 }
-
-
-/*
- * Page length menu
- */
 .dataTables_length {
 	float: left;
 }
-
-
-/*
- * Filter
- */
 .dataTables_filter {
 	float: right;
 	text-align: right;
 }
-
-
-/*
- * Table information
- */
 .dataTables_info {
 	clear: both;
 	float: left;
 }
-
-
-/*
- * Pagination
- */
 .dataTables_paginate {
 	float: right;
 	text-align: right;
 }
-
-/* Two button pagination - previous / next */
 .paginate_disabled_previous,
 .paginate_enabled_previous,
 .paginate_disabled_next,
@@ -109,7 +72,6 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 .paginate_enabled_next:active {
 	outline: none;
 }
-
 .paginate_disabled_previous,
 .paginate_disabled_next {
 	color: #666 !important;
@@ -123,16 +85,12 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 	padding-right: 23px;
 	margin-left: 10px;
 }
-
 .paginate_enabled_previous { background: url(<?=Router::$dir.$this->icono('back_enabled')?>) no-repeat top left; }
 .paginate_enabled_previous:hover { background: url(<?=Router::$dir.$this->icono('back_enabled_hover')?>) no-repeat top left; }
 .paginate_disabled_previous { background: url(<?=Router::$dir.$this->icono('back_disabled')?>) no-repeat top left; }
-
 .paginate_enabled_next { background: url(<?=Router::$dir.$this->icono('forward_enabled')?>) no-repeat top right; }
 .paginate_enabled_next:hover { background: url(<?=Router::$dir.$this->icono('forward_enabled_hover')?>) no-repeat top right; }
 .paginate_disabled_next { background: url(<?=Router::$dir.$this->icono('forward_disabled')?>) no-repeat top right; }
-
-/* Full number pagination */
 .paging_full_numbers {
 	height: 22px;
 	line-height: 22px;
@@ -143,7 +101,6 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 .paging_full_numbers a:hover {
 	text-decoration: none;
 }
-
 .paging_full_numbers a.paginate_button,
 .paging_full_numbers a.paginate_active {
 	border: 1px solid #aaa;
@@ -156,24 +113,16 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 	*cursor: hand;
 	color: #333 !important;
 }
-
 .paging_full_numbers a.paginate_button {
 	background-color: #ddd;
 }
-
 .paging_full_numbers a.paginate_button:hover {
 	background-color: #ccc;
 	text-decoration: none !important;
 }
-
 .paging_full_numbers a.paginate_active {
 	background-color: #99B3FF;
 }
-
-
-/*
- * Processing indicator
- */
 .dataTables_processing {
 	position: absolute;
 	top: 50%;
@@ -189,33 +138,19 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 	font-size: 14px;
 	background-color: white;
 }
-
-
-/*
- * Sorting
- */
 .sorting { background: url(<?=Router::$dir.$this->icono('sort_both')?>) no-repeat center right; }
 .sorting_asc { background: url(<?=Router::$dir.$this->icono('sort_asc')?>) no-repeat center right; }
 .sorting_desc { background: url(<?=Router::$dir.$this->icono('sort_desc')?>) no-repeat center right; }
-
 .sorting_asc_disabled { background: url(<?=Router::$dir.$this->icono('sort_asc_disabled')?>) no-repeat center right; }
 .sorting_desc_disabled { background: url(<?=Router::$dir.$this->icono('sort_desc_disabled')?>) no-repeat center right; }
- 
 table.dataTable thead th:active,
 table.dataTable thead td:active {
 	outline: none;
 }
-
-
-/*
- * Scrolling
- */
 .dataTables_scroll {
 	clear: both;
 }
-
 .dataTables_scrollBody {
 	*margin-top: -1px;
 	-webkit-overflow-scrolling: touch;
 }
-

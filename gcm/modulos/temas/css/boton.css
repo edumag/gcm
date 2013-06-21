@@ -1,4 +1,8 @@
-.boton{
+/*  ## boton 
+   
+    <a class="boton" href="#">Botón de ejemplo</a>
+*/
+.boton {
 -moz-border-radius:5px;
 -webkit-border-radius:5px;
 border-radius:5px;

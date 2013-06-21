@@ -1,10 +1,9 @@
-/* 
-# medias.css
-Comportamiento para diferentes resoluciones
-*/
+/* Comportamiento para diferentes resoluciones */
 
-/*
-## 640px
+/*  ## 640px pasamos a versión de ancho reducido 
+
+- Los títulos de los paneles se convierten en botones
+- Las tablas pasan a modo vertical
 */
 @media screen and (max-width: 640px){
 
@@ -19,8 +18,9 @@ width: 96%;
 #lateral { 
    margin-left: 10px;
 }
-/*
- ### Los titulos de los paneles se convierten en botones
+/*  ## Los títulos de los paneles se convierten en botones
+
+    <div class="panel_titulo"><a href="#">Título</a></div>
 */
 .panel_titulo a:first-child  {
 -moz-border-radius:5px;
@@ -36,9 +36,35 @@ text-shadow:1px 1px 0 #ffffff;
 padding: 5px;
 display: block;
 }
-/*
- ### Tablas adaptables
- Cada registro se muestra verticalmente
+
+/* ## Tablas adaptables, cada registro se muestra verticalmente
+
+    <table>
+       <thead>
+          <tr>
+             <th>head 01</th>
+             <th>head 02</th>
+             <th>head 03</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr>
+             <td>fila 01 col 01</td>
+             <td>fila 01 col 02</td>
+             <td>fila 01 col 03</td>
+          </tr>
+          <tr>
+             <td>fila 02 col 01</td>
+             <td>fila 02 col 02</td>
+             <td>fila 02 col 03</td>
+          </tr>
+          <tr>
+             <td>fila 03 col 01</td>
+             <td>fila 03 col 02</td>
+             <td>fila 03 col 03</td>
+          </tr>
+       </tbody>
+    </table>
 */
 table, thead, tr, th, tbody, td{
    display:block;
@@ -50,8 +76,10 @@ td {
    position: relative;
 }
 }
-/*
-## 400px
+/*  ## 400px
+
+- Adaptamos cabecera
+
 */
 @media screen and (max-width: 400px){
 #cabeceraDerecha {
@@ -59,8 +87,9 @@ td {
    width: 100%;
 }
 }
-/*
-## 320px
+/*  ## 320px
+- Adaptamos selector de idiomas
+- Adaptamos formulario de busqueda
 */
 @media screen and (max-width: 320px){
 #cabeceraDerecha select {

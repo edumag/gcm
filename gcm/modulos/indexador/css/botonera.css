@@ -1,4 +1,20 @@
+/*  ## Botonera paginador
 
+    <div class="paginador">
+       <span class="info_botonera">
+          Pàgina 1 de 21 - 
+          168 resultats   
+       </span>
+       <span class="botonera_paginador">
+          <span class="pag_actual"><b>1</b></span>
+          <a href="?uec_orden=&amp;uec_tipo_orden=&amp;uec_pagina=2">2</a>
+          <a href="?uec_orden=&amp;uec_tipo_orden=&amp;uec_pagina=3">3</a>
+          <a href="?uec_orden=&amp;uec_tipo_orden=&amp;uec_pagina=2">&gt;</a>
+          <a href="?uec_orden=&amp;uec_tipo_orden=&amp;uec_pagina=21">&gt;&gt;</a>
+       </span>
+    </div>
+
+*/
 .paginador {
 /** border:1px solid <?=$this->color("botonera-00")?>; */
 margin:10px;

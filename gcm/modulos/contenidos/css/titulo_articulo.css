@@ -1,8 +1,22 @@
+/*  ## Cabecera de una entrada en listado
 
+    <div id="listado_de_contenido">
+       <div class="titulo_articulo">
+          <a ondblclick="location.href='apuntes/Linux/Edicion_de_texto/vim/index.html'" href="apuntes/Linux/Edicion_de_texto/vim/index.html" class="enlace_entrada">
+            vim
+          </a>   
+          <div class="doc_info">
+          <h3>13 de Mayo, 2013</h3>
+          <h3>
+            <a href="./apuntes/">Apuntes</a> / <a href="./apuntes/Linux/">Linux</a> / <a href="./apuntes/Linux/Edicion_de_texto/">Edición de texto</a> / <a href="./apuntes/Linux/Edicion_de_texto/vim/">vim</a>
+          </h3>
+       </div>
+    </div>
+*/
 #listado_de_contenido .titulo_articulo {
 font-size: 1.8em;
 }
-/* Caja con informaci�n del documento */
+/* Caja con información del documento */
 /* fecha,etc.. */
 .titulo_articulo h3 {
 font-size: small;

@@ -1,5 +1,20 @@
+/*  ## Panel en columna
 
-   
+    <div id="columna">
+      <div class="panel">
+         <div class="panel_titulo">
+         <a href="#" class="panel_iniciado">Panel</a>
+         </div>
+         <div class="subpanel">
+            <ul>
+               <li>lista 01</li>
+               <li>lista 02</li>
+               <li>lista 03</li>
+            </ul>
+         </div>
+      </div>
+    </div>
+*/
 #columna .panel ul {
 list-style: none;
 padding: 3px 0px 5px 7px;
