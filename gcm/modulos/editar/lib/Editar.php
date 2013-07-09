@@ -5,9 +5,6 @@
  * @brief     Módulo para la edición de contenido
  *
  * Módulo con las herramientas nacesarias para la edición de contenido
- * como: literales, constantes, etc...
- *
- * @todo      Administrar literales
  *
  * @category  Modulos
  * @package   Editar
@@ -206,7 +203,6 @@ class Editar extends Modulos {
     * @param $evento Evento
     * @param $args Array de argumentos
     *
-    * @todo Esto debe estar en literales y utlizar al maximo la clase padre GcmConfig
     * @todo ¿Borrar el literal del nombre anterior?
     *
     */
