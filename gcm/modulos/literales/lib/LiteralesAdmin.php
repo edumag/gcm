@@ -119,9 +119,10 @@ class LiteralesAdmin extends Literales {
       $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >'
          .literal('Añadir',3)
          .'</a>';
-      $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:filtra()" >'
+      $salida .= '<a class="boton" title="'.htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8").'" style="cursor: pointer;" onclick="javascript:filtra()" >'
          .literal('Filtrar',3)
          .'</a>';
+
       $salida .= '<br /><br />';
 
       if ( $arr->variables() ) {
@@ -134,7 +135,8 @@ class LiteralesAdmin extends Literales {
                <p class="'.$clase.'">
                <a href="javascript:;" 
                   onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'{L{'.$key.'}}\'); return false"
-                  title="'.$valor.'" >
+                  title="'.htmlentities(literal('Añadir literal a contenido',3).' ('.$valor.')',ENT_QUOTES, "UTF-8").'" 
+                  >
                   '.$key.'
                </a>
                <a style="font-size: smaller;" title="Eliminar" 
