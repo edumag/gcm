@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Jun 21 20:06:24 CEST 2013
+// Archivo generado automáticamente por GcmConfig Tue Jul 9 9:27:47 CEST 2013
 $LG_es['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instalación, pasos a seguir';
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
@@ -11,17 +11,15 @@ $LG_es['Como_crear_un_modulo']='Como crear un módulo';
 $LG_es['Conexion_entre_modulos']='Conexión entre módulos';
 $LG_es['Configuracion_para_modulos']='Configuración para módulos';
 $LG_es['Crud']='Crud';
-$LG_es['Debug']='';
+$LG_es['Debug']='Debug';
 $LG_es['December']='Diciembre';
 $LG_es['Desarrollo']='';
 $LG_es['Documentacion']='Documentación';
-$LG_es['Documentación del framework']='';
-$LG_es['Documentación para Gcm']='';
 $LG_es['Ejemplo_de_documento']='Ejemplo de documento';
 $LG_es['Ejemplo_de_uso_de_GcmConfig']='Ejemplo de uso de GcmConfig';
 $LG_es['Entrada_de_prueba']='Entrada de prueba';
 $LG_es['Entrada_de_prueba_2']='Entrada de prueba 2';
-$LG_es['Eventos']='';
+$LG_es['Eventos']='Eventos';
 $LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='Evitar reenvios a formulario al actualizar una pagina';
 $LG_es['Forzar_eventos_por_omision']='Forzar eventos por omision';
 $LG_es['GCM']='';
@@ -73,7 +71,6 @@ $LG_es['literales']='';
 $LG_es['probando']='';
 $LG_es['probando nuevo']='';
 $LG_es['proyecto']='';
-$LG_es['seccion con otro nombre2']='';
 $LG_es['seccion nueva']='Sección nueva';
 $LG_es['sección']='';
 $LG_es['sin_traduccion']='No se ha encontrado traducción de este documento le presentamos el original';
@@ -81,4 +78,5 @@ $LG_es['tema']='';
 $LG_es['tema_nuevo']='tema nuevo';
 $LG_es['thumbnail']='';
 $LG_es['tiny_mce']='';
+$LG_es['Documentación para Gcm']='';
 ?>

@@ -22,10 +22,6 @@ require_once(GCM_DIR."lib/int/GcmConfig/lib/GcmConfigFactory.php");
 /**
  * @class Literales
  * @brief Manejo de literales
- * @version 0.3
- *
- * @todo Crear administrador de literales.
- * @todo Crear mecanismo para eliminar literal de todos los idiomas no solo del que estamos.
  */
 
 class Literales extends Modulos {

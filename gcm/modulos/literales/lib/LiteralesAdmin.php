@@ -22,7 +22,6 @@ require_once(dirname(__FILE__).'/Literales.php');
  * @brief Administración de literales
  * @version 0.3
  *
- * @todo Crear administrador de literales.
  * @todo Crear mecanismo para eliminar literal de todos los idiomas no solo del que estamos.
  */
 
@@ -36,8 +35,6 @@ class LiteralesAdmin extends Literales {
 
    /** 
     * Presentar panel de literales 
-    *
-    * @todo Difrenciar entre literales sin contenido y literales sin traducción
     *
     * @param $e Evento
     * @param $args Array de argumentos
@@ -266,15 +263,13 @@ class LiteralesAdmin extends Literales {
       Temas::panel($panel);
 
       }
-   
-   /**
+      /**
     * Administración de literales
     *
     * @param  $e Evento
     * @param  $args Argumentos
     * @return TRUE/FALSE
-    * @todo Al presentar de nuevo el formulario despues de una actualización 
-    *       no muestra los cambios
+    * @bug Al presentar de nuevo el formulario despues de una actualización no muestra los cambios
     *
     */
    

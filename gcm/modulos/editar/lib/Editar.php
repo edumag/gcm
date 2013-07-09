@@ -195,45 +195,6 @@ class Editar extends Modulos {
 
       }
 
-   /** Cambio de nombre de contenido
-    *
-    * El nombre del fichero a cambiar el nombre viene en POST['original'] 
-    * y el destino en POST['destino'].
-    *
-    * @param $evento Evento
-    * @param $args Array de argumentos
-    *
-    * @todo ¿Borrar el literal del nombre anterior?
-    *
-    */
-
-   function cambio_nombre_contenido($e,$args='') {
-
-      global $gcm, $LG;
-
-      $original = $_POST['original'];
-      $destino  = $_POST['destino'];
-
-      $original_r = $gcm->router->desglosarUrl($original);
-      $destino_r  = $gcm->router->desglosarUrl($destino);
-
-      $original = str_replace('\.html','',$original_r['c']);
-      $destino  = str_replace('\.html','',$destino_r['c']);
-
-      $file=$gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      $arr->del($original);
-      $arr->set(GUtil::textoplano($destino),$destino);
-
-      $arr->guardar_variables();
-
-      global $LG;
-      $LG[GUtil::textoplano($destino)]=$destino;
-
-      }
-
    /** 
    * Creamos un panel con las constantes para poder ser insertados en la pagina editada.
    *
