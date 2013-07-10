@@ -39,7 +39,7 @@ class Aplicar_SEO extends Modulos {
 
       global $gcm;
 
-      $dominio = 'masmonell.com';
+      $dominio = $gcm->config('admin','Proyecto');
 
       $url = str_replace('seo','',$_SERVER['HTTP_REFERER']);
 
