@@ -39,27 +39,12 @@ class Aplicar_SEO extends Modulos {
 
       global $gcm;
 
+      $dominio = 'masmonell.com';
+
       $url = str_replace('seo','',$_SERVER['HTTP_REFERER']);
 
       $titulo = 'SEO';
-      $contenido = '
-         <p>
-         Pendiente de hacer que este módulo compruebe y ayude a tener lo necesario para un buen
-         posicionamineto.
-         </p>
-
-         Información sobre SEO en 
-         <a href="http://mamedu.com/dev/gcm/proyecto/Documentacion/SEO.html">
-         http://mamedu.com/dev/gcm/proyecto/Documentacion/SEO.html
-         </a>
-
-         <br /><br />
-         <h2>Herraminetas</h2>
-         <br />
-         <a href="https://developers.google.com/speed/pagespeed/insights#url='.$url.'&mobile=false" >Test de velocidad</a>
-         <br /><br />
-
-         ';
+      $contenido = get_include_contents(dirname(__FILE__).'/../html/info.phtml',array('dominio'=>$dominio));
 
       $gcm->contenido = $contenido;
       $gcm->event->anular('contenido','aplicar_SEO');
