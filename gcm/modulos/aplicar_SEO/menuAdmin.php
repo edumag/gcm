@@ -31,4 +31,8 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
+$menuAdmin['Administración']['boton']['SEO']['activado']= 1;
+$menuAdmin['Administración']['boton']['SEO']['title']="Gestionar SEO";
+$menuAdmin['Administración']['boton']['SEO']['link']=dirname($_SERVER['PHP_SELF'])."/seo";
+
 ?>

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Fri Jun 21 9:41:07 CEST 2013
+// Archivo generado automáticamente por GcmConfig Wed Sep 4 10:57:35 CEST 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -9,10 +9,6 @@ $GCM_LG_es['Últimas entradas en']='';
 $GCM_LG_es['Sin sección']='';
 $GCM_LG_es['Sección']='';
 $GCM_LG_es['no encontrada']='';
-$GCM_LG_es['Últimas entradas en']='';
-$GCM_LG_es['Menú']='';
-$GCM_LG_es['Usuario']='';
-$GCM_LG_es['Contraseña']='';
 $GCM_LG_es['Registros']='';
 $GCM_LG_es['Contraseña no pasa verificación']='';
 $GCM_LG_es['El correo no parece valido']='';
@@ -93,4 +89,31 @@ $GCM_LG_es['Subir fichero proyecto.css modificado']='';
 $GCM_LG_es['Guardar colores']='';
 $GCM_LG_es['Añadir un color']='';
 $GCM_LG_es['Añadir']='';
+$GCM_LG_es['Campo obligatorio']='';
+$GCM_LG_es['Longitud máxima']='';
+$GCM_LG_es['Filtrar']='';
+$GCM_LG_es['Listado completo de contenido']='';
+$GCM_LG_es['Acciones sobre contenidos']='';
+$GCM_LG_es['Borrar']='';
+$GCM_LG_es['Cambiar nombre']='';
+$GCM_LG_es['Configuración guardada en DATOS/configuracion/idiomas/LG_es.php']='';
+$GCM_LG_es['Contenido nuevo']='';
+$GCM_LG_es['Título']='';
+$GCM_LG_es['Título del contenido']='';
+$GCM_LG_es['Acciones']='';
+$GCM_LG_es['Guardar']='';
+$GCM_LG_es['Constantes']='';
+$GCM_LG_es['Añadir email oculto a los spammers']='';
+$GCM_LG_es['Nombre a mostrar']='';
+$GCM_LG_es['Email']='';
+$GCM_LG_es['Insertar']='';
+$GCM_LG_es['Mostrar únicamente literales vacíos']='';
+$GCM_LG_es['Añadir literal a contenido']='';
+$GCM_LG_es['Editar']='';
+$GCM_LG_es['trabajosedu']='';
+$GCM_LG_es['Renombrar o mover contenido']='';
+$GCM_LG_es['Ejecutar']='';
+$GCM_LG_es['Contenido renombrado o movido']='';
+$GCM_LG_es['Gestionar SEO']='';
+$GCM_LG_es['de']='';
 ?>

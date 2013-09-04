@@ -5,9 +5,6 @@
  * @brief     Módulo para la edición de contenido
  *
  * Módulo con las herramientas nacesarias para la edición de contenido
- * como: literales, constantes, etc...
- *
- * @todo      Administrar literales
  *
  * @category  Modulos
  * @package   Editar
@@ -195,46 +192,6 @@ class Editar extends Modulos {
       $arr->guardar_variables();
 
       echo "Elemento [ ".$_GET['elemento']." ] añadido o modificado por [ ".$_GET['valor']." ]";
-
-      }
-
-   /** Cambio de nombre de contenido
-    *
-    * El nombre del fichero a cambiar el nombre viene en POST['original'] 
-    * y el destino en POST['destino'].
-    *
-    * @param $evento Evento
-    * @param $args Array de argumentos
-    *
-    * @todo Esto debe estar en literales y utlizar al maximo la clase padre GcmConfig
-    * @todo ¿Borrar el literal del nombre anterior?
-    *
-    */
-
-   function cambio_nombre_contenido($e,$args='') {
-
-      global $gcm, $LG;
-
-      $original = $_POST['original'];
-      $destino  = $_POST['destino'];
-
-      $original_r = $gcm->router->desglosarUrl($original);
-      $destino_r  = $gcm->router->desglosarUrl($destino);
-
-      $original = str_replace('\.html','',$original_r['c']);
-      $destino  = str_replace('\.html','',$destino_r['c']);
-
-      $file=$gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      $arr->del($original);
-      $arr->set(GUtil::textoplano($destino),$destino);
-
-      $arr->guardar_variables();
-
-      global $LG;
-      $LG[GUtil::textoplano($destino)]=$destino;
 
       }
 

@@ -23,3 +23,7 @@
  * @version   SVN $Id: menuAdmin.php 182 2010-02-26 15:11:50Z eduardo $ 
  */
 
+// Literales 
+$menuAdmin['Configuración']['boton']['Literales']['activado']=1;
+$menuAdmin['Configuración']['boton']['Literales']['title']="Editar literales";
+$menuAdmin['Configuración']['boton']['Literales']['link']="?m=literales&a=administrar";

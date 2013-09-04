@@ -384,8 +384,6 @@ function presentarBytes($bytes) {
 
 function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
-   registrar(__FILE__,__LINE__, "<br>time: $time / formato_entrada: $formato_entrada / formato_salida: $formato_salida");
-
    if ( $formato_entrada == 'sqlite' ) $formato_entrada = 'unix';
 
    if ( $formato_entrada == 'deducir' ) {
@@ -1118,5 +1116,16 @@ function css3_write ($property, $value) {
 	." ".$property.": ".$value.";\n";
 	echo $css3;
    } 
+
+/**
+ * Escapar cadena para añadir a html desde para un value
+ * 
+ * @param $cadena Cadena a escapar
+ */
+
+function esc_value($cadena) {
+
+   return htmlspecialchars($cadena,ENT_QUOTES,'UTF-8');
+   }
 
 ?>
