@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/lib/int/solicitud/lib/Solicitud.php</title>
+<title>gcm: Fichero Fuente gcm/lib/int/temas/lib/TemaGcm.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,505 +81,263 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_6dcf7604432fbe0cdce90d2c3270522a.html">solicitud</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_b45f4a2cdae25a1e4b75b511541262b6.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_f339ddfbe2de8958fc425e435cc4e7c9.html">temas</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_d4981816818a402d12f3032963dc6fc2.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">Solicitud.php</div>  </div>
+<div class="title">TemaGcm.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="../../d3/d65/a00154.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/**</span>
-<a name="l00004"></a>00004 <span class="comment"> * @file      Solicitud.php</span>
-<a name="l00005"></a>00005 <span class="comment"> * @brief     Recoger solicitud</span>
-<a name="l00006"></a>00006 <span class="comment"> *</span>
-<a name="l00007"></a>00007 <span class="comment"> * @author    Eduardo Magrané </span>
-<a name="l00008"></a>00008 <span class="comment"> *</span>
-<a name="l00009"></a>00009 <span class="comment"> * @internal</span>
-<a name="l00010"></a>00010 <span class="comment"> *   Created  04/02/11</span>
-<a name="l00011"></a>00011 <span class="comment"> *  Revision  SVN $Id: $</span>
-<a name="l00012"></a>00012 <span class="comment"> * Copyright  Copyright (c) 2011, Eduardo Magrané</span>
-<a name="l00013"></a>00013 <span class="comment"> *</span>
-<a name="l00014"></a>00014 <span class="comment"> * This source code is released for free distribution under the terms of the</span>
-<a name="l00015"></a>00015 <span class="comment"> * GNU General Public License as published by the Free Software Foundation.</span>
-<a name="l00016"></a>00016 <span class="comment"> */</span>
-<a name="l00017"></a>00017 
-<a name="l00018"></a>00018 require_once(<span class="stringliteral">&#39;constantes.php&#39;</span>);
-<a name="l00019"></a>00019 require_once(<span class="stringliteral">&#39;Restricciones.php&#39;</span>);
-<a name="l00020"></a>00020 require_once(<span class="stringliteral">&#39;RestriccionesFallidas.php&#39;</span>);
-<a name="l00021"></a>00021 <span class="comment"></span>
-<a name="l00022"></a>00022 <span class="comment">/**</span>
-<a name="l00023"></a>00023 <span class="comment"> * Recoger solicitud venga de GET, POST o Cookies</span>
-<a name="l00024"></a>00024 <span class="comment"> *</span>
-<a name="l00025"></a>00025 <span class="comment"> */</span>
-<a name="l00026"></a>00026 
-<a name="l00027"></a><a class="code" href="../../d4/d31/a00069.html">00027</a> <span class="keyword">class </span><a class="code" href="../../d4/d31/a00069.html" title="Recoger solicitud venga de GET, POST o Cookies.">Solicitud</a> {
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029    <span class="keyword">private</span> $_arGetVars;                                <span class="comment">///&lt; Copia de GET</span>
-<a name="l00030"></a>00030 <span class="comment"></span>   <span class="keyword">private</span> $_arPostVars;                               <span class="comment">///&lt; Copia de POST</span>
-<a name="l00031"></a>00031 <span class="comment"></span>   <span class="keyword">private</span> $_arCookieVars;                             <span class="comment">///&lt; Copia de Cookies</span>
-<a name="l00032"></a>00032 <span class="comment"></span>   <span class="keyword">private</span> $_arRequestVars;                            <span class="comment">///&lt; Copia de REQUEST</span>
-<a name="l00033"></a>00033 <span class="comment"></span><span class="comment"></span>
-<a name="l00034"></a>00034 <span class="comment">   /**</span>
-<a name="l00035"></a>00035 <span class="comment">    * Si se redirige de nuevo al usuario a la pagina original mediante el </span>
-<a name="l00036"></a>00036 <span class="comment">    * objeto solicitud como resultado de pasar parámetros que no pasan las</span>
-<a name="l00037"></a>00037 <span class="comment">    * pruebas de restricción, esta variable contendra una copia del objeto</span>
-<a name="l00038"></a>00038 <span class="comment">    * &#39;solicitud&#39; suministrado.</span>
-<a name="l00039"></a>00039 <span class="comment">    */</span>
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041    <span class="keyword">private</span> $_objOriginalRequestObject;
-<a name="l00042"></a>00042 <span class="comment"></span>
-<a name="l00043"></a>00043 <span class="comment">   /**</span>
-<a name="l00044"></a>00044 <span class="comment">    * Determina si se ha creado &#39;Solicitud&#39; como resultado de una redirección</span>
-<a name="l00045"></a>00045 <span class="comment">    * tras el fallo de una prueba</span>
-<a name="l00046"></a>00046 <span class="comment">    */</span>
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048    <span class="keyword">private</span> $_blIsRedirectFollowingConstraintFailure = FALSE;
-<a name="l00049"></a>00049 <span class="comment"></span>
-<a name="l00050"></a>00050 <span class="comment">   /**</span>
-<a name="l00051"></a>00051 <span class="comment">    * Si falla la mencioniada prueba de restricción, ¿Se debe redirigir</span>
-<a name="l00052"></a>00052 <span class="comment">    * automáticamente a la página origial o a otra url?</span>
-<a name="l00053"></a>00053 <span class="comment">    */</span>
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055    <span class="keyword">private</span> $_blRedirectOnConstraintFailure;
-<a name="l00056"></a>00056 <span class="comment"></span>
-<a name="l00057"></a>00057 <span class="comment">   /**</span>
-<a name="l00058"></a>00058 <span class="comment">    * Si se falla en una prueba de restricción y se ha establecido </span>
-<a name="l00059"></a>00059 <span class="comment">    * _blRedirectOnConstraintFailure a true, esta variable especifica si se </span>
-<a name="l00060"></a>00060 <span class="comment">    * debe desviar el objeto &#39;Solicitud&#39; a una url determinada, si se deja</span>
-<a name="l00061"></a>00061 <span class="comment">    * en blanco se utiliza la url de referencia.</span>
-<a name="l00062"></a>00062 <span class="comment">    */</span>
-<a name="l00063"></a>00063 
-<a name="l00064"></a>00064    <span class="keyword">private</span> $_strConstraintFailureRedirectTargetURL;
-<a name="l00065"></a>00065 <span class="comment"></span>
-<a name="l00066"></a>00066 <span class="comment">   /**</span>
-<a name="l00067"></a>00067 <span class="comment">    * Si no se establece _strConstraintFailureRedirectTargetURL, </span>
-<a name="l00068"></a>00068 <span class="comment">    * _blRedirectOnConstraintFailure se estable en true y no se encuentra </span>
-<a name="l00069"></a>00069 <span class="comment">    * disponible ninguna URL de referencia, esta variable especifica la url </span>
-<a name="l00070"></a>00070 <span class="comment">    * a la que se debe redigir.</span>
-<a name="l00071"></a>00071 <span class="comment">    */</span>
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073    <span class="keyword">private</span> $_strConstraintFailureDefaultRedirectTargetURL;
-<a name="l00074"></a>00074 <span class="comment"></span>
-<a name="l00075"></a>00075 <span class="comment">   /**</span>
-<a name="l00076"></a>00076 <span class="comment">    * Matriz de restricciones cuyos índices contienen tres elementos con la </span>
-<a name="l00077"></a>00077 <span class="comment">    * clave en un valor hash: el nombre del parámetro en el que se aplica la </span>
-<a name="l00078"></a>00078 <span class="comment">    * restricción, el método en el que espea que este parametro se pase </span>
-<a name="l00079"></a>00079 <span class="comment">    * (como una constante) y el objeto Restricción que expresa la prueba a </span>
-<a name="l00080"></a>00080 <span class="comment">    * aplicar</span>
-<a name="l00081"></a>00081 <span class="comment">    */</span>
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083    <span class="keyword">private</span> $_arObjParameterMethodConstraintHash;
-<a name="l00084"></a>00084 <span class="comment"></span>
-<a name="l00085"></a>00085 <span class="comment">   /**</span>
-<a name="l00086"></a>00086 <span class="comment">    * Matriz de objetos de fallo de restricción, si ha fallado alguna </span>
-<a name="l00087"></a>00087 <span class="comment">    * retricción, suponoendo que se ha ejecutado las pruebas.</span>
-<a name="l00088"></a>00088 <span class="comment">    */</span>
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090    <span class="keyword">private</span> $_arObjConstraintFailure;
-<a name="l00091"></a>00091 <span class="comment"></span>
-<a name="l00092"></a>00092 <span class="comment">   /**</span>
-<a name="l00093"></a>00093 <span class="comment">    * Booleana que expresa si las pruebas de restricción han pasado las pruebas</span>
-<a name="l00094"></a>00094 <span class="comment">    */</span>
+<a name="l00002"></a>00002 
+<a name="l00022"></a><a class="code" href="../../d2/db1/a00070.html">00022</a> <span class="keyword">class </span><a class="code" href="../../d2/db1/a00070.html" title="Tratar con temas de proyectos.">TemaGcm</a> {
+<a name="l00023"></a>00023 
+<a name="l00026"></a><a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779">00026</a>     <span class="keyword">public</span> <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>;
+<a name="l00027"></a>00027 
+<a name="l00030"></a><a class="code" href="../../d2/db1/a00070_a5629ba8c527bcc9469cf12a47264447b.html#a5629ba8c527bcc9469cf12a47264447b">00030</a>     <span class="keyword">public</span> <a class="code" href="../../d2/db1/a00070_a5629ba8c527bcc9469cf12a47264447b.html#a5629ba8c527bcc9469cf12a47264447b" title="Lista de colores del tema formato: [capa][valor] = &#39;#ffffff&#39;.">$colores</a>;
+<a name="l00031"></a>00031 
+<a name="l00034"></a><a class="code" href="../../d2/db1/a00070_a44249bbbacc7cc54aac0d745ef7db972.html#a44249bbbacc7cc54aac0d745ef7db972">00034</a>     <span class="keyword">protected</span> <a class="code" href="../../d2/db1/a00070_a44249bbbacc7cc54aac0d745ef7db972.html#a44249bbbacc7cc54aac0d745ef7db972" title="Listado de colores demandados que no estan implementados.">$colores_faltantes</a> = NULL ;
+<a name="l00035"></a>00035 
+<a name="l00044"></a><a class="code" href="../../d2/db1/a00070_abbb988ebf9b4491082c9df0ec6881e9b.html#abbb988ebf9b4491082c9df0ec6881e9b">00044</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_abbb988ebf9b4491082c9df0ec6881e9b.html#abbb988ebf9b4491082c9df0ec6881e9b" title="Constructor.">__construct</a>(<a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>, <a class="code" href="../../d2/db1/a00070_a5629ba8c527bcc9469cf12a47264447b.html#a5629ba8c527bcc9469cf12a47264447b" title="Lista de colores del tema formato: [capa][valor] = &#39;#ffffff&#39;.">$colores</a>) {
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046        $this-&gt;ficheros = <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>;
+<a name="l00047"></a>00047        $this-&gt;colores  = <a class="code" href="../../d2/db1/a00070_a5629ba8c527bcc9469cf12a47264447b.html#a5629ba8c527bcc9469cf12a47264447b" title="Lista de colores del tema formato: [capa][valor] = &#39;#ffffff&#39;.">$colores</a>;
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049        }
+<a name="l00050"></a>00050 
+<a name="l00063"></a><a class="code" href="../../d2/db1/a00070_ae8d8bc8bba6866ed46062a4aefcba8c8.html#ae8d8bc8bba6866ed46062a4aefcba8c8">00063</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_ae8d8bc8bba6866ed46062a4aefcba8c8.html#ae8d8bc8bba6866ed46062a4aefcba8c8" title="Devolvemos string para enlazar el javascript con html.">incluir_javascript</a>(<a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>=NULL,$librerias=NULL,$url_base) {
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065       <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>  = ( <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a> ) ? <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a> : $this-&gt;ficheros[js];
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067       $lista     = ( !empty(<a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>) ) ? implode(<span class="charliteral">&#39;,&#39;</span>,<a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>) : NULL ;
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069       <span class="keywordflow">if</span> ( $librerias &amp;&amp; !empty($librerias)  ) {
+<a name="l00070"></a>00070          <span class="keywordflow">foreach</span> ( $librerias as $items ) {
+<a name="l00071"></a>00071             list($modulo,$nombre) = explode(<span class="charliteral">&#39;:&#39;</span>,$items);
+<a name="l00072"></a>00072             $f = $this-&gt;<a class="code" href="../../d2/db1/a00070_a298996eb77204ec8510eac42cbb50eb3.html#a298996eb77204ec8510eac42cbb50eb3" title="devolver ruta de archivo de tema">ruta</a>(strtolower($modulo),<span class="stringliteral">&#39;libjs&#39;</span>,$nombre);
+<a name="l00073"></a>00073             echo <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;script src=&quot;&#39;</span>.$url_base.$f.<span class="stringliteral">&#39;&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span>;
+<a name="l00074"></a>00074             }
+<a name="l00075"></a>00075          }
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078       <span class="keywordflow">if</span> ( $lista ) echo <span class="stringliteral">&quot;\n&quot;</span>.<span class="stringliteral">&#39;&lt;script src=&quot;proyecto.js?arch=&#39;</span>.$lista.<span class="stringliteral">&#39;&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span>;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080       <span class="keywordflow">if</span> ( ! $lista ) echo <span class="stringliteral">&quot;\n&lt;!-- sin javascript para añadir --&gt;&quot;</span>;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082       }
+<a name="l00083"></a>00083 
+<a name="l00094"></a><a class="code" href="../../d2/db1/a00070_a58fe51ac9431c2959611e392e2e6321a.html#a58fe51ac9431c2959611e392e2e6321a">00094</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a58fe51ac9431c2959611e392e2e6321a.html#a58fe51ac9431c2959611e392e2e6321a" title="Devolver color para archivos css, en caso de no existir devolvemos &#39;red&#39; y añadimos color a $this-&gt;co...">color</a>($color, $valor = FALSE) {
 <a name="l00095"></a>00095 
-<a name="l00096"></a>00096    <span class="keyword">private</span> $_hasRunConstraintTests;
-<a name="l00097"></a>00097 <span class="comment"></span>
-<a name="l00098"></a>00098 <span class="comment">   /**</span>
-<a name="l00099"></a>00099 <span class="comment">    * Consultamos REQUEST, GET, POST y COOKIE y rellena las variables miembro.</span>
-<a name="l00100"></a>00100 <span class="comment">    *</span>
-<a name="l00101"></a>00101 <span class="comment">    * Se comprueba la existencia de una cookie llamada phprqcOriginalRequestObject, </span>
-<a name="l00102"></a>00102 <span class="comment">    * si existe se supone que otro objeto &#39;Solicitud&#39; se ha pasado como resultado de </span>
-<a name="l00103"></a>00103 <span class="comment">    * una devolución tras los fallos.</span>
-<a name="l00104"></a>00104 <span class="comment">    *</span>
-<a name="l00105"></a>00105 <span class="comment">    * La cookie tiene un valor de null en esta fase, para evitar un bucle infinito </span>
-<a name="l00106"></a>00106 <span class="comment">    * cuando se crea el objeto &#39;Solicitud&#39; original, posteriormente se anula su </span>
-<a name="l00107"></a>00107 <span class="comment">    * contenido con la función stripslashes en un nuevo objeto &#39;Solicitud&#39;, que </span>
-<a name="l00108"></a>00108 <span class="comment">    * posteriormente quedara disponoble para su interrogación a traves del método </span>
-<a name="l00109"></a>00109 <span class="comment">    * de acceso GetOriginalRequestObjectFollowingConstraintFailure.</span>
-<a name="l00110"></a>00110 <span class="comment">    */</span>
+<a name="l00096"></a>00096       <span class="keywordflow">if</span> ( isset($this-&gt;colores[$color])  ) {
+<a name="l00097"></a>00097          <span class="keywordflow">return</span> $this-&gt;colores[$color];
+<a name="l00098"></a>00098       } <span class="keywordflow">else</span> {
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100          <span class="keywordflow">if</span> ( $valor ) {
+<a name="l00101"></a>00101             $this-&gt;colores[$color] = $valor;
+<a name="l00102"></a>00102             registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Color predefinido (&#39;</span>.$color.<span class="stringliteral">&#39;): &#39;</span>.$valor,<span class="stringliteral">&#39;DEBUG&#39;</span>);
+<a name="l00103"></a>00103             <span class="keywordflow">return</span> $valor;
+<a name="l00104"></a>00104             }
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106          $this-&gt;colores_faltantes[$color] = NULL;
+<a name="l00107"></a>00107          $this-&gt;colores[$color] = <span class="stringliteral">&#39;red&#39;</span>;
+<a name="l00108"></a>00108          registrar(__FILE__,__LINE__,__CLASS__.<span class="stringliteral">&#39;-&gt;&#39;</span>.__FUNCTION__.<span class="charliteral">&#39;(&#39;</span>.$color.<span class="stringliteral">&#39;) Color no definido&#39;</span>,<span class="stringliteral">&#39;ADMIN&#39;</span>);
+<a name="l00109"></a>00109          <span class="keywordflow">return</span> <span class="stringliteral">&#39;red&#39;</span>;
+<a name="l00110"></a>00110          }
 <a name="l00111"></a>00111 
-<a name="l00112"></a><a class="code" href="../../d4/d31/a00069_a051e9380cfe35e08442cd58cbb0fd978.html#a051e9380cfe35e08442cd58cbb0fd978">00112</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a051e9380cfe35e08442cd58cbb0fd978.html#a051e9380cfe35e08442cd58cbb0fd978" title="Consultamos REQUEST, GET, POST y COOKIE y rellena las variables miembro.">__construct</a>($check_for_cookie = <span class="keyword">true</span>) {
+<a name="l00112"></a>00112       }
 <a name="l00113"></a>00113 
-<a name="l00114"></a>00114       <span class="comment">// Import variables</span>
-<a name="l00115"></a>00115       global $_REQUEST;
-<a name="l00116"></a>00116       global $_GET;
-<a name="l00117"></a>00117       global $_POST;
-<a name="l00118"></a>00118       global $_COOKIE;
-<a name="l00119"></a>00119       $this-&gt;_arGetVars = $_GET;
-<a name="l00120"></a>00120       $this-&gt;_arPostVars = $_POST;
-<a name="l00121"></a>00121       $this-&gt;_arCookieVars = $_COOKIE;
-<a name="l00122"></a>00122       $this-&gt;_arRequestVars = $_REQUEST;
-<a name="l00123"></a>00123 
-<a name="l00124"></a>00124       <span class="keywordflow">if</span> ($check_for_cookie) {
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126          <span class="comment">//if ( isset($this-&gt;_arCookieVars[&quot;phprqcOriginalRequestObject&quot;]) ) {</span>
-<a name="l00127"></a>00127          <span class="keywordflow">if</span> ( isset($_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>]) ) {
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129             <span class="comment">//$cookieVal = $this-&gt;_arRequestVars[&quot;phprqcOriginalRequestObject&quot;];</span>
-<a name="l00130"></a>00130             $cookieVal = $_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>];
-<a name="l00131"></a>00131             unset($_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>]);
-<a name="l00132"></a>00132             $this-&gt;_blIsRedirectFollowingConstraintFailure = <span class="keyword">true</span>;
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134             <span class="keywordflow">if</span> (strlen($cookieVal) &gt; 0) {
-<a name="l00135"></a>00135                $strResult = setcookie (<span class="stringliteral">&quot;phprqcOriginalRequestObject&quot;</span>, <span class="stringliteral">&quot;&quot;</span>,time() - 3600,<span class="charliteral">&#39;/&#39;</span>);
-<a name="l00136"></a>00136                $origObj = unserialize(stripslashes($cookieVal));
-<a name="l00137"></a>00137                $this-&gt;_objOriginalRequestObject = &amp;$origObj;
-<a name="l00138"></a>00138                $this-&gt;_arRequestVars[<span class="stringliteral">&quot;phprqcOriginalRequestObject&quot;</span>] = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00139"></a>00139                $this-&gt;_arGetVars[<span class="stringliteral">&quot;phprqcOriginalRequestObject&quot;</span>] = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00140"></a>00140                $this-&gt;_arPostVars[<span class="stringliteral">&quot;phprqcOriginalRequestObject&quot;</span>] = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00141"></a>00141             };
-<a name="l00142"></a>00142             $this-&gt;_blIsRedirectOnConstraintFailure  = <span class="keyword">true</span>;
-<a name="l00143"></a>00143          } <span class="keywordflow">else</span> {
-<a name="l00144"></a>00144             $this-&gt;_blIsRedirectOnConstraintFailure  = <span class="keyword">false</span>;
-<a name="l00145"></a>00145          };
-<a name="l00146"></a>00146       } <span class="keywordflow">else</span> {
-<a name="l00147"></a>00147          $this-&gt;_blIsRedirectOnConstraintFailure  = <span class="keyword">false</span>;
-<a name="l00148"></a>00148       };
-<a name="l00149"></a>00149       $this-&gt;_arObjParameterMethodConstraintHash = Array();
-<a name="l00150"></a>00150       $this-&gt;_arObjConstraintFailure = Array();
-<a name="l00151"></a>00151       $this-&gt;_blHasRunConstraintTests = <span class="keyword">false</span>;
-<a name="l00152"></a>00152       
-<a name="l00153"></a>00153    }
-<a name="l00154"></a>00154 <span class="comment"></span>
-<a name="l00155"></a>00155 <span class="comment">   /**</span>
-<a name="l00156"></a>00156 <span class="comment">    * Si la página mostrada se ha cargado automáticamente siguiendo una </span>
-<a name="l00157"></a>00157 <span class="comment">    * solicitud de redirección 302 como resultado de un fallo, este </span>
-<a name="l00158"></a>00158 <span class="comment">    * método devuelve true</span>
-<a name="l00159"></a>00159 <span class="comment">    */</span>
-<a name="l00160"></a>00160 
-<a name="l00161"></a><a class="code" href="../../d4/d31/a00069_a563cbb0ad56b58e51ddb4c768a5de82a.html#a563cbb0ad56b58e51ddb4c768a5de82a">00161</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a563cbb0ad56b58e51ddb4c768a5de82a.html#a563cbb0ad56b58e51ddb4c768a5de82a" title="Si la página mostrada se ha cargado automáticamente siguiendo una solicitud de redirección 302 como r...">IsRedirectFollowingConstraintFailure</a>() {
-<a name="l00162"></a>00162       <span class="keywordflow">return</span>($this-&gt;_blIsRedirectOnConstraintFailure);
-<a name="l00163"></a>00163    }
-<a name="l00164"></a>00164 <span class="comment"></span>
-<a name="l00165"></a>00165 <span class="comment">   /**</span>
-<a name="l00166"></a>00166 <span class="comment">    * Si la página mostrada se ha cargado autometicamente siguiendo una </span>
-<a name="l00167"></a>00167 <span class="comment">    * solicitud de redirección 302 como resultado de un fallo este metodo </span>
-<a name="l00168"></a>00168 <span class="comment">    * devuelve el objeto &#39;Solicitud&#39; que existía cuando se llamo a la página, </span>
-<a name="l00169"></a>00169 <span class="comment">    * justo antes de que fallara las pruebas</span>
-<a name="l00170"></a>00170 <span class="comment">    */</span>
-<a name="l00171"></a>00171 
-<a name="l00172"></a><a class="code" href="../../d4/d31/a00069_a08eff9d39dfa2089cc08bf1b33f5d6fb.html#a08eff9d39dfa2089cc08bf1b33f5d6fb">00172</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a08eff9d39dfa2089cc08bf1b33f5d6fb.html#a08eff9d39dfa2089cc08bf1b33f5d6fb" title="Si la página mostrada se ha cargado autometicamente siguiendo una solicitud de redirección 302 como r...">GetOriginalRequestObjectFollowingConstraintFailure</a>() {
-<a name="l00173"></a>00173       <span class="keywordflow">if</span> ($this-&gt;_blIsRedirectOnConstraintFailure) {
-<a name="l00174"></a>00174          <span class="keywordflow">return</span>($this-&gt;_objOriginalRequestObject);
-<a name="l00175"></a>00175       };
-<a name="l00176"></a>00176    }
-<a name="l00177"></a>00177 <span class="comment"></span>
-<a name="l00178"></a>00178 <span class="comment">   /**</span>
-<a name="l00179"></a>00179 <span class="comment">    * Al aceptar true o false como parámetro, este método nos permite indicarle el</span>
-<a name="l00180"></a>00180 <span class="comment">    * objeto solicitud si debe emitir una solicitud 302 ante el fallo de cualquier</span>
-<a name="l00181"></a>00181 <span class="comment">    * prueba de restricción, El destino de esta redirección se establece mediante </span>
-<a name="l00182"></a>00182 <span class="comment">    * los métodos SetConstraintFailureRedirectTargetURL y </span>
-<a name="l00183"></a>00183 <span class="comment">    * SetConstraintFailureDefaultRedirectTargetURL</span>
-<a name="l00184"></a>00184 <span class="comment">    *</span>
-<a name="l00185"></a>00185 <span class="comment">    */</span>
+<a name="l00129"></a><a class="code" href="../../d2/db1/a00070_a36d25423132d748b34e7671eb0358383.html#a36d25423132d748b34e7671eb0358383">00129</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a36d25423132d748b34e7671eb0358383.html#a36d25423132d748b34e7671eb0358383" title="Construcción del archivo css para proyectos.">construir_css</a>() {
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133       echo <span class="stringliteral">&quot;/* Archivo generado por &quot;</span>.__CLASS__.<span class="stringliteral">&quot; */\n\n&quot;</span>;
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135       <span class="comment">// Incluimos archivo de variables</span>
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137       $fich_variables = dirname($this-&gt;ficheros[<span class="stringliteral">&#39;css&#39;</span>][<span class="stringliteral">&#39;temas/css/body.css&#39;</span>]).<span class="stringliteral">&#39;/../../../variables.php&#39;</span>;
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139       <span class="keywordflow">if</span> ( file_exists( $fich_variables ) ) include ($fich_variables);
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142       <span class="comment">// Si se nos pide un css concreto añadimos solo el body.css + el css que se pide</span>
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144       <span class="keywordflow">if</span> ( isset($_GET[<span class="stringliteral">&#39;css&#39;</span>]) &amp;&amp; !empty ($_GET[<span class="stringliteral">&#39;css&#39;</span>]) ) {
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146          $css = $_GET[<span class="stringliteral">&#39;css&#39;</span>];
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148          echo <span class="stringliteral">&quot;\n/* body */\n&quot;</span>;
+<a name="l00149"></a>00149          include($this-&gt;ficheros[<span class="stringliteral">&#39;css&#39;</span>][<span class="stringliteral">&#39;temas/css/body.css&#39;</span>]);
+<a name="l00150"></a>00150          echo <span class="stringliteral">&quot;\n/* css especifico: &quot;</span> . $css . <span class="stringliteral">&quot; */\n\n&quot;</span>;
+<a name="l00151"></a>00151          $incluir = $this-&gt;ficheros[<span class="stringliteral">&#39;css&#39;</span>][$css];
+<a name="l00152"></a>00152          <span class="keywordflow">if</span> ( $incluir ) {
+<a name="l00153"></a>00153             include($incluir);
+<a name="l00154"></a>00154          } <span class="keywordflow">else</span> {
+<a name="l00155"></a>00155             <span class="comment">// registrar(__FILE__,__LINE__,&#39;Archivo css no encontrado: [&#39;.$_GET[&#39;css&#39;].&#39;]&#39;,&#39;ERROR&#39;);</span>
+<a name="l00156"></a>00156             trigger_error(<span class="stringliteral">&#39;Archivo css no encontrado: [&#39;</span>.$_GET[<span class="stringliteral">&#39;css&#39;</span>].<span class="charliteral">&#39;]&#39;</span>,E_USER_ERROR);
+<a name="l00157"></a>00157             }
+<a name="l00158"></a>00158          echo <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160       } <span class="keywordflow">else</span> {
+<a name="l00161"></a>00161          
+<a name="l00162"></a>00162          echo <span class="stringliteral">&quot;\n/* fichero:temas/css/body.css: */\n&quot;</span>;
+<a name="l00163"></a>00163          include($this-&gt;ficheros[<span class="stringliteral">&#39;css&#39;</span>][<span class="stringliteral">&#39;temas/css/body.css&#39;</span>]);
+<a name="l00164"></a>00164          echo <span class="stringliteral">&quot;\n/* acaba:temas/css/body.css: */\n&quot;</span>;
+<a name="l00165"></a>00165 
+<a name="l00166"></a>00166          <span class="keywordflow">foreach</span> ( $this-&gt;ficheros[<span class="stringliteral">&#39;css&#39;</span>] as $llave =&gt; $fichero) {
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168             <span class="keywordflow">if</span> ( $llave != <span class="stringliteral">&#39;temas/css/body.css&#39;</span> ) {
+<a name="l00169"></a>00169                echo <span class="stringliteral">&quot;\n/* fichero:&quot;</span>.$llave.<span class="stringliteral">&quot;: */\n&quot;</span>;
+<a name="l00170"></a>00170                include($fichero);
+<a name="l00171"></a>00171                echo <span class="stringliteral">&quot;\n/* acaba:&quot;</span>.$llave.<span class="stringliteral">&quot;: */\n&quot;</span>;
+<a name="l00172"></a>00172                }
+<a name="l00173"></a>00173 
+<a name="l00174"></a>00174             }
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176          }
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178       $SALIDA = ob_get_contents();
+<a name="l00179"></a>00179       ob_end_clean();
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181       <span class="keywordflow">if</span> ( GCM_DEBUG ) {
+<a name="l00182"></a>00182          <span class="keywordflow">return</span> $SALIDA;
+<a name="l00183"></a>00183       } <span class="keywordflow">else</span> {
+<a name="l00184"></a>00184          <span class="keywordflow">return</span> <a class="code" href="../../d4/d3e/a00116_a647946886335918bcb6632e9189e9e01.html#a647946886335918bcb6632e9189e9e01" title="Minimizar archivos css.">minimizar_css</a>($SALIDA);
+<a name="l00185"></a>00185          }
 <a name="l00186"></a>00186 
-<a name="l00187"></a><a class="code" href="../../d4/d31/a00069_a4fa700b4a55acb6306b4715c9a7e5855.html#a4fa700b4a55acb6306b4715c9a7e5855">00187</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a4fa700b4a55acb6306b4715c9a7e5855.html#a4fa700b4a55acb6306b4715c9a7e5855" title="Al aceptar true o false como parámetro, este método nos permite indicarle el objeto solicitud si debe...">SetRedirectOnConstraintFailure</a>($blTrueOrFalse) {
-<a name="l00188"></a>00188       $this-&gt;_blRedirectOnConstraintFailure  = $blTrueOrFalse;
-<a name="l00189"></a>00189    }
-<a name="l00190"></a>00190 <span class="comment"></span>
-<a name="l00191"></a>00191 <span class="comment">   /**</span>
-<a name="l00192"></a>00192 <span class="comment">    * Establece el destino de una redirección 302</span>
-<a name="l00193"></a>00193 <span class="comment">    *</span>
-<a name="l00194"></a>00194 <span class="comment">    * Si no estable ninguno,o se utiliza la página de referencia (Normalmente el </span>
-<a name="l00195"></a>00195 <span class="comment">    * destino deseado) o bien, si no está disponible, se utiliza una url predeterminada </span>
-<a name="l00196"></a>00196 <span class="comment">    * (que se establece utilizando el método SetConstraintFailureDefaultRedirectTargetURL)</span>
-<a name="l00197"></a>00197 <span class="comment">    */</span>
-<a name="l00198"></a>00198 
-<a name="l00199"></a><a class="code" href="../../d4/d31/a00069_a5b9a6c208a16eef28b46a083e5d59ba5.html#a5b9a6c208a16eef28b46a083e5d59ba5">00199</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a5b9a6c208a16eef28b46a083e5d59ba5.html#a5b9a6c208a16eef28b46a083e5d59ba5" title="Establece el destino de una redirección 302.">SetConstraintFailureRedirectTargetURL</a>($strURL) {
-<a name="l00200"></a>00200       $this-&gt;_strConstraintFailureRedirectTargetURL = $strURL;
-<a name="l00201"></a>00201    }
-<a name="l00202"></a>00202 <span class="comment"></span>
-<a name="l00203"></a>00203 <span class="comment">   /**</span>
-<a name="l00204"></a>00204 <span class="comment">    * Si no se estable una url de destino con el método anterior se utiliza la página de </span>
-<a name="l00205"></a>00205 <span class="comment">    * referencia, si fuese necesario, como respuesta a un fallo, si no hay ninguna </span>
-<a name="l00206"></a>00206 <span class="comment">    * disponible (Por ejemplo como consecuencia de un usuario que hace una visita desde </span>
-<a name="l00207"></a>00207 <span class="comment">    * un marcador), se utiliza en su lugar el valor URL predeterminado especificado con </span>
-<a name="l00208"></a>00208 <span class="comment">    * este método.)</span>
-<a name="l00209"></a>00209 <span class="comment">    */</span>
+<a name="l00187"></a>00187       }
+<a name="l00188"></a>00188 
+<a name="l00200"></a><a class="code" href="../../d2/db1/a00070_a5ae9b6b4025b3f0a2f08be7378352d99.html#a5ae9b6b4025b3f0a2f08be7378352d99">00200</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a5ae9b6b4025b3f0a2f08be7378352d99.html#a5ae9b6b4025b3f0a2f08be7378352d99" title="Construcción del fichero javascript del proyecto con los ficheros javascript recibidos.">construir_js</a>() {
+<a name="l00201"></a>00201 
+<a name="l00202"></a>00202       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00203"></a>00203 
+<a name="l00204"></a>00204       <span class="comment">// Incluir librerías</span>
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206       <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>  = $gcm-&gt;lista_js();
+<a name="l00207"></a>00207       $url_base  = <a class="code" href="../../d9/db3/a00066_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>;
+<a name="l00208"></a>00208 
+<a name="l00209"></a>00209       <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>  = ( <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a> ) ? <a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a> : $this-&gt;ficheros[js];
 <a name="l00210"></a>00210 
-<a name="l00211"></a><a class="code" href="../../d4/d31/a00069_aea8a3a6e3cc6264172bd70c9520574f7.html#aea8a3a6e3cc6264172bd70c9520574f7">00211</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_aea8a3a6e3cc6264172bd70c9520574f7.html#aea8a3a6e3cc6264172bd70c9520574f7" title="Si no se estable una url de destino con el método anterior se utiliza la página de referencia...">SetConstraintFailureDefaultRedirectTargetURL</a>($strURL) {
-<a name="l00212"></a>00212       $this-&gt;_strConstraintFailureDefaultRedirectTargetURL = $strURL;
-<a name="l00213"></a>00213    }
-<a name="l00214"></a>00214 <span class="comment"></span>
-<a name="l00215"></a>00215 <span class="comment">   /**</span>
-<a name="l00216"></a>00216 <span class="comment">    * Devuelve el valor del parámetro especificado, este valor procede directamente de </span>
-<a name="l00217"></a>00217 <span class="comment">    * REQUEST, por lo que la precedencia de busqueda de variable GET, variable POST y </span>
-<a name="l00218"></a>00218 <span class="comment">    * variables cookie depende de la configuración de php.ini</span>
-<a name="l00219"></a>00219 <span class="comment">    */</span>
-<a name="l00220"></a>00220 
-<a name="l00221"></a><a class="code" href="../../d4/d31/a00069_ac7415558b1bce5a8eb2e66975f8f13de.html#ac7415558b1bce5a8eb2e66975f8f13de">00221</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_ac7415558b1bce5a8eb2e66975f8f13de.html#ac7415558b1bce5a8eb2e66975f8f13de" title="Devuelve el valor del parámetro especificado, este valor procede directamente de REQUEST, por lo que la precedencia de busqueda de variable GET, variable POST y variables cookie depende de la configuración de php.ini.">GetParameterValue</a>($strParameter) {
-<a name="l00222"></a>00222       <span class="keywordflow">return</span>($this-&gt;_arRequestVars[$strParameter]);
-<a name="l00223"></a>00223    }
-<a name="l00224"></a>00224 <span class="comment"></span>
-<a name="l00225"></a>00225 <span class="comment">   /** Devuelve un hash de parametros, basicamente una copia directa de REQUEST */</span>
-<a name="l00226"></a>00226 
-<a name="l00227"></a><a class="code" href="../../d4/d31/a00069_a68ef82e90436b26105c8608383e816cd.html#a68ef82e90436b26105c8608383e816cd">00227</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a68ef82e90436b26105c8608383e816cd.html#a68ef82e90436b26105c8608383e816cd" title="Devuelve un hash de parametros, basicamente una copia directa de REQUEST.">GetParameters</a>() {
-<a name="l00228"></a>00228       <span class="keywordflow">return</span>($this-&gt;_arRequestVars);
-<a name="l00229"></a>00229    }
-<a name="l00230"></a>00230 <span class="comment"></span>
-<a name="l00231"></a>00231 <span class="comment">   /** hash de COOKIES */</span>
+<a name="l00211"></a>00211       $lista = ( !empty(<a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>) ) ? implode(<span class="charliteral">&#39;,&#39;</span>,<a class="code" href="../../d2/db1/a00070_a938f0c03ea09d13b4aef299d221bf779.html#a938f0c03ea09d13b4aef299d221bf779" title="Listado de ficheros del tema [tipo][modulo/tipo/nombre] = url de archivo.">$ficheros</a>) : NULL ;
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213       <span class="keywordflow">if</span> ( !isset($_GET[<span class="stringliteral">&#39;arch&#39;</span>])  ) {
+<a name="l00214"></a>00214          echo <span class="stringliteral">&quot;\n /**********************************************/&quot;</span>;
+<a name="l00215"></a>00215          echo <span class="stringliteral">&quot;\n /* ERROR: No se especifico archivos a incluir */&quot;</span>;
+<a name="l00216"></a>00216          echo <span class="stringliteral">&quot;\n /**********************************************/&quot;</span>;
+<a name="l00217"></a>00217          exit();
+<a name="l00218"></a>00218          }
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220       <span class="keywordflow">if</span> ( GCM_DEBUG ) echo <span class="stringliteral">&quot;\n/* Ficheros javascript a incluir\n&quot;</span>.depurar($_GET[<span class="stringliteral">&#39;arch&#39;</span>]).<span class="stringliteral">&quot;\n*/\n&quot;</span>;
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222       <span class="comment">// if ( $librerias &amp;&amp; !empty($librerias)  ) {</span>
+<a name="l00223"></a>00223       <span class="comment">//    foreach ( $librerias as $items ) {</span>
+<a name="l00224"></a>00224       <span class="comment">//       list($modulo,$nombre) = explode(&#39;:&#39;,$items);</span>
+<a name="l00225"></a>00225       <span class="comment">//       $f = $this-&gt;ruta(strtolower($modulo),&#39;libjs&#39;,$nombre);</span>
+<a name="l00226"></a>00226       <span class="comment">//       //echo &quot;\n&quot;.&#39;&lt;script src=&quot;&#39;.$url_base.$f.&#39;&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;;</span>
+<a name="l00227"></a>00227       <span class="comment">//       echo &quot;\n/* Librería: $f */\n\n&quot;;</span>
+<a name="l00228"></a>00228       <span class="comment">//       include($f);</span>
+<a name="l00229"></a>00229       <span class="comment">//       echo &quot;\n&quot;;</span>
+<a name="l00230"></a>00230       <span class="comment">//       }</span>
+<a name="l00231"></a>00231       <span class="comment">//    }</span>
 <a name="l00232"></a>00232 
-<a name="l00233"></a><a class="code" href="../../d4/d31/a00069_a60edeb531b901d82571a7ce6741d0e96.html#a60edeb531b901d82571a7ce6741d0e96">00233</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a60edeb531b901d82571a7ce6741d0e96.html#a60edeb531b901d82571a7ce6741d0e96" title="hash de COOKIES">GetCookies</a>() {
-<a name="l00234"></a>00234       <span class="keywordflow">return</span>($this-&gt;_arCookieVars);
-<a name="l00235"></a>00235    }
-<a name="l00236"></a>00236 <span class="comment"></span>
-<a name="l00237"></a>00237 <span class="comment">   /** Hash de POST */</span>
-<a name="l00238"></a>00238 
-<a name="l00239"></a><a class="code" href="../../d4/d31/a00069_a0af59b035a03a989b2ee2a7db1f24b5f.html#a0af59b035a03a989b2ee2a7db1f24b5f">00239</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a0af59b035a03a989b2ee2a7db1f24b5f.html#a0af59b035a03a989b2ee2a7db1f24b5f" title="Hash de POST.">GetPostVariables</a>() {
-<a name="l00240"></a>00240       <span class="keywordflow">return</span>($this-&gt;_arPostVariables);
-<a name="l00241"></a>00241    }
-<a name="l00242"></a>00242 <span class="comment"></span>
-<a name="l00243"></a>00243 <span class="comment">   /** Hash de GET */</span>
-<a name="l00244"></a>00244 
-<a name="l00245"></a><a class="code" href="../../d4/d31/a00069_a291a7c940e2fa323031f79d0da84e9e4.html#a291a7c940e2fa323031f79d0da84e9e4">00245</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a291a7c940e2fa323031f79d0da84e9e4.html#a291a7c940e2fa323031f79d0da84e9e4" title="Hash de GET.">GetGetVariables</a>() {
-<a name="l00246"></a>00246       <span class="keywordflow">return</span>($this-&gt;_arGetVariables);
-<a name="l00247"></a>00247    }
-<a name="l00248"></a>00248 <span class="comment"></span>
-<a name="l00249"></a>00249 <span class="comment">   /**</span>
-<a name="l00250"></a>00250 <span class="comment">    * Añade una restricción a esta solicitus. Una restricción se aplica a un solo </span>
-<a name="l00251"></a>00251 <span class="comment">    * parametro y especifica una condición que se tiene que satisfacer para que </span>
-<a name="l00252"></a>00252 <span class="comment">    * dicha restricción se considere coincidente. Este metodo acepta el ombre del </span>
-<a name="l00253"></a>00253 <span class="comment">    * parametro, el método de entrega (ENTRADAS_GET, ENTRADAS_POST o ENTRADAS_COOKIE </span>
-<a name="l00254"></a>00254 <span class="comment">    * como una constante) y el objeto Restricciones como sus parametros. Cuando se </span>
-<a name="l00255"></a>00255 <span class="comment">    * añade una restricción, no se puede eliminar. Se puede aplicar más de una </span>
-<a name="l00256"></a>00256 <span class="comment">    * restricción a un solo parámetro.</span>
-<a name="l00257"></a>00257 <span class="comment">    */</span>
-<a name="l00258"></a>00258 
-<a name="l00259"></a><a class="code" href="../../d4/d31/a00069_ae2d4b54e43c139e258d50eb32b41571c.html#ae2d4b54e43c139e258d50eb32b41571c">00259</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_ae2d4b54e43c139e258d50eb32b41571c.html#ae2d4b54e43c139e258d50eb32b41571c" title="Añade una restricción a esta solicitus.">AddConstraint</a>($strParameter, $intMethod, $objConstraint) {
-<a name="l00260"></a>00260       $newHash[<span class="stringliteral">&quot;PARAMETER&quot;</span>] = $strParameter;
-<a name="l00261"></a>00261       $newHash[<span class="stringliteral">&quot;METHOD&quot;</span>] = $intMethod;
-<a name="l00262"></a>00262       $newHash[<span class="stringliteral">&quot;CONSTRAINT&quot;</span>] = $objConstraint;
-<a name="l00263"></a>00263       $this-&gt;_arObjParameterMethodConstraintHash[] = $newHash;
-<a name="l00264"></a>00264       }
-<a name="l00265"></a>00265 <span class="comment"></span>
-<a name="l00266"></a>00266 <span class="comment">   /**</span>
-<a name="l00267"></a>00267 <span class="comment">    * Para devolver de forma facil el valor de un parametro</span>
-<a name="l00268"></a>00268 <span class="comment">    *</span>
-<a name="l00269"></a>00269 <span class="comment">    * @param $parametro</span>
-<a name="l00270"></a>00270 <span class="comment">    *</span>
-<a name="l00271"></a>00271 <span class="comment">    * @return Valor del parametro o FALSE</span>
-<a name="l00272"></a>00272 <span class="comment">    */</span>
-<a name="l00273"></a>00273 
-<a name="l00274"></a><a class="code" href="../../d4/d31/a00069_a9f775c201d1345ce6f90eb32e8ddc9f3.html#a9f775c201d1345ce6f90eb32e8ddc9f3">00274</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_a9f775c201d1345ce6f90eb32e8ddc9f3.html#a9f775c201d1345ce6f90eb32e8ddc9f3" title="Para devolver de forma facil el valor de un parametro.">valor_parametro</a>($parametro) {
-<a name="l00275"></a>00275 
-<a name="l00276"></a>00276       <span class="keywordflow">if</span> (isset($this-&gt;_arCookieVars[$parametro])) {
-<a name="l00277"></a>00277          <span class="keywordflow">return</span> $this-&gt;_arCookieVars[$parametro];
-<a name="l00278"></a>00278       } elseif (isset($this-&gt;_arGetVars[$parametro])) {
-<a name="l00279"></a>00279          <span class="keywordflow">return</span> $this-&gt;_arGetVars[$parametro];
-<a name="l00280"></a>00280       } elseif (isset($this-&gt;_arPostVars[$parametro])) {
-<a name="l00281"></a>00281          <span class="keywordflow">return</span> $this-&gt;_arPostVars[$parametro];
-<a name="l00282"></a>00282       } <span class="keywordflow">else</span> {
-<a name="l00283"></a>00283          <span class="keywordflow">return</span> FALSE;
-<a name="l00284"></a>00284          }
-<a name="l00285"></a>00285       }
-<a name="l00286"></a>00286 <span class="comment"></span>
-<a name="l00287"></a>00287 <span class="comment">   /**</span>
-<a name="l00288"></a>00288 <span class="comment">    * Prueba cada restricción una a una y toma de cualquier fallo rellenando la </span>
-<a name="l00289"></a>00289 <span class="comment">    * variable miembro GetConstraintFailures. Si _blRedirectOnConstraintFailure </span>
-<a name="l00290"></a>00290 <span class="comment">    * se estable a true, se redirige automáticamente a la URL apropiada, tras </span>
-<a name="l00291"></a>00291 <span class="comment">    * enviar primero una cookie temporal que ses una representación del objeto </span>
-<a name="l00292"></a>00292 <span class="comment">    * &#39;Solicitud&#39; actual.</span>
-<a name="l00293"></a>00293 <span class="comment">    */</span>
-<a name="l00294"></a>00294 
-<a name="l00295"></a><a class="code" href="../../d4/d31/a00069_ae1d5ac813434379f8fff6b953359a70d.html#ae1d5ac813434379f8fff6b953359a70d">00295</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_ae1d5ac813434379f8fff6b953359a70d.html#ae1d5ac813434379f8fff6b953359a70d" title="Prueba cada restricción una a una y toma de cualquier fallo rellenando la variable miembro GetConstra...">TestConstraints</a>() {
-<a name="l00296"></a>00296 
-<a name="l00297"></a>00297       $this-&gt;_blHasRunConstraintTests = <span class="keyword">true</span>;
-<a name="l00298"></a>00298       $anyFail = <span class="keyword">false</span>;
-<a name="l00299"></a>00299 
-<a name="l00300"></a>00300       <span class="keywordflow">for</span> ($i=0; $i&lt;=<span class="keyword">sizeof</span>($this-&gt;_arObjParameterMethodConstraintHash) -1; $i++) {
-<a name="l00301"></a>00301 
-<a name="l00302"></a>00302          $strThisParameter = 
-<a name="l00303"></a>00303             $this-&gt;_arObjParameterMethodConstraintHash[$i] [<span class="stringliteral">&quot;PARAMETER&quot;</span>];
-<a name="l00304"></a>00304          $intThisMethod = $this-&gt;_arObjParameterMethodConstraintHash[$i][<span class="stringliteral">&quot;METHOD&quot;</span>];
-<a name="l00305"></a>00305          $objThisConstraint = 
-<a name="l00306"></a>00306             $this-&gt;_arObjParameterMethodConstraintHash[$i] [<span class="stringliteral">&quot;CONSTRAINT&quot;</span>];
-<a name="l00307"></a>00307          $varActualValue = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00308"></a>00308          <span class="keywordflow">if</span> ($intThisMethod == ENTRADAS_COOKIE) {
-<a name="l00309"></a>00309             $varActualValue = $this-&gt;_arCookieVars[$strThisParameter];
-<a name="l00310"></a>00310          };
-<a name="l00311"></a>00311          <span class="keywordflow">if</span> ($intThisMethod == ENTRADAS_GET) {
-<a name="l00312"></a>00312             $varActualValue = $this-&gt;_arGetVars[$strThisParameter];
-<a name="l00313"></a>00313          };
-<a name="l00314"></a>00314          <span class="keywordflow">if</span> ($intThisMethod == ENTRADAS_POST) {
-<a name="l00315"></a>00315             $varActualValue = $this-&gt;_arPostVars[$strThisParameter];
-<a name="l00316"></a>00316          };
-<a name="l00317"></a>00317          $intConstraintType = $objThisConstraint-&gt;GetConstraintType();
-<a name="l00318"></a>00318          $strConstraintOperand = $objThisConstraint-&gt;GetConstraintOperand();
-<a name="l00319"></a>00319          $thisFail = <span class="keyword">false</span>;
-<a name="l00320"></a>00320          $objFailureObject = <span class="keyword">new</span> <a class="code" href="../../d1/d6f/a00063.html">RestriccionesFallidas</a>($strThisParameter, 
-<a name="l00321"></a>00321             $intThisMethod, $objThisConstraint);
+<a name="l00233"></a>00233       $SALIDA=<span class="stringliteral">&#39;&#39;</span>;
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235       <span class="comment">// Generar array con los archvos js de los modulos.</span>
+<a name="l00236"></a>00236       $ficheros_js = explode(<span class="charliteral">&#39;,&#39;</span>,$_GET[<span class="stringliteral">&#39;arch&#39;</span>]);
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238       echo <span class="stringliteral">&quot;\n\n/* Archivo javascript de proyecto */\n\n&quot;</span>;
+<a name="l00239"></a>00239 
+<a name="l00240"></a>00240       <span class="comment">// Incluir archivos de módulos</span>
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242       echo <span class="stringliteral">&quot;/* Ficheros: &quot;</span>.depurar($ficheros_js).<span class="stringliteral">&quot;*/&quot;</span>;
+<a name="l00243"></a>00243 
+<a name="l00244"></a>00244       <span class="keywordflow">if</span> ( $ficheros_js ) {
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246          <span class="keywordflow">foreach</span> ( $ficheros_js as $items ) {
+<a name="l00247"></a>00247 
+<a name="l00248"></a>00248             <span class="keywordflow">if</span> ( empty($items)  ) <span class="keywordflow">break</span>;
+<a name="l00249"></a>00249             list($modulo,$nombre) = explode(<span class="charliteral">&#39;:&#39;</span>,$items);
+<a name="l00250"></a>00250             echo <span class="stringliteral">&quot;\n/* $modulo: $nombre */\n\n&quot;</span>;
+<a name="l00251"></a>00251             $f = $this-&gt;<a class="code" href="../../d2/db1/a00070_a298996eb77204ec8510eac42cbb50eb3.html#a298996eb77204ec8510eac42cbb50eb3" title="devolver ruta de archivo de tema">ruta</a>(strtolower($modulo),<span class="stringliteral">&#39;js&#39;</span>,$nombre);
+<a name="l00252"></a>00252             include ($f);
+<a name="l00253"></a>00253             echo <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00254"></a>00254             }
+<a name="l00255"></a>00255 
+<a name="l00256"></a>00256          }
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258       $SALIDA = ob_get_contents();
+<a name="l00259"></a>00259       ob_end_clean();
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261       <span class="keywordflow">return</span> $SALIDA;
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263       }
+<a name="l00264"></a>00264 
+<a name="l00273"></a><a class="code" href="../../d2/db1/a00070_a298996eb77204ec8510eac42cbb50eb3.html#a298996eb77204ec8510eac42cbb50eb3">00273</a>     <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a298996eb77204ec8510eac42cbb50eb3.html#a298996eb77204ec8510eac42cbb50eb3" title="devolver ruta de archivo de tema">ruta</a>($modulo, $tipo, $fichero) {
+<a name="l00274"></a>00274 
+<a name="l00275"></a>00275        $ruta = $modulo.<span class="charliteral">&#39;/&#39;</span>.$tipo.<span class="charliteral">&#39;/&#39;</span>.$fichero;
+<a name="l00276"></a>00276        $fichero_tema = ( isset($this-&gt;ficheros[$tipo][$ruta]) ) ? $this-&gt;ficheros[$tipo][$ruta] : FALSE;
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278        <span class="keywordflow">if</span> ( $fichero_tema ) {
+<a name="l00279"></a>00279           <span class="keywordflow">return</span> $fichero_tema;
+<a name="l00280"></a>00280        } <span class="keywordflow">else</span> {
+<a name="l00281"></a>00281           <span class="comment">// Si no encontramos en el módulo especificado, miramos en el módulo temas.</span>
+<a name="l00282"></a>00282           $ruta = <span class="stringliteral">&#39;temas/&#39;</span>.$tipo.<span class="charliteral">&#39;/&#39;</span>.$fichero;
+<a name="l00283"></a>00283           $fichero_tema = ( isset($this-&gt;ficheros[$tipo][$ruta]) ) ? $this-&gt;ficheros[$tipo][$ruta] : FALSE;
+<a name="l00284"></a>00284 
+<a name="l00285"></a>00285           <span class="keywordflow">if</span> ( $fichero_tema ) {
+<a name="l00286"></a>00286              <span class="keywordflow">return</span> $fichero_tema;
+<a name="l00287"></a>00287           } <span class="keywordflow">else</span> {
+<a name="l00288"></a>00288              $msg = <span class="stringliteral">&#39;Fichero del módulo [&#39;</span>.$modulo.<span class="stringliteral">&#39;] tipo [&#39;</span>.$tipo.<span class="stringliteral">&#39;] fichero [&#39;</span>.$fichero.<span class="stringliteral">&#39;] ruta [&#39;</span>.$ruta.<span class="stringliteral">&#39;] no encontrado&#39;</span>;
+<a name="l00289"></a>00289              trigger_error($msg,E_USER_ERROR);
+<a name="l00290"></a>00290              <span class="comment">//registrar(__FILE__,__LINE__,$msg,&#39;ADMIN&#39;);</span>
+<a name="l00291"></a>00291             }
+<a name="l00292"></a>00292           }
+<a name="l00293"></a>00293        <span class="keywordflow">return</span> FALSE;
+<a name="l00294"></a>00294       }
+<a name="l00295"></a>00295 
+<a name="l00304"></a><a class="code" href="../../d2/db1/a00070_aacf954fc8b6e1528e8b649dead1da22d.html#aacf954fc8b6e1528e8b649dead1da22d">00304</a>     <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_aacf954fc8b6e1528e8b649dead1da22d.html#aacf954fc8b6e1528e8b649dead1da22d" title="Devolver lista de los colores que se han demandado y no estan implementados.">devolver_colores_faltantes</a>() {
+<a name="l00305"></a>00305        <span class="keywordflow">return</span> ( $this-&gt;colores_faltantes ) ? $this-&gt;colores_faltantes : FALSE ;
+<a name="l00306"></a>00306       }
+<a name="l00307"></a>00307 
+<a name="l00317"></a><a class="code" href="../../d2/db1/a00070_a9483c8a51dfcddb2ceabf6b98d9779de.html#a9483c8a51dfcddb2ceabf6b98d9779de">00317</a>    <span class="keyword">function</span> <a class="code" href="../../d2/db1/a00070_a9483c8a51dfcddb2ceabf6b98d9779de.html#a9483c8a51dfcddb2ceabf6b98d9779de" title="Devolver rura de icono del tema actual o por defecto de gcm.">icono</a>($nombre) {
+<a name="l00318"></a>00318 
+<a name="l00319"></a>00319       <span class="keywordflow">if</span> ( empty($nombre)  ) <span class="keywordflow">return</span> FALSE;
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
 <a name="l00322"></a>00322 
-<a name="l00323"></a>00323          <span class="keywordflow">switch</span> ($intConstraintType) {
+<a name="l00323"></a>00323       $tipo_iconos = array(<span class="stringliteral">&#39;.gif&#39;</span>,<span class="stringliteral">&#39;.png&#39;</span>);
 <a name="l00324"></a>00324 
-<a name="l00325"></a>00325          <span class="keywordflow">case</span> RT_MAIL:
-<a name="l00326"></a>00326             <span class="keywordflow">if</span> (! filter_var( (<span class="keywordtype">string</span>) $varActualValue, FILTER_VALIDATE_EMAIL) ) {
-<a name="l00327"></a>00327                $thisFail = <span class="keyword">true</span>;
-<a name="l00328"></a>00328                registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;El email no parece valido&#39;</span>);
-<a name="l00329"></a>00329                }
-<a name="l00330"></a>00330             <span class="keywordflow">break</span>;
-<a name="l00331"></a>00331 
-<a name="l00332"></a>00332          <span class="keywordflow">case</span> <a class="code" href="../../dd/db2/a00151_ab78166469618b355c2fa7ae4fb5682a4.html#ab78166469618b355c2fa7ae4fb5682a4" title="Restricciones.">RT_LONG_MIN</a>:
-<a name="l00333"></a>00333             <span class="keywordflow">if</span> (strlen((<span class="keywordtype">string</span>)$varActualValue) &lt; (integer) $strConstraintOperand) {
-<a name="l00334"></a>00334                $thisFail = <span class="keyword">true</span>;
-<a name="l00335"></a>00335                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; su longitud es menor a &#39;</span>.$strConstraintOperand);
-<a name="l00336"></a>00336                }
-<a name="l00337"></a>00337             <span class="keywordflow">break</span>;
-<a name="l00338"></a>00338 
-<a name="l00339"></a>00339          <span class="keywordflow">case</span> RT_LONG_MAX:
-<a name="l00340"></a>00340             <span class="keywordflow">if</span> (strlen((<span class="keywordtype">string</span>)$varActualValue) &gt; (integer) $strConstraintOperand) {
-<a name="l00341"></a>00341                $thisFail = <span class="keyword">true</span>;
-<a name="l00342"></a>00342                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; su longitud es mayor a &#39;</span>.$strConstraintOperand);
-<a name="l00343"></a>00343                }
-<a name="l00344"></a>00344             <span class="keywordflow">break</span>;
+<a name="l00325"></a>00325       <span class="keywordflow">foreach</span> ( $tipo_iconos as $tipo_icono ) {
+<a name="l00326"></a>00326 
+<a name="l00327"></a>00327          $icono = $nombre.$tipo_icono;
+<a name="l00328"></a>00328 
+<a name="l00329"></a>00329          <span class="keywordflow">if</span> ( isset($this-&gt;ficheros[<span class="stringliteral">&#39;iconos&#39;</span>][<span class="stringliteral">&#39;temas/iconos/&#39;</span>.$icono])  ) {
+<a name="l00330"></a>00330 
+<a name="l00331"></a>00331             $ruta = $this-&gt;ficheros[<span class="stringliteral">&#39;iconos&#39;</span>][<span class="stringliteral">&#39;temas/iconos/&#39;</span>.$icono];
+<a name="l00332"></a>00332 
+<a name="l00333"></a>00333             <span class="keywordflow">if</span> ( is_file($ruta) ) {
+<a name="l00334"></a>00334                <span class="keywordflow">return</span> <a class="code" href="../../d9/db3/a00066_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>.$ruta;
+<a name="l00335"></a>00335             } <span class="keywordflow">else</span> {
+<a name="l00336"></a>00336                <span class="keywordflow">return</span> FALSE;
+<a name="l00337"></a>00337                }
+<a name="l00338"></a>00338             }
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340          }
+<a name="l00341"></a>00341 
+<a name="l00342"></a>00342       <span class="keywordflow">return</span> FALSE;
+<a name="l00343"></a>00343 
+<a name="l00344"></a>00344       }
 <a name="l00345"></a>00345 
-<a name="l00346"></a>00346          <span class="keywordflow">case</span> RT_CARACTERES_PERMITIDOS:
-<a name="l00347"></a>00347             <span class="keywordflow">for</span> ($j=0; $j&lt;=strlen($varActualValue)-1; $j++) {
-<a name="l00348"></a>00348                $thisChar = substr($varActualValue, $j, 1);
-<a name="l00349"></a>00349                <span class="keywordflow">if</span> (strpos($strConstraintOperand, $thisChar) === <span class="keyword">false</span>) {
-<a name="l00350"></a>00350                   $thisFail = <span class="keyword">true</span>;
-<a name="l00351"></a>00351                   registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; con caracteres no permitidos&#39;</span>);
-<a name="l00352"></a>00352                };
-<a name="l00353"></a>00353             };
-<a name="l00354"></a>00354             <span class="keywordflow">break</span>;
-<a name="l00355"></a>00355 
-<a name="l00356"></a>00356          <span class="keywordflow">case</span> RT_CARACTERES_NO_PERMITIDOS:
-<a name="l00357"></a>00357             <span class="keywordflow">for</span> ($j=0; $j&lt;=strlen($varActualValue)-1; $j++) {
-<a name="l00358"></a>00358                $thisChar = substr($varActualValue, $j, 1);
-<a name="l00359"></a>00359                <span class="keywordflow">if</span> (!(strpos($strConstraintOperand, $thisChar) === <span class="keyword">false</span>)) {
-<a name="l00360"></a>00360                   $thisFail = <span class="keyword">true</span>;
-<a name="l00361"></a>00361                   registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; con caracteres no permitidos&#39;</span>);
-<a name="l00362"></a>00362                };
-<a name="l00363"></a>00363             };
-<a name="l00364"></a>00364             <span class="keywordflow">break</span>;
-<a name="l00365"></a>00365 
-<a name="l00366"></a>00366          <span class="keywordflow">case</span> RT_MENOR_QUE:
-<a name="l00367"></a>00367             <span class="keywordflow">if</span> ($varActualValue &gt;= $strConstraintOperand) {
-<a name="l00368"></a>00368                $thisFail = <span class="keyword">true</span>;
-<a name="l00369"></a>00369                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; menor a &#39;</span>.$strConstraintOperand);
-<a name="l00370"></a>00370                }
-<a name="l00371"></a>00371             <span class="keywordflow">break</span>;
-<a name="l00372"></a>00372 
-<a name="l00373"></a>00373          <span class="keywordflow">case</span> RT_MAYOR_QUE:
-<a name="l00374"></a>00374             <span class="keywordflow">if</span> ($varActualValue &lt;= $strConstraintOperand) {
-<a name="l00375"></a>00375                $thisFail = <span class="keyword">true</span>;
-<a name="l00376"></a>00376                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; mayor a &#39;</span>.$strConstraintOperand);
-<a name="l00377"></a>00377                }
-<a name="l00378"></a>00378             <span class="keywordflow">break</span>;
-<a name="l00379"></a>00379 
-<a name="l00380"></a>00380          <span class="keywordflow">case</span> RT_IGUAL_QUE:
-<a name="l00381"></a>00381             <span class="keywordflow">if</span> ($varActualValue != $strConstraintOperand) {
-<a name="l00382"></a>00382                $thisFail = <span class="keyword">true</span>;
-<a name="l00383"></a>00383                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; igual que &#39;</span>.$strConstraintOperand);
-<a name="l00384"></a>00384                }
-<a name="l00385"></a>00385             <span class="keywordflow">break</span>;
-<a name="l00386"></a>00386 
-<a name="l00387"></a>00387          <span class="keywordflow">case</span> RT_NO_IGUAL:
-<a name="l00388"></a>00388             <span class="keywordflow">if</span> ($varActualValue == $strConstraintOperand) {
-<a name="l00389"></a>00389                $thisFail = <span class="keyword">true</span>;
-<a name="l00390"></a>00390                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; no es igual a &#39;</span>.$strConstraintOperand);
-<a name="l00391"></a>00391                }
-<a name="l00392"></a>00392             <span class="keywordflow">break</span>;
-<a name="l00393"></a>00393 
-<a name="l00394"></a>00394          <span class="keywordflow">case</span> RT_PASA_EXPRESION_REGULAR:
-<a name="l00395"></a>00395             <span class="keywordflow">if</span> (!(preg_match($strConstraintOperand, $varActualValue))) {
-<a name="l00396"></a>00396                $thisFail = <span class="keyword">true</span>;
-<a name="l00397"></a>00397                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; pasa exp &#39;</span>.$strConstraintOperand);
-<a name="l00398"></a>00398                }
-<a name="l00399"></a>00399             <span class="keywordflow">break</span>;
-<a name="l00400"></a>00400 
-<a name="l00401"></a>00401          <span class="keywordflow">case</span> RT_NO_PASA_EXPRESION_REGULAR:
-<a name="l00402"></a>00402             <span class="keywordflow">if</span> (preg_match($strConstraintOperand, $varActualValue)) {
-<a name="l00403"></a>00403                $thisFail = <span class="keyword">true</span>;
-<a name="l00404"></a>00404                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; no pasa exp&#39;</span>.$strConstraintOperand);
-<a name="l00405"></a>00405                }
-<a name="l00406"></a>00406             <span class="keywordflow">break</span>;
-<a name="l00407"></a>00407 
-<a name="l00408"></a>00408          <span class="keywordflow">case</span> RT_NO_ES_NUMERO:
-<a name="l00409"></a>00409             <span class="keywordflow">if</span> ( ! is_numeric($varActualValue) ) {
-<a name="l00410"></a>00410                $thisFail = <span class="keyword">true</span>;
-<a name="l00411"></a>00411                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; menor a &#39;</span>.$strConstraintOperand);
-<a name="l00412"></a>00412                }
-<a name="l00413"></a>00413             <span class="keywordflow">break</span>;
-<a name="l00414"></a>00414 
-<a name="l00415"></a>00415          <span class="keywordflow">case</span> RT_REQUERIDO:
-<a name="l00416"></a>00416             <span class="keywordflow">if</span> ( ! isset($varActualValue) ) {
-<a name="l00417"></a>00417                $thisFail = <span class="keyword">true</span>;
-<a name="l00418"></a>00418                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; es requerido &#39;</span>.$strConstraintOperand);
-<a name="l00419"></a>00419                }
-<a name="l00420"></a>00420             <span class="keywordflow">break</span>;
-<a name="l00421"></a>00421 
-<a name="l00422"></a>00422          <span class="keywordflow">case</span> RT_PASSWORD:
-<a name="l00423"></a>00423             <span class="keywordflow">if</span> ( ! isset($_REQUEST[<span class="stringliteral">&#39;verificacion&#39;</span>]) ) {
-<a name="l00424"></a>00424                $thisFail = <span class="keyword">true</span>;
-<a name="l00425"></a>00425                registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Se necesita un campo &quot;verificacion&quot; para poder verificar la contraseña &#39;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
-<a name="l00426"></a>00426                }
-<a name="l00427"></a>00427             <span class="keywordflow">if</span> ( $varActualValue != $_REQUEST[<span class="stringliteral">&#39;verificacion&#39;</span>] ) {
-<a name="l00428"></a>00428                $thisFail = <span class="keyword">true</span>;
-<a name="l00429"></a>00429                registrar(__FILE__,__LINE__,$strThisParameter.<span class="stringliteral">&#39; contraseña diferente a verificación &#39;</span>.$strConstraintOperand);
-<a name="l00430"></a>00430                registrar(__FILE__,__LINE__,$varActualValue.<span class="stringliteral">&#39; != &#39;</span>.$_REQUEST[<span class="stringliteral">&#39;verificacion&#39;</span>],<span class="stringliteral">&#39;ADMIN&#39;</span>);
-<a name="l00431"></a>00431                }
-<a name="l00432"></a>00432             <span class="keywordflow">break</span>;
-<a name="l00433"></a>00433 
-<a name="l00434"></a>00434          };
-<a name="l00435"></a>00435 
-<a name="l00436"></a>00436          <span class="keywordflow">if</span> ($thisFail) {
-<a name="l00437"></a>00437             $anyFail = <span class="keyword">true</span>;
-<a name="l00438"></a>00438             $this-&gt;_arObjConstraintFailure[] = $objFailureObject;
-<a name="l00439"></a>00439          };
-<a name="l00440"></a>00440 
-<a name="l00441"></a>00441       };
-<a name="l00442"></a>00442 
-<a name="l00443"></a>00443       <span class="keywordflow">if</span> ($anyFail) {
-<a name="l00444"></a>00444 
-<a name="l00445"></a>00445          <span class="keywordflow">if</span> ($this-&gt;_blRedirectOnConstraintFailure) {
-<a name="l00446"></a>00446 
-<a name="l00447"></a>00447             $targetURL = $_SERVER[<span class="stringliteral">&quot;REDIRECT_URL&quot;</span>];
-<a name="l00448"></a>00448             <span class="keywordflow">if</span> (!$targetURL) {
-<a name="l00449"></a>00449                $targetURL = $this-&gt;_strConstraintFailureDefaultRedirectTargetURL;
-<a name="l00450"></a>00450             };
-<a name="l00451"></a>00451             <span class="keywordflow">if</span> ($this-&gt;_strConstraintFailureRedirectTargetURL) {
-<a name="l00452"></a>00452                $targetURL = $this-&gt;_strConstraintFailureRedirectTargetURL;
-<a name="l00453"></a>00453             };
-<a name="l00454"></a>00454             <span class="keywordflow">if</span> ($targetURL) {
-<a name="l00455"></a>00455                $objToSerialize = $this;
-<a name="l00456"></a>00456                $strSerialization = serialize($objToSerialize);
-<a name="l00457"></a>00457                <span class="comment">//setcookie (&quot;phprqcOriginalRequestObject&quot;, $strSerialization, time() + 3600,&#39;/&#39;);</span>
-<a name="l00458"></a>00458                $_SESSION[<span class="stringliteral">&#39;RESPUESTA_ERRONEA&#39;</span>] = $strSerialization;
-<a name="l00459"></a>00459                header(<span class="stringliteral">&quot;Location: $targetURL&quot;</span>);
-<a name="l00460"></a>00460                exit(0);
-<a name="l00461"></a>00461             };
-<a name="l00462"></a>00462          };
-<a name="l00463"></a>00463       };
-<a name="l00464"></a>00464       <span class="keywordflow">return</span>(!($anyFail));  <span class="comment">// Returns TRUE if all tests passed, otherwise returns</span>
-<a name="l00465"></a>00465       <span class="comment">//  FALSE</span>
-<a name="l00466"></a>00466    }
-<a name="l00467"></a>00467 <span class="comment"></span>
-<a name="l00468"></a>00468 <span class="comment">   /**</span>
-<a name="l00469"></a>00469 <span class="comment">    * Cuando una llamada a TestConstraints() indica que han fallado este método </span>
-<a name="l00470"></a>00470 <span class="comment">    * devolvera una matriz de objetos RestriccionesFallidas que representan todos</span>
-<a name="l00471"></a>00471 <span class="comment">    * estos fallos, a este método se tiene que acceder desde el objeto &#39;Solicitud&#39; </span>
-<a name="l00472"></a>00472 <span class="comment">    * original, al que se ha accedido utilizando </span>
-<a name="l00473"></a>00473 <span class="comment">    * GetOriginalRequestObjectFollowingConstraintFailure</span>
-<a name="l00474"></a>00474 <span class="comment">    */</span>
-<a name="l00475"></a>00475 
-<a name="l00476"></a><a class="code" href="../../d4/d31/a00069_ab9bb9d6ec6c744c9e1265493ef462c5c.html#ab9bb9d6ec6c744c9e1265493ef462c5c">00476</a>    <span class="keyword">function</span> <a class="code" href="../../d4/d31/a00069_ab9bb9d6ec6c744c9e1265493ef462c5c.html#ab9bb9d6ec6c744c9e1265493ef462c5c" title="Cuando una llamada a TestConstraints() indica que han fallado este método devolvera una matriz de obj...">GetConstraintFailures</a>() {
-<a name="l00477"></a>00477       <span class="keywordflow">if</span> (!$this-&gt;_blHasRunConstraintTests) {
-<a name="l00478"></a>00478          $this-&gt;<a class="code" href="../../d4/d31/a00069_ae1d5ac813434379f8fff6b953359a70d.html#ae1d5ac813434379f8fff6b953359a70d" title="Prueba cada restricción una a una y toma de cualquier fallo rellenando la variable miembro GetConstra...">TestConstraints</a>();
-<a name="l00479"></a>00479       };
-<a name="l00480"></a>00480       <span class="keywordflow">return</span>($this-&gt;_arObjConstraintFailure);
-<a name="l00481"></a>00481    }
-<a name="l00482"></a>00482 }
-<a name="l00483"></a>00483 
-<a name="l00484"></a>00484 ?&gt;
+<a name="l00346"></a>00346    }
+<a name="l00347"></a>00347 
+<a name="l00348"></a>00348 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 4 de Septiembre de 2013 17:51:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

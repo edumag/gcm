@@ -91,23 +91,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">/** @file Formas de evitar el spam</span>
-<a name="l00004"></a>00004 <span class="comment"> *</span>
-<a name="l00005"></a>00005 <span class="comment"> * Fem un camp de formulari amb un nom aleatori amb el valor de la data actual</span>
-<a name="l00006"></a>00006 <span class="comment"> * per despres comparar amb el temps de resposte i sapiguer si es molt curt, possiblement</span>
-<a name="l00007"></a>00007 <span class="comment"> * es tracti de una màquina</span>
-<a name="l00008"></a>00008 <span class="comment"> *</span>
-<a name="l00009"></a>00009 <span class="comment"> */</span>
-<a name="l00010"></a>00010 <span class="comment"></span>
-<a name="l00011"></a>00011 <span class="comment">/** Afegir camp de captcha al formulari</span>
-<a name="l00012"></a>00012 <span class="comment"> *</span>
-<a name="l00013"></a>00013 <span class="comment"> * @param $nom Nom del captcha per poger diferencia entre captchas</span>
-<a name="l00014"></a>00014 <span class="comment"> * @param $retorn true/false Ens Dona la posibilitat de retorna el text per incloura,</span>
-<a name="l00015"></a>00015 <span class="comment"> *        per defecta lo imprimeix.        </span>
-<a name="l00016"></a>00016 <span class="comment"> *</span>
-<a name="l00017"></a>00017 <span class="comment"> */</span>
-<a name="l00018"></a>00018 
+<a name="l00002"></a>00002 
 <a name="l00019"></a>00019 <span class="keyword">function</span> anyadirCaptcha($nom=<span class="stringliteral">&#39;default&#39;</span>, $retorn=<span class="stringliteral">&#39;false&#39;</span>) {
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021    $NC=$nom.<span class="stringliteral">&quot;_cf_&quot;</span>.caracter_aleatorio();
@@ -120,14 +104,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00028"></a>00028    }
 <a name="l00029"></a>00029 
 <a name="l00030"></a>00030    }
-<a name="l00031"></a>00031 <span class="comment"></span>
-<a name="l00032"></a>00032 <span class="comment">/** Verifiquem</span>
-<a name="l00033"></a>00033 <span class="comment"> * </span>
-<a name="l00034"></a>00034 <span class="comment"> * @param seg Segons minims per defecta 10</span>
-<a name="l00035"></a>00035 <span class="comment"> * @param $nom Nom del captcha per poger diferencia entre captchas</span>
-<a name="l00036"></a>00036 <span class="comment"> *</span>
-<a name="l00037"></a>00037 <span class="comment"> */</span>
-<a name="l00038"></a>00038 
+<a name="l00031"></a>00031 
 <a name="l00039"></a>00039 <span class="keyword">function</span> verificarCaptcha($seg=10, $nom=<span class="stringliteral">&#39;default&#39;</span>){
 <a name="l00040"></a>00040 
 <a name="l00041"></a>00041    <span class="keywordflow">if</span> ( ! isset($_SESSION[$nom.<span class="stringliteral">&#39;_cf_&#39;</span>])  ) <span class="keywordflow">return</span> FALSE;
@@ -144,11 +121,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00052"></a>00052       }
 <a name="l00053"></a>00053 
 <a name="l00054"></a>00054    }
-<a name="l00055"></a>00055 <span class="comment"></span>
-<a name="l00056"></a>00056 <span class="comment">/**</span>
-<a name="l00057"></a>00057 <span class="comment"> * CAptcha amb imatge</span>
-<a name="l00058"></a>00058 <span class="comment"> */</span>
-<a name="l00059"></a>00059 
+<a name="l00055"></a>00055 
 <a name="l00060"></a>00060 <span class="keyword">function</span> anyadirCaptchaImagen() {
 <a name="l00061"></a>00061 
 <a name="l00062"></a>00062    global $_ADMIN ;
@@ -168,11 +141,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00076"></a>00076      &lt;?php
 <a name="l00077"></a>00077 
 <a name="l00078"></a>00078 }
-<a name="l00079"></a>00079 <span class="comment"></span>
-<a name="l00080"></a>00080 <span class="comment">/**</span>
-<a name="l00081"></a>00081 <span class="comment"> * Generem caracter aleatoti</span>
-<a name="l00082"></a>00082 <span class="comment"> */</span>
-<a name="l00083"></a>00083 
+<a name="l00079"></a>00079 
 <a name="l00084"></a>00084 <span class="keyword">function</span> caracter_aleatorio() {
 <a name="l00085"></a>00085 
 <a name="l00086"></a>00086    mt_srand((<span class="keywordtype">double</span>)microtime()*1000000);
@@ -193,9 +162,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 <a name="l00101"></a>00101 
 <a name="l00102"></a>00102    <span class="keywordflow">return</span> chr($valor_aleatorio);
 <a name="l00103"></a>00103 }
-<a name="l00104"></a>00104 <span class="comment"></span>
-<a name="l00105"></a>00105 <span class="comment">/** Comprovem captcha */</span>
-<a name="l00106"></a>00106 
+<a name="l00104"></a>00104 
 <a name="l00107"></a>00107 <span class="keyword">function</span> verificarCaptchaImagen(){
 <a name="l00108"></a>00108 
 <a name="l00109"></a>00109 
@@ -224,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 4 de Septiembre de 2013 17:51:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

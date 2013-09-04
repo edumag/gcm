@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/ver_registros/menuAdmin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/admin/modelos/usuarios.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,26 +80,47 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_7a6a9dd989122f1a21582e97cb95937e.html">ver_registros</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4bb3efc8d73bd21ee44e3e5f9fd3a84d.html">admin</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_aaf205401f8892ba8af05eaf977d9379.html">modelos</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">menuAdmin.php</div>  </div>
+<div class="title">usuarios.php</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002    <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]=1;
-<a name="l00003"></a>00003    <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Visualización de los registros de la aplicación&quot;</span>;
-<a name="l00004"></a>00004    <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Registros&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<a class="code" href="../../d9/db3/a00066_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.<span class="stringliteral">&#39;ver_registros/visualizar/&#39;</span>.<a class="code" href="../../d9/db3/a00066_acf215f34a917d014776ce684a9ee8909.html#acf215f34a917d014776ce684a9ee8909" title="Url que nos llega.">Router::$url</a>;
-<a name="l00005"></a>00005 ?&gt;
-<a name="l00006"></a>00006 
+<a name="l00002"></a>00002 
+<a name="l00008"></a>00008 require_once(GCM_DIR.<span class="stringliteral">&#39;lib/int/databoundobject/lib/Crud.php&#39;</span>);
+<a name="l00009"></a>00009 
+<a name="l00021"></a><a class="code" href="../../d9/da5/a00075.html">00021</a> <span class="keyword">class </span><a class="code" href="../../d9/da5/a00075.html" title="Modelo para los usuarios de la aplicación.">Usuarios</a> <span class="keyword">extends</span> <a class="code" href="../../dd/da2/a00019.html" title="Extendemos DataBoundObject para automatizar los procesos de insertar, modificar, y borrar registros d...">Crud</a> {
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="../../d9/da5/a00075_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76">00023</a>    <span class="keyword">function</span> <a class="code" href="../../d9/da5/a00075_aa12c13acd4a2e13ba867740ca4bcfe76.html#aa12c13acd4a2e13ba867740ca4bcfe76" title="Nombre de tabla.">DefineTableName</a>() {
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027       <span class="keywordflow">return</span> $gcm-&gt;au-&gt;sufijo.<span class="stringliteral">&#39;usuarios&#39;</span>;
+<a name="l00028"></a>00028       }
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="../../d9/da5/a00075_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf">00030</a>    <span class="keyword">function</span> <a class="code" href="../../d9/da5/a00075_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf" title="Constructor.">__construct</a>(PDO <a class="code" href="../../db/db2/a00020_ac437da21cd594d73c1385cf604f4be38.html#ac437da21cd594d73c1385cf604f4be38" title="PDO.">$objPDO</a>, $id=NULL) {
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032       global <a class="code" href="../../d1/d1e/a00087_a19a0c049e76bf73f0a16f04e31cfbe86.html#a19a0c049e76bf73f0a16f04e31cfbe86" title="Instancia de Gcm.">$gcm</a>;
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034       $this-&gt;sql_listado = <span class="stringliteral">&#39;SELECT u.id, u.usuario, u.nombre,u.apellidos, fecha_modificacion as modificación FROM &#39;</span>.$gcm-&gt;au-&gt;sufijo.<span class="stringliteral">&#39;usuarios u&#39;</span>;
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036       <a class="code" href="../../d9/da5/a00075_a58774bd73019cfce42c8ac27bab8b2bf.html#a58774bd73019cfce42c8ac27bab8b2bf" title="Constructor.">parent::__construct</a>($objPDO, $id);
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038       }
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040    }
+<a name="l00041"></a>00041 
+<a name="l00044"></a>00044 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 21 de Junio de 2013 10:49:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 4 de Septiembre de 2013 17:51:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

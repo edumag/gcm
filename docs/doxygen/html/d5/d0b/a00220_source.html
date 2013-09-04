@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/imagenes/menuAdmin.php</title>
+<title>gcm: Fichero Fuente gcm/modulos/indexador/menuAdmin.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -80,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_925a7c03a73672f2b14aa59d01f20b70.html">imagenes</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_9b052a3440b154b2392779948b3a8c54.html">indexador</a>      </li>
     </ul>
   </div>
 </div>
@@ -90,15 +90,17 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002    <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Imagenes&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]= 1;
-<a name="l00003"></a>00003    <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Imagenes&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Administrar imágenes&quot;</span>;
-<a name="l00004"></a>00004    <a class="code" href="../../d6/d43/a00216_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Administración&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;Imagenes&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<a class="code" href="../../d9/db3/a00066_a1659f0a629d408e0f849dbe4ee061e62.html#a1659f0a629d408e0f849dbe4ee061e62" title="Base de url relativa al directorio.">Router::$dir</a>.Router::$url.<span class="stringliteral">&quot;?m=imagenes&amp;a=galeria&quot;</span>;
-<a name="l00005"></a>00005 ?&gt;
+<a name="l00002"></a>00002    <a class="code" href="../../d3/dd5/a00215_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;indexador&#39;</span>][<span class="stringliteral">&#39;activado&#39;</span>]=1;
+<a name="l00003"></a>00003    <a class="code" href="../../d3/dd5/a00215_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;indexador&#39;</span>][<span class="stringliteral">&#39;nombre&#39;</span>]=<span class="stringliteral">&quot;Reindexador&quot;</span>;
+<a name="l00004"></a>00004    <a class="code" href="../../d3/dd5/a00215_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;indexador&#39;</span>][<span class="stringliteral">&#39;title&#39;</span>]=<span class="stringliteral">&quot;Reindexar el contenido&quot;</span>;
+<a name="l00005"></a>00005    <a class="code" href="../../d3/dd5/a00215_ac6850841b0b078d831abbf3b0a3a69e3.html#ac6850841b0b078d831abbf3b0a3a69e3" title="Administrar comentarios.">$menuAdmin</a>[<span class="stringliteral">&#39;Seguimiento&#39;</span>][<span class="stringliteral">&#39;boton&#39;</span>][<span class="stringliteral">&#39;indexador&#39;</span>][<span class="stringliteral">&#39;link&#39;</span>]=<a class="code" href="../../d9/db3/a00066_ac78df45419614d6db964d0bd9e542c63.html#ac78df45419614d6db964d0bd9e542c63" title="$enlace_relativo + $dir">Router::$base</a>.<span class="stringliteral">&quot;?e=reindexar&quot;</span>;
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 21 de Junio de 2013 10:49:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 4 de Septiembre de 2013 17:51:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

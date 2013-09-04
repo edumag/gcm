@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/indexador/html/botonera_paginador.html</title>
+<title>gcm: Fichero Fuente gcm/lib/int/GcmPDO/lib/GcmPDO.php</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -79,46 +79,120 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_9b052a3440b154b2392779948b3a8c54.html">indexador</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_1417f59272386799b39d2b0614ce1793.html">html</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_4a8627447bedc6767ffa2db0ba8b8dff.html">lib</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_1137d9bd5659dfe4ff61ed82f20fbd21.html">int</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_6d74a9db0e209af2b3b4bf87264254c7.html">GcmPDO</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_234cb28bd1313c3d6420919ab633c8a9.html">lib</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">botonera_paginador.html</div>  </div>
+<div class="title">GcmPDO.php</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php <span class="keywordflow">if</span> ($this-&gt;total_de_paginas &gt; 1) { ?&gt;
-<a name="l00002"></a>00002 &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;paginador&quot;</span>&gt;
-<a name="l00003"></a>00003    &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;info_botonera&quot;</span>&gt;
-<a name="l00004"></a>00004       &lt;?php echo literal(<span class="stringliteral">&#39;Página&#39;</span>);?&gt;: &lt;?=$this-&gt;pagina;?&gt;/&lt;?=$this-&gt;total_de_paginas;?&gt;
-<a name="l00005"></a>00005    &lt;/span&gt;
-<a name="l00006"></a>00006    &lt;span <span class="keywordtype">id</span>=<span class="stringliteral">&quot;botonera_paginador&quot;</span>&gt;
-<a name="l00007"></a>00007       &lt;?php <span class="keywordflow">if</span>($this-&gt;pagina&gt;1) { ?&gt;
-<a name="l00008"></a>00008          &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo; ?&gt;pagina=1&#39;</span>&gt;&lt;&lt;&lt;/a&gt;
-<a name="l00009"></a>00009          &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo; ?&gt;pagina=&lt;?php echo ($this-&gt;pagina-1)?&gt;&#39;</span>&gt;&lt;&lt;/a&gt;
-<a name="l00010"></a>00010       &lt;?php } ?&gt;
-<a name="l00011"></a>00011       &lt;?php <span class="keywordflow">for</span> ($i=$this-&gt;elemento_inicio;(($i&lt;=$this-&gt;total_de_paginas)&amp;&amp;($i&lt;=$this-&gt;elemento_final));$i++){ ?&gt;
-<a name="l00012"></a>00012          &lt;?php <span class="keywordflow">if</span> ($this-&gt;pagina == $i) { ?&gt;
-<a name="l00013"></a>00013          &lt;span <span class="keyword">class</span>=<span class="stringliteral">&#39;pag_actual&#39;</span>&gt;&lt;b&gt;&lt;?php echo $this-&gt;pagina; ?&gt;&lt;/b&gt;&lt;/span&gt;
-<a name="l00014"></a>00014          &lt;?php } <span class="keywordflow">else</span> { ?&gt;
-<a name="l00015"></a>00015             &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo; ?&gt;pagina=&lt;?php echo $i; ?&gt;&#39;</span>&gt;&lt;?php echo $i; ?&gt;&lt;/a&gt;
-<a name="l00016"></a>00016          &lt;?php } ?&gt;
-<a name="l00017"></a>00017       &lt;?php } ?&gt;
-<a name="l00018"></a>00018       &lt;?php <span class="keywordflow">if</span>($this-&gt;pagina &lt; $this-&gt;total_de_paginas){ ?&gt;
-<a name="l00019"></a>00019       &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo; ?&gt;pagina=&lt;?php echo ($this-&gt;pagina+1); ?&gt;&#39;</span>&gt;&gt;&lt;/a&gt;
-<a name="l00020"></a>00020          &lt;a href=<span class="stringliteral">&#39;&lt;?php echo $this-&gt;url_base.$simbolo; ?&gt;pagina=&lt;?php echo $this-&gt;total_de_paginas; ?&gt;&#39;</span>&gt;&gt;&gt;&lt;/a&gt;
-<a name="l00021"></a>00021       &lt;?php } ?&gt;
-<a name="l00022"></a>00022    &lt;/span&gt;
-<a name="l00023"></a>00023 &lt;/div&gt;
-<a name="l00024"></a>00024 &lt;?php } ?&gt;
+<a href="../../d4/ddd/a00138.html">Ir a la documentación de este archivo.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00025"></a><a class="code" href="../../de/d8c/a00036.html">00025</a> <span class="keyword">class </span><a class="code" href="../../de/d8c/a00036.html" title="Extensión para PDO.">GcmPDO</a> {
+<a name="l00026"></a>00026 
+<a name="l00027"></a><a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58">00027</a>    <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$resultado</a>;                    
+<a name="l00028"></a><a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525">00028</a>    <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;                          
+<a name="l00029"></a><a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e">00029</a>    <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;                          
+<a name="l00030"></a><a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b">00030</a>    <span class="keyword">protected</span> <a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$num_total_registros</a>;          
+<a name="l00031"></a>00031 
+<a name="l00038"></a><a class="code" href="../../de/d8c/a00036_a7e48679afeef5ab082a322d944544321.html#a7e48679afeef5ab082a322d944544321">00038</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a7e48679afeef5ab082a322d944544321.html#a7e48679afeef5ab082a322d944544321" title="Constructor.">__construct</a> (PDO <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>, <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>) {
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040       $this-&gt;num_total_registros = 0;
+<a name="l00041"></a>00041       $this-&gt;pdo = <a class="code" href="../../de/d8c/a00036_a5766efd703cef0e00bfc06b3f3acbe0e.html#a5766efd703cef0e00bfc06b3f3acbe0e" title="Instancia de PDO.">$pdo</a>;
+<a name="l00042"></a>00042       $this-&gt;sql = <a class="code" href="../../de/d8c/a00036_a047170d6020a882807665812a27e2525.html#a047170d6020a882807665812a27e2525" title="sql generado">$sql</a>;
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044       $consulta_count = <span class="stringliteral">&quot;SELECT COUNT(*) FROM ($this-&gt;sql) as conta&quot;</span>;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046       <span class="comment">/* Mirar número de resultados */</span>
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048       <span class="keywordflow">if</span> ( ! $result = $this-&gt;pdo-&gt;prepare($consulta_count) ) {
+<a name="l00049"></a>00049          $error = $result-&gt;errorInfo();
+<a name="l00050"></a>00050          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;ERROR &quot;</span>.$error[2].<span class="stringliteral">&quot;\nsql:\n&quot;</span>.$consulta_count,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00051"></a>00051          <span class="keywordflow">return</span> FALSE;
+<a name="l00052"></a>00052          }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054       <span class="keywordflow">if</span> ( ! $result-&gt;execute()  ) {
+<a name="l00055"></a>00055          $error = $result-&gt;errorInfo();
+<a name="l00056"></a>00056          registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;ERROR &quot;</span>.$error[2].<span class="stringliteral">&quot;\nsql:\n&quot;</span>.$consulta_count,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00057"></a>00057          <span class="keywordflow">return</span> FALSE;
+<a name="l00058"></a>00058          }
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060       $filas = $result-&gt;fetch();
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062       <span class="keywordflow">foreach</span>($filas as $key =&gt; $value) {
+<a name="l00063"></a>00063          $this-&gt;num_total_registros = $value;
+<a name="l00064"></a>00064          }
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066       }
+<a name="l00067"></a>00067 
+<a name="l00072"></a><a class="code" href="../../de/d8c/a00036_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8">00072</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a21c2d8df5f21197ead452f0a334f08b8.html#a21c2d8df5f21197ead452f0a334f08b8" title="Devolver el numero total de registros.">numero_registros</a>() {
+<a name="l00073"></a>00073       <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_ab1e4a19cfa11b961a85ebcf6b729007b.html#ab1e4a19cfa11b961a85ebcf6b729007b" title="Número total de registro.">$this-&gt;num_total_registros</a>;
+<a name="l00074"></a>00074       }
+<a name="l00075"></a>00075 
+<a name="l00080"></a><a class="code" href="../../de/d8c/a00036_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7">00080</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a6d31bb16a2f21fec954d0d782b20d5d7.html#a6d31bb16a2f21fec954d0d782b20d5d7" title="Validar que hemos obtenido resultados.">validar</a>() {
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082       <span class="keywordflow">if</span> ( $this-&gt;num_total_registros &gt; 0 ) {
+<a name="l00083"></a>00083          <span class="keywordflow">return</span> TRUE;
+<a name="l00084"></a>00084       } <span class="keywordflow">else</span> {
+<a name="l00085"></a>00085          <span class="keywordflow">return</span> FALSE;
+<a name="l00086"></a>00086          }
+<a name="l00087"></a>00087       }
+<a name="l00088"></a>00088 
+<a name="l00093"></a><a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b">00093</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>() {
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097       <span class="keywordflow">try</span> {
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099          $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>=$this-&gt;pdo-&gt;prepare($this-&gt;sql);
+<a name="l00100"></a>00100          $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;execute();
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102          } <span class="keywordflow">catch</span> (Exception $ex) {
+<a name="l00103"></a>00103             registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;Error con la base de datos&quot;</span>,<span class="stringliteral">&#39;ERROR&#39;</span>);
+<a name="l00104"></a>00104             registrar(__FILE__,__LINE__,<span class="stringliteral">&quot;SQL: &quot;</span>.$this-&gt;sql.<span class="stringliteral">&quot;\n&quot;</span>.$ex-&gt;getMessage(),<span class="stringliteral">&#39;ADMIN&#39;</span>);
+<a name="l00105"></a>00105             <span class="keywordflow">return</span> FALSE;
+<a name="l00106"></a>00106             }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108       <span class="keywordflow">return</span> <a class="code" href="../../de/d8c/a00036_a06face0ef35c41554d8f4fe115363f58.html#a06face0ef35c41554d8f4fe115363f58" title="Recorset con el resultado.">$this-&gt;resultado</a>;
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110       }
+<a name="l00111"></a>00111 
+<a name="l00116"></a><a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf">00116</a>    <span class="keyword">function</span> <a class="code" href="../../de/d8c/a00036_a1ec67e03b210e19238ae0c421c971bcf.html#a1ec67e03b210e19238ae0c421c971bcf" title="Devolver resultado como array.">to_array</a>() {
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>  ) $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>();
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120       $retorno = array();
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122       <span class="keywordflow">if</span> ( ! $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a> ) {
+<a name="l00123"></a>00123          registrar(__FILE__,__LINE__,<span class="stringliteral">&#39;Sin resultados&#39;</span>);
+<a name="l00124"></a>00124          <span class="keywordflow">return</span> FALSE;
+<a name="l00125"></a>00125       }
+<a name="l00126"></a>00126       $arAll = $this-&gt;<a class="code" href="../../de/d8c/a00036_ae08c97c931867536e3d7d04cd6df771b.html#ae08c97c931867536e3d7d04cd6df771b" title="Devolver recordset con el resultado.">resultado</a>-&gt;fetchAll(PDO::FETCH_ASSOC);
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128       $conta = 0;
+<a name="l00129"></a>00129       <span class="keywordflow">foreach</span> ( $arAll as $arRow ) {
+<a name="l00130"></a>00130          <span class="keywordflow">foreach</span>($arRow as $key =&gt; $value) {
+<a name="l00131"></a>00131             $retorno[$conta][$key] = $value;
+<a name="l00132"></a>00132             }
+<a name="l00133"></a>00133          $conta++;
+<a name="l00134"></a>00134          }
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136       <span class="keywordflow">return</span> $retorno;
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138       }
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140    }
+<a name="l00141"></a>00141 ?&gt;
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 21 de Junio de 2013 10:49:17 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 4 de Septiembre de 2013 17:51:05 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

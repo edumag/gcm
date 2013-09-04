@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>gcm: Fichero Fuente gcm/modulos/menu/css/barraNavegacion.css</title>
+<title>gcm: Fichero Fuente gcm/modulos/menu/alt/menuPrincipal-decagora.css</title>
 
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
@@ -81,83 +81,73 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
       <li class="navelem"><a class="el" href="../../dir_7220247a7eb7348af0158c165feaa73e.html">gcm</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_68a9a62338f056989803ab8fbb9b88d5.html">modulos</a>      </li>
       <li class="navelem"><a class="el" href="../../dir_e0b90d1017353e67ec406a3e12ca4962.html">menu</a>      </li>
-      <li class="navelem"><a class="el" href="../../dir_c79e4658021f234f9fbe8febb6dae4fa.html">css</a>      </li>
+      <li class="navelem"><a class="el" href="../../dir_82e9c533c296fd83ffba12a8bfa1e8b9.html">alt</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">barraNavegacion.css</div>  </div>
+<div class="title">menuPrincipal-decagora.css</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*  ## Barra de navegación</span>
-<a name="l00002"></a>00002 <span class="comment"></span>
-<a name="l00003"></a>00003 <span class="comment">    &lt;div id=&quot;barraNavegacion&quot;&gt;</span>
-<a name="l00004"></a>00004 <span class="comment">       &lt;ul&gt;</span>
-<a name="l00005"></a>00005 <span class="comment">          &lt;li&gt;&lt;a href=&quot;./Articulos/&quot; class=&quot;&quot;&gt;&lt;img alt=&quot;+&quot; src=&quot;../dev/gcm/gcm/modulos/temas/iconos/+.png&quot;&gt; &lt;/a&gt;&lt;a href=&quot;./Articulos/&quot;&gt;Articulos&lt;/a&gt;&lt;/li&gt;</span>
-<a name="l00006"></a>00006 <span class="comment">          &lt;li&gt;&lt;a href=&quot;./Humor_linuxero_(Mafalda).html&quot;&gt;Humor linuxero (Mafalda)&lt;/a&gt;&lt;/li&gt;</span>
-<a name="l00007"></a>00007 <span class="comment">          &lt;li&gt;&lt;a href=&quot;./Proyectos/&quot; class=&quot;&quot;&gt;&lt;img alt=&quot;+&quot; src=&quot;../dev/gcm/gcm/modulos/temas/iconos/+.png&quot;&gt; &lt;/a&gt;&lt;a href=&quot;./Proyectos/&quot;&gt;Proyectos&lt;/a&gt;&lt;/li&gt;</span>
-<a name="l00008"></a>00008 <span class="comment">          &lt;li&gt;&lt;a href=&quot;./Acerca_de.html&quot;&gt;Acerca de&lt;/a&gt;&lt;/li&gt;</span>
-<a name="l00009"></a>00009 <span class="comment">          &lt;li&gt;&lt;a href=&quot;./apuntes/&quot; class=&quot;&quot;&gt;&lt;img alt=&quot;+&quot; src=&quot;../dev/gcm/gcm/modulos/temas/iconos/+.png&quot;&gt; &lt;/a&gt;&lt;a href=&quot;./apuntes/&quot;&gt;Apuntes&lt;/a&gt;&lt;/li&gt;</span>
-<a name="l00010"></a>00010 <span class="comment">          &lt;li&gt;&lt;a href=&quot;./Presentar_fecha_unix_en_formato_humano.html&quot;&gt;Presentar fecha unix en formato humano&lt;/a&gt;&lt;/li&gt;</span>
-<a name="l00011"></a>00011 <span class="comment">       &lt;/ul&gt;</span>
-<a name="l00012"></a>00012 <span class="comment">    &lt;/div&gt;</span>
-<a name="l00013"></a>00013 <span class="comment">*/</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#barraNavegacion  {</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>width: 100%;
-<a name="l00016"></a>00016 padding: 5px 5px 5px 0px;
-<a name="l00017"></a>00017 margin: 3px 2px 3px 5px;
-<a name="l00018"></a>00018 text-align: left;
-<a name="l00019"></a>00019 }
-<a name="l00020"></a>00020 <span class="preprocessor">#barraNavegacion .m_off, #barraNavegacion .m_on {</span>
-<a name="l00021"></a>00021 <span class="preprocessor"></span>   font-size: 110%;
-<a name="l00022"></a>00022 }
-<a name="l00023"></a>00023 <span class="preprocessor">#barraNavegacion a {</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span>border: 1px;
-<a name="l00025"></a>00025 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;body-11&quot;</span>)?&gt;;
-<a name="l00026"></a>00026 }
-<a name="l00027"></a>00027 <span class="preprocessor">#barraNavegacion ul img {</span>
-<a name="l00028"></a>00028 <span class="preprocessor"></span>   border: 0;
-<a name="l00029"></a>00029    width: 16px;
-<a name="l00030"></a>00030    height: 16px;
-<a name="l00031"></a>00031    }
-<a name="l00032"></a>00032 <span class="preprocessor">#barraNavegacion ul {</span>
-<a name="l00033"></a>00033 <span class="preprocessor"></span>list-style-position: outside;
-<a name="l00034"></a>00034 padding: 3px 0px 0px 2px;
-<a name="l00035"></a>00035 margin: 0;
-<a name="l00036"></a>00036 list-style:none;
-<a name="l00037"></a>00037 border-left: 1px ;
-<a name="l00038"></a>00038 <span class="comment">/* border-left-style: dotted; */</span>
-<a name="l00039"></a>00039 text-align: left;
-<a name="l00040"></a>00040 <span class="comment">/* /dashed/solid/double/groove/ridge/inset/outset; */</span>
-<a name="l00041"></a>00041 <span class="comment">/*list-style-image:none; IE would also need this*/</span>
+<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="comment">/* menuPrincipal.css */</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#menu_principal {</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span>padding: 0;
+<a name="l00005"></a>00005 margin:0;
+<a name="l00006"></a>00006 position: absolute;
+<a name="l00007"></a>00007 top: 80px;
+<a name="l00008"></a>00008 left: -6px;
+<a name="l00009"></a>00009 z-index: 10;
+<a name="l00010"></a>00010 }
+<a name="l00011"></a>00011 table#menu {
+<a name="l00012"></a>00012 margin-top: 3px;
+<a name="l00013"></a>00013 border: 0px;
+<a name="l00014"></a>00014 padding: 0px;
+<a name="l00015"></a>00015 background: #EED8AE;
+<a name="l00016"></a>00016 background: transparent;
+<a name="l00017"></a>00017 }
+<a name="l00018"></a>00018 <span class="preprocessor">#menu td {</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>text-align: center;
+<a name="l00020"></a>00020 font-size: 90%;
+<a name="l00021"></a>00021 background: #EED8AE;
+<a name="l00022"></a>00022 background: transparent;
+<a name="l00023"></a>00023 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00024"></a>00024 padding: 1px;
+<a name="l00025"></a>00025 background: no-repeat url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$gcm-&gt;event-&gt;instancias[&quot;temas&quot;]-&gt;ruta(&quot;menu&quot;,&quot;img&quot;,&quot;boton_desactivado.gif&quot;)?&gt;&#39;</span>);
+<a name="l00026"></a>00026 width: 70px;
+<a name="l00027"></a>00027 height: 70px;
+<a name="l00028"></a>00028 vertical-align: middle;
+<a name="l00029"></a>00029 }
+<a name="l00030"></a>00030 <span class="preprocessor">#menu td a {</span>
+<a name="l00031"></a>00031 <span class="preprocessor"></span>margin: 0px;
+<a name="l00032"></a>00032 padding: 0px;
+<a name="l00033"></a>00033 color:#E0AD14;
+<a name="l00034"></a>00034 text-decoration: none;
+<a name="l00035"></a>00035 border: 1px solid transparent;
+<a name="l00036"></a>00036 margin: 1px;
+<a name="l00037"></a>00037 }
+<a name="l00038"></a>00038 <span class="preprocessor">#menu td a:hover {</span>
+<a name="l00039"></a>00039 <span class="preprocessor"></span>background: #4B87AD;
+<a name="l00040"></a>00040 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;0&quot;</span>)?&gt;;
+<a name="l00041"></a>00041 border: 1px solid &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
 <a name="l00042"></a>00042 }
-<a name="l00043"></a>00043 <span class="preprocessor">#barraNavegacion .listaOff {</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>text-decoration: none;
-<a name="l00045"></a>00045 font-weight: bold;
+<a name="l00043"></a>00043 <span class="preprocessor">#menu td a:active {</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span>background: #EED8AE;
+<a name="l00045"></a>00045 color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
 <a name="l00046"></a>00046 }
-<a name="l00047"></a>00047 <span class="preprocessor">#barraNavegacion ul ul {</span>
-<a name="l00048"></a>00048 <span class="preprocessor"></span>   font-size: 90%;
-<a name="l00049"></a>00049    margin: 5px 16px;
+<a name="l00047"></a>00047 <span class="comment">/* Estamos aqui del menu principal */</span>
+<a name="l00048"></a>00048 <span class="preprocessor">#menu td#menuOff {</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span>background: no-repeat url(<span class="stringliteral">&#39;&lt;?=Router::$dir.$gcm-&gt;event-&gt;instancias[&quot;temas&quot;]-&gt;ruta(&quot;menu&quot;,&quot;img&quot;,&quot;boton_activado.gif&quot;)?&gt;&#39;</span>);
 <a name="l00050"></a>00050 }
-<a name="l00051"></a>00051 <span class="preprocessor">#barraNavegacion li a {</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>font-weight: normal;
-<a name="l00053"></a>00053 text-decoration: none;
-<a name="l00054"></a>00054 }
-<a name="l00055"></a>00055 <span class="preprocessor">#barraNavegacion li a:hover {</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>font-weight: normal;
-<a name="l00057"></a>00057 text-decoration: none;
-<a name="l00058"></a>00058 }
-<a name="l00059"></a>00059 <span class="preprocessor">#barraNavegacion li a:active {</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span>font-weight: normal;
-<a name="l00061"></a>00061 color: #D97B40;
-<a name="l00062"></a>00062 text-decoration: none;
-<a name="l00063"></a>00063 }
+<a name="l00051"></a>00051 <span class="preprocessor">#menu td#menuOff a {</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span>color: &lt;?=$this-&gt;color(<span class="stringliteral">&quot;3&quot;</span>)?&gt;;
+<a name="l00053"></a>00053 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generado el Viernes, 21 de Junio de 2013 10:49:18 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
+Generado el Miércoles, 4 de Septiembre de 2013 17:51:06 para gcm por &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>
