@@ -162,8 +162,8 @@ class Formulario {
       $this->campos       = $campos;
       $this->displayHash  = $displayHash;
 
-      $this->plantilla = dirname(__FILE__).'/../html/form_registro.html';
-      $this->plantilla_visualizar = dirname(__FILE__).'/../html/registro.html';
+      $this->plantilla = dirname(__FILE__).'/../html/form_registro.phtml';
+      $this->plantilla_visualizar = dirname(__FILE__).'/../html/registro.phtml';
 
       $this->css       = dirname(__FILE__).'/../css/formulario.css';
 
