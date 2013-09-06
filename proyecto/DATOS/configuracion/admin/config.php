@@ -1,14 +1,15 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Fri Feb 15 9:20:39 CET 2013
+// Archivo generado automáticamente por GcmConfig Fri Sep 6 10:26:13 CEST 2013
 $config['Idioma por defecto']='es';
-$config['Módulos activados'][]='cache_http';
-$config['Módulos activados'][]='comentarios';
-$config['Módulos activados'][]='descargables';
-$config['Módulos activados'][]='indexador';
-$config['Módulos activados'][]='referencias';
-$config['Módulos activados'][]='widgets';
-$config['Módulos activados'][]='aplicar_SEO';
-$config['Módulos activados'][]='literales';
+$config['Módulos activados'][0]='cache_http';
+$config['Módulos activados'][1]='comentarios';
+$config['Módulos activados'][2]='descargables';
+$config['Módulos activados'][3]='indexador';
+$config['Módulos activados'][4]='referencias';
+$config['Módulos activados'][5]='widgets';
+$config['Módulos activados'][6]='aplicar_SEO';
+$config['Módulos activados'][7]='literales';
+$config['Módulos activados'][8]='roles';
 $config['Palabra secreta para depurar']='debug';
 $config['Proyecto']='proyecto';
 $config['Sufijo para base de datos']='proyecto_';

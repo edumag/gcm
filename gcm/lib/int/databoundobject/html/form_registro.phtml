@@ -1,0 +1,97 @@
+<?php
+
+ /**
+  * @file form_registro.phtm
+  * @brief Generamos formulario según tipo de campo
+  */
+
+?>
+
+<?php if ( isset($this->displayHash["PROBLEMS"]) ) { ?>
+<p class="error">Problemas con formulario</p>
+<? } ?>
+
+<br />
+
+   <?php  // echo "CAMPOS: <pre>" ; print_r($this->campos) ; echo "</pre>"; // DEV  ?>
+
+   <?php if ( isset($this->ID) ) { ?>
+   <input type="hidden" name="id" value="<?=$this->ID?>" /> 
+   <?php } ?>
+
+   <?php foreach ( $this->campos as $campo => $relacion ) { ?>
+
+   <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
+   <input type="hidden" name="<?=$campo?>" value="<?=$this->valores($campo)?>" /> 
+   <?php continue; } ?>
+
+   <?php if ( $relacion != 'ID' && $campo != "fecha_creacion" && $campo != "fecha_modificacion"  ) { ?>   
+
+   <div class="caja_campo" id="caja_campo_<?=$campo?>">
+
+   <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
+
+      <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>
+      <select name="<?=$campo?>">
+         <option><?=literal('Seleccionar')?></option>
+         <option></option>
+         <?php foreach ( $this->campos[$campo]['opciones'] as $res) { ?>
+            <?php $count=0; ?>
+            <?php foreach ( $res as $contenido ) { ?>
+            <?php if ( $count == 0 ) $identificador = $contenido; ?>
+            <?php if ( $count == 1 ) $nombre = $contenido; ?>
+            <?php $count++; ?>
+            <?php } ?>
+            <option value="<?=$identificador?>"<?php if ( $identificador == $this->valores($campo) ) echo ' selected' ;?>>
+            <?php echo $nombre; ?>
+            </option>
+         <?php } ?>
+      </select>
+
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
+   
+   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <input name="<?=$campo?>"  type="date" value="<?=str_replace(' ','T',$this->valores($campo))?>"/>
+
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
+   
+   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <input name="<?=$campo?>"  type="datetime" value="<?php if ( $this->valores($campo) !== '0000-00-00 00:00:00' ) { echo strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))); } else { echo ''; } ?>"/>
+
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
+   
+   <div class="caja_campo_titulo"><?=literal('contraseña')?>: </div>
+   <input name="<?=$campo?>"  type="password" value=""/>
+   </div>
+   <div class="caja_campo" id="caja_campo_verificacion">
+   <div class="caja_campo_titulo"><?=literal('verificación')?>: </div>
+   <input name="verificacion"  type="password" value=""/>
+
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
+
+   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <textarea rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
+
+   <?php } else { ?>
+
+   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <input name="<?=$campo?>" 
+      <?php if ( isset($this->campos[$campo]['maxlength']) ) { ?>
+      maxlength="<?=$this->campos[$campo]['maxlength']?>" 
+      <?php } ?>
+      <?php if ( isset($this->campos[$campo]['size']) ) { ?>
+      size="<?=$this->campos[$campo]['size']?>" 
+      <?php } ?>
+      type="text" value="<?=$this->valores($campo)?>"/>
+
+   <?php } ?>
+
+   <div class="caja_campo_error">
+      <?php if ( isset($this->displayHash['PROBLEMS'][$campo]) ) echo $this->displayHash['PROBLEMS'][$campo]; ?>
+   </div>
+
+   </div>
+
+   <?php } ?>
+
+   <?php } ?>
