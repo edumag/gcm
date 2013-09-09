@@ -322,35 +322,6 @@ class Crud extends DataBoundObject {
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
 
-
-
-      //$this->plantilla   = dirname(__FILE__).'/../html/form_registro.html';
-      //$this->fichero_css = dirname(__FILE__).'/../css/crud.css';
-
-      /** @todo Revisar tema de galeria da errores al intentar cargarla */
-
-      // if ( $this->galeria ) {
-
-      //    $conf_galeria = array(
-      //         'tipo'         => 'tabla-archivo'
-      //       , 'pdo'          => $this->objPDO
-      //       , 'tabla'        => $this->strTableName
-      //       , 'dir_imagenes' => $this->galeria
-      //       , 'dir_tmp'      => 'tmp/'
-      //       );
-
-      //    $this->galeria = new Galeria($conf_galeria, $this->ID);
-
-      //    $this->galeria->limit_imatges = 1;
-      //    $this->galeria->amplaria_max = 640;
-      //    $this->galeria->imatge_espera = GCM_DIR.'/lib/int/galeria/img/30.gif';
-      //    $this->galeria->contingut_enllac_borrar = '[x]'; 
-      //    $this->galeria->amplada_presentacio = 100;
-      //    $this->galeria->sufijo = $this->strTableName;
-
-
-      //    }
-
       }
 
    /**
@@ -939,7 +910,7 @@ class Crud extends DataBoundObject {
       if ( isset($this->plantilla_editar) ) $form->plantilla = $this->plantilla_editar;
 
       ?>
-         <form name="crud" action="<?php if ( isset($_SERVER['REDIRECT_URL']) ) echo $_SERVER['REDIRECT_URL'];?>" method="post">
+         <form name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
       <?php
 
       $form->genera_formulario(FALSE, $this->accion);

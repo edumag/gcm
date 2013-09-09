@@ -40,7 +40,7 @@ class Array2table {
       self::$img_modificar = 'modificar.png' ;
       self::$img_borrar    = 'borrar.png'    ;
       self::$img_ver       = 'ver.png'       ;
-      self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
+      if ( is_object(Router) ) self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
 
       }
 
