@@ -7,8 +7,10 @@
 
 /** Saber si tenemos que cargar el código para el tratamiento de fechas */
 
-$cargar_codigo_fechas = FALSE;
-$dir_codigo_fechas    = '../'.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquery-simple-datetimepicker/';
+$cargar_codigo_fechas_horas = FALSE;
+$dir_codigo_fechas_horas    = '../'.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquery-simple-datetimepicker/';
+$cargar_codigo_fechas       = FALSE;
+$dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/';
 
 ?>
 
@@ -55,12 +57,13 @@ $dir_codigo_fechas    = '../'.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquer
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
    
+   <?php $cargar_codigo_fechas[] = $campo; ?>
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
-   <input name="<?=$campo?>"  type="date" value="<?=str_replace(' ','T',$this->valores($campo))?>"/>
+   <input name="<?=$campo?>" id="<?=$campo?>" type="text" value="<?php echo$this->valores($campo)?>"/>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
-   <?php $cargar_codigo_fechas[] = $campo; ?>
+   <?php $cargar_codigo_fechas_horas[] = $campo; ?>
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
    <input name="<?=$campo?>"  type="text" value="<?php if ( $this->valores($campo) ) { echo strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))); } else { echo strftime("%Y-%m-%d %H:%M"); } ?>"/>
 
@@ -106,17 +109,17 @@ $dir_codigo_fechas    = '../'.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquer
 
 // Cargamos código para el tratamiento de fechas si se ha pedido
 
-if ( $cargar_codigo_fechas ) {
+if ( $cargar_codigo_fechas_horas ) {
 
    ?>
 
 	<!--Load Script and Stylesheet -->
-	<script type="text/javascript" src="<?php echo $dir_codigo_fechas; ?>jquery.simple-dtpicker.js"></script>
-	<link type="text/css" href="<?php echo $dir_codigo_fechas; ?>jquery.simple-dtpicker.css" rel="stylesheet" />
+	<script type="text/javascript" src="<?php echo $dir_codigo_fechas_horas; ?>jquery.simple-dtpicker.js"></script>
+	<link type="text/css" href="<?php echo $dir_codigo_fechas_horas; ?>jquery.simple-dtpicker.css" rel="stylesheet" />
 	<!---->
 
 	<script type="text/javascript">
-      <?php foreach ( $cargar_codigo_fechas as $campo_fecha ) { ?>
+      <?php foreach ( $cargar_codigo_fechas_horas as $campo_fecha ) { ?>
 		$(function(){
          $('*[name=<?php echo $campo_fecha ?>]').appendDtpicker();
 		});
@@ -126,4 +129,34 @@ if ( $cargar_codigo_fechas ) {
    <?php
 
    }
+
+if ( $cargar_codigo_fechas ) {
+
+   ?>
+   <link type="text/css" href="<?php echo $dir_codigo_fechas; ?>jquery.datepick.css" rel="stylesheet">
+   <script>
+      addLoadEvent(function(){
+
+         <?php include(dirname(__FILE__).'/../ext/jquery.datepick/jquery.datepick.js'); ?>
+
+         <?php foreach ( $cargar_codigo_fechas as $campo_fecha ) { ?>
+
+         $(function() {
+            // $('#<?php echo $campo_fecha ?>').datepick();
+            $('#<?php echo $campo_fecha ?>').datepick({dateFormat: 'yyyy-mm-dd'});
+         });
+
+         <?php } ?>
+      });
+   </script>
+
+
+
+
+
+
+   <?php
+   }
+
+
 ?>
