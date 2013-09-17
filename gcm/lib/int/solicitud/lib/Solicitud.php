@@ -149,7 +149,7 @@ class Solicitud {
       $this->_arObjParameterMethodConstraintHash = Array();
       $this->_arObjConstraintFailure = Array();
       $this->_blHasRunConstraintTests = false;
-      
+      $this->_strConstraintFailureDefaultRedirectTargetURL = $_SERVER["REDIRECT_URL"];
    }
 
    /**
@@ -312,131 +312,142 @@ class Solicitud {
             $varActualValue = $this->_arGetVars[$strThisParameter];
          };
          if ($intThisMethod == ENTRADAS_POST) {
-            $varActualValue = $this->_arPostVars[$strThisParameter];
+            $varValorActual = $this->_arPostVars[$strThisParameter];
          };
          $intConstraintType = $objThisConstraint->GetConstraintType();
          $strConstraintOperand = $objThisConstraint->GetConstraintOperand();
          $thisFail = false;
-         $objFailureObject = new RestriccionesFallidas($strThisParameter, 
-            $intThisMethod, $objThisConstraint);
+         $indices = ( is_array($varValorActual) ) ? count($varValorActual) : 0 ; 
+         $conta = 0;
 
-         switch ($intConstraintType) {
+         while ( $conta < $indices ) {
 
-         case RT_MAIL:
-            if (! filter_var( (string) $varActualValue, FILTER_VALIDATE_EMAIL) ) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,'El email no parece valido');
-               }
-            break;
+            $indice = ( is_array($varValorActual) ) ? $conta : FALSE ;
 
-         case RT_LONG_MIN:
-            if (strlen((string)$varActualValue) < (integer) $strConstraintOperand) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' su longitud es menor a '.$strConstraintOperand);
-               }
-            break;
+            $varActualValue = ( is_array($varValorActual) ) ? $varActualValue = $varValorActual[$conta] : $varActualValue = $varValorActual; 
 
-         case RT_LONG_MAX:
-            if (strlen((string)$varActualValue) > (integer) $strConstraintOperand) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' su longitud es mayor a '.$strConstraintOperand);
-               }
-            break;
+            $objFailureObject = new RestriccionesFallidas($strThisParameter, $intThisMethod, $objThisConstraint, $indice);
 
-         case RT_CARACTERES_PERMITIDOS:
-            for ($j=0; $j<=strlen($varActualValue)-1; $j++) {
-               $thisChar = substr($varActualValue, $j, 1);
-               if (strpos($strConstraintOperand, $thisChar) === false) {
+            switch ($intConstraintType) {
+
+            case RT_MAIL:
+               if (! filter_var( (string) $varActualValue, FILTER_VALIDATE_EMAIL) ) {
                   $thisFail = true;
-                  registrar(__FILE__,__LINE__,$strThisParameter.' con caracteres no permitidos');
-               };
-            };
-            break;
+                  registrar(__FILE__,__LINE__,'El email no parece valido');
+                  }
+               break;
 
-         case RT_CARACTERES_NO_PERMITIDOS:
-            for ($j=0; $j<=strlen($varActualValue)-1; $j++) {
-               $thisChar = substr($varActualValue, $j, 1);
-               if (!(strpos($strConstraintOperand, $thisChar) === false)) {
+            case RT_LONG_MIN:
+               if (strlen((string)$varActualValue) < (integer) $strConstraintOperand) {
                   $thisFail = true;
-                  registrar(__FILE__,__LINE__,$strThisParameter.' con caracteres no permitidos');
+                  registrar(__FILE__,__LINE__,$strThisParameter.' su longitud es menor a '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_LONG_MAX:
+               if (strlen((string)$varActualValue) > (integer) $strConstraintOperand) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' su longitud es mayor a '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_CARACTERES_PERMITIDOS:
+               for ($j=0; $j<=strlen($varActualValue)-1; $j++) {
+                  $thisChar = substr($varActualValue, $j, 1);
+                  if (strpos($strConstraintOperand, $thisChar) === false) {
+                     $thisFail = true;
+                     registrar(__FILE__,__LINE__,$strThisParameter.' con caracteres no permitidos');
+                  };
                };
+               break;
+
+            case RT_CARACTERES_NO_PERMITIDOS:
+               for ($j=0; $j<=strlen($varActualValue)-1; $j++) {
+                  $thisChar = substr($varActualValue, $j, 1);
+                  if (!(strpos($strConstraintOperand, $thisChar) === false)) {
+                     $thisFail = true;
+                     registrar(__FILE__,__LINE__,$strThisParameter.' con caracteres no permitidos');
+                  };
+               };
+               break;
+
+            case RT_MENOR_QUE:
+               if ($varActualValue >= $strConstraintOperand) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' menor a '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_MAYOR_QUE:
+               if ($varActualValue <= $strConstraintOperand) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' mayor a '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_IGUAL_QUE:
+               if ($varActualValue != $strConstraintOperand) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' igual que '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_NO_IGUAL:
+               if ($varActualValue == $strConstraintOperand) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' no es igual a '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_PASA_EXPRESION_REGULAR:
+               if (!(preg_match($strConstraintOperand, $varActualValue))) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' pasa exp '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_NO_PASA_EXPRESION_REGULAR:
+               if (preg_match($strConstraintOperand, $varActualValue)) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' no pasa exp'.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_NO_ES_NUMERO:
+               if ( ! is_numeric($varActualValue) ) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' menor a '.$strConstraintOperand);
+                  }
+               break;
+
+            case RT_REQUERIDO:
+               if ( ! isset($varActualValue) || empty($varActualValue) ) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,literal($strThisParameter).' '.literal('es requerido'));
+                  }
+               break;
+
+            case RT_PASSWORD:
+               if ( ! isset($_REQUEST['verificacion']) ) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,'Se necesita un campo "verificacion" para poder verificar la contraseña ','ERROR');
+                  }
+               if ( $varActualValue != $_REQUEST['verificacion'] ) {
+                  $thisFail = true;
+                  registrar(__FILE__,__LINE__,$strThisParameter.' contraseña diferente a verificación '.$strConstraintOperand);
+                  registrar(__FILE__,__LINE__,$varActualValue.' != '.$_REQUEST['verificacion'],'ADMIN');
+                  }
+               break;
+
             };
-            break;
-
-         case RT_MENOR_QUE:
-            if ($varActualValue >= $strConstraintOperand) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' menor a '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_MAYOR_QUE:
-            if ($varActualValue <= $strConstraintOperand) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' mayor a '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_IGUAL_QUE:
-            if ($varActualValue != $strConstraintOperand) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' igual que '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_NO_IGUAL:
-            if ($varActualValue == $strConstraintOperand) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' no es igual a '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_PASA_EXPRESION_REGULAR:
-            if (!(preg_match($strConstraintOperand, $varActualValue))) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' pasa exp '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_NO_PASA_EXPRESION_REGULAR:
-            if (preg_match($strConstraintOperand, $varActualValue)) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' no pasa exp'.$strConstraintOperand);
-               }
-            break;
-
-         case RT_NO_ES_NUMERO:
-            if ( ! is_numeric($varActualValue) ) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' menor a '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_REQUERIDO:
-            if ( ! isset($varActualValue) ) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' es requerido '.$strConstraintOperand);
-               }
-            break;
-
-         case RT_PASSWORD:
-            if ( ! isset($_REQUEST['verificacion']) ) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,'Se necesita un campo "verificacion" para poder verificar la contraseña ','ERROR');
-               }
-            if ( $varActualValue != $_REQUEST['verificacion'] ) {
-               $thisFail = true;
-               registrar(__FILE__,__LINE__,$strThisParameter.' contraseña diferente a verificación '.$strConstraintOperand);
-               registrar(__FILE__,__LINE__,$varActualValue.' != '.$_REQUEST['verificacion'],'ADMIN');
-               }
-            break;
-
-         };
 
          if ($thisFail) {
             $anyFail = true;
             $this->_arObjConstraintFailure[] = $objFailureObject;
          };
+
+         $conta++;
+         } // Acaba while 
 
       };
 
@@ -444,13 +455,15 @@ class Solicitud {
 
          if ($this->_blRedirectOnConstraintFailure) {
 
-            $targetURL = $_SERVER["REDIRECT_URL"];
-            if (!$targetURL) {
-               $targetURL = $this->_strConstraintFailureDefaultRedirectTargetURL;
-            };
             if ($this->_strConstraintFailureRedirectTargetURL) {
                $targetURL = $this->_strConstraintFailureRedirectTargetURL;
             };
+            if (!$targetURL) {
+               if ($this->_strConstraintFailureDefaultRedirectTargetURL) {
+                  $targetURL = $this->_strConstraintFailureDefaultRedirectTargetURL;
+               }
+            };
+
             if ($targetURL) {
                $objToSerialize = $this;
                $strSerialization = serialize($objToSerialize);

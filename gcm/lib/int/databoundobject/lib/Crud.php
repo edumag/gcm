@@ -14,9 +14,7 @@
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
  *
- * @defgroup crud Creación, CRUD modificación y borrado de registros
- *
- * @{
+ * @ingroup crud
  */
 
 require_once(dirname(__FILE__).'/DataBoundObject.php');
@@ -48,17 +46,35 @@ class Crud extends DataBoundObject {
 
    public $elementos_pagina = 10;         ///< Número de elementos por página en listado, por defecto los de paginarPDO
 
-   public $css_formulario   = FALSE ;     ///< Añadimos css para Formulario o no.
+   public $css_formulario   = TRUE ;     ///< Añadimos css para Formulario o no.
 
    public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
 
    /**
-    * Tipo de tabla: 
+    * Tipo de tabla soportados: 
     *
     * - normal, por defecto.
     * - combinatoria
+    * - relacion_varios
     *
-    * Una tabla combinatoria nos permite gusrdar relaciones multiples (*,*) entre dos tablas,
+    * Podemos definir el tipo de tabla al instanciarla, para poder controlar su comportamiento
+    * desde la tabla padre.
+    *
+    * normal
+    * ------
+    * 
+    * Tablas normales.
+    *
+    * relacion_varios
+    * ---------------
+    * 
+    * Son las tablas que contienes registros varios relacionados con la tabla padre ( 1,* ), 
+    * un registro de la tabla padre puede estar relacionado con varios registros de esta.
+    * 
+    * combinatoria
+    * ------------
+    *
+    * Una tabla combinatoria nos permite guardar relaciones multiples (*,*) entre dos tablas,
     * las cararcteristicas de estas tablas es que tienen dos indices y cada uno apunta al indice
     * de otra tabla.
     *
@@ -76,7 +92,28 @@ class Crud extends DataBoundObject {
     *
     */
 
-   protected $tipo_tabla = 'normal';
+   public $tipo_tabla = 'normal';
+
+   /**
+    * Podemos definir una plantilla personalizada para editar los registros, tener en
+    * cuenta qudebe basarse en la plantilla por defecto 'form_registro.phtml'
+    */
+
+   public $plantilla_editar = FALSE;
+
+   /**
+    * Podemos definir una plantilla personalizada para editar los registros, tener en
+    * cuenta qudebe basarse en la plantilla por defecto 'form_registros_relacionados.phtml'
+    */
+
+   public $plantilla_relacion_varios = FALSE;
+
+   /**
+    * Definimos la url del formulario al que se debe volver en caso de errpres,
+    * pordefecto es $_SERVER["REDIRECT_URL"] 
+    */
+
+   protected $url_formulario = FALSE;
 
    /**
     * Podemos definir un metodo personalizado para la visualización de los registros 
@@ -121,7 +158,7 @@ class Crud extends DataBoundObject {
    public $opciones_array2table = FALSE;
 
    /**
-    * Array con los atributos publicos que deamos pasar a paginador
+    * Array con los atributos publicos que deamos pasar a PaginarPDO
     *
     * Para ver las posibilidades @see paginarPDO
     */
@@ -157,9 +194,17 @@ class Crud extends DataBoundObject {
 
    protected $plantilla;
 
-   /** Archivo css para los estilos */
+   /** Archivos css para los estilos */
 
-   protected $fichero_css;
+   public $ficheros_css;
+
+   /** Librerías javascript a argar */
+
+   public $librerias_js;
+
+   /** Código javascript a añadir */
+
+   public $codigo_js;
 
    /**
     * SQL para generar listado, por defecto 'SELECT * FROM tabla ORDER BY id desc' 
@@ -293,13 +338,22 @@ class Crud extends DataBoundObject {
 
    protected $dir_img_array2table = FALSE;
 
+   /**
+    * Tablas que contienen contenido relacionado con el registro actual, permitiendonos
+    * relacionar varios registros de otra tabla con la actual.
+    */
+
+   public $relaciones_varios = FALSE;
+
    /** 
     * Constructor
     */
 
-   function __construct(PDO $objPdo, $id = NULL) {
+   function __construct(PDO $objPdo, $id = NULL, $tipo_tabla = 'normal') {
 
       global $gcm;
+
+      $this->tipo_tabla = $tipo_tabla;
 
       parent::__construct($objPdo, $id);
  
@@ -671,6 +725,7 @@ class Crud extends DataBoundObject {
 
    function restricciones_automaticas() {
 
+      // echo "tipos_campos: <pre>" ; print_r($this->tipos_campos) ; echo "</pre>"; exit();// DEV  
       foreach ( $this->arRelationMap as $campo => $referencia) {
 
          if ( $campo == 'mail' ) $this->restricciones[$campo][RT_MAIL] = 1;
@@ -687,8 +742,7 @@ class Crud extends DataBoundObject {
             }
 
          // Si un campo no permite null es requerido
-         if ( ! isset($this->restricciones[$campo][RT_REQUERIDO]) && 
-            isset($this->tipos_campos[$campo]['null']) && 
+         if ( isset($this->tipos_campos[$campo]['null']) && 
             $this->tipos_campos[$campo]['null'] == 'NO' && 
             !isset($this->tipos_campos[$campo]['Default']) ) {
 
@@ -703,75 +757,230 @@ class Crud extends DataBoundObject {
 
    /**
     * Mensajes automáticos, en caso de tener el mensaje definido ya no lo chafamos
+    *
+    * Construimos las restricciones de javascript segun contenido de restricciones y mensajes
+    *
+    * Este metodo se basa en validate.js que se puede encontrar en:
+    * http://rickharrison.github.com/validate.js/
+    *
+    * restricciones:
+    *
+    * campo[tipo restriccion][valor]
+    *
+    * @todo Los casos que estan comentados hay que buscar la manera de implementarlos
+    * @todo Aplicar pass_md5
     */
 
    function mensajes_automaticos() {
 
+      $codigo_js = "";  //< Código javascript a incluir para la validación
+
       if ( isset($this->restricciones) ) {
 
+         // echo "<pre>" ; print_r($this->restricciones) ; echo "</pre>"; exit(); // DEV  
          foreach ( $this->restricciones as $campo => $restriccion ) {
 
             foreach ( $restriccion as $tipo => $valor) {
 
-               if ( ! isset($this->mensajes[$campo][$tipo]) ) {
+               switch ($tipo) {
 
-                  switch ($tipo) {
+                  case RT_MAIL:
+                     $this->mensajes[$campo][$tipo] = literal('El correo no parece valido',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'valid_email'
+                        },";
+                     break;
 
-                     case RT_MAIL:
-                        $this->mensajes[$campo][$tipo] = literal('El correo no parece valido',3);
-                        break;
+                  case RT_LONG_MIN:
+                     $this->mensajes[$campo][$tipo] = literal('Longitud minima',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'min_length[$valor]'
+                        },";
+                     break;
 
-                     case RT_LONG_MIN:
-                        $this->mensajes[$campo][$tipo] = literal('Longitud minima',3);
-                        break;
+                  case RT_LONG_MAX:
+                     $this->mensajes[$campo][$tipo] = literal('Longitud máxima',3)
+                        .' '.$this->tipos_campos[$campo]['max'];
 
-                     case RT_LONG_MAX:
-                        $this->mensajes[$campo][$tipo] = literal('Longitud máxima',3)
-                           .' '.$this->tipos_campos[$campo]['max'];
-                        break;
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'max_length[$valor]'
+                        },";
+                     break;
 
-                     case RT_CARACTERES_PERMITIDOS:
-                        $this->mensajes[$campo][$tipo] = literal('Caracteres no permitidos',3);
-                        break;
+                  case RT_CARACTERES_PERMITIDOS:
+                     $this->mensajes[$campo][$tipo] = literal('Caracteres no permitidos',3);
+                     break;
 
-                     case RT_CARACTERES_NO_PERMITIDOS:
-                        $this->mensajes[$campo][$tipo] = literal('Caracteres no permitidos',3);
-                        break;
+                  case RT_CARACTERES_NO_PERMITIDOS:
+                     $this->mensajes[$campo][$tipo] = literal('Caracteres no permitidos',3);
+                     break;
 
-                     case RT_MENOR_QUE:
-                        $this->mensajes[$campo][$tipo] = literal('Demasiado pequeño',3);
-                        break;
+                  case RT_MENOR_QUE:
+                     $this->mensajes[$campo][$tipo] = literal('Demasiado pequeño',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'greater_than[$valor]'
+                        },";
+                     break;
 
-                     case RT_MAYOR_QUE:
-                        $this->mensajes[$campo][$tipo] = literal('Demasiado grande',3);
-                        break;
+                  case RT_MAYOR_QUE:
+                     $this->mensajes[$campo][$tipo] = literal('Demasiado grande',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'less_than[$valor]'
+                        },";
+                     break;
 
-                     case RT_IGUAL_QUE:
-                        $this->mensajes[$campo][$tipo] = literal('No coincide',3);
-                        break;
+                  case RT_IGUAL_QUE:
+                     $this->mensajes[$campo][$tipo] = literal('No coincide',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'matches[$valor]'
+                        },";
+                     break;
 
-                     case RT_NO_IGUAL:
-                        $this->mensajes[$campo][$tipo] = literal('No coincide',3);
-                        break;
+                  case RT_NO_IGUAL:
+                     $this->mensajes[$campo][$tipo] = literal('No coincide',3);
+                     break;
 
-                     case RT_PASA_EXPRESION_REGULAR:
-                        $this->mensajes[$campo][$tipo] = literal('Contenido no permitido',3);
-                        break;
+                  case RT_PASA_EXPRESION_REGULAR:
+                     $this->mensajes[$campo][$tipo] = literal('Contenido no permitido',3);
+                     break;
 
-                     case RT_NO_PASA_EXPRESION_REGULAR:
-                        $this->mensajes[$campo][$tipo] = literal('Contenido no permitido',3);
-                        break;
+                  case RT_NO_PASA_EXPRESION_REGULAR:
+                     $this->mensajes[$campo][$tipo] = literal('Contenido no permitido',3);
+                     break;
 
-                     case RT_PASSWORD:
-                        $this->mensajes[$campo][$tipo] = literal('Contraseña no pasa verificación',3);
-                        break;
+                  case RT_PASSWORD:
+                     $this->mensajes[$campo][$tipo] = literal('Contraseña no pasa verificación',3);
+                     break;
 
-                     }
+                  case RT_NO_ES_NUMERO:
+                     $this->mensajes[$campo][$tipo] = literal('Debe ser un numero',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'numeric[$valor]'
+                        },";
+                     break;
+
+                  case RT_REQUERIDO:
+                     $this->mensajes[$campo][$tipo] = literal('Campo requerido',3);
+                     $codigo_js .= "{
+                        name: '$campo',
+                        rules: 'required'
+                        },";
+                     break;
+                  }
+               }
+
+            }
+         }
+
+      // Mensajes para javascript
+
+      $men = "";  //< Definimos mensajes para la validación en javascript
+
+      if ( isset($this->mensajes) ) {
+         foreach ( $this->mensajes as $campo => $mensajes ) {
+
+            foreach ( $mensajes as $restriccion => $mensaje ) {
+
+               switch ($restriccion) {
+
+               case RT_MAIL:
+                  $men.= "\nvalidator.setMessage('valid_email', '%s $mensaje');";
+                  break;
+
+               case RT_LONG_MIN:
+                  $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+                  break;
+
+               case RT_LONG_MAX:
+                  $men.= "\nvalidator.setMessage('max_length', '%s $mensaje');";
+                  break;
+
+               // case RT_CARACTERES_PERMITIDOS:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
+
+               // case RT_CARACTERES_NO_PERMITIDOS:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
+
+               case RT_MENOR_QUE:
+                  $men.= "\nvalidator.setMessage('greater_than', '%s $mensaje');";
+                  break;
+
+               case RT_MAYOR_QUE:
+                  $men.= "\nvalidator.setMessage('less_than', '%s $mensaje');";
+                  break;
+
+               case RT_IGUAL_QUE:
+                  $men.= "\nvalidator.setMessage('matches', '%s $mensaje');";
+                  break;
+
+               // case RT_NO_IGUAL:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
+
+               // case RT_PASA_EXPRESION_REGULAR:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
+
+               // case RT_NO_PASA_EXPRESION_REGULAR:
+               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    break;
+
+               case RT_NO_ES_NUMERO:
+                  $men.= "\nvalidator.setMessage('numeric', '%s $mensaje');";
+                  break;
+
+               case RT_REQUERIDO:
+                  $men.= "\nvalidator.setMessage('required', '%s $mensaje');";
+                  break;
 
                   }
                }
 
             }
+
+         }
+
+      if ( ! empty($codigo_js) ) {
+         $codigo_js = trim($codigo_js,',');
+
+         if ( $this->tipo_tabla == 'normal' ) {
+
+            $codigo_js = file_get_contents(dirname(__FILE__).'/../js/validate.js')."
+              var validator = new FormValidator('crud', [$codigo_js], 
+                 function(errors, events) {
+                    if (errors.length > 0) {
+                       salida = errors.join(".'"\n"'.");
+                       alert(salida);
+                       }
+                    }
+                  );
+              $men
+              ";
+
+         } else {
+
+            $codigo_js = "
+              var validator_".$this->DefineTableName()." = new FormValidator('crud', [$codigo_js], 
+                 function(errors, events) {
+                    if (errors.length > 0) {
+                       salida = errors.join(".'"\n"'.");
+                       alert(salida);
+                       }
+                    }
+                  );
+              ";
+
+            }
+         $this->codigo_js .= $codigo_js;
          }
 
       }
@@ -817,7 +1026,10 @@ class Crud extends DataBoundObject {
       $salida = $this->visualizando_registro() ;
 
       if ( $salida ) { 
+
          echo $salida;
+         $this->visualizar_registros_relacionados();
+
          return;
          }
 
@@ -848,16 +1060,16 @@ class Crud extends DataBoundObject {
 
          }
 
-      $form = new Formulario($this->tipos_formulario, $displayHash, $this->restricciones, $this->mensajes);
-
-      $form->css = $this->css_formulario;
+      $form = new Formulario($this->tipos_formulario, $displayHash);
 
       // Si tenemos plantilla para visualizar desde el modelo se la pasamos a Formulario
       if ( isset($this->plantilla_visualizar) ) {
          $form->plantilla_visualizar = $this->plantilla_visualizar;
          }
 
-      $form->genera_formulario(TRUE, $this->accion);
+      $form->genera_formulario(TRUE, $this->accion, $this);
+
+      $this->visualizar_registros_relacionados();
 
       if ( $this->galeria ) $this->galeria->inicia();
 
@@ -866,13 +1078,20 @@ class Crud extends DataBoundObject {
 
    /**
     * Generar formulario
+    *
+    * @param $displayHash Array con los valores
+    * @param $nombre_campo_relacional Nombre del campo que contiene la relación con la tabla
+    *        padre
+    * @param $modelo_padre Enviamos el modelo padre para que pueda relacionarse con él y 
+    *        enviarle petición de carga de scripts y conocer el identificador del registro.
+    * @param $contador Contador, nos servira para las tablas relaciones_varias diferenciar entre registros.
     */
 
-   function generar_formulario($displayHash=NULL) {
+   function generar_formulario($displayHash=NULL, $nombre_campo_relacional = FALSE, $modelo_padre = FALSE, $contador = FALSE) {
 
       require_once(dirname(__FILE__).'/Formulario.php');
 
-      /* Rellenamos datos para Formulario */
+      /* Rellenamos datos para Formulario con sus valores si los tiene */
 
       foreach ( $this->arRelationMap as $campo => $R ) {
 
@@ -880,6 +1099,12 @@ class Crud extends DataBoundObject {
          if ( $this->ID ) {
             $this->tipos_formulario[$this->DefineTableName().'_id']['valor'] = $this->ID;
             $this->tipos_formulario[$this->DefineTableName().'_id']['oculto_form'] = 1;
+            }
+
+         // Si la tenemos nombre_campo_relacional lo ocultamos.
+         if ( $campo == $nombre_campo_relacional ) {
+            $this->tipos_formulario[$campo]['valor'] = $modelo_padre->ID;
+            $this->tipos_formulario[$campo]['oculto_form'] = 1;
             }
 
          // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
@@ -891,8 +1116,11 @@ class Crud extends DataBoundObject {
                }
             }
 
-         if ( $campo != array_search('ID',$this->arRelationMap) ) $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
+         if ( $campo != array_search('ID',$this->arRelationMap) ) 
+            $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
 
+         // Si es un campo con el indice de una tabla relacionada, buscamos los posibles 
+         // valores desde su modelo.
          if ( isset($this->tipos_formulario[$campo]['tabla'])  ) {
             $modelo_relacionado = ucfirst($this->tipos_formulario[$campo]['tabla']);
             $id_relacionado = $this->GetAccessor($campo);
@@ -902,25 +1130,91 @@ class Crud extends DataBoundObject {
 
          }
 
-      $form = new Formulario($this->tipos_formulario, $displayHash, $this->restricciones, $this->mensajes);
+      $form = new Formulario($this->tipos_formulario, $displayHash);
 
-      if ( $this->css_formulario ) $form->css = $this->css_formulario;
+      // Si es una tabla de tipo 'relacion_varios' cargamos plantilla form_registros_relacion_varios.phtml
+      // y en caso de tener una definida en el modelo la cogemos.
 
-      // Si tenemos plantilla desde el modelo se la pasamos a Formulario
-      if ( isset($this->plantilla_editar) ) $form->plantilla = $this->plantilla_editar;
+      if ( $this->tipo_tabla == 'relacion_varios' ) {
 
-      ?>
+         if ( $this->plantilla_relacion_varios ) {
+            $form->plantilla = $this->plantilla_relacion_varios;
+         } else {
+            $form->plantilla = dirname(__FILE__).'/../html/form_registros_relacionados.phtml';
+            }
+
+      } else {
+
+         // Si tenemos plantilla desde el modelo se la pasamos a Formulario
+         if ( $this->plantilla_editar ) $form->plantilla = $this->plantilla_editar;
+
+         }
+
+      // Si es una tabla normal añadimos cabecera de formulario, es caso contrario es una tabla relacionada
+      // no hay que hacerlo
+
+      if ( $this->tipo_tabla == 'normal' ) {
+         ?>
          <form name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
-      <?php
+         <?php
+         }
 
-      $form->genera_formulario(FALSE, $this->accion);
+      if ( $this->tipo_tabla == 'normal' ) {
+         $form->genera_formulario(FALSE, $this->accion, $this);
+      } else {
+         $form->genera_formulario(FALSE, $this->accion, $modelo_padre, $this->DefineTableName(), $contador);
+         }
+
+      $this->formulario_registros_relacionados($displayHash);
 
       if ( $this->galeria ) $this->galeria->inicia();
 
-      ?>
+      if ( $this->tipo_tabla == 'normal' ) {
+         ?>
          <p class="botonera_crud"><input type="submit" name="<?php echo $this->DefineTableName(); ?>_guardar" value="Guardar"></p>
-      </form>
-      <?php
+         </form>
+         <?php
+
+         // Cargamos css, librerías javascript y código javascript
+         // al final del formulario.
+
+         if ( $this->css_formulario ) {
+            ?>
+            <style>
+            <?php require(dirname(__FILE__).'/../css/formulario.css'); ?>
+            </style>
+            <?php
+            }
+
+
+         if ( $this->ficheros_css ) {
+            foreach ( $this->ficheros_css as $fichero_css ) {
+               ?>
+               <link type="text/css" href="<?php echo $fichero_css;?>" rel="stylesheet" />
+               <?php
+               }
+            }
+
+         if ( $this->librerias_js ) {
+            foreach ( $this->librerias_js as $libreria_js ) {
+               ?>
+               <script type="text/javascript" src="<?php echo $libreria_js;?>"></script>
+               <?php
+               }
+            }
+
+         if ( $this->codigo_js ) {
+            ?>
+            <script>
+            addLoadEvent(function(){
+               <?php echo $this->codigo_js;?>
+            });
+            </script>
+            <?php
+            }
+
+         }
+
       }
 
    /**
@@ -994,8 +1288,15 @@ class Crud extends DataBoundObject {
 
       if ( $this->accion == 'guardando' ) {
 
+         // echo "<pre>" ; print_r($_POST) ; echo "</pre>"; exit() ; // DEV  
+
          $solicitud = new Solicitud();
          $solicitud->SetRedirectOnConstraintFailure(true);
+         // Si tenemos definida la url de vuelta al formulario la especificamos
+         // a solicitud.
+         if ( $this->url_formulario ) {
+            $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
+            }
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
          if ( isset($this->restricciones) && ! empty($this->restricciones) ) {
@@ -1009,7 +1310,34 @@ class Crud extends DataBoundObject {
                }
             }
 
+         // Si tenemos registros relacionados de otras tablas tenemos que comprobar
+         // sus restricciones teniendo en cuenta que llegan como arrays del formularios
+
+         if ( $this->relaciones_varios ) {
+            foreach ( $this->relaciones_varios as $relacion_varios ) {
+               list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
+               $nombre_clase = ucwords($nombre_tabla);
+               $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+               $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+
+               if ( isset($rel->restricciones) && ! empty($rel->restricciones) ) {
+                  foreach ( $rel->restricciones() as $campo => $restriccion ) {
+                     foreach ( $restriccion as $tipo => $valor ) {
+                        $restricciones[$conta] = new Restricciones($tipo, $valor);
+                        $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                        $conta++;
+                        }
+                     }
+                  }
+
+               }
+            }
+
+// echo "<pre>" ; print_r($_POST) ; echo "</pre>"; exit(); // DEV  
+         
          $solicitud->TestConstraints();
+
+         // echo "<pre>" ; print_r($solicitud) ; echo "</pre>"; exit(); // DEV 
 
          // Si hemos llegado aquí hemos pasado las pruebas
 
@@ -1019,43 +1347,7 @@ class Crud extends DataBoundObject {
 
             if ( $resultado ) {
 
-               foreach ( $this->arRelationMap as $campo => $rCampo ) {
-
-                  if ( isset($this->ID) && $campo == 'fecha_creacion'  ) {
-                     $this->SetAccessor($rCampo, date("Y-m-d H:i:s"));
-                     continue;
-                     }
-
-                  if ( $campo == 'fecha_modificacion'  ) {
-                     $this->SetAccessor($rCampo, date("Y-m-d H:i:s"));
-                     continue;
-                     }
-
-                  // pass_md5: password debe ser igual a la verificación y lo convertimos 
-                  // con md5()
-                  if ( $campo == 'pass_md5' && !empty($resultado[$campo]) ) {
-                     $this->SetAccessor($rCampo, md5($resultado[$campo]));
-                     // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
-                     continue;
-                     }
-
-                  // Si viene la contraseña vacia la eliminamos de los datos a modificar sino
-                  // la modifica sin ser lo que queremos.
-                  if ( $campo == 'pass_md5' && empty($resultado[$campo]) ) {
-                     $this->DelAccessor($rCampo);
-                     // registrar(__FILE__,__LINE__,'pass: '.$resultado[$campo].' md5: '.md5($resultado[$campo]),'AVISO'); // DEV
-                     continue;
-                     }
-                  if ( $campo != array_search('ID',$this->arRelationMap)  ) {
-                     if (get_magic_quotes_gpc() == 1) {
-                        $this->SetAccessor($rCampo, stripslashes($resultado[$campo]));
-                     } else {
-                        $this->SetAccessor($rCampo, $resultado[$campo]);
-                        }
-                     }
-
-                  }
-
+               $this->recoger_valores_formulario($this, $resultado);
 
                if ( $this->save() ) {
 
@@ -1077,6 +1369,45 @@ class Crud extends DataBoundObject {
                      }
 
                   if ( $this->galeria ) $this->galeria->guardar($this->ID);
+
+                  // Si tenemos registros relacionados de otras tablas hay que guardarlos tambien
+                  // Primero borramos los que ya existan relacionados al registro padre
+                  // Despues añadimos teniendo en cuenta que vendran en forma de arrays y con el
+                  // nombre de la tabla como prefijo.
+
+                  if ( $this->relaciones_varios ) {
+                     foreach ( $this->relaciones_varios as $relacion_varios ) {
+                        list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
+                        $nombre_clase = ucwords($nombre_tabla);
+                        $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+                        $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+
+                        // Recorremos identificadores de los registros relacionados existentes
+                        $ids_relacionados = $rel->find($condicion_relacion, array('id'));
+                        if ( $ids_relacionados ) {
+                           foreach ( $ids_relacionados as $id_relacionado ) {
+                              //echo "<br>id: ".$id_relacionado['id'];
+                              $rel = new $nombre_clase($this->objPDO, $id_relacionado['id']);
+                              $rel->MarkForDeletion();
+                              }
+                           }
+
+                        // Guardar registros relacionado
+                        $nombre_identificador = array_search('ID',$rel->arRelationMap);
+                        $numero_registros_formulario = count($resultado[$rel->DefineTableName().'_'.$rel->DefineTableName().'_'.$nombre_identificador]);
+                        for ( $index = 0 ; $index < $numero_registros_formulario ; $index++ ) {
+
+                           // Comprobar que no este marcado para eliminar
+                           $nombre_campo_eliminar = $rel->DefineTableName().'_eliminar-'.$index;
+                           if ( isset($resultado[$nombre_campo_eliminar]) ) continue; 
+
+                           $nueva_relacion = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+                           $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index);
+                           $nueva_relacion->save();
+                        
+                           }
+                        }
+                     }
 
                   $mens = ( $this->accion == 'modificando' ) ? 'Registro modificado' : 'Registro incluido';
                   registrar(__FILE__,__LINE__,literal($mens,3),'AVISO');
@@ -1302,8 +1633,118 @@ class Crud extends DataBoundObject {
 
       }
 
-   }
+   /**
+    * Visualizar los registros relacionados de otras tablas
+    */
 
-/** @} */
+   function visualizar_registros_relacionados() {
+
+      // Si tenemos un tipo de campo 'relaciones_varios' presentamos su propio form
+      if ( $this->relaciones_varios ) {
+         foreach ( $this->relaciones_varios as $relacion_varios ) {
+            list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
+            $nombre_clase = ucwords($nombre_tabla);
+            $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+            $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+            $rel->listado($condicion_relacion);
+            }
+         }
+
+      }
+      
+   /**
+    * Formulario para los registros relacionados de otras tablas
+    */
+
+   function formulario_registros_relacionados($displayHash = FALSE) {
+
+      // Si tenemos un tipo de campo 'relaciones_varios' presentamos su propio form
+      if ( $this->relaciones_varios ) {
+         foreach ( $this->relaciones_varios as $relacion_varios ) {
+            list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
+            $nombre_clase = ucwords($nombre_tabla);
+            $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+            $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+
+            // Recorremos identificadores de los registros relacionados existentes
+            $ids_relacionados = $rel->find($condicion_relacion, array('id'));
+            if ( $ids_relacionados ) {
+               $conta = 0;
+               foreach ( $ids_relacionados as $id_relacionado ) {
+                  //echo "<br>id: ".$id_relacionado['id'];
+                  // $rel = new $nombre_clase($this->objPDO, $id_relacionado[0], 'relacion_varios');
+                  $rel->ID = $id_relacionado['id'];
+                  $rel->tipos_formulario = FALSE;
+                  $rel->load();
+                  // echo "<pre>" ; print_r($rel->valores) ; echo "</pre>"; // DEV  
+                  $rel->generar_formulario($displayHash, $nombre_campo_relacional, $this, $conta);
+                  $this->codigo_js .= $rel->codigo_js;
+                  $conta++;
+                  }
+               }
+
+            }
+         }
+
+      }
+      
+   /**
+    * Recoger campos de formulario.
+    * 
+    * @param $modelo Modelo basado en Crud
+    * @param $resultado Array con los resultados, por lo general $_POST pero 
+    *        podemos jugar con ello.
+    * @param $numero_registro Numero de registro, para los casos en que los valores esten
+    *        en un subarray de resultados.
+    */
+
+   function recoger_valores_formulario($modelo, $resultado, $numero_registro = FALSE) {
+
+      foreach ( $modelo->arRelationMap as $campo => $rCampo ) {
+
+         $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->DefineTableName().'_'.$campo][$numero_registro] : $resultado[$campo];
+
+         // echo "<pre>" ; print_r($numero_registro.' '.$rCampo.':'.$valor) ; echo "</pre>"; // DEV  
+
+         if ( isset($modelo->ID) && $campo == 'fecha_creacion'  ) {
+            $modelo->SetAccessor($rCampo, date("Y-m-d H:i:s"));
+            continue;
+            }
+
+         if ( $campo == 'fecha_modificacion'  ) {
+            $modelo->SetAccessor($rCampo, date("Y-m-d H:i:s"));
+            continue;
+            }
+
+         // pass_md5: password debe ser igual a la verificación y lo convertimos 
+         // con md5()
+         if ( $campo == 'pass_md5' && !empty($valor) ) {
+            $modelo->SetAccessor($rCampo, md5($valor));
+            // registrar(__FILE__,__LINE__,'pass: '.$valor.' md5: '.md5($valor),'AVISO'); // DEV
+            continue;
+            }
+
+         // Si viene la contraseña vacia la eliminamos de los datos a modificar sino
+         // la modifica sin ser lo que queremos.
+         if ( $campo == 'pass_md5' && empty($valor) ) {
+            $modelo->DelAccessor($rCampo);
+            // registrar(__FILE__,__LINE__,'pass: '.$valor.' md5: '.md5($valor),'AVISO'); // DEV
+            continue;
+            }
+
+         // Añadimos campo generico
+         if ( $campo != array_search('ID',$modelo->arRelationMap)  ) {
+            if (get_magic_quotes_gpc() == 1) {
+               $modelo->SetAccessor($rCampo, stripslashes($valor));
+            } else {
+               $modelo->SetAccessor($rCampo, $valor);
+               }
+            }
+
+         }
+
+      }
+
+   }
 
 ?>

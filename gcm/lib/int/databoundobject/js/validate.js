@@ -1,4 +1,9 @@
-/*
+/**
+ * @file validate.js
+ * @brief Validación de datos del formulario desde javascript
+ *
+ * @ingroup crud
+ *
  * validate.js 1.0.2
  * Copyright (c) 2011 Rick Harrison, http://rickharrison.me
  * validate.js is open sourced under the MIT license.
