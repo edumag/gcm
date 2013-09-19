@@ -26,3 +26,10 @@ background: white;
    background: red;
 }
 
+.boton_insertar_registro {
+    background: none repeat scroll 0 0 inactiveborder;
+    border: 1px solid black;
+    border-radius: 5px 5px 5px 5px;
+    padding: 4px;
+    cursor: pointer;
+}

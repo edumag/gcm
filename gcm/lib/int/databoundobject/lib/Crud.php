@@ -40,6 +40,8 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  *
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
+ *
+ * @todo Borrado de un registro debe borrar los relacionados
  */
 
 class Crud extends DataBoundObject {
@@ -205,6 +207,10 @@ class Crud extends DataBoundObject {
    /** Código javascript a añadir */
 
    public $codigo_js;
+
+   /** Reglas para el código javascript a añadir */
+
+   public $reglas_js;
 
    /**
     * SQL para generar listado, por defecto 'SELECT * FROM tabla ORDER BY id desc' 
@@ -773,7 +779,13 @@ class Crud extends DataBoundObject {
 
    function mensajes_automaticos() {
 
-      $codigo_js = "";  //< Código javascript a incluir para la validación
+      /** 
+       * En caso de relacion_varios añadimos corchetes a los nombres de los campos 
+       * para que funcionen las validaciones.
+       */
+
+      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_varios' ) ? $this->DefineTableName().'_' : '' ;
+      $sufijo_names_js = ( $this->tipo_tabla == 'relacion_varios' ) ? '[]' : '' ;
 
       if ( isset($this->restricciones) ) {
 
@@ -786,16 +798,16 @@ class Crud extends DataBoundObject {
 
                   case RT_MAIL:
                      $this->mensajes[$campo][$tipo] = literal('El correo no parece valido',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'valid_email'
                         },";
                      break;
 
                   case RT_LONG_MIN:
                      $this->mensajes[$campo][$tipo] = literal('Longitud minima',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'min_length[$valor]'
                         },";
                      break;
@@ -804,8 +816,8 @@ class Crud extends DataBoundObject {
                      $this->mensajes[$campo][$tipo] = literal('Longitud máxima',3)
                         .' '.$this->tipos_campos[$campo]['max'];
 
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'max_length[$valor]'
                         },";
                      break;
@@ -820,24 +832,24 @@ class Crud extends DataBoundObject {
 
                   case RT_MENOR_QUE:
                      $this->mensajes[$campo][$tipo] = literal('Demasiado pequeño',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'greater_than[$valor]'
                         },";
                      break;
 
                   case RT_MAYOR_QUE:
                      $this->mensajes[$campo][$tipo] = literal('Demasiado grande',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'less_than[$valor]'
                         },";
                      break;
 
                   case RT_IGUAL_QUE:
                      $this->mensajes[$campo][$tipo] = literal('No coincide',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'matches[$valor]'
                         },";
                      break;
@@ -860,16 +872,16 @@ class Crud extends DataBoundObject {
 
                   case RT_NO_ES_NUMERO:
                      $this->mensajes[$campo][$tipo] = literal('Debe ser un numero',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'numeric[$valor]'
                         },";
                      break;
 
                   case RT_REQUERIDO:
                      $this->mensajes[$campo][$tipo] = literal('Campo requerido',3);
-                     $codigo_js .= "{
-                        name: '$campo',
+                     $this->reglas_js .= "{
+                        name: '$prefijo_names_js$campo$sufijo_names_js',
                         rules: 'required'
                         },";
                      break;
@@ -881,8 +893,6 @@ class Crud extends DataBoundObject {
 
       // Mensajes para javascript
 
-      $men = "";  //< Definimos mensajes para la validación en javascript
-
       if ( isset($this->mensajes) ) {
          foreach ( $this->mensajes as $campo => $mensajes ) {
 
@@ -891,55 +901,55 @@ class Crud extends DataBoundObject {
                switch ($restriccion) {
 
                case RT_MAIL:
-                  $men.= "\nvalidator.setMessage('valid_email', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('valid_email', '%s $mensaje');";
                   break;
 
                case RT_LONG_MIN:
-                  $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
                   break;
 
                case RT_LONG_MAX:
-                  $men.= "\nvalidator.setMessage('max_length', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('max_length', '%s $mensaje');";
                   break;
 
                // case RT_CARACTERES_PERMITIDOS:
-               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                // case RT_CARACTERES_NO_PERMITIDOS:
-               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                case RT_MENOR_QUE:
-                  $men.= "\nvalidator.setMessage('greater_than', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('greater_than', '%s $mensaje');";
                   break;
 
                case RT_MAYOR_QUE:
-                  $men.= "\nvalidator.setMessage('less_than', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('less_than', '%s $mensaje');";
                   break;
 
                case RT_IGUAL_QUE:
-                  $men.= "\nvalidator.setMessage('matches', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('matches', '%s $mensaje');";
                   break;
 
                // case RT_NO_IGUAL:
-               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                // case RT_PASA_EXPRESION_REGULAR:
-               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                // case RT_NO_PASA_EXPRESION_REGULAR:
-               //    $men.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                case RT_NO_ES_NUMERO:
-                  $men.= "\nvalidator.setMessage('numeric', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('numeric', '%s $mensaje');";
                   break;
 
                case RT_REQUERIDO:
-                  $men.= "\nvalidator.setMessage('required', '%s $mensaje');";
+                  $this->codigo_js.= "validator.setMessage('required', '%s $mensaje');";
                   break;
 
                   }
@@ -947,40 +957,6 @@ class Crud extends DataBoundObject {
 
             }
 
-         }
-
-      if ( ! empty($codigo_js) ) {
-         $codigo_js = trim($codigo_js,',');
-
-         if ( $this->tipo_tabla == 'normal' ) {
-
-            $codigo_js = file_get_contents(dirname(__FILE__).'/../js/validate.js')."
-              var validator = new FormValidator('crud', [$codigo_js], 
-                 function(errors, events) {
-                    if (errors.length > 0) {
-                       salida = errors.join(".'"\n"'.");
-                       alert(salida);
-                       }
-                    }
-                  );
-              $men
-              ";
-
-         } else {
-
-            $codigo_js = "
-              var validator_".$this->DefineTableName()." = new FormValidator('crud', [$codigo_js], 
-                 function(errors, events) {
-                    if (errors.length > 0) {
-                       salida = errors.join(".'"\n"'.");
-                       alert(salida);
-                       }
-                    }
-                  );
-              ";
-
-            }
-         $this->codigo_js .= $codigo_js;
          }
 
       }
@@ -1203,6 +1179,21 @@ class Crud extends DataBoundObject {
                }
             }
 
+         if ( $this->reglas_js ) {
+
+            $reglas_js = trim($this->reglas_js,',');
+            $this->codigo_js = file_get_contents(dirname(__FILE__).'/../js/validate.js')."
+              var validator = new FormValidator('crud', [$reglas_js], 
+                 function(errors, events) {
+                    if (errors.length > 0) {
+                       salida = errors.join(".'"\n"'.");
+                       alert(salida);
+                       }
+                    }
+                  );
+               ".$this->codigo_js;
+            }
+
          if ( $this->codigo_js ) {
             ?>
             <script>
@@ -1333,7 +1324,6 @@ class Crud extends DataBoundObject {
                }
             }
 
-// echo "<pre>" ; print_r($_POST) ; echo "</pre>"; exit(); // DEV  
          
          $solicitud->TestConstraints();
 
@@ -1660,7 +1650,9 @@ class Crud extends DataBoundObject {
 
       // Si tenemos un tipo de campo 'relaciones_varios' presentamos su propio form
       if ( $this->relaciones_varios ) {
+
          foreach ( $this->relaciones_varios as $relacion_varios ) {
+
             list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
             $nombre_clase = ucwords($nombre_tabla);
             $condicion_relacion = "$nombre_campo_relacional = $this->ID";
@@ -1669,23 +1661,35 @@ class Crud extends DataBoundObject {
             // Recorremos identificadores de los registros relacionados existentes
             $ids_relacionados = $rel->find($condicion_relacion, array('id'));
             if ( $ids_relacionados ) {
+
+               echo '<div id="forms_'.$nombre_tabla.'" class="formularios_registros_varios">';
                $conta = 0;
                foreach ( $ids_relacionados as $id_relacionado ) {
-                  //echo "<br>id: ".$id_relacionado['id'];
-                  // $rel = new $nombre_clase($this->objPDO, $id_relacionado[0], 'relacion_varios');
+
                   $rel->ID = $id_relacionado['id'];
                   $rel->tipos_formulario = FALSE;
                   $rel->load();
-                  // echo "<pre>" ; print_r($rel->valores) ; echo "</pre>"; // DEV  
                   $rel->generar_formulario($displayHash, $nombre_campo_relacional, $this, $conta);
-                  $this->codigo_js .= $rel->codigo_js;
                   $conta++;
-                  }
-               }
 
+                  }
+               // Añadimos una más para poder añadir registros nuevos
+               $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+               $rel->generar_formulario(FALSE, $nombre_campo_relacional, $this, $conta);
+               $this->codigo_js .= $rel->codigo_js;
+               $this->reglas_js .= $rel->reglas_js;
+
+               echo '</div>';
+
+               // Añadimos javascript para poder insertar registros nuevos
+               $this->codigo_js .= "
+                  $nombre_tabla = new Administrar_registros_varios('$nombre_tabla',$conta); 
+                  $nombre_tabla.inicia();
+                  ";
+
+               }
             }
          }
-
       }
       
    /**

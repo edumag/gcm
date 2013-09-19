@@ -188,6 +188,8 @@ class Formulario {
     *           - codigo_js:    Cadena con el javascript que queremos que se ejecute al cargarse la pagina.
     * @param $nombre_tabla_relacionada Nombre de la tabla relacionada.
     * @param $contador Contador, nos servira para las tablas relaciones_varias diferenciar entre registros.
+    *        En caso de no tener contador en la plantilla de registros_varios interpretamos que estamos añadiendo
+    *        el formulario de entrada para nuevos registros relacionados.
     */
 
    function genera_formulario($ver = FALSE, $accion = 'insertando', $objeto_padre = FALSE, $nombre_tabla_relacionada=FALSE, $contador=FALSE) {
