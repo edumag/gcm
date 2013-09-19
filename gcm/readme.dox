@@ -1,12 +1,31 @@
 /**
 
 @file readme.dox
-@brief Documentación para gcm
-@page manual Manual
+@brief Documentación para GCM
 @mainpage
 
-- @subpage instalacion
-- @subpage configuracion
-- @subpage crud
+**Presentación**
+
+Librerías y gestor de contenido para la creación de proyectos web.
+
+ 
+*Características*
+
+- Creación de proyectos nuevos fácil y rápidamente.
+- Creación de contenido por secciones
+- Galería de imágenes
+- Sistema de etiquetas (En desarrollo)
+- Sistema de literales y constantes.
+- Multiidioma
+- Todo son módulos, permite activar y desactivar para mantener el proyecto rápido.
+- Librerías propias para por ejemplo hacer CRUDs automáticos.
+
+@image html ejemplo-01.png
+ 
+Descarga: https://github.com/edumag/gcm
+
+Autor: Eduardo Magrané
+
+Licencia: GPL http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
 */

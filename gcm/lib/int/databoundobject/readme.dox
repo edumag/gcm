@@ -2,13 +2,115 @@
 
 @file readme.dox
 @brief CRUD
-@page crud  CRUD automatización de gestión de registros
 
-Crud
-----
+@defgroup crud CRUD
+
+Automatización de la gestión de la base de datos. Creación, modificación y borrado de registros
+
+@{
 
 Con crud se automatiza al máximo la gestión de registros en la base de datos, 
-procurando perder el mínimo de personalización.
+procurando no perder la posibilidad de personalizar.
 
+Un ejemplo de uso:
+
+Una vez definido el modelo co este simple código para podemos gestionar la tabla.
+
+@code
+$condicion_tarea = ( $this->proyectos_id ) ? " t.idProyecto=".$this->proyectos_id : FALSE;
+$tareas = new Tareas($this->pdo);
+$tareas->url_ajax = '&formato=ajax&m=trabajos&a=tareas';
+$tareas->administrar($condicion_tarea);
+@endcode
+
+Este sería un ejemplo del modelo de la tabla.
+
+@code
+
+/**
+ * @class Tareas.php
+ * @brief Modelo para las tareas de la aplicación.
+ * @version 0.1
+ */
+
+class Tareas extends Crud {
+
+   function __construct(PDO $objPDO, $id=NULL) {
+
+      $this->sql_listado = 'SELECT t.id, p.nombre as Proyecto, t.nombre as Nombre, t.fechaInicio as Inicio FROM tareas t LEFT JOIN proyectos p ON p.id=t.idProyecto ';
+
+      $this->plantilla_visualizar = dirname(__FILE__).'/../html/visualizar_tarea.phtml';
+
+      $this->tipos_formulario['idProyecto']['tipo'] = 'relacion';
+      $this->tipos_formulario['idProyecto']['tabla'] = 'proyectos';
+      $this->tipos_formulario['idEstado']['tipo'] = 'relacion';
+      $this->tipos_formulario['idEstado']['tabla'] = 'estados';
+
+      $this->tipos_formulario['euroshora']['privado'] = 1;
+      $this->tipos_formulario['compensacion']['privado'] = 1;
+      $this->tipos_formulario['presupuesto']['privado'] = 1;
+      $this->tipos_formulario['idFactura']['privado'] = 1;
+      $this->tipos_formulario['fechaPagado']['privado'] = 1;
+
+      $this->tipos_formulario['nombre']['peso'] = -10;
+      $this->tipos_formulario['descripcion']['peso'] = -8;
+      $this->tipos_formulario['fechaInicio']['peso'] = 2;
+      $this->tipos_formulario['fechaInicio']['tipo'] = 'fecha';
+      $this->tipos_formulario['fechaFinal']['peso'] = 4;
+      $this->tipos_formulario['fechaFinal']['tipo'] = 'fecha';
+      $this->tipos_formulario['prioridad']['peso'] = 6;
+
+      parent::__construct($objPDO, $id);
+
+      }
+
+   /**
+    * Devolver listao con id y nombre para poder ser utilizado en 
+    * select de formulario
+    *
+    * Si tenemos un proyecto seleccionado, limitamos el select a sus tareas, las
+    * ordenamos por fecha de inicio y limitamos a 20, para no saturar.
+    */
+
+   function listado_para_select() {
+
+      if ( isset($_SESSION['proyecto_id']) ) {
+         $condicion = 'idProyecto = '.$_SESSION['proyecto_id'];
+      } else {
+         $condicion = NULL;
+         }
+
+      $orden = 'id desc';
+
+      return $this->find($condicion,array('id', 'nombre'),$orden);
+
+      }
+
+   final function visualizando_registro() {
+
+      $salida = FALSE;
+
+      $salida .= '<br />Inicio: <b>'.$this->getFechaInicio().'</b>';
+      if ( $this->getFechaFianl() ) $salida .= '<br />Finalizado: <b>'.$this->getFechaFianl().'</b>';
+
+      // Totales para tarea
+
+      $sqlMinTar = "SELECT sum((IF (ti.fechaFinal!='0000-00-00 00:00:00',UNIX_TIMESTAMP(ti.fechaFinal),UNIX_TIMESTAMP(now())) - UNIX_TIMESTAMP(ti.fechaInicio)) / 60)  as minutos FROM tiempos ti, movimientos m, tareas t  WHERE ti.idMovimiento=m.id AND m.idTarea=t.id AND t.id=".$this->ID;
+
+      $tot = new GcmPDO($this->objPDO, $sqlMinTar);
+      $res = $tot->to_array();
+      $minutos = $res[0]['minutos'];
+
+      $salida .= "<br/>Tiempo en tarea: <b>".minutos2tiempo($minutos)."</b>";
+
+      if ( $this->getDescripcion() ) $salida .= Rst2html::convertir($this->getDescripcion());
+
+      return $salida;
+      }
+
+   }
+@endcode
+
+@}
 
 */

@@ -9,7 +9,7 @@
  */
 
 /**
- * @defgroup gcm_api Gestión de contenido MamEdu
+ * @defgroup gcm_api Gestión de Contenido Mamedu
  *
  * Frameworks que nos permite acelerar el proceso de construcción de una aplicación web
  *

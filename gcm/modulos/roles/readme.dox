@@ -8,15 +8,13 @@ posibilidad de modificar cualquier cosa de la administración.
 admin:     Tiene todos los privilegios.
 usuario:   Editar su perfil. (Todos los usuarios que se registran tiene este rol como mínimo)
 
-Archivos::
+Archivos gcm/modulos/roles/::
 
-gcm/modulos/roles/
-
-|-- config
-|   |-- roles
-|   |   |-- editor.php     Acciones del rol editor por defecto
-|   |   `-- usuario.php    Acciones del rol usuario por defecto
-|   `-- usuarios.php       Array con los usuarios con roles
+   config
+   |-- roles
+   |   |-- editor.php     Acciones del rol editor por defecto
+   |   `-- usuario.php    Acciones del rol usuario por defecto
+   `-- usuarios.php       Array con los usuarios con roles
 
 Al crear un nuevo rol se genera su archivo correspondiente en la carpeta del
 proyecto con todos las acciones permitidas. Será necesario editarlo y quitar

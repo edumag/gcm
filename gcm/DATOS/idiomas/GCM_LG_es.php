@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Sep 9 7:58:28 CEST 2013
+// Archivo generado automáticamente por GcmConfig Thu Sep 19 8:04:40 CEST 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -17,6 +17,8 @@ $GCM_LG_es['Módulos']='';
 $GCM_LG_es['admin']='';
 $GCM_LG_es['Configuración de ']='';
 $GCM_LG_es['comentarios']='';
+$GCM_LG_es['Campo obligatorio']='';
+$GCM_LG_es['Longitud máxima']='';
 $GCM_LG_es['contenidos']='';
 $GCM_LG_es['idiomas']='';
 $GCM_LG_es['imagenes']='';
@@ -49,8 +51,8 @@ $GCM_LG_es['Editar ficheros del proyecto']='';
 $GCM_LG_es['Administracion de los diferentes idiomas']='';
 $GCM_LG_es['Configurar proyecto']='';
 $GCM_LG_es['Configuración']='';
-$GCM_LG_es['Editar constantes']='';
 $GCM_LG_es['Editar literales']='';
+$GCM_LG_es['Editar constantes']='';
 $GCM_LG_es['Seguimiento del proyecto']='';
 $GCM_LG_es['Seguimiento']='';
 $GCM_LG_es['Reindexar el contenido']='';
@@ -65,7 +67,7 @@ $GCM_LG_es['Configuración de menu']='';
 $GCM_LG_es['Configuración de metatags']='';
 $GCM_LG_es['Configuración de temas']='';
 $GCM_LG_es['Configuración de ver_registros']='';
-$GCM_LG_es['masmoedu']='';
+$GCM_LG_es['mameduedu']='';
 $GCM_LG_es['Editar información de usuario']='';
 $GCM_LG_es['Cerrar sessión']='';
 $GCM_LG_es['Salir']='';
@@ -89,8 +91,6 @@ $GCM_LG_es['Subir fichero proyecto.css modificado']='';
 $GCM_LG_es['Guardar colores']='';
 $GCM_LG_es['Añadir un color']='';
 $GCM_LG_es['Añadir']='';
-$GCM_LG_es['Campo obligatorio']='';
-$GCM_LG_es['Longitud máxima']='';
 $GCM_LG_es['Filtrar']='';
 $GCM_LG_es['Listado completo de contenido']='';
 $GCM_LG_es['Acciones sobre contenidos']='';
@@ -119,4 +119,5 @@ $GCM_LG_es['de']='';
 $GCM_LG_es['Cancelar']='';
 $GCM_LG_es['Configuración guardada']='';
 $GCM_LG_es['Registro modificado']='';
+$GCM_LG_es['Campo requerido']='';
 ?>

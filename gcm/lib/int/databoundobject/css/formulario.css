@@ -11,3 +11,25 @@ color: red;
 background: white;
 }
 
+.caja_registro {
+   padding: 10px;
+   margin: 10px ;
+   border: 1px solid black;
+   border-radius: 15px 0 0 0; 
+}
+
+.caja_registro_on {
+   background: white;
+}
+
+.caja_registro_off {
+   background: red;
+}
+
+.boton_insertar_registro {
+    background: none repeat scroll 0 0 inactiveborder;
+    border: 1px solid black;
+    border-radius: 5px 5px 5px 5px;
+    padding: 4px;
+    cursor: pointer;
+}

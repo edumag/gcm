@@ -1,4 +1,9 @@
-/*
+/**
+ * @file validate.js
+ * @brief Validación de datos del formulario desde javascript
+ *
+ * @ingroup crud
+ *
  * validate.js 1.0.2
  * Copyright (c) 2011 Rick Harrison, http://rickharrison.me
  * validate.js is open sourced under the MIT license.
@@ -152,17 +157,30 @@
                 var field = this.fields[key] || {},
                     element = this.form[field.name];
 
-                if (element && element !== undefined) {
-                    field.type = element.type;
-                    field.value = element.value;
-                    field.checked = element.checked;
-                }
+                // alert('Elementos: '+element.length);
 
-                /*
-                 * Run through the rules for each field.
-                 */
+                if ( element.length !== undefined ) {
+                   for (var i=0;i<element.length;i++) {
+                      if (element[i] && element[i] !== undefined) {
+                          field.type = element[i].type;
+                          field.value = element[i].value;
+                          field.checked = element[i].checked;
+                      }
 
-                this._validateField(field);
+                      /*
+                       * Run through the rules for each field.
+                       */
+
+                      this._validateField(field);
+                      }
+                } else {
+                   if (element && element !== undefined) {
+                       field.type = element.type;
+                       field.value = element.value;
+                       field.checked = element.checked;
+                   }
+                   this._validateField(field);
+                  }
             }
         }
 
