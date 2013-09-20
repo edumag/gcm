@@ -11,7 +11,7 @@ color: red;
 background: white;
 }
 
-.caja_registro {
+.formularios_registros_varios {
    padding: 10px;
    margin: 10px ;
    border: 1px solid black;
@@ -32,4 +32,8 @@ background: white;
     border-radius: 5px 5px 5px 5px;
     padding: 4px;
     cursor: pointer;
+}
+
+.formularios_registros_varios > p {
+    margin: 16px 0 8px;
 }
