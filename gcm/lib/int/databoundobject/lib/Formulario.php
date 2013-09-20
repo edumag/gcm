@@ -25,6 +25,12 @@
  *
  * El peso especificado en un campo nos permite controlar el orden de presentación
  *
+ * Opciones:
+ *
+ * - tipo: text, 
+ * - ['oculto_form'] = 1 No se muestra.
+ * - ['ignorar'] = 1 Se ignora al presentar en formulario 
+ *
  * Debe:
  * 
  * - Recibir un array con los campos del formulario y sus especificaciones, ejemplo:
@@ -144,8 +150,8 @@ class Formulario {
       $this->campos        = $campos;
       $this->displayHash   = $displayHash;
 
-      $this->plantilla = dirname(__FILE__).'/../html/form_registro.phtml';
-      $this->plantilla_visualizar = dirname(__FILE__).'/../html/registro.phtml';
+      $this->plantilla = dirname(__FILE__).'/../html/registro_editar.phtml';
+      $this->plantilla_visualizar = dirname(__FILE__).'/../html/registro_visualizar.phtml';
 
       // Ordenamos campos por su peso
       uasort($this->campos, 'ordenar_por_peso');
