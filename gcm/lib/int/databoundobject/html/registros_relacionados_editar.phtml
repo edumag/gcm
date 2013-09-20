@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file form_registro.phtm
+ * @file registros_relacionados_editar.phtm
  * @brief Generamos formulario según tipo de campo
  * @ingroup crud
  */
@@ -34,6 +34,8 @@ $dir_codigo_admin_varios    = '../'.GCM_DIR.'lib/int/databoundobject/js/';
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
    <input type="hidden" name="<?php echo $nombre_tabla_relacionada; ?>_<?=$campo?>[]" value="<?=$this->valores($campo,$nombre_tabla_relacionada,$contador)?>" /> 
    <?php continue; } ?>
+
+   <?php if ( isset($this->campos[$campo]['ignorar']) && $this->campos[$campo]['ignorar'] == 1 ) continue; ?>
 
    <?php if ( $relacion != 'ID' && $campo != "fecha_creacion" && $campo != "fecha_modificacion"  ) { ?>   
 

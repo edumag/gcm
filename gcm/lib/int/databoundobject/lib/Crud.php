@@ -41,7 +41,6 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
  *
- * @todo Borrado de un registro debe borrar los relacionados
  */
 
 class Crud extends DataBoundObject {
@@ -98,14 +97,14 @@ class Crud extends DataBoundObject {
 
    /**
     * Podemos definir una plantilla personalizada para editar los registros, tener en
-    * cuenta qudebe basarse en la plantilla por defecto 'form_registro.phtml'
+    * cuenta qudebe basarse en la plantilla por defecto 'registro_editar.phtml'
     */
 
    public $plantilla_editar = FALSE;
 
    /**
     * Podemos definir una plantilla personalizada para editar los registros, tener en
-    * cuenta qudebe basarse en la plantilla por defecto 'form_registros_relacionados.phtml'
+    * cuenta qudebe basarse en la plantilla por defecto 'registros_relacionados_editar.phtml'
     */
 
    public $plantilla_relacion_varios = FALSE;
@@ -646,7 +645,7 @@ class Crud extends DataBoundObject {
 
             }
 
-      } else {
+      } else { // Para mysql
 
          if ( isset($this->tipos_formulario[$row['Field']]['tipo']) ) return ;
 
@@ -774,7 +773,6 @@ class Crud extends DataBoundObject {
     * campo[tipo restriccion][valor]
     *
     * @todo Los casos que estan comentados hay que buscar la manera de implementarlos
-    * @todo Aplicar pass_md5
     */
 
    function mensajes_automaticos() {
@@ -901,55 +899,55 @@ class Crud extends DataBoundObject {
                switch ($restriccion) {
 
                case RT_MAIL:
-                  $this->codigo_js.= "validator.setMessage('valid_email', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('valid_email', '%s $mensaje');";
                   break;
 
                case RT_LONG_MIN:
-                  $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
                   break;
 
                case RT_LONG_MAX:
-                  $this->codigo_js.= "validator.setMessage('max_length', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('max_length', '%s $mensaje');";
                   break;
 
                // case RT_CARACTERES_PERMITIDOS:
-               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                // case RT_CARACTERES_NO_PERMITIDOS:
-               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                case RT_MENOR_QUE:
-                  $this->codigo_js.= "validator.setMessage('greater_than', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('greater_than', '%s $mensaje');";
                   break;
 
                case RT_MAYOR_QUE:
-                  $this->codigo_js.= "validator.setMessage('less_than', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('less_than', '%s $mensaje');";
                   break;
 
                case RT_IGUAL_QUE:
-                  $this->codigo_js.= "validator.setMessage('matches', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('matches', '%s $mensaje');";
                   break;
 
                // case RT_NO_IGUAL:
-               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                // case RT_PASA_EXPRESION_REGULAR:
-               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                // case RT_NO_PASA_EXPRESION_REGULAR:
-               //    $this->codigo_js.= "validator.setMessage('min_length', '%s $mensaje');";
+               //    $this->codigo_js.= "\nvalidator.setMessage('min_length', '%s $mensaje');";
                //    break;
 
                case RT_NO_ES_NUMERO:
-                  $this->codigo_js.= "validator.setMessage('numeric', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('numeric', '%s $mensaje');";
                   break;
 
                case RT_REQUERIDO:
-                  $this->codigo_js.= "validator.setMessage('required', '%s $mensaje');";
+                  $this->codigo_js.= "\nvalidator.setMessage('required', '%s $mensaje');";
                   break;
 
                   }
@@ -1004,7 +1002,6 @@ class Crud extends DataBoundObject {
       if ( $salida ) { 
 
          echo $salida;
-         $this->visualizar_registros_relacionados();
 
          return;
          }
@@ -1079,8 +1076,12 @@ class Crud extends DataBoundObject {
 
          // Si la tenemos nombre_campo_relacional lo ocultamos.
          if ( $campo == $nombre_campo_relacional ) {
-            $this->tipos_formulario[$campo]['valor'] = $modelo_padre->ID;
-            $this->tipos_formulario[$campo]['oculto_form'] = 1;
+            if ( isset($modelo_padre->ID) ) {
+               $this->tipos_formulario[$campo]['valor'] = $modelo_padre->ID;
+               $this->tipos_formulario[$campo]['oculto_form'] = 1;
+            } else {
+               $this->tipos_formulario[$campo]['ignorar'] = 1;
+               }
             }
 
          // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
@@ -1108,7 +1109,7 @@ class Crud extends DataBoundObject {
 
       $form = new Formulario($this->tipos_formulario, $displayHash);
 
-      // Si es una tabla de tipo 'relacion_varios' cargamos plantilla form_registros_relacion_varios.phtml
+      // Si es una tabla de tipo 'relacion_varios' cargamos plantilla registros_relacionados_editar.phtml
       // y en caso de tener una definida en el modelo la cogemos.
 
       if ( $this->tipo_tabla == 'relacion_varios' ) {
@@ -1116,7 +1117,7 @@ class Crud extends DataBoundObject {
          if ( $this->plantilla_relacion_varios ) {
             $form->plantilla = $this->plantilla_relacion_varios;
          } else {
-            $form->plantilla = dirname(__FILE__).'/../html/form_registros_relacionados.phtml';
+            $form->plantilla = dirname(__FILE__).'/../html/registros_relacionados_editar.phtml';
             }
 
       } else {
@@ -1312,9 +1313,14 @@ class Crud extends DataBoundObject {
                $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
 
                if ( isset($rel->restricciones) && ! empty($rel->restricciones) ) {
+                  $conta=0;
                   foreach ( $rel->restricciones() as $campo => $restriccion ) {
                      foreach ( $restriccion as $tipo => $valor ) {
                         $restricciones[$conta] = new Restricciones($tipo, $valor);
+                        // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
+                        // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
+                        // estar vacio.
+                        if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
                         $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
                         $conta++;
                         }
@@ -1383,8 +1389,8 @@ class Crud extends DataBoundObject {
                            }
 
                         // Guardar registros relacionado
-                        $nombre_identificador = array_search('ID',$rel->arRelationMap);
-                        $numero_registros_formulario = count($resultado[$rel->DefineTableName().'_'.$rel->DefineTableName().'_'.$nombre_identificador]);
+
+                        $numero_registros_formulario = 20; // Ponemos un limite pero al darse cuenta que no hay datos parara
                         for ( $index = 0 ; $index < $numero_registros_formulario ; $index++ ) {
 
                            // Comprobar que no este marcado para eliminar
@@ -1392,7 +1398,13 @@ class Crud extends DataBoundObject {
                            if ( isset($resultado[$nombre_campo_eliminar]) ) continue; 
 
                            $nueva_relacion = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
-                           $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index);
+                           if ( ! $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index) ) break ;
+
+                           // Si estamos insertando faltara añadir el identificador del registro padre a los valores
+                           // de los registros relacionados.
+                           if ( $this->accion == 'insertando' ) {
+                              $nueva_relacion->SetAccessor(ucwords($nombre_campo_relacional),$this->ID);
+                              } 
                            $nueva_relacion->save();
                         
                            }
@@ -1482,8 +1494,30 @@ class Crud extends DataBoundObject {
          $this->MarkForDeletion();
          $this->__destruct();
 
+         if ( $this->relaciones_varios ) {
+
+            foreach ( $this->relaciones_varios as $relacion_varios ) {
+               list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
+               $nombre_clase = ucwords($nombre_tabla);
+               $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+               $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+
+               // Recorremos identificadores de los registros relacionados existentes
+               $ids_relacionados = $rel->find($condicion_relacion, array('id'));
+               if ( $ids_relacionados ) {
+                  foreach ( $ids_relacionados as $id_relacionado ) {
+                     //echo "<br>id: ".$id_relacionado['id'];
+                     $rel = new $nombre_clase($this->objPDO, $id_relacionado['id']);
+                     $rel->MarkForDeletion();
+                     }
+                  }
+              }
+            }
+
+
+
          registrar(__FILE__,__LINE__,"Registro eliminado",'AVISO');
-         header("Location: ".$_SERVER['REDIRECT_URL']);
+         header("Location: ".$_SERVER['PHP_SELF']);
          exit(0);
 
       } elseif ( $this->accion == 'editar' ) {
@@ -1658,12 +1692,16 @@ class Crud extends DataBoundObject {
             $condicion_relacion = "$nombre_campo_relacional = $this->ID";
             $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
 
+            ?>
+            <fieldset id="forms_<?php echo $nombre_tabla ?>" class="formularios_registros_varios">
+            <legend  accesskey="r"><?php echo literal($nombre_clase) ?></legend>
+
+            <?php
             // Recorremos identificadores de los registros relacionados existentes
             $ids_relacionados = $rel->find($condicion_relacion, array('id'));
+            $conta = 0;
             if ( $ids_relacionados ) {
 
-               echo '<div id="forms_'.$nombre_tabla.'" class="formularios_registros_varios">';
-               $conta = 0;
                foreach ( $ids_relacionados as $id_relacionado ) {
 
                   $rel->ID = $id_relacionado['id'];
@@ -1673,21 +1711,24 @@ class Crud extends DataBoundObject {
                   $conta++;
 
                   }
-               // Añadimos una más para poder añadir registros nuevos
-               $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
-               $rel->generar_formulario(FALSE, $nombre_campo_relacional, $this, $conta);
-               $this->codigo_js .= $rel->codigo_js;
-               $this->reglas_js .= $rel->reglas_js;
-
-               echo '</div>';
-
-               // Añadimos javascript para poder insertar registros nuevos
-               $this->codigo_js .= "
-                  $nombre_tabla = new Administrar_registros_varios('$nombre_tabla',$conta); 
-                  $nombre_tabla.inicia();
-                  ";
-
                }
+
+            // Añadimos una más para poder añadir registros nuevos
+            $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+            $rel->generar_formulario(FALSE, $nombre_campo_relacional, $this, $conta);
+            $this->codigo_js .= $rel->codigo_js;
+            $this->reglas_js .= $rel->reglas_js;
+
+            ?>
+            </fieldset>
+            <?php
+
+            // Añadimos javascript para poder insertar registros nuevos
+            $this->codigo_js .= "
+               $nombre_tabla = new Administrar_registros_varios('$nombre_tabla',$conta); 
+               $nombre_tabla.inicia();
+               ";
+
             }
          }
       }
@@ -1704,9 +1745,15 @@ class Crud extends DataBoundObject {
 
    function recoger_valores_formulario($modelo, $resultado, $numero_registro = FALSE) {
 
+      // Retornamos T/F para conocer si hay valores o no
+
+      $hay_valores = FALSE;
+
       foreach ( $modelo->arRelationMap as $campo => $rCampo ) {
 
          $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->DefineTableName().'_'.$campo][$numero_registro] : $resultado[$campo];
+
+         if ( ! empty($valor) && $valor ) $hay_valores = TRUE;
 
          // echo "<pre>" ; print_r($numero_registro.' '.$rCampo.':'.$valor) ; echo "</pre>"; // DEV  
 
@@ -1746,6 +1793,27 @@ class Crud extends DataBoundObject {
             }
 
          }
+
+      return $hay_valores;
+
+      }
+
+   /**
+    * Devolvemos array con los registros relacionados 
+    *
+    * @param $relacion Cadena que contiene la tabla relacionada y el campo (tabla.campo)
+    * @param $campos   Array con los campos que se quieres recuperar
+    * @param $orden    Orden para la SQL
+    */
+
+   function get_registros_relacion_varios($relacion, $campos=NULL, $orden=NULL) {
+
+      list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion); 
+      $nombre_clase = ucwords($nombre_tabla);
+      $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+      $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
+      $relacionados = $rel->find($condicion_relacion,$campos, $orden);
+      return $relacionados;
 
       }
 
