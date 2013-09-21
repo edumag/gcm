@@ -6,6 +6,8 @@
  * @ingroup crud
  */
 
+require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
+
 /** Saber si tenemos que cargar el código para el tratamiento de fechas */
 
 $cargar_codigo_fechas_horas = FALSE;
@@ -24,13 +26,13 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    <?php  // echo "CAMPOS: <pre>" ; print_r($this->campos) ; echo "</pre>"; // DEV  ?>
 
    <?php if ( isset($this->ID) ) { ?>
-   <input type="hidden" name="id" value="<?=$this->ID?>" /> 
+   <?php echo HTML::form_hidden('id',$this->ID); ?>
    <?php } ?>
 
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
-   <input type="hidden" name="<?=$campo?>" value="<?=$this->valores($campo)?>" /> 
+   <?php echo HTML::form_hidden($campo,$this->valores($campo)); ?>
    <?php continue; } ?>
 
    <?php if ( $relacion != 'ID' && $campo != "fecha_creacion" && $campo != "fecha_modificacion"  ) { ?>   
@@ -59,6 +61,8 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion_varios'  ) { ?>
 
    <?php // Tenemos definido un campo que hace referencia a una tabla externa con relaciones multiples ?>
+
+   <?php echo "<pre>" ; print_r($this->campos[$campo]) ; echo "</pre>"; // DEV   ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
    

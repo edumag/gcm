@@ -350,6 +350,26 @@ class Crud extends DataBoundObject {
 
    public $relaciones_varios = FALSE;
 
+   /**
+    * Relaciones con tablas combinatorias
+    *
+    * Ejemplo: 
+    *
+    * <pre>
+    * $this->combinar_tablas[]   =  'tv_autors.id=tv_rel_autors.autors_id,tv_id';
+    * </pre>
+    *
+    * tv_autors.id:             Tabla con la información que nos interesa relacionar con el campo que lo indexa
+    * tv_rel_autors.autors_id:  Tabla combinatoria con el campo que contiene el identificador del autor
+    * tv_id:                    Campo dentro de la tabla combinatoria que contiene el identificador de la tabla padre. 
+    *
+    * Todas las tablas afectadas deben estar instanciadas desde los modelos como una extensión de Crud.
+    *
+    * @todo Implementar gestión de tablas combinatorias
+    */
+
+   public $combinar_tablas = FALSE;
+
    /** 
     * Constructor
     */
