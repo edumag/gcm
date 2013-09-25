@@ -37,3 +37,17 @@ background: white;
 .formularios_registros_varios > p {
     margin: 16px 0 8px;
 }
+
+.posibles_registros ul {
+    display: inline-block;
+    padding: 26px;
+}
+.posibles_registros li {
+    display: inline;
+}
+.posibles_registros a {
+    background: none repeat scroll 0 0 whitesmoke;
+    border-radius: 5px 5px 5px 5px;
+    margin: 4px;
+    padding: 1px;
+}

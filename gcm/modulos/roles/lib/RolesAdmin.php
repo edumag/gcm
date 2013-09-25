@@ -77,7 +77,7 @@ class RolesAdmin extends Roles {
          <?php
          }
 
-      require_once(GCM_DIR.'lib/int/html/lib/html.php');
+      require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
 
       $gcm->event->anular('contenido','roles');
       $gcm->event->unico('titulo','roles');
@@ -158,7 +158,7 @@ class RolesAdmin extends Roles {
       <fieldset>
       <legend  accesskey="a">Añadir un nuevo rol</legend>
       <br />
-      <?php echo HTML::form_text('nuevo_rol', array('placeholder' => 'Texto sin espacios', 'pattern' => '[A-Za-z]{4,15}', 'required' )); ?>
+      <?php echo HTML::form_text('nuevo_rol', FALSE, array('placeholder' => 'Texto sin espacios', 'pattern' => '[A-Za-z]{4,15}', 'required' )); ?>
       <button type="submit">Enviar </button>
       </fieldset>
       </form>
@@ -203,7 +203,7 @@ class RolesAdmin extends Roles {
    
          }
 
-      require_once(GCM_DIR.'lib/int/html/lib/html.php');
+      require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
 
       if ( file_exists($archivo) ) {
          $contenido = file_get_contents($archivo);
@@ -215,7 +215,7 @@ class RolesAdmin extends Roles {
       <form action="" method="POST">
       <fieldset>
       <legend  accesskey="r">Adjudicar roles a usuarios</legend>
-      <?php echo HTML::form_text('contenido_usuarios', array('valor' => $contenido, 'maxlength' => 2000 , 'required' )); ?>
+      <?php echo HTML::form_text('contenido_usuarios', $contenido, array('maxlength' => 2000 , 'required' )); ?>
       <input name="usuarios_roles" type="submit" value="Enviar" />
       </fieldset>
       </form>

@@ -6,6 +6,8 @@
  * @ingroup crud
  */
 
+require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
+
 /** Saber si tenemos que cargar el código para el tratamiento de fechas */
 
 $cargar_codigo_fechas_horas = FALSE;
@@ -24,13 +26,13 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    <?php  // echo "CAMPOS: <pre>" ; print_r($this->campos) ; echo "</pre>"; // DEV  ?>
 
    <?php if ( isset($this->ID) ) { ?>
-   <input type="hidden" name="id" value="<?=$this->ID?>" /> 
+   <?php echo HTML::form_hidden('id',$this->ID); ?>
    <?php } ?>
 
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
-   <input type="hidden" name="<?=$campo?>" value="<?=$this->valores($campo)?>" /> 
+   <?php echo HTML::form_hidden($campo,$this->valores($campo)); ?>
    <?php continue; } ?>
 
    <?php if ( $relacion != 'ID' && $campo != "fecha_creacion" && $campo != "fecha_modificacion"  ) { ?>   
@@ -40,63 +42,62 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
       <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>
-      <select name="<?=$campo?>">
-         <option><?=literal('Seleccionar')?></option>
-         <option></option>
-         <?php foreach ( $this->campos[$campo]['opciones'] as $res) { ?>
-            <?php $count=0; ?>
-            <?php foreach ( $res as $contenido ) { ?>
-            <?php if ( $count == 0 ) $identificador = $contenido; ?>
-            <?php if ( $count == 1 ) $nombre = $contenido; ?>
-            <?php $count++; ?>
-            <?php } ?>
-            <option value="<?=$identificador?>"<?php if ( $identificador == $this->valores($campo) ) echo ' selected' ;?>>
-            <?php echo $nombre; ?>
-            </option>
-         <?php } ?>
-      </select>
+
+      <?php echo HTML::form_select($campo, $this->campos[$campo]['opciones'],$this->valores($campo),literal('Seleccionar')); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion_varios'  ) { ?>
 
    <?php // Tenemos definido un campo que hace referencia a una tabla externa con relaciones multiples ?>
 
+   <?php echo "<pre>" ; print_r($this->campos[$campo]) ; echo "</pre>"; // DEV   ?>
+
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
    
    <?php $cargar_codigo_fechas[] = $campo; ?>
+
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
-   <input name="<?=$campo?>" id="<?=$campo?>" type="text" value="<?php echo$this->valores($campo)?>"/>
+   <?php echo HTML::form_text($campo,$this->valores($campo)); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
    <?php $cargar_codigo_fechas_horas[] = $campo; ?>
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
-   <input name="<?=$campo?>"  type="text" value="<?php if ( $this->valores($campo) ) { echo strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))); } else { echo strftime("%Y-%m-%d %H:%M"); } ?>"/>
+   <?php $valor = ( $this->valores($campo) ) 
+               ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))) 
+               : strftime("%Y-%m-%d %H:%M"); ?>
+   
+   <?php echo HTML::form_text($campo,$valor); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
    
    <div class="caja_campo_titulo"><?=literal('contraseña')?>: </div>
-   <input name="<?=$campo?>"  type="password" value=""/>
+   <?php echo HTML::form_pass($campo); ?>
    </div>
    <div class="caja_campo" id="caja_campo_verificacion">
    <div class="caja_campo_titulo"><?=literal('verificación')?>: </div>
-   <input name="verificacion"  type="password" value=""/>
+   <?php echo HTML::form_pass('verificacion'); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
 
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
-   <textarea rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
+
+   <?php echo HTML::form_text($campo
+         ,$this->valores($campo)
+         ,array('rows'=>$this->campos[$campo]['rows'],'cols'=>$this->campos[$campo]['cols'])
+         ,0); 
+   ?>
 
    <?php } else { ?>
 
+   <?php $atr = FALSE ; ?>
+   <?php if ( isset($this->campos[$campo]['maxlength']) ) $atr['maxlength'] = $this->campos[$campo]['maxlength'] ; ?>
+   <?php if ( isset($this->campos[$campo]['size']) ) $atr['size'] = $this->campos[$campo]['size'] ; ?>
+
    <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
-   <input name="<?=$campo?>" 
-      <?php if ( isset($this->campos[$campo]['maxlength']) ) { ?>
-      maxlength="<?=$this->campos[$campo]['maxlength']?>" 
-      <?php } ?>
-      <?php if ( isset($this->campos[$campo]['size']) ) { ?>
-      size="<?=$this->campos[$campo]['size']?>" 
-      <?php } ?>
-      type="text" value="<?=$this->valores($campo)?>"/>
+   <?php echo HTML::form_text($campo
+         ,$this->valores($campo)
+         ,$atr); 
+   ?>
 
    <?php } ?>
 
@@ -119,7 +120,7 @@ if ( $objeto_padre ) {
 if ( $cargar_codigo_fechas_horas ) {
 
    $objeto_padre->ficheros_css["jquery.simple-dtpicker.css"] = $dir_codigo_fechas_horas."jquery.simple-dtpicker.css";
-   $objeto_padre->librerias_js["jquery.simple-dtpicker.js"] = $dir_codigo_fechas_horas."jquery.simple-dtpicker.js";
+   $objeto_padre->codigo_js .= file_get_contents(dirname(__FILE__).'/../ext/mugifly-jquery-simple-datetimepicker/jquery.simple-dtpicker.js');
 
 
    foreach ( $cargar_codigo_fechas_horas as $campo_fecha ) {
