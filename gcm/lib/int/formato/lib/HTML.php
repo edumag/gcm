@@ -28,11 +28,13 @@ class HTML {
     * @param $atributos Array con la lista de los atributos y sus valores.
     */
 
-   static function get_atributos($atributos) {
+   static function get_atributos($atributos=FALSE) {
 
       $salida = FALSE;
 
-      foreach ( $atr as $atributo => $valor ) {
+      if ( ! $atributos ) return FALSE;
+
+      foreach ( $atributos as $atributo => $valor ) {
 
          if ( $atributo == 'required' ) {
             $salida .= ' required';
@@ -55,7 +57,8 @@ class HTML {
     * @param $valor  Valor
     * @param $atr    Atributos para el input o textarea
     * @param $limite Si el atributo maxlength sobrepasa este limite presentamos
-    *        un textarea en vez de un input text
+    *        un textarea en vez de un input text, puede definirse como 0 para
+    *        generar un textarea sin limite
     */
 
    static function form_text($name, $valor=FALSE, $atr=FALSE, $limite=150) {
@@ -63,7 +66,7 @@ class HTML {
       $maxlength = ( isset($atr['maxlength']) ) ? $atr['maxlength'] : FALSE ;
       $size = ( isset($atr['size']) ) ? $atr['size'] : FALSE ;
 
-      $textarea = ( $maxlength && $maxlength > 150 ) ? TRUE : FALSE ;
+      $textarea = ( $limite == 0 || ( $maxlength && $maxlength > $limite ) ) ? TRUE : FALSE ;
 
       $salida = '';
 
@@ -78,7 +81,7 @@ class HTML {
 
       // Atributos
 
-      echo self::get_atributos($atr);
+      $salida .= self::get_atributos($atr);
 
       if ( $textarea ) { // textarea
 
@@ -106,7 +109,66 @@ class HTML {
 
    static function form_hidden($nombre, $valor=FALSE, $atributos=FALSE) {
 
-      return '<input type="hidden" name="'.self::esc_atr($nombre).'" value="'.self::esc_atr($valor).'" />';
+      return '<input type="hidden" name="'.self::esc_atr($nombre).'" value="'.self::esc_atr($valor).'" '.self::get_atributos($atributos).' />';
+
+      }
+
+   /**
+    * Campo password
+    */
+
+   static function form_pass($nombre, $valor=FALSE, $atributos=FALSE) {
+
+      return '<input type="password" name="'.self::esc_atr($nombre).'" value="'.self::esc_atr($valor).'" '.self::get_atributos($atributos).' />';
+
+      }
+
+   /**
+    * Devolvemos cadena con el select construido
+    *
+    * @param $nombre Nombre para el select
+    * @param $opciones Array con las opciones cada una con un array identificador y valor
+    * @param $valor_seleccionado Valor establecido
+    * @param $primera_opcion Por si deseamos añadir un texto en el select como primera opción
+    * @param $readonly Solo lectura
+    */
+
+   static function form_select($nombre, $opciones, $valor_seleccionado=FALSE, $primera_opcion=FALSE, $readonly = FALSE) {
+
+      $disabled = ( $readonly ) ? 'disabled' : '' ;
+
+      $salida = '
+         <select name="'.$nombre.'" id="'.$nombre.'" '.$disabled.'>
+         ';
+
+      if ( $primera_opcion ) {
+         $salida .= '
+            <option>'.$primera_opcion.'</option>
+            <option></option>
+            ';
+         }
+
+      foreach ( $opciones as $res) {
+         $count=0;
+         foreach ( $res as $contenido ) {
+            if ( $count == 0 ) $identificador = $contenido;
+            if ( $count == 1 ) $nombre = $contenido;
+            $count++;
+            }
+
+         $salida .= '
+            <option value="'.$identificador.'" 
+            ';
+
+         if ( $identificador == $valor_seleccionado ) $salida .= ' selected ';
+
+         $salida .= '>'.$nombre.'</option>';
+
+         }
+
+      $salida .= '</select>';
+
+      return $salida;
 
       }
 
@@ -281,7 +343,5 @@ class HTML {
       }
 
    }
-
-
 
 ?>

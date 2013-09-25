@@ -57,6 +57,7 @@ class Crud extends DataBoundObject {
     * - normal, por defecto.
     * - combinatoria
     * - relacion_varios
+    * - relacion_externa
     *
     * Podemos definir el tipo de tabla al instanciarla, para poder controlar su comportamiento
     * desde la tabla padre.
@@ -71,6 +72,12 @@ class Crud extends DataBoundObject {
     * 
     * Son las tablas que contienes registros varios relacionados con la tabla padre ( 1,* ), 
     * un registro de la tabla padre puede estar relacionado con varios registros de esta.
+    * 
+    * relacion_externa
+    * ----------------
+    * 
+    * Son las tablas que contienes registros varios relacionados con la tabla padre ( *,* ), 
+    * la relación esta definida en la tabla combinatoria.
     * 
     * combinatoria
     * ------------
@@ -108,6 +115,13 @@ class Crud extends DataBoundObject {
     */
 
    public $plantilla_relacion_varios = FALSE;
+
+   /**
+    * Podemos definir una plantilla personalizada para editar los registros, tener en
+    * cuenta qudebe basarse en la plantilla por defecto 'registros_combinados_editar.phtml'
+    */
+
+   public $plantilla_relacion_externa = FALSE;
 
    /**
     * Definimos la url del formulario al que se debe volver en caso de errpres,
@@ -365,7 +379,8 @@ class Crud extends DataBoundObject {
     *
     * Todas las tablas afectadas deben estar instanciadas desde los modelos como una extensión de Crud.
     *
-    * @todo Implementar gestión de tablas combinatorias
+    * @todo Validación en tablas combinatorias
+    * @todo Mejorar selección de registros combinatorios
     */
 
    public $combinar_tablas = FALSE;
@@ -382,22 +397,6 @@ class Crud extends DataBoundObject {
 
       parent::__construct($objPdo, $id);
  
-      // Para tamblas combinatorias, relacionar los indices con sus tablas
-
-      if ( $this->tipo_tabla == 'combinatoria' ) {
-
-         foreach ( $this->campos_indices as $indice ) {
-            if ( ! isset($this->tipos_formulario[$indice]) ) {
-               $this->tipos_formulario[$indice]['tipo'] = "relacion";
-               $this->tipos_formulario[$indice]['tabla'] = str_replace($this->id_relacion,'',$indice);
-               $modelo_relacionado = ucfirst($this->tipos_formulario[$indice]['tabla']);
-               $id_relacionado = FALSE; // @todo Añadir valor
-               $relacion = new $modelo_relacionado($this->objPDO,$id_relacionado);
-               $this->tipos_formulario[$indice]['opciones'] = $relacion->listado_para_select();
-               }
-            }
-         }
-
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
 
@@ -431,6 +430,11 @@ class Crud extends DataBoundObject {
     * Relación entre campos de la tabla y variables a utilizar en el dominio, a la vez
     * aprovechamos para ver los tipos de campo y definirlos junto con los 
     * tipos_formulario
+    *
+    * Si definimos los campos desde el modelo tener en cuenta que:
+    *
+    * Si es una tabla combinatoria con dos indices el primer indice debe corresponder al 
+    * que relaciona la tabla con el contenido y el segundo el que relaciona la tabla padre.
     */
 
    function DefineRelationMap($objPDO) {
@@ -798,12 +802,12 @@ class Crud extends DataBoundObject {
    function mensajes_automaticos() {
 
       /** 
-       * En caso de relacion_varios añadimos corchetes a los nombres de los campos 
+       * En caso de relaciones varios o externas añadimos corchetes a los nombres de los campos 
        * para que funcionen las validaciones.
        */
 
-      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_varios' ) ? $this->DefineTableName().'_' : '' ;
-      $sufijo_names_js = ( $this->tipo_tabla == 'relacion_varios' ) ? '[]' : '' ;
+      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->DefineTableName().'_' : '' ;
+      $sufijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? '[]' : '' ;
 
       if ( isset($this->restricciones) ) {
 
@@ -1140,6 +1144,16 @@ class Crud extends DataBoundObject {
             $form->plantilla = dirname(__FILE__).'/../html/registros_relacionados_editar.phtml';
             }
 
+      // Si es una tabla de tipo relacion_externa
+
+      } elseif ( $this->tipo_tabla == 'relacion_externa' ) {
+
+         if ( $this->plantilla_relacion_externa ) {
+            $form->plantilla = $this->plantilla_relacion_externa;
+         } else {
+            $form->plantilla = dirname(__FILE__).'/../html/registros_combinados_editar.phtml';
+            }
+
       } else {
 
          // Si tenemos plantilla desde el modelo se la pasamos a Formulario
@@ -1152,7 +1166,7 @@ class Crud extends DataBoundObject {
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
-         <form name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
+         <form id="crud" name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
          <?php
          }
 
@@ -1163,6 +1177,8 @@ class Crud extends DataBoundObject {
          }
 
       $this->formulario_registros_relacionados($displayHash);
+
+      $this->formulario_registros_combinados($displayHash);
 
       if ( $this->galeria ) $this->galeria->inicia();
 
@@ -1350,6 +1366,55 @@ class Crud extends DataBoundObject {
                }
             }
 
+         // Si tenemos registros combinados de otras tablas tenemos que comprobar
+         // sus restricciones teniendo en cuenta que llegan como arrays del formularios
+
+         if ( $this->combinar_tablas ) {
+
+            foreach ( $this->combinar_tablas as $combinados ) {
+
+               list(
+                  $tabla_contenido   
+                  ,$campo_contenido   
+                  ,$tabla_combinatoria
+                  ,$campo_combinatoria
+                  ,$campo_relacion    
+                  ) = explode(',',$combinados); 
+
+               $clase_contenido    = ucwords($tabla_contenido);
+               $clase_combinatoria = ucwords($tabla_combinatoria);
+               $condicion_combinatoria = "$campo_relacion = $this->ID";
+               $rel = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
+               $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
+
+               if ( $ids_relacionados ) {
+
+                  foreach ( $ids_relacionados as $id_relacionado ) {
+
+                     $id = $id_relacionado[$campo_combinatoria];
+                     $condicion_contenido = "$campo_contenido = ".$id.' ';
+
+                     $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
+
+                     if ( isset($rel_contenido->restricciones) && ! empty($rel_contenido->restricciones) ) {
+                        $conta=0;
+                        foreach ( $rel_contenido->restricciones() as $campo => $restriccion ) {
+                           foreach ( $restriccion as $tipo => $valor ) {
+                              $restricciones[$conta] = new Restricciones($tipo, $valor);
+                              // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
+                              // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
+                              // estar vacio.
+                              if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
+                              $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                              $conta++;
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+
          
          $solicitud->TestConstraints();
 
@@ -1427,6 +1492,90 @@ class Crud extends DataBoundObject {
                               } 
                            $nueva_relacion->save();
                         
+                           }
+                        }
+                     }
+
+                  // Si tenemos registros combinados de otras tablas hay que guardarlos tambien
+                  // Primero borramos los que ya existan relacionados al registro padre
+                  // Despues añadimos teniendo en cuenta que vendran en forma de arrays y con el
+                  // nombre de la tabla como prefijo.
+
+                  if ( $this->combinar_tablas ) {
+
+                     foreach ( $this->combinar_tablas as $combinatoria ) {
+
+                        list(
+                           $tabla_contenido   
+                           ,$campo_contenido   
+                           ,$tabla_combinatoria
+                           ,$campo_combinatoria
+                           ,$campo_relacion    
+                           ) = explode(',',$combinatoria); 
+
+                        $clase_contenido    = ucwords($tabla_contenido);
+                        $clase_combinatoria = ucwords($tabla_combinatoria);
+                        $condicion_combinatoria = "$campo_relacion = $this->ID";
+                        $rel = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
+                        $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria,$campo_relacion));
+
+                        if ( $ids_relacionados ) {
+
+                           foreach ( $ids_relacionados as $id_relacionado ) {
+
+                              $id = $id_relacionado[$campo_combinatoria];
+                              $rel_combinatoria = new $clase_combinatoria($this->objPDO, "$id,".$this->ID, 'combinatoria');
+                              $rel_combinatoria->MarkForDeletion();
+                              unset($rel_combinatoria);
+                              }
+
+                           }
+
+                        // Vamos añadiendo los id de la tabla con el contenido que añadimos para poder
+                        // finalmente añadirlos a la tabla combinatoria
+
+                        $identificadores_contenido_insertados = FALSE;
+
+                        // Guardamos registros nuevos en tabla contenido si los hay y añadirlos
+                        // a la lista de ids relacionados para añadirlos en la tabla combinatoria
+
+                        $numero_registros_formulario = 20; // Ponemos un limite pero al darse cuenta que no hay datos parara
+                        for ( $index = 0 ; $index < $numero_registros_formulario ; $index++ ) {
+
+                           // Comprobar que no este marcado para eliminar
+                           $nombre_campo_eliminar = $tabla_contenido.'_eliminar-'.$index;
+                           if ( isset($resultado[$nombre_campo_eliminar]) ) continue; 
+
+                           // Si tiene su propio identificador no hay que guardarlo
+                           $nombre_campo_identificativo = $tabla_contenido.'_'.$tabla_contenido.'_id';
+                           if ( isset($resultado[$nombre_campo_identificativo][$index]) ) { 
+                              $ID = $resultado[$nombre_campo_identificativo][$index]; 
+                              $identificadores_contenido_insertados[] = $ID;
+                           } else {
+                              $ID = NULL;
+
+                              $nueva_relacion = new $clase_contenido($this->objPDO, $ID, 'relacion_externa');
+                              if ( ! $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index) ) break ;
+
+                              $nueva_relacion->save();
+                              $identificadores_contenido_insertados[] = $nueva_relacion->ID;
+                              unset($nueva_relacion);
+
+                              } 
+
+                           }
+
+                        // Guardar registros en la tabla combinatoria
+
+                        if ( $identificadores_contenido_insertados ) {
+
+                           foreach ( $identificadores_contenido_insertados as $id_contenidos ) {
+                              $ID = "$id_contenidos,".$this->ID;
+                              $nueva_relacion = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
+                              $nueva_relacion->SetAccessor('ID', $ID);
+                              $nueva_relacion->save();
+                              unset($nueva_relacion);
+                              }
                            }
                         }
                      }
@@ -1746,6 +1895,7 @@ class Crud extends DataBoundObject {
             // Añadimos javascript para poder insertar registros nuevos
             $this->codigo_js .= "
                $nombre_tabla = new Administrar_registros_varios('$nombre_tabla',$conta); 
+               $nombre_tabla.Literal_insertar = '".literal('Insertar nuevo '.$nombre_tabla)."';
                $nombre_tabla.inicia();
                ";
 
@@ -1834,6 +1984,122 @@ class Crud extends DataBoundObject {
       $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
       $relacionados = $rel->find($condicion_relacion,$campos, $orden);
       return $relacionados;
+
+      }
+
+   /**
+    * Formulario para los registros combinados
+    */
+
+   function formulario_registros_combinados($displayHash = FALSE) {
+
+      // Si tenemos un tipo de campo 'relaciones_varios' presentamos su propio form
+      if ( $this->combinar_tablas ) {
+
+         foreach ( $this->combinar_tablas as $combinados ) {
+
+            $tabla_contenido    = FALSE;  //< Tabla que contiene el contenido
+            $campo_contenido    = FALSE;  //< Campo del contenido que contiene id
+            $tabla_combinatoria = FALSE;  //< Tabla que contiene las relaciones
+            $campo_combinatoria = FALSE;  //< Campo de la combinatoria que contiene id del contenido
+            $campo_relacion     = FALSE;  //< Campo de la combinatoria que contiene id padre
+
+            list(
+               $tabla_contenido   
+               ,$campo_contenido   
+               ,$tabla_combinatoria
+               ,$campo_combinatoria
+               ,$campo_relacion    
+               ) = explode(',',$combinados); 
+
+            $clase_contenido    = ucwords($tabla_contenido);
+            $clase_combinatoria = ucwords($tabla_combinatoria);
+
+            // DEV
+            // echo "<br>".'$tabla_contenido     '.$tabla_contenido    ; 
+            // echo "<br>".'$campo_contenido     '.$campo_contenido    ; 
+            // echo "<br>".'$tabla_combinatoria  '.$tabla_combinatoria ; 
+            // echo "<br>".'$campo_combinatoria  '.$campo_combinatoria ; 
+            // echo "<br>".'$campo_relacion      '.$campo_relacion     ; 
+            // echo "<br>".'$clase_contenido     '.$clase_contenido    ; 
+            // echo "<br>".'$clase_combinatoria  '.$clase_combinatoria ; 
+
+
+            $condicion_combinatoria = "$campo_relacion = $this->ID";
+
+            $rel = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
+
+            ?>
+            <fieldset id="forms_<?php echo $tabla_contenido ?>" class="formularios_registros_varios">
+            <legend  accesskey="r"><?php echo literal($clase_contenido) ?></legend>
+
+            <?php
+            // Recorremos identificadores de los registros relacionados existentes
+            $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
+
+            $conta = 0;
+            if ( $ids_relacionados ) {
+
+               foreach ( $ids_relacionados as $id_relacionado ) {
+
+                  // Creamos instancias del modelo que contiene el contenido
+
+                  $id = $id_relacionado[$campo_combinatoria];
+                  $condicion_contenido = "$campo_contenido = ".$id.' ';
+
+                  // echo "<pre>info: " ; print_r("campo_contenido: $campo_combinatoria $id") ; echo "</pre>"; exit(); // DEV  
+
+                  $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
+                  $rel_contenido->ID = $id;
+                  $rel_contenido->tipos_formulario = FALSE;
+                  $rel_contenido->load();
+                  $rel_contenido->generar_formulario($displayHash, $campo_contenido, $this, $conta);
+                  $conta++;
+
+                  }
+               }
+
+            // Añadimos una más para poder añadir registros nuevos
+            $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
+            $rel_contenido->generar_formulario(FALSE, $campo_contenido, $this, $conta);
+            $this->codigo_js .= $rel->codigo_js;
+            $this->reglas_js .= $rel->reglas_js;
+
+            ?>
+            </fieldset>
+            <?php
+
+            // Añadimos javascript para poder insertar registros nuevos
+            $this->codigo_js .= "
+               $tabla_contenido = new Administrar_registros_varios('$tabla_contenido',$conta); 
+               $tabla_contenido.Literal_insertar = '".literal('Insertar nuevo '.$tabla_contenido)."';
+               $tabla_contenido.inicia_combinatorio();
+               ";
+
+            // Añadimos opción de asignar registro existente
+            $posibles = $rel_contenido->find();
+            ?>
+            <div class="posibles_registros" id="posibles_registros_<?php echo $tabla_contenido;?>">
+               <ul>
+                  <?php if ( $posibles ) { ?>
+                  <?php foreach ( $posibles as $posible ) { ?>
+                  <?php $id_posible = $posible[$campo_contenido]; ?>
+                  <li id="li_posible_<?php echo $tabla_contenido;?>-<?php echo $id_posible ?>">
+                     <?php $salida = ''; foreach($posible as $campo => $valor ) { ?>
+                     <?php if ( $campo != $campo_contenido ) $salida .= $valor; ?>
+                     <?php } ?>
+                     <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
+                        <?php echo $salida ?>
+                     </a>
+                  </li>
+                  <?php } ?>
+                  <?php } ?>
+               </ul>
+            </div>
+            <?php
+
+            }
+         }
 
       }
 

@@ -265,12 +265,10 @@ abstract class DataBoundObject {
 
          // Si es una tabla combinatoria añadir los indices a modificar
          if ( count($this->campos_indices) > 1 ) {
+            $valores_indices = explode(',',$this->ID);
             $conta = 0;
             foreach ( $this->campos_indices as $indice ) {
-               if ( isset($_POST[$indice]) ) {
-                  $objStatement->bindValue(':post_' . $indice, $_POST[$indice],
-                     PDO::PARAM_INT);
-                  }
+               $objStatement->bindValue(':post_' . $indice, $valores_indices[$conta],PDO::PARAM_INT);
                $conta++;
                }
             }
@@ -282,7 +280,7 @@ abstract class DataBoundObject {
          } catch (PDOException $e) {
 
             $msg = $e->getMessage();
-            registrar(__FILE__,__LINE__,$msg,'ADMIN');
+            registrar(__FILE__,__LINE__,$msg,'ERROR');
             return FALSE;
          }
 
@@ -306,11 +304,8 @@ abstract class DataBoundObject {
          if ( count($this->campos_indices) > 1 ) {
             $conta = 0;
             foreach ( $this->campos_indices as $indice ) {
-               if ( isset($_POST[$indice]) ) {
-                  // $salida .= $indice. "=:post_".$indice.", ";
-                  $strQuery .= $indice . ', ';
-                  $strValueList .= ":post_$indice, ";
-                  }
+               $strQuery .= $indice . ', ';
+               $strValueList .= ":post_$indice, ";
                $conta++;
                }
             }
@@ -361,18 +356,21 @@ abstract class DataBoundObject {
 
          // Si es una tabla combinatoria añadir los indices a modificar
          if ( count($this->campos_indices) > 1 ) {
+            $valores_indices = explode(',',$this->valores['id']);
             $conta = 0;
             foreach ( $this->campos_indices as $indice ) {
-               if ( isset($_POST[$indice]) ) {
-                  $objStatement->bindValue(':post_' . $indice, $_POST[$indice],
-                     PDO::PARAM_INT);
-                  }
+               $objStatement->bindValue(':post_' . $indice, $valores_indices[$conta], PDO::PARAM_INT);
                $conta++;
                }
             }
 
 
-         return $objStatement->execute();
+         if ( $objStatement->execute() ) {
+            $this->ID = $this->ultimo_identificador();
+            return TRUE;
+         } else {
+            return FALSE;
+            }
       }
    }
 
@@ -416,6 +414,7 @@ abstract class DataBoundObject {
             $strQuery .= $condicion;
 
 
+            // if ( $this->strTableName == 'tv_rel_autors' ) {echo "<pre>info: " ; print_r($strQuery) ; echo "</pre>"; exit(); } // DEV
 
             $objStatement = $this->objPDO->prepare($strQuery);
 
