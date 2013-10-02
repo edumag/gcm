@@ -29,6 +29,15 @@ background: linear-gradient(135deg, <?=$this->color("body-02")?> 0%, <?=$this->c
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
 }
 
+/* 
+  ## Sustituye a la etiqueta "center" en desuso en html5 
+    <div class="centrado">Centrado de contenido</div>
+ */
+
+.centrado {
+   text-align: center;
+ }
+
 #wrap{
 width: 100%;
 margin:0 auto;

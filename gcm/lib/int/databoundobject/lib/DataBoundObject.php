@@ -561,7 +561,7 @@ abstract class DataBoundObject {
          $seleccion = '*';
          }
 
-      $sql = "Select $seleccion from ".$this->strTableName;
+      $sql = "SELECT $seleccion FROM ".$this->strTableName;
 
       if ( $condicion ) $sql .= " WHERE $condicion";
 

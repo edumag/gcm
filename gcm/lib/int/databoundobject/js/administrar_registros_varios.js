@@ -6,6 +6,11 @@
 
 function Administrar_registros_varios(identificador, total_registros) {
 
+   var _degug = true;
+
+   if ( _degug ) console.debug('Id: '+identificador);
+   if ( _degug ) console.debug('total_registros: '+total_registros);
+
    // Variables privadas
    var _identificador    = identificador;
    var _total_registros  = total_registros;
@@ -25,14 +30,15 @@ function Administrar_registros_varios(identificador, total_registros) {
    this.inicia = function() {
 
       var nombre_elemento = 'caja_registro_'+_identificador+'-'+_total_registros
+
+      if ( _degug ) console.debug('nombre_elemento: '+nombre_elemento);
+
       this.Ultimo_form = document.getElementById(nombre_elemento);
       this.Form_insertar = this.Ultimo_form.cloneNode(true);
 
       this.Caja_boton.innerHTML = _boton_insertar + this.Literal_insertar + '</a>';
       this.Ultimo_form.parentNode.appendChild(this.Caja_boton);
       this.Ultimo_form.parentNode.removeChild(this.Ultimo_form);
-
-      // console.debug(this);
 
       };
 
@@ -41,9 +47,9 @@ function Administrar_registros_varios(identificador, total_registros) {
 
    this.inicia_combinatorio = function() {
 
-      this.inicia();
+      if ( _degug ) console.debug('Id: '+_identificador);
 
-      console.debug('Id: '+_identificador);
+      this.inicia();
 
       var frm = document.getElementById('forms_'+_identificador);
       var nombre_boton_eliminar = _identificador+'_eliminar';
