@@ -47,9 +47,16 @@ class Crud extends DataBoundObject {
 
    public $elementos_pagina = 10;         ///< Número de elementos por página en listado, por defecto los de paginarPDO
 
-   public $css_formulario   = TRUE ;     ///< Añadimos css para Formulario o no.
+   public $css_formulario   = TRUE ;      ///< Añadimos css para Formulario o no.
 
    public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
+
+   /**
+    * Nos permite diferencirar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
+    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo.
+    */
+
+   public $sufijo;
 
    /**
     * Tipo de tabla soportados: 
@@ -399,6 +406,8 @@ class Crud extends DataBoundObject {
  
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
+
+      $this->sufijo = $strTableName.'_';
 
       }
 
@@ -1767,7 +1776,7 @@ class Crud extends DataBoundObject {
 
       $this->elementos = ( $this->elementos_pagina ) ? $this->elementos_pagina : NULL;
 
-      $pd = new PaginarPDO($this->objPDO, $sql, $this->strTableName.'_', $this->elementos_pagina, $order, $this->sql_listado_relacion);
+      $pd = new PaginarPDO($this->objPDO, $sql, $this->sufijo, $this->elementos_pagina, $order, $this->sql_listado_relacion);
 
       // Configuración de paginador
       if ( $this->conf_paginador ) {

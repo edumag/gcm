@@ -123,11 +123,6 @@ class PaginarPDO extends GcmPDO {
 
       $this->sql = $sql." ".$order;
 
-      // if ( isset($ordenadox) ) echo '<br>ordenadox: '.$ordenadox;
-      // echo '<br>as_orden: '.$this->as_orden;
-      // echo '<br>tipo_orden: '.$this->tipo_orden;
-      // echo "<br>sql: <pre>" ; print_r($this->sql) ; echo "</pre>"; // DEV  
-
       if (empty($_GET[$this->sufijo."pagina"])) {
          $inicio = 0;
          $this->pagina=1;
@@ -138,6 +133,14 @@ class PaginarPDO extends GcmPDO {
          $inicio = ($this->pagina - 1) * $this->elementos_pagina;
 
          }
+
+      // DEV
+      // if ( isset($ordenadox) ) echo '<br>ordenadox: '.$ordenadox;
+      // echo '<br>sugijo: '.$this->sufijo;
+      // echo '<br>pagina: '.$this->pagina.' GET: '.$_REQUEST[$this->sufijo.'pagina'];
+      // echo '<br>as_orden: '.$this->as_orden;
+      // echo '<br>tipo_orden: '.$this->tipo_orden;
+      // echo "<br>sql: <pre>" ; print_r($this->sql) ; echo "</pre>"; // DEV  
 
       $inicio = ( $inicio > 0 ) ? $inicio : 0 ;
 
@@ -256,9 +259,12 @@ class PaginarPDO extends GcmPDO {
       $this->botonera();
       $this->pagina($opciones_array2table, $presentacion);
       $this->botonera();
-      echo '</div>';
-      if ($this->total_de_paginas > 1) {
+      echo '</div> <!-- acaba caja '.$div.' url_ajax: '.$url_ajax.' -->';
+
+      if ( $this->total_de_paginas > 1 ) {
+
          if ( $url_ajax && $url_ajax != '' ) {
+
             $this->script_ajax();
             
             if ( isset($_REQUEST['formato']) && $_REQUEST['formato'] == 'ajax' ) {
