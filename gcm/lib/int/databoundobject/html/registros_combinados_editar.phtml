@@ -11,10 +11,10 @@ require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
 /** Saber si tenemos que cargar el código para el tratamiento de fechas */
 
 $cargar_codigo_fechas_horas = FALSE;
-$dir_codigo_fechas_horas    = '../'.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquery-simple-datetimepicker/';
+$dir_codigo_fechas_horas    = GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquery-simple-datetimepicker/';
 $cargar_codigo_fechas       = FALSE;
-$dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/';
-$dir_codigo_admin_varios    = '../'.GCM_DIR.'lib/int/databoundobject/js/';
+$dir_codigo_fechas          = GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/';
+$dir_codigo_admin_varios    = GCM_DIR.'lib/int/databoundobject/js/';
 
 // Definimos si permitimos modificar los calores del formulario o no
 $editable = TRUE;
@@ -52,7 +52,7 @@ $editable = TRUE;
 
    <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
-      <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>
+      <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?></div>
       <?php echo HTML::form_select($nombre_tabla_relacionada.'_'.$campo.'[]', $this->campos[$campo]['opciones']
          ,$this->valores($campo,$nombre_tabla_relacionada,$contador)
          ,literal('Seleccionar')
@@ -65,14 +65,14 @@ $editable = TRUE;
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
    
    <?php $cargar_codigo_fechas[] = $campo; ?>
-   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?></div>
    <?php $atr = FALSE; if ( ! $editable ) $atr['readonly'] = 'readonly'; ?>
    <?php echo HTML::form_text($nombre_tabla_relacionada.'_'.$campo.'[]',$this->valores($campo,$nombre_tabla_relacionada,$contador),$atr); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
    <?php $cargar_codigo_fechas_horas[] = $campo; ?>
-   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?></div>
    <?php $valor = ( $this->valores($campo,$nombre_tabla_relacionada,$contador) ) 
                ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo,$nombre_tabla_relacionada,$contador))) 
                : strftime("%Y-%m-%d %H:%M"); ?>
@@ -82,17 +82,17 @@ $editable = TRUE;
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
    
-   <div class="caja_campo_titulo"><?=literal('contraseña')?>: </div>
+   <div class="caja_campo_titulo"><?=literal('contraseña')?></div>
    <?php $atr = FALSE; if ( ! $editable ) $atr['readonly'] = 'readonly'; ?>
    <?php echo HTML::form_pass($nombre_tabla_relacionada.'_'.$campo.'[]',FALSE,$atr); ?>
    </div>
    <div class="caja_campo" id="caja_campo_verificacion">
-   <div class="caja_campo_titulo"><?=literal('verificación')?>: </div>
+   <div class="caja_campo_titulo"><?=literal('verificación')?></div>
    <?php echo HTML::form_pass($nombre_tabla_relacionada.'_verificacion[]',FALSE,$atr); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?></div>
 
    <?php if ( ! $editable ) $atr['readonly'] = 'readonly'; ?>
    <?php if ( $this->campos[$campo]['rows'] ) $atr['rows'] = $this->campos[$campo]['rows']; ?>
@@ -106,7 +106,7 @@ $editable = TRUE;
 
    <?php } else { ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?></div>
 
    <?php $atr = FALSE ; ?>
    <?php if ( isset($this->campos[$campo]['maxlength']) ) $atr['maxlength'] = $this->campos[$campo]['maxlength'] ; ?>
@@ -179,6 +179,5 @@ if ( $cargar_codigo_fechas ) {
 <input onclick="var el=document.getElementById('caja_registro_<?php echo $nombre_tabla_relacionada;?>-<?php echo $contador ?>');el.parentNode.removeChild(el);" name="<?php echo $nombre_tabla_relacionada ?>_eliminar-<?php echo $contador ?>" id="<?php echo $nombre_tabla_relacionada ?>_eliminar-<?php echo $contador ?>" type="checkbox" value="1" >
 Eliminar
 </label>
-
 
 </div>

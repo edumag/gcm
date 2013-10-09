@@ -47,9 +47,16 @@ class Crud extends DataBoundObject {
 
    public $elementos_pagina = 10;         ///< Número de elementos por página en listado, por defecto los de paginarPDO
 
-   public $css_formulario   = TRUE ;     ///< Añadimos css para Formulario o no.
+   public $css_formulario   = TRUE ;      ///< Añadimos css para Formulario o no.
 
    public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
+
+   /**
+    * Nos permite diferencirar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
+    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo.
+    */
+
+   public $sufijo;
 
    /**
     * Tipo de tabla soportados: 
@@ -399,6 +406,8 @@ class Crud extends DataBoundObject {
  
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
+
+      $this->sufijo = $this->strTableName.'_';
 
       }
 
@@ -754,7 +763,6 @@ class Crud extends DataBoundObject {
 
    function restricciones_automaticas() {
 
-      // echo "tipos_campos: <pre>" ; print_r($this->tipos_campos) ; echo "</pre>"; exit();// DEV  
       foreach ( $this->arRelationMap as $campo => $referencia) {
 
          if ( $campo == 'mail' ) $this->restricciones[$campo][RT_MAIL] = 1;
@@ -811,7 +819,6 @@ class Crud extends DataBoundObject {
 
       if ( isset($this->restricciones) ) {
 
-         // echo "<pre>" ; print_r($this->restricciones) ; echo "</pre>"; exit(); // DEV  
          foreach ( $this->restricciones as $campo => $restriccion ) {
 
             foreach ( $restriccion as $tipo => $valor) {
@@ -1310,13 +1317,9 @@ class Crud extends DataBoundObject {
 
       /** Acciones */
 
-      // echo "Acción: ".$this->accion; // DEV
-
       if ( $this->accion == 'agafa_imatge' ) $this->galeria->inicia();
 
       if ( $this->accion == 'guardando' ) {
-
-         // echo "<pre>" ; print_r($_POST) ; echo "</pre>"; exit() ; // DEV  
 
          $solicitud = new Solicitud();
          $solicitud->SetRedirectOnConstraintFailure(true);
@@ -1418,8 +1421,6 @@ class Crud extends DataBoundObject {
          
          $solicitud->TestConstraints();
 
-         // echo "<pre>" ; print_r($solicitud) ; echo "</pre>"; exit(); // DEV 
-
          // Si hemos llegado aquí hemos pasado las pruebas
 
          /* Comprobamos datos que nos llegan */
@@ -1430,11 +1431,11 @@ class Crud extends DataBoundObject {
 
                $this->recoger_valores_formulario($this, $resultado);
 
+               $this->accion = ( isset($this->ID) ) ? 'modificando' : 'insertando';
+
                if ( $this->save() ) {
 
                   /* Si utilizamos galería hay que guardar imagenes */
-
-                  $this->accion = ( isset($this->ID) ) ? 'modificando' : 'insertando';
 
                   $this->ID = ( isset($this->ID) ) ? $this->ID : $this->ultimo_identificador();
 
@@ -1479,11 +1480,11 @@ class Crud extends DataBoundObject {
                         for ( $index = 0 ; $index < $numero_registros_formulario ; $index++ ) {
 
                            // Comprobar que no este marcado para eliminar
-                           $nombre_campo_eliminar = $rel->DefineTableName().'_eliminar-'.$index;
+                           $nombre_campo_eliminar = $rel->strTableName.'_eliminar-'.$index;
                            if ( isset($resultado[$nombre_campo_eliminar]) ) continue; 
 
                            $nueva_relacion = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
-                           if ( ! $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index) ) break ;
+                           if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) break ;
 
                            // Si estamos insertando faltara añadir el identificador del registro padre a los valores
                            // de los registros relacionados.
@@ -1555,7 +1556,7 @@ class Crud extends DataBoundObject {
                               $ID = NULL;
 
                               $nueva_relacion = new $clase_contenido($this->objPDO, $ID, 'relacion_externa');
-                              if ( ! $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index) ) break ;
+                              if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) break ;
 
                               $nueva_relacion->save();
                               $identificadores_contenido_insertados[] = $nueva_relacion->ID;
@@ -1761,8 +1762,8 @@ class Crud extends DataBoundObject {
 
       if ( $condicion ) {
 
-         if ( stripos($sql,'GROUP') !== FALSE ) {
-            $sql = str_ireplace('GROUP',' WHERE '.$condicion.' GROUP', $sql);
+         if ( stripos($sql,'GROUP ') !== FALSE ) {
+            $sql = str_ireplace('GROUP ',' WHERE '.$condicion.' GROUP ', $sql);
          } else {
             $sql .= ' WHERE '.$condicion ;
             }
@@ -1775,7 +1776,7 @@ class Crud extends DataBoundObject {
 
       $this->elementos = ( $this->elementos_pagina ) ? $this->elementos_pagina : NULL;
 
-      $pd = new PaginarPDO($this->objPDO, $sql, $this->strTableName.'_', $this->elementos_pagina, $order, $this->sql_listado_relacion);
+      $pd = new PaginarPDO($this->objPDO, $sql, $this->sufijo, $this->elementos_pagina, $order, $this->sql_listado_relacion);
 
       // Configuración de paginador
       if ( $this->conf_paginador ) {
@@ -1811,8 +1812,6 @@ class Crud extends DataBoundObject {
          // Opciones personalizadas para presentación de datos
          if ( isset($this->opciones_array2table['op']) ) 
             $opciones = array_merge($opciones, $this->opciones_array2table['op']);
-
-         // echo "<pre>opciones: " ; print_r($opciones) ; echo "</pre>"; // DEV  
 
          $presentacion = ( isset($this->opciones_array2table['presentacion']) ) ?
             $this->opciones_array2table['presentacion'] :
@@ -1925,8 +1924,6 @@ class Crud extends DataBoundObject {
 
          if ( ! empty($valor) && $valor ) $hay_valores = TRUE;
 
-         // echo "<pre>" ; print_r($numero_registro.' '.$rCampo.':'.$valor) ; echo "</pre>"; // DEV  
-
          if ( isset($modelo->ID) && $campo == 'fecha_creacion'  ) {
             $modelo->SetAccessor($rCampo, date("Y-m-d H:i:s"));
             continue;
@@ -1988,6 +1985,54 @@ class Crud extends DataBoundObject {
       }
 
    /**
+    * Devolvemos array con los registros relacionados de una tabla externa 
+    *
+    * @param $relacion Cadena que contiene la tabla relacionada y el campo (tabla.campo)
+    * @param $campos   Array con los campos que se quieres recuperar
+    * @param $orden    Orden para la SQL
+    */
+
+   function get_registros_relacion_combinada($relacion, $campos=NULL, $orden=NULL) {
+
+      $tabla_contenido    = FALSE;  //< Tabla que contiene el contenido
+      $campo_contenido    = FALSE;  //< Campo del contenido que contiene id
+      $tabla_combinatoria = FALSE;  //< Tabla que contiene las relaciones
+      $campo_combinatoria = FALSE;  //< Campo de la combinatoria que contiene id del contenido
+      $campo_relacion     = FALSE;  //< Campo de la combinatoria que contiene id padre
+
+      list(
+         $tabla_contenido   
+         ,$campo_contenido   
+         ,$tabla_combinatoria
+         ,$campo_combinatoria
+         ,$campo_relacion    
+         ) = explode(',',$relacion); 
+
+      $clase_contenido    = ucwords($tabla_contenido);
+      $clase_combinatoria = ucwords($tabla_combinatoria);
+
+      $condicion_combinatoria = "$campo_relacion = $this->ID";
+
+      $rel = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
+
+      $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
+
+      if ( ! $ids_relacionados ) return FALSE;
+
+      $ids_relacionados_sql = FALSE;
+      foreach ( $ids_relacionados as $id_relacion ) {
+         $ids_relacionados_sql .= $id_relacion[$campo_combinatoria].',';
+         }
+
+      $ids_relacionados_sql = rtrim($ids_relacionados_sql,',');
+
+      $contenido = new $clase_contenido($this->objPDO);
+      $condicion_contenido = "$campo_contenido IN (".$ids_relacionados_sql.")";
+
+      return $contenido->find($condicion_contenido);
+      }
+
+   /**
     * Formulario para los registros combinados
     */
 
@@ -2012,18 +2057,14 @@ class Crud extends DataBoundObject {
                ,$campo_relacion    
                ) = explode(',',$combinados); 
 
+            // echo "<br>tabla_contenido    $tabla_contenido    ";
+            // echo "<br>campo_contenido    $campo_contenido    ";
+            // echo "<br>tabla_combinatoria $tabla_combinatoria ";
+            // echo "<br>campo_combinatoria $campo_combinatoria ";
+            // echo "<br>campo_relacion     $campo_relacion     ";
+
             $clase_contenido    = ucwords($tabla_contenido);
             $clase_combinatoria = ucwords($tabla_combinatoria);
-
-            // DEV
-            // echo "<br>".'$tabla_contenido     '.$tabla_contenido    ; 
-            // echo "<br>".'$campo_contenido     '.$campo_contenido    ; 
-            // echo "<br>".'$tabla_combinatoria  '.$tabla_combinatoria ; 
-            // echo "<br>".'$campo_combinatoria  '.$campo_combinatoria ; 
-            // echo "<br>".'$campo_relacion      '.$campo_relacion     ; 
-            // echo "<br>".'$clase_contenido     '.$clase_contenido    ; 
-            // echo "<br>".'$clase_combinatoria  '.$clase_combinatoria ; 
-
 
             $condicion_combinatoria = "$campo_relacion = $this->ID";
 
@@ -2047,8 +2088,6 @@ class Crud extends DataBoundObject {
                   $id = $id_relacionado[$campo_combinatoria];
                   $condicion_contenido = "$campo_contenido = ".$id.' ';
 
-                  // echo "<pre>info: " ; print_r("campo_contenido: $campo_combinatoria $id") ; echo "</pre>"; exit(); // DEV  
-
                   $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
                   $rel_contenido->ID = $id;
                   $rel_contenido->tipos_formulario = FALSE;
@@ -2065,10 +2104,6 @@ class Crud extends DataBoundObject {
             $this->codigo_js .= $rel->codigo_js;
             $this->reglas_js .= $rel->reglas_js;
 
-            ?>
-            </fieldset>
-            <?php
-
             // Añadimos javascript para poder insertar registros nuevos
             $this->codigo_js .= "
                $tabla_contenido = new Administrar_registros_varios('$tabla_contenido',$conta); 
@@ -2079,26 +2114,33 @@ class Crud extends DataBoundObject {
             // Añadimos opción de asignar registro existente
             $posibles = $rel_contenido->find();
             ?>
-            <div class="posibles_registros" id="posibles_registros_<?php echo $tabla_contenido;?>">
-               <ul>
-                  <?php if ( $posibles ) { ?>
-                  <?php foreach ( $posibles as $posible ) { ?>
-                  <?php $id_posible = $posible[$campo_contenido]; ?>
-                  <li id="li_posible_<?php echo $tabla_contenido;?>-<?php echo $id_posible ?>">
-                     <?php $salida = ''; foreach($posible as $campo => $valor ) { ?>
-                     <?php if ( $campo != $campo_contenido ) $salida .= $valor; ?>
+            <fieldset>
+               <legend  accesskey="c"><?php echo literal('Seleccionar existente') ?></legend>
+               <div class="posibles_registros" id="posibles_registros_<?php echo $tabla_contenido;?>">
+                  <ul>
+                     <?php if ( $posibles ) { ?>
+                     <?php foreach ( $posibles as $posible ) { ?>
+                     <?php $id_posible = $posible[$campo_contenido]; ?>
+                     <li id="li_posible_<?php echo $tabla_contenido;?>-<?php echo $id_posible ?>">
+                        <?php $conta=0; $salida = ''; foreach($posible as $campo => $valor ) { $conta++ ; ?>
+                        <?php if ( $campo != $campo_contenido ) $salida .= literal($valor); ?>
+                        <?php if ( $conta > 1 ) { break; } // Solo añadimos el siguiente campo al identificador ?> 
+                        <?php } ?>
+                        <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
+                           <?php echo $salida ?>
+                        </a>
+                     </li>
                      <?php } ?>
-                     <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
-                        <?php echo $salida ?>
-                     </a>
-                  </li>
-                  <?php } ?>
-                  <?php } ?>
-               </ul>
-            </div>
+                     <?php } ?>
+                  </ul>
+               </div>
+
+               </fieldset>
+            </fieldset>
             <?php
 
             }
+
          }
 
       }

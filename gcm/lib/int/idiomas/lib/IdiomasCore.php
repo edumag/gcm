@@ -15,7 +15,7 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
-require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
+//require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
 
 /** Idiomas
  * para la administración de los idiomas

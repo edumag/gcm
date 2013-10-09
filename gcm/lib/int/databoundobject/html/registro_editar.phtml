@@ -41,7 +41,7 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
 
    <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
-      <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?>: </div>
+      <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?></div>
 
       <?php echo HTML::form_select($campo, $this->campos[$campo]['opciones'],$this->valores($campo),literal('Seleccionar')); ?>
 
@@ -55,13 +55,13 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    
    <?php $cargar_codigo_fechas[] = $campo; ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo)?></div>
    <?php echo HTML::form_text($campo,$this->valores($campo)); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
    <?php $cargar_codigo_fechas_horas[] = $campo; ?>
-   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo)?></div>
    <?php $valor = ( $this->valores($campo) ) 
                ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))) 
                : strftime("%Y-%m-%d %H:%M"); ?>
@@ -70,16 +70,16 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
    
-   <div class="caja_campo_titulo"><?=literal('contraseña')?>: </div>
+   <div class="caja_campo_titulo"><?=literal('contraseña')?></div>
    <?php echo HTML::form_pass($campo); ?>
    </div>
    <div class="caja_campo" id="caja_campo_verificacion">
-   <div class="caja_campo_titulo"><?=literal('verificación')?>: </div>
+   <div class="caja_campo_titulo"><?=literal('verificación')?></div>
    <?php echo HTML::form_pass('verificacion'); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo)?></div>
 
    <?php echo HTML::form_text($campo
          ,$this->valores($campo)
@@ -93,7 +93,7 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    <?php if ( isset($this->campos[$campo]['maxlength']) ) $atr['maxlength'] = $this->campos[$campo]['maxlength'] ; ?>
    <?php if ( isset($this->campos[$campo]['size']) ) $atr['size'] = $this->campos[$campo]['size'] ; ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo)?>: </div>
+   <div class="caja_campo_titulo"><?=literal($campo)?></div>
    <?php echo HTML::form_text($campo
          ,$this->valores($campo)
          ,$atr); 

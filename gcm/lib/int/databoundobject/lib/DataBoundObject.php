@@ -136,6 +136,7 @@ abstract class DataBoundObject {
 
          $strQuery .= $condicion;
 
+         registrar(__FILE__,__LINE__,$strQuery,'DEBUG');
          $objStatement = $this->objPDO->prepare($strQuery);
 
          $conta = 0;
@@ -230,6 +231,7 @@ abstract class DataBoundObject {
          $strQuery .= $condicion;
 
          unset($objStatement);
+         registrar(__FILE__,__LINE__,$strQuery,'DEBUG');
          $objStatement = $this->objPDO->prepare($strQuery);
 
          $conta = 0;
@@ -334,6 +336,7 @@ abstract class DataBoundObject {
 
          unset($objStatement);
          
+         registrar(__FILE__,__LINE__,$strQuery,'DEBUG');
          $objStatement = $this->objPDO->prepare($strQuery);
 
          foreach ($this->arRelationMap as $key => $value) {
@@ -416,6 +419,7 @@ abstract class DataBoundObject {
 
             // if ( $this->strTableName == 'tv_rel_autors' ) {echo "<pre>info: " ; print_r($strQuery) ; echo "</pre>"; exit(); } // DEV
 
+            registrar(__FILE__,__LINE__,$strQuery,'DEBUG');
             $objStatement = $this->objPDO->prepare($strQuery);
 
             $conta = 0;
@@ -561,12 +565,13 @@ abstract class DataBoundObject {
          $seleccion = '*';
          }
 
-      $sql = "Select $seleccion from ".$this->strTableName;
+      $sql = "SELECT $seleccion FROM ".$this->strTableName;
 
       if ( $condicion ) $sql .= " WHERE $condicion";
 
       if ( isset($orden)  ) $sql .= " ORDER BY ".$orden;
 
+      registrar(__FILE__,__LINE__,$sql,'DEBUG');
       $objStatement = $this->objPDO->prepare($sql);
       $objStatement->execute();
 

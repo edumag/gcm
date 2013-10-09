@@ -32,6 +32,8 @@ class PaginarPDO extends GcmPDO {
    public $plantilla_botonera;            ///< Plantilla que presenta los resultados
    public $paginas_agrupadas=2;           ///< Número de botones de páginas que se presenta por alante y atras de la actual
    public $sufijo;                        ///< Para diferenciar entre diferentes instancias
+   public $botonera_abajo=TRUE;           ///< Presentar botoner abajo
+   public $botonera_arriba=TRUE;          ///< Presentar botoner arriba
 
    private $inicio;                       ///< Inicio
    private $pagina;                       ///< Número de página
@@ -78,7 +80,7 @@ class PaginarPDO extends GcmPDO {
          if ( $sql_relaciones && array_key_exists($this->as_orden,$sql_relaciones) ) {
             $order = "ORDER BY ".$sql_relaciones[$this->as_orden]." ".$this->tipo_orden;
          } else {
-            $order = "ORDER BY `".$this->as_orden."` ".$this->tipo_orden;
+            $order = "ORDER BY ".$this->as_orden." ".$this->tipo_orden;
             }
 
       } elseif ( $order ) {
@@ -123,11 +125,6 @@ class PaginarPDO extends GcmPDO {
 
       $this->sql = $sql." ".$order;
 
-      // if ( isset($ordenadox) ) echo '<br>ordenadox: '.$ordenadox;
-      // echo '<br>as_orden: '.$this->as_orden;
-      // echo '<br>tipo_orden: '.$this->tipo_orden;
-      // echo "<br>sql: <pre>" ; print_r($this->sql) ; echo "</pre>"; // DEV  
-
       if (empty($_GET[$this->sufijo."pagina"])) {
          $inicio = 0;
          $this->pagina=1;
@@ -154,7 +151,16 @@ class PaginarPDO extends GcmPDO {
       if ( $this->elemento_inicio < 1  ) $this->elemento_inicio=1;
       if ( $this->elemento_final > $this->total_de_paginas  ) $this->elemento_final=$this->total_de_paginas;
 
+
+      // DEV
+      // if ( isset($ordenadox) ) echo '<br>ordenadox: '.$ordenadox;
+      // echo '<br>sugijo: '.$this->sufijo;
+      // echo '<br>pagina: '.$this->pagina.' GET: '.$_REQUEST[$this->sufijo.'pagina'];
+      // echo '<br>as_orden: '.$this->as_orden;
+      // echo '<br>tipo_orden: '.$this->tipo_orden;
       // echo "<pre>sql: " ; print_r($this->sql) ; echo "</pre>"; // DEV  
+      // exit();
+
       }
 
    /** 
@@ -253,12 +259,15 @@ class PaginarPDO extends GcmPDO {
       $div   = $ident.'paginador';
 
       echo '<div id="'.$div.'">';
-      $this->botonera();
+      if ( $this->botonera_arriba ) $this->botonera();
       $this->pagina($opciones_array2table, $presentacion);
-      $this->botonera();
-      echo '</div>';
-      if ($this->total_de_paginas > 1) {
+      if ( $this->botonera_abajo ) $this->botonera();
+      echo '</div> <!-- acaba caja '.$div.' url_ajax: '.$url_ajax.' -->';
+
+      if ( $this->total_de_paginas > 1 ) {
+
          if ( $url_ajax && $url_ajax != '' ) {
+
             $this->script_ajax();
             
             if ( isset($_REQUEST['formato']) && $_REQUEST['formato'] == 'ajax' ) {

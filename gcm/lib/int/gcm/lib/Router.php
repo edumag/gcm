@@ -216,6 +216,15 @@ class Router {
 
       global $gcm;
 
+      if ( isset($gcm->event->modulos_activados) ) {
+         foreach ( $gcm->event->modulos_activados as $modulo ) {
+            if ( ! self::$modulos || ! in_array($modulo,self::$modulos) ) {
+               self::$modulos[] = $modulo;
+               }
+            }
+         }
+      return;
+
       if ( isset($gcm->event->eventos) ) {
 
          foreach ( $gcm->event->eventos as $evento ) {

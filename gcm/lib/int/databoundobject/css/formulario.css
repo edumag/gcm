@@ -43,8 +43,8 @@ background: white;
     padding: 26px;
 }
 .posibles_registros li {
-    display: inline;
-}
+    display: inline-flex;
+   }
 .posibles_registros a {
     background: none repeat scroll 0 0 whitesmoke;
     border-radius: 5px 5px 5px 5px;
