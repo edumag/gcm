@@ -38,6 +38,11 @@ class Responsiveslides extends Modulos {
 
       global $gcm;
 
+      $imagenes_sin_comprobar = glob(Router::$d.$this->imagenes.'/*');
+      $imagenes = array();
+      foreach ( $imagenes_sin_comprobar as $img ) {
+         if ( esImagen($img) ) $imagenes[] = $img;
+         }
       $this->javascripts('responsiveslides.min.js');
       include($gcm->event->instancias['temas']->ruta('responsiveslides','html','slide.phtml'));
 

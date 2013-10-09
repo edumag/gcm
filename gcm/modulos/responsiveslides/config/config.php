@@ -1,3 +1,3 @@
 <?php
-$config['Imágenes'][] = 'ejemplo.jpg';
+$config['Imágenes'] = 'dir_imagenes';
 ?>
