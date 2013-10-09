@@ -407,7 +407,7 @@ class Crud extends DataBoundObject {
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
 
-      $this->sufijo = $strTableName.'_';
+      $this->sufijo = $this->strTableName.'_';
 
       }
 
@@ -1484,7 +1484,7 @@ class Crud extends DataBoundObject {
                            if ( isset($resultado[$nombre_campo_eliminar]) ) continue; 
 
                            $nueva_relacion = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
-                           if ( ! $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index) ) break ;
+                           if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) break ;
 
                            // Si estamos insertando faltara añadir el identificador del registro padre a los valores
                            // de los registros relacionados.
@@ -1556,7 +1556,7 @@ class Crud extends DataBoundObject {
                               $ID = NULL;
 
                               $nueva_relacion = new $clase_contenido($this->objPDO, $ID, 'relacion_externa');
-                              if ( ! $this->recoger_valores_formulario(&$nueva_relacion, $resultado, $index) ) break ;
+                              if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) break ;
 
                               $nueva_relacion->save();
                               $identificadores_contenido_insertados[] = $nueva_relacion->ID;
@@ -1762,8 +1762,8 @@ class Crud extends DataBoundObject {
 
       if ( $condicion ) {
 
-         if ( stripos($sql,'GROUP') !== FALSE ) {
-            $sql = str_ireplace('GROUP',' WHERE '.$condicion.' GROUP', $sql);
+         if ( stripos($sql,'GROUP ') !== FALSE ) {
+            $sql = str_ireplace('GROUP ',' WHERE '.$condicion.' GROUP ', $sql);
          } else {
             $sql .= ' WHERE '.$condicion ;
             }
@@ -2104,10 +2104,6 @@ class Crud extends DataBoundObject {
             $this->codigo_js .= $rel->codigo_js;
             $this->reglas_js .= $rel->reglas_js;
 
-            ?>
-            </fieldset>
-            <?php
-
             // Añadimos javascript para poder insertar registros nuevos
             $this->codigo_js .= "
                $tabla_contenido = new Administrar_registros_varios('$tabla_contenido',$conta); 
@@ -2118,23 +2114,29 @@ class Crud extends DataBoundObject {
             // Añadimos opción de asignar registro existente
             $posibles = $rel_contenido->find();
             ?>
-            <div class="posibles_registros" id="posibles_registros_<?php echo $tabla_contenido;?>">
-               <ul>
-                  <?php if ( $posibles ) { ?>
-                  <?php foreach ( $posibles as $posible ) { ?>
-                  <?php $id_posible = $posible[$campo_contenido]; ?>
-                  <li id="li_posible_<?php echo $tabla_contenido;?>-<?php echo $id_posible ?>">
-                     <?php $salida = ''; foreach($posible as $campo => $valor ) { ?>
-                     <?php if ( $campo != $campo_contenido ) $salida .= $valor; ?>
+            <fieldset>
+               <legend  accesskey="c"><?php echo literal('Seleccionar existente') ?></legend>
+               <div class="posibles_registros" id="posibles_registros_<?php echo $tabla_contenido;?>">
+                  <ul>
+                     <?php if ( $posibles ) { ?>
+                     <?php foreach ( $posibles as $posible ) { ?>
+                     <?php $id_posible = $posible[$campo_contenido]; ?>
+                     <li id="li_posible_<?php echo $tabla_contenido;?>-<?php echo $id_posible ?>">
+                        <?php $conta=0; $salida = ''; foreach($posible as $campo => $valor ) { $conta++ ; ?>
+                        <?php if ( $campo != $campo_contenido ) $salida .= literal($valor); ?>
+                        <?php if ( $conta > 1 ) { break; } // Solo añadimos el siguiente campo al identificador ?> 
+                        <?php } ?>
+                        <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
+                           <?php echo $salida ?>
+                        </a>
+                     </li>
                      <?php } ?>
-                     <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
-                        <?php echo $salida ?>
-                     </a>
-                  </li>
-                  <?php } ?>
-                  <?php } ?>
-               </ul>
-            </div>
+                     <?php } ?>
+                  </ul>
+               </div>
+
+               </fieldset>
+            </fieldset>
             <?php
 
             }

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Oct 1 8:02:41 CEST 2013
+// Archivo generado automáticamente por GcmConfig Wed Oct 9 17:15:10 CEST 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -120,4 +120,8 @@ $GCM_LG_es['Cancelar']='';
 $GCM_LG_es['Configuración guardada']='';
 $GCM_LG_es['Registro modificado']='';
 $GCM_LG_es['Campo requerido']='';
+$GCM_LG_es['masmonelledu']='';
+$GCM_LG_es['responsiveslides']='';
+$GCM_LG_es['Configuración de responsiveslides']='';
+$GCM_LG_es['Error al crear directorio destino']='';
 ?>

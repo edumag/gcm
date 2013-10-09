@@ -513,22 +513,22 @@ class Eventos {
       $logeados = ( $gcm->au->logeado() ) ? TRUE : FALSE ;
 
       if ( isset($this->ubicaciones[$m])  ) {
-         if ( $logeados && file_exists($this->ubicaciones[$m].'/lib/'.$M.'Admin.php')  ) {
+         if ( $logeados && is_file($this->ubicaciones[$m].'/lib/'.$M.'Admin.php') !== FALSE  ) {
             $MA = $M.'Admin';
             $fm = $this->ubicaciones[$m].'/lib/'.$MA.'.php';
          } else {
             $fm = $this->ubicaciones[$m].'/lib/'.$M.'.php';
             $MA = FALSE;
             }
-
       } elseif ( $logeados && file_exists($this->dir_modulos_proyecto.$m.'/lib/'.$M.'Admin.php') ) {
          $MA = $M.'Admin';
          $fm = $this->dir_modulos_proyecto.$m.'/lib/'.$MA.'.php';
       } elseif ( file_exists($this->dir_modulos_proyecto.$m.'/lib/'.$M.'.php') ) {
          $fm = $this->dir_modulos_proyecto.$m.'/lib/'.$M.'.php';
          $MA = FALSE;
-      } elseif ( $logeados && file_exists($this->dir_modulos.$m.'/lib/'.$M.'.php') ) {
-         $MA = $M.'Admin';
+      } elseif ( $logeados && file_exists($this->dir_modulos.$m.'/lib/'.$M.'Admin.php') ) {
+         registrar(__FILE__,__LINE__,'FICHERO: '.$fm,'ERROR');
+         $MA = FALSE;
          $fm = $this->dir_modulos.$m.'/lib/'.$MA.'.php';
       } elseif ( file_exists($this->dir_modulos.$m.'/lib/'.$M.'.php') ) {
          $MA = FALSE;

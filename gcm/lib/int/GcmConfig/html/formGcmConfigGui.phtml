@@ -56,9 +56,11 @@
 
          <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>'>
 
+            <?php $conta=0; ?>
+
             [<a title='Añadir más' href="javascript:anadirVariable('<?php echo $this->idioma ?>','<?php echo $clave ?>','<?php echo $conta?>')" >+</a>]
 
-            <?php $conta=0; while (list($claveArray, $valorArray)=each($val)) { $conta++; ?>
+            <?php while (list($claveArray, $valorArray)=each($val)) { $conta++; ?>
 
             <div id='<?php echo $clave."-".$conta?>' >
 

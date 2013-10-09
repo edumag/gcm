@@ -40,7 +40,7 @@ class Array2table {
       self::$img_modificar = 'modificar.png' ;
       self::$img_borrar    = 'borrar.png'    ;
       self::$img_ver       = 'ver.png'       ;
-      if ( is_object(Router) ) self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
+      if ( is_object('Router') ) self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
 
       }
 
@@ -70,10 +70,10 @@ class Array2table {
     *
     *                    Estructura de ejemplo:
     *
-    *                    array('url' => array(                            // Nombre del campo con el enlace
-    *                                   'campo_enlazado'=>'contenido'     // Nombre del campo que se mostrara en el enlace
-    *                                  ,'titulo_columna'=>'Contenido'     // Titulo de la columna
-    *                                  ,'base_url'=>Router::$base         // Base de la url 
+    *                    array('enlaces' => array(
+    *                                  'campo_enlazado'=>'contenido'     // Nombre del campo que se mostrara en el enlace
+    *                                  ,'titulo_columna'=>'Contenido'    // Titulo de la columna que hace de enlace
+    *                                  ,'base_url'=>?id=                 // Base de la url 
     *                                    )
     *                                  )
     *        Importaante:
@@ -233,7 +233,7 @@ class Array2table {
       if ( $modificar ) {
          $num_columnas++;
          ?>
-         <th>
+         <th class="head">
             <h3>
                <img src='<?=self::$base_imagenes.self::$img_modificar?>'
                width='16' height='16' border='0' title='Modificar' 

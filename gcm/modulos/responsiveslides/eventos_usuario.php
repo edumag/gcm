@@ -27,4 +27,5 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
+$eventos['cabeceraIzquierda']['slide'][1]='';
 ?>
