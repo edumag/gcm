@@ -686,6 +686,52 @@ class Admin extends Modulos {
 
       }
 
+   /**
+    * Procesar shortcodes de contenido
+    *
+    */
+
+   function shortcode($e,$args=FALSE) {
+
+      global $gcm;
+
+      $etiqueta_inicio = '{S{';
+      $etiqueta_final  = '}}';
+
+      $buffer = $gcm->contenido;
+
+      while ( strpos($buffer, $etiqueta_inicio) !== false ) {
+
+         $pos1 = NULL;
+         $pos2 = NULL;
+         $archivo  = NULL;
+         $remplazar = NULL;
+         $archivo = NULL;
+
+         $pos1 = strpos($buffer, $etiqueta_inicio);
+         $pos2 = strpos($buffer, $etiqueta_final, $pos1);
+         $remplazar = substr($buffer, $pos1, $pos2 - $pos1 + 2);
+         $etiqueta = str_replace($etiqueta_inicio,'',$remplazar);
+         $etiqueta = str_replace($etiqueta_final,'',$etiqueta);
+
+         if ( $pos1 && $pos2 && $etiqueta && $remplazar ) {
+
+            ob_start();
+            list($modulo,$accion,$args) = explode(',',$etiqueta);
+            $gcm->event->lanzar_accion_modulo($modulo,$accion,'shortcode',$args);
+            $etiqueta = ob_get_contents();
+            ob_end_clean();
+
+            $buffer = str_replace($remplazar,$etiqueta,$buffer);
+
+            }
+
+         }
+
+      $gcm->contenido=$buffer;
+      }
+
+
    }
 
 ?>
