@@ -5,10 +5,9 @@
  * Funciones para añadir eliminar o modificar variables y descripciones
  *
  * @author    Eduardo Magrané 
+ * @ingroup GcmConfig
  *
  * @internal
- *   Created  09/02/10
- *  Revision  SVN $Id: $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the

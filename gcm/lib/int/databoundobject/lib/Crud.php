@@ -1762,11 +1762,7 @@ class Crud extends DataBoundObject {
 
       if ( $condicion ) {
 
-         if ( stripos($sql,'GROUP ') !== FALSE ) {
-            $sql = str_ireplace('GROUP ',' WHERE '.$condicion.' GROUP ', $sql);
-         } else {
-            $sql .= ' WHERE '.$condicion ;
-            }
+         $sql = $this->anyadir_condicion_sql($condicion,$sql);
 
          }
 
@@ -2144,6 +2140,28 @@ class Crud extends DataBoundObject {
          }
 
       }
+
+   /**
+    * Añadir condición a la sql
+    * 
+    * @param $condicion Condición
+    * @param $sql SQL a modificar por defecto $this->sql_listado 
+    */
+
+   function anyadir_condicion_sql($condicion, $sql=FALSE) {
+
+      $sql = ( $sql ) ? $sql : $this->sql_listado ;
+
+      if ( stripos($sql,'GROUP ') !== FALSE ) {
+         $sql = str_ireplace('GROUP ',' WHERE '.$condicion.' GROUP ', $sql);
+      } else {
+         $sql .= ' WHERE '.$condicion ;
+         }
+
+      return $sql;
+
+      }
+
 
    }
 

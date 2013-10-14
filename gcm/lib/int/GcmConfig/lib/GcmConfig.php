@@ -2,11 +2,11 @@
 
 /**
  * @file      GcmConfig.php
+ * @brief     Manipulación de archivos de configuración
+ * @ingroup   GcmConfig
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  21/01/10
- *  Revision  SVN $Id: GcmConfig.php 651 2012-10-17 09:19:07Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -33,6 +33,8 @@
  * Uso:
  *
  * Formato para el archivo que contiene las variables de configuración TGC.php:
+ * El nombre de la variable debe coincidir con el nombre del archivo, el resto será
+ * ignorado y por lo tanto perdido al volver a escribir el archivo.
  *
  * <pre>
  * <?php
@@ -65,7 +67,6 @@
  *
  * Los ficheros de idiomas contendran su especificación en el nombre, ejemplo: TGC_es.php
  *
- * @version 0.1
  */
 
 class GcmConfig {

@@ -3,9 +3,11 @@
 @file readme.dox
 @brief CRUD
 
-@defgroup crud CRUD
+@defgroup crud CRUD Create, update and delete 
 
 Automatización de la gestión de la base de datos. Creación, modificación y borrado de registros
+
+@ingroup librerias
 
 @{
 

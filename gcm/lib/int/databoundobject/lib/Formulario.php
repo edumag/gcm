@@ -7,8 +7,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  09/03/11
- *  Revision  SVN $Id: $
  * Copyright  Copyright (c) 2011, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -23,89 +21,9 @@
  * Clase que gestiona la forma en que se presentan los datos para ser
  * modificados, según los criterios que se le pasen.
  *
- * El peso especificado en un campo nos permite controlar el orden de presentación
- *
- * Opciones:
- *
- * - tipo: text, 
- * - ['oculto_form'] = 1 No se muestra.
- * - ['ignorar'] = 1 Se ignora al presentar en formulario 
- *
  * Debe:
  * 
  * - Recibir un array con los campos del formulario y sus especificaciones, ejemplo:
- *
- * <pre>
- * Array (
- *
- *    [nombre] => Array
- *        (
- *            [tipo] => text
- *            [maxlength] => 100
- *            [size] => 30
- *            [valor] => Probando nombre
- *            [peso] => -10
- *        )
- *
- *    [descripcion] => Array
- *        (
- *            [tipo] => textarea
- *            [cols] => 30
- *            [rows] => 3
- *            [valor] => Probando nombreProbando 
- *            [oculto_form] => 1                  // Queda oculto dentro del formulario
- *            [privado] => 1                      // No se muestra en la visualización del registro
- *        )
- *
- *    [categorias_id] => Array
- *        (
- *            [tipo] => relacion
- *            [maxlength] => 11
- *            [size] => 11
- *            [tabla] => categorias
- *            [valor] => 
- *            [opciones] => Array
- *                (
- *                    [0] => Array
- *                        (
- *                            [id] => 5
- *                            [nombre] => nombre
- *                        )
- *
- *                    [1] => Array
- *                        (
- *                            [id] => 4
- *                            [nombre] => Cuarta
- *                        )
- *
- *                )
- *
- *        )
- *
- *    [fecha_creacion] => Array
- *        (
- *            [tipo] => text
- *            [maxlength] => 20
- *            [size] => 20
- *            [valor] => 2011-03-10 10:21:27
- *            [oculto_form] => 1                  // Queda oculto dentro del formulario
- *        )
- *
- *    [stock] => Array
- *        (
- *            [tipo] => text
- *            [maxlength] => 11
- *            [size] => 11
- *            [valor] => 
- *        )
- *    [mail] => Array
- *        (
- *            [tipo] => mail
- *            [maxlength] => 100
- *            [size] => 30
- *            [valor] => 
- *        )
- * </pre>
  *
  * - Recibir array con el displayHash generao por Solicitud
  * 
@@ -130,7 +48,94 @@ class Formulario {
 
    public $plantilla_visualizar;
 
-   /** Array con los campos del formulario */
+   /** 
+    * Array con los campos del formulario 
+    *
+    * El peso especificado en un campo nos permite controlar el orden de presentación
+    *
+    * Opciones:
+    *
+    * - tipo: text, 
+    * - ['oculto_form'] = 1 No se muestra.
+    * - ['ignorar'] = 1 Se ignora al presentar en formulario 
+    *
+    * Ejemplos:
+    *
+    * @code
+    * <pre>
+    * Array (
+    *
+    *    [nombre] => Array
+    *        (
+    *            [tipo] => text
+    *            [maxlength] => 100
+    *            [size] => 30
+    *            [valor] => Probando nombre
+    *            [peso] => -10
+    *        )
+    *
+    *    [descripcion] => Array
+    *        (
+    *            [tipo] => textarea
+    *            [cols] => 30
+    *            [rows] => 3
+    *            [valor] => Probando nombreProbando 
+    *            [oculto_form] => 1                  // Queda oculto dentro del formulario
+    *            [privado] => 1                      // No se muestra en la visualización del registro
+    *        )
+    *
+    *    [categorias_id] => Array
+    *        (
+    *            [tipo] => relacion
+    *            [maxlength] => 11
+    *            [size] => 11
+    *            [tabla] => categorias
+    *            [valor] => 
+    *            [opciones] => Array
+    *                (
+    *                    [0] => Array
+    *                        (
+    *                            [id] => 5
+    *                            [nombre] => nombre
+    *                        )
+    *
+    *                    [1] => Array
+    *                        (
+    *                            [id] => 4
+    *                            [nombre] => Cuarta
+    *                        )
+    *
+    *                )
+    *
+    *        )
+    *
+    *    [fecha_creacion] => Array
+    *        (
+    *            [tipo] => text
+    *            [maxlength] => 20
+    *            [size] => 20
+    *            [valor] => 2011-03-10 10:21:27
+    *            [oculto_form] => 1                  // Queda oculto dentro del formulario
+    *        )
+    *
+    *    [stock] => Array
+    *        (
+    *            [tipo] => text
+    *            [maxlength] => 11
+    *            [size] => 11
+    *            [valor] => 
+    *        )
+    *    [mail] => Array
+    *        (
+    *            [tipo] => mail
+    *            [maxlength] => 100
+    *            [size] => 30
+    *            [valor] => 
+    *        )
+    * </pre>
+    * 
+    * @endcode
+    */
 
    protected $campos; 
 

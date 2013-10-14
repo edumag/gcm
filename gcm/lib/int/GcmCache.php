@@ -4,6 +4,7 @@
  * @file GcmCache.php
  * @brief Cache
  *
+ * @ingroup librerias
  * @author    Eduardo Magrané 
  *
  * @internal
@@ -14,8 +15,11 @@
  */
 
 /**
- * @defgroup Cache para páginas y variables
+ * @defgroup GcmCache GcmCache
  * @ingroup librerias
+ * 
+ * Cache para páginas y variables
+ *
  * @{
  */
 
