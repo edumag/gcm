@@ -70,51 +70,40 @@ $menuAdmin['lugar_modulo']['mod']['nombre_modulo']['link']="?m=nombre_modulo";
 <div>
 <h2>Informaci&oacute;n de la aplicaci&oacute;n</h2>
 <p>La clase Router nos permite saber informaci&oacute;n de la acci&oacute;n o lugar actual.</p>
-<p>sus m&eacute;todos son:</p>
 <pre class="literal-block">/** Devolver la ruta hacia el directorio base del proyecto */
-Router::get_dir(){
-
-/** Se quiere presentar contenido o no TRUE/FALSE */
-Router::get_sin_contenido(){
-
+Router::$dir<br />
 /** Devolver la url recibida */
-Router::get_url()
+Router::$url
 
 /** Devolver directorio del contenido por defecto, depender&aacute; del idioma por defecto, ejemplo File/es  */
-Router::get_dd()
+Router::$dd
 
 /** Devolver el directorio de contenido seg&uacute;n idioma seleccionado, ejemplo File/ca */
-Router::get_d()
+Router::$d
 
 /** Devolver la secci&oacute;n actual */
-Router::get_s()
+Router::$s
 
 /** Devolver el nombre del contenido */
-Router::get_c()
+Router::$c
 
 /** Devolver la ruta completa del contenido, ejemplo: FIle/es/Documentacion/contenido.html */
-Router::get_f()
+Router::$f
 
 /** Devolver el nombre del m&oacute;dulo  */
-Router::get_m()
+Router::$m
 
 /** Devolver la accion que se pide realizar */
-Router::get_a()
+Router::$a
 
 /** Devolver el idioma actual */
-Router::get_i()
+Router::$i
 
 /** Devolver el idioma por defecto */
-Router::get_ii()
-
-/** Devolver el nombre de la secci&oacute;n actual sin las secciones padres */
-Router::get_estamos()
-
-/** Devolver si estamos editando o viendo */
-Router::get_editar()
+Router::$ii
 
 /** Devolver el tipo mime del archivo */
-Router::get_mime_type()
+Router::$mime_type
 </pre>
 </div>
 <div class="section">&nbsp;</div>
