@@ -53,7 +53,7 @@ class Crud extends DataBoundObject {
 
    /**
     * Nos permite diferencirar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
-    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo.
+    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo y en los botones de acción.
     */
 
    public $sufijo;
@@ -814,7 +814,7 @@ class Crud extends DataBoundObject {
        * para que funcionen las validaciones.
        */
 
-      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->DefineTableName().'_' : '' ;
+      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->sufijo() : '' ;
       $sufijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? '[]' : '' ;
 
       if ( isset($this->restricciones) ) {
@@ -1101,8 +1101,8 @@ class Crud extends DataBoundObject {
 
          // Si tenemos identificador lo añadimos oculto
          if ( $this->ID ) {
-            $this->tipos_formulario[$this->DefineTableName().'_id']['valor'] = $this->ID;
-            $this->tipos_formulario[$this->DefineTableName().'_id']['oculto_form'] = 1;
+            $this->tipos_formulario[$this->sufijo.'id']['valor'] = $this->ID;
+            $this->tipos_formulario[$this->sufijo.'id']['oculto_form'] = 1;
             }
 
          // Si la tenemos nombre_campo_relacional lo ocultamos.
@@ -1180,7 +1180,7 @@ class Crud extends DataBoundObject {
       if ( $this->tipo_tabla == 'normal' ) {
          $form->genera_formulario(FALSE, $this->accion, $this);
       } else {
-         $form->genera_formulario(FALSE, $this->accion, $modelo_padre, $this->DefineTableName(), $contador);
+         $form->genera_formulario(FALSE, $this->accion, $modelo_padre, $this->strTableName, $contador);
          }
 
       $this->formulario_registros_relacionados($displayHash);
@@ -1191,7 +1191,7 @@ class Crud extends DataBoundObject {
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
-         <p class="botonera_crud"><input type="submit" name="<?php echo $this->DefineTableName(); ?>_guardar" value="Guardar"></p>
+         <p class="botonera_crud"><input type="submit" name="<?php echo $this->sufijo; ?>guardar" value="Guardar"></p>
          </form>
          <?php
 
@@ -1270,11 +1270,11 @@ class Crud extends DataBoundObject {
 
       $displayHash = array();
 
-      if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) $this->ID = $_REQUEST[$this->DefineTableName().'_id'];
+      if ( isset($_REQUEST[$this->sufijo.'id']) ) $this->ID = $_REQUEST[$this->sufijo.'id'];
 
       // El identificador puede que venga por sesión.
-      if ( ! $this->ID && isset($_SESSION['VALORES'][$this->DefineTableName().'_id']) ) 
-         $this->ID = isset($_SESSION['VALORES'][$this->DefineTableName().'_id']);
+      if ( ! $this->ID && isset($_SESSION['VALORES'][$this->sufijo.'id']) ) 
+         $this->ID = isset($_SESSION['VALORES'][$this->sufijo.'id']);
 
       // Verificar registro
       if ( $this->ID ) {
@@ -1288,24 +1288,24 @@ class Crud extends DataBoundObject {
 
       // Determinar acción actual
 
-      if ( isset($_POST[$this->DefineTableName().'_guardar']) ) {
+      if ( isset($_POST[$this->sufijo.'guardar']) ) {
          $this->accion = 'guardando';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_insertar']) && $this->permisos ) {
+      } elseif ( isset($_REQUEST[$this->sufijo.'insertar']) && $this->permisos ) {
          $this->accion = 'insertar';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accio_galeria']) && $_REQUEST[$this->DefineTableName().'_accio_galeria'] == 'agafa_imatge' ) {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accio_galeria']) && $_REQUEST[$this->sufijo.'accio_galeria'] == 'agafa_imatge' ) {
          $this->accion = 'agafa_imatge';
-      } elseif ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->DefineTableName().'_formulario'])) {
+      } elseif ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
          $this->accion = 'con_errores';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'ver') {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'ver') {
          $this->accion = 'ver';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'eliminar') {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'eliminar') {
          $this->accion = 'eliminar';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'editar') {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'editar') {
          $this->accion = 'editar';
       } elseif ( $accion_directa ) {
          $this->accion = $accion_directa;
       } else {
-         if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) {
+         if ( isset($_REQUEST[$this->sufijo.'id']) ) {
             $this->accion = 'ver';
          } else {
             $this->accion = 'inicio';
@@ -1360,7 +1360,7 @@ class Crud extends DataBoundObject {
                         // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
                         // estar vacio.
                         if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
-                        $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                        $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
                         $conta++;
                         }
                      }
@@ -1408,7 +1408,7 @@ class Crud extends DataBoundObject {
                               // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
                               // estar vacio.
                               if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
-                              $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                              $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
                               $conta++;
                               }
                            }
@@ -1725,17 +1725,17 @@ class Crud extends DataBoundObject {
 
          // Boton insertar
          if ( $this->accion == "ver" || $this->accion == "inicio" ) {
-            echo '<a class="formulari2 boton" href="?'.$this->DefineTableName().'_insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
+            echo '<a class="formulari2 boton" href="?'.$this->sufijo.'insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
             }
 
          // Boton editar
          if ( $this->accion != "editar" && $this->ID ) {
-            echo ' <a class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=editar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
+            echo ' <a class="formulari2 boton" href="?'.$this->sufijo.'accion=editar&'.$this->sufijo.'id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
             }
 
          // Boton borrar
          if (  $this->ID ) {
-            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->DefineTableName().'" class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
+            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->sufijo.'" class="formulari2 boton" href="?'.$this->sufijo.'accion=eliminar&'.$this->sufijo.'id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
             }
 
          // Boton Cancelar
@@ -1772,7 +1772,7 @@ class Crud extends DataBoundObject {
 
       $this->elementos = ( $this->elementos_pagina ) ? $this->elementos_pagina : NULL;
 
-      $pd = new PaginarPDO($this->objPDO, $sql, $this->sufijo, $this->elementos_pagina, $order, $this->sql_listado_relacion);
+      $pd = new PaginarPDO($this->objPDO, $sql, $this->sufijo, $this->elementos_pagina, $order, $this->sql_listado_relacion, $this->conf_paginador);
 
       // Configuración de paginador
       if ( $this->conf_paginador ) {
@@ -1785,21 +1785,21 @@ class Crud extends DataBoundObject {
 
          if ( $this->permisos ) {
             $opciones = array(
-               'url'           => '?'.$this->DefineTableName().'_id='
+               'url'           => '?'.$this->sufijo.'id='
                ,'identifiador' => 'id'
                ,'modificar'    => 'editar'  
                // ,'eliminar'     => 'eliminar'
                //,'ver'          => 'ver'
-               ,'accion'       => $this->DefineTableName().'_accion'
+               ,'accion'       => $this->sufijo.'accion'
                ,'ocultar_id'   => 1
                ,'dir_img'      => ( $this->dir_img_array2table ) ? $this->dir_img_array2table : NULL
                );
          } else {
             $opciones = array(
-               'url'           => '?'.$this->DefineTableName().'_id='
+               'url'           => '?'.$this->sufijo.'id='
                ,'identifiador' => 'id'
                //,'ver'          => 'ver'
-               ,'accion'       => $this->DefineTableName().'_accion'
+               ,'accion'       => $this->sufijo.'accion'
                ,'ocultar_id'   => 1
                ,'dir_img'      => ( $this->dir_img_array2table ) ? $this->dir_img_array2table : NULL
                );
@@ -1916,7 +1916,7 @@ class Crud extends DataBoundObject {
 
       foreach ( $modelo->arRelationMap as $campo => $rCampo ) {
 
-         $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->DefineTableName().'_'.$campo][$numero_registro] : $resultado[$campo];
+         $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->sufijo.$campo][$numero_registro] : $resultado[$campo];
 
          if ( ! empty($valor) && $valor ) $hay_valores = TRUE;
 

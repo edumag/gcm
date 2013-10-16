@@ -62,9 +62,11 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    
    <?php $cargar_codigo_fechas_horas[] = $campo; ?>
    <div class="caja_campo_titulo"><?=literal($campo)?></div>
-   <?php $valor = ( $this->valores($campo) ) 
+   <?php 
+   $valor = ( $this->valores($campo) && $this->valores($campo) != '0000-00-00 00:00:00' ) 
                ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))) 
-               : strftime("%Y-%m-%d %H:%M"); ?>
+               : strftime("%Y-%m-%d %H:%M"); 
+   ?>
    
    <?php echo HTML::form_text($campo,$valor); ?>
 
