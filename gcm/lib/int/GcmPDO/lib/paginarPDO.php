@@ -268,9 +268,16 @@ class PaginarPDO extends GcmPDO {
 
          if ( $url_ajax && $url_ajax != '' ) {
 
+            // Ocultamos botonera hasta cargarse el ajax para evitar que se clique 
+            // antes de tiempo
+            ?>
+            <style>#<?php echo $div ?> .botonera_paginador { visibility: hidden; }</style>
+            <?php
+
             $this->script_ajax();
             
             if ( isset($_REQUEST['formato']) && $_REQUEST['formato'] == 'ajax' ) {
+
                ?>
                <script>setTimeout('initPaginador("#<?=$div?>","<?=$url_ajax?>")', 1000);</script>
                <?php
@@ -303,6 +310,7 @@ class PaginarPDO extends GcmPDO {
       ?>
       <script>
       function initPaginador(div,url_ajax) {
+         $(div).find(".botonera_paginador").css('visibility','visible');
          $(div).find(".botonera_paginador a").click(function() {
             var url = $(this).attr("href") + url_ajax;
             $.get(url,function(data){
