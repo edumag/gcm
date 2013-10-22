@@ -126,12 +126,22 @@ class GcmConfigGui extends GcmConfig {
 
          foreach( $_POST['descripcion_'.$idioma] as $clave => $valor ) {
 
-            $this->setDescripcion($clave,$valor, $idioma);
+            if ( is_array($valor) ) {
+               foreach ( $valor as $key => $val ) {
+                  $this->setDescripcion($clave,$val, $idioma, $key);
+                  }
+            } else {
+               $this->setDescripcion($clave,$valor, $idioma);
+               }
 
             }
 
          }
       
+      // echo "<pre>POST" ; print_r($_POST) ; echo "</pre>"; // DEV  
+      // echo "<pre>variables" ; print_r($this->variables) ; echo "</pre>"; // DEV  
+      // echo "<pre>descripciones" ; print_r($this->descripciones) ; echo "</pre>"; // DEV  
+
       return TRUE;
 
       }

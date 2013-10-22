@@ -126,6 +126,12 @@ if ( $cargar_codigo_fechas_horas ) {
 
 
    foreach ( $cargar_codigo_fechas_horas as $campo_fecha ) {
+
+   // {
+	//				'locale': 'es'
+   //            ,'inline': true
+   //            ,'dateFormat': 'd.m.y h.m'
+	//			}
       $objeto_padre->codigo_js .= "
          $(function(){
             $('*[name=$campo_fecha]').appendDtpicker();

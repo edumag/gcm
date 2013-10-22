@@ -1002,7 +1002,7 @@ class Crud extends DataBoundObject {
          }
 
 
-      if (isset($this->ID)) {
+      if (isset($this->ID) && !empty($this->ID) ) {
 
          $strRetVal = $this->GetAccessor(ucfirst($campo));
          //$strRetVal = $this->GetAccessor($campo);
@@ -1107,7 +1107,7 @@ class Crud extends DataBoundObject {
 
          // Si la tenemos nombre_campo_relacional lo ocultamos.
          if ( $campo == $nombre_campo_relacional ) {
-            if ( isset($modelo_padre->ID) ) {
+            if ( isset($modelo_padre->ID) && !empty($modelo_padre->ID) ) {
                $this->tipos_formulario[$campo]['valor'] = $modelo_padre->ID;
                $this->tipos_formulario[$campo]['oculto_form'] = 1;
             } else {
@@ -1280,7 +1280,7 @@ class Crud extends DataBoundObject {
       if ( $this->ID ) {
          if ( ! $this->blIsLoaded ) {
             if ( ! $this->Load() ) {
-               registrar(__FILE__,__LINE__,'No esiste registro ['.$this->ID.']','ERROR');
+               registrar(__FILE__,__LINE__,literal('No esiste registro').' ['.$this->ID.']','ERROR');
                return FALSE;
                }
             }
@@ -1359,7 +1359,7 @@ class Crud extends DataBoundObject {
                         // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
                         // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
                         // estar vacio.
-                        if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
+                        if ( ! isset($this->ID) && !empty($this->ID) && $campo == $nombre_campo_relacional ) continue;
                         $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
                         $conta++;
                         }
@@ -1407,7 +1407,7 @@ class Crud extends DataBoundObject {
                               // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
                               // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
                               // estar vacio.
-                              if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
+                              if ( ! isset($this->ID) && !empty($this->ID) && $campo == $nombre_campo_relacional ) continue;
                               $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
                               $conta++;
                               }
@@ -1431,13 +1431,13 @@ class Crud extends DataBoundObject {
 
                $this->recoger_valores_formulario($this, $resultado);
 
-               $this->accion = ( isset($this->ID) ) ? 'modificando' : 'insertando';
+               $this->accion = ( isset($this->ID) && ! empty($this->ID) ) ? 'modificando' : 'insertando';
 
                if ( $this->save() ) {
 
                   /* Si utilizamos galería hay que guardar imagenes */
 
-                  $this->ID = ( isset($this->ID) ) ? $this->ID : $this->ultimo_identificador();
+                  $this->ID = ( isset($this->ID) && ! empty($this->ID) ) ? $this->ID : $this->ultimo_identificador();
 
                   /* Si tenemos eventos los lanzamos */
 
@@ -1581,11 +1581,11 @@ class Crud extends DataBoundObject {
                         }
                      }
 
-                  $mens = ( $this->accion == 'modificando' ) ? 'Registro modificado' : 'Registro incluido';
+                  $mens = ( $this->accion == 'modificando' ) ? literal('Registro modificado') : literal('Registro incluido');
                   registrar(__FILE__,__LINE__,literal($mens,3),'AVISO');
                   unset($_SESSION['VALORES']);
                } else {
-                  registrar(__FILE__,__LINE__,'ERROR al añadir o modificar registro','ERROR');
+                  registrar(__FILE__,__LINE__,literal('Error al añadir o modificar registro'),'ERROR');
                   }
 
             }
@@ -1641,7 +1641,7 @@ class Crud extends DataBoundObject {
       } elseif ( $this->accion == 'ver' ) {
 
          if ( ! $this->ID ) {
-            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            registrar(__FILE__,__LINE__,literal('No existe registro'),'ERROR');
             return FALSE;
             }
 
@@ -1651,7 +1651,7 @@ class Crud extends DataBoundObject {
       } elseif ( $this->accion == 'eliminar' ) {
 
          if ( ! $this->ID ) {
-            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            registrar(__FILE__,__LINE__,literal('No existe registro'),'ERROR');
             return FALSE;
             }
 
@@ -1686,7 +1686,7 @@ class Crud extends DataBoundObject {
 
 
 
-         registrar(__FILE__,__LINE__,"Registro eliminado",'AVISO');
+         registrar(__FILE__,__LINE__,literal("Registro eliminado"),'AVISO');
          header("Location: ".$_SERVER['PHP_SELF']);
          exit(0);
 
@@ -1816,7 +1816,7 @@ class Crud extends DataBoundObject {
          $pd->generar_pagina($this->url_ajax, $opciones, $presentacion);
 
       } else {
-         registrar(__FILE__,__LINE__,"Tabla sin contenido",'AVISO');
+         registrar(__FILE__,__LINE__,literal("Tabla sin contenido"),'AVISO');
          }
 
       }
@@ -1920,7 +1920,7 @@ class Crud extends DataBoundObject {
 
          if ( ! empty($valor) && $valor ) $hay_valores = TRUE;
 
-         if ( isset($modelo->ID) && $campo == 'fecha_creacion'  ) {
+         if ( isset($modelo->ID) && ! empty($modelo->ID) && $campo == 'fecha_creacion'  ) {
             $modelo->SetAccessor($rCampo, date("Y-m-d H:i:s"));
             continue;
             }
@@ -2122,7 +2122,7 @@ class Crud extends DataBoundObject {
                         <?php if ( $campo != $campo_contenido ) $salida .= literal($valor); ?>
                         <?php if ( $conta > 1 ) { break; } // Solo añadimos el siguiente campo al identificador ?> 
                         <?php } ?>
-                        <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
+                        <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo str_replace("'","\'",$salida) ?>')">
                            <?php echo $salida ?>
                         </a>
                      </li>
