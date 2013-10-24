@@ -520,7 +520,6 @@ class Eventos {
             $fm = $this->ubicaciones[$m].'/lib/'.$M.'.php';
             $MA = FALSE;
             }
-
       } elseif ( $logeados && file_exists($this->dir_modulos_proyecto.$m.'/lib/'.$M.'Admin.php') ) {
          $MA = $M.'Admin';
          $fm = $this->dir_modulos_proyecto.$m.'/lib/'.$MA.'.php';

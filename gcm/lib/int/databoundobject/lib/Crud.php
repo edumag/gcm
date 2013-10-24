@@ -778,10 +778,13 @@ class Crud extends DataBoundObject {
             $this->restricciones[$campo][RT_LONG_MAX] = $this->tipos_campos[$campo]['max'];
             }
 
-         // Si un campo no permite null es requerido
-         if ( isset($this->tipos_campos[$campo]['null']) && 
-            $this->tipos_campos[$campo]['null'] == 'NO' && 
-            !isset($this->tipos_campos[$campo]['Default']) ) {
+         // Si un campo no permite null es requerido a no ser que sea una tabla relacionada
+         // en ese caso no es obligatorio
+
+         if ( isset($this->tipos_campos[$campo]['null']) 
+            && $this->tipos_campos[$campo]['null'] == 'NO' 
+            && !isset($this->tipos_campos[$campo]['Default']) 
+            && $this->tipo_tabla == 'normal' ) {
 
                $this->restricciones[$campo][RT_REQUERIDO] = 1;
                $this->mensajes[$campo][RT_REQUERIDO] = literal('Campo obligatorio',3);
@@ -1174,6 +1177,7 @@ class Crud extends DataBoundObject {
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
          <form id="crud" name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
+         <input type="hidden" name="url_formulario" value="<?php echo ( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
          <?php
          }
 
@@ -1289,13 +1293,15 @@ class Crud extends DataBoundObject {
       // Determinar acción actual
 
       if ( isset($_POST[$this->sufijo.'guardar']) ) {
-         $this->accion = 'guardando';
+         if ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
+            $this->accion = 'con_errores';
+         } else {
+            $this->accion = 'guardando';
+            }
       } elseif ( isset($_REQUEST[$this->sufijo.'insertar']) && $this->permisos ) {
          $this->accion = 'insertar';
       } elseif ( isset($_REQUEST[$this->sufijo.'accio_galeria']) && $_REQUEST[$this->sufijo.'accio_galeria'] == 'agafa_imatge' ) {
          $this->accion = 'agafa_imatge';
-      } elseif ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
-         $this->accion = 'con_errores';
       } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'ver') {
          $this->accion = 'ver';
       } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'eliminar') {
@@ -1325,8 +1331,12 @@ class Crud extends DataBoundObject {
          $solicitud->SetRedirectOnConstraintFailure(true);
          // Si tenemos definida la url de vuelta al formulario la especificamos
          // a solicitud.
-         if ( $this->url_formulario ) {
+         if ( isset($_POST['url_formulario']) ) {
+            $solicitud->SetConstraintFailureRedirectTargetURL($_POST['url_formulario']);
+         } elseif ( $this->url_formulario ) {
             $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
+         } else {
+            $solicitud->SetConstraintFailureRedirectTargetURL($_SERVER['REDIRECT_URL']);
             }
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
@@ -1418,7 +1428,6 @@ class Crud extends DataBoundObject {
                }
             }
 
-         
          $solicitud->TestConstraints();
 
          // Si hemos llegado aquí hemos pasado las pruebas
@@ -1934,7 +1943,6 @@ class Crud extends DataBoundObject {
          // con md5()
          if ( $campo == 'pass_md5' && !empty($valor) ) {
             $modelo->SetAccessor($rCampo, md5($valor));
-            // registrar(__FILE__,__LINE__,'pass: '.$valor.' md5: '.md5($valor),'AVISO'); // DEV
             continue;
             }
 
@@ -1942,7 +1950,6 @@ class Crud extends DataBoundObject {
          // la modifica sin ser lo que queremos.
          if ( $campo == 'pass_md5' && empty($valor) ) {
             $modelo->DelAccessor($rCampo);
-            // registrar(__FILE__,__LINE__,'pass: '.$valor.' md5: '.md5($valor),'AVISO'); // DEV
             continue;
             }
 

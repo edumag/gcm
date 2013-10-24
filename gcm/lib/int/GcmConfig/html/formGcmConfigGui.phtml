@@ -79,7 +79,7 @@ function contabilizar_saltos_linea($cadena) {
             // añadir o eliminar grupos.
             ?>
 
-            <fieldset id="item_<?php echo $clave.'-'.($conta - 1) ?>">
+            <fieldset class="grupo_config" id="item_<?php echo $clave.'-'.($conta - 1) ?>">
 
             <legend id="legend_<?php echo $clave.'-'.($conta - 1) ?>">
                <?php echo literal($clave).' ('.($conta - 1) .')'; ?>
@@ -92,18 +92,16 @@ function contabilizar_saltos_linea($cadena) {
 
             <?php while (list($claveArray2, $valorArray2)=each($valorArray)) { $conta2++; ?>
 
-
-
             <div id='<?php echo $claveArray."-".$conta2?>' >
 
                <b><?php echo $claveArray2?></b>
                <?php $cadena =  $this->getDescripcion($claveArray2,NULL,$clave) ?>
-               <textarea rows='<?php echo contabilizar_saltos_linea($cadena) ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray2 ?>]'
+               <textarea class="textAreaDescrip" rows='<?php echo contabilizar_saltos_linea($cadena) ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray2 ?>]'
                <?php if ( ! $modificar_descripciones ) { ?>
                class='inputLectura' readonly
                <?php } ?> ><?php echo $cadena;?></textarea>
 
-               <textarea class="item_valor formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $valorArray2?></textarea>
+               <textarea class="item_valor formulari2 textAreaValor" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $valorArray2?></textarea>
 
             </div>
 
@@ -141,24 +139,17 @@ function contabilizar_saltos_linea($cadena) {
 
          <div>
 
-         <div class="textAreaDescrip">
+         <?php  
+         $cadena=$this->getDescripcion($clave);
+         $lineas=contabilizar_saltos_linea($cadena);
+         ?> 
 
-            <?php  
-            $cadena=$this->getDescripcion($clave);
-            $lineas=contabilizar_saltos_linea($cadena);
-            ?> 
+         <textarea class="textAreaDescrip" rows='<?php echo $lineas ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+         <?php if ( ! $modificar_descripciones ) { ?>
+         class='inputLectura' readonly
+         <?php } ?> ><?php echo $cadena?></textarea>
 
-            <textarea rows='<?php echo $lineas ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
-            <?php if ( ! $modificar_descripciones ) { ?>
-            class='inputLectura' readonly
-            <?php } ?> ><?php echo $cadena?></textarea>
-
-         </div>
-
-
-         <div class="textAreaDescrip">
-            <textarea class="formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $val?></textarea>
-         </div>
+         <textarea class="textAreaValor formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $val?></textarea>
 
          <?php } ?>
 

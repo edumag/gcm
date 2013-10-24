@@ -12,9 +12,11 @@
    padding: 5px;
    margin: 5px;
 }
-.textAreaDescrip{ float:left; width:50%}
+textarea.textAreaDescrip{ float:left; width:45%}
+textarea.textAreaValor{ float:left; width:50%}
 
 .GcmConfigCajaForm fieldset {
    border: 1px solid gold;
    margin: 5px;
 }
+.grupo_config b { display: block; float: left; width: 100%; }
