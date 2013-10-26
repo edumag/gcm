@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jul 9 9:27:47 CEST 2013
+// Archivo generado automáticamente por GcmConfig Sat Oct 26 7:48:04 CEST 2013
 $LG_es['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instalación, pasos a seguir';
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
@@ -14,7 +14,7 @@ $LG_es['Crud']='Crud';
 $LG_es['Debug']='Debug';
 $LG_es['December']='Diciembre';
 $LG_es['Desarrollo']='';
-$LG_es['Documentacion']='Documentación';
+$LG_es['Documentacion']='';
 $LG_es['Ejemplo_de_documento']='Ejemplo de documento';
 $LG_es['Ejemplo_de_uso_de_GcmConfig']='Ejemplo de uso de GcmConfig';
 $LG_es['Entrada_de_prueba']='Entrada de prueba';
@@ -37,12 +37,12 @@ $LG_es['Paginador_con_ajax']='Paginador con ajax';
 $LG_es['Permisos']='';
 $LG_es['Permisos borrador']='';
 $LG_es['Plantillas']='Plantillas';
-$LG_es['Presentacion']='Presentación';
+$LG_es['Presentacion']='';
 $LG_es['Probando_contenido']='Probando contenido';
 $LG_es['Referencias']='Referencias';
 $LG_es['SEO']='SEO';
 $LG_es['Seccion']='Sección';
-$LG_es['Seccion_de_prueba']='Sección de prueba';
+$LG_es['Seccion_de_prueba']='';
 $LG_es['Seccions']='Secciones';
 $LG_es['Sistema_de_plantillas']='Sistema de plantillas';
 $LG_es['Sistema_de_registros']='Sistema de registros';
@@ -65,7 +65,7 @@ $LG_es['eliminar']='';
 $LG_es['es']='Castellano';
 $LG_es['gcm']='';
 $LG_es['index']='index';
-$LG_es['inicio']='Inicio';
+$LG_es['inicio']='';
 $LG_es['iniciot']='Pagina de inicio';
 $LG_es['literales']='';
 $LG_es['probando']='';

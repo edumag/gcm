@@ -70,19 +70,17 @@ class AdminAdmin extends Admin {
             $url = 'buscar/palabra_a_buscar/'.$seccion.'/'.$contenido;
             $router = Router::desglosarUrl($url);
 
-            echo '<br />'.$url.'<br />';
-
-            $this->ejecuta_test('Verificar url',$router['url'],$seccion.'/'.$contenido);
-            $this->ejecuta_test('Verificar s',$router['s'],$seccion.'/');
-            $this->ejecuta_test('Verificar c',$router['c'],$contenido);
+            $this->ejecuta_test('Verificar url: '.$url,$router['url'],$seccion.'/'.$contenido);
+            $this->ejecuta_test('Verificar s: '.$seccion,$router['s'],$seccion.'/');
+            $this->ejecuta_test('Verificar c: '.$contenido,$router['c'],$contenido);
             $this->ejecuta_test('Verificar dd',$router['dd'],'File/es/');
             $this->ejecuta_test('Verificar d',$router['d'],'File/es/');
             $this->ejecuta_test('Verificar ii',$router['ii'],'es');
             $this->ejecuta_test('Verificar i',$router['i'],'es');
             $this->ejecuta_test('Verificar a',$router['a'],NULL);
             $this->ejecuta_test('Verificar m',$router['m'],NULL);
-            $this->ejecuta_test('Verificar args',$router['args'],array('palabra_a_buscar'));
-            $this->ejecuta_test('Verificar e',$router['e'],'buscar');
+            $this->ejecuta_test('Verificar args: palabra_a_buscar',$router['args'],array('palabra_a_buscar'));
+            $this->ejecuta_test('Verificar e: buscar',$router['e'],'buscar');
             $this->ejecuta_test('Verificar enlace_relativo', $router['enlace_relativo'],'./');
             $this->ejecuta_test('Verificar mime/type',$router['mime_type'],'text/html');
             $this->ejecuta_test('Verificar formato',$router['formato'],'html');
@@ -104,22 +102,20 @@ class AdminAdmin extends Admin {
             $url = 'ca/ajax/contenidos/borrar/12/28/'.$contenido;
             $router = Router::desglosarUrl($url);
 
-            echo '<br />'.$url.'<br />';
-
-            $this->ejecuta_test('Verficar url',$router['url'],$contenido);
+            $this->ejecuta_test('Verficar url: '.$url,$router['url'],$contenido);
             $this->ejecuta_test('Verficar s',$router['s'],'');
-            $this->ejecuta_test('Verficar c',$router['c'],$contenido);
+            $this->ejecuta_test('Verficar c: '.$contenido,$router['c'],$contenido);
             $this->ejecuta_test('Verficar dd',$router['dd'],'File/es/');
             $this->ejecuta_test('Verficar d',$router['d'],'File/es/');
             $this->ejecuta_test('Verficar ii',$router['ii'],'es');
             $this->ejecuta_test('Verficar i',$router['i'],'ca');
-            $this->ejecuta_test('Verficar a',$router['a'],'borrar');
-            $this->ejecuta_test('Verficar m',$router['m'],'contenidos');
-            $this->ejecuta_test('Verficar args',$router['args'],array('12','28'));
+            $this->ejecuta_test('Verficar a: borrar',$router['a'],'borrar');
+            $this->ejecuta_test('Verficar m: contenidos',$router['m'],'contenidos');
+            $this->ejecuta_test('Verficar args: [12,28]',$router['args'],array('12','28'));
             $this->ejecuta_test('Verficar e',$router['e'],NULL);
             $this->ejecuta_test('Verficar enlace_relativo', $router['enlace_relativo'],'./');
-            $this->ejecuta_test('Verficar mime/type',$router['mime_type'],'text/html');
-            $this->ejecuta_test('Verficar formato',$router['formato'],'ajax');
+            $this->ejecuta_test('Verficar mime/type: text/html',$router['mime_type'],'text/html');
+            $this->ejecuta_test('Verficar formato: ajax',$router['formato'],'ajax');
 
             }
 
@@ -128,17 +124,15 @@ class AdminAdmin extends Admin {
       $url = 'ca/ajax/buscar/literal/';
       $router = Router::desglosarUrl($url);
 
-      echo '<p>'.$url.'</p>';
-
-      $this->ejecuta_test('Verificar url',$router['url'],'');
-      $this->ejecuta_test('Verificar s',$router['s'],'');
-      $this->ejecuta_test('Verificar c',$router['c'],'');
-      $this->ejecuta_test('Verificar dd',$router['dd'],'File/es/');
-      $this->ejecuta_test('Verificar d',$router['d'],'File/es/');
-      $this->ejecuta_test('Verificar ii',$router['ii'],'es');
-      $this->ejecuta_test('Verificar i',$router['i'],'ca');
-      $this->ejecuta_test('Verificar a',$router['e'],'buscar');
-      $this->ejecuta_test('Verificar args',$router['args'],array('literal'));
+      $this->ejecuta_test('Verificar url: '.$url,$router['url'],'');
+      $this->ejecuta_test('s',$router['s'],'');
+      $this->ejecuta_test('c',$router['c'],'');
+      $this->ejecuta_test('dd',$router['dd'],'File/es/');
+      $this->ejecuta_test('d',$router['d'],'File/es/');
+      $this->ejecuta_test('ii',$router['ii'],'es');
+      $this->ejecuta_test('i',$router['i'],'ca');
+      $this->ejecuta_test('e: buscar',$router['e'],'buscar');
+      $this->ejecuta_test('args: literal',$router['args'],array('literal'));
 
       }
 

@@ -57,6 +57,17 @@ class Roles extends Modulos {
 
       }
 
+   /**
+    * test
+    */
+
+   function test() {
+
+      // Comprobar existencia de archivos necesarios
+      $this->ejecuta_test('Permisos administrador',self::comprobar_permisos('admin','test'));
+
+      }
+
    static function comprobar_permisos($m, $a) {
 
       global $gcm;
@@ -80,8 +91,6 @@ class Roles extends Modulos {
     * @defgroup roles Roles
     *
     * Gestión de roles de usuarios.
-    *
-    *
     *
     * @ingroup usuarios
     * @{

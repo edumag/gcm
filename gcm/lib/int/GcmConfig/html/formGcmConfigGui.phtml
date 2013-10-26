@@ -83,7 +83,7 @@ function contabilizar_saltos_linea($cadena) {
 
             <legend id="legend_<?php echo $clave.'-'.($conta - 1) ?>">
                <?php echo literal($clave).' ('.($conta - 1) .')'; ?>
-               <?php if ( true || $eliminar ) {  ?>
+               <?php if ( true || $eliminar ) {  // Permitimos eliminar grupo a usuario ?>
                <a title="<?php echo literal('Eliminar').' '.literal($claveArray); ?>" href='javascript:eliminarGrupo("item_<?php echo $clave.'-'.($conta - 1) ?>")' >[X]</a>
                <?php   } ?>
             </legend>
@@ -97,7 +97,13 @@ function contabilizar_saltos_linea($cadena) {
                <b><?php echo $claveArray2?></b>
                <?php $cadena =  $this->getDescripcion($claveArray2,NULL,$clave) ?>
                <textarea class="textAreaDescrip" rows='<?php echo contabilizar_saltos_linea($cadena) ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray2 ?>]'
-               <?php if ( ! $modificar_descripciones ) { ?>
+
+               <?php
+               // Solo aactivamos la modificación de las descripciones del último elemento 
+               // del grupo, ya que si se modifica las anteriores seria chafada por la última
+               ?>
+
+               <?php if ( ! $modificar_descripciones || $conta != count($val) ) { ?>
                class='inputLectura' readonly
                <?php } ?> ><?php echo $cadena;?></textarea>
 

@@ -375,6 +375,23 @@ class GcmConfig {
          // $this->recoger_descripciones($idioma);
          $this->descripciones_modificadas[$idioma] = TRUE;
 
+         /* Si no hay descripción en el idioma por defecto añadimos la misma */
+
+         if ( $idioma != $this->idiomaxdefecto ) {
+
+            $this->recoger_descripciones($this->idiomaxdefecto);
+
+            $descripcion = $this->descripciones[$this->idiomaxdefecto][$variable][$clave];
+
+            if ( ! $this->validarDescripcion($descripcion) ) {
+
+               $this->descripciones_modificadas[$this->idiomaxdefecto] = TRUE;
+
+               $this->setDescripcion($variable,$descripcion, $this->idiomaxdefecto, $clave);
+
+               }
+
+            }
       } else {
 
          $descripcion = trim($descripcion);
@@ -386,19 +403,21 @@ class GcmConfig {
          $this->descripciones_modificadas[$idioma] = TRUE;
          $this->descripciones[$idioma][$variable] = $descripcion;
 
-         }
+         /* Si no hay descripción en el idioma por defecto añadimos la misma */
 
-      /* Si no hay descripción en el idioma por defecto añadimos la misma */
+         if ( $idioma != $this->idiomaxdefecto ) {
 
-      if ( $idioma != $this->idiomaxdefecto ) {
+            $this->recoger_descripciones($this->idiomaxdefecto);
 
-         $this->recoger_descripciones($this->idiomaxdefecto);
+            $descripcion = $this->descripciones[$this->idiomaxdefecto][$variable];
 
-         if ( ! $this->validarDescripcion($this->descripciones[$this->idiomaxdefecto][$variable]) ) {
+            if ( ! $this->validarDescripcion($descripcion) ) {
 
-            $this->descripciones_modificadas[$this->idiomaxdefecto] = TRUE;
+               $this->descripciones_modificadas[$this->idiomaxdefecto] = TRUE;
 
-            $this->setDescripcion($variable,$descripcion, $this->idiomaxdefecto, $clave);
+               $this->setDescripcion($variable,$descripcion, $this->idiomaxdefecto, $clave);
+
+               }
 
             }
 
