@@ -18,6 +18,7 @@
 
 class Mapas extends Modulos {
 
+   public $mapas;
    public $marcadores;
 
    static $cargado_script = FALSE ;
@@ -28,7 +29,8 @@ class Mapas extends Modulos {
 
       parent::__construct();
 
-      // $this->marcadores = $this->config('Marcadores');
+      $this->mapas = $this->config('Mapas');
+      $this->marcadores = $this->config('Marcadores');
 
       }
 
@@ -36,34 +38,63 @@ class Mapas extends Modulos {
 
       global $gcm;
 
-      $caja_mapa     = 'caja_mapa';
-      $mapa_latitud  = '42.522724';
-      $mapa_longitud = '3.01712';
+      if ( ! $args ) { registrar(__FILE__,__LINE__,"Es necesario pasar el nombre del mapa a mostrar",'ERROR') ; return FALSE ;}
+      
+      $mapa_nombre = $args;
 
-      echo 'PRESENTANDO MAPA';
+      $mapa = $this->mapas[$mapa_nombre];
+
+      foreach ( $this->mapas as $mapa ) {
+         if ( $mapa['nombre'] == $mapa_nombre ) continue;
+         }
+
+      if ( ! $mapa ) { registrar(__FILE__,__LINE__,"No se ha encontrado un mapa con este nombre [$mapa_nombre]",'ERROR') ; return FALSE ;}
+
+      $latitud        = $mapa['latitud'];
+      $longitud       = $mapa['longitud'];
+      $tipo           = $mapa['tipo'];
+      $zoom           = intval($mapa['zoom']);
+      $otras_opciones = $mapa['Otras opciones'];
+
+      foreach ( $this->marcadores as $marcador ) {
+         if ( $marcador['mapa'] == $mapa_nombre ) {
+            $marcadores[] = $marcador;
+            }
+         }
+
+      $caja_mapa     = str_replace(' ','_',$mapa_nombre);
 
       $this->cargar_script();
       ?>
-      <div id="<?php echo $caja_mapa ?>" class="mapa" >MAPA</div>
-      <div id="<?php echo $caja_mapa ?>_info" class="mapa_info" >MAPA INFO</div>
+      <div id="<?php echo $caja_mapa ?>" class="mapa" ><?php echo literal('Cargando mapa')?>...</div>
+      <div id="<?php echo $caja_mapa ?>_info" class="mapa_info" ></div>
       <script type="text/javascript">
 
+         var mapa = {
+            'nombre': '<?php echo $mapa_nombre ?>',
+            'latitud': '<?php echo $latitud ?>',
+            'longitud': '<?php echo $longitud ?>',
+            'tipo': '<?php echo $tipo ?>',
+            'zoom': <?php echo $zoom ?>,
+            'otras_opciones': '<?php echo $otras_opciones ?>',
+         };
+
          var markers = {
-           'countries': [
+           'marca': [
+         <?php foreach ( $marcadores as $marca ) { ?>
              {
-               'name': 'La Svizra',
-               'location': [46.818188, 8.227512]
+               'name': '<?php echo $marca['nombre'] ?>'
+               ,'location': [<?php echo $marca['latitud'] ?>, <?php echo $marca['longitud'] ?>]
+               ,'contenido': '<?php echo $marca['contenido'] ?>'
+
              },
-             {
-               'name': 'España',
-               'location': [40.463667, -3.74922]
-             }
+         <?php } ?>
            ]
          };
 
       addLoadEvent(function(){
 
-         inicia_mapa('caja_mapa',markers);
+         inicia_mapa('<?php echo $caja_mapa ?>',mapa, markers);
          }); 
       </script>
       <?php
