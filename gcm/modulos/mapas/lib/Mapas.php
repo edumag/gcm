@@ -1,27 +1,29 @@
 <?php
 
 /**
- * @file mapas.php
+ * @file Mapas.php
  * @brief Presentar mapa y marcadores configurados
  *
  * @package Modulos
  */
 
 /**
- * @class mapas
- * @brief Slideshow de imágenes
+ * @class Mapas
+ * @brief Creación de mapas con marcadores.
  *
  * @code
  * $gcm->event->lanzar_accion_modulo('mapas','mapa','evento_mapa');
  * @endcode
+ *
+ * @ingroup modulo_mapas
  */
 
 class Mapas extends Modulos {
 
-   public $mapas;
-   public $marcadores;
+   public $mapas;         //< Listado de mapas
+   public $marcadores;    //< Listado de marcadores
 
-   static $cargado_script = FALSE ;
+   static $cargado_script = FALSE ; //< Para saber si ya tenemos cargadas las librerías javascript
 
    /** Constructor */
 
@@ -34,15 +36,22 @@ class Mapas extends Modulos {
 
       }
 
+   /**
+    * Presentar mapa
+    *
+    * @paaram $e Evento que lo llama
+    * @paaram $args Argumentos, por defecto en $args obtendremos el nombre del mapa a mostrar
+    */
+
    function mapa($e,$args=FALSE) {
 
       global $gcm;
 
+      $gcm->add_lib_js('temas', 'jquery.modal.min.js');
+
       if ( ! $args ) { registrar(__FILE__,__LINE__,"Es necesario pasar el nombre del mapa a mostrar",'ERROR') ; return FALSE ;}
       
       $mapa_nombre = $args;
-
-      $mapa = $this->mapas[$mapa_nombre];
 
       foreach ( $this->mapas as $mapa ) {
          if ( $mapa['nombre'] == $mapa_nombre ) continue;
@@ -52,7 +61,7 @@ class Mapas extends Modulos {
 
       $latitud        = $mapa['latitud'];
       $longitud       = $mapa['longitud'];
-      $tipo           = $mapa['tipo'];
+      // $tipo           = $mapa['tipo'];
       $zoom           = intval($mapa['zoom']);
       $otras_opciones = $mapa['Otras opciones'];
 
@@ -70,11 +79,12 @@ class Mapas extends Modulos {
       <div id="<?php echo $caja_mapa ?>_info" class="mapa_info" ></div>
       <script type="text/javascript">
 
+         // 'tipo': '<?php echo $tipo ?>',
+
          var mapa = {
             'nombre': '<?php echo $mapa_nombre ?>',
             'latitud': '<?php echo $latitud ?>',
             'longitud': '<?php echo $longitud ?>',
-            'tipo': '<?php echo $tipo ?>',
             'zoom': <?php echo $zoom ?>,
             'otras_opciones': '<?php echo $otras_opciones ?>',
          };
@@ -86,6 +96,7 @@ class Mapas extends Modulos {
                'name': '<?php echo $marca['nombre'] ?>'
                ,'location': [<?php echo $marca['latitud'] ?>, <?php echo $marca['longitud'] ?>]
                ,'contenido': '<?php echo $marca['contenido'] ?>'
+               ,'icon': '<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('mapas','iconos',$marca['icono'])?>'
 
              },
          <?php } ?>

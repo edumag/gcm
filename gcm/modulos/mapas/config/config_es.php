@@ -1,7 +1,6 @@
 <?php
 $config_DESC['Mapas']['grupo']='Especifica nombre de mapa y sus caracteriscicas
 
-Para ver las opciones de los mapas puedes ir a https://developers.google.com/maps/documentation/javascript/reference?hl=es-ES#MapOptions
 ';
 $config_DESC['Mapas']['nombre']='Nombre del mapa';
 $config_DESC['Mapas']['latitud']='latitud del mapa';
@@ -15,8 +14,5 @@ $config_DESC['Marcadores']['nombre']='Nombre del marcador';
 $config_DESC['Marcadores']['latitud']='latitud';
 $config_DESC['Marcadores']['longitud']='longitud';
 $config_DESC['Marcadores']['icono']='icono';
-$config_DESC['Marcadores']['contenido']='Especifica nombre del maracdor al que pertenece y el contenido a mostrar.
-Ejemplo:
-<img src="http://localhost/masmonell/imagenes/activida/montaje-01.jpg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a venenatis nunc. Cras pretium mattis urna, in lobortis turpis consectetur ut. Duis ante lorem, venenatis nec vulputate id, sollicitudin quis arcu. Aliquam malesuada elementum dui, eu iaculis lacus feugiat vel. Fusce est nibh, eleifend nec molestie non, mattis eu metus. Phasellus eu nisl lectus. Sed lorem mauris, posuere et sollicitudin quis, vehicula quis massa. Nam elementum lectus id sem adipiscing quis dignissim diam interdum. In ultricies augue nec elit rhoncus eleifend. Aenean ut neque libero. Maecenas vel dolor nunc, vel interdum erat. Donec non eros dui. Praesent sed lorem eu augue fringilla vehicula. Quisque ipsum ipsum, imperdiet eu iaculis a, fringilla a lacus. Curabitur ac nunc lorem.
-';
+$config_DESC['Marcadores']['contenido']='Contenido del marcador al clicar sobre él';
 ?>

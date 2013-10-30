@@ -1,6 +1,7 @@
 /**
  * @file mapas.js
  * @brief Presentación de mapas
+ * @ingroup modulo_mapas
  */
 
 contenidos = [];
@@ -38,13 +39,14 @@ function inicia_mapa(container,mapa,markers) {
             var id = details.name.replace(' ','_');
             contenidos[id] = details.contenido;
             marcadores[i] = new google.maps.Marker({
-               map: map,
-               title: details.name,
-               position: new google.maps.LatLng(details.location[0], details.location[1]),
-               clickable: true,
-               draggable: false,
-               visible:   true,
-               flat: true
+               map: map
+               ,title: details.name
+               ,position: new google.maps.LatLng(details.location[0], details.location[1])
+               ,clickable: true
+               ,draggable: false
+               ,visible:   true
+               ,flat: true
+               ,icon: details.icon
             });
             infowindow[id] = new google.maps.InfoWindow({
                 content: details.contenido
@@ -52,8 +54,8 @@ function inicia_mapa(container,mapa,markers) {
                });
             google.maps.event.addListener(marcadores[i], 'click', function(e) {
                var id = this.title.replace(' ','_');
-               infowindow[id].open(map,marcadores[i]);
-               // presenta_info_mapa(container,id);
+               // infowindow[id].open(map,marcadores[i]); // Cancelamos infowindows
+               presenta_info_mapa(container,id);
             });
          }
       }
@@ -61,7 +63,28 @@ function inicia_mapa(container,mapa,markers) {
    }
 }
 
+/**
+ * Presentar información del marcador
+ * 
+ * @param container Identificador de la caja donde se presenta el contenido 
+ * @param id Identificador del marcador que contiene el contenido
+ */
+
 function presenta_info_mapa(container,id) {
    var caja = document.getElementById(container+'_info');
-   caja.innerHTML = contenidos[id];
+   var contenido = '<section class="semantic-content" id="modal-text" ';
+   contenido += ' tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">';
+   contenido += '<div class="modal-inner">';
+   contenido += '<div class="modal-content">';
+   contenido += '<p>'+contenidos[id]+'</p>';
+   contenido += '</div>';
+   contenido += '</div>';
+   contenido += '</section>';
+
+   caja.innerHTML = contenido;
+   $("#"+container+"_info").modal({
+      escapeClose: true
+      ,clickClose: true
+      ,showClose: true
+      });
    }

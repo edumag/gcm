@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Oct 28 18:35:49 CET 2013
+// Archivo generado automáticamente por GcmConfig Wed Oct 30 13:49:39 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -127,4 +127,5 @@ $GCM_LG_es['Configuración de responsiveslides']='';
 $GCM_LG_es['Contenido actualizado']='';
 $GCM_LG_es['Guardar contenido']='';
 $GCM_LG_es['masmonelledu']='';
+$GCM_LG_es['Nombre de sección']='';
 ?>
