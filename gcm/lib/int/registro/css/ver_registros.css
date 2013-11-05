@@ -1,0 +1,44 @@
+/* Registro de la aplizacón */
+#caja_registro {
+border: 1px solid #68573D;
+width: 100%;
+overflow: auto;
+margin-top: 10px;
+}
+#caja_registro tr :hover {
+background: <?=$this->color("body-11")?>;
+color: <?=$this->color("body-06")?>;
+padding: 2px;
+}
+#caja_registro thead {
+background: <?=$this->color("body-11")?>;
+color: <?=$this->color("body-06")?>;
+padding: 2px;
+}
+.tabla_registros {
+overflow: auto;
+margin: 10px 4px;
+}
+.paginador {
+    color: rgb(0, 0, 0);
+    margin: 10px;
+    padding: 10px;
+}
+.info_botonera {
+    color: rgb(135, 215, 208);
+    font-weight: bold;
+}
+.botonera_paginador {
+    float: right;
+    text-align: right;
+}
+.pag_actual {
+    color: rgb(135, 215, 208);
+}
+.botonera_paginador a, .botonera_paginador {
+    color: rgb(190, 190, 190);
+    font-weight: bold;
+    padding: 2px;
+    text-decoration: none;
+}
+

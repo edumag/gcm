@@ -47,9 +47,9 @@ require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
 
 class Registro {
 
-   private $tipos_admitidos;                                               ///< Tipos de registros dentro del $nivel
-   private $conexion = NULL;                                               ///< Conexión con base de datos
-   private $sufijo   = '';                                                 ///< Sufijo para tabla en Base de datos
+   public $sufijo   = '';                                                 ///< Sufijo para tabla en Base de datos
+   public $tipos_admitidos;                                               ///< Tipos de registros dentro del $nivel
+   public $conexion = NULL;                                               ///< Conexión con base de datos
 
    /**
     * Si recibimos algun registro de tipo ERROR pasamos $errores a TRUE
@@ -61,9 +61,20 @@ class Registro {
     * Array con los registros de la pagina actual
     */
 
-   public $registros;                                                      ///< Guardamos registros en array
+   public $registros;
 
-   public  $tipos_registros = array('DEBUG', 'NORMAL', 'ADMIN', 'AVISO', 'ERROR');   ///< Array de tipos de registro
+   /**
+    * Niveles de registro
+    *
+    * DEBUG   Solo sirven para depurar y saber lo que hace la aplicación
+    * NORMAL  Sin uso explicito
+    * ADMIN   Mensajes para el administrador
+    * AVISO   Mensajes para el usuario
+    * ERROR   Mensajes de error 
+    */
+   
+   public  $tipos_registros = array('DEBUG', 'NORMAL', 'ADMIN', 'AVISO', 'ERROR');
+
    public  $sesion = NULL;                                                           ///< Marca de sesión para los registros
    public  $limite_mensajes = 500;                                                   ///< Limite para los mensajes de registro
    public  $limite_descripcion = 1300;                                               ///< Limite para la descripción
@@ -463,7 +474,8 @@ class Registro {
       if ( $condicion ) {
          $sql1 .= ' AND '.stripslashes($condicion) ;
       } else {
-         $sql1 .= ' AND sesion='.$this->sesion;
+         // No limitamos asesión actual
+         //$sql1 .= ' AND sesion='.$this->sesion;
       }
 
       $consulta = $sql0.$sql1;
