@@ -59,10 +59,12 @@ function contabilizar_saltos_linea($cadena) {
          $lineas=contabilizar_saltos_linea($cadena);
          ?> 
 
+         <?php if ( $cadena  || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
          <textarea rows='<?php echo $lineas ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]<?php if ( $grupo ) echo '[grupo]'; ?>'
          <?php if ( ! $modificar_descripciones ) { ?>
          class='inputLectura' readonly
          <?php } ?> ><?php echo $cadena?></textarea>
+         <?php } ?>
 
          </div>
 
@@ -94,9 +96,24 @@ function contabilizar_saltos_linea($cadena) {
 
             <div id='<?php echo $claveArray."-".$conta2?>' >
 
+               <?php
+               // Si el número de filas supera las dos presentamos descripción sobre el valor
+               // y no al lado.
+               $ta_descripcion = $this->getDescripcion($claveArray2,NULL,$clave);
+               $ta_row_desc    = contabilizar_saltos_linea($ta_descripcion);
+               $ta_valor       = $valorArray2;
+               $ta_row_valor   = contabilizar_saltos_linea($ta_valor);
+               if ( $ta_row_valor > 1 || $ta_row_desc > 1 ) {
+                  $ta_class_descr = "textAreaDescripGrande";
+                  $ta_class_valor = "textAreaValorGrande";
+               } else {
+                  $ta_class_descr = "textAreaDescrip";
+                  $ta_class_valor = "textAreaValor";
+                  }
+               ?>
+
                <b><?php echo $claveArray2?></b>
-               <?php $cadena =  $this->getDescripcion($claveArray2,NULL,$clave) ?>
-               <textarea class="textAreaDescrip" rows='<?php echo contabilizar_saltos_linea($cadena) ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray2 ?>]'
+               <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray2 ?>]'
 
                <?php
                // Solo aactivamos la modificación de las descripciones del último elemento 
@@ -105,9 +122,9 @@ function contabilizar_saltos_linea($cadena) {
 
                <?php if ( ! $modificar_descripciones || $conta != count($val) ) { ?>
                class='inputLectura' readonly
-               <?php } ?> ><?php echo $cadena;?></textarea>
+               <?php } ?> ><?php echo $ta_descripcion;?></textarea>
 
-               <textarea class="item_valor formulari2 textAreaValor" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $valorArray2?></textarea>
+               <textarea class="item_valor formulari2 <?php echo $ta_class_valor ?>" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $ta_valor?></textarea>
 
             </div>
 
@@ -124,7 +141,7 @@ function contabilizar_saltos_linea($cadena) {
                [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
                <?php } ?>
                <br />
-               <textarea class="formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+               <textarea class="formulari2" rows='<?php echo contabilizar_saltos_linea($valorArray2);  ?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
 
             </div>
             <?php } // Acaba si es un array ?>
@@ -133,8 +150,25 @@ function contabilizar_saltos_linea($cadena) {
 
          </div>
 
-         <?php } else { ?>
+         <?php } else { // Elemento simple ?>
 
+         <?php
+         // Si el número de filas supera las dos presentamos descripción sobre el valor
+         // y no al lado.
+         $ta_descripcion = $this->getDescripcion($clave);
+         $ta_row_desc    = contabilizar_saltos_linea($ta_descripcion);
+         $ta_valor       = $val;
+         $ta_row_valor   = contabilizar_saltos_linea($ta_valor);
+
+         // Presentamos en una sola fila o una debajo de la otra según tamaño
+         if ( $ta_row_valor > 1 || $ta_row_desc > 1 || ! $ta_descripcion) {
+            $ta_class_descr = "textAreaDescripGrande";
+            $ta_class_valor = "textAreaValorGrande";
+         } else {
+            $ta_class_descr = "textAreaDescrip";
+            $ta_class_valor = "textAreaValor";
+            }
+         ?>
 
          <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
 
@@ -145,22 +179,21 @@ function contabilizar_saltos_linea($cadena) {
 
          <div>
 
-         <?php  
-         $cadena=$this->getDescripcion($clave);
-         $lineas=contabilizar_saltos_linea($cadena);
-         ?> 
+         <?php if ( $ta_descripcion || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
 
-         <textarea class="textAreaDescrip" rows='<?php echo $lineas ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+         <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc; ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
          <?php if ( ! $modificar_descripciones ) { ?>
          class='inputLectura' readonly
-         <?php } ?> ><?php echo $cadena?></textarea>
+         <?php } ?> ><?php echo $ta_descripcion?></textarea>
 
-         <textarea class="textAreaValor formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $val?></textarea>
+         <?php } ?>
+
+         <textarea class="<?php echo $ta_class_valor ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
 
          <?php } ?>
 
 	</div>
-      <hr class="clear" />
+      <div style="clear: both;"></div>
    </div>
 
       <?php } ?>
