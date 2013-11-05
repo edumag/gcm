@@ -1284,7 +1284,7 @@ class Crud extends DataBoundObject {
       if ( $this->ID ) {
          if ( ! $this->blIsLoaded ) {
             if ( ! $this->Load() ) {
-               registrar(__FILE__,__LINE__,literal('No esiste registro').' ['.$this->ID.']','ERROR');
+               registrar(__FILE__,__LINE__,literal('No esiste registro').( ( isset($this->ID) && ! empty($this->ID) ) ? ' ['.$this->ID.']' : '' ),'ERROR');
                return FALSE;
                }
             }
