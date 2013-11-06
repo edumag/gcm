@@ -163,7 +163,7 @@ if ( ! function_exists("registrar") ) {
  *
  */
 
-function registrar($fichero,$linea,$mensaje,$tipo='DEBUG') {
+function registrar($fichero,$linea,$mensaje,$tipo='DEBUG',$descripcion=FALSE) {
 
    global $gcm;
 
@@ -179,7 +179,7 @@ function registrar($fichero,$linea,$mensaje,$tipo='DEBUG') {
       // $registro = RegistroFactory::getRegistro();
       // $registro->registra($fichero,$linea,$mensaje,$tipo);
    } else {
-      $gcm->registra($fichero,$linea,$mensaje,$tipo);
+      $gcm->registra($fichero,$linea,$mensaje,$tipo, $descripcion);
       }
 
    }
@@ -255,6 +255,8 @@ function esImagen($archivo) {
 
    }
 
+if ( ! function_exists('depurar') ) {
+
 /** Formatemaos salida de array */
 
 function depurar($var, $titulo=NULL, $nivel=0) {
@@ -299,6 +301,8 @@ function depurar($var, $titulo=NULL, $nivel=0) {
 
    return $string;
    }
+
+}
 
 /**
  * Recogemos los argumentos entregados a una función
@@ -1107,6 +1111,7 @@ function sesion($elemento, $valor=FALSE) {
  *
  * Extrido de: http://webintenta.com/generar-prefijos-css3-con-php.html
  */
+ 
 
 function css3_write ($property, $value) {
 	$css3 = "-webkit-".$property.": ".$value.";\n"

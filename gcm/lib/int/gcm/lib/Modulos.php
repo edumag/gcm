@@ -106,6 +106,25 @@ abstract class Modulos {
       }
 
    /**
+    * Añadir librerias externas
+    *
+    * @param $tipo Tipo de fichero puede ser js o css
+    * @param $url  Url del fichero
+    */
+
+   protected function add_ext_lib($tipo, $url) {
+
+      global $gcm;
+
+      if ( $gcm && $gcm instanceof Gcm ) {
+         registrar(__FILE__,__LINE__,'Añadimos librería externa tipo ['.$tipo.'] url: ['.$this->nombre_clase.']');
+         $gcm->add_ext_lib($tipo,$url);
+      } else {
+         registrar(__FILE__,__LINE__,'Modulos->add_ext_lib('.$tipo.','.$url.') $gcm no esta definida','ERROR');
+         }
+      }
+
+   /**
     * Añadir librerias javascript a la lista de Gcm
     *
     * @param $archivo Librería javascript a añadir

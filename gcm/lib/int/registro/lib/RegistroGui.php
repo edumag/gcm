@@ -21,12 +21,26 @@ require_once(dirname(__FILE__).'/Registro.php');
 
 class RegistroGui extends Registro {
 
+   /** 
+    * Constructor 
+    * 
+    * @param $base_datos Base de datos puede ser una instancia de PDO o un 
+    *           archivo sqlite
+    * @param $sufijo Sufijo a utilizar al crear o consultar a base de datos
+    */
 
    function __construct($base_datos=NULL, $sufijo='') {
 
       parent::__construct($base_datos,$sufijo);
 
       }
+
+   /**
+    * Presentamos tabla con los registros
+    *
+    * @param $filtro Filtro en caso de tenerlo
+    * @param $array  Array con los registros
+    */
 
    function tabla_registros($filtro=NULL, $array=NULL) {
 
@@ -65,7 +79,7 @@ class RegistroGui extends Registro {
          $resultado[$conta]['fichero'] = $fichero;
          $resultado[$conta]['linea'] = $linea;
          $resultado[$conta]['mensaje'] = $mensaje;
-         // $resultado[$conta]['descripcion'] = $descripcion;
+         $resultado[$conta]['descripcion'] = $descripcion;
          $conta++;
          next($registros);
          }
@@ -73,7 +87,11 @@ class RegistroGui extends Registro {
       require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
 
       //$opciones = array ('ocultar_id' => TRUE, 'fila_unica' => 'mensaje','table_id' => 'table');
-      $opciones = array ('ocultar_id' => TRUE,'table_id' => 'table');
+
+      $opciones = array ('ocultar_id' => TRUE
+                        ,'table_id' => 'table'
+                        , 'fila_unica' => 'descripcion'
+                        );
 
 
       $array2table = new Array2table();

@@ -323,6 +323,8 @@ class Registro {
 
    function registra($fichero,$linea, $m, $tipo = 'DEBUG', $descripcion = NULL) {
 
+      if ( ! $tipo ) $tipo = 'DEBUG';
+
       $tiempo = time();
 
       if ( !$m || $m == '' ) {

@@ -130,80 +130,6 @@ class Ver_registros extends Modulos {
       }
 
    /**
-    * Sistema de admnistración de ficheros de registro de la aplicación
-    *
-    * Presentación de registro con formulario de filtrado
-    *
-    * @filtro Condición sql para regustor de base de datos
-    * @array  En caso de querer presentar los registros que tenemos en el array
-    *
-    * @package Registro
-    * @subpackge Acciones
-    */
-
-   function tabla_registros($filtro=NULL, $array=NULL) {
-
-      global $gcm;
-
-      if ( GCM_DEBUG || $gcm->au->logeado()) {
-
-         if ( $array  ) {
-
-            /* Los registros vienen en un array */
-
-            $registros = $array;
-
-         } elseif ( ! $filtro ) {
-
-            $registros = $gcm->reg->ver_registros();
-
-         } else {
-            
-            $registros = $gcm->reg->ver_registros(NULL,$filtro);
-
-         }
-
-         if ( !is_array($registros) || count($registros) < 1 ) {
-            echo "<div class='aviso'>Sin registros</div>";
-            return FALSE;
-            }
-
-         $conta = 0;
-         reset($registros);
-         while ( current($registros) ) {
-            $registro = current($registros);
-            list($id,$sesion,$fecha,$tipo,$fichero,$linea,$mensaje,$descripcion) = $registro;
-            $resultado[$conta]['id'] = $id;
-            $resultado[$conta]['sesion'] = $sesion;
-            $resultado[$conta]['fecha'] = $fecha;
-            $resultado[$conta]['tipo'] = $tipo;
-            $resultado[$conta]['fichero'] = $fichero;
-            $resultado[$conta]['linea'] = $linea;
-            $resultado[$conta]['mensaje'] = $mensaje;
-            // $resultado[$conta]['descripcion'] = $descripcion;
-            $conta++;
-            next($registros);
-            }
-
-         require_once(GCM_DIR.'lib/int/array2table/lib/Array2table.php');
-
-         //$opciones = array ('ocultar_id' => TRUE, 'fila_unica' => 'mensaje','table_id' => 'table');
-         $opciones = array ('ocultar_id' => TRUE,'table_id' => 'table');
-
-
-         $array2table = new Array2table();
-         $array2table->generar_tabla($resultado, $opciones);
-
-         $gcm->add_lib_js('temas', 'jquery.dataTables.js');
-         
-         return;
-
-      } else {
-         return FALSE;
-      }
-   }
-
-   /**
     * registros_ajax
     *
     * Recogemos valores del formulario para crear el filtro
@@ -236,6 +162,13 @@ class Ver_registros extends Modulos {
 
       global $gcm;
 
+      $this->add_ext_lib('js', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.js');
+      $this->add_ext_lib('css', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.css');
+
+      require_once (GCM_DIR.'lib/int/registro/lib/RegistroGui.php');
+
+      $reg = new RegistroGui($gcm->pdo_conexion(), $gcm->sufijo);
+
       if ( ! GCM_DEBUG ) {
          /* Añadimos algo de contenido para que no salga aviso en Plantilla de que falta */
          echo '<!-- debug -->';
@@ -246,18 +179,18 @@ class Ver_registros extends Modulos {
 
       /* Añadimos variables del sistema a los registros */
 
-      if ( $_POST ) { $gcm->registra(__FILE__,__LINE__,depurar($_POST,'Post','POST')); }
-      if ( $_GET ) { $gcm->registra(__FILE__,__LINE__,depurar($_GET,'Get','GET')); }
-      if ( $_SESSION ) { $gcm->registra(__FILE__,__LINE__,depurar($_SESSION,'Session')); }
-      //$gcm->registra(__FILE__,__LINE__,depurar(get_defined_constants(),'Constantes'));
-      $gcm->registra(__FILE__,__LINE__,depurar($_SERVER,'SERVER'));
-      // registrar(__FILE__,__LINE__,depurar($gcm->event->eventos,'Eventos'));
-      registrar(__FILE__,__LINE__,depurar($gcm->event->ubicaciones,'Ubicaciones'));
+      if ( $_POST )    { registrar(__FILE__,__LINE__,'POST',FALSE,depurar($_POST)); }
+      if ( $_GET )     { registrar(__FILE__,__LINE__,'GET',FALSE,depurar($_GET)); }
+      if ( $_SESSION ) { registrar(__FILE__,__LINE__,'SSESSION',FALSE,depurar($_SESSION)); }
+      registrar(__FILE__,__LINE__,'Constantes',FALSE,depurar(get_defined_constants()));
+      registrar(__FILE__,__LINE__,'SERVER',FALSE,depurar($_SERVER));
+      registrar(__FILE__,__LINE__,'EVENTOS',FALSE,depurar($gcm->event->eventos));
+      registrar(__FILE__,__LINE__,'UBICACIONES',FALSE,depurar($gcm->event->ubicaciones));
 
       /* Panel de registros */
       ob_start();
       echo '<br />';
-      $this->tabla_registros(NULL,$gcm->reg->registros);
+      $reg->tabla_registros(NULL,$gcm->reg->registros);
       $salida = ob_get_contents(); 
       ob_end_clean();
 
@@ -301,7 +234,8 @@ class Ver_registros extends Modulos {
 
       global $gcm;
 
-      $gcm->add_lib_js('temas', 'jquery.dataTables.js');
+      $this->add_ext_lib('js', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.js');
+      $this->add_ext_lib('css', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.css');
 
       $this->javascripts('ver_registros.js');
 

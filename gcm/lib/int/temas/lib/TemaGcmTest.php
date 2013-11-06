@@ -20,7 +20,7 @@ class TemaGcmTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new TemaGcm;
+        $this->object = new TemaGcm();
     }
 
     /**

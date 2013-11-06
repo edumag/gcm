@@ -184,8 +184,8 @@ class Temas extends Modulos {
          $ficheros = $this->ficheros_xdefecto; 
          }
 
-      registrar(__FILE__,__LINE__,'Ficheros del tema: '.depurar($ficheros));
-      registrar(__FILE__,__LINE__,'Colores del tema: '.depurar($this->colores));
+      registrar(__FILE__,__LINE__,'Ficheros del tema',FALSE,depurar($ficheros));
+      registrar(__FILE__,__LINE__,'Colores del tema ',FALSE,depurar($this->colores));
       registrar(__FILE__,__LINE__,'Sistema: '.$this->plataforma.' Navegador: '.$this->navegador.' Versión: '.$this->version);
 
       $this->tema = new TemaGcm($ficheros,$this->colores);
@@ -246,11 +246,12 @@ class Temas extends Modulos {
 
       global $gcm;
 
-      $ficheros  = $gcm->lista_js();
-      $librerias = $gcm->lista_lib_js();
-      $url_base  = Router::$dir;
+      $ficheros   = $gcm->javascripts;
+      $librerias  = $gcm->librerias_javascript;
+      $lib_js_ext = $gcm->librerias_externas;
+      $url_base   = Router::$dir;
 
-      $this->tema->incluir_javascript($ficheros,$librerias,$url_base);
+      $this->tema->incluir_javascript($ficheros,$librerias,$url_base, $lib_js_ext);
 
       }
 
@@ -391,7 +392,7 @@ class Temas extends Modulos {
 
       $this->javascripts('general.js');
       $this->javascripts('paneles.js');
-      $this->librerias_js('jquery.js');
+      $this->add_ext_lib('js',Router::$base.GCM_DIR.'lib/ext/jquery/jquery.js');
 
       if ( Router::$c == 'proyectos.css' ) {
          header('Content-Type: text/css');

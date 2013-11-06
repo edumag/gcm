@@ -29,6 +29,24 @@ class TemaGcm {
 
     public $colores;
 
+    /** 
+     * Listado de librerias javascript externas 
+     *
+     * Las librerías externas son aquellas que por ser genericas y tener que estar
+     * accesibles para cualquier módulo serán incluidas en la lista por cualquier 
+     * módulo que lo necesite sin reargarlas.
+     *
+     * La lista debe añadir la url completa para cargar.
+     *
+     * La estructura del array es: 
+     * @code
+     * $librerias_externas[js][] = '../lib/ext/js/jquery.dataTable.min.js'; 
+     * $librerias_externas[css][] = '../lib/ext/js/jquery.dataTable.css'; 
+     * @endcode
+     */
+
+    public $librerias_externas;
+
     /** Listado de colores demandados que no estan implementados */
 
     protected $colores_faltantes = NULL ;
@@ -58,13 +76,28 @@ class TemaGcm {
      * @param $ficheros  Ficheros javascript para construir el del proyecto
      * @param $librerias Librerias javascript a incluir
      * @param $url_base  Url base para añadir a los enlaces
+     * @param $lib_js_ext Librerias javascript externas 
      */
 
-    public function incluir_javascript($ficheros=NULL,$librerias=NULL,$url_base) {
+    public function incluir_javascript($ficheros=NULL,$librerias=NULL,$url_base, $lib_js_ext) {
 
       $ficheros  = ( $ficheros ) ? $ficheros : $this->ficheros[js];
 
       $lista     = ( !empty($ficheros) ) ? implode(',',$ficheros) : NULL ;
+
+      if ( $lib_js_ext && !empty($lib_js_ext)  ) {
+         foreach ( $lib_js_ext as $items ) {
+            list($tipo,$url) = explode(':',$items);
+            if ( $tipo == 'js' ) {
+               echo "\n".'<script src="'.$url.'" type="text/javascript"></script>';
+            } elseif ( $tipo == 'css' ) {
+               echo "\n".'<link rel="stylesheet" href="'.$url.'" type="text/css" media="screen" />';
+            } else {
+               registrar(__FILE__,__LINE__,"Tipo de librería externa desconocido",'ERROR');
+               
+               }
+            }
+         }
 
       if ( $librerias && !empty($librerias)  ) {
          foreach ( $librerias as $items ) {
@@ -203,7 +236,7 @@ class TemaGcm {
 
       // Incluir librerías
 
-      $ficheros  = $gcm->lista_js();
+      $ficheros  = $gcm->javascripts;
       $url_base  = Router::$dir;
 
       $ficheros  = ( $ficheros ) ? $ficheros : $this->ficheros[js];
