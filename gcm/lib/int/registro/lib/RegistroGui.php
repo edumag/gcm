@@ -143,6 +143,16 @@ class RegistroGui extends Registro {
          <?php include(dirname(__FILE__).'/../js/registro.js'); ?>
          </script>
          <?php
+         self::$cargado_js = TRUE;
+         }
+
+      if ( ! self::$cargado_css ) {
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/registro.css'); ?>
+         </style>
+         <?php
+         self::$cargado_css = TRUE;
          }
 
       }
