@@ -14,7 +14,12 @@ require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
 class Registros_crud extends Crud {
 
    function DefineTableName() {
-      return 'registros';
+
+      $sufijo = ( isset($GLOBALS['sufijo_para_modelo']) ) 
+         ? $GLOBALS['sufijo_para_modelo']
+         : '';
+
+      return $sufijo.'registros';
       }
 
    }

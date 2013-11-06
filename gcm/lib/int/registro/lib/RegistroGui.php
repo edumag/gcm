@@ -21,6 +21,9 @@ require_once(dirname(__FILE__).'/Registro.php');
 
 class RegistroGui extends Registro {
 
+   static $cargado_css;  //< Saber si hemos cargado los css
+   static $cargado_js ;  //< Saber si hemos cargado los js 
+
    /** 
     * Constructor 
     * 
@@ -36,7 +39,9 @@ class RegistroGui extends Registro {
       }
 
    /**
-    * Presentamos tabla con los registros
+    * Presentamos tabla con los registros nos sirve para presentar
+    * el array con los registros de la sesión
+    * 
     *
     * @param $filtro Filtro en caso de tenerlo
     * @param $array  Array con los registros
@@ -44,21 +49,13 @@ class RegistroGui extends Registro {
 
    function tabla_registros($filtro=NULL, $array=NULL) {
 
-      $reg = &$GLOBALS['registre_db'] ;
-
       if ( $array  ) {
-
-         /* Los registros vienen en un array */
 
          $registros = $array;
 
-      } elseif ( ! $filtro ) {
-
-         $registros = $reg->ver_registros();
-
       } else {
          
-         $registros = $reg->ver_registros(NULL,$filtro);
+         $registros = FALSE;
 
       }
 
@@ -120,13 +117,11 @@ class RegistroGui extends Registro {
          <li>mensaje LIKE "%ERROR%"</li>
       </ul> 
       </div>
-      <form name='form_ver_registros' action='' method='post' onSubmit='javascript: visualizar_registros(this,"<?=$reg->sesion?>"); return false;'>
+      <form name='form_ver_registros' action='' method='post' onSubmit='javascript: visualizar_registros(this); return false;'>
       <fieldset>
       <legend><?php echo literal('Filtro',3);?></legend>
          <input type="text" style='width:98%;' name='filtro' value="<?php echo $filtro; ?>">
       </fieldset>
-      <input type='hidden' name='m' value='ver_registros' />
-      <input type='hidden' name='a' value='registros_ajax' />
       <input type='hidden' name='formato' value='ajax' />
       <br />
       <br />
@@ -142,8 +137,14 @@ class RegistroGui extends Registro {
 
       echo '</div>';
 
-      // $gcm->add_lib_js('temas', 'jquery.dataTables.js');
-   
+      if ( ! self::$cargado_js ) {
+         ?>
+         <script>
+         <?php include(dirname(__FILE__).'/../js/registro.js'); ?>
+         </script>
+         <?php
+         }
+
       }
 
    function admin($e, $filtro=FALSE) {
@@ -152,10 +153,11 @@ class RegistroGui extends Registro {
 
       if ( !isset($_GET['formato']) || ( isset($_GET['formato']) && $_GET['formato'] !== 'ajax' ) ) $this->filtro($filtro);
 
+      $GLOBALS['sufijo_para_modelo'] = $this->sufijo;
       $registros = new Registros_crud($this->conexion);
       $registros->sufijo = '';
       $registros->url_ajax = '&formato=ajax';
-      $registros->elementos_pagina = 100;
+      $registros->elementos_pagina = 60;
       $registros->opciones_array2table = array(
           'op' => array (
              'ocultar_id'=>FALSE

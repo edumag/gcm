@@ -12,6 +12,8 @@
  * @depends   General
  */
 
+$GLOBALS['DIR_BASE'] = Router::$dir;
+
 /** 
  * Modulo para presentar los registros de la aplizació
  */
@@ -66,104 +68,11 @@ class Ver_registros extends Modulos {
 
       }
 
-   function cabecera_tabla($sesion) {
-
-      ?>
-      <table class='registro' summary='Registros de la aplicación'>
-          <thead>
-             <tr><th class="sesion" colspan="3">Sesion: <strong><?=presentarFecha($sesion,2);?></strong></th></tr>
-             <tr>
-             <th>Fecha</th>
-             <th>Tipo</th>
-             <th width="100%">Mensaje</th>
-             </tr>
-          </thead>
-          <tbody>
-      <?php
-
-      }
-
-   /** Formulario para los regisstros */
-
-   function formulario($filtro=NULL) {
-
-      global $gcm;
-
-      $filtro = ( isset($_POST['filtro']) ) ? $_POST['filtro'] : 'sesion='.$gcm->reg->sesion;
-
-      ?>
-      <div class="registros_sesion">
-      <fieldset>
-      <legend><?=literal('Registros',3)?></legend>
-      <div class="ayuda">
-      Podemos filtrar por id, sesion, fecha, tipo ('ERROR','AVISO','ADMIN','DEBUG'), fichero, mensaje
-      <br />
-      Ejemplos:
-      <ul>
-         <li>sesion>100 AND tipo='ERROR' ORDER BY id desc</li>
-         <li>mensaje LIKE "%ERROR%"</li>
-      </ul> 
-      </div>
-      <form name='form_ver_registros' action='' method='post' onSubmit='javascript: visualizar_registros(this,"<?=$gcm->reg->sesion?>"); return false;'>
-      <fieldset>
-      <legend><?php echo literal('Filtro',3);?></legend>
-         <input type="text" style='width:98%;' name='filtro' value="<?php echo $filtro; ?>">
-      </fieldset>
-      <input type='hidden' name='m' value='ver_registros' />
-      <input type='hidden' name='a' value='registros_ajax' />
-      <input type='hidden' name='formato' value='ajax' />
-      <br />
-      <br />
-      <input type='submit' />
-      </form>
-      <div id='caja_registro_<?=$gcm->reg->sesion?>'>
-      </fieldset>
-      <?php
-      
-
-      if ( isset($_POST['filtro']) ) { 
-         $this->tabla_registros($filtro); 
-         }
-      
-      echo '</div></div>';
-
-      }
-
-   /**
-    * registros_ajax
-    *
-    * Recogemos valores del formulario para crear el filtro
-    */
-
-   function registros_ajax() {
-
-      if (  ! GCM_DEBUG && !permiso('ver_registros',NULL,FALSE,FALSE) ) {
-         echo '<p class="error">'.literal('Sin permisos').'</p>';
-         return FALSE;
-         }
-
-      $filtro = ( isset($_GET['filtro']) ) ? $_GET['filtro'] : '';
-
-      $this->tabla_registros($filtro);
-
-      ?>
-      <script>
-      $(document).ready(function() {
-      $('#table').dataTable();
-      } );
-      </script>
-      <?php
-      exit();
-      }
-
    /* Si estamos en modo DEBUG presentamos formulario de regitros */
 
    function debug() {
 
       global $gcm;
-
-      $this->add_ext_lib('js', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.js');
-      $this->add_ext_lib('css', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.css');
 
       require_once (GCM_DIR.'lib/int/registro/lib/RegistroGui.php');
 
@@ -175,8 +84,6 @@ class Ver_registros extends Modulos {
          return;
          }
          
-      $this->javascripts('ver_registros.js');
-
       /* Añadimos variables del sistema a los registros */
 
       if ( $_POST )    { registrar(__FILE__,__LINE__,'POST',FALSE,depurar($_POST)); }
@@ -208,23 +115,6 @@ class Ver_registros extends Modulos {
       }
 
    /**
-    * postcontenido_ajax
-    *
-    * En caso de llamar a contenido desde ajax se debe reinicializar 
-    * paneles con javascript
-    */
-
-   function postcontenido_ajax($e, $args) {
-
-      ?>
-      <script>
-      paneles();
-      </script>
-      <?php
-
-      }
-
-   /**
     * Visualizar registros
     *
     * Presentamos formulario de registros
@@ -234,16 +124,33 @@ class Ver_registros extends Modulos {
 
       global $gcm;
 
-      $this->add_ext_lib('js', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.js');
-      $this->add_ext_lib('css', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.css');
-
-      $this->javascripts('ver_registros.js');
 
       $gcm->event->anular('titulo','ver_registros');
       $gcm->event->anular('contenido','ver_registros');
       $gcm->titulo = literal('Registros');
 
       $this->formulario();
+
+      }
+
+   function formulario($e=FALSE, $args=FALSE) {
+
+      global $gcm;
+
+      if ( !isset($_GET['formato']) || $_GET['formato'] !== 'ajax' ) {
+         
+         ?>
+         <h1 id="heading">Registres de l'aplicació</h1>
+         <?php
+
+         }
+
+      require_once (GCM_DIR.'lib/int/registro/lib/RegistroGui.php');
+
+      $filtro = ( isset($_GET['filtro']) ) ? $_GET['filtro'] : FALSE ;
+
+      $reg = new RegistroGui($gcm->reg->conexion, $gcm->sufijo);
+      $reg->admin('interno',$filtro);
 
       }
 

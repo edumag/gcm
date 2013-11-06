@@ -817,7 +817,7 @@ class Crud extends DataBoundObject {
        * para que funcionen las validaciones.
        */
 
-      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->sufijo() : '' ;
+      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->sufijo : '' ;
       $sufijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? '[]' : '' ;
 
       if ( isset($this->restricciones) ) {

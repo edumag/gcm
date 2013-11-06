@@ -258,7 +258,7 @@ class Gcm {
       if ( strpos($bd_registros,'sqlite') !== FALSE || $bd_registros == '' ) {  
 
          if ( ! is_dir('log') ) mkdir('log');
-         $this->reg = new Registro('log');
+         $this->reg = new Registro('log',$this->sufijo);
 
       } else {
          
