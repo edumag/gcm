@@ -95,7 +95,7 @@ class Mapas extends Modulos {
              {
                'name': '<?php echo $marca['nombre'] ?>'
                ,'location': [<?php echo $marca['latitud'] ?>, <?php echo $marca['longitud'] ?>]
-               ,'contenido': '<?php echo $marca['contenido'] ?>'
+               ,'contenido': '<?php echo eregi_replace("[\n|\r|\n\r]", ' ', nl2br($marca['contenido']));?>'
                ,'icon': '<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('mapas','iconos',$marca['icono'])?>'
 
              },
