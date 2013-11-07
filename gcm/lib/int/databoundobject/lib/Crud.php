@@ -53,7 +53,7 @@ class Crud extends DataBoundObject {
 
    /**
     * Nos permite diferencirar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
-    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo.
+    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo y en los botones de acción.
     */
 
    public $sufijo;
@@ -778,10 +778,13 @@ class Crud extends DataBoundObject {
             $this->restricciones[$campo][RT_LONG_MAX] = $this->tipos_campos[$campo]['max'];
             }
 
-         // Si un campo no permite null es requerido
-         if ( isset($this->tipos_campos[$campo]['null']) && 
-            $this->tipos_campos[$campo]['null'] == 'NO' && 
-            !isset($this->tipos_campos[$campo]['Default']) ) {
+         // Si un campo no permite null es requerido a no ser que sea una tabla relacionada
+         // en ese caso no es obligatorio
+
+         if ( isset($this->tipos_campos[$campo]['null']) 
+            && $this->tipos_campos[$campo]['null'] == 'NO' 
+            && !isset($this->tipos_campos[$campo]['Default']) 
+            && $this->tipo_tabla == 'normal' ) {
 
                $this->restricciones[$campo][RT_REQUERIDO] = 1;
                $this->mensajes[$campo][RT_REQUERIDO] = literal('Campo obligatorio',3);
@@ -814,7 +817,7 @@ class Crud extends DataBoundObject {
        * para que funcionen las validaciones.
        */
 
-      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->DefineTableName().'_' : '' ;
+      $prefijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? $this->sufijo : '' ;
       $sufijo_names_js = ( $this->tipo_tabla == 'relacion_externa' || $this->tipo_tabla == 'relacion_varios' ) ? '[]' : '' ;
 
       if ( isset($this->restricciones) ) {
@@ -1002,7 +1005,7 @@ class Crud extends DataBoundObject {
          }
 
 
-      if (isset($this->ID)) {
+      if (isset($this->ID) && !empty($this->ID) ) {
 
          $strRetVal = $this->GetAccessor(ucfirst($campo));
          //$strRetVal = $this->GetAccessor($campo);
@@ -1101,13 +1104,13 @@ class Crud extends DataBoundObject {
 
          // Si tenemos identificador lo añadimos oculto
          if ( $this->ID ) {
-            $this->tipos_formulario[$this->DefineTableName().'_id']['valor'] = $this->ID;
-            $this->tipos_formulario[$this->DefineTableName().'_id']['oculto_form'] = 1;
+            $this->tipos_formulario[$this->sufijo.'id']['valor'] = $this->ID;
+            $this->tipos_formulario[$this->sufijo.'id']['oculto_form'] = 1;
             }
 
          // Si la tenemos nombre_campo_relacional lo ocultamos.
          if ( $campo == $nombre_campo_relacional ) {
-            if ( isset($modelo_padre->ID) ) {
+            if ( isset($modelo_padre->ID) && !empty($modelo_padre->ID) ) {
                $this->tipos_formulario[$campo]['valor'] = $modelo_padre->ID;
                $this->tipos_formulario[$campo]['oculto_form'] = 1;
             } else {
@@ -1174,13 +1177,14 @@ class Crud extends DataBoundObject {
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
          <form id="crud" name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
+         <input type="hidden" name="url_formulario" value="<?php echo ( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
          <?php
          }
 
       if ( $this->tipo_tabla == 'normal' ) {
          $form->genera_formulario(FALSE, $this->accion, $this);
       } else {
-         $form->genera_formulario(FALSE, $this->accion, $modelo_padre, $this->DefineTableName(), $contador);
+         $form->genera_formulario(FALSE, $this->accion, $modelo_padre, $this->strTableName, $contador);
          }
 
       $this->formulario_registros_relacionados($displayHash);
@@ -1191,7 +1195,7 @@ class Crud extends DataBoundObject {
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
-         <p class="botonera_crud"><input type="submit" name="<?php echo $this->DefineTableName(); ?>_guardar" value="Guardar"></p>
+         <p class="botonera_crud"><input type="submit" name="<?php echo $this->sufijo; ?>guardar" value="Guardar"></p>
          </form>
          <?php
 
@@ -1270,17 +1274,17 @@ class Crud extends DataBoundObject {
 
       $displayHash = array();
 
-      if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) $this->ID = $_REQUEST[$this->DefineTableName().'_id'];
+      if ( isset($_REQUEST[$this->sufijo.'id']) ) $this->ID = $_REQUEST[$this->sufijo.'id'];
 
       // El identificador puede que venga por sesión.
-      if ( ! $this->ID && isset($_SESSION['VALORES'][$this->DefineTableName().'_id']) ) 
-         $this->ID = isset($_SESSION['VALORES'][$this->DefineTableName().'_id']);
+      if ( ! $this->ID && isset($_SESSION['VALORES'][$this->sufijo.'id']) ) 
+         $this->ID = isset($_SESSION['VALORES'][$this->sufijo.'id']);
 
       // Verificar registro
       if ( $this->ID ) {
          if ( ! $this->blIsLoaded ) {
             if ( ! $this->Load() ) {
-               registrar(__FILE__,__LINE__,'No esiste registro ['.$this->ID.']','ERROR');
+               registrar(__FILE__,__LINE__,literal('No esiste registro').( ( isset($this->ID) && ! empty($this->ID) ) ? ' ['.$this->ID.']' : '' ),'ERROR');
                return FALSE;
                }
             }
@@ -1288,24 +1292,26 @@ class Crud extends DataBoundObject {
 
       // Determinar acción actual
 
-      if ( isset($_POST[$this->DefineTableName().'_guardar']) ) {
-         $this->accion = 'guardando';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_insertar']) && $this->permisos ) {
+      if ( isset($_POST[$this->sufijo.'guardar']) ) {
+         if ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
+            $this->accion = 'con_errores';
+         } else {
+            $this->accion = 'guardando';
+            }
+      } elseif ( isset($_REQUEST[$this->sufijo.'insertar']) && $this->permisos ) {
          $this->accion = 'insertar';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accio_galeria']) && $_REQUEST[$this->DefineTableName().'_accio_galeria'] == 'agafa_imatge' ) {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accio_galeria']) && $_REQUEST[$this->sufijo.'accio_galeria'] == 'agafa_imatge' ) {
          $this->accion = 'agafa_imatge';
-      } elseif ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->DefineTableName().'_formulario'])) {
-         $this->accion = 'con_errores';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'ver') {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'ver') {
          $this->accion = 'ver';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'eliminar') {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'eliminar') {
          $this->accion = 'eliminar';
-      } elseif ( isset($_REQUEST[$this->DefineTableName().'_accion']) && $_REQUEST[$this->DefineTableName().'_accion'] == 'editar') {
+      } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'editar') {
          $this->accion = 'editar';
       } elseif ( $accion_directa ) {
          $this->accion = $accion_directa;
       } else {
-         if ( isset($_REQUEST[$this->DefineTableName().'_id']) ) {
+         if ( isset($_REQUEST[$this->sufijo.'id']) ) {
             $this->accion = 'ver';
          } else {
             $this->accion = 'inicio';
@@ -1325,8 +1331,12 @@ class Crud extends DataBoundObject {
          $solicitud->SetRedirectOnConstraintFailure(true);
          // Si tenemos definida la url de vuelta al formulario la especificamos
          // a solicitud.
-         if ( $this->url_formulario ) {
+         if ( isset($_POST['url_formulario']) ) {
+            $solicitud->SetConstraintFailureRedirectTargetURL($_POST['url_formulario']);
+         } elseif ( $this->url_formulario ) {
             $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
+         } else {
+            $solicitud->SetConstraintFailureRedirectTargetURL($_SERVER['REDIRECT_URL']);
             }
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
@@ -1359,8 +1369,8 @@ class Crud extends DataBoundObject {
                         // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
                         // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
                         // estar vacio.
-                        if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
-                        $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                        if ( ! isset($this->ID) && !empty($this->ID) && $campo == $nombre_campo_relacional ) continue;
+                        $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
                         $conta++;
                         }
                      }
@@ -1407,8 +1417,8 @@ class Crud extends DataBoundObject {
                               // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
                               // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
                               // estar vacio.
-                              if ( ! isset($this->ID) && $campo == $nombre_campo_relacional ) continue;
-                              $solicitud->AddConstraint($rel->DefineTableName().'_'.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                              if ( ! isset($this->ID) && !empty($this->ID) && $campo == $nombre_campo_relacional ) continue;
+                              $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
                               $conta++;
                               }
                            }
@@ -1418,7 +1428,6 @@ class Crud extends DataBoundObject {
                }
             }
 
-         
          $solicitud->TestConstraints();
 
          // Si hemos llegado aquí hemos pasado las pruebas
@@ -1431,13 +1440,13 @@ class Crud extends DataBoundObject {
 
                $this->recoger_valores_formulario($this, $resultado);
 
-               $this->accion = ( isset($this->ID) ) ? 'modificando' : 'insertando';
+               $this->accion = ( isset($this->ID) && ! empty($this->ID) ) ? 'modificando' : 'insertando';
 
                if ( $this->save() ) {
 
                   /* Si utilizamos galería hay que guardar imagenes */
 
-                  $this->ID = ( isset($this->ID) ) ? $this->ID : $this->ultimo_identificador();
+                  $this->ID = ( isset($this->ID) && ! empty($this->ID) ) ? $this->ID : $this->ultimo_identificador();
 
                   /* Si tenemos eventos los lanzamos */
 
@@ -1581,11 +1590,11 @@ class Crud extends DataBoundObject {
                         }
                      }
 
-                  $mens = ( $this->accion == 'modificando' ) ? 'Registro modificado' : 'Registro incluido';
+                  $mens = ( $this->accion == 'modificando' ) ? literal('Registro modificado') : literal('Registro incluido');
                   registrar(__FILE__,__LINE__,literal($mens,3),'AVISO');
                   unset($_SESSION['VALORES']);
                } else {
-                  registrar(__FILE__,__LINE__,'ERROR al añadir o modificar registro','ERROR');
+                  registrar(__FILE__,__LINE__,literal('Error al añadir o modificar registro'),'ERROR');
                   }
 
             }
@@ -1641,7 +1650,7 @@ class Crud extends DataBoundObject {
       } elseif ( $this->accion == 'ver' ) {
 
          if ( ! $this->ID ) {
-            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            registrar(__FILE__,__LINE__,literal('No existe registro'),'ERROR');
             return FALSE;
             }
 
@@ -1651,7 +1660,7 @@ class Crud extends DataBoundObject {
       } elseif ( $this->accion == 'eliminar' ) {
 
          if ( ! $this->ID ) {
-            registrar(__FILE__,__LINE__,'No existe registro','ERROR');
+            registrar(__FILE__,__LINE__,literal('No existe registro'),'ERROR');
             return FALSE;
             }
 
@@ -1686,7 +1695,7 @@ class Crud extends DataBoundObject {
 
 
 
-         registrar(__FILE__,__LINE__,"Registro eliminado",'AVISO');
+         registrar(__FILE__,__LINE__,literal("Registro eliminado"),'AVISO');
          header("Location: ".$_SERVER['PHP_SELF']);
          exit(0);
 
@@ -1725,17 +1734,17 @@ class Crud extends DataBoundObject {
 
          // Boton insertar
          if ( $this->accion == "ver" || $this->accion == "inicio" ) {
-            echo '<a class="formulari2 boton" href="?'.$this->DefineTableName().'_insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
+            echo '<a class="formulari2 boton" href="?'.$this->sufijo.'insertar=1">'.literal('Insertar',3).' </a>&nbsp;';
             }
 
          // Boton editar
          if ( $this->accion != "editar" && $this->ID ) {
-            echo ' <a class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=editar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
+            echo ' <a class="formulari2 boton" href="?'.$this->sufijo.'accion=editar&'.$this->sufijo.'id='.$this->ID.'">'.literal('Editar',3).' </a>&nbsp;';
             }
 
          // Boton borrar
          if (  $this->ID ) {
-            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->DefineTableName().'" class="formulari2 boton" href="?'.$this->DefineTableName().'_accion=eliminar&'.$this->DefineTableName().'_id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
+            echo ' <a onclick="return confirm(\''.literal('Confirmar borrado').'\');" id="a_eliminar_'.$this->sufijo.'" class="formulari2 boton" href="?'.$this->sufijo.'accion=eliminar&'.$this->sufijo.'id='.$this->ID.'">'.literal('Borrar',3).' </a>&nbsp;';
             }
 
          // Boton Cancelar
@@ -1762,11 +1771,7 @@ class Crud extends DataBoundObject {
 
       if ( $condicion ) {
 
-         if ( stripos($sql,'GROUP ') !== FALSE ) {
-            $sql = str_ireplace('GROUP ',' WHERE '.$condicion.' GROUP ', $sql);
-         } else {
-            $sql .= ' WHERE '.$condicion ;
-            }
+         $sql = $this->anyadir_condicion_sql($condicion,$sql);
 
          }
 
@@ -1776,7 +1781,7 @@ class Crud extends DataBoundObject {
 
       $this->elementos = ( $this->elementos_pagina ) ? $this->elementos_pagina : NULL;
 
-      $pd = new PaginarPDO($this->objPDO, $sql, $this->sufijo, $this->elementos_pagina, $order, $this->sql_listado_relacion);
+      $pd = new PaginarPDO($this->objPDO, $sql, $this->sufijo, $this->elementos_pagina, $order, $this->sql_listado_relacion, $this->conf_paginador);
 
       // Configuración de paginador
       if ( $this->conf_paginador ) {
@@ -1789,21 +1794,21 @@ class Crud extends DataBoundObject {
 
          if ( $this->permisos ) {
             $opciones = array(
-               'url'           => '?'.$this->DefineTableName().'_id='
+               'url'           => '?'.$this->sufijo.'id='
                ,'identifiador' => 'id'
                ,'modificar'    => 'editar'  
                // ,'eliminar'     => 'eliminar'
                //,'ver'          => 'ver'
-               ,'accion'       => $this->DefineTableName().'_accion'
+               ,'accion'       => $this->sufijo.'accion'
                ,'ocultar_id'   => 1
                ,'dir_img'      => ( $this->dir_img_array2table ) ? $this->dir_img_array2table : NULL
                );
          } else {
             $opciones = array(
-               'url'           => '?'.$this->DefineTableName().'_id='
+               'url'           => '?'.$this->sufijo.'id='
                ,'identifiador' => 'id'
                //,'ver'          => 'ver'
-               ,'accion'       => $this->DefineTableName().'_accion'
+               ,'accion'       => $this->sufijo.'accion'
                ,'ocultar_id'   => 1
                ,'dir_img'      => ( $this->dir_img_array2table ) ? $this->dir_img_array2table : NULL
                );
@@ -1820,7 +1825,7 @@ class Crud extends DataBoundObject {
          $pd->generar_pagina($this->url_ajax, $opciones, $presentacion);
 
       } else {
-         registrar(__FILE__,__LINE__,"Tabla sin contenido",'AVISO');
+         registrar(__FILE__,__LINE__,literal("Tabla sin contenido"),'AVISO');
          }
 
       }
@@ -1920,11 +1925,11 @@ class Crud extends DataBoundObject {
 
       foreach ( $modelo->arRelationMap as $campo => $rCampo ) {
 
-         $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->DefineTableName().'_'.$campo][$numero_registro] : $resultado[$campo];
+         $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->sufijo.$campo][$numero_registro] : $resultado[$campo];
 
          if ( ! empty($valor) && $valor ) $hay_valores = TRUE;
 
-         if ( isset($modelo->ID) && $campo == 'fecha_creacion'  ) {
+         if ( isset($modelo->ID) && ! empty($modelo->ID) && $campo == 'fecha_creacion'  ) {
             $modelo->SetAccessor($rCampo, date("Y-m-d H:i:s"));
             continue;
             }
@@ -1938,7 +1943,6 @@ class Crud extends DataBoundObject {
          // con md5()
          if ( $campo == 'pass_md5' && !empty($valor) ) {
             $modelo->SetAccessor($rCampo, md5($valor));
-            // registrar(__FILE__,__LINE__,'pass: '.$valor.' md5: '.md5($valor),'AVISO'); // DEV
             continue;
             }
 
@@ -1946,7 +1950,6 @@ class Crud extends DataBoundObject {
          // la modifica sin ser lo que queremos.
          if ( $campo == 'pass_md5' && empty($valor) ) {
             $modelo->DelAccessor($rCampo);
-            // registrar(__FILE__,__LINE__,'pass: '.$valor.' md5: '.md5($valor),'AVISO'); // DEV
             continue;
             }
 
@@ -2126,7 +2129,7 @@ class Crud extends DataBoundObject {
                         <?php if ( $campo != $campo_contenido ) $salida .= literal($valor); ?>
                         <?php if ( $conta > 1 ) { break; } // Solo añadimos el siguiente campo al identificador ?> 
                         <?php } ?>
-                        <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo $salida ?>')">
+                        <a href="javascript:<?php echo $tabla_contenido; ?>.insertar_registro(<?php echo $id_posible; ?>,'<?php echo str_replace("'","\'",$salida) ?>')">
                            <?php echo $salida ?>
                         </a>
                      </li>
@@ -2144,6 +2147,28 @@ class Crud extends DataBoundObject {
          }
 
       }
+
+   /**
+    * Añadir condición a la sql
+    * 
+    * @param $condicion Condición
+    * @param $sql SQL a modificar por defecto $this->sql_listado 
+    */
+
+   function anyadir_condicion_sql($condicion, $sql=FALSE) {
+
+      $sql = ( $sql ) ? $sql : $this->sql_listado ;
+
+      if ( stripos($sql,'GROUP ') !== FALSE ) {
+         $sql = str_ireplace('GROUP ',' WHERE '.$condicion.' GROUP ', $sql);
+      } else {
+         $sql .= ' WHERE '.$condicion ;
+         }
+
+      return $sql;
+
+      }
+
 
    }
 

@@ -36,7 +36,20 @@ require_once(GCM_DIR."lib/int/GcmConfig/lib/GcmConfigFactory.php");
 
 class Editar extends Modulos {
 
-   function __construct() { parent::__construct() ; }
+   /**
+    * Ruta hacia el código javascript del editor desde html
+    */
+
+   private $editor = "lib/ext/tiny_mce/tiny_mce.js";
+   private $ruta_editor_html;
+
+   function __construct() { 
+
+      parent::__construct() ; 
+
+      $this->ruta_editor_html = GCM_DIR_P.$this->editor;
+
+      }
 
    /** editorweb
     *
@@ -65,7 +78,7 @@ class Editar extends Modulos {
       $gcm->event->accion2evento('columna','editar','panel_constantes',6);
 
       ?>
-      <script language="javascript" type="text/javascript" src="<?php echo GCM_DIR_P ?>lib/ext/tiny_mce/tiny_mce.js"></script>
+      <script language="javascript" type="text/javascript" src="<?php echo $this->ruta_editor_html?>"></script>
 
       <script language="javascript" type="text/javascript">
       tinyMCE.init({
@@ -105,6 +118,17 @@ class Editar extends Modulos {
       <?php
 
    }
+
+   /**
+    * test
+    */
+
+   function test() {
+
+      // Comprobar existencia de archivos necesarios
+      $this->ejecuta_test('Comprobar editor',is_file(GCM_DIR.$this->editor));
+
+      }
 
    /** Insertar email en el editor web
     *

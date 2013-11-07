@@ -1,0 +1,103 @@
+/**
+
+@ingroup librerias
+@defgroup GcmConfig GcmConfig
+
+ Librería interna para el tratamiento de archivos de configuración
+
+@{
+
+Configuración
+-------------
+
+Solamente necesitamos un archivo con un array del mismo nombre que contenga los 
+valores a configurar GcmConfig, no obstante también podemos crear 
+descripciones de estas variables para que se muestren al usuario y que tenga una 
+explicación de ayuda.
+
+Otra opción es pasarle un archivo con valores por defecto. GcmConfigGui
+
+## Ejemplos de diferentes tipos de variables
+
+### simple
+
+archivo avisos.php
+@code
+$avisos['vintervalo']	= 10;					///< Segons en actualitzar el contador
+@endcode
+
+archivo avisos_ca_ES.php
+@code
+$avisos_DESC['vintervalo']='Segons que han de passar per actualitzar el contador de temps';
+@endcode
+
+### listas
+
+archivo generals.php
+@code
+$generals['sDescripcio'][0]		=	"Frase que defineix la web, en Català";
+$generals['sDescripcio'][1]		=	"Frase que define la web, en castellano";
+$generals['sDescripcio'][2]		=	"Frase que define la web FR";
+@endcode
+
+archivo generals_ca_ES.php
+@code
+$generals_DESC['sDescripcio']='El primer Array amb català, seguit del castellà, el FR, ENG i GER.
+@endcode
+
+### grupos
+
+Podemos definir un grupo de variables, en tal caso el usuario podrá borrar o añadir grupos completos
+pero no quitar o añadir elementos en el mismo.
+
+@note
+Es importante que en la descripción tengamos definido 'grupo' y su descripción para que la aplicación
+lo manipule como tal.
+
+Ejemplo de configuración de un grupo
+
+archivo productes.php
+@code
+$productes['empreses_facturadores'][0]['sCodEmpresa']='%06d';
+$productes['empreses_facturadores'][0]['sNomPresentador']='TOTDEMO-01';
+$productes['empreses_facturadores'][0]['sEmpresFact']='Demo de activitats, S.L.';
+@endcode
+
+Ejemplo de archivo con descripciones
+
+archivo productes_DESC.php
+@code
+$productes_DESC['empreses_facturadores']['grupo']='Empresas facturadoras';
+$productes_DESC['empreses_facturadores']['sCodEmpresa']='Código de empresa';
+$productes_DESC['empreses_facturadores']['sNomPresentador']='Nombre presentador';
+@endcode
+
+Sistema para el tratamiento de archivos de configuración
+--------------------------------------------------------
+
+gcm/lib/int/GcmConfig/
+
+- html                                Plantillas 
+
+  + formGcmConfigGui.html           Formulario para modificar contenido
+
+- js                                  Ficheros Javascript
+
+  + GcmConfigGui.js                 Javascript para el formulario
+
+- lib                                 Librerías
+
+  + GcmConfig.php                   Clase base
+  + GcmConfigFactory.php            Patrón factory y singleton para poder recoger
+                                    diferentes instancias y no repetir las mismas
+  + GcmConfigGui.php                Interface
+
+- test                                Tests
+
+  + TestGcmConfig.php               phpunit 
+  + TestGcmConfigFactory.php        phpunit 
+  + TestGcmConfigGui.php            phpunit 
+  + TestPhpGcmConfigGui.php         php
+
+@}
+*/

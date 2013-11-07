@@ -586,6 +586,16 @@ class Contenidos extends ContenidosAbstract {
       return $fecha;
       }
 
+   /**
+    * Test
+    */
+
+   function test() {
+
+      $this->ejecuta_test('Permiss en directorio contenido ['.Router::$dd.']', is_readable(Router::$dd));
+
+
+      }
 
    }
 

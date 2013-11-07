@@ -1,3 +1,12 @@
+<h2>M&eacute;todos de los m&oacute;dulos para incluir javascript</h2>
+<p>Tenemos tres metodos diferentes para a&ntilde;adir javascript desde los m&oacute;dulos.</p>
+<h3>javascript()</h3>
+<p>Para a&ntilde;adir porciones de c&oacute;digo al archivo proyecto.js que se genera automaticamente con todos los archivos definidos, estos archivos se encuentran en la carpeta js del mismo m&oacute;dulo.</p>
+<h3>librerias_js()</h3>
+<p>Son librerias de terceros o no que se encuentran dentro de la carpeta libjs del m&oacute;dulo y son requeridas para su funcionamiento, estas librerias seran a&ntilde;adidas al proyecto antes del archivo proyecto.js.</p>
+<h3>add_ext_lib()</h3>
+<p>Para a&ntilde;adir librer&iacute;as de terceros tanto js como css requeridas de forma global como por ejemplo jquery, est&aacute;s ser&aacute;n las primeras en ser incluidas.</p>
+<h2>Uso</h2>
 <p>Para hacer que Gcm cargue un javascript del m&oacute;dulo se debe a&ntilde;adir en el m&eacute;todo que haga uso de &eacute;l la siguiente orden.</p>
 <pre>$this-&gt;javascripts('archivo.js');</pre>
 <p>Esto a&ntilde;ade el contenido del archivo a proyecto.js</p>
@@ -6,7 +15,9 @@
 <pre>$this-&gt;librerias_js('jquery-1.2.6.js');</pre>
 <p><span class="aviso">La librer&iacute;a debe encontrarse en la carpeta libjs del m&oacute;dulo que la a&ntilde;ade.</span></p>
 <p><span class="aviso">En el caso de querer cargar una librer&iacute;a de un m&oacute;dulo diferente, podemos hacer desde $gcm</span></p>
-<pre><span class="aviso">global $gcm;<br />$gcm-&gt;add_lib_js('temas', 'jquery.dataTables.js');</span></pre>
+<pre><span class="aviso">global $gcm;<br />$this-&gt;librerias_js('temas', 'jquery.dataTables.js');</span></pre>
+<p>En caso de querer cargar una libreria externa tanto js como css.</p>
+<pre>$this-&gt;add_ext_lib('js', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.js');<br />$this-&gt;add_ext_lib('css', Router::$base.GCM_DIR.'lib/ext/jquery/datatable/jquery.dataTables.css');</pre>
 <h2>Ejemplo de uso:</h2>
 <p>Un ejemplo es el m&oacute;dulo im&aacute;genes, tenemos un evento configurado para que despu&eacute;s del contenido las im&aacute;genes que se encuentren dentro del div contenido sean visualizadas con el plugin colorbox:</p>
 <p>Archivo de eventos de usuario: <strong>eventos_usuarios.php</strong></p>

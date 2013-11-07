@@ -1,3 +1,30 @@
+<?php
+
+/**
+ * @file formGcmConfigGui.php
+ * @brief Plantilla para generar formulario de configuración
+ */
+
+
+function contabilizar_saltos_linea($cadena) {
+
+   //Definimos el ancho que queramos en una variable
+   $ancho=55; 
+
+   if (strtoupper(substr(PHP_OS,0,3)=='WIN')) { 
+     $eol="\r\n"; 
+   } elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) { 
+     $eol="\r"; 
+   } else { 
+     $eol="\n"; 
+      } 
+
+   $cad=wordwrap($cadena, $ancho, $eol, 1); 
+   return substr_count($cad,$eol)+1; 
+
+   }
+
+?>
 <script type="text/javascript">
    <?php include(dirname(__FILE__).'/../js/GcmConfigGui.js'); ?>
 </script>
@@ -8,59 +35,105 @@
 
       <?php if ( isset($this->variables) ) { while (list($clave, $val)=each($this->variables)){ ?>
 
+      <?php // Si es un array se debe permitir añadir más valores o eliminarlos ?>
+
+      <?php if ( is_array($val)) {  // Puede se una lista o un grupo ?>
+
+      <?php $grupo = ( is_array($val[0]) ) ? 'Grupo' : FALSE ; // Saber si es un grupo ?>
+
       <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
 
          <b><?php echo $clave?></b>
          <?php if ( $eliminar ) { ?>
-         <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+         <a onclick='javascript:eliminarElemento<?php echo $grupo ?>("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
          <?php   } ?>
-	<div >
-         <!-- <input type='text' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]' -->
 
+         [<a title='<?php echo literal('Añadir más').' '.literal($clave) ?>' href="javascript:anadirVariable<?php echo $grupo ?>('<?php echo $this->idioma ?>','<?php echo $clave ?>',<?php echo count($val);?>)" >+</a>]
 
+      <div>
 
-         <?php if ( is_array($val)) { ?>
+         <div class="textAreaDescripLLista">
 
-            <div class="textAreaDescripLLista">
+         <?php  
+         $cadena=$this->getDescripcion($clave);
+         $lineas=contabilizar_saltos_linea($cadena);
+         ?> 
 
-         <?php } else { ?>
-            <div class="textAreaDescrip">
-         <?php } ?>
-            <?php  
-            //Definimos el ancho que queramos en una variable
-            $ancho=37; 
-            $cadena=$this->getDescripcion($clave);
-
-            //hacemos comparaciones y ajustamos el contenido 
-            //y lo dividimos en lineas
-            if (strtoupper(substr(PHP_OS,0,3)=='WIN')) { 
-              $eol="\r\n"; 
-            } elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) { 
-              $eol="\r"; 
-            } else { 
-              $eol="\n"; 
-            } 
-            $cad=wordwrap($cadena, $ancho, $eol, 1); 
-            $lineas=substr_count($cad,$eol)+1; 
-            ?> 
-
-            <textarea rows='<?php echo $lineas ?>' style='border: 0;background:none repeat scroll 0 0 transparent;' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+         <?php if ( $cadena  || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
+         <textarea rows='<?php echo $lineas ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]<?php if ( $grupo ) echo '[grupo]'; ?>'
          <?php if ( ! $modificar_descripciones ) { ?>
          class='inputLectura' readonly
          <?php } ?> ><?php echo $cadena?></textarea>
+         <?php } ?>
+
          </div>
-
-         <?php // Si es un array se debe permitir añadir más valores o eliminarlos ?>
-
-         <?php if ( is_array($val)) { ?>
 
          <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>'>
 
             <?php $conta=0; ?>
 
-            [<a title='Añadir más' href="javascript:anadirVariable('<?php echo $this->idioma ?>','<?php echo $clave ?>','<?php echo $conta?>')" >+</a>]
-
             <?php while (list($claveArray, $valorArray)=each($val)) { $conta++; ?>
+
+            <?php if ( is_array($valorArray) ) { ?>
+
+            <?php 
+            // Si estamos en un grupo no se puede eliminar los items individualmente, pero si se puede
+            // añadir o eliminar grupos.
+            ?>
+
+            <fieldset class="grupo_config" id="item_<?php echo $clave.'-'.($conta - 1) ?>">
+
+            <legend id="legend_<?php echo $clave.'-'.($conta - 1) ?>">
+               <?php echo literal($clave).' ('.($conta - 1) .')'; ?>
+               <?php if ( true || $eliminar ) {  // Permitimos eliminar grupo a usuario ?>
+               <a title="<?php echo literal('Eliminar').' '.literal($claveArray); ?>" href='javascript:eliminarGrupo("item_<?php echo $clave.'-'.($conta - 1) ?>")' >[X]</a>
+               <?php   } ?>
+            </legend>
+
+            <?php $conta2=0; ?>
+
+            <?php while (list($claveArray2, $valorArray2)=each($valorArray)) { $conta2++; ?>
+
+            <div id='<?php echo $claveArray."-".$conta2?>' >
+
+               <?php
+               // Si el número de filas supera las dos presentamos descripción sobre el valor
+               // y no al lado.
+               $ta_descripcion = $this->getDescripcion($claveArray2,NULL,$clave);
+               $ta_row_desc    = contabilizar_saltos_linea($ta_descripcion);
+               $ta_valor       = $valorArray2;
+               $ta_row_valor   = contabilizar_saltos_linea($ta_valor);
+               if ( $ta_row_valor > 1 || $ta_row_desc > 1 ) {
+                  $ta_class_descr = "textAreaDescripGrande";
+                  $ta_class_valor = "textAreaValorGrande";
+               } else {
+                  $ta_class_descr = "textAreaDescrip";
+                  $ta_class_valor = "textAreaValor";
+                  }
+               ?>
+
+               <b><?php echo $claveArray2?></b>
+               <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray2 ?>]'
+
+               <?php
+               // Solo aactivamos la modificación de las descripciones del último elemento 
+               // del grupo, ya que si se modifica las anteriores seria chafada por la última
+               ?>
+
+               <?php if ( ! $modificar_descripciones || $conta != count($val) ) { ?>
+               class='inputLectura' readonly
+               <?php } ?> ><?php echo $ta_descripcion;?></textarea>
+
+               <textarea class="item_valor formulari2 <?php echo $ta_class_valor ?>" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $ta_valor?></textarea>
+
+            </div>
+
+
+            <?php } /// Acaba while ?>
+
+            </fieldset>
+
+            <?php } else { // No es un array ?>
 
             <div id='<?php echo $clave."-".$conta?>' >
 
@@ -68,22 +141,60 @@
                [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
                <?php } ?>
                <br />
-               <textarea class="formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+               <textarea class="formulari2" rows='<?php echo contabilizar_saltos_linea($valorArray2);  ?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
 
             </div>
+            <?php } // Acaba si es un array ?>
 
-            <?php } ?>
+            <?php } // Acaba while de array ?>
 
          </div>
 
-         <?php } else { ?>
-		<div class="textAreaDescrip">
-         <textarea class="formulari2" rows='1' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $val?></textarea>
-		</div>
+         <?php } else { // Elemento simple ?>
+
+         <?php
+         // Si el número de filas supera las dos presentamos descripción sobre el valor
+         // y no al lado.
+         $ta_descripcion = $this->getDescripcion($clave);
+         $ta_row_desc    = contabilizar_saltos_linea($ta_descripcion);
+         $ta_valor       = $val;
+         $ta_row_valor   = contabilizar_saltos_linea($ta_valor);
+
+         // Presentamos en una sola fila o una debajo de la otra según tamaño
+         if ( $ta_row_valor > 1 || $ta_row_desc > 1 || ! $ta_descripcion) {
+            $ta_class_descr = "textAreaDescripGrande";
+            $ta_class_valor = "textAreaValorGrande";
+         } else {
+            $ta_class_descr = "textAreaDescrip";
+            $ta_class_valor = "textAreaValor";
+            }
+         ?>
+
+         <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
+
+            <b><?php echo $clave?></b>
+            <?php if ( $eliminar ) { ?>
+            <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+            <?php   } ?>
+
+         <div>
+
+         <?php if ( $ta_descripcion || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
+
+         <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc; ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+         <?php if ( ! $modificar_descripciones ) { ?>
+         class='inputLectura' readonly
+         <?php } ?> ><?php echo $ta_descripcion?></textarea>
+
          <?php } ?>
+
+         <textarea class="<?php echo $ta_class_valor ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
+
+         <?php } ?>
+
 	</div>
-   <hr class="clear" />
-      </div>
+      <div style="clear: both;"></div>
+   </div>
 
       <?php } ?>
 

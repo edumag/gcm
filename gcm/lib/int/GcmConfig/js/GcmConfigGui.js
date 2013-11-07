@@ -5,10 +5,9 @@
  * Funciones para añadir eliminar o modificar variables y descripciones
  *
  * @author    Eduardo Magrané 
+ * @ingroup GcmConfig
  *
  * @internal
- *   Created  09/02/10
- *  Revision  SVN $Id: $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -96,4 +95,35 @@ function anadirVariable(idioma,CLAVE,NUM) {
 function eliminarVariable(NAME_VAR) {
    var CAJA = document.getElementById(NAME_VAR);
    CAJA.parentNode.removeChild(CAJA);
+   }
+
+/**
+ * Añadir nuevo grupo
+ */
+
+function anadirVariableGrupo(idioma, clave, num) {
+   var ultimo_item = document.getElementById('item_'+clave+'-'+ (num - 1));
+   var nuevo_item = ultimo_item.cloneNode(true);
+   ultimo_item.parentNode.insertBefore(nuevo_item,ultimo_item);
+   var legend = ultimo_item.childNodes[1];
+   legend.innerHTML = clave +' ('+num+')';
+
+   for (i=0;ele=ultimo_item.elements[i];i++) {
+       if(/\item_valor\b/.test(ele.className)) {
+         ele.value = "";
+         ele.name = ele.name.replace('['+(num-1)+']','['+(num)+']');
+          }
+      }
+
+   }
+
+/**
+ * Eliminar un grupo
+ */
+
+function eliminarGrupo(grupo) {
+   var grupo = document.getElementById(grupo);
+   grupo.parentNode.removeChild(grupo);
+
+
    }

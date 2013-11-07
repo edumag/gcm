@@ -1,0 +1,165 @@
+.botones_acciones {
+    padding: 8px;
+}
+#tablewrapper {
+    margin: 0 auto;
+    overflow: auto;
+    width: 100%;
+}
+#tableheader {
+    height: 55px;
+    width: 96%;
+}
+.search {
+    border: 1px solid rgb(214, 214, 214);
+    float: left;
+    padding: 6px;
+}
+#tableheader select {
+    float: left;
+    font-size: 12px;
+    padding: 2px 4px 4px;
+    width: 125px;
+}
+#tableheader input {
+    float: left;
+    font-size: 12px;
+    margin-left: 4px;
+    padding: 2px 4px 4px;
+    width: 225px;
+}
+
+.fila_unica div {
+    background: none repeat scroll 0 0 rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: monospace;
+    margin: 2px;
+}
+.details {
+    float: right;
+    padding-top: 12px;
+}
+.details div {
+    float: left;
+    font-size: 12px;
+    margin-left: 15px;
+}
+table.dataTable {
+    width: 100%;
+}
+.head {
+    background-color: rgb(135, 215, 208);
+    border-bottom: 8px solid rgb(255, 255, 255);
+    border-left: 1px solid rgb(255, 255, 255);
+    border-right: 1px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-align: left;
+}
+.head img {
+    padding: 5px 0 0 8px;
+}
+.asc {
+    background-color: rgb(135, 215, 208);
+}
+.desc {
+    background-color: rgb(135, 215, 208);
+}
+.evenrow a img {
+    padding: 5px 0 0 12px;
+}
+.oddrow a img {
+    padding: 5px 0 0 12px;
+}
+.dataTable th h3 {
+    font-size: 100%;
+}
+.dataTable td {
+    border-left: 1px solid rgb(255, 255, 255);
+    border-right: 1px solid rgb(255, 255, 255);
+    padding: 1px 2px;
+}
+.dataTable .head h3 {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding-left: 3px;
+}
+.dataTable .desc, .sortable .asc {
+    background-color: rgb(135, 215, 208);
+}
+.dataTable .desc h3 {
+    background: url("<?php echo GCM_DIR.'lib/int/array2table/img/';?>desc.gif") no-repeat scroll 4px center rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding-left: 14px;
+}
+.dataTable .asc h3 {
+    background: url("<?php echo GCM_DIR.'lib/int/array2table/img/';?>asc.gif") no-repeat scroll 4px center rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding-left: 14px;
+}
+.dataTable .head:hover, .dataTable .desc:hover, .dataTable .asc:hover {
+    color: rgb(204, 153, 0);
+}
+.dataTable .evenrow td {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+}
+.dataTable .oddrow td {
+    background: none repeat scroll 0 0 rgb(235, 235, 235);
+}
+.dataTable td.evenselected {
+    background: none repeat scroll 0 0 rgb(225, 225, 225);
+}
+.dataTable td.oddselected {
+    background: none repeat scroll 0 0 rgb(235, 235, 235);
+}
+.dataTable .oddrow td.oddselected {
+    background: none repeat scroll 0 0 rgb(225, 225, 225);
+}
+.dataTable tr.evenrow:hover td {
+    background: none repeat scroll 0 0 rgb(214, 214, 214) !important;
+}
+.dataTable tr.oddrow:hover td {
+    background: none repeat scroll 0 0 rgb(214, 214, 214) !important;
+}
+.dataTable tfoot {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+    font-weight: bold;
+}
+.dataTable tfoot td {
+    padding: 6px 8px 8px;
+}
+#tablefooter {
+    height: 15px;
+    margin-top: 20px;
+    width: 96%;
+}
+#tablenav {
+    float: left;
+}
+#tablenav img {
+    cursor: pointer;
+}
+#tablenav div {
+    float: left;
+    margin-right: 15px;
+}
+#tablelocation {
+    float: right;
+    font-size: 12px;
+}
+#tablelocation select {
+    margin-right: 3px;
+}
+#tablelocation div {
+    float: left;
+    margin-left: 15px;
+}
+.page {
+    font-style: italic;
+    margin-top: 2px;
+}
+#selectedrow td {
+    background: none repeat scroll 0 0 rgb(214, 214, 214);
+}

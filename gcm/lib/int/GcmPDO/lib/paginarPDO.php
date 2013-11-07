@@ -57,15 +57,24 @@ class PaginarPDO extends GcmPDO {
     *        ordenar las fechas por el alias el orden nos lo hace como si fuera una  cadena, 
     *        así en este caso se hace necesario tener el nombre real del  campo para que las 
     *        ordene como fechas.
+    * @param $configuracion Array con los atributos publicos y sus valores 
     */
 
-   function __construct (PDO $pdo, $sql, $sufijo=FALSE, $elementos_pagina=8, $order = FALSE, $sql_relaciones = FALSE) {
+   function __construct (PDO $pdo, $sql, $sufijo=FALSE, $elementos_pagina=8, $order = FALSE, $sql_relaciones = FALSE, $configuracion=FALSE) {
 
        parent::__construct($pdo, $sql);
 
       $this->sufijo = ( $sufijo ) ? $sufijo : '';
 
       $this->elementos_pagina = ( $elementos_pagina ) ? $elementos_pagina : 10 ; 
+
+      // si recibimos configuración la gestionamos
+
+      if ( $configuracion ) {
+         foreach ( $configuracion as $atributo => $valor ) {
+            $this->$atributo = $valor;
+            }
+         }
 
      // Definimos orden si nos llega por GET o cogemos por defecto
 
@@ -268,18 +277,42 @@ class PaginarPDO extends GcmPDO {
 
          if ( $url_ajax && $url_ajax != '' ) {
 
+            // Ocultamos botonera hasta cargarse el ajax para evitar que se clique 
+            // antes de tiempo
+            ?>
+            <script>
+            //document.getElementById('<?php echo $div ?>').style.visibility = "hidden";
+            var contenedor = document.getElementById('<?php echo $div ?>');
+            var hijos = contenedor.getElementsByTagName("span");
+            for (i=0;i<hijos.length;i++){
+               var clase = hijos[i].getAttribute('class');
+               if ( clase == 'botonera_paginador' ) {
+                  hijos[i].style.visibility = "hidden";
+                  }
+               }
+            </script>
+            <?php
+
             $this->script_ajax();
             
             if ( isset($_REQUEST['formato']) && $_REQUEST['formato'] == 'ajax' ) {
+
                ?>
-               <script>setTimeout('initPaginador("#<?=$div?>","<?=$url_ajax?>")', 1000);</script>
+               <script>
+               setTimeout('initPaginador("#<?=$div?>","<?=$url_ajax?>")', 1000);
+               </script>
                <?php
             } else {
                ?>
                <script>
-                  addLoadEvent(function(){
-                     initPaginador("#<?=$div?>","<?=$url_ajax?>");
-                  });
+               setTimeout('initPaginador("#<?=$div?>","<?=$url_ajax?>")', 1000);
+               // Al no cargarse el script de twitter no acaba de mostrarse nunca
+               // la botonera, lo dejamos en un segundo para dar tiempo a jquery
+               // y ya esta.
+               //
+               //   addLoadEvent(function(){
+               //      initPaginador("#<?=$div?>","<?=$url_ajax?>");
+               //   });
                </script>
                <?php
                }
@@ -317,6 +350,8 @@ class PaginarPDO extends GcmPDO {
               });
             return false;
          });
+
+         $(div).find(".botonera_paginador").css('visibility','visible');
        }
       </script>
       <?php

@@ -27,6 +27,9 @@ class Array2table {
    public static $img_ver       ;                //< Imagen para visualizar detalles
    public $sufijo               ;                //< sufijo para añadir a los enlaces
 
+   public static $script_incluido = FALSE ;      //< Saber si javascript a sido añadido T/F
+   public static $css_incluido    = FALSE ;      //< Saber si css a sido añadido T/F
+
    /**
     * Constructor
     *
@@ -79,7 +82,7 @@ class Array2table {
     *        Importaante:
     *           Para que funcione correctamente el campo url debe llegar primero desde la sql que el campo al que enlaza
     *
-    *     $fila_unica   Campo que deseamos que se muestre en una sola fila de la tabla, util para cuando 
+    *     fila_unica   Campo que deseamos que se muestre en una sola fila de la tabla, util para cuando 
     *                   es un campo con mucho texto, sin necesidad de ordenarse por él.
     * 
     * @param $orden Nombre de la columna por la que se esta ordenando
@@ -262,7 +265,11 @@ class Array2table {
 
       $fpi = 'evenrow';
 
+      $num_fila = 0;
+
       foreach ( $res as $fila ) {          // filas del body de la tabla
+
+         $num_fila++;
 
          $enlace = FALSE;
 
@@ -307,7 +314,9 @@ class Array2table {
 
             } elseif ( isset($fila_unica) && $fila_unica == $key_columna ) {
                $DATO=trim($columna);
-               $salida_fila_unica .= sprintf("\n\t\t<tr><td colspan='%s' %s>%s</td></tr>",$num_columnas,$clase_columna,$DATO);
+               if ( !empty($DATO) ) {
+                  $salida_fila_unica .= sprintf("\n\t\t<tr><td class='fila_unica' colspan='%s' %s><a href='javascript:mostrar_fila_unica(\"fila_".$this->sufijo.$num_fila."\");'>mostrar</a><div id='fila_".$this->sufijo.$num_fila."' style='display: none;'>%s</div></td></tr>",$num_columnas,$clase_columna,nl2br($DATO));
+                  }
                
             } elseif ($key_columna == "img" ) {
                $DATO=trim($columna);
@@ -373,6 +382,23 @@ class Array2table {
          echo "\n\t</tbody>";
          echo "</table>";
 
+         if ( ! self::$css_incluido ) {
+            ?>
+            <style>
+            <?php include(dirname(__FILE__).'/../css/array2table.css'); ?>
+            </style>
+            <?php
+            self::$css_incluido = TRUE;
+            }
+
+         if ( ! self::$script_incluido ) {
+            ?>
+            <script>
+            <?php include(dirname(__FILE__).'/../js/array2table.js'); ?>
+            </script>
+            <?php
+            self::$script_incluido = TRUE;
+            }
       }
 
    }

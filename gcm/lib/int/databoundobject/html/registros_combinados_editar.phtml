@@ -73,10 +73,11 @@ $editable = TRUE;
    
    <?php $cargar_codigo_fechas_horas[] = $campo; ?>
    <div class="caja_campo_titulo"><?=literal($campo,$nombre_tabla_relacionada,$contador)?></div>
-   <?php $valor = ( $this->valores($campo,$nombre_tabla_relacionada,$contador) ) 
+   <?php 
+   $valor = ( $this->valores($campo,$nombre_tabla_relacionada,$contador) && $this->valores($campo,$nombre_tabla_relacionada,$contador) != '0000-00-00 00:00:00' ) 
                ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo,$nombre_tabla_relacionada,$contador))) 
-               : strftime("%Y-%m-%d %H:%M"); ?>
-   
+               : strftime("%Y-%m-%d %H:%M"); 
+   ?>
    <?php $atr = FALSE; if ( ! $editable ) $atr['readonly'] = 'readonly'; ?>
    <?php echo HTML::form_text($nombre_tabla_relacionada.'_'.$campo.'[]',$valor,$atr); ?>
 

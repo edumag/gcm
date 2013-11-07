@@ -6,10 +6,9 @@
  * Interface para modificar variables de php de un archivo.
  *
  * @author    Eduardo Magrané 
+ * @ingroup GcmConfig
  *
  * @internal
- *   Created  21/01/10
- *  Revision  SVN $Id: GcmConfigGui.php 443 2011-01-02 13:15:38Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -27,9 +26,6 @@ require_once('GcmConfig.php');
  * a la vez la edición de su contenido con formularios php.
  *
  * Inspirado en @see http://www.jourmoly.com.ar/introduccion-a-mvc-con-php-segunda-parte/
- * 
- *
- * @version 0.1
  */
 
 class GcmConfigGui extends GcmConfig {
@@ -130,12 +126,22 @@ class GcmConfigGui extends GcmConfig {
 
          foreach( $_POST['descripcion_'.$idioma] as $clave => $valor ) {
 
-            $this->setDescripcion($clave,$valor, $idioma);
+            if ( is_array($valor) ) {
+               foreach ( $valor as $key => $val ) {
+                  $this->setDescripcion($clave,$val, $idioma, $key);
+                  }
+            } else {
+               $this->setDescripcion($clave,$valor, $idioma);
+               }
 
             }
 
          }
       
+      // echo "<pre>POST" ; print_r($_POST) ; echo "</pre>"; // DEV  
+      // echo "<pre>variables" ; print_r($this->variables) ; echo "</pre>"; // DEV  
+      // echo "<pre>descripciones" ; print_r($this->descripciones) ; echo "</pre>"; // DEV  
+
       return TRUE;
 
       }

@@ -2,13 +2,13 @@
 
 /**
  * @file      Config.php
- * @brief     MEcanismo independiente de confiuración
+ * @brief     Mecanismo independiente de confiuración
+ * @ingroup   GcmConfig
  *
  * @author    Eduardo Magrané 
  *
  * @internal
  * Created    13/11/09
- * Revision   SVN $Id: Idiomas.php 469 2011-02-04 07:56:07Z eduardo $
  * Copyright  Copyright (c) 2009, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the

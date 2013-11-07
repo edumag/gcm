@@ -51,6 +51,23 @@ class Imagenes extends Modulos {
 
       }
 
+   /**
+    * test
+    */
+
+   function test() {
+
+      // Comprobar existencia de archivos necesarios
+      $this->ejecuta_test('Comprobar configuración: alto máximo de imagenes',$this->altoMaxImg);
+      $this->ejecuta_test('Comprobar configuración: ancho máximo de imagenes',$this->anchoMaxImg);
+      $this->ejecuta_test('Comprobar configuración: alto máximo de miniaturas',$this->altoMaxMiniatura);
+      $this->ejecuta_test('Comprobar configuración: alto máximo de miniaturas',$this->anchoMaxMiniatura);
+      $this->ejecuta_test('Comprobar configuración: dominio de proyecto',$this->proyecto);
+      $this->ejecuta_test('Comprobar configuración: Idioma por defecto',$this->idioma);
+
+      }
+
+
    /** 
     * Presentar galeria
     *

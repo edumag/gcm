@@ -149,7 +149,7 @@ class Eventos {
 
       $this->modulos_activados = array_merge($gcm->modulos_basicos,$gcm->config('admin','Módulos activados'));
 
-      registrar(__FILE__,__LINE__,depurar($this->modulos_activados,'Modulos activados'));
+      registrar(__FILE__,__LINE__,'Listado de módulos activados',FALSE,depurar($this->modulos_activados,'Modulos activados'));
 
       $this->visualizar = $visualizar;
       $this->eventos = array();
@@ -176,7 +176,7 @@ class Eventos {
       $this->leer_eventos('usuario');
       if ( file_exists($this->dir_modulos_proyecto) ) $this->leer_eventos('usuario',$this->dir_modulos_proyecto);
 
-      registrar(__FILE__,__LINE__,depurar(get_object_vars($this),'Variables en eventos'));
+      registrar(__FILE__,__LINE__,'Variables en eventos',FALSE,depurar(get_object_vars($this)));
 
       // echo "<pre>Eventos: " ; print_r($this->eventos) ; echo "</pre>"; // DEV  
       // echo "<pre>cEventos: " ; print_r($this->cEventos) ; echo "</pre>"; // DEV  
@@ -383,7 +383,7 @@ class Eventos {
 
             $orden = $this->prioridad($e);
 
-            registrar(__FILE__,__LINE__,'Acciones para evento ['.$evento.']: '.depurar($orden));
+            registrar(__FILE__,__LINE__,'Acciones para evento ['.$evento.']',FALSE,depurar($orden));
 
             /* Lanzar eventos */
 
@@ -580,7 +580,10 @@ class Eventos {
 
       global $gcm;
 
-      if ( ! in_array($m,$this->modulos_activados) ) return;
+      if ( ! in_array($m,$this->modulos_activados) ) {
+         registrar(__FILE__,__LINE__,'Modulo '.$m.' desactivado','ADMIN');
+         return;
+         }
 
       // Comprobar permisos
       if ( ! $this->get_lista_blanca($m,$a) ) {

@@ -2,11 +2,11 @@
 
 /**
  * @file      GcmConfig.php
+ * @brief     Manipulación de archivos de configuración
+ * @ingroup   GcmConfig
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  21/01/10
- *  Revision  SVN $Id: GcmConfig.php 651 2012-10-17 09:19:07Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -33,6 +33,8 @@
  * Uso:
  *
  * Formato para el archivo que contiene las variables de configuración TGC.php:
+ * El nombre de la variable debe coincidir con el nombre del archivo, el resto será
+ * ignorado y por lo tanto perdido al volver a escribir el archivo.
  *
  * <pre>
  * <?php
@@ -65,7 +67,6 @@
  *
  * Los ficheros de idiomas contendran su especificación en el nombre, ejemplo: TGC_es.php
  *
- * @version 0.1
  */
 
 class GcmConfig {
@@ -320,9 +321,18 @@ class GcmConfig {
 
       if ( is_array($valor)) {   // si es un array 
          $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
-         foreach ( $valor as $val ) {
-            $val = html_entity_decode($val,ENT_NOQUOTES,'UTF-8');
-            $this->variables[$variable][] = $val;
+         $conta=0;
+         foreach ( $valor as $key => $val ) {
+            if ( is_array($val) ) {   // si es un grupo
+               foreach ( $val as $k => $v ) {
+                  $v = html_entity_decode($v,ENT_NOQUOTES,'UTF-8');
+                  $this->variables[$variable][$conta][$k] = $v;
+                  }
+            } else {
+               $val = html_entity_decode($val,ENT_NOQUOTES,'UTF-8');
+               $this->variables[$variable][] = $val;
+               }
+            $conta++;
             }
       } else {
          $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
@@ -344,34 +354,70 @@ class GcmConfig {
     * @param $variable Variable a la que pertenece la descripción
     * @param $descripcion Descripción
     * @param $idioma Idioma en que se desea presentar las descripciones
+    * @param $clave En caso de ser un grupo pasamos el array como variable y la clave
     */
 
-   function setDescripcion($variable, $descripcion, $idioma = NULL) {
+   function setDescripcion($variable, $descripcion, $idioma = NULL, $clave=FALSE) {
 
-      $descripcion = html_entity_decode($descripcion,ENT_NOQUOTES,'UTF-8');
-      $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
+      if ($variable) { $variable = trim($variable);}
 
-      if ( ! $this->validarDescripcion($descripcion) ) return FALSE ;
+      if ( $clave ) {    // Es un grupo
 
-      $idioma = ( $idioma ) ? $idioma : $this->idioma ;
+         $descripcion = html_entity_decode($descripcion,ENT_NOQUOTES,'UTF-8');
+         $descripcion = trim($descripcion);
+         $clave = html_entity_decode($clave,ENT_NOQUOTES,'UTF-8');
+         $this->descripciones[$idioma][$variable][$clave] = $descripcion;
+         if ( ! $this->validarDescripcion($descripcion) ) {
+            registrar(__FILE__,__LINE__,'Descripción no pasa validación','ERROR');
+            return FALSE ;
+            }
+         $idioma = ( $idioma ) ? $idioma : $this->idioma ;
+         // $this->recoger_descripciones($idioma);
+         $this->descripciones_modificadas[$idioma] = TRUE;
 
-      $this->recoger_descripciones($idioma);
+         /* Si no hay descripción en el idioma por defecto añadimos la misma */
 
-      $this->descripciones_modificadas[$idioma] = TRUE;
+         if ( $idioma != $this->idiomaxdefecto ) {
 
-      $this->descripciones[$idioma][$variable] = $descripcion;
+            $this->recoger_descripciones($this->idiomaxdefecto);
 
-      /* Si no hay descripción en el idioma por defecto añadimos la misma */
+            $descripcion = $this->descripciones[$this->idiomaxdefecto][$variable][$clave];
 
-      if ( $idioma != $this->idiomaxdefecto ) {
+            if ( ! $this->validarDescripcion($descripcion) ) {
 
-         $this->recoger_descripciones($this->idiomaxdefecto);
+               $this->descripciones_modificadas[$this->idiomaxdefecto] = TRUE;
 
-         if ( ! $this->validarDescripcion($this->descripciones[$this->idiomaxdefecto][$variable]) ) {
+               $this->setDescripcion($variable,$descripcion, $this->idiomaxdefecto, $clave);
 
-            $this->descripciones_modificadas[$this->idiomaxdefecto] = TRUE;
+               }
 
-            $this->setDescripcion($variable,$descripcion, $this->idiomaxdefecto);
+            }
+      } else {
+
+         $descripcion = trim($descripcion);
+         $descripcion = html_entity_decode($descripcion,ENT_NOQUOTES,'UTF-8');
+         $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
+         if ( ! $this->validarDescripcion($descripcion) ) return FALSE ;
+         $idioma = ( $idioma ) ? $idioma : $this->idioma ;
+         $this->recoger_descripciones($idioma);
+         $this->descripciones_modificadas[$idioma] = TRUE;
+         $this->descripciones[$idioma][$variable] = $descripcion;
+
+         /* Si no hay descripción en el idioma por defecto añadimos la misma */
+
+         if ( $idioma != $this->idiomaxdefecto ) {
+
+            $this->recoger_descripciones($this->idiomaxdefecto);
+
+            $descripcion = $this->descripciones[$this->idiomaxdefecto][$variable];
+
+            if ( ! $this->validarDescripcion($descripcion) ) {
+
+               $this->descripciones_modificadas[$this->idiomaxdefecto] = TRUE;
+
+               $this->setDescripcion($variable,$descripcion, $this->idiomaxdefecto, $clave);
+
+               }
 
             }
 
@@ -402,7 +448,7 @@ class GcmConfig {
     *
     */
 
-   function getDescripcion($variable, $idioma = NULL) {
+   function getDescripcion($variable, $idioma = NULL, $grupo=FALSE) {
 
       $idioma = ( $idioma ) ? $idioma : $this->idioma ;
 
@@ -416,6 +462,18 @@ class GcmConfig {
 
       if ( !$this->descripciones_recogidas[$idioma] ) { $this->recoger_descripciones($idioma); }
 
+      // Si es un grupo
+      if ( $grupo && isset($this->descripciones[$idioma][$grupo][$variable])) {
+         return $this->descripciones[$idioma][$grupo][$variable];
+         }
+
+      // Nos estan pidiendo la descripción del grupo
+      if(isset($this->descripciones[$idioma][$variable]) 
+         && is_array($this->descripciones[$idioma][$variable])
+         && isset($this->descripciones[$idioma][$variable]['grupo']) ) {
+            return $this->descripciones[$idioma][$variable]['grupo'];
+         }
+
       if(isset($this->descripciones[$idioma][$variable])) {
          return $this->descripciones[$idioma][$variable];
          }
@@ -425,6 +483,23 @@ class GcmConfig {
        * para ser conscientes de que la descripción no es la del idioma 
        * actual
        */
+
+      // Nos estan pidiendo la descripción del grupo
+      if(isset($this->descripciones[$this->idiomaxdefecto][$variable]) && is_array($this->descripciones[$this->idiomaxdefecto][$variable]) ) {
+         // Comprobar si existe
+         if ( isset($this->descripciones[$this->idiomaxdefecto][$variable]['grupo']) ) {
+            return $this->idiomaxdefecto.'::'.$this->descripciones[$this->idiomaxdefecto][$variable]['grupo'];
+            registrar(__FILE__,__LINE__,literal('No hay descripción del grupo ['.$variable.'] en el idioa actual'),'ADMIN');
+         } else {
+            return FALSE;
+            registrar(__FILE__,__LINE__,literal('No hay descripción del grupo ['.$variable.']'),'ADMIN');
+            }
+         }
+
+      // Puede que sea un grupo comprobar si existe en él.
+      if ( $grupo && isset($this->descripciones[$this->idiomaxdefecto][$grupo][$variable])) {
+         return $this->idiomaxdefecto.'::'.$this->descripciones[$this->idiomaxdefecto][$grupo][$variable];
+         }
 
       if(isset($this->descripciones[$this->idiomaxdefecto][$variable])) {
          return $this->idiomaxdefecto.'::'.$this->descripciones[$this->idiomaxdefecto][$variable];
@@ -507,15 +582,22 @@ class GcmConfig {
 
       $archivo_descripciones = $this->directorio_descripciones.'/'.$this->nombre_array.'_'.$idioma.'.php';
 
-      $this->escribirArchivos($archivo_descripciones, $this->descripciones[$idioma], $this->nombre_array.'_DESC');
+      $this->escribirArchivos($archivo_descripciones, $this->descripciones[$idioma], $this->nombre_array.'_DESC', TRUE);
 
       return TRUE;
 
       }
 
-   /** Pasar contenido a archivos php */
+   /** 
+    * Pasar contenido a archivos php 
+    * 
+    * @param $archivo Archivo destino
+    * @param $datos   Array con los datos 
+    * @param $nombre del array
+    * @param $descripciones Son descripciones TRUE/FALSE
+    */
 
-   private function escribirArchivos($archivo, $datos, $nombre_array) {
+   private function escribirArchivos($archivo, $datos, $nombre_array, $descripciones=FALSE) {
 
       /* Ordenamos variables */
 
@@ -544,13 +626,42 @@ class GcmConfig {
                   $conta=0;
                   while (list($claveArray, $valorArray)=each($val)) {
 
-                     $valorArray = str_replace("\\","",$valorArray);
-                     $valorArray = stripcslashes($valorArray);
+                     if ( is_array($valorArray) ) {  // Es un grupo
 
-                     if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][".$conta."]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
-                        throw new Exception("No se puede escribir en ".$archivo);
-                        return FALSE;
+                        $conta2=0;
+                        while (list($claveArray2, $valorArray2)=each($valorArray)) {
+
+                           $valorArray2 = str_replace("\\","",$valorArray2);
+                           $valorArray2 = stripcslashes($valorArray2);
+
+                           if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][".$conta."]['".$claveArray2."']='".str_replace("'","\'",$valorArray2)."';\n") === FALSE ) {
+                              throw new Exception("No se puede escribir en ".$archivo);
+                              return FALSE;
+                              }
+
+                           $conta2++;
+                           }
+
+                     } else {
+
+                        $valorArray = str_replace("\\","",$valorArray);
+                        $valorArray = stripcslashes($valorArray);
+
+                        // si son descripciones funciona diferente
+                        if ( $descripciones ) {
+                           if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."']['".$claveArray."']='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
+                              throw new Exception("No se puede escribir en ".$archivo);
+                              return FALSE;
+                              }
+                        } else {
+                           if (fputs($file, '$'."$nombre_array"."['".str_replace("'","\'",$clave)."'][".$conta."]='".str_replace("'","\'",$valorArray)."';\n") === FALSE ) {
+                              throw new Exception("No se puede escribir en ".$archivo);
+                              return FALSE;
+                              }
+                           }
+
                         }
+
                      $conta++;
                      }
 

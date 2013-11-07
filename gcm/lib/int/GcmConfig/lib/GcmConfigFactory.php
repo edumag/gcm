@@ -3,12 +3,10 @@
 /**
  * @file      GcmConfigFactory.php
  * @brief     Patron Factory para la clase GcmConfig
- *
+ * @ingroup   GcmConfig
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  22/01/10
- *  Revision  SVN $Id: GcmConfigFactory.php 220 2010-04-09 11:24:21Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the

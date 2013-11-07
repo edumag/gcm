@@ -488,7 +488,7 @@ class Router {
       // echo "<br>absoluta: ".self::$base_absoluta;
       // echo "<pre>" ; print_r($_SERVER) ; echo "</pre>"; // DEV  
 
-      registrar(__FILE__,__LINE__,'Router:'.depurar(get_class_vars(__CLASS__),'Variables'));
+      registrar(__FILE__,__LINE__,'Variables en Router',FALSE,depurar(get_class_vars(__CLASS__)));
 
       }
 

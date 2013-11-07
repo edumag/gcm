@@ -51,7 +51,7 @@ require('Plantilla.php');
 require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
 
 /* Registros */
-require_once(GCM_DIR.'lib/int/registro/Registro.php');
+require_once(GCM_DIR.'lib/int/registro/lib/Registro.php');
 
 /* Autentificación de usuarios */
 require_once(GCM_DIR."lib/int/autentificacion/lib/Autentificacion.php");
@@ -165,13 +165,19 @@ class Gcm {
     * Array con los archivos javascript necesarios para la aplicación
     */
 
-   private $javascripts = array();
+   public $javascripts = array();
 
    /**
     * Array con las librerias javascript necesarios para la aplicación
     */
 
-   private $librerias_javascript = array();
+   public $librerias_javascript = array();
+
+   /**
+    * Array con las librerias externas necesarios para la aplicación
+    */
+
+   public $librerias_externas = array();
 
    /** 
     * Para posibles comprobaciones, permitimos elegir no recoger la configuración
@@ -252,7 +258,7 @@ class Gcm {
       if ( strpos($bd_registros,'sqlite') !== FALSE || $bd_registros == '' ) {  
 
          if ( ! is_dir('log') ) mkdir('log');
-         $this->reg = new Registro('log');
+         $this->reg = new Registro('log',$this->sufijo);
 
       } else {
          
@@ -407,6 +413,23 @@ class Gcm {
       }
 
    /**
+    * Añadir librerias externas a la aplicación
+    *
+    * @param $tipo Tipo de fichero puede ser js o css
+    * @param $url  Url del fichero
+    */
+
+   function add_ext_lib($tipo, $url) {
+
+      if ( in_array($tipo.":".$url, $this->librerias_externas) ) {
+         registrar(__FILE__,__LINE__,$tipo.','.$url.') Añadido anteriormente');
+         return;
+         }
+
+      $this->librerias_externas[] = $tipo.":".$url;
+      }
+
+   /**
     * Añadir archivos javascript a la aplicación
     *
     * @param $modulo Módulo que lo reclama
@@ -420,19 +443,6 @@ class Gcm {
          }
       $this->javascripts[] = $modulo.":".$archivo;
       }
-
-   /**
-    * Devolver lista de archivos javascript
-    */
-
-   function lista_js() { return $this->javascripts; }
-
-   /**
-    * Devolver lista de librerias javascript
-    */
-
-   function lista_lib_js() { return $this->librerias_javascript; }
-
 
    /** 
     * Devolver conexión con base de datos en caso de existir o crearla

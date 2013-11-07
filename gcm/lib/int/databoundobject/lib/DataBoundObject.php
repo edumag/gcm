@@ -92,7 +92,7 @@ abstract class DataBoundObject {
       $this->arRelationMap = $this->DefineRelationMap($objPDO);
       $this->objPDO = $objPDO;
       $this->blIsLoaded = false;
-      if (isset($id)) $this->ID = $id;
+      if (isset($id) && ! empty($id) ) $this->ID = $id;
       $this->arModifiedRelations = array();
       $this->comprobar_indices();
 
@@ -154,7 +154,6 @@ abstract class DataBoundObject {
          $arRow = $objStatement->fetch(PDO::FETCH_ASSOC);
 
          if ( ! $arRow  ) {
-            registrar(__FILE__,__LINE__,'No existe registro ['.$this->ID.'] en ['.$this->strTableName.']'."\nsql: ".$strQuery,'ADMIN');
             $this->ID = FALSE;
             return FALSE;
             }
@@ -187,7 +186,7 @@ abstract class DataBoundObject {
 
       $indices = explode(",",$this->ID);
 
-      if (isset($this->ID)) {
+      if (isset($this->ID) && ! empty($this->ID) ) {
 
          $strQuery = 'UPDATE ' . $this->strTableName . ' SET ';
 
@@ -392,7 +391,7 @@ abstract class DataBoundObject {
 
    public function __destruct() {
 
-      if (isset($this->ID)) {   
+      if (isset($this->ID) && ! empty($this->ID) ) {   
 
          $indices = explode(",",$this->ID);
 
