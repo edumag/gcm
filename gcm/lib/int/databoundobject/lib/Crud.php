@@ -14,6 +14,7 @@
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
  *
+ * @todo Crear formulario con filtros para listado
  * @ingroup crud
  */
 
@@ -386,7 +387,6 @@ class Crud extends DataBoundObject {
     *
     * Todas las tablas afectadas deben estar instanciadas desde los modelos como una extensión de Crud.
     *
-    * @todo Validación en tablas combinatorias
     * @todo Mejorar selección de registros combinatorios
     */
 

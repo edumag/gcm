@@ -127,51 +127,6 @@ class Mapas extends Modulos {
 
       }
 
-   /**
-    * Administración de mapas
-    *
-    * @param $e Evento que lo llama
-    * @param $args Argumentos
-    */
-
-   function admin($e, $args) {
-
-      global $gcm;
-
-      require(GCM_DIR.'lib/int/GcmConfig/lib/Config.php');
-
-      $dir_datos = "DATOS/configuracion/mapas/";
-
-      // Buscar archivos de mapas
-      $mapas_conf = glob($dir_datos.'mapa*.php');
-      if ( $mapas_conf ) {
-         foreach ( $mapas_conf as $mapa_conf ) {
-            echo "<br>Mapa: ".$mapa_conf;
-            }
-      }
-
-      // permitir seleccionar
-      // nuevo mapa
-      $nuevo = new Config($dir_datos.'mapa1.php');
-      // Editar existente
-      // Guardar mapa
-
-
-      }
-
-   /**
-    * Instalación del módulo
-    *
-    * @param $e Evento que lo llama
-    * @param $args Argumentos
-    */
-
-   function instalacion($e, $args) {
-      
-      global $gcm;
-
-      }
-
    }
 
 ?>

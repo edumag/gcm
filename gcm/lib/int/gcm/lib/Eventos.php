@@ -527,8 +527,7 @@ class Eventos {
          $fm = $this->dir_modulos_proyecto.$m.'/lib/'.$M.'.php';
          $MA = FALSE;
       } elseif ( $logeados && file_exists($this->dir_modulos.$m.'/lib/'.$M.'Admin.php') ) {
-         registrar(__FILE__,__LINE__,'FICHERO: '.$fm,'ERROR');
-         $MA = FALSE;
+         $MA = $M.'Admin';
          $fm = $this->dir_modulos.$m.'/lib/'.$MA.'.php';
       } elseif ( file_exists($this->dir_modulos.$m.'/lib/'.$M.'.php') ) {
          $MA = FALSE;
@@ -689,6 +688,8 @@ class Eventos {
 
    function accion2evento($evento,$modulo,$metodo,$prioridad,$args='') {
 
+      registrar(__FILE__,__LINE__,"Se añade acción [".$metodo."] a evento [".$evento."] desde [".$modulo."]");
+      
       $this->eventos[$evento][$modulo][$metodo][$prioridad] = $args;
 
       }

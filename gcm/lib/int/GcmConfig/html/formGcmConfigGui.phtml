@@ -124,7 +124,7 @@ function contabilizar_saltos_linea($cadena) {
                class='inputLectura' readonly
                <?php } ?> ><?php echo $ta_descripcion;?></textarea>
 
-               <textarea class="item_valor formulari2 <?php echo $ta_class_valor ?>" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $ta_valor?></textarea>
+               <textarea class="item_valor formulari2 <?php echo $ta_class_valor.' GC_'.$claveArray2 ?>" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $ta_valor?></textarea>
 
             </div>
 
@@ -188,7 +188,7 @@ function contabilizar_saltos_linea($cadena) {
 
          <?php } ?>
 
-         <textarea class="<?php echo $ta_class_valor ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
+         <textarea class="<?php echo $ta_class_valor.' GC_'.$clave ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
 
          <?php } ?>
 
