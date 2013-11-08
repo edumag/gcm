@@ -170,9 +170,13 @@ function registrar($fichero,$linea,$mensaje,$tipo='DEBUG',$descripcion=FALSE) {
    /* Si existe una instancia de gcm la utilizamos sino creamos una */
 
    if ( !isset($gcm) ) {
-      echo '<div class="error">No hay instancia de gcm';
-      echo '<br />Mensaje: '.$mensaje;
-      echo '<br />'.$fichero,$linea,$mensaje,$tipo;
+      echo '<div class="error">';
+      echo 'No hay instancia de gcm mostramos mensaje directamente';
+      echo '<br />Mensaje tipo: '.$tipo;
+      echo '<br />'.$fichero,':'.$linea;
+      echo '<pre>';
+      echo $mensaje;
+      echo '</pre>';
       echo '</div>';
       // exit();
       // require_once(GCM_DIR.'lib/int/registro/RegistroFactory.php');

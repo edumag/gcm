@@ -1,5 +1,3 @@
-$('textarea.GC_icono').css('background','green');
-
 var textarea_seleccionado = false;
 
 $(function() {

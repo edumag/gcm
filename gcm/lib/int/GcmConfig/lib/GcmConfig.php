@@ -611,9 +611,10 @@ class GcmConfig {
 
          if ( ! $file = @fopen($ubicacion.'/'.$archivo, "w",TRUE) ) {
             $error = error_get_last();
-            throw new Exception("No se pudo abrir archivo $archivo para incluir $nombre_array "
-               ."\n\n Directori actual: ".getcwd()
-               ."\n\n Error: ".$error['message']);
+            $msg = "No se pudo abrir archivo $archivo para incluir $nombre_array ";
+            $msg .= "\nDirectori actual: ".getcwd();
+            if ( $error ) $msg .= "\nError: ".$error['message'];
+            throw new Exception($msg);
          } else {
 
             fputs($file, "<?php\n");
