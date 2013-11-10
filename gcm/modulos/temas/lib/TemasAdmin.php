@@ -65,6 +65,8 @@ class TemasAdmin extends Temas {
 
       parent::__construct($tema_actual);
 
+      $gcm->event->accion2evento('contenido_caja_info_dev','temas','contenido_caja_info_dev',3);
+
       }
 
    /**
@@ -821,6 +823,31 @@ class TemasAdmin extends Temas {
       $arch_colores = $arch_colores_tema_actual;
       }
 
+   /**
+    * Información a mostra del módulo
+    */
+
+   function contenido_caja_info_dev($e, $args=FALSE) {
+
+      global $gcm;
+
+      ?>
+      <h2>Temas</h2>
+      <?php
+      $temas = glob($this->dir_temas.'*');
+
+      if ( !$temas  ) {
+         echo '<p class="aviso">'.literal('No hay temas para seleccionar',3).'</p>';
+      } else {
+         foreach ( $temas as $tema ) {
+            list($dir,$tema_proyecto) = explode('/',$tema);
+             $temas_proyecto[] = $tema_proyecto;
+         }
+      }
+
+      include($this->ruta('temas','html','seleccionar_tema.phtml'));
+
+      }
 
    }
 ?>

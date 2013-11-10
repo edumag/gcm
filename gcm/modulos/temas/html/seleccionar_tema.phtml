@@ -1,0 +1,16 @@
+<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+   <fieldset>
+      <legend><?=literal('Temas actual',3)?></legend>
+      <?php if ( !empty($temas_proyecto) ) { ?>
+      <select name="tema" onchange="this.form.submit();">
+         <option value=""><?=literal('Selecciona tema',3)?></option>
+         <?php foreach ( $temas_proyecto as $tema ) { ?>
+         <option value="<?=$tema?>" 
+         <?php if ( $tema == $this->tema_actual ) echo ' selected="1"' ?>>
+         <?=$tema?>
+         </option>
+         <?php } ?>
+      <?php } ?>
+      </select>
+   </fieldset>
+</form>

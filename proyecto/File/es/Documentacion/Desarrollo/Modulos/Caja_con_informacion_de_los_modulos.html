@@ -1,0 +1,8 @@
+<p>Desde admin se genera caja_info_dev un panel con la informaci&oacute;n de los m&oacute;dulos que queremos mostrar.</p>
+<p><img src="File/es/Documentacion/Desarrollo/Modulos/informacioin_modulos.png" border="0" /></p>
+<p>Se lanza el evento contenido_caja_info_dev para que cada m&oacute;dulo pueda generar su propia informaci&oacute;n.</p>
+<p>Un ejemplo lo tenemos en TemasAdmin donde desde el constructor enlazamos el evento contenido_caja_info_dev con el evento contenido_caja_info_dev del propio m&oacute;dulo Temas, permitirndo seleccionar un tema diferente para visualizar el contenido actual.</p>
+<p>Desde el constructor de TemasAdmin</p>
+<pre>$gcm-&gt;event-&gt;accion2evento('contenido_caja_info_dev','temas','contenido_caja_info_dev',3);</pre>
+<pre>/**<br /> * Informaci&oacute;n a mostra del m&oacute;dulo<br /> */<br /><br />function contenido_caja_info_dev($e, $args=FALSE) {<br />      global $gcm;<br />      ?&gt;<br />      &lt;h2&gt;Temas&lt;/h2&gt;<br />      &lt;?php<br />      $temas = glob($this-&gt;dir_temas.'*');<br /><br />      if ( !$temas  ) {<br />         echo '&lt;p class="aviso"&gt;'.literal('No hay temas para seleccionar',3).'&lt;/p&gt;';<br />      } else {<br />         foreach ( $temas as $tema ) {<br />            list($dir,$tema_proyecto) = explode('/',$tema);<br />             $temas_proyecto[] = $tema_proyecto;<br />         }<br />      }<br />      include($this-&gt;ruta('temas','html','seleccionar_tema.phtml'));<br />      }</pre>
+<p>&nbsp;</p>

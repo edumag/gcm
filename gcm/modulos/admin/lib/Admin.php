@@ -731,6 +731,49 @@ class Admin extends Modulos {
       $gcm->contenido=$buffer;
       }
 
+   /**
+    * Caja con información de depuración
+    */
+
+   function caja_info_dev($e, $args) {
+
+      global $gcm;
+
+      ob_start();
+      $gcm->event->lanzarEvento('contenido_caja_info_dev');
+      $salida = ob_get_contents(); ob_end_clean();
+
+      if ( $salida != "" ) { 
+
+         $panel = array();
+         $panel['titulo'] = literal('Información de módulos');
+         $panel['oculto'] = FALSE;
+         $panel['contenido'] = $salida;
+         Temas::panel($panel);
+         }
+      }
+
+   /**
+    * Información para depurar aplicación
+    */
+
+   function contenido_caja_info_dev($e, $args=FALSE) {
+
+      if ( GCM_DEBUG ) {
+         ?>
+         <h2>Admin</h2>
+         <a href="<?php echo modificarGet('debug','0');?>" title="<?php echo literal('Desactivar depuración'); ?>">
+            <?php echo literal('Depuración activada');?>
+         </a>
+         <?php
+      } else {
+         ?>
+         <a href="<?php echo modificarGet('debug','1');?>" title="<?php echo literal('Activar depuración'); ?>">
+            <?php echo literal('Depuración desactivada');?>
+         </a>
+         <?php
+         }
+      }
 
    }
 

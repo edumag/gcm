@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Nov 8 11:49:39 CET 2013
+// Archivo generado automáticamente por GcmConfig Sun Nov 10 12:02:25 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -129,4 +129,5 @@ $GCM_LG_es['Guardar contenido']='';
 $GCM_LG_es['masmonelledu']='';
 $GCM_LG_es['Nombre de sección']='';
 $GCM_LG_es['Iconos']='';
+$GCM_LG_es['Contenido añadido']='';
 ?>
