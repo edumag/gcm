@@ -216,6 +216,8 @@ class AdminAdmin extends Admin {
 
       permiso('administrar',TRUE);
 
+      if ( isset($_REQUEST['eVisualizar']) ) return ;
+
       $gcm->tema = 'admin';
       $gcm->plantilla = 'administrando.html';
 
@@ -227,9 +229,21 @@ class AdminAdmin extends Admin {
       $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/?eVisualizar';
 
       echo '<p id="ver_plantilla"><a id="boton_ver_plantilla" class="boton" href="?eVisualizar=1" onclick="ver_plantilla();return false;">Ver plantilla</a></p>';
+      echo '<p id="ver_lista"><a id="boton_ver_lista" class="boton" href="?formato=ajax&m=admin&a=lista_eventos" onclick="ver_lista();return false;">Ver listado</a></p>';
 
       ?>
       <script>
+         function ver_lista() {
+            
+            var contenedor = $('p#ver_lista');
+            var url = $('a#boton_ver_lista').attr("href");  // alert(url);
+            contenedor.html("Cargando...");
+
+            $.get(url,function(data){
+               contenedor.replaceWith(data);
+              });
+            return false;
+            }
          function ver_plantilla() {
             
             var contenedor = $('p#ver_plantilla');
@@ -245,6 +259,32 @@ class AdminAdmin extends Admin {
       <?php
 
    }
+
+   /**
+    * Listar eventos para editar
+    */
+
+   function lista_eventos($e, $args=FALSE) {
+
+      global $gcm;
+
+      ?>
+      <ul>Eventos
+      <?php foreach ( $gcm->event->eventos as $evento => $modulos ) { ?>
+         <ul><?php echo $evento ?>
+         <?php foreach ( $modulos as $modulo => $accion)  { ?>
+            <?php foreach ($accion as $p ) { $prioridad = key($p); $args = ( isset($p[0]) ) ? $p[0] : FALSE; } ?>
+            <li>
+               <a href="<?php echo Router::$base ?>/admin/editar_conexion?md=<?php echo $modulo ?>" title="Editar eventos de módulo">
+                  <?php echo $modulo ?> -> <?php echo key($accion) ?> <?php echo $prioridad ?> <?php echo $args ?>
+               </a>
+            </li>
+         <?php } ?>
+         </ul>
+      <?php } ?>
+      </ul>
+      <?php
+      }
 
    /**
     * Editar conexión

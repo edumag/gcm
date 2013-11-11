@@ -63,6 +63,8 @@ class TemasAdmin extends Temas {
 
    function __construct($tema_actual='') {
 
+      global $gcm;
+
       parent::__construct($tema_actual);
 
       $gcm->event->accion2evento('contenido_caja_info_dev','temas','contenido_caja_info_dev',3);

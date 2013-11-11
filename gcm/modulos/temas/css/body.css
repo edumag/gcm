@@ -29,6 +29,18 @@ background: linear-gradient(135deg, <?=$this->color("body-02")?> 0%, <?=$this->c
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#818285', GradientType=1 );
 }
 
+/*
+  ## Las listas por defecto sin estilo
+     <ul>
+      <li>uno</li>
+      <li>dos</li>
+      <li>tres</li>
+      <li>...</li>
+     </ul>
+ */
+
+ul { list-style: none outside none; }
+
 /* 
   ## Sustituye a la etiqueta "center" en desuso en html5 
     <div class="centrado">Centrado de contenido</div>

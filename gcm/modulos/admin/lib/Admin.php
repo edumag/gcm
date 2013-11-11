@@ -759,21 +759,41 @@ class Admin extends Modulos {
 
    function contenido_caja_info_dev($e, $args=FALSE) {
 
+      ?>
+      <h2>Admin</h2>
+      <ul>
+      <?php
+
       if ( GCM_DEBUG ) {
          ?>
-         <h2>Admin</h2>
+         <li>
          <a href="<?php echo modificarGet('debug','0');?>" title="<?php echo literal('Desactivar depuración'); ?>">
             <?php echo literal('Depuración activada');?>
          </a>
+         </li>
          <?php
       } else {
          ?>
+         <li>
          <a href="<?php echo modificarGet('debug','1');?>" title="<?php echo literal('Activar depuración'); ?>">
             <?php echo literal('Depuración desactivada');?>
          </a>
+         </li>
          <?php
          }
+
+      ?>
+      <li>
+      <a href="<?php echo modificarGet('eGcm','1');?>" title="<?php echo literal('Forzar a recoger los eventos por defecto'); ?>">
+         <?php echo literal('Eventos por defecto');?>
+      </a>
+      </li>
+
+      </ul>
+      <?php
+
       }
+
 
    }
 
