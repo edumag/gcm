@@ -50,33 +50,26 @@ class GcmCache {
     * Nombre del archivo de cache
     */
 
-   private $archivo_cache;
+   public $archivo_cache;
 
    /**
     * Extensión para archivos de cache
     */
 
-   private $extension = '.cache';
+   public $extension = '.cache';
 
    /** Constructor */
 
-   function __construct() {
+   function __construct($dir_cache=FALSE, $duracion=FALSE) {
 
-      $this->dir_cache = 'cache/';
-      $this->duracion  = 60*60*2;
+      $this->dir_cache = ( $dir_cache ) ? $dir_cache : 'cache/' ;
+      $this->duracion  = ( $duracion  ) ? $duracion  : 60*60*2  ;   // 60 segundos * 60 minutos * 2 horas = cada 2 horas
 
       if ( ! file_exists($this->dir_cache) ) {
          if ( ! mkdir($this->dir_cache) ) {
             registrar(__FILE__,__LINE__,'No se pudo crear directorio para cache','ERROR');
             }
          }
-
-      }
-
-   function test() {
-
-      $this->ejecuta_test('Directorio para cache: '.$this->dir_cache, file_exists($this->dir_cache), TRUE);
-      $this->ejecuta_test('Permisos de directorio: '.$this->dir_cache,is_readable($this->dir_cache), TRUE);
 
       }
 
@@ -218,16 +211,13 @@ class GcmCache {
     * Borramos todos los archivos que contengan la url en el nombre sino pasamos
     * url borramos todos.
     *
-    * @param $e Evento
-    * @param $args Argumentos
+    * @param $url url a borrar se utiliza comodin para borrar todo lo que contenga la url
     */
 
-   function borrar($e, $args) {
+   function borrar($url='todo') {
 
-      global $gcm;
-
-      if ( $args != 'todo' && !empty($args) ) {
-         $url = str_replace('/','_',$args);
+      if ( $url != 'todo' && !empty($url) ) {
+         $url = str_replace('/','_',$url);
          $archivos = glob($this->dir_cache.'*'.$url.'*');
       } else {
          $archivos = glob($this->dir_cache.'*');
@@ -235,14 +225,9 @@ class GcmCache {
          }
 
       registrar(__FILE__,__LINE__,
-         __CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Archivos a borrar: '.depurar($archivos));
+         __CLASS__.'->'.__FUNCTION__.'(url: '.depurar($url).')',FALSE,'Archivos a borrar: '.depurar($archivos));
 
-      if ( !isset($archivos) || empty($archivos) ) {
-         
-         return;
-         exit();
-         $gcm->salir();
-         }
+      if ( !isset($archivos) || empty($archivos) ) return;
 
       foreach ( $archivos as $archivo ) {
          if ( is_dir($archivo) ) {
@@ -252,17 +237,8 @@ class GcmCache {
             }
          }
 
-      registrar(__FILE__,__LINE__,'Archivos borrados en cache: '.count($archivos));
+      registrar(__FILE__,__LINE__,'Archivos borrados en cache ['.count($archivos).']');
 
-      /* Si el evento es borrar_cache, presentamos información para que salga en ventana emergente */
-
-      if ( $e == 'borrar_cache' ) {
-
-         return;
-         exit();
-         $gcm->salir();
-
-         }
       }
 
    /**
