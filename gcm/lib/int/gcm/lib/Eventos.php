@@ -133,6 +133,8 @@ class Eventos {
 
    private $lista_blanca = array();
 
+   private $numero_eventos = 0 ;        //< Numero de eventos
+
    /** 
     * Llenamos el array eventos con la información de los archivos
     * de eventos de cada modulo
@@ -285,34 +287,52 @@ class Eventos {
             }
 
          if ( $this->leer_eventos_proyecto ) {
+            include($fichero_modulo);
+            if ( isset($eventos) && is_array($eventos) ) $this->recoger_eventos($modulo,$directorio,$eventos,$nivel);
+            unset($eventos);
             include($fichero_evento);
+            if ( isset($eventos) && is_array($eventos) ) $this->recoger_eventos($modulo,$directorio,$eventos,$nivel);
+            unset($eventos);
          } else {
             include($fichero_modulo);
+            if ( isset($eventos) && is_array($eventos) ) $this->recoger_eventos($modulo,$directorio,$eventos,$nivel);
+            unset($eventos);
             }
 
-         if ( isset($eventos) && is_array($eventos) ) {
-            foreach ( $eventos as $e => $accion ) {
-               foreach ( $accion as $a => $valor ) {
-                  foreach ( $valor as $prioridad => $argumentos ) {
-                     // Si son eventos de usuario añadimos acciones a lista_blanca
-                     if ( $nivel == 'usuario' ) $this->lista_blanca[$modulo][] = $a;
-                     $this->eventos[$e][$modulo][$a][$prioridad] = $argumentos; 
-                     $this->ubicaciones[$modulo] = $directorio.$modulo; 
-                     $n++;
-                     if ( isset($cEventos[$e]) ) {
-                        $this->cEventos[$e][$cEventos[$e]] = $modulo;
-                        }
+         $n++;
+
+         }
+
+         registrar(__FILE__,__LINE__,'Numero de eventos en '.$directorio.': '.$this->numero_eventos);
+
+      }
+
+   /**
+    * Recoger eventos de módulo a eventos
+    */
+
+   function recoger_eventos($modulo,$directorio,$eventos,$nivel = FALSE) {
+
+      if ( isset($eventos) && is_array($eventos) ) {
+         foreach ( $eventos as $e => $accion ) {
+            foreach ( $accion as $a => $valor ) {
+               foreach ( $valor as $prioridad => $argumentos ) {
+                  // Si son eventos de usuario añadimos acciones a lista_blanca
+                  if ( $nivel == 'usuario' ) $this->lista_blanca[$modulo][] = $a;
+                  $this->eventos[$e][$modulo][$a][$prioridad] = $argumentos; 
+                  $this->ubicaciones[$modulo] = $directorio.$modulo; 
+                  $this->numero_eventos++;
+                  if ( isset($cEventos[$e]) ) {
+                     $this->cEventos[$e][$cEventos[$e]] = $modulo;
                      }
-                     unset($a);
-                     if ( isset($cEventos)  ) unset($cEventos[$e]);
                   }
+                  unset($a);
+                  if ( isset($cEventos)  ) unset($cEventos[$e]);
                }
-            unset($eventos);
             }
          }
 
-         registrar(__FILE__,__LINE__,'Numero de eventos en '.$directorio.': '.$n);
-
+         // echo 'eventos: '.$modulo.'<pre>' ; print_r($this->eventos) ; echo '</pre>'; // exit() ; // DEV  
       }
 
    /** Verificar la existencia de un evento
@@ -527,8 +547,7 @@ class Eventos {
          $fm = $this->dir_modulos_proyecto.$m.'/lib/'.$M.'.php';
          $MA = FALSE;
       } elseif ( $logeados && file_exists($this->dir_modulos.$m.'/lib/'.$M.'Admin.php') ) {
-         registrar(__FILE__,__LINE__,'FICHERO: '.$fm,'ERROR');
-         $MA = FALSE;
+         $MA = $M.'Admin';
          $fm = $this->dir_modulos.$m.'/lib/'.$MA.'.php';
       } elseif ( file_exists($this->dir_modulos.$m.'/lib/'.$M.'.php') ) {
          $MA = FALSE;
@@ -689,6 +708,8 @@ class Eventos {
 
    function accion2evento($evento,$modulo,$metodo,$prioridad,$args='') {
 
+      registrar(__FILE__,__LINE__,"Se añade acción [".$metodo."] a evento [".$evento."] desde [".$modulo."]");
+      
       $this->eventos[$evento][$modulo][$metodo][$prioridad] = $args;
 
       }
