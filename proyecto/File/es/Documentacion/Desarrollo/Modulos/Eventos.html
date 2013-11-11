@@ -1,11 +1,19 @@
-<h2>Lanzarun evento<br /></h2>
+<h2>Lanzar un evento</h2>
 <p>Podemos lanzar eventos desde diferentes m&oacute;dulos.</p>
 <p>Ejemplo en Contenido.</p>
-<pre>$gcm-&gt;event-&gt;lanzarEvento('archivo_renombrado','ruta_origen='.$ruta_origen.'&amp;ruta_destino='.$ruta_destino.\<br />'&amp;nombre_escapado='.$nombre_escapado.'&amp;nombre_original='.$nombre_original);<br /></pre>
+<pre>$gcm-&gt;event-&gt;lanzarEvento('archivo_renombrado','ruta_origen='.$ruta_origen.'&amp;ruta_destino='.$ruta_destino.<br />'&amp;nombre_escapado='.$nombre_escapado.'&amp;nombre_original='.$nombre_original);</pre>
 <p>&nbsp;</p>
 <p>Desde el m&oacute;dulo contenido se lanza el evento 'archivo_renombrado', esto permite que otros modulos lo recogan y hagan las acciones que deben hacer</p>
 <h2>Anular eventos</h2>
 <p>La forma de anular eventos es</p>
-<pre>$gcm-&gt;titulo = literal('P&aacute;gina no encontrada');<br />$gcm-&gt;event-&gt;anular('titulo','contenido');<br /></pre>
+<pre>$gcm-&gt;titulo = literal('P&aacute;gina no encontrada');<br />$gcm-&gt;event-&gt;anular('titulo','contenido');</pre>
 <p>En este caso modificamos la parte del t&iacute;tulo procesada por la plantilla en Gcm y anulamos los siguientes eventos.</p>
+<h2>A&ntilde;adir acci&oacute;n a un evento</h2>
+<p>Desde un m&oacute;dulo podemos a&ntilde;adir acciones a los eventos en tiempo de ejecuci&oacute;n, ejemplo:</p>
+<pre>// A&ntilde;adimos panel con iconos seleccionables<br />$gcm-&gt;event-&gt;accion2evento('columna','mapas','seleccionar_iconos',3);</pre>
+<h4>&nbsp;Los parametros son:</h4>
+<p>columna: es el evento que recogera la acci&oacute;n</p>
+<p>mapas: es el m&oacute;dulo que genera la acci&oacute;n</p>
+<p>seleccionar_iconos: es la acci&oacute;n a realizar ( metodo )</p>
+<p>3: la prioridad</p>
 <p><a href="../docs/doxygen/html/d7/d7a/a00016.html">Documentaci&oacute;n de la API</a></p>

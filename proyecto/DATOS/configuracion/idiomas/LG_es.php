@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sat Oct 26 7:48:04 CEST 2013
+// Archivo generado automáticamente por GcmConfig Mon Nov 11 14:04:16 CET 2013
 $LG_es['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instalación, pasos a seguir';
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
@@ -79,4 +79,6 @@ $LG_es['tema_nuevo']='tema nuevo';
 $LG_es['thumbnail']='';
 $LG_es['tiny_mce']='';
 $LG_es['Documentación para Gcm']='';
+$LG_es['Apariencia']='';
+$LG_es['Caja_con_informacion_de_los_modulos']='Caja con información de los módulos';
 ?>
