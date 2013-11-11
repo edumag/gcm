@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 // Archivo generado automáticamente por GcmConfig Mon Nov 11 18:39:47 CET 2013
+=======
+// Archivo generado automáticamente por GcmConfig Mon Nov 11 14:13:38 CET 2013
+>>>>>>> release-5.1
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';

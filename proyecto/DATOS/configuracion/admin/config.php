@@ -10,6 +10,7 @@ $config['Módulos activados'][5]='widgets';
 $config['Módulos activados'][6]='aplicar_SEO';
 $config['Módulos activados'][7]='literales';
 $config['Módulos activados'][8]='roles';
+$config['Módulos activados'][8]='mapas';
 $config['Palabra secreta para depurar']='debug';
 $config['Proyecto']='proyecto';
 $config['Sufijo para base de datos']='proyecto_';
