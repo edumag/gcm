@@ -747,7 +747,7 @@ class Admin extends Modulos {
 
          $panel = array();
          $panel['titulo'] = literal('Información de módulos');
-         $panel['oculto'] = FALSE;
+         $panel['oculto'] = TRUE;
          $panel['contenido'] = $salida;
          Temas::panel($panel);
          }
@@ -786,6 +786,16 @@ class Admin extends Modulos {
       <li>
       <a href="<?php echo modificarGet('eGcm','1');?>" title="<?php echo literal('Forzar a recoger los eventos por defecto'); ?>">
          <?php echo literal('Eventos por defecto');?>
+      </a>
+      </li>
+      <li>
+      <a href="?e=test" title="<?php echo literal('Forzar a recoger los eventos por defecto'); ?>">
+         <?php echo literal('Lanzar test');?>
+      </a>
+      </li>
+      <li>
+      <a href="?e=cron" title="<?php echo literal('Forzar a recoger los eventos por defecto'); ?>">
+         <?php echo literal('Lanzar cron');?>
       </a>
       </li>
 

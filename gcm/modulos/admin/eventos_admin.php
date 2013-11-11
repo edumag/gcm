@@ -21,4 +21,10 @@ if ( ! $gcm->config('admin','configuracion_confirmada') ) {
 
 }
 
+// Caja con la información de los módulos para el desarrollo
+$eventos['columna']['caja_info_dev'][3]='';
+
+// Contenido para la caja info dev
+$eventos['contenido_caja_info_dev']['contenido_caja_info_dev'][1]='';
+
 ?>
