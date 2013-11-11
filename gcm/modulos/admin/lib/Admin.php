@@ -305,8 +305,6 @@ class Admin extends Modulos {
     *  $menuAdmin['Archivo']['boton']['borrar_documento']['title']="Borrar documento actual";
     *  $menuAdmin['Archivo']['boton']['borrar_documento']['link']="?e=borrar_documento";
     *
-    * @todo Organizar menú, crear sistema que ordene el menú
-    *
     * @author Eduardo Magrané
     */
 

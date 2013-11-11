@@ -21,6 +21,8 @@
  * @{
  */
 
+require_once GCM_DIR.'lib/int/GcmCache.php';
+
 /**
  * @class Cache_http
  * @brief Cache http
@@ -30,37 +32,9 @@
 
 class Cache_http extends Modulos {
 
-   /**
-    * Directorio donde se guarda la cache
-    */
+   /** Instancia de GcmCache */
 
-   private $dir_cache;
-
-   /**
-    * Tiempo de expiración de la cache de archivos html (en segundos)
-    *
-    * 60x60x2 = 2 hora
-    */
-
-   private $duracion; 
-
-   /**
-    * Tiempo de expiración para las variables
-    */
-
-   private $duracion_variables = 3000 ; 
-
-   /**
-    * Nombre del archivo de cache
-    */
-
-   private $archivo_cache;
-
-   /**
-    * Extensión para archivos de cache
-    */
-
-   private $extension = '.cache';
+   protected $instancia_cache; 
 
    /** Constructor */
 
@@ -68,21 +42,17 @@ class Cache_http extends Modulos {
 
       parent::__construct();
 
-      $this->dir_cache = 'cache/';
-      $this->duracion  = 60*60*2;
+      $dir_cache = 'cache/';
+      $duracion  = 60*60*2;   // 60 segundos * 60 minutos * 2 horas = cada 2 horas
 
-      if ( ! file_exists($this->dir_cache) ) {
-         if ( ! mkdir($this->dir_cache) ) {
-            registrar(__FILE__,__LINE__,'No se pudo crear directorio para cache','ERROR');
-            }
-         }
+      $this->instancia_cache = new GcmCache($dir_cache, $duracion);
 
       }
 
    function test() {
 
-      $this->ejecuta_test('Directorio para cache: '.$this->dir_cache, file_exists($this->dir_cache), TRUE);
-      $this->ejecuta_test('Permisos de directorio: '.$this->dir_cache,is_readable($this->dir_cache), TRUE);
+      $this->ejecuta_test('Directorio para cache: '.$this->instancia_cache->dir_cache, file_exists($this->instancia_cache->dir_cache), TRUE);
+      $this->ejecuta_test('Permisos de directorio: '.$this->instancia_cache->dir_cache,is_readable($this->instancia_cache->dir_cache), TRUE);
 
       }
 
@@ -138,15 +108,15 @@ class Cache_http extends Modulos {
       $aBasename = explode('?',$url);
       $aDirname  = explode('?',$url);
       $basename = basename($aBasename[0]);
-      $dirname = $this->dir_cache.dirname($aDirname[0]);
+      $dirname = $this->instancia_cache->dir_cache.dirname($aDirname[0]);
       mkdir_recursivo($dirname);
 
-      $this->archivo_cache = $dirname.'/'.$basename.'_'.
+      $this->instancia_cache->archivo_cache = $dirname.'/'.$basename.'_'.
          $plataforma.'_'.$navegador.'_'.$version.'_'.
-         md5(serialize($solicitud)).$this->extension;
+         md5(serialize($solicitud)).$this->instancia_cache->extension;
 
-      if (@file_exists($this->archivo_cache)) {
-          $fecha_cache = @filemtime($this->archivo_cache);
+      if (@file_exists($this->instancia_cache->archivo_cache)) {
+          $fecha_cache = @filemtime($this->instancia_cache->archivo_cache);
       } else {
           $fecha_cache = 0;
          }
@@ -155,25 +125,25 @@ class Cache_http extends Modulos {
       @clearstatcache();
 
       // Mostramos el archivo si aun no vence
-      if (time() - $this->duracion < $fecha_cache) {
-         registrar(__FILE__,__LINE__,'Archivo en cache: '.$this->archivo_cache,'ADMIN');
+      if (time() - $this->instancia_cache->duracion < $fecha_cache) {
+         registrar(__FILE__,__LINE__,'Archivo en cache: '.$this->instancia_cache->archivo_cache,'ADMIN');
          /* Cabeceras de archivo */
          $aExt = explode('.',Router::$url);
          $ext = end($aExt);
          switch($ext) {
          case 'css':
             header('Content-Type: text/css');
-            $salida = "\n".'/* Archivo en cache '.$this->archivo_cache.' */'."\n";
+            $salida = "\n".'/* Archivo en cache '.$this->instancia_cache->archivo_cache.' */'."\n";
             break;
          case 'js':
             header('Content-Type: text/javascript');
-            $salida = "\n".'/* Archivo en cache '.$this->archivo_cache.' */'."\n";
+            $salida = "\n".'/* Archivo en cache '.$this->instancia_cache->archivo_cache.' */'."\n";
             break;
          default:
-            $salida = "\n".'<!-- Archivo en cache '.$this->archivo_cache.' -->'."\n";
+            $salida = "\n".'<!-- Archivo en cache '.$this->instancia_cache->archivo_cache.' -->'."\n";
             break;
             }
-          readfile($this->archivo_cache);
+          readfile($this->instancia_cache->archivo_cache);
           echo $salida;
           exit();
          }
@@ -202,10 +172,10 @@ class Cache_http extends Modulos {
       // Si no tenemos contenido nos volvemos
       if ( empty($gcm->salida) ) return;
 
-      if ( empty($this->archivo_cache)  ) return;
+      if ( empty($this->instancia_cache->archivo_cache)  ) return;
 
       /* Generamos el nuevo archivo cache */
-      $fp = fopen($this->archivo_cache, "w");
+      $fp = fopen($this->instancia_cache->archivo_cache, "w");
 
       if ( $fp  ) {
 
@@ -215,7 +185,7 @@ class Cache_http extends Modulos {
 
          }
       
-      registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'() Archivo guardado en cache: '.$this->archivo_cache);
+      registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'() Archivo guardado en cache: '.$this->instancia_cache->archivo_cache);
       }
 
    /**
@@ -232,33 +202,7 @@ class Cache_http extends Modulos {
 
       global $gcm;
 
-      if ( $args != 'todo' && !empty($args) ) {
-         $url = str_replace('/','_',$args);
-         $archivos = glob($this->dir_cache.'*'.$url.'*');
-      } else {
-         $archivos = glob($this->dir_cache.'*');
-         if ( function_exists('apc_clear_cache') ) apc_clear_cache();
-         }
-
-      registrar(__FILE__,__LINE__,
-         __CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') Archivos a borrar: '.depurar($archivos));
-
-      if ( !isset($archivos) || empty($archivos) ) {
-         
-         return;
-         exit();
-         $gcm->salir();
-         }
-
-      foreach ( $archivos as $archivo ) {
-         if ( is_dir($archivo) ) {
-            rmdir_recursivo($archivo);
-         } else {
-            @unlink($archivo);
-            }
-         }
-
-      registrar(__FILE__,__LINE__,'Archivos borrados en cache: '.count($archivos));
+      $this->instancia_cache->borrar($args);
 
       /* Si el evento es borrar_cache, presentamos información para que salga en ventana emergente */
 
@@ -279,39 +223,13 @@ class Cache_http extends Modulos {
     *                         variables
     * @param $tiempo_expiracion Tiempo en que expira la variable, en caso de 
     *                           no pasar valor, sera el estipulado por 
-    *                           $this->duracion_variables
+    *                           $this->instancia_cache->duracion_variables
     * @return Contenido de variable o FALSE en caso de no existir o exceder tiempo
     */
 
    function recuperar_variable($nombre_variable, $tiempo_expiracion=NULL) {
 
-      $tiempo_expiracion = ( $tiempo_expiracion ) ? $tiempo_expiracion : $this->duracion_variables;
-
-      if ( function_exists('apc_fetch') ) {
-         $retorno = apc_fetch($nombre_variable);
-         if ( $retorno ) return $retorno;
-         }
-
-      $archivo_variable = $this->dir_cache.$nombre_variable.$this->extension;
-
-      if (@file_exists($archivo_variable)) {
-          $fecha_cache = @filemtime($archivo_variable);
-      } else {
-          $fecha_cache = 0;
-         }
-
-      /* Borramos cache de php al mirar información de archivo */
-      @clearstatcache();
-
-      // devolvemos la variable si aun no vence
-      if (time() - $tiempo_expiracion < $fecha_cache) {
-         $contenido = file_get_contents($archivo_variable);
-         $retorno = unserialize($contenido);
-         registrar(__FILE__,__LINE__,'Recuperamos variable en cache ['.$nombre_variable.'] '."\n".depurar($retorno));
-         return $retorno; 
-         }
-
-      return FALSE;
+      return $this->instancia_cache->recuperar_variable($nombre_variable, $tiempo_expiracion);
 
       }
 
@@ -321,15 +239,8 @@ class Cache_http extends Modulos {
 
    function guardar_variable($nombre_variable,$valor) {
 
-      if ( function_exists('apc_add') ) return apc_add($nombre_variable, $valor);
+      return $this->instancia_cache->guardar_variable($nombre_variable, $valor);
 
-      $archivo_variable = $this->dir_cache.$nombre_variable.$this->extension;
-
-      $fp = @fopen($archivo_variable, "w");
-      @fwrite($fp, serialize($valor));
-      @fclose($fp);
-      
-      registrar(__FILE__,__LINE__,'Guardamos variable en cache ['.$nombre_variable.'] '."\n".depurar($valor));
       }
 
    }

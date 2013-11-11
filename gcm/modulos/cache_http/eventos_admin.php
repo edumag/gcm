@@ -26,5 +26,8 @@
  * GNU General Public License as published by the Free Software Foundation.
  */
 
+/** Vaciar cache */
+$eventos['cron']['cron'][2]='';
+
 
 ?>
