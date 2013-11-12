@@ -1,4 +1,7 @@
 <?php
+/**
+ * @file admin/eventos_admin.php
+ */
 
 /**
  * @file eventos_admin.php
@@ -13,7 +16,7 @@ $eventos['test']['ejecutar_tests_modulos'][1]='';
 
 $eventos['precarga']['activar_tema_admin'][1]='';
 
-/* Si no se ha confirmado el cambio del administrador por defecto */
+/** Si no se ha confirmado el cambio del administrador por defecto */
 
 if ( ! $gcm->config('admin','configuracion_confirmada') ) {
 
@@ -21,10 +24,12 @@ if ( ! $gcm->config('admin','configuracion_confirmada') ) {
 
 }
 
-// Caja con la información de los módulos para el desarrollo
+/// Caja con la información de los módulos para el desarrollo
 $eventos['columna']['caja_info_dev'][3]='';
 
-// Contenido para la caja info dev
+/// Contenido para la caja info dev
 $eventos['contenido_caja_info_dev']['contenido_caja_info_dev'][1]='';
 
+/// Tras ejecutar cron mostramos registros y salimos 
+$eventos['cron']['cerrar_cron'][2000]='';
 ?>

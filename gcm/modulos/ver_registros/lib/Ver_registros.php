@@ -198,7 +198,7 @@ class Ver_registros extends Modulos {
       $args['nombre_remitente'] = $this->nombre_remitente;
       $args['mail_remitente'] = $this->mail_remitente;
 
-      registrar(__FILE__,__LINE__,'Enviamos email con los registros');
+      registrar(__FILE__,__LINE__,'Enviamos email con los registros','ADMIN');
 
       $gcm->event->lanzar_accion_modulo('enviomail','enviar_email',$e, $args);
       }
