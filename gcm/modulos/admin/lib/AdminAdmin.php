@@ -137,6 +137,41 @@ class AdminAdmin extends Admin {
       }
 
    /**
+    * Cerrar cron
+    *
+    * Tras ejecutar el evento cron y todos los módulos hayan realizado el
+    * trabajo, mostramos los avisos en formato texto y salimos.
+    *
+    * @param $e Evento
+    * @param $args Argumentos
+    */
+
+   function cerrar_cron($e = FALSE, $args = FALSE) {
+
+      global $gcm;
+
+      // Recogemos avisos
+      $tipos = $gcm->reg->registros_sesion();
+
+      if ( $tipos )  {
+
+         foreach ($tipos as $tipo => $registros ) {
+            echo '# '.$tipo;
+            echo "\n";
+            echo "\n";
+            foreach ( $registros as $reg ) {
+               echo $reg[2];
+               echo "\n";
+               }
+            }
+
+         }
+
+      exit();
+
+      }
+
+   /**
     * Ejecutar métodos test de los módulos
     *
     * Buscamos en todos los módulos si hay un metodo test en tal caso se lanza
