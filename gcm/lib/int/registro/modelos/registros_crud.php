@@ -15,12 +15,16 @@ class Registros_crud extends Crud {
 
    function __construct(PDO $objPdo, $id = NULL) {
 
+      $sufijo = ( isset($GLOBALS['sufijo_para_modelo']) ) 
+         ? $GLOBALS['sufijo_para_modelo']
+         : '';
+
       $this->sql_listado = 'SELECT id
          ,DATE_FORMAT(FROM_UNIXTIME(fecha),"%d/%m/%y %T") as fecha
          ,tipo
          ,mensaje
          ,CONCAT("sesion: ",sesion," ",fichero,":",linea,"\n\n",descripcion) as descripcion  
-         FROM trab_registros
+         FROM '.$sufijo.'registros
       ';
 
       parent::__construct($objPdo, $id);
