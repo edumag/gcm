@@ -26,7 +26,7 @@ class Cache_httpAdmin extends Cache_http {
 
    function cron($e, $args=FALSE) {
 
-      registrar(__FILE__,__LINE__,"Borramos cache desde cron");
+      registrar(__FILE__,__LINE__,"Borramos cache desde cron",'ADMIN');
       
       $this->borrar('cron','todo');
 
