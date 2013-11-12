@@ -184,7 +184,7 @@ class RegistroGui extends Registro {
           );
 
       echo '<div id="caja_registros">';
-      $registros->administrar($filtro, FALSE, FALSE, FALSE);
+      $registros->administrar($filtro, 'id desc', FALSE, FALSE);
       echo '</div>';
       }
 
