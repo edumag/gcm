@@ -580,6 +580,8 @@ class Gcm {
 
       if ( $this->reg instanceof Registro ) {
          $this->reg->registra($fichero,$linea,$mensaje, $tipo, $descripcion);
+      } else {
+         // registrar(__FILE__,__LINE__,"No hay instancia de Registro",'ERROR');
          }
       }
 
