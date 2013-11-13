@@ -46,6 +46,7 @@ class GcmPDO {
       /* Mirar número de resultados */
 
       if ( ! $result = $this->pdo->prepare($consulta_count) ) {
+         echo '<pre>PDO: ' ; print_r($this->pdo) ; echo '</pre>'; // exit() ; // DEV  
          $error = $result->errorInfo();
          registrar(__FILE__,__LINE__,"ERROR ".$error[2]."\nsql:\n".$consulta_count,'ERROR');
          return FALSE;
@@ -134,6 +135,32 @@ class GcmPDO {
          }
 
       return $retorno;
+
+      }
+
+   /**
+    * Exportar a csv
+    *
+    * @param $file_csv Fichero destino 
+    */
+
+   function to_csv($file_csv=FALSE) {
+
+      $file_csv = ( $file_csv ) ? $file_csv : 'export.csv' ;
+
+      if ( substr($file_csv,-4) !== '.csv' ) $file_csv = $file_csv.'.csv';
+
+      if ( ! $this->resultado  ) $this->resultado();
+
+      $arAll = $this->resultado->fetchAll(PDO::FETCH_ASSOC);
+
+      $fp = fopen($file_csv, 'w');
+
+      foreach ($arAll as $campos) {
+          fputcsv($fp, $campos);
+      }
+
+      fclose($fp);
 
       }
 
