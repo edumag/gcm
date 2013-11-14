@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file registro_editar.phtml
+ * @brief Generamos formulario según tipo de campo
+ * @ingroup crud
+ */
+
+require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
+
+$condiciones = array( 
+    array('igual','Igual')
+   ,array('contiene','Contiene')
+   ); 
+   ?>
+
+<?php  // echo "CAMPOS: <pre>" ; print_r($this->campos) ; echo "</pre>"; // DEV  ?>
+<?php  // echo "POST:   <pre>" ; print_r($_POST)        ; echo "</pre>"; // DEV  ?>
+
+<?php $select = FALSE; ?>
+<?php foreach ( $this->campos as $campo => $relacion ) { ?>
+<?php $select[] = array($campo,$campo); ?>
+<?php } ?>
+
+<?php 
+echo HTML::form_select('filtro_campo[]',$select); 
+echo HTML::form_select('filtro_condicion[]',$condiciones); 
+echo HTML::form_text('filtro_texto[]');
+?>

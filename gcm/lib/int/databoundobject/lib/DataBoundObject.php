@@ -28,7 +28,7 @@
 abstract class DataBoundObject {
 
    protected $ID;                          ///< Identificador de registro
-   protected $objPDO;                      ///< PDO
+   public $objPDO;                      ///< PDO
    protected $strTableName;                ///< Nombre de tabla
    protected $arRelationMap;               ///< Array con las relaciones campo tabla->nombre_variable
    protected $blForDeletion;               ///< Para saber si se debe borrar el registro

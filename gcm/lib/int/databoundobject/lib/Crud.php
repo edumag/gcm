@@ -132,19 +132,83 @@ class Crud extends DataBoundObject {
    public $plantilla_relacion_externa = FALSE;
 
    /**
-    * Definimos la url del formulario al que se debe volver en caso de errpres,
-    * pordefecto es $_SERVER["REDIRECT_URL"] 
+    * Tablas que contienen contenido relacionado con el registro actual, permitiendonos
+    * relacionar varios registros de otra tabla con la actual.
     */
 
-   protected $url_formulario = FALSE;
+   public $relaciones_varios = FALSE;
 
    /**
-    * Podemos definir un metodo personalizado para la visualización de los registros 
-    * individuales, en caso de no tenerlo se presentara el formulario en versión
-    * de solo lectura
+    * Relaciones con tablas combinatorias
+    *
+    * Ejemplo: 
+    *
+    * <pre>
+    * $this->combinar_tablas[]   =  'tv_autors.id=tv_rel_autors.autors_id,tv_id';
+    * </pre>
+    *
+    * tv_autors.id:             Tabla con la información que nos interesa relacionar con el campo que lo indexa
+    * tv_rel_autors.autors_id:  Tabla combinatoria con el campo que contiene el identificador del autor
+    * tv_id:                    Campo dentro de la tabla combinatoria que contiene el identificador de la tabla padre. 
+    *
+    * Todas las tablas afectadas deben estar instanciadas desde los modelos como una extensión de Crud.
+    *
+    * @todo Mejorar selección de registros combinatorios
     */
 
-   protected function visualizando_registro() { return FALSE ; }
+   public $combinar_tablas = FALSE;
+
+   /**
+    * Permitir exportar los resultados del listado a csv
+    */
+
+   public $exportar_csv = FALSE;
+
+   /**
+    * Añadir caja con posibles filtros
+    */
+
+   public $formulario_filtros = FALSE;
+
+   /** Archivos css para los estilos */
+
+   public $ficheros_css;
+
+   /** Librerías javascript a argar */
+
+   public $librerias_js;
+
+   /** Código javascript a añadir */
+
+   public $codigo_js;
+
+   /** Reglas para el código javascript a añadir */
+
+   public $reglas_js;
+
+   /**
+    * SQL para generar listado, por defecto 'SELECT * FROM tabla ORDER BY id desc' 
+    *
+    * Nos permite tener un listado personalizado desde los modelos, para evitar un exceso
+    * de campos no necesarios en los lidtados.
+    *
+    * uso:
+    * <pre>
+    * class Tareas extends Crud {
+    * 
+    *    function __construct(PDO $objPDO, $id=NULL) {
+    * 
+    *       $this->sql_listado = 'SELECT id, nombre as Nombre, fechaInicio as Inicio FROM tareas ORDER BY id desc';
+    * 
+    *       parent::__construct($objPDO, $id);
+    * 
+    *       }
+    * 
+    *    }
+    * </pre>
+    */
+
+   public $sql_listado;
 
    /**
     * Opciones de presentación para el listado con array2table o
@@ -188,6 +252,21 @@ class Crud extends DataBoundObject {
 
    public $conf_paginador = FALSE;        
 
+   /**
+    * Definimos la url del formulario al que se debe volver en caso de errpres,
+    * pordefecto es $_SERVER["REDIRECT_URL"] 
+    */
+
+   protected $url_formulario = FALSE;
+
+   /**
+    * Podemos definir un metodo personalizado para la visualización de los registros 
+    * individuales, en caso de no tenerlo se presentara el formulario en versión
+    * de solo lectura
+    */
+
+   protected function visualizando_registro() { return FALSE ; }
+
    protected $evento_guardar = FALSE;     ///< Metodo a lanzar al guardar registro, recibe identificador de registro como parametro
    protected $evento_modificar = FALSE;   ///< Metodo a lanzar al modificar registro, recibe identificador de registro como parametro
    protected $evento_borrar  = FALSE;     ///< Metodo a lanzar al borrar registro, recibe identificador de registro como parametro
@@ -216,46 +295,6 @@ class Crud extends DataBoundObject {
    /** Plantilla para presentar formulario de registro */
 
    protected $plantilla;
-
-   /** Archivos css para los estilos */
-
-   public $ficheros_css;
-
-   /** Librerías javascript a argar */
-
-   public $librerias_js;
-
-   /** Código javascript a añadir */
-
-   public $codigo_js;
-
-   /** Reglas para el código javascript a añadir */
-
-   public $reglas_js;
-
-   /**
-    * SQL para generar listado, por defecto 'SELECT * FROM tabla ORDER BY id desc' 
-    *
-    * Nos permite tener un listado personalizado desde los modelos, para evitar un exceso
-    * de campos no necesarios en los lidtados.
-    *
-    * uso:
-    * <pre>
-    * class Tareas extends Crud {
-    * 
-    *    function __construct(PDO $objPDO, $id=NULL) {
-    * 
-    *       $this->sql_listado = 'SELECT id, nombre as Nombre, fechaInicio as Inicio FROM tareas ORDER BY id desc';
-    * 
-    *       parent::__construct($objPDO, $id);
-    * 
-    *       }
-    * 
-    *    }
-    * </pre>
-    */
-
-   public $sql_listado;
 
    /**
     * Relación de los campos del listado con sus alias.
@@ -366,31 +405,12 @@ class Crud extends DataBoundObject {
    protected $dir_img_array2table = FALSE;
 
    /**
-    * Tablas que contienen contenido relacionado con el registro actual, permitiendonos
-    * relacionar varios registros de otra tabla con la actual.
+    * sql que utilizamos para administrar, puede ser requerida para exportar,
+    * nos da la sql del listado con la condición establecida pero sin el orden
+    * ya que el orden viene por otro lado.
     */
 
-   public $relaciones_varios = FALSE;
-
-   /**
-    * Relaciones con tablas combinatorias
-    *
-    * Ejemplo: 
-    *
-    * <pre>
-    * $this->combinar_tablas[]   =  'tv_autors.id=tv_rel_autors.autors_id,tv_id';
-    * </pre>
-    *
-    * tv_autors.id:             Tabla con la información que nos interesa relacionar con el campo que lo indexa
-    * tv_rel_autors.autors_id:  Tabla combinatoria con el campo que contiene el identificador del autor
-    * tv_id:                    Campo dentro de la tabla combinatoria que contiene el identificador de la tabla padre. 
-    *
-    * Todas las tablas afectadas deben estar instanciadas desde los modelos como una extensión de Crud.
-    *
-    * @todo Mejorar selección de registros combinatorios
-    */
-
-   public $combinar_tablas = FALSE;
+   protected $sql;
 
    /** 
     * Constructor
@@ -1082,6 +1102,116 @@ class Crud extends DataBoundObject {
 
       }
    
+   /**
+    * Generar formulario de filtros
+    *
+    * @param $displayHash Array con los valores
+    * @param $nombre_campo_relacional Nombre del campo que contiene la relación con la tabla
+    *        padre
+    * @param $modelo_padre Enviamos el modelo padre para que pueda relacionarse con él y 
+    *        enviarle petición de carga de scripts y conocer el identificador del registro.
+    * @param $contador Contador, nos servira para las tablas relaciones_varias diferenciar entre registros.
+    */
+
+   function generar_formulario_filtro($displayHash=NULL, $nombre_campo_relacional = FALSE, $modelo_padre = FALSE, $contador = FALSE) {
+
+      if ( isset($_REQUEST['formato']) && $_REQUEST['formato'] == 'ajax' ) return ;
+
+      require_once(dirname(__FILE__).'/Formulario_filtro.php');
+
+      /* Rellenamos datos para Formulario con sus valores si los tiene */
+
+      foreach ( $this->arRelationMap as $campo => $R ) {
+
+         // Si tenemos identificador lo añadimos oculto
+         if ( $this->ID ) {
+            $this->tipos_formulario[$this->sufijo.'id']['valor'] = $this->ID;
+            $this->tipos_formulario[$this->sufijo.'id']['oculto_form'] = 1;
+            }
+
+         // Si la tenemos nombre_campo_relacional lo ocultamos.
+         if ( $campo == $nombre_campo_relacional ) {
+            if ( isset($modelo_padre->ID) && !empty($modelo_padre->ID) ) {
+               $this->tipos_formulario[$campo]['valor'] = $modelo_padre->ID;
+               $this->tipos_formulario[$campo]['oculto_form'] = 1;
+            } else {
+               $this->tipos_formulario[$campo]['ignorar'] = 1;
+               }
+            }
+
+         // Si es una tabla combinatoria miramos de añadir los campos que hacen de indice, ya
+         // que probablemente no haya nada más que presentar.
+         if ( count($this->campos_indices) > 1 ) {
+            foreach ( $this->campos_indices as $indice ) {
+               $this->tipos_formulario[$indice]['tipo'] = "relacion";
+               $this->tipos_formulario[$indice]['valor'] = $this->valores[$indice];
+               }
+            }
+
+         if ( $campo != array_search('ID',$this->arRelationMap) ) 
+            $this->tipos_formulario[$campo]['valor'] = $this->valores($campo, $displayHash);
+
+         // Si es un campo con el indice de una tabla relacionada, buscamos los posibles 
+         // valores desde su modelo.
+         if ( isset($this->tipos_formulario[$campo]['tabla'])  ) {
+            $modelo_relacionado = ucfirst($this->tipos_formulario[$campo]['tabla']);
+            $id_relacionado = $this->GetAccessor($campo);
+            $relacion = new $modelo_relacionado($this->objPDO,$id_relacionado);
+            $this->tipos_formulario[$campo]['opciones'] = $relacion->listado_para_select();
+            }
+
+         }
+
+      $form = new Formulario_filtro($this->tipos_formulario, $displayHash);
+
+      // Si es una tabla de tipo 'relacion_varios' cargamos plantilla registros_relacionados_editar.phtml
+      // y en caso de tener una definida en el modelo la cogemos.
+
+      // if ( $this->tipo_tabla == 'relacion_varios' ) {
+
+      //    if ( $this->plantilla_relacion_varios ) {
+      //       $form->plantilla = $this->plantilla_relacion_varios;
+      //    } else {
+      //       $form->plantilla = dirname(__FILE__).'/../html/registros_relacionados_editar.phtml';
+      //       }
+
+      // // Si es una tabla de tipo relacion_externa
+
+      // } elseif ( $this->tipo_tabla == 'relacion_externa' ) {
+
+      //    if ( $this->plantilla_relacion_externa ) {
+      //       $form->plantilla = $this->plantilla_relacion_externa;
+      //    } else {
+      //       $form->plantilla = dirname(__FILE__).'/../html/registros_combinados_editar.phtml';
+      //       }
+
+      // } else {
+
+      //    // Si tenemos plantilla desde el modelo se la pasamos a Formulario
+      //    if ( $this->plantilla_editar ) $form->plantilla = $this->plantilla_editar;
+
+      //    }
+
+      // Si es una tabla normal añadimos cabecera de formulario, es caso contrario es una tabla relacionada
+      // no hay que hacerlo
+
+      ?>
+      <form id="crud_filtro" name="crud_filtro" action="" method="post">
+      <fieldset>
+      <legend><?php echo literal('Filtros')?></legend>
+      <input type="hidden" name="url_formulario_filtro" value="<?php echo ( isset($_SERVER['HTTP_REFERER']) ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
+
+      <?php $form->genera_formulario(FALSE, $this->accion, $this); ?>
+
+      <br />
+      <p class="botonera_crud"><input type="submit" name="<?php echo $this->sufijo; ?>filtro" value="Filtrar"></p>
+      </fieldset>
+      </form>
+      <?php
+
+
+      }
+
 
    /**
     * Generar formulario
@@ -1177,7 +1307,7 @@ class Crud extends DataBoundObject {
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
          <form id="crud" name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
-         <input type="hidden" name="url_formulario" value="<?php echo ( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
+         <input type="hidden" name="url_formulario" value="<?php echo ( isset($_SERVER['HTTP_REFERER']) ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
          <?php
          }
 
@@ -1272,6 +1402,8 @@ class Crud extends DataBoundObject {
 
       $this->permisos = $permisos;
 
+      $condicion = $this->anyadir_filtros($condicion);
+
       $displayHash = array();
 
       if ( isset($_REQUEST[$this->sufijo.'id']) ) $this->ID = $_REQUEST[$this->sufijo.'id'];
@@ -1310,6 +1442,9 @@ class Crud extends DataBoundObject {
          $this->accion = 'editar';
       } elseif ( $accion_directa ) {
          $this->accion = $accion_directa;
+      } elseif ( isset($_REQUEST[$this->sufijo.'csv']) ) {
+         $this->exportar($condicion, $order, 'csv');
+         return;
       } else {
          if ( isset($_REQUEST[$this->sufijo.'id']) ) {
             $this->accion = 'ver';
@@ -1711,6 +1846,7 @@ class Crud extends DataBoundObject {
 
       } else {
 
+         if ( $this->formulario_filtros ) $this->generar_formulario_filtro();
          $this->listado($condicion, $order);
          $this->botones_acciones($this->accion);
 
@@ -1752,6 +1888,12 @@ class Crud extends DataBoundObject {
             echo ' <a class="formulari2 boton" href="'.$_SERVER['PHP_SELF'].'">'.literal('Cancelar',3).' </a> ';
             }
 
+         // Boton exportar csv
+         if ( $this->exportar_csv && $accion == "inicio" ) {
+            $filtro = array_merge($this->filtro2get(),array('csv' => 1,'formato'=>'ajax'));
+            echo ' <a class="formulari2 boton" href="'.construir_get($filtro).'">'.literal('Exportar a CSV').' </a> ';
+            }
+
          echo '</div>';
 
          }
@@ -1768,12 +1910,7 @@ class Crud extends DataBoundObject {
       $sql = ( isset($this->sql_listado) ) ? $this->sql_listado : 'SELECT * FROM '.$this->strTableName;
       
       // La condición debe añadirse antes de GROUP en caso de lo haya.
-
-      if ( $condicion ) {
-
-         $sql = $this->anyadir_condicion_sql($condicion,$sql);
-
-         }
+      if ( $condicion ) $sql = $this->anyadir_condicion_sql($condicion,$sql);
 
       $order = ( $order ) ? ' ORDER BY '.$order : ' ORDER BY '.array_search('ID',$this->arRelationMap).' desc';
 
@@ -2169,7 +2306,80 @@ class Crud extends DataBoundObject {
 
       }
 
+   /**
+    * Exportación, de momento solo a csv
+    *
+    * @param $condicion Condicion para el listado
+    * @param $order     Orden para presentar el listado, por defecto id desc
+    * @param $formato   Por defecto csv y de momento el único
+    */
 
+   function exportar($condicion=FALSE, $orden=FALSE,$formato='csv') {
+
+      $sql = ( isset($this->sql_listado) ) ? $this->sql_listado : 'SELECT * FROM '.$this->strTableName;
+
+      // La condición debe añadirse antes de GROUP en caso de lo haya.
+      if ( $condicion ) $sql = $this->anyadir_condicion_sql($condicion,$sql);
+
+      require_once GCM_DIR.'lib/int/GcmPDO/lib/GcmPDO.php';
+      $export = new GcmPDO($this->objPDO, $sql);
+      $export->to_csv(); 
+      exit();
+      
+      }
+
+   /**
+    * Añadir filtros a la condición que nos vienen por GET p POST
+    */
+
+   function anyadir_filtros($condicion) {
+
+      if ( ! isset($_REQUEST['filtro_campo']) ) return $condicion;
+
+      $condicion = ( $condicion ) ? $condicion : '1' ;
+
+      for ( $i=0; $i < count($_REQUEST['filtro_campo']); $i++ ) {
+         $campo = $_REQUEST['filtro_campo'][$i];
+         $cond  = $_REQUEST['filtro_condicion'][$i];
+         $texto = $_REQUEST['filtro_texto'][$i];
+
+         switch ($cond) {
+            case 'igual':
+               $condicion .= " AND ($campo = '$texto')";
+               break;
+            
+            case 'contiene':
+               $condicion .= " AND ($campo LIKE '%$texto%')";
+               break;
+            }
+         }
+
+      return $condicion;
+
+      }
+
+   /**
+    * Convertimos filtro actual a GET para poder ser pasado desde enlaces
+    */
+
+   function filtro2get() {
+
+      $filtro = FALSE;
+      if ( isset($_POST) ) {
+         foreach ( $_POST as $k => $post ) {
+            if ( is_array($post) && stripos($k,'filtro_') !== FALSE ) {    // Si cadena contiene '.html'
+               $cf=0;
+               foreach ( $post as $v ) {
+                  $filtro[$k.'[]'] = $post[0];
+                  $cf++;
+                  }
+               }
+            }
+         }
+
+      return $filtro;
+
+      }
    }
 
 ?>
