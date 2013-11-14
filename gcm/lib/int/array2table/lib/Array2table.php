@@ -315,7 +315,7 @@ class Array2table {
             } elseif ( isset($fila_unica) && $fila_unica == $key_columna ) {
                $DATO=trim($columna);
                if ( !empty($DATO) ) {
-                  $salida_fila_unica .= sprintf("\n\t\t<tr><td class='fila_unica' colspan='%s' %s><a href='javascript:mostrar_fila_unica(\"fila_".$this->sufijo.$num_fila."\");'>mostrar</a><div id='fila_".$this->sufijo.$num_fila."' style='display: none;'>%s</div></td></tr>",$num_columnas,$clase_columna,nl2br($DATO));
+                  $salida_fila_unica .= sprintf("\n\t\t<tr><td class='fila_unica' colspan='%s' %s><div id='fila_".$this->sufijo.$num_fila."'>%s</div></td></tr>",$num_columnas,$clase_columna,nl2br($DATO));
                   }
                
             } elseif ($key_columna == "img" ) {

@@ -472,13 +472,23 @@ function modificarGet($var, $valor) {
 
 /**
  * Generamos url segun las variables de GET que ya tenemos
+ * añadiendo las que pasamos.
  *
- * @param $variables Array con las variables y sus valores a añadir.
+ * @param $variables Array con las variables y sus valores a añadir 
+ *         formato: array ( 'orden' => id,  'tipo_orden' => desc)
  */
 
-function construir_get ($variables) {
+function construir_get ($variables=FALSE) {
 
-   $resultado = array_merge( $_GET, $variables );
+   if ( isset($_GET) && ( $variables ) && is_array($variables) ) {
+      $resultado = array_merge( $_GET, $variables );
+   } elseif ( isset($_GET) && ( ( ! $variables ) || ( ! is_array($variables) ) ) ) {
+      $resultado = $_GET;
+   } elseif ( ! isset($_GET) && ( $variables && is_array($variables) ) ) {
+      $resultado = $variables;
+   } else {
+      return FALSE;
+      }
 
    $simbolo = '?';
    $salida = '';

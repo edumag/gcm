@@ -1890,7 +1890,7 @@ class Crud extends DataBoundObject {
 
          // Boton exportar csv
          if ( $this->exportar_csv && $accion == "inicio" ) {
-            $filtro = array_merge($this->filtro2get(),array('csv' => 1,'formato'=>'ajax'));
+            $filtro = $this->filtro2get(array('csv' => 1,'formato'=>'ajax'));
             echo ' <a class="formulari2 boton" href="'.construir_get($filtro).'">'.literal('Exportar a CSV').' </a> ';
             }
 
@@ -2360,9 +2360,12 @@ class Crud extends DataBoundObject {
 
    /**
     * Convertimos filtro actual a GET para poder ser pasado desde enlaces
+    *
+    * @param $variables Podemos sumar las variables que deseemos, 
+    *         formato: array('csv' => 1,'formato'=>'ajax')
     */
 
-   function filtro2get() {
+   function filtro2get($variables=FALSE) {
 
       $filtro = FALSE;
       if ( isset($_POST) ) {
@@ -2377,7 +2380,9 @@ class Crud extends DataBoundObject {
             }
          }
 
-      return $filtro;
+      if ( $filtro && $variables ) return array_merge($filtro,$variables);
+      if ( $filtro ) return $filtro;
+      if ( $variables ) return $variables;
 
       }
    }
