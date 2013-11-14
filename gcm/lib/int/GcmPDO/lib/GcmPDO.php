@@ -46,15 +46,25 @@ class GcmPDO {
       /* Mirar número de resultados */
 
       if ( ! $result = $this->pdo->prepare($consulta_count) ) {
-         echo '<pre>PDO: ' ; print_r($this->pdo) ; echo '</pre>'; // exit() ; // DEV  
          $error = $result->errorInfo();
          registrar(__FILE__,__LINE__,"ERROR ".$error[2]."\nsql:\n".$consulta_count,'ERROR');
          return FALSE;
          }
 
-      if ( ! $result->execute()  ) {
-         $error = $result->errorInfo();
-         registrar(__FILE__,__LINE__,"ERROR ".$error[2]."\nsql:\n".$consulta_count,'ERROR');
+      try {
+
+         // registrar(__FILE__,__LINE__,$this->sql,'AVISO');
+         
+         $result->execute();
+
+      } catch (Exception $ex) {
+
+         $error = $ex->getMessage();
+         $file  = $ex->getFile();
+         $line  = $ex->getLine();
+
+         registrar($file,$line,$error,'ERROR');
+         registrar($file,$line,"SQL: ".$this->sql."\n\n".$error,'ADMIN');
          return FALSE;
          }
 
@@ -154,7 +164,7 @@ class GcmPDO {
 
       $arAll = $this->resultado->fetchAll(PDO::FETCH_ASSOC);
 
-      $fp = fopen($file_csv, 'w');
+      $fp = fopen('/tmp/'.$file_csv, 'w');
 
       foreach ($arAll as $campos) {
           fputcsv($fp, $campos);
@@ -162,6 +172,12 @@ class GcmPDO {
 
       fclose($fp);
 
+      $len = filesize('/tmp/'.$file_csv);
+      header('Content-Type: application/csv; utf-8');
+      header("Content-Length: $len");
+      header("Content-Disposition: inline; filename=".basename('/tmp/'.$file_csv));
+      readfile('/tmp/'.$file_csv);
+      exit();
       }
 
    }

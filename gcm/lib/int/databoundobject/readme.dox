@@ -113,6 +113,25 @@ class Tareas extends Crud {
    }
 @endcode
 
+@todo Separar filtro de Crud
+
+Tenemos la posibilidad de añadir un formulario para crear filtros avanzados.
+
+Configurando una instancia de Crud con $crud->filtros = TRUE se mostrara un 
+formulario en la cabecera del listado que nos permitira generar filtros.
+
+Ahora mismo funciona y la exportación de csv se realiza teneiendo en cuenta el
+filtro.
+
+@todo Falta extender los filtros para tener más posibilidades.
+@todo Añadir un filtro simple que se base en un campo de busqueda y que mire si 
+      tenemos contenido en cualquier campo.
+@todo Separar el formulario de filtro del listado, permitiendo ser llamado desde
+      cualquier lugar en cualquier campo.
+@todo Separar el formulario de filtro del listado, permitiendo ser llamado desde
+      cualquier lugar.
+@todo El paginador pierde el filtro, hay que pasárselo por GET
+
 @}
 
 */

@@ -457,8 +457,6 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
 function modificarGet($var, $valor) {
 
-   global $s, $c ;
-
    $salida = "?".$var."=".$valor;
    foreach($_GET as $key => $val ) {
       if ( $key != $var ) {

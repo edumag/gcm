@@ -128,6 +128,7 @@ class RegistroGui extends Registro {
       <input type='submit' />
       </form>
       </fieldset>
+
       <?php
 
 
@@ -161,13 +162,15 @@ class RegistroGui extends Registro {
 
       require_once(dirname(__FILE__).'/../modelos/registros_crud.php');
 
-      if ( !isset($_GET['formato']) || ( isset($_GET['formato']) && $_GET['formato'] !== 'ajax' ) ) $this->filtro($filtro);
+      // if ( !isset($_GET['formato']) || ( isset($_GET['formato']) && $_GET['formato'] !== 'ajax' ) ) $this->filtro($filtro);
 
       $GLOBALS['sufijo_para_modelo'] = $this->sufijo;
       $registros = new Registros_crud($this->conexion);
       $registros->sufijo = '';
       $registros->url_ajax = '&formato=ajax';
       $registros->elementos_pagina = 60;
+      $registros->exportar_csv = TRUE;
+      $registros->formulario_filtros = TRUE;
       $registros->opciones_array2table = array(
           'op' => array (
              'ocultar_id'=>FALSE
@@ -183,9 +186,10 @@ class RegistroGui extends Registro {
              )
           );
 
-      echo '<div id="caja_registros">';
-      $registros->administrar($filtro, 'id desc', FALSE, FALSE);
-      echo '</div>';
+      if ( ! isset($_GET['csv']) ) echo '<div id="caja_registros">';
+      $registros->administrar($filtro, 'id desc', FALSE, TRUE);
+      if ( ! isset($_GET['csv']) ) echo '</div>';
+
       }
 
 
