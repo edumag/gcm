@@ -1,5 +1,13 @@
 <?php
-// Archivo generado automaticamente por /home/eduardo/SERVIDOR/subversion/gcm/trunk/gcm/lib/int/GcmConfig/lib/GcmConfig.php
+
+/**
+ * @file admin/config/config.php
+ * @brief Configuración Admin
+ * @defgroup configuracion_admin Descripciones para la configuración de Admin
+ * @ingroup modulo_admin
+ * @{
+ */
+
 $config['Proyecto']='gcm';
 $config['bd_conexion']='sqlite:DATOS/proyecto.db';
 $config['bd_usuario'] = '';
@@ -18,4 +26,7 @@ $config['bd_conexion']='sqlite:DATOS/proyecto.db';
 $config['bd_usuario'] = '';
 $config['bd_pass']='';
 $config['Sufijo para base de datos']='';
+
+/** @} */
+
 ?>

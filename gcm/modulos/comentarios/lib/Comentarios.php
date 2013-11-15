@@ -7,8 +7,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  04/02/11
- *  Revision  SVN $Id: Comentarios.php 650 2012-10-04 07:17:48Z eduardo $
  * Copyright  Copyright (c) 2011, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the

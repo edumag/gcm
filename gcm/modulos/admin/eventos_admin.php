@@ -1,11 +1,11 @@
 <?php
-/**
- * @file admin/eventos_admin.php
- */
 
 /**
  * @file eventos_admin.php
  * @brief Definimos eventos administrativos y acciones permitidas para usuario registrado
+ * @defgroup eventos_admin Eventos de Admin
+ * @ingroup modulo_admin
+ * @{
  */
 
 $eventos['menuadmin']['presentar_menu_administrativo'][1]='';
@@ -32,4 +32,6 @@ $eventos['contenido_caja_info_dev']['contenido_caja_info_dev'][1]='';
 
 /// Tras ejecutar cron mostramos registros y salimos 
 $eventos['cron']['cerrar_cron'][2000]='';
+
+/** @} */
 ?>
