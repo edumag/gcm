@@ -1,8 +1,32 @@
 /**
 
-@file ver_registros/readme.dox
-@brief Visualización de registros
+@defgroup modulo_ver_registros Módulo Ver_registros
 
 Visualización del registro de la aplicación para administradores
 
-*/
+@ingroup modulos_aplicacion
+@ingroup modulo_ver_registros
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- config
+|   |-- config_es.php
+|   `-- config.php
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- html
+|   `-- presentar_avisos.html
+|-- lib
+|   |-- Ver_registrosAdmin.php
+|   `-- Ver_registros.php
+|-- menuAdmin.php
+`-- readme.dox
+
+3 directories, 9 files
+</pre>
+
+@} */

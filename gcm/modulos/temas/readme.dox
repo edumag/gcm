@@ -1,0 +1,129 @@
+/**
+
+@defgroup modulo_temas Módulo Temas
+
+Gestión de la los diferentes temas del proyecto
+
+@ingroup modulos_aplicacion
+@ingroup modulo_temas
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- config
+|   `-- config.php
+|-- css
+|   |-- avisos.css
+|   |-- body.css
+|   |-- boton.css
+|   |-- cabecera.css
+|   |-- camino.css
+|   |-- colores.php
+|   |-- columna.css
+|   |-- farbtastic.css
+|   |-- formularios.css
+|   |-- jquery.modal.css
+|   |-- medias.css
+|   |-- paneles.css
+|   |-- pie.css
+|   |-- titulo.css
+|   `-- ventana.css
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- html
+|   |-- administrando.html
+|   |-- form_colores.html
+|   |-- form_editar.html
+|   |-- form_fichero_css.html
+|   |-- form_ficheros_tema.html
+|   |-- form_temas.html
+|   |-- panel.html
+|   |-- pie.html
+|   |-- principal.html
+|   |-- seleccionar_tema.phtml
+|   |-- sin_contenido.html
+|   |-- sin_seccion.html
+|   |-- sin_tema.html
+|   `-- titulo.html
+|-- iconos
+|   |-- alerta.png
+|   |-- audio.png
+|   |-- aviso.png
+|   |-- ayuda.png
+|   |-- back_disabled.png
+|   |-- back_enabled_hover.png
+|   |-- back_enabled.png
+|   |-- borrar.png
+|   |-- buscar.png
+|   |-- calendario.png
+|   |-- candado.png
+|   |-- carpeta.png
+|   |-- categorias.png
+|   |-- cerrar.png
+|   |-- close.png
+|   |-- codigo.png
+|   |-- comentarios.png
+|   |-- configurar.png
+|   |-- descargar.png
+|   |-- editar.png
+|   |-- error.png
+|   |-- etiquetas.png
+|   |-- forward_disabled.png
+|   |-- forward_enabled_hover.png
+|   |-- forward_enabled.png
+|   |-- foto.png
+|   |-- info.png
+|   |-- nuevo.png
+|   |-- ok.png
+|   |-- papelera.png
+|   |-- -.png
+|   |-- +.png
+|   |-- sort_asc_disabled.png
+|   |-- sort_asc.png
+|   |-- sort_both.png
+|   |-- sort_desc_disabled.png
+|   |-- sort_desc.png
+|   |-- user_add.png
+|   |-- user_perfil.png
+|   |-- user.png
+|   |-- ver.png
+|   |-- video.png
+|   `-- volver.png
+|-- img
+|   |-- asc.gif
+|   |-- bg.gif
+|   |-- desc.gif
+|   |-- first.gif
+|   |-- header-bg.gif
+|   |-- header-selected-bg.gif
+|   |-- last.gif
+|   |-- loading.gif
+|   |-- marker.png
+|   |-- mask.png
+|   |-- next.gif
+|   |-- previous.gif
+|   |-- progressbar.gif
+|   |-- sort.gif
+|   `-- wheel.png
+|-- js
+|   |-- general.js
+|   |-- iniciar_selector_color.js
+|   |-- javascript_head.js
+|   |-- ocultar_contenido_desde_titulo.js
+|   `-- paneles.js
+|-- lib
+|   |-- TemasAdmin.php
+|   `-- Temas.php
+|-- libjs
+|   |-- farbtastic.js
+|   `-- jquery.modal.min.js
+|-- menuAdmin.php
+`-- readme.dox
+
+8 directories, 101 files
+</pre>
+
+@} */

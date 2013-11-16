@@ -3,7 +3,7 @@
 /**
  * @file admin/config/config.php
  * @brief Configuración Admin
- * @defgroup configuracion_admin Descripciones para la configuración de Admin
+ * @defgroup configuracion_admin Configuración para Admin
  * @ingroup modulo_admin
  * @{
  */

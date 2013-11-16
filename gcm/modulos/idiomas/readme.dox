@@ -1,0 +1,44 @@
+/**
+
+@defgroup modulo_idiomas Módulo Idiomas
+
+Gestión de los diferentes idiomas, nos permite tener un seleccionador de idiomas
+y gestionarlos.
+
+@ingroup modulos_aplicacion
+@ingroup modulo_idiomas
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/idiomas/
+|-- config
+|   |-- config_es.php
+|   `-- config.php
+|-- css
+|   |-- lista_idiomas.css
+|   `-- selectorIdiomas.css
+|-- eventos_usuario.php
+|-- html
+|   |-- banderas.html
+|   `-- form_idiomas.html
+|-- img
+|   |-- al.gif
+|   |-- ca.gif
+|   |-- en.gif
+|   |-- es.gif
+|   |-- fr.gif
+|   `-- it.gif
+|-- info.php
+|-- lib
+|   `-- Idiomas.php
+|-- menuAdmin.php
+`-- readme.dox
+
+5 directories, 17 files
+</pre>
+
+@} */

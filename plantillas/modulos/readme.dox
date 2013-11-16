@@ -2,12 +2,17 @@
 
 @defgroup modulo_{modulo} Módulo {Modulo}
 
+Descripción del módulo
+
 @ingroup modulos_aplicacion
 @ingroup modulo_{modulo}
+
+@{
 
 Contenido
 ---------
 
+<pre>
 |-- alt                  Alternativas a los archivos por defecto
 |-- config               Configuración por defecto
 |-- css                  css por defecto
@@ -19,13 +24,26 @@ Contenido
 |-- img                  Imágenes
 |-- js                   Javascripts
 |-- lib                  
-|   -- Modulo.php       Clase del módulo
-|   -- ModuloAdmin.php  Clase que extiende de Modulo con métodos administrativos 
+|   -- {Modulo}.php       Clase del módulo
+|   -- {Modulo}Admin.php  Clase que extiende de Modulo con métodos administrativos 
 |-- libjs               Librerías js propias
 |-- menuAdmin.php       Entradas del menú administrativo
 |-- modelos             Modelos para Crud
 `-- readme.dox          Este archivo
+</pre>
 
-11 directories, 5 files
+/**
+ * @defgroup lista_blanca Lista de los métodos que no requieren de permisos
+ * @ingroup modulos_aplicacion
+ * @{
+ */
 
+Ejemplo para el envio de emails en el módulo Enviomails
+
+@code
+/** Permitimos envio de email a usuarios */
+$this->set_lista_blanca('enviomail','enviar_email');
+@endcode
+
+ /** @} */
 @} */

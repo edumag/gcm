@@ -1,3 +1,6 @@
+/**
+@defgroup modulo_responsiveslides Módulo Responsiveslides
+
 Presentación de slide de imágenes.
 
 Podemos configurar la lista de imágenes que deseamos.
@@ -28,3 +31,36 @@ Opciones::
      before: function(){},   // Function: Before callback
      after: function(){}     // Function: After callback
    });
+
+
+
+@ingroup modulos_aplicacion
+@ingroup modulo_responsiveslides
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/responsiveslides/
+|-- config
+|   |-- config_es.php
+|   `-- config.php
+|-- css
+|   `-- responsiveslides.css
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- html
+|   `-- slide.phtml
+|-- js
+|   `-- responsiveslides.min.js
+|-- lib
+|   `-- Responsiveslides.php
+|-- menuAdmin.php
+`-- readme.dox
+
+5 directories, 10 files
+</pre>
+
+@} */

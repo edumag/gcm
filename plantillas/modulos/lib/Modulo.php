@@ -4,6 +4,7 @@
  * @file {Modulo}.php
  * @brief
  *
+ * @ingroup modulo_{modulo}
  * @author    Eduardo Magrané 
  *
  * @internal
@@ -16,8 +17,6 @@
 /**
  * @class {Modulo}
  * @brief
- *
- * @ingroup modulo_{modulo}
  */
 
 class {Modulo} extends Modulos {

@@ -1,9 +1,12 @@
 <?php
 
 /**
- * @file Eventos de usuario para contenidos
- *
- * @package Contenidos
+ * @file contenidos/eventos_usuario.php
+ * @brief Eventos para contenidos
+ * @defgroup eventos_contenidos Eventos de contenidos
+ * @ingroup modulo_contenidos
+ * @ingroup eventos
+ * @{
  */
 
 /** Presentar contenido */

@@ -1,9 +1,20 @@
 <?php
 
+/**
+ * @file admin/menuAdmin.php
+ * @brief Entradas para el menú administrativo
+ * @defgroup menu_admin_admin Menu admin para Admin
+ * @ingroup menu_admin
+ * @ingroup modulo_admin
+ * @{
+ */
+
+
 # $menuAdmin['Administración']['title']='Administrar proyecto';
 
 $usuario = $_SESSION[$gcm->sufijo.'usuario'];
 
+/** Editar perfil usuario */
 $menuAdmin2[$usuario]['boton']['Editar perfil']['activado']= 1;
 $menuAdmin2[$usuario]['boton']['Editar perfil']['title']="Editar información de usuario";
 $menuAdmin2[$usuario]['boton']['Editar perfil']['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
@@ -42,4 +53,5 @@ if ( permiso('configurar_conexiones','admin') ) {
 
    }
 
+/** @} */
 ?>

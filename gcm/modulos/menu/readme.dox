@@ -1,0 +1,40 @@
+/**
+
+@defgroup modulo_menu Módulo Menu
+
+Menú de entradas del proyecto
+
+@ingroup modulos_aplicacion
+@ingroup modulo_menu
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/menu/
+|-- alt
+|   |-- menuPrincipal-02.css
+|   `-- menuPrincipal-decagora.css
+|-- config
+|   |-- config_es.php
+|   `-- config.php
+|-- css
+|   |-- barraNavegacion.css
+|   |-- menu_botones.css
+|   `-- menuPrincipal.css
+|-- eventos_usuario.php
+|-- img
+|   |-- boton_activado.gif
+|   `-- boton_desactivado.gif
+|-- js
+|   `-- menu.js
+|-- lib
+|   `-- Menu.php
+`-- readme.dox
+
+6 directories, 13 files
+</pre>
+
+@} */

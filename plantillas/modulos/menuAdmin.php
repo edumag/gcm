@@ -3,8 +3,10 @@
 /**
  * @file {modulo}/menuAdmin.php
  * @brief Entradas para el menú administrativo
- *
+ * @defgroup menu_admin_{modulo} Menu admin para {Modulo}
+ * @ingroup menu_admin
  * @ingroup modulo_{modulo}
+ * @{
  */
 
 /** Administrar comentarios */

@@ -5,6 +5,7 @@
  * @brief Eventos para {modulo}
  * @defgroup eventos_{modulo} Eventos de {modulo}
  * @ingroup modulo_{modulo}
+ * @ingroup eventos
  * @{
  */
 

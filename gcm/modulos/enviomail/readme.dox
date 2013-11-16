@@ -1,0 +1,29 @@
+/**
+
+@defgroup modulo_enviomail Módulo Enviomail
+
+Envio de emails prsonalizados para el proyecto
+
+@ingroup modulos_aplicacion
+@ingroup modulo_enviomail
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/enviomail/
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- html
+|   |-- form_enviomail.html
+|   `-- mail.html
+|-- lib
+|   `-- Enviomail.php
+`-- readme.dox
+
+2 directories, 6 files
+</pre>
+
+@} */

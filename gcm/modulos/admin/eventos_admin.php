@@ -5,6 +5,7 @@
  * @brief Definimos eventos administrativos y acciones permitidas para usuario registrado
  * @defgroup eventos_admin Eventos de Admin
  * @ingroup modulo_admin
+ * @ingroup eventos
  * @{
  */
 

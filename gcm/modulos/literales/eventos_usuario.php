@@ -1,23 +1,19 @@
 <?php
 
 /**
- * Fichero plantilla para generar eventos de usuario
- *
- * formato:
- * $eventos['<evento>']['<acción>']="<prioridad>|<argumentos>";
- *
- * ejemplo:
- * $eventos['columna']['ultimas_entradas']="2|num=7&seccion=".Router::get_s()."&formato=1";
- *
- * @category Gcm
- * @package Modulos
- * @subpackage <nombre de módulo>
- * @author    <autor> <email>
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- * @version   SVN $Id: eventos_usuario.php 227 2010-04-22 08:56:35Z eduardo $ 
+ * @file literales/eventos_usuario.php
+ * @brief Eventos para literales
+ * @defgroup eventos_literales Eventos de literales
+ * @ingroup modulo_literales
+ * @ingroup eventos
+ * @{
  */
 
+
 if ( !isset($_SESSION['edit']) || $_SESSION['edit'] != 'si' ) {
+   /** Si no estamos editando procesamos texto */
    $eventos['postcontenido']['procesar_texto'][1] = '';
    }
+
+/** @} */
 ?>

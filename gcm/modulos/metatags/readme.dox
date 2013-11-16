@@ -1,0 +1,31 @@
+/**
+
+@defgroup modulo_metatags Módulo Metatags
+
+Configuración de los metatags de un proyecto
+
+@ingroup modulos_aplicacion
+@ingroup modulo_metatags
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/metatags/
+|-- config
+|   |-- config_ca.php
+|   |-- config_es.php
+|   `-- config.php
+|-- eventos_usuario.php
+|-- html
+|   `-- heads.html
+|-- lib
+|   `-- Metatags.php
+`-- readme.dox
+
+3 directories, 7 files
+</pre>
+
+@} */

@@ -1,0 +1,31 @@
+/**
+
+@defgroup modulo_editar Módulo Editar
+
+Presentamos editor web para contenido
+
+@ingroup modulos_aplicacion
+@ingroup modulo_editar
+
+@{
+
+Contenido
+---------
+
+<pre>
+
+|-- eventos_admin.php
+|-- html
+|   `-- form_insertar_email.html
+|-- js
+|   `-- generico.js
+|-- lib
+|   `-- Editar.php
+|-- menuAdmin.php
+`-- readme.dox
+
+3 directories, 6 files
+
+</pre>
+
+@} */

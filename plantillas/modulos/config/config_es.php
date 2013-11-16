@@ -5,6 +5,7 @@
  * @brief Descripciones en castellano para configuración para {Modulo}
  * @defgroup descripciones_configuracion_{modulo} Descripcions para la configuración de {Modulo}
  * @ingroup modulo_{modulo}
+ * @ingroup configuracion_{modulo}
  * @{
  */
 

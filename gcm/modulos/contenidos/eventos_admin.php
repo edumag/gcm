@@ -1,9 +1,12 @@
 <?php
 
 /**
- * @file Eventos administrativos para contenido
- *
- * @package Contenidos
+ * @file contenidos/eventos_admin.php
+ * @brief Eventos administrativos para contenidos
+ * @defgroup eventos_admin_contenidos Eventos administrativos de Contenidos
+ * @ingroup modulo_contenidos
+ * @ingroup eventos
+ * @{
  */
 
 /** 
@@ -98,5 +101,7 @@ $eventos['postejecutar_nuevo']['enrutar'][100]='';
 
 /** Editar contenido ya existente: Contenidos::editar() */
 $eventos['editar_contenido']['editar'][1]='';
+
+/** @} */
 
 ?>

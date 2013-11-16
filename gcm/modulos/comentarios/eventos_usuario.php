@@ -5,6 +5,7 @@
  * @brief Eventos para comentarios
  * @defgroup eventos_comentarios Eventos de comentarios
  * @ingroup modulo_comentarios
+ * @ingroup eventos
  * @{
  */
 

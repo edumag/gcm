@@ -1,0 +1,32 @@
+/**
+
+@defgroup modulo_literales Módulo Literales
+
+Administrar los literales de la aplicación
+
+@ingroup modulos_aplicacion
+@ingroup modulo_literales
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/literales/
+|-- css
+|   `-- panel_literales.css
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- js
+|   `-- literales.js
+|-- lib
+|   |-- LiteralesAdmin.php
+|   `-- Literales.php
+|-- menuAdmin.php
+`-- readme.dox
+
+3 directories, 8 files
+</pre>
+
+@} */

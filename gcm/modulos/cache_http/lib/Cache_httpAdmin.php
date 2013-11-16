@@ -3,12 +3,7 @@
 /**
  * @file Cache_httpAdmin.php
  * @brief Administración de módulo para generar cache de páginas
- */
-
-/**
- * @ingroup Cache_http
- * @ingroup Gcm
- * @{
+ * @ingroup modulo_cache_http
  */
 
 require_once dirname(__FILE__).'/Cache_http.php';
@@ -37,5 +32,4 @@ class Cache_httpAdmin extends Cache_http {
 
    }
 
-/** @} */
 ?>

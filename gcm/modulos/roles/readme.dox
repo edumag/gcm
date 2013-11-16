@@ -1,3 +1,7 @@
+/**
+
+@defgroup modulo_roles Módulo Roles
+
 El módulo "roles" nos permite definir diferentes roles a los usuarios, y
 definir las diferentes acciones que se permiten a cada rol.
 
@@ -20,3 +24,29 @@ Al crear un nuevo rol se genera su archivo correspondiente en la carpeta del
 proyecto con todos las acciones permitidas. Será necesario editarlo y quitar
 las que no queramos que ejecute.
 
+@ingroup modulos_aplicacion
+@ingroup modulo_roles
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/roles/
+|-- config
+|   |-- roles
+|   |   |-- editor.php
+|   |   `-- usuario.php
+|   `-- usuarios.php
+|-- eventos_admin.php
+|-- lib
+|   |-- RolesAdmin.php
+|   `-- Roles.php
+|-- menuAdmin.php
+`-- readme.dox
+
+3 directories, 8 files
+</pre>
+
+@} */
