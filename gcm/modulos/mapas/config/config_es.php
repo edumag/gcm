@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * @file mapas/config/config_es.php
+ * @brief Descripciones en castellano para configuración para Mapas
+ * @defgroup descripciones_configuracion_mapas Descripcions para la configuración de Mapas
+ * @ingroup modulo_mapas
+ * @ingroup configuracion_mapas
+ * @{
+ */
+
 $config_DESC['Mapas']['grupo']='Especifica nombre de mapa y sus caracteriscicas
 
 ';
@@ -15,4 +25,7 @@ $config_DESC['Marcadores']['latitud']='latitud';
 $config_DESC['Marcadores']['longitud']='longitud';
 $config_DESC['Marcadores']['icono']='icono';
 $config_DESC['Marcadores']['contenido']='Contenido del marcador al clicar sobre él';
+
+/** @} */
+
 ?>

@@ -6,7 +6,6 @@
  */
 
 require_once(dirname(__FILE__).'/Comentarios.php');
-require_once(dirname(__FILE__).'/Comentarios.php');
 
 /** 
  * @class ComentariosAdmin

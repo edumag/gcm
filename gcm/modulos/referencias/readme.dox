@@ -1,0 +1,27 @@
+/**
+
+@defgroup modulo_referencias Módulo Referencias
+
+Añadir referencias de enlaces externos en el contenido de una entrada
+
+@ingroup modulos_aplicacion
+@ingroup modulo_referencias
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/referencias/
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- lib
+|   `-- Referencias.php
+|-- menuAdmin.php
+`-- readme.dox
+
+1 directory, 5 files
+</pre>
+
+@} */

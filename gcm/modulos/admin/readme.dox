@@ -1,0 +1,36 @@
+/**
+
+@defgroup modulo_admin Módulo admin
+
+Módulo administrativo
+
+@ingroup modulos_aplicacion
+@ingroup modulo_admin
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- alt                  Alternativas a los archivos por defecto
+|-- config               Configuración por defecto
+|-- css                  css por defecto
+|-- eventos_admin.php    Eventos de administración
+|-- eventos_usuario.php  Eventos de usuario
+|-- ext                  Librerías externas
+|-- html                 Plantillas
+|-- iconos               Iconos
+|-- img                  Imágenes
+|-- js                   Javascripts
+|-- lib                  
+|   -- Modulo.php       Clase del módulo
+|   -- ModuloAdmin.php  Clase que extiende de Modulo con métodos administrativos 
+|-- libjs               Librerías js propias
+|-- menuAdmin.php       Entradas del menú administrativo
+|-- modelos             Modelos para Crud
+`-- readme.dox          Este archivo
+</pre>
+
+
+@} */

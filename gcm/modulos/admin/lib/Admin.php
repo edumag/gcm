@@ -2,24 +2,23 @@
 
 /**
  * @file Admin.php
- *
+ * @brief Módulo Admin
+ * 
+ * @ingroup modulo_admin
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  23/11/09
- *  Revision  SVN $Id: Admin.php 660 2012-11-01 19:37:28Z eduardo $
  * Copyright  Copyright (c) 2009, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
  *
- * @todo Hacer limpieza, se pueden eliminar métodos en desuso
  */
 
 /**
  * @class Admin
  * @brief Administración de proyectos
- * @version 0.1
+ * @todo Hacer limpieza, se pueden eliminar métodos en desuso
  */
 
 class Admin extends Modulos {
@@ -305,7 +304,6 @@ class Admin extends Modulos {
     *  $menuAdmin['Archivo']['boton']['borrar_documento']['title']="Borrar documento actual";
     *  $menuAdmin['Archivo']['boton']['borrar_documento']['link']="?e=borrar_documento";
     *
-    * @author Eduardo Magrané
     */
 
    function presentar_menu_administrativo() {

@@ -1,0 +1,40 @@
+/**
+
+@defgroup modulo_descargables Módulo Descargables
+
+Presentamos archivos de código y permitimos descargarlos
+
+@ingroup modulos_aplicacion
+@ingroup modulo_descargables
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- config.php
+|-- css
+|   |-- descargables.css
+|   `-- geshi.css
+|-- eventos_usuario.php
+|-- geshicss
+|   |-- dawn.css
+|   |-- mac-classic.css
+|   |-- twilight.css
+|   `-- vibrant-ink.css
+|-- html
+|   |-- codigo_decorado.html
+|   |-- descargables.html
+|   `-- presentar_codigo.html
+|-- js
+|   `-- descargables.js
+|-- lib
+|   `-- Descargables.php
+`-- readme.dox
+
+5 directories, 14 files
+
+</pre>
+
+@} */

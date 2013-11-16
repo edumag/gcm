@@ -1,0 +1,28 @@
+/**
+
+@defgroup modulo_contenidos Módulo Contenidos
+
+Gestiona el contenido del proyecto, permitiendo añadir, editar, borrar y modificar las entradas
+
+@ingroup modulos_aplicacion
+@ingroup modulo_contenidos
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- config               Configuración por defecto
+|-- css                  css por defecto
+|-- eventos_admin.php    Eventos de administración
+|-- eventos_usuario.php  Eventos de usuario
+|-- html                 Plantillas
+|-- lib                  
+|   -- Contenidos.php       Clase del módulo
+|   -- ContenidosAdmin.php  Clase que extiende de Modulo con métodos administrativos 
+|-- menuAdmin.php       Entradas del menú administrativo
+`-- readme.dox          Este archivo
+</pre>
+
+@} */

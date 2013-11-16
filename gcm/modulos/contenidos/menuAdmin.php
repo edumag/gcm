@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * @file contenidos/menuAdmin.php
+ * @brief Entradas para el menú administrativo
+ * @defgroup menu_admin_contenidos Menu admin para Contenidos
+ * @ingroup menu_admin
+ * @ingroup modulo_contenidos
+ * @{
+ */
+
+
 /** Configuración para el menú administrativo */
 
 if ( permiso('editar','contenidos') ) {
@@ -59,6 +69,8 @@ $menuAdmin['Contenidos']     ['peso'] = -10;
 $menuAdmin['Administración'] ['peso'] = -8;
 $menuAdmin['Configuración']  ['peso'] = -6;
 $menuAdmin['Seguimiento']    ['peso'] = -4;
+
+/** @} */
 
 ?>
 

@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * @file metatags/config/config.php
+ * @brief Configuración Metatags
+ * @defgroup configuracion_metatags Configuración para Metatags
+ * @ingroup modulo_metatags
+ * @{
+ */
+
 $config['title'] = 'Gcm';
 $config['author'] = 'Eduardo Magrané';
 $config['subject'] = 'Gestor de Contenido Gcm';
@@ -9,4 +18,7 @@ $config['language'] = 'spanish';
 $config['revisit'] = '1 day';
 $config['distribution'] = 'global';
 $config['robots'] = 'all';
+
+/** @} */
+
 ?>

@@ -1,18 +1,12 @@
 <?php
 
 /**
- * @file      eventos_usuario.php
- * @brief     Eventos de administración para literales
- *
- * @author    Eduardo Magrané 
- *
- * @internal
- *   Created  25/11/09
- *  Revision  SVN $Id: eventos_admin.php 414 2010-11-30 08:55:42Z eduardo $
- * Copyright  Copyright (c) 2009, Eduardo Magrané
- *
- * This source code is released for free distribution under the terms of the
- * GNU General Public License as published by the Free Software Foundation.
+ * @file literales/eventos_admin.php
+ * @brief Eventos administrativos para literales
+ * @defgroup eventos_admin_literales Eventos administrativos de Literales
+ * @ingroup modulo_literales
+ * @ingroup eventos
+ * @{
  */
 
 /** Panel para acceder de forma rapida a los literales */
@@ -24,12 +18,20 @@ $eventos['columna']['panel_literales'][5] = '';
 /** Borrar literales despues renombrar una sección */
 //$eventos['postejecutar_mover_seccion']['borrar_literal_seccion'][5] = '';
 
+
 /**
- * Configuración para los permisos de usuario
- *
- * permitimos administrar literales a editores y traductores
+ * @defgroup permisos_literales Permisos desde el módulo Literales
+ * @ingroup modulo_literales
+ * @ingroup permisos_usuarios
+ * @{
  */
 
+/** Permitimos administrar literales a editores */
 $acciones['literales']['panel_literales'][] = 'editor';
+
+/** Permitimos administrar literales a traductores */
 $acciones['literales']['panel_literales'][] = 'traductor';
 
+/** @} */
+
+?>

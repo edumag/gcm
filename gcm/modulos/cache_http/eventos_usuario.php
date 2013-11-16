@@ -1,32 +1,25 @@
 <?php
 
 /**
- * @file  eventos_usuario.php
- * @brief Eventos de usuario para módulo Cache_http
- *
- * formato:
- * @code
- * $eventos[evento][acción][prioridad] = "argumentos";
- * @endcode
- *
- * ejemplo:
- * @code
- * $eventos['columna']['ultimas_entradas'][2] = "num=7&seccion=".Router::get_s()."&formato=1";
- * @endcode
- *
- * @ingroup Cache_http
- *
- * @author   Eduardo Magrané eduardo@mamedu.com
- * @internal
- *   license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- *   version   SVN $Id: eventos_usuario.php 182 2010-02-26 15:11:50Z eduardo $ 
+ * @file cache_http/eventos_usuario.php
+ * @brief Eventos para cache_http
+ * @defgroup eventos_cache_http Eventos de cache_http
+ * @ingroup modulo_cache_http
+ * @ingroup eventos
+ * @{
  */
 
-/**
- * Eventos de usuario
- */
+/** Antes de cargar la pagina comprobamos si tenemos cache */
 
 $eventos['precarga']['alInicio'][1] = '';
+
+/** Después de cargar la pagina guardamos en cache */
+
 $eventos['postcarga']['alFinal'][1] = '';
+
+/** Borramos la cache */
+
 $eventos['borrar_cache']['borrar'][1] = 'todo';
+
+/** @} */
 ?>

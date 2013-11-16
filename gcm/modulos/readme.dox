@@ -1,0 +1,69 @@
+/**
+
+Documentación para el desarrollo con GCM
+
+@defgroup permisos_usuarios Permisos para los roles de usuario
+
+### eventos_usuario.php eventos_admin.php
+
+#### Configuración de los permisos de usuarios
+
+Permisos para los diferentes roles
+
+Un ejemplo desde el archivo eventos_admin.php de Editar
+
+@code
+/** Permitimos editar cualquier contenido a editor */
+$acciones['editar']['editar_contenido'][] = 'editor';
+@endcode
+
+@{ @}
+
+@defgroup eventos Eventos
+@ingroup modulos_aplicacion
+
+### eventos_usuario.php eventos_admin.php
+
+#### Configuración de los eventos
+
+formato:
+
+@code
+$eventos['<evento>']['<acción>'][<prioridad>] = "<argumentos>";
+@endcode
+
+ejemplo:
+
+@code
+$eventos['columna']['ultimas_entradas'][2] = "num=7&seccion=".Router::get_s()."&formato=1";
+@endcode
+
+@{ @}
+
+@defgroup menu_admin Menu Administrativo
+@ingroup modulos_aplicacion
+
+## menu_admin.php
+
+Configuración de las entradas para el menú administrativo
+
+Formato:
+
+@code
+$menuAdmin['<Sección del menú>']['<tipo>']['<literal>']['activado']= <prioridad>;
+$menuAdmin['<Sección del menú>']['<tipo>']['<literal>']['title']="<Descripción>";
+$menuAdmin['<Sección del menú>']['<tipo>']['<literal>']['link']="<Enlace>";
+@endcode
+
+Ejemplo:
+
+@code
+$menuAdmin['Archivo']['boton']['Borrar documento']['activado'] = ( $gcm->presentar_contenido && is_file( Router::get_f() ) ) ? 1 : 0;
+$menuAdmin['Archivo']['boton']['Borrar documento']['title']="Borrar documento actual";
+$menuAdmin['Archivo']['boton']['Borrar documento']['link']=Router::get_dir().Router::get_url()."?e=peticion_borrado";
+@endcode
+
+
+@{ @}
+
+*/

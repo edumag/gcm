@@ -3,7 +3,7 @@
 /**
  * @file comentarios/config/config_es.php
  * @brief Descripciones en castellano para configuración para comentarios
- * @defgroup descripciones_comentarios Descripcions para la configuración de comentarios
+ * @defgroup descripciones_configuracion_comentarios Descripcions para la configuración de comentarios
  * @ingroup modulo_comentarios
  * @{
  */

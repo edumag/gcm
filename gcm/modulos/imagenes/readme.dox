@@ -1,0 +1,56 @@
+/**
+
+@defgroup modulo_imagenes Módulo Imágenes
+
+Gestión de las imágenes
+
+@ingroup modulos_aplicacion
+@ingroup modulo_imagenes
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/imagenes/
+|-- config
+|   |-- config_ca.php
+|   |-- config_es.php
+|   `-- config.php
+|-- css
+|   |-- colorbox.css
+|   |-- galeria.css
+|   |-- jquery.fileupload-ui.css
+|   `-- thickbox.css
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- html
+|   |-- columna.phtml
+|   `-- contenido.phtml
+|-- img
+|   |-- controls.png
+|   `-- loadingAnimation.gif
+|-- js
+|   |-- aplicar_colorbox.js
+|   `-- imagenes.js
+|-- lib
+|   |-- ImagenesAdmin.php
+|   |-- Imagenes.php
+|   |-- presentar_galeria.php
+|   `-- UploadHandler.php
+|-- libjs
+|   |-- jquery.colorbox.js
+|   |-- jquery.fileupload.js
+|   |-- jquery.fileupload-ui.js
+|   |-- jquery.iframe-transport.js
+|   `-- jquery.ui.widget.js
+|-- menuAdmin.php
+|-- readme.dox
+`-- scripts
+    `-- crear_galeria.sh
+
+8 directories, 27 files
+</pre>
+
+@} */

@@ -34,7 +34,22 @@
     color: rgb(255, 255, 255);
     font-family: monospace;
     margin: 2px;
+    height: 15px;
+    overflow: auto;
+  -moz-transition-duration:.3s;
+  -webkit-transition-duration:.3s;
+  -o-transition-duration:.3s;
+  transition-duration:.3s;
 }
+
+.fila_unica div:hover {
+   height: 200px;
+  -moz-transition-duration:.3s;
+  -webkit-transition-duration:.3s;
+  -o-transition-duration:.3s;
+  transition-duration:.3s;
+}
+
 .details {
     float: right;
     padding-top: 12px;

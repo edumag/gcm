@@ -1,10 +1,13 @@
 <?php
 
 /**
- * @file eventos_usuario.php
- * @brief Eventos para imágenes
+ * @file imagenes/eventos_usuario.php
+ * @brief Eventos para imagenes
+ * @defgroup eventos_imagenes Eventos de imagenes
+ * @ingroup modulo_imagenes
+ * @ingroup eventos
+ * @{
  */
-
 
 /**
  * Enlazamos las imágenes a la galería
@@ -17,5 +20,7 @@
  */
 
 $eventos['postcontenido']['imagenes2thickbox'][3] = '';
+
+/** @} */
 
 ?>

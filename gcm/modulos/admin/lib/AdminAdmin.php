@@ -4,15 +4,14 @@
  * @file AdminAdmin.php
  * @brief Métodos administrativos para el módulo admin
  *
- * @package modulos
+ * @ingroup modulo_admin
  */
 
 require_once(dirname(__FILE__).'/Admin.php');
 
 /**
  * @class AdminAdmin
- * @brief Administración de proyectos
- * @version 0.1
+ * @brief Administración de la administración de proyectos
  */
 
 class AdminAdmin extends Admin {

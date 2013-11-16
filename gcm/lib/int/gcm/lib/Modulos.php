@@ -4,8 +4,6 @@
  * @file      Modulos.php
  * @brief     Clase abstracta para módulos
  *
- * @package Modulos Módulos
- *
  * Todos los módulos de gcm deben heredar de está clase para tener todas las funcionalidades
  * disponibles.
  *

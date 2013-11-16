@@ -1,0 +1,31 @@
+/**
+
+@defgroup modulo_cache_http Módulo Cache_http
+
+Cache para paginas completas y variables
+
+@see GcmCache
+
+@ingroup modulos_aplicacion
+@ingroup modulo_cache_http
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- js
+|   `-- cache_http.js
+|-- lib
+|   |-- Cache_httpAdmin.php
+|   `-- Cache_http.php
+`-- menuAdmin.php
+
+2 directories, 6 files
+
+</pre>
+
+@} */

@@ -3,6 +3,7 @@
 /**
  * @file aplicar_SEO.php
  * @brief Módulo para facilitar la tarea de SEO
+ * @ingroup modulo_aplicar_SEO
  *
  * @author     Eduardo Magrané eduardo@mamedu.com
  *

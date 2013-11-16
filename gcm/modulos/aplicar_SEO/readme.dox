@@ -1,0 +1,26 @@
+/**
+
+@defgroup modulo_aplicar_SEO Módulo Aplicar_SEO
+
+Descripción del módulo
+
+@ingroup modulos_aplicacion
+@ingroup modulo_aplicar_SEO
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- eventos_admin.php   Eventos de administración
+|-- html                Plantillas
+|   -- info.phtml       Información 
+|-- lib                  
+|   -- Modulo.php       Clase del módulo
+|   -- ModuloAdmin.php  Clase que extiende de Modulo con métodos administrativos 
+|-- menuAdmin.php       Entradas del menú administrativo
+`-- readme.dox          Este archivo
+</pre>
+
+@} */

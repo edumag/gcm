@@ -2,6 +2,9 @@
 
 @defgroup modulo_mapas Módulo Mapas
 
+@ingroup modulos_aplicacion
+@ingroup modulo_mapas
+
 @{
 
 @ingroup modulos_aplicacion

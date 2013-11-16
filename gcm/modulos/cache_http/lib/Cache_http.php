@@ -4,30 +4,21 @@
  * @file Cache_http.php
  * @brief Módulo para generar cache de páginas
  *
+ * @ingroup modulo_cache_http
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  23/11/09
- *  Revision  SVN $Id: modulo.php 182 2010-02-26 15:11:50Z eduardo $
- * Copyright  Copyright (c) 2009, Eduardo Magrané
+ * Copyright  Copyright (c) 2011, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
- */
-
-/**
- * @defgroup Cache_http Cache para páginas
- * @ingroup Gcm
- * @{
  */
 
 require_once GCM_DIR.'lib/int/GcmCache.php';
 
 /**
  * @class Cache_http
- * @brief Cache http
- *
- * @version 0.1
+ * @brief Cache para paginas y variables
  */
 
 class Cache_http extends Modulos {
@@ -245,5 +236,4 @@ class Cache_http extends Modulos {
 
    }
 
-/** @} */
 ?>

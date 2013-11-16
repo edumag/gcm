@@ -1,0 +1,48 @@
+/**
+
+@defgroup modulo_indexador Módulo Indexador
+
+Indexamos las entradas en base de datos para poder tener un listado de las mismas
+y un buscador.
+
+@ingroup modulos_aplicacion
+@ingroup modulo_indexador
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/indexador/
+|-- config
+|   |-- config_es.php
+|   `-- config.php
+|-- css
+|   |-- botonera.css
+|   |-- busquedas.css
+|   |-- caja_buscar.css
+|   |-- listado_contenidos.css
+|   `-- ultimas_entradas.css
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- html
+|   |-- botonera_paginador.html
+|   |-- caja_buscar.html
+|   |-- elemento_lista_indexar.html
+|   |-- listado_columna.html
+|   `-- listado_contenido.html
+|-- info.php
+|-- js
+|   |-- indexador.js
+|   |-- listado_reindexado.js
+|   `-- reindexador_completo.js
+|-- lib
+|   `-- Indexador.php
+|-- menuAdmin.php
+`-- readme.dox
+
+5 directories, 21 files
+</pre>
+
+@} */

@@ -1,0 +1,29 @@
+/**
+
+@defgroup modulo_gdoxygen Módulo Gdoxygen
+
+Adaptación de la documentación generada por doxygen
+
+@ingroup modulos_aplicacion
+@ingroup modulo_gdoxygen
+
+@{
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/gdoxygen/
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- js
+|   `-- busquedas.js
+|-- lib
+|   |-- Gdoxygen.php
+|   `-- search_doxygen.php
+`-- readme.dox
+
+2 directories, 6 files
+</pre>
+
+@} */

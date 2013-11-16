@@ -1,0 +1,27 @@
+/**
+
+@defgroup modulo_widgets Módulo Widgets
+
+Porciones de codigo que podemos añadir a un evento o a un shorcode
+
+@ingroup modulos_aplicacion
+@ingroup modulo_widgets
+
+@{
+
+Contenido
+---------
+
+<pre>
+
+|-- eventos_usuario.php
+|-- index.php
+|-- lib
+|   -- Widgets.php
+-- readme.dox
+
+1 directory, 4 files
+
+</pre>
+
+@} */
