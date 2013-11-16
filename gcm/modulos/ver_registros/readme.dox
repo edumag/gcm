@@ -29,4 +29,11 @@ Contenido
 3 directories, 9 files
 </pre>
 
+@}
+@defgroup plantilla_ver_registros Plantillas pata Ver_registros
+@ingroup modulo_ver_registros
+@ingroup plantillas_modulos
+@{
+
 @} */
+

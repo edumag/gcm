@@ -32,5 +32,11 @@ Contenido
 `-- readme.dox          Este archivo
 </pre>
 
+@defgroup plantilla_admin Plantillas pata Admin
+@ingroup modulo_admin
+@ingroup plantillas_modulos
+@{
+
+@}
 
 @} */

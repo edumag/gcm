@@ -18,4 +18,11 @@ Configuración
 
 - Número paginación: Número de comentarios que se muestran en cada página.
 
+@}
+
+@defgroup plantilla_comentarios Plantillas pata Comentarios
+@ingroup modulo_comentarios
+@ingroup plantillas_modulos
+@{
+
 @} */

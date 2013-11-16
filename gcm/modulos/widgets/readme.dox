@@ -24,4 +24,11 @@ Contenido
 
 </pre>
 
+@}
+
+@defgroup plantilla_widgets Plantillas pata Widgets
+@ingroup modulo_widgets
+@ingroup plantillas_modulos
+@{
+
 @} */

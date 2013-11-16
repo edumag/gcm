@@ -1,9 +1,22 @@
 /**
 
 @ingroup librerias
+
 @defgroup librerias Librerías internas
 
 @{
+
+En GCM tenemos librerías que pueden ser utilizadas de forma independiente en otros 
+proyectos que no esten gestionados por GCM.
+
+@}
+
+@defgroup plantilla_libreria Plantillas de las librería
+@ingroup librerias
+@{
+
+Las plantillas utilizadas por las librerías se pueden reemplazar por plantillas propias
+desde la configuración de la librería.
 
 @}
 */

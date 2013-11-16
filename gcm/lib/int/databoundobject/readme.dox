@@ -1,9 +1,6 @@
 /**
 
-@file readme.dox
-@brief CRUD
-
-@defgroup crud CRUD Create, update and delete 
+@defgroup crud CRUD Automatización de la gestión de datos
 
 Automatización de la gestión de la base de datos. Creación, modificación y borrado de registros
 
@@ -134,4 +131,12 @@ filtro.
 
 @}
 
+@defgroup plantilla_crud Plantillas para Crud
+@ingroup plantilla_libreria
+@ingroup crud
+@{
+
+Las plantillas para CRUD puede ser personalizadas
+
+@}
 */

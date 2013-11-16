@@ -54,3 +54,10 @@ gcm/modulos/imagenes/
 </pre>
 
 @} */
+
+@defgroup plantilla_imagenes Plantillas pata Imagenes
+@ingroup modulo_imagenes
+@ingroup modulos_aplicacion
+@{
+
+@}

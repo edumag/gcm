@@ -29,4 +29,11 @@ gcm/modulos/literales/
 3 directories, 8 files
 </pre>
 
+@}
+
+@defgroup plantilla_literales Plantillas pata Literales
+@ingroup modulo_literales
+@ingroup plantillas_modulos
+@{
+
 @} */

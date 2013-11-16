@@ -7,8 +7,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  05/05/10
- *  Revision  SVN $Id: DataBoundObject.php 648 2012-09-17 17:26:34Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the

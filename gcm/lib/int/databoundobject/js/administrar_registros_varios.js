@@ -2,6 +2,12 @@
  * @file administrar_registros_varios.js
  * @brief Script para facilitar la administración de registros varios 
  *        relacionados con un padre.
+ * @ingroup crud
+ */
+
+/**
+ * Mecanismo para facilitar la gestión de registros vinculados 
+ * a otro registro
  */
 
 function Administrar_registros_varios(identificador, total_registros) {

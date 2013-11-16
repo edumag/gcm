@@ -66,4 +66,16 @@ $menuAdmin['Archivo']['boton']['Borrar documento']['link']=Router::get_dir().Rou
 
 @{ @}
 
+@defgroup plantillas_modulos Plantillas de los módulos
+@ingroup modulos_aplicacion
+@{
+
+Las plantillas de los módulos son fácilmente personalizables desde los temas, simplemente
+copiando la plantilla y llevándola al tema que queramos podremos personalizarla.
+
+GCM se encarga de comprobar si el tema actual tiene una plantilla definida y si es así la coge
+a cambio de la del propio módulo.
+
+
+@}
 */

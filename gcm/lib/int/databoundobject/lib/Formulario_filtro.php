@@ -2,7 +2,7 @@
 
 /**
  * @file      Formulario_filtro.php
- * @brief     Generardor de formularios
+ * @brief     Generardor de filtros
  *
  * @author    Eduardo Magrané 
  *

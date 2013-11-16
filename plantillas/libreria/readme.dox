@@ -1,0 +1,23 @@
+/**
+
+@defgroup {libreria} Librería
+
+{Descripción conrta}
+
+@ingroup librerias
+
+@{
+
+{Documentación}
+
+@}
+
+@defgroup plantilla_{libreria} Plantillas para {Libreria}
+@ingroup plantilla_libreria
+@ingroup {libreria}
+@{
+
+Las plantillas para CRUD puede ser personalizadas
+
+@}
+*/

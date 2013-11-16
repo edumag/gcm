@@ -1,11 +1,14 @@
 <?php
 
-/** @file Formas de evitar el spam
- *
+/** 
+ * @file captcha.php
+ * @brief Formas de evitar el spam
+ * @defgroup captcha Captcha para evitar spam
+ * @ingroup librerias
  * Fem un camp de formulari amb un nom aleatori amb el valor de la data actual
  * per despres comparar amb el temps de resposte i sapiguer si es molt curt, possiblement
  * es tracti de una màquina
- *
+ * @{
  */
 
 /** Afegir camp de captcha al formulari
@@ -127,4 +130,6 @@ function verificarCaptchaImagen(){
    return TRUE;
 
 }
+
+/** @} */
 ?>

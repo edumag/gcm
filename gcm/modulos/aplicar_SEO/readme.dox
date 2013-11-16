@@ -23,4 +23,11 @@ Contenido
 `-- readme.dox          Este archivo
 </pre>
 
+@}
+
+@defgroup plantilla_aplicar_SEO Plantillas pata Aplicar_SEO
+@ingroup modulo_aplicar_SEO
+@ingroup plantillas_modulos
+@{
+
 @} */

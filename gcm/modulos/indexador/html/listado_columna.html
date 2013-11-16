@@ -1,3 +1,12 @@
+<?php
+
+/** 
+ * @file listado_columna.html
+ * @brief Listado de contenido
+ * @ingroup plantilla_indexador
+ */
+
+ ?>
 <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
 
 <?php $caminos = explode('/',$fila->url); ?>

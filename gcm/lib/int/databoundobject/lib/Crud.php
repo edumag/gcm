@@ -7,8 +7,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  09/02/11
- *  Revision  SVN $Id: $
  * Copyright  Copyright (c) 2011, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -42,6 +40,7 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
  *
+ * @ingroup crud
  */
 
 class Crud extends DataBoundObject {

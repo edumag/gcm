@@ -3,12 +3,9 @@
 /**
  * @file      Array2table.php
  * @brief     Pasar contenido de un array a tabla
- *
- * @author    Eduardo Magrané 
+ * @ingroup array2table
  *
  * @internal
- *   Created  07/05/10
- *  Revision  SVN $Id: Array2table.php 650 2012-10-04 07:17:48Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -17,6 +14,7 @@
 
 /** 
  * Transformar contenido array en tabla html
+ * @ingroup array2table
  */
 
 class Array2table {

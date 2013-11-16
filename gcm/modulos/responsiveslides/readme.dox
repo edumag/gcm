@@ -63,4 +63,11 @@ gcm/modulos/responsiveslides/
 5 directories, 10 files
 </pre>
 
+@}
+
+@defgroup plantilla_responsiveslides Plantillas pata Responsiveslides
+@ingroup modulo_responsiveslides
+@ingroup plantillas_modulos
+@{
+
 @} */

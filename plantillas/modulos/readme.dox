@@ -45,5 +45,13 @@ Ejemplo para el envio de emails en el módulo Enviomails
 $this->set_lista_blanca('enviomail','enviar_email');
 @endcode
 
- /** @} */
-@} */
+@}
+
+@defgroup plantilla_{modulo} Plantillas pata {Modulo}
+@ingroup modulo_{modulo}
+@ingroup plantillas_modulos
+@{
+
+@} 
+
+*/
