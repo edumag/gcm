@@ -1,3 +1,12 @@
+<?php
+
+/** 
+ * @file caja_buscar.html
+ * @brief Caja con formulario busqueda
+ * @ingroup plantilla_indexador
+ */
+
+ ?>
 <form id='form_busqueda' class="quick_search" method='get' action="<?php echo $_SERVER['PHP_SELF']; ?>">
    <input type="text" name="buscar" value="<?php echo literal('Buscar');?>" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
    <input type="hidden" name="proyectos_id" value="<?php if ( isset($_GET['proyectos_id']) ) echo $_GET['proyectos_id'];?>" />

@@ -28,4 +28,11 @@ gcm/modulos/metatags/
 3 directories, 7 files
 </pre>
 
+@}
+
+@defgroup plantilla_metatags Plantillas pata Metatags
+@ingroup modulo_metatags
+@ingroup plantillas_modulos
+@{
+
 @} */

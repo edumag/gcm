@@ -49,4 +49,11 @@ gcm/modulos/roles/
 3 directories, 8 files
 </pre>
 
+@}
+
+@defgroup plantilla_roles Plantillas pata Roles
+@ingroup modulo_roles
+@ingroup plantillas_modulos
+@{
+
 @} */

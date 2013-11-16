@@ -25,4 +25,11 @@ Contenido
 `-- readme.dox          Este archivo
 </pre>
 
+@}
+
+@defgroup plantilla_contenidos Plantillas pata Contenidos
+@ingroup modulo_contenidos
+@ingroup plantillas_modulos
+@{
+
 @} */

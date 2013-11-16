@@ -24,4 +24,11 @@ gcm/modulos/referencias/
 1 directory, 5 files
 </pre>
 
+@}
+
+@defgroup plantilla_referencias Plantillas pata Referencias
+@ingroup modulo_referencias
+@ingroup plantillas_modulos
+@{
+
 @} */

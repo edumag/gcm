@@ -41,4 +41,11 @@ gcm/modulos/idiomas/
 5 directories, 17 files
 </pre>
 
+@}
+
+@defgroup plantilla_idiomas Plantillas pata Idiomas
+@ingroup modulo_idiomas
+@ingroup plantillas_modulos
+@{
+
 @} */

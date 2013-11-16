@@ -3,6 +3,7 @@
 /**
  * @file Autentificacion.php
  * @brief Sistema de autentificación de usuarios.
+ * @ingroup autentificacion
  *
  * Sistema basado en roles de usuario.
  * 
@@ -17,6 +18,7 @@
 
 /**
  * @defgroup autentificacion Autentificación
+ * @ingroup autentificacion
  * @ingroup usuarios
  * @{
  */
@@ -75,6 +77,7 @@ class Autentificacion {
          $this->crear_admin_defecto();
 
       }
+
    /**
     * Existe tabla
     */

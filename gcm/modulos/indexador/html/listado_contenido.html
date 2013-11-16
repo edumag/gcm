@@ -1,3 +1,12 @@
+<?php
+
+/** 
+ * @file listado_contenido.html
+ * @brief Listado de contenido
+ * @ingroup plantilla_contenido
+ */
+
+ ?>
 <div id='listado_de_contenido' >
    <?php while($fila = $this->resultado->fetch(PDO::FETCH_OBJ)) { ?>
    <?php $url = GUtil::gcm_generar_url($fila->url) ?>

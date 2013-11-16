@@ -26,4 +26,11 @@ gcm/modulos/enviomail/
 2 directories, 6 files
 </pre>
 
+@}
+
+@defgroup plantilla_enviomail Plantillas pata Enviomail
+@ingroup modulo_enviomail
+@ingroup plantillas_modulos
+@{
+
 @} */

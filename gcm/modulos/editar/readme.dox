@@ -28,4 +28,11 @@ Contenido
 
 </pre>
 
+@}
+
+@defgroup plantilla_editar Plantillas pata Editar
+@ingroup modulo_editar
+@ingroup plantillas_modulos
+@{
+
 @} */

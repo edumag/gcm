@@ -45,4 +45,11 @@ gcm/modulos/indexador/
 5 directories, 21 files
 </pre>
 
+@}
+
+@defgroup plantilla_indexador Plantillas pata Indexador
+@ingroup modulo_indexador
+@ingroup plantillas_modulos
+@{
+
 @} */

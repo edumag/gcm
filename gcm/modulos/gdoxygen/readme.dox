@@ -26,4 +26,11 @@ gcm/modulos/gdoxygen/
 2 directories, 6 files
 </pre>
 
+@}
+
+@defgroup plantilla_gdoxygen Plantillas pata Gdoxygen
+@ingroup modulo_gdoxygen
+@ingroup plantillas_modulos
+@{
+
 @} */

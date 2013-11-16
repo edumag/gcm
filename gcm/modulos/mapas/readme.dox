@@ -51,4 +51,11 @@ https://developers.google.com/maps/documentation/javascript/reference?hl=es-ES#M
 
 
 
+@}
+
+@defgroup plantilla_mapas Plantillas pata Mapas
+@ingroup modulo_mapas
+@ingroup plantillas_modulos
+@{
+
 @} */

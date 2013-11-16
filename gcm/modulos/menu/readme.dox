@@ -37,4 +37,11 @@ gcm/modulos/menu/
 6 directories, 13 files
 </pre>
 
+@}
+
+@defgroup plantilla_menu Plantillas pata Menu
+@ingroup modulo_menu
+@ingroup plantillas_modulos
+@{
+
 @} */

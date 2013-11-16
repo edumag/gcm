@@ -37,4 +37,11 @@ Contenido
 
 </pre>
 
+@}
+
+@defgroup plantilla_descargables Plantillas pata Descargables
+@ingroup modulo_descargables
+@ingroup plantillas_modulos
+@{
+
 @} */

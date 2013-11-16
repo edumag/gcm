@@ -1,6 +1,7 @@
 /**
  * @file array2table.js
  * @brief Javascript para Array2table
+ * @ingroup array2table
  */
 
 /**

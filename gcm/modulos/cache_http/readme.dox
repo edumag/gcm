@@ -28,4 +28,11 @@ Contenido
 
 </pre>
 
+@}
+
+@defgroup plantilla_cache_http Plantillas pata Cache_http
+@ingroup modulo_cache_http
+@ingroup plantillas_modulos
+@{
+
 @} */

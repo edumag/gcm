@@ -126,4 +126,13 @@ Contenido
 8 directories, 101 files
 </pre>
 
-@} */
+@}
+
+@defgroup plantilla_temas Plantillas pata Temas
+@ingroup modulo_temas
+@ingroup plantillas_modulos
+@{
+
+@}
+*/
+
