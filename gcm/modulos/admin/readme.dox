@@ -2,12 +2,17 @@
 
 @defgroup modulo_admin Módulo admin
 
+Módulo administrativo
+
 @ingroup modulos_aplicacion
 @ingroup modulo_admin
+
+@{
 
 Contenido
 ---------
 
+<pre>
 |-- alt                  Alternativas a los archivos por defecto
 |-- config               Configuración por defecto
 |-- css                  css por defecto
@@ -25,7 +30,7 @@ Contenido
 |-- menuAdmin.php       Entradas del menú administrativo
 |-- modelos             Modelos para Crud
 `-- readme.dox          Este archivo
+</pre>
 
-11 directories, 5 files
 
 @} */

@@ -1,16 +1,18 @@
 <?php
 
-/** Eventod de módulo menu
- *
- * @package   menu
- * @category  Modulos
- * @author    Eduardo Magrané <eduardo mamedu com>
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- * @version   SVN $Id: eventos_usuario.php 126 2009-11-24 22:20:10Z eduardo $ 
- *
+/**
+ * @file menu/eventos_usuario.php
+ * @brief Eventos para menu
+ * @defgroup eventos_menu Eventos de menu
+ * @ingroup modulo_menu
+ * @ingroup eventos
+ * @{
  */
 
+/** Menú principal */
 $eventos['cabecera']['menu_principal'][0] = '';
+
+/** Menú para la barra de navegación */
 $eventos['columna']['barra_navegacion'][1] = '';
 
 // añadimos metodo menu_ajax a la lista blanca, para que no se necesiten 
@@ -18,5 +20,7 @@ $eventos['columna']['barra_navegacion'][1] = '';
 
 $this->set_lista_blanca('menu','menu_ajax');
 $this->set_lista_blanca('menu','menu_ajax_off');
+
+/** @} */
 
 ?>
