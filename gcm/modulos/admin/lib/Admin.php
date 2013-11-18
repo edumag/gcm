@@ -544,6 +544,7 @@ class Admin extends Modulos {
 
          require_once(dirname(__FILE__).'/../modelos/usuarios.php');
          $usuarios = new Usuarios($gcm->pdo_conexion());
+         $usuarios->url_formulario = "?m=admin&a=usuarios";
          $usuarios->administrar(FALSE,FALSE,FALSE,TRUE);
 
          return;
