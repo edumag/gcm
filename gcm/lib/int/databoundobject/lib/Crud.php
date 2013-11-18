@@ -256,7 +256,7 @@ class Crud extends DataBoundObject {
     * pordefecto es $_SERVER["REDIRECT_URL"] 
     */
 
-   protected $url_formulario = FALSE;
+   public $url_formulario = FALSE;
 
    /**
     * Podemos definir un metodo personalizado para la visualización de los registros 
@@ -1305,7 +1305,7 @@ class Crud extends DataBoundObject {
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
-         <form id="crud" name="crud" action="<?php if ( isset($_SERVER['PHP_SELF']) ) echo $_SERVER['PHP_SELF'];?>" method="post">
+         <form id="crud" name="crud" action="<?php if ( $this->url_formulario ) echo $this->url_formulario;?>" method="post">
          <input type="hidden" name="url_formulario" value="<?php echo ( isset($_SERVER['HTTP_REFERER']) ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
          <?php
          }
