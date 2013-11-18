@@ -3,10 +3,12 @@
 /**
  * @file Formato.php
  * @brief Generador de código segun formato html, csv, json, etc...
+ * @ingroup formato
  */
 
 /**
  * Clase Formato para mostrar contenido en diferentes formatos
+ * @ingroup formato
  */
 
 class Formato {

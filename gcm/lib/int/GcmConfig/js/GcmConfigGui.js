@@ -1,12 +1,11 @@
 /**
- * @file      GcmConfigGui.js
- * @brief     Javascript para formulario
+ * @file    GcmConfigGui.js
+ * @brief   Javascript para formulario
+ * @ingroup GcmConfig
  *
  * Funciones para añadir eliminar o modificar variables y descripciones
  *
  * @author    Eduardo Magrané 
- * @ingroup GcmConfig
- *
  * @internal
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *

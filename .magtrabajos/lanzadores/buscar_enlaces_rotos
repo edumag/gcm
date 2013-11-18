@@ -1,0 +1,4 @@
+
+$mt_minitermianl -e "wget --spider  --no-parent -r -o enlaces_rotos.txt http://www.mamedu.com"
+
+

@@ -1,0 +1,9 @@
+## Fichero con lista de comandos que serán lanzador desde mytrabajos
+##
+## Cada linea es un comando
+
+# Si hay sesión de vim anterior la abrimos y la borramos 
+[[ -e Session.vim ]] && ( gvim -S Session.vim ; sleep 2s ; rm -f Session.vim )
+
+# Lanzamos firefox con pagina del proyecto en local
+$mt_navegador --new--window $mt_web_local &

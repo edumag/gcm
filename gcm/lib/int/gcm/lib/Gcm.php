@@ -3,6 +3,7 @@
 /**
  * @file Gcm.php
  * @brief Clase que inicia y conecta todos los elementos del framework
+ * @ingroup gcm_lib
  *
  * @author    Eduardo Magrané eduardo.mamedu.com
  * licencia: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
@@ -23,6 +24,7 @@
  * En producción solo se debera comentar la linea en proyecto/index.php y se anula la posibilidad 
  * de debug
  *
+ * @ingroup gcm_lib
  * @{
  */
 
@@ -78,13 +80,15 @@ function __autoload($clase) {
 /* Gestionamos los errores */
 set_error_handler("Gutil::gestion_errores");
 
-/** Clase principal
+/** 
+ * Clase principal
  * 
  * Con la clase gcm interconectamos los eventos con los módulos.
  *
  * Una vez Detectadas las variables generales por Router, lanzamos elevento precarga
  * esto nos permite una acción rapida hacia modulos que utilizan ajax.
  *
+ * @ingroup gcm_lib
  */
 
 class Gcm {

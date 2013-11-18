@@ -1,0 +1,17 @@
+#!/bin/bash
+
+url_css="http://localhost/gcm/proyecto/proyectos.css?debug=1"
+destino="docs/css/"
+pro="gcm"
+titulo="Estilos de $pro"
+
+if [ -e "$destino" ] ; then
+   echo
+   read -p "Borramos destino antes de regenerar documentación (s/n): " OPCION
+   echo
+   if [ "$OPCION" == "s" ] ; then rm -fr "$destino" ; fi
+fi
+
+lynx -source "$url_css" | grep -v 'acaba:'  | grep -v 'Eventos' | sed 's/Tema actual/# Tema/g' | sed 's/fichero:/# /' | sed '/^$/d'  > /tmp/$pro.css
+
+styledocco --verbose -n "$titulo" -o "$destino" --include /tmp/$pro.css /tmp/$pro.css

@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @file      GcmPDO.php
- * @brief     Extensión para PDO
+ * @file    GcmPDO.php
+ * @brief   Extensión para PDO
+ * @ingroup gcmpdo
  *
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  14/05/10
- *  Revision  SVN $Id: PaginarPDO.php 278 2010-07-13 12:24:14Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -19,7 +18,7 @@
 /**
  * @class GcmPDO
  * @brief Extensión para PDO
- * @version 0.1
+ * @ingroup gcmpdo
  */
 
 class GcmPDO {

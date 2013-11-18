@@ -19,6 +19,7 @@ require_once(GCM_DIR.'lib/int/GcmConfig/lib/GcmConfigFactory.php');
 
 /**
  * Configuración general
+ * @ingroup GcmConfig
  */
 
 class Config {

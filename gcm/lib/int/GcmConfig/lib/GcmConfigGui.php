@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @file      GcmConfigGui.php
- *
- * Interface para modificar variables de php de un archivo.
+ * @file  GcmConfigGui.php
+ * @brief Interface para modificar variables de php de un archivo.
+ * @ingroup GcmConfig
  *
  * @author    Eduardo Magrané 
  * @ingroup GcmConfig
@@ -18,9 +18,9 @@
 require_once('GcmConfig.php');
 
 /**
- * @class GcmConfig
- *
- * @brief     Lectura y edición de archivos de configuración
+ * @class   GcmConfig
+ * @brief   Lectura y edición de archivos de configuración
+ * @ingroup GcmConfig
  *
  * Esta clase nos permite leer archivos de configuración nativos de php y
  * a la vez la edición de su contenido con formularios php.

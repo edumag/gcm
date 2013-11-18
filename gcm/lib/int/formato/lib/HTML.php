@@ -3,11 +3,13 @@
 /**
  * @file html.php
  * @brief Clase estatica para generar html
- *
- * @author Eduardo Magrané
- * @version 0.1
+ * @ingroup formato
  */
 
+/**
+ * HTML
+ * @ingroup formato
+ */
 
 class HTML {
 

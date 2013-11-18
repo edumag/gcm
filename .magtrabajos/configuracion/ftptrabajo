@@ -1,0 +1,14 @@
+
+ftptrabajo_bloqueo_activado='no'
+
+ftptrabajo_com_diff='meld'
+
+ftptrabajo_dir_local='/home/eduardo/SERVIDOR/gcm/'
+
+ftptrabajo_dir_remoto='web/dev/gcm/'
+
+ftptrabajo_editor='gvim'
+
+ftptrabajo_server='ftp.mamedu.com'
+
+ftptrabajo_terminal='xterm'

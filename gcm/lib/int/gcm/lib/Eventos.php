@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @file      Eventos.php
+ * @file  Eventos.php
+ * @brief Gestión de los eventos de gcm
+ * @ingroup gcm_lib
  * 
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  24/11/09
- *  Revision  SVN $Id: Eventos.php 660 2012-11-01 19:37:28Z eduardo $
  * Copyright  Copyright (c) 2009, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -17,6 +17,7 @@
 /** 
  * @class Eventos
  * @brief Módulo Eventos para conectar acciones con los módulos
+ * @ingroup gcm_lib
  *
  * Utilizamos los archivos eventos_usuario.php y eventos_admin.php de
  * cada módulo para interconectar a los módulos.
@@ -45,13 +46,12 @@
  *
  * Tambien se puede especificar comportamientos en tiempo de ejecución:
  *
- * <pre>
+ * @code
  * $gcm->event->anular('contenido','contenidos');
  * $gcm->event->unico('titulo','contenidos');
- * </pre>
+ * @endcode
  *
  * @see modulos/contenido/eventos_usuario.php
- *
  */
 
 class Eventos {
@@ -608,7 +608,8 @@ class Eventos {
       if ( ! $this->get_lista_blanca($m,$a) ) {
 
          if ( ! permiso($a, $m) ) {
-            registrar(__FILE__,__LINE__,$m.'->'.$a.'() sin permisos','AVISO');
+            //registrar(__FILE__,__LINE__,$m.'->'.$a.'() sin permisos','AVISO');
+            registrar(__FILE__,__LINE__,literal('Autorización denegada'),'AVISO',$m.'->'.$a.'() sin permisos');
             return FALSE;
             }
 

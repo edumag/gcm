@@ -1,0 +1,10 @@
+/**
+
+@defgroup gcm_lib GCM Librerías internas
+@ingroup librerias
+@{
+
+Librerías especificas para GCM
+
+@}
+*/

@@ -20,14 +20,15 @@ require_once('GcmConfig.php');
 /**
  * @class GcmConfigFactory
  * @brief Patron Factory para la clase GcmConfig
+ * @ingroup GcmConfig
  *
  * Para asegurarnos que recogemos la misma instancia para cada fichero de 
  * configuración
  *
  * Uso:
- * <pre>
+ * @code
  * $conf = GcmConfigFactory::GetGcmConfig('archivo');
- * </pre>
+ * @endcode
  *
  * @version 0.1
  */

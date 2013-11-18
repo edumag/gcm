@@ -3,6 +3,7 @@
 /**
  * @file      helpers.php
  * @brief     Funciones para facilitar la programación de módulos para gcm
+ * @ingroup gcm_lib
  *
  * @author    Eduardo Magrané 
  *
@@ -183,6 +184,15 @@ function registrar($fichero,$linea,$mensaje,$tipo='DEBUG',$descripcion=FALSE) {
       // $registro = RegistroFactory::getRegistro();
       // $registro->registra($fichero,$linea,$mensaje,$tipo);
    } else {
+
+      $usuario = ( isset($_SESSION[$gcm->sufijo.'usuario']) && $_SESSION[$gcm->sufijo.'usuario'] ) 
+         ? $_SESSION[$gcm->sufijo.'usuario'] 
+         : 'Anonimo' ;
+
+      $descripcion = "Usuario: $usuario IP: ".mostrar_ip()."
+
+         $descripcion" ;
+
       $gcm->registra($fichero,$linea,$mensaje,$tipo, $descripcion);
       }
 

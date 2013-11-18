@@ -3,6 +3,7 @@
 /**
  * @file Registro.php
  * @brief Sistem de registros
+ * @ingroup registro
  *
  * Nos permite guardar los registros que se van generando
  *
@@ -34,15 +35,16 @@ require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
  * por email al enviar un error.
  *
  * Uso:
- * <pre>
+ * @code
  * $reg = Registro::getInstance();
  * $reg->registra(__FILE__,__LINE__,'Mensaje a registrar','ADMIN');         // Regsitro tipo ADMIN
  * $reg->ver_registros('sesion=21221212 AND tipo=ADMIN'); // Devolver registros de la session x que sean del tipo ADMIN 
- * </pre>
+ * @endcode
  *
  * @author Eduardo Magrané
  *
  * @todo Terminar formulario para ver registros con filtros predefinidos
+ * @ingroup registro
  */
 
 class Registro {

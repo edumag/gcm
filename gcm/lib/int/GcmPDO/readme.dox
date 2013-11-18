@@ -1,0 +1,16 @@
+/**
+@defgroup gcmpdo GcmPDO
+@ingroup librerias
+@{
+
+Extensión de PDO
+
+@}
+
+@defgroup plantilla_gcmpdo Plantillas para GcmPDO
+@ingroup plantilla_libreria
+@ingroup gcmpdo
+@{
+
+@}
+*/
