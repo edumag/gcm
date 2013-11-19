@@ -648,9 +648,9 @@ class AdminAdmin extends Admin {
          $modulo = $array[count($array)-3];
 
          if ( permiso('configuracion',$modulo) ) {
-            $menuAdmin[literal('Módulos',3)]['boton'][literal($modulo,3)]['activado']= 1;
-            $menuAdmin[literal('Módulos',3)]['boton'][literal($modulo,3)]['title']=literal("Configuración de ",3).literal($modulo,3);
-            $menuAdmin[literal('Módulos',3)]['boton'][literal($modulo,3)]['link']=Router::$base.$modulo."/configuracion";
+            $menuAdmin['Configuración']['boton'][literal($modulo,3)]['activado']= 1;
+            $menuAdmin['Configuración']['boton'][literal($modulo,3)]['title']=literal("Configuración de ",3).literal($modulo,3);
+            $menuAdmin['Configuración']['boton'][literal($modulo,3)]['link']=Router::$base.$modulo."/configuracion";
             }
 
 
@@ -667,9 +667,9 @@ class AdminAdmin extends Admin {
             $modulo = $array[count($array)-3];
 
             if ( permiso('configuracion',$modulo) ) {
-               $menuAdmin[literal('Módulos',3)]['boton'][literal($modulo,3)]['activado']= 1;
-               $menuAdmin[literal('Módulos',3)]['boton'][literal($modulo,3)]['title']=literal("Configuración de ",3).literal($modulo,3);
-               $menuAdmin[literal('Módulos',3)]['boton'][literal($modulo,3)]['link']="?m=".$modulo."&a=configuracion";
+               $menuAdmin['Configuración']['boton'][literal($modulo,3)]['activado']= 1;
+               $menuAdmin['Configuración']['boton'][literal($modulo,3)]['title']=literal("Configuración de ",3).literal($modulo,3);
+               $menuAdmin['Configuración']['boton'][literal($modulo,3)]['link']="?m=".$modulo."&a=configuracion";
                }
 
 

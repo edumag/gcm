@@ -58,18 +58,6 @@ $menuAdmin['Contenidos']['boton']['Ver todo']['activado']= 1;
 $menuAdmin['Contenidos']['boton']['Ver todo']['title']="Listar contenido";
 $menuAdmin['Contenidos']['boton']['Ver todo']['link']=Router::$dir.Router::$url."?e=vertodo";
 
-/** Secciones del menú predeterminadas */
-$menuAdmin['Administración']['title']='Administrar proyecto';
-$menuAdmin['Configuración']['title']='Configurar proyecto';
-$menuAdmin['Seguimiento']['title']='Seguimiento del proyecto';
-
-/** Especificamos peso para ordenar menú */
-
-$menuAdmin['Contenidos']     ['peso'] = -10;
-$menuAdmin['Administración'] ['peso'] = -8;
-$menuAdmin['Configuración']  ['peso'] = -6;
-$menuAdmin['Seguimiento']    ['peso'] = -4;
-
 /** @} */
 
 ?>

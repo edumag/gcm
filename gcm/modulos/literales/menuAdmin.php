@@ -9,9 +9,13 @@
  * @{
  */
 
-/** Administrar literales */
-$menuAdmin['Configuración']['boton']['Literales']['activado']=1;
-$menuAdmin['Configuración']['boton']['Literales']['title']="Editar literales";
-$menuAdmin['Configuración']['boton']['Literales']['link']="?m=literales&a=administrar";
+if ( permiso('administrar','literales') ) {
+
+   /** Administrar literales */
+   $menuAdmin['Administración']['boton']['Literales']['activado']=1;
+   $menuAdmin['Administración']['boton']['Literales']['title']="Editar literales";
+   $menuAdmin['Administración']['boton']['Literales']['link']="?m=literales&a=administrar";
+
+   }
 
 /** @} */

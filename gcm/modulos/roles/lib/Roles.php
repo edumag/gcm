@@ -83,6 +83,8 @@ class Roles extends Modulos {
 
       if ( isset(self::$acciones[$m]) && in_array($a, self::$acciones[$m]) ) return TRUE;
 
+      registrar(__FILE__,__LINE__,"Sin permisos para $m -> $a");
+      
       return FALSE;
 
       }

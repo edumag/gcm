@@ -20,6 +20,8 @@
 
    <?php if ( is_array($seccion) ) { ?>
 
+   <?php if ( ! isset($seccion['boton']) ) continue ; ?>
+
    <?php $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ; ?>
    <?php $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#'; ?>
 
