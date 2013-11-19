@@ -19,6 +19,5 @@ if ( permiso('administrar_constantes','editar') ) {
    }
 
 /** @} */
-
 ?>
 
