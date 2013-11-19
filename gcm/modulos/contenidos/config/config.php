@@ -14,4 +14,3 @@ $config['descartar'][] = 'gdoxygen';
 /** @} */
 
 ?>
-

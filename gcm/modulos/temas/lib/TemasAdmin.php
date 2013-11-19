@@ -69,6 +69,9 @@ class TemasAdmin extends Temas {
 
       $gcm->event->accion2evento('contenido_caja_info_dev','temas','contenido_caja_info_dev',3);
 
+      // Permitimos a cualquier usuario registrado
+      $gcm->event->set_lista_blanca('temas','contenido_caja_info_dev');
+
       }
 
    /**

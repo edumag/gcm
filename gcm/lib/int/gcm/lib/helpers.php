@@ -189,11 +189,13 @@ function registrar($fichero,$linea,$mensaje,$tipo='DEBUG',$descripcion=FALSE) {
          ? $_SESSION[$gcm->sufijo.'usuario'] 
          : 'Anonimo' ;
 
-      $descripcion = "Usuario: $usuario IP: ".mostrar_ip()."
+      $descripcion_extra = "Usuario: $usuario IP: ".mostrar_ip();
 
-         $descripcion" ;
+      if ( isset($_SERVER['REQUEST_URI']) ) $descripcion_extra .= "\n\nREQUEST_URI: ".$_SERVER['REQUEST_URI'];
 
-      $gcm->registra($fichero,$linea,$mensaje,$tipo, $descripcion);
+      $descripcion_extra .= $descripcion;
+
+      $gcm->registra($fichero,$linea,$mensaje,$tipo, $descripcion_extra);
       }
 
    }

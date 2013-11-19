@@ -55,10 +55,11 @@ class GcmConfigGui extends GcmConfig {
 
    function formulario($args = NULL) {
 
-      $ampliar   = ( isset($args['ampliar']) ) ? $args['ampliar'] : FALSE;
-      $eliminar  = ( isset($args['eliminar']) ) ? $args['eliminar'] : FALSE;
-      $plantilla = ( isset($args['plantilla']) ) ? $args['plantilla'] : dirname(__FILE__).'/../html/formGcmConfigGui.phtml';
-      $css       = ( isset($args['css']) ) ? $args['css'] : FALSE;
+      $ampliar       = ( isset($args['ampliar']) ) ? $args['ampliar'] : FALSE;
+      $ampliar_lista = ( isset($args['ampliar_lista']) ) ? $args['ampliar_lista'] : FALSE;
+      $eliminar      = ( isset($args['eliminar']) ) ? $args['eliminar'] : FALSE;
+      $plantilla     = ( isset($args['plantilla']) ) ? $args['plantilla'] : dirname(__FILE__).'/../html/formGcmConfigGui.phtml';
+      $css           = ( isset($args['css']) ) ? $args['css'] : FALSE;
       $modificar_descripciones = ( isset($args['modificar_descripciones']) ) ? $args['modificar_descripciones'] : FALSE;
 
 

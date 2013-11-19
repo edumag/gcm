@@ -428,6 +428,8 @@ class Crud extends DataBoundObject {
 
       $this->sufijo = $this->strTableName.'_';
 
+      // Definimos url_formulario
+      $this->url_formulario = $_SERVER['REQUEST_URI'] ;
       }
 
    /**
@@ -1306,7 +1308,6 @@ class Crud extends DataBoundObject {
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
          <form id="crud" name="crud" action="<?php if ( $this->url_formulario ) echo $this->url_formulario;?>" method="post">
-         <input type="hidden" name="url_formulario" value="<?php echo ( isset($_SERVER['HTTP_REFERER']) ) ? $_SERVER['HTTP_REFERER'] : $_SERVER['REQUEST_URI'] ?>" />
          <?php
          }
 
@@ -1463,15 +1464,7 @@ class Crud extends DataBoundObject {
 
          $solicitud = new Solicitud();
          $solicitud->SetRedirectOnConstraintFailure(true);
-         // Si tenemos definida la url de vuelta al formulario la especificamos
-         // a solicitud.
-         if ( isset($_POST['url_formulario']) ) {
-            $solicitud->SetConstraintFailureRedirectTargetURL($_POST['url_formulario']);
-         } elseif ( $this->url_formulario ) {
-            $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
-         } else {
-            $solicitud->SetConstraintFailureRedirectTargetURL($_SERVER['REDIRECT_URL']);
-            }
+         $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
          if ( isset($this->restricciones) && ! empty($this->restricciones) ) {

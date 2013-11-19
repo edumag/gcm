@@ -424,18 +424,18 @@ class Solicitud {
                break;
 
             case RT_REQUERIDO:
-               if ( ! isset($varActualValue) || empty($varActualValue) ) {
+               if ( ! isset($varActualValue) || ( $varActualValue !== "0" && empty($varActualValue) ) ) {
                   $thisFail = true;
                   registrar(__FILE__,__LINE__,literal($strThisParameter).' '.literal('es requerido'),'ERROR');
                   }
                break;
 
             case RT_PASSWORD:
-               if ( ! isset($_REQUEST['verificacion']) ) {
+               if ( ! isset($_POST['verificacion']) ) {
                   $thisFail = true;
                   registrar(__FILE__,__LINE__,'Se necesita un campo "verificacion" para poder verificar la contraseña ','ERROR');
                   }
-               if ( $varActualValue != $_REQUEST['verificacion'] ) {
+               if ( $varActualValue != $_POST['verificacion'] ) {
                   $thisFail = true;
                   registrar(__FILE__,__LINE__,$strThisParameter.' contraseña diferente a verificación '.$strConstraintOperand,'ERROR');
                   registrar(__FILE__,__LINE__,$varActualValue.' != '.$_REQUEST['verificacion'],'ADMIN');

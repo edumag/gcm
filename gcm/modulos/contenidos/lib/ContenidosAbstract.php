@@ -926,7 +926,7 @@ abstract class ContenidosAbstract extends Modulos {
                throw new Exception('El contendo no existe [ '.Router::$f.' ]');
             }
          } catch (Exception $ex) {
-            registrar(__FILE__,__LINE__,'No se pudo recoger fecha: '.$ex->getMessage(),'ADMIN');
+            registrar(__FILE__,__LINE__,'No se pudo recoger fecha: '.$ex->getMessage());
             }
          }
 

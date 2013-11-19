@@ -53,6 +53,7 @@ class RolesAdmin extends Roles {
 
          $args = array();
          $args['eliminar'] = 'si';
+         $args['ampliar_lista'] = 'si';
 
          // $configuracion->directorio_descripciones(GCM_DIR.'modulos/'.$modulo.'/config');
 
@@ -173,6 +174,12 @@ class RolesAdmin extends Roles {
 
       }
 
+   /**
+    * Administrar roles de usuarios
+    *
+    * @todo procesar texto de readme para presentarlo
+    */
+
    function usuarios($e, $args=FALSE){
 
       global $gcm;
@@ -181,7 +188,10 @@ class RolesAdmin extends Roles {
       $gcm->event->unico('titulo','roles');
       $gcm->titulo = literal('Roles de usuarios');
 
-      echo '<div class="ayuda">'; echo nl2br(file_get_contents(dirname(__FILE__).'/../readme.dox')) ; echo '</div>';
+      require GCM_DIR.'lib/ext/parsedown-master/Parsedown.php';
+      $ayuda = file_get_contents(dirname(__FILE__).'/../usuario.md');   
+      $ayuda = Parsedown::instance()->parse($ayuda);
+      echo '<div class="ayuda">'; echo $ayuda ; echo '</div>';
 
       // Archivo con los roles de usuario del proyecto
       $archivo = self::$dir_roles.'../usuarios.php';

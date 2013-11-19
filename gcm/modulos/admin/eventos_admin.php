@@ -35,4 +35,9 @@ $eventos['contenido_caja_info_dev']['contenido_caja_info_dev'][1]='';
 $eventos['cron']['cerrar_cron'][2000]='';
 
 /** @} */
+
+// Permitimos a cualquier usuario registrado ver la caja_dev
+$this->set_lista_blanca('admin','caja_info_dev');
+$this->set_lista_blanca('admin','contenido_caja_info_dev');
+
 ?>

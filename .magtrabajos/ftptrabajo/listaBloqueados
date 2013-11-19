@@ -1,0 +1,12 @@
+gcm/modulos/admin/lib/Admin.php
+gcm/modulos/admin/lib/AdminAdmin.php
+gcm/lib/int/databoundobject/lib/Crud.php
+gcm/modulos/temas/lib/TemasAdmin.php
+.magtrabajos/ftptrabajo/listaBloqueados
+gcm/lib/int/GcmConfig/html/formGcmConfigGui.phtml
+gcm/lib/int/GcmConfig/js/GcmConfigGui.js
+gcm/lib/int/GcmConfig/lib/GcmConfigGui.php
+gcm/lib/int/gcm/lib/Modulos.php
+gcm/lib/int/gcm/lib/helpers.php
+gcm/modulos/contenidos/lib/ContenidosAbstract.php
+gcm/modulos/mapas/lib/Mapas.php

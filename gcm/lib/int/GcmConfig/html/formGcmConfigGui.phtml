@@ -211,6 +211,13 @@ function contabilizar_saltos_linea($cadena) {
 
    <?php } ?>
 
+   <?php if ( $ampliar_lista ) { ?>
+
+   <br /><br />
+   <a class='boton' onclick="javascript:nueva_lista('<?php echo $this->idioma ?>'); return false;">Añadir nueva lista </a>
+
+   <?php } ?>
+
    <br /><br />
 
    <input type='hidden' name='archivo' value='<?php echo $this->archivo ?>' />

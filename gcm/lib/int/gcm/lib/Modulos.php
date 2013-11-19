@@ -190,7 +190,7 @@ abstract class Modulos {
 
       global $gcm;
 
-      if ( !permiso('configuracion') ) {
+      if ( !permiso('configuracion',lcfirst($this->nombre_clase)) ) {
          registrar(__FILE__,__LINE__,'Sin permisos para configurar','AVISO');
          return FALSE;
          }
