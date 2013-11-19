@@ -1,0 +1,17 @@
+gcm/modulos/ver_registros/eventos_admin.php
+gcm/modulos/ver_registros/menuAdmin.php
+gcm/modulos/admin/menuAdmin.php
+gcm/modulos/aplicar_SEO/menuAdmin.php
+gcm/modulos/cache_http/menuAdmin.php
+gcm/modulos/comentarios/menuAdmin.php
+gcm/modulos/contenidos/menuAdmin.php
+gcm/modulos/editar/menuAdmin.php
+gcm/modulos/idiomas/menuAdmin.php
+gcm/modulos/imagenes/menuAdmin.php
+gcm/modulos/indexador/menuAdmin.php
+gcm/modulos/literales/menuAdmin.php
+gcm/modulos/roles/menuAdmin.php
+gcm/modulos/temas/menuAdmin.php
+gcm/modulos/aplicar_SEO/lib/Aplicar_SEO.php
+gcm/modulos/roles/lib/Roles.php
+gcm/modulos/admin/lib/AdminAdmin.php
