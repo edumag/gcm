@@ -1,8 +1,11 @@
 /**
 
 @defgroup modulo_roles Módulo Roles
+@ingroup  usuarios_gcm
 
 Permisos de usuario mediante roles.
+
+Ampliamos autentificación para poder manejar permisos mediante roles
 
 admin:     Tiene todos los privilegios.
 usuario:   Editar su perfil. (Todos los usuarios que se registran tiene este rol como mínimo)

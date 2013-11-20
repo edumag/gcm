@@ -8,7 +8,11 @@
 require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
 
 /**
- * @defgroup usuarios Usuarios
+ * @defgroup usuarios_gcm Usuarios en Gcm
+ * @ingroup  modulo_admin
+ *
+ * Utilizamos Autentificación para gestionar los usuarios
+ * @see autentificacion
  * @{
  */
 

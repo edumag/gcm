@@ -1157,4 +1157,29 @@ function esc_value($cadena) {
    return htmlspecialchars($cadena,ENT_QUOTES,'UTF-8');
    }
 
+/**
+ * @file formGcmConfigGui.phtml
+ * @brief Plantilla para generar formulario de configuración
+ * @ingroup plantilla_GcmConfig
+ */
+
+
+function contabilizar_saltos_linea($cadena) {
+
+   //Definimos el ancho que queramos en una variable
+   $ancho=55; 
+
+   if (strtoupper(substr(PHP_OS,0,3)=='WIN')) { 
+     $eol="\r\n"; 
+   } elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) { 
+     $eol="\r"; 
+   } else { 
+     $eol="\n"; 
+      } 
+
+   $cad=wordwrap($cadena, $ancho, $eol, 1); 
+   return substr_count($cad,$eol)+1; 
+
+   }
+
 ?>

@@ -3,8 +3,6 @@
 /**
  * @file RolesAdmin.php
  * @brief Clase para administración de roles
- *
- * @package Modulos
  */
 
 require_once ( 'Roles.php' );
@@ -93,6 +91,7 @@ class RolesAdmin extends Roles {
 
             $configuracion = new GcmConfigGui($_POST['archivo']);
 
+            $configuracion->directorio_descripciones(dirname(__FILE__).'/../config/roles/descripciones/');
             $configuracion->escribir_desde_post();
 
          } catch (Exception $ex) {
@@ -225,7 +224,8 @@ class RolesAdmin extends Roles {
       <form action="" method="POST">
       <fieldset>
       <legend  accesskey="r">Adjudicar roles a usuarios</legend>
-      <?php echo HTML::form_text('contenido_usuarios', $contenido, array('maxlength' => 2000 , 'required' )); ?>
+      <?php $lineas=contabilizar_saltos_linea($contenido); ?>
+      <?php echo HTML::form_text('contenido_usuarios', $contenido, array('maxlength' => 2000 , 'required','class'=>'editor_codigo','rows'=>$lineas )); ?>
       <input name="usuarios_roles" type="submit" value="Enviar" />
       </fieldset>
       </form>

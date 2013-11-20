@@ -1,10 +1,9 @@
 <?php
 
 /**
- * @file roles.php
+ * @file Roles.php
  * @brief Clase Roles
- *
- * @package Modulos
+ * @ingroup modulo_roles
  */
 
 /**
@@ -90,15 +89,6 @@ class Roles extends Modulos {
       }
 
    /**
-    * @defgroup roles Roles
-    *
-    * Gestión de roles de usuarios.
-    *
-    * @ingroup usuarios
-    * @{
-    */
-
-   /**
     * Recogemos $acciones de archivo de configuración
     *
     * y rellenamos roles de usuario en sesión
@@ -159,8 +149,6 @@ class Roles extends Modulos {
       // echo "<pre>Acciones: " ; print_r(self::$acciones) ; echo "</pre>"; // DEV  
       
       }
-
-   /** @} */
 
    }
 

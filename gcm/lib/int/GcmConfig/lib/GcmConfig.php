@@ -24,7 +24,7 @@
  * Inspirado en @see http://www.jourmoly.com.ar/introduccion-a-mvc-con-php-segunda-parte/
  * 
  * Las descripciones de las variables se guardan en archivos a parte uno por cada idioma 
- * que utilicamos, Podemos especificar el idioma por defecto de la aplicación y el idioma
+ * que utilizamos, Podemos especificar el idioma por defecto de la aplicación y el idioma
  * actual.
  *
  * En caso de no tener todas las descripciones del idioma actual las cogeremos del idioma 
@@ -214,9 +214,9 @@ class GcmConfig {
       }
 
    /**
-    * Definir un archivo con las descripciones
+    * Definir directorio donde se guardan y recogen las descripciones
     *
-    * @param $archivo Archivo con las descripciones
+    * @param $directorio Directorio descripciones
     */
 
    function directorio_descripciones($directorio) {
@@ -608,9 +608,9 @@ class GcmConfig {
 
       try {
 
-         $ubicacion = dirname($_SERVER['SCRIPT_FILENAME']);
+         // $ubicacion = dirname($_SERVER['SCRIPT_FILENAME']).'/';
 
-         if ( ! $file = @fopen($ubicacion.'/'.$archivo, "w",TRUE) ) {
+         if ( ! $file = @fopen($archivo, "w",TRUE) ) {
             $error = error_get_last();
             $msg = "No se pudo abrir archivo $archivo para incluir $nombre_array ";
             $msg .= "\nDirectori actual: ".getcwd();

@@ -119,7 +119,7 @@ class GcmConfigGui extends GcmConfig {
 
       /* Descripciones */
 
-      if ( count($_POST['descripcion_'.$idioma]) > 0 ) {
+      if ( isset($_POST['descripcion_'.$idioma]) && count($_POST['descripcion_'.$idioma]) > 0 ) {
 
          $this->descripciones[$idioma] = array();
 
