@@ -1,0 +1,12 @@
+gcm/modulos/roles/readme.dox
+gcm/modulos/temas/css/formularios.css
+gcm/lib/int/GcmConfig/html/formGcmConfigGui.phtml
+gcm/lib/int/gcm/lib/helpers.php
+gcm/DATOS/idiomas/GCM_LG_es.php
+gcm/modulos/roles/lib/RolesAdmin.php
+plantillas/libreria/html/plantilla.phtml
+gcm/modulos/admin/modelos/usuarios.php
+gcm/modulos/readme.dox
+gcm/modulos/roles/lib/Roles.php
+gcm/lib/int/GcmConfig/lib/GcmConfig.php
+gcm/lib/int/GcmConfig/lib/GcmConfigGui.php
