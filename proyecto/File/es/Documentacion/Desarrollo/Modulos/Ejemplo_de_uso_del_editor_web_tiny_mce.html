@@ -1,0 +1,6 @@
+<p>Desde el m&oacute;dulo mapas necesitamos que uno de los campos de configuraci&oacute;n del m&oacute;dulo tuviera el editor web activado.</p>
+<p>Desde MapasAdmin.php pedimos a gcm que nos incluya el javascript del m&oacute;dulo y que a&ntilde;ada la librer&iacute;a externa de tiny_mce</p>
+<pre>   function configuracion($e, $args=FALSE) {<br /><br />      global $gcm;<br /><br />      $this-&gt;javascripts('editorweb.js');<br />      $this-&gt;add_ext_lib('js',Router::$base.GCM_DIR.'lib/ext/tiny_mce/tiny_mce.js');<br /><br />      // A&ntilde;adimos panel con iconos seleccionables<br />      $gcm-&gt;event-&gt;accion2evento('columna','mapas','seleccionar_iconos',3);<br />      parent::configuracion($e, $args);<br />      }</pre>
+<p>En el archivo editorweb.js dentro de addLoadEvent para asegurarnos que solo se ejecute al cargar la p&aacute;gina, creamos las instancias de tinyMCE para todos los textareas con class GC_contenido</p>
+<pre>addLoadEvent(function(){<br />   tinyMCE.init({<br />      mode : "textareas",<br />      editor_selector : "GC_contenido",<br />      theme : "simple",<br />      languages : 'es',<br />      });<br />   });</pre>
+<p>&nbsp;</p>

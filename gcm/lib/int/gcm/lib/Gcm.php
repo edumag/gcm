@@ -431,6 +431,8 @@ class Gcm {
          }
 
       $this->librerias_externas[] = $tipo.":".$url;
+      registrar(__FILE__,__LINE__,"Contenido de librerias_externas",'DEBUG',depurar($this->librerias_externas));
+      
       }
 
    /**

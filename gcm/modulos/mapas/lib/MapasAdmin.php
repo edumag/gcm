@@ -38,6 +38,9 @@ class MapasAdmin extends Mapas {
 
       global $gcm;
 
+      $this->javascripts('editorweb.js');
+      $this->add_ext_lib('js',Router::$base.GCM_DIR.'lib/ext/tiny_mce/tiny_mce.js');
+
       // Añadimos panel con iconos seleccionables
       $gcm->event->accion2evento('columna','mapas','seleccionar_iconos',3);
 

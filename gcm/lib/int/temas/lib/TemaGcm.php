@@ -79,14 +79,18 @@ class TemaGcm {
      * @param $lib_js_ext Librerias javascript externas 
      */
 
-    public function incluir_javascript($ficheros=NULL,$librerias=NULL,$url_base, $lib_js_ext) {
+    public function incluir_javascript($ficheros=NULL,$librerias=NULL,$url_base, $lib_js_ext=NULL) {
 
       $ficheros  = ( $ficheros ) ? $ficheros : $this->ficheros[js];
 
       $lista     = ( !empty($ficheros) ) ? implode(',',$ficheros) : NULL ;
 
       if ( $lib_js_ext && !empty($lib_js_ext)  ) {
+
+         if ( GCM_DEBUG ) echo "\n\n<!-- librerías externas -->\n\n";
+
          foreach ( $lib_js_ext as $items ) {
+            
             list($tipo,$url) = explode(':',$items);
             if ( $tipo == 'js' ) {
                echo "\n".'<script src="'.$url.'" type="text/javascript"></script>';
@@ -96,15 +100,25 @@ class TemaGcm {
                registrar(__FILE__,__LINE__,"Tipo de librería externa desconocido",'ERROR');
                
                }
+
             }
+
+         if ( GCM_DEBUG ) echo "\n\n<!-- Acaba librerías externas -->\n\n";
+
          }
 
       if ( $librerias && !empty($librerias)  ) {
+
+         if ( GCM_DEBUG ) echo "\n\n<!-- librerías de módulos -->\n\n";
+
          foreach ( $librerias as $items ) {
             list($modulo,$nombre) = explode(':',$items);
             $f = $this->ruta(strtolower($modulo),'libjs',$nombre);
             echo "\n".'<script src="'.$url_base.$f.'" type="text/javascript"></script>';
             }
+
+         if ( GCM_DEBUG ) echo "\n\n<!-- Acaba librerías de módulos -->\n\n";
+
          }
 
 
