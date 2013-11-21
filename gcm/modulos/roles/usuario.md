@@ -1,3 +1,7 @@
+@defgroup info_usuario_roles Información para usuario
+@ingroup modulo_roles
+@{
+
 El módulo "roles" nos permite definir diferentes roles a los usuarios, y
 definir las diferentes acciones que se permiten a cada rol.
 
@@ -8,4 +12,4 @@ posibilidad de modificar cualquier cosa de la administración.
 - admin:     Tiene todos los privilegios.
 - usuario:   Editar su perfil. (Todos los usuarios que se registran tiene este rol como mínimo)
 
-
+@}

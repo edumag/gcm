@@ -189,6 +189,13 @@ class RolesAdmin extends Roles {
 
       require GCM_DIR.'lib/ext/parsedown-master/Parsedown.php';
       $ayuda = file_get_contents(dirname(__FILE__).'/../usuario.md');   
+      $reemplazar = array(
+         '@defgroup info_usuario_roles Información para usuario'
+         ,'@ingroup modulo_roles'
+         ,'@{'
+         ,'@}'
+         );
+      $ayuda = str_replace($reemplazar,'',$ayuda);
       $ayuda = Parsedown::instance()->parse($ayuda);
       echo '<div class="ayuda">'; echo $ayuda ; echo '</div>';
 
