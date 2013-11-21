@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cmd="grc tail -f " 
-ficheros="/var/log/apache2/error.log /var/log/php_errors.log"
-terminal="$TERM"
-
-$TERM -T 'Registros' -geometry 150x80 -e $cmd $ficheros &
