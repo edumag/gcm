@@ -24,5 +24,12 @@ $eventos['buscar']['presentar_busquedas'][1]='';
 /** Indexar archivos remotamente */
 $eventos['indexar']['indexado'][3] = '';
 
+/** 
+ * En caso de error de pagina no encontrada mostramos sugerencias según 
+ * la pagina que buscó 
+ */
+
+$eventos['error']['error'][1]='';
+
 /** @} */
 ?>

@@ -395,6 +395,19 @@ class Admin extends Modulos {
 
       }
 
+   /**
+    * Enviamos cabecera de error
+    */
+
+   function cabecera_error($e, $args=FALSE) {
+
+      global $gcm;
+
+      registrar(__FILE__,__LINE__,"Se ha producido un error, creamos cabeceras de error");
+      
+      header("Status: 404 Not Found");
+
+      }
 
    }
 

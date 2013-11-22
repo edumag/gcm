@@ -28,5 +28,9 @@ $eventos['registro']['formulario_registro'][10]='';
 
 $eventos['postcontenido']['shortcode'][100]='';
 
+/** En caso de error enviamos cabeceras 404 */
+
+$eventos['error']['cabecera_error'][1] = '';
+
 /** @} */
 ?>

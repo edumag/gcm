@@ -296,11 +296,13 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      $gcm->titulo = literal('Sin Contenido',3);
+      $gcm->titulo = literal('Página no encontrada',3);
 
-      $ruta = $gcm->event->instancias['temas']->ruta('temas','html','sin_contenido.html');
+      registrar(__FILE__,__LINE__,literal("La página solicitada no ha sido encontrada"),'AVISO');
+      
+      $gcm->event->lanzarEvento('error','sin_contenido='.Router::$c);
 
-      registrar(__FILE__,__LINE__,literal('Contenido').' ['.Router::$s.Router::$c.'] '.literal('no encontrado',3),'ERROR');
+      registrar(__FILE__,__LINE__,literal('Contenido').' ['.Router::$s.Router::$c.'] '.literal('no encontrado',3));
       return;
 
       if ( $ruta ) {

@@ -305,6 +305,11 @@ class Gcm {
 
       require_once(GCM_DIR.'lib/int/GcmConfig/lib/GcmConfigFactory.php');
 
+      if ( ! $modulo ) {
+         registrar(__FILE__,__LINE__,"Error sin modulo definido",'ERROR');
+         return FALSE;
+         }
+         
       // Nombre de módulo con primera letra en minusculas
       $modulo = strtolower($modulo[0]).substr($modulo,1);
 
@@ -473,8 +478,9 @@ class Gcm {
    function pdo_conexion($conexion='principal') {
 
       // Si ya tenemos conexión la devolvemos
-      //
-      if ( isset($this->pdo[$conexion]) ) return $this->pdo[$conexion];
+      if ( isset($this->pdo[$conexion]) ) {
+         return $this->pdo[$conexion];
+         }
 
       // Ubicación de la aplicación, por defecto local
       $ubicacion = 'local';

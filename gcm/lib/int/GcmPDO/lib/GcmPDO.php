@@ -62,7 +62,7 @@ class GcmPDO {
          $file  = $ex->getFile();
          $line  = $ex->getLine();
 
-         registrar($file,$line,$error,'ERROR');
+         // registrar($file,$line,$error,'ERROR');
          registrar($file,$line,"SQL: ".$this->sql."\n\n".$error,'ADMIN');
          return FALSE;
          }

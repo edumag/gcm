@@ -205,7 +205,7 @@ class GUtil {
 
           // Errores que mostramos
 
-          registrar($nombre_archivo,$num_linea, $mens_err,'ERROR');
+          registrar($nombre_archivo,$num_linea, $mens_err,'ADMIN');
 
        } elseif ( in_array($num_err, $errores_a_registrar) ) {
 
