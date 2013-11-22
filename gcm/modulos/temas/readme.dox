@@ -44,9 +44,6 @@ Contenido
 |   |-- pie.html
 |   |-- principal.html
 |   |-- seleccionar_tema.phtml
-|   |-- sin_contenido.html
-|   |-- sin_seccion.html
-|   |-- sin_tema.html
 |   `-- titulo.html
 |-- iconos
 |   |-- alerta.png
