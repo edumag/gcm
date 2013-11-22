@@ -163,8 +163,6 @@ class Admin extends Modulos {
    /**
     * Comprobar que el administrador no es aun el por defecto
     *
-    * @todo Enrutar a pagina de sin privilegios
-    *
     * @param $e Evento que lo llama
     * @param $args Argumentos
     */

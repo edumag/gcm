@@ -628,8 +628,6 @@ abstract class ContenidosAbstract extends Modulos {
     * Si se encuentra contenido con el mismo nombre a la hora de guardar
     * esta función presguntara que se desea hacer, cambiar el nombre, sobrescribir, etc...
     *
-    * @todo Presentar secciones para poder seleccionar otra donde guardar.
-    *
     * @author Eduardo Magrané
     * @version 1.0
     * @param $contenido a grabar

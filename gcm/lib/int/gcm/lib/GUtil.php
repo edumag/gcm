@@ -385,8 +385,6 @@ class GUtil {
     * Presentamos la url recibida separada por secciones, con los 
     * literales y sus enlaces correspondientes
     *
-    * @todo Aplicar enlaces en camino
-    *
     * @param $url url
     * @param $enlazar Enlazar las secciones o contenidos, por defecto FALSE
     * @param $contenido Mostrar contenido o solo secciones
