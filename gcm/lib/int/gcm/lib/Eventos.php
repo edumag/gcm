@@ -319,6 +319,9 @@ class Eventos {
                foreach ( $valor as $prioridad => $argumentos ) {
                   // Si son eventos de usuario añadimos acciones a lista_blanca
                   if ( $nivel == 'usuario' ) $this->lista_blanca[$modulo][] = $a;
+                  // Si ya tenemos el evento lo borramos para que predominen los 
+                  // últimos que son los fijados por el proyecto
+                  if ( isset($this->eventos[$e][$modulo][$a]) ) unset($this->eventos[$e][$modulo][$a]) ;
                   $this->eventos[$e][$modulo][$a][$prioridad] = $argumentos; 
                   $this->ubicaciones[$modulo] = $directorio.$modulo; 
                   $this->numero_eventos++;

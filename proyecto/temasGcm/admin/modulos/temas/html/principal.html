@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+   <!--autor: eduardo magrane-->
+   <!--email: eduardo@mamedu.com-->
+   {heads}
+	
+   <meta name="viewport" content="width=device−width, initial−scale=1.0" />
+	<!--[if lt IE 9]>
+   <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+   {menuadmin}
+	<header id="header">
+		<hgroup>
+         
+         <h1 class="site_title"><a href="index.html">{tituloProyecto}</a></h1>
+			<h2 class="section_title"></h2><div class="btn_view_site">{cabeceraDerecha}</div>
+		</hgroup>
+	</header> <!-- end of header bar -->
+	
+	<section id="secondary_bar">
+		<div class="breadcrumbs_container">
+         {subcabecera}
+		</div>
+	</section><!-- end of secondary bar -->
+	
+   <aside id="sidebar" class="column">
+      {formbuscar}
+      <hr />
+		<h3>Contenido</h3>
+		<ul class="toggle">
+			<li class="icn_new_article"><a href="#">Nueva entrada</a></li>
+			<li class="icn_edit_article"><a href="#">Edit Articles</a></li>
+			<li class="icn_categories"><a href="#">Categories</a></li>
+			<li class="icn_tags"><a href="#">Tags</a></li>
+		</ul>
+      {columna}
+	</aside><!-- end of sidebar -->
+	
+	<section id="main" class="column">
+		
+         {avisos}
+         {titulo}
+         {contenido}
+
+		<div class="spacer"></div>
+	</section>
+
+
+   {scripts}
+
+{debug}
+{pie}
+</body>
+
+</html>

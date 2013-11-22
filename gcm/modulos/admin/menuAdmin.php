@@ -18,6 +18,7 @@ $usuario = $_SESSION[$gcm->sufijo.'usuario'];
 $menuAdmin2[$usuario]['boton']['Editar perfil']['activado']= 1;
 $menuAdmin2[$usuario]['boton']['Editar perfil']['title']="Editar información de usuario";
 $menuAdmin2[$usuario]['boton']['Editar perfil']['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
+// $menuAdmin2[$usuario]['class']='user';
 
 $menuAdmin2['Salir']['title']="Cerrar sessión";
 $menuAdmin2['Salir']['link']='./?salir=1';

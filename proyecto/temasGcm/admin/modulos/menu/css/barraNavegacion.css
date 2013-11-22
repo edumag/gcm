@@ -1,0 +1,54 @@
+
+#barraNavegacion	{
+width: 100%;
+padding: 5px 5px 5px 0px;
+margin: 3px 2px 3px 5px;
+text-align: left;
+}
+#barraNavegacion a {
+border: 1px;
+color: <?=$this->color("4")?>;
+}
+#barraNavegacion ul img {
+   border: 0;
+   width: 16px;
+   height: 16px;
+   }
+
+#barraNavegacion ul {
+list-style-position: outside;
+padding: 3px 0px 0px 2px;
+margin: 0;
+list-style:none;
+border-left: 1px ;
+/* border-left-style: dotted; */
+text-align: left;
+/* /dashed/solid/double/groove/ridge/inset/outset; */
+/*list-style-image:none; IE would also need this*/
+}
+#barraNavegacion .listaOff {
+text-decoration: none;
+font-weight: bold;
+}
+#barraNavegacion ul ul {
+   font-size: 90%;
+}
+#barraNavegacion ul ul ul {
+   font-size: 90%;
+}
+#barraNavegacion li a {
+font-weight: normal;
+text-decoration: none;
+}
+#barraNavegacion li a:hover {
+font-weight: normal;
+text-decoration: none;
+}
+#barraNavegacion li a:active {
+font-weight: normal;
+color: #D97B40;
+text-decoration: none;
+}
+#barraNavegacion .m_off, #barraNavegacion .m_on {
+   font-size: 110%;
+}
