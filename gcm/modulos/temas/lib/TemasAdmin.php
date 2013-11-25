@@ -529,6 +529,8 @@ class TemasAdmin extends Temas {
 
    function formulario_colores() {
 
+      global $gcm;
+
       $incluir_colores = TRUE;
 
       $this->librerias_js('farbtastic.js');

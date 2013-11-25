@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Nov 25 11:22:24 CET 2013
+// Archivo generado automáticamente por GcmConfig Mon Nov 25 12:46:26 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -136,4 +136,5 @@ $GCM_LG_es['Idiomas Activados']='';
 $GCM_LG_es['Nuevo idioma']='';
 $GCM_LG_es['Pagina no encontrada']='';
 $GCM_LG_es['Página no encontrada']='';
+$GCM_LG_es['Procesar fichero proyecto.css modificado']='';
 ?>

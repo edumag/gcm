@@ -1,15 +1,15 @@
-/*  ## camino
 
+/*  ## camino
     <div id="camino">
     |-&gt; <a href="./">Inicio</a>
          / <a href="./apuntes">Apuntes</a>
          / <a href="./apuntes/Linux">Linux</a>
-         / <a href="./apuntes/Linux/Edicion_de_texto">EdiciÃ³n de texto</a>
+         / <a href="./apuntes/Linux/Edicion_de_texto">Edición de texto</a>
          / <a href="./apuntes/Linux/Edicion_de_texto/vim">vim</a>
          / <a href="./apuntes/Linux/Edicion_de_texto/vim/plugins">plugins</a>
     </div>
 */
 #camino a, #camino {
-color: <?=$this->color("body-11")?>;
+color: <?=$this->color("camino-00")?>;
 font-size: 100%;
 }
