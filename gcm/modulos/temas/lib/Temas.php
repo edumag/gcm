@@ -328,11 +328,8 @@ class Temas extends Modulos {
 
       global $gcm;
 
-      ?>
-      <a href="" title="<?php echo literal('inicio');?>">
-         <?php echo literal($this->Titulo,1); ?>
-      </a>
-      <?php
+      include($gcm->event->instancias['temas']->ruta('temas','html','titulo.html'));
+      return;
 
       }
 

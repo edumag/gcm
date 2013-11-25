@@ -25,7 +25,6 @@
 color: <?=$this->color("body-06")?>;
 background: <?=$this->color("body-07")?>;
 padding: 15px;
-overflow: hidden;
 }
 #cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {
 display: inline;

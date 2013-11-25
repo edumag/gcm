@@ -1,17 +1,7 @@
-/*  ## Pie de página
-
-    <div id="pie">
-       <img src="http://www.mamedu.com/gcm/File/es//ojo.gif" />
-       <div id="pie_derecho">
-          <a>Pie de página</a>
-         <img src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
-       </div>
-    </div>
-*/
 #pie {
    float: left;
-   width: 100%;
-   margin-top:10px;
+   width: 90%;
+   margin: 10px 5%;
    margin-bottom:10px;
    color: <?=$this->color("body-06")?>;
    background: <?=$this->color("body-07")?>;

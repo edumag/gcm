@@ -19,7 +19,7 @@
     </ol>
 */
 #contenido {
-   padding: 10px;
+   padding: 0;
 }
 #contenido > p {
     margin: 10px;

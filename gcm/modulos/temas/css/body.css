@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ## Estilos generales 
 
     <div id="wrap">
@@ -12,12 +13,12 @@
     </div>
 */
 body {
+   margin:0;
+   padding:0;
 background-color: <?=$this->color("body-00")?>;
 color: <?=$this->color("body-01")?>;
 font-family: Palatino, 'Book Antiqua', serif;
 line-height: 20px;
-padding: 0;
-margin: 6px;
 /* Gradiante */
 background: <?=$this->color("body-02")?>;
 background: -moz-linear-gradient(-45deg, <?=$this->color("body-02")?> 0%, <?=$this->color("body-03")?> 2%, <?=$this->color("body-04")?> 45%, <?=$this->color("body-05")?> 100%);
@@ -56,7 +57,7 @@ margin:0 auto;
 }
 
 #contenido h1 {
-    margin: 18px 2px;
+    padding: 18px 2px;
 }
 /* Contenedor */
 #contenedor {
@@ -70,7 +71,7 @@ height: auto !important;
 #lateral {
 width: 27%;
 color: #6F6137;
-float:right;
+float:left;
 padding-top: 30px;
 }
 #lateral p{
