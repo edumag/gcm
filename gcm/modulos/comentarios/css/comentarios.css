@@ -67,7 +67,8 @@
    border-bottom: 1px solid <?=$this->color("comentarios-04")?>;
    margin: 0;
    margin-bottom: 10px;
-   background: <?=$this->color("body-12")?>;
+   background: rgb(110, 110, 110);
+
 }
 .form_comentario form {
    padding: 10px;

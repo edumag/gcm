@@ -70,7 +70,7 @@ height: auto !important;
 /* Columna lateral */
 #lateral {
 width: 27%;
-color: #6F6137;
+color: rgb(54, 57, 51);
 float:left;
 padding-top: 30px;
 }
@@ -87,7 +87,7 @@ padding: 0 15px 15px 15px;
 }
 a{
 text-decoration: none;
-color: <?=$this->color("body-07")?>;
+color: rgb(32, 69, 63);
 font-style: italic;
 }
 a:hover{
@@ -135,7 +135,7 @@ pre {
 border: 1px solid <?=$this->color("body-06")?>;
 border-left: 3px solid <?=$this->color("body-06")?>;
 background-color: <?=$this->color("body-11")?>;
-color: <?=$this->color("body-06")?>; 
+color: rgb(119, 134, 125);
 margin: 18px 2px;
 padding: 3px;
 overflow: auto;
