@@ -1,0 +1,11 @@
+<div class='titulo_articulo'>
+   <?=$titulo; ?>
+   <div class='doc_info'>
+      <?php if ( isset($fecha) )  { ?>
+      <h3><?=presentarFecha($fecha,1,'mysql')?></h3>
+      <?php } ?>
+      <?php if ( !empty($camino)  ) { ?>
+      <h3><?=$camino?></h3>
+      <?php } ?>
+   </div>
+</div>
