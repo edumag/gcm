@@ -1,10 +1,17 @@
 <?php
 
 /**
- * @file responsiveslides.php
- * @brief Slideshow de imágenes
+ * @file Responsiveslide.php
+ * @brief
  *
- * @package Modulos
+ * @ingroup modulo_responsiveslide
+ * @author    Eduardo Magrané 
+ *
+ * @internal
+ * Copyright  Copyright (c) 2011, Eduardo Magrané
+ *
+ * This source code is released for free distribution under the terms of the
+ * GNU General Public License as published by the Free Software Foundation.
  */
 
 /**
@@ -38,7 +45,7 @@ class Responsiveslides extends Modulos {
 
       global $gcm;
 
-      $imagenes_sin_comprobar = glob(Router::$d.$this->imagenes.'/*');
+      $imagenes_sin_comprobar = glob(Router::$dd.$this->imagenes.'/*');
       $imagenes = array();
       foreach ( $imagenes_sin_comprobar as $img ) {
          if ( esImagen($img) ) $imagenes[] = $img;

@@ -1,65 +1,44 @@
-/*  ## Menú principal 
 
-    <div id="menu_principal">
-      <table id="menu" cellspacing="0">
-        <tbody>
-          <tr>
-            <td><a title="inicio_title" href="./../">Bienvenidos</a></td>
-            <td id="Habitaciones"><a title="" href="./../Habitaciones/">Habitaciones</a></td>
-            <td id="casa_completa"><a title="" href="./../casa_completa/">casa
-                completa</a></td>
-            <td id="Apartamento"><a title="" href="./../Apartamento/">Apartamento</a></td>
-            <td id="Como_LLegar"><a title="" href="./../Como_LLegar/">Cómo LLegar </a></td>
-            <td id="menuOff"><a title="" href="./../Ofertas/">Ofertas</a></td>
-            <td id="Actividades"><a title="" href="./../Actividades/">Actividades</a></td>
-            <td id="Mercadillo"><a title="" href="./../Mercadillo/">Mercadillo</a></td>
-            <td id="Libro_de_visitas"><a title="" href="./../Libro_de_visitas/">Libro
-                de visitas</a></td>
-            <td id="Contacto"><a title="" href="./../Contacto/">Contacto</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-*/
+/* menuPrincipal.css */
 #menu_principal {
-background: <?=$this->color("body-18")?>;
+background: <?=$this->color("menuPrincipal-00")?>;
 }
 table#menu {
 margin-top: 3px;
 border: 0px;
 padding: 0px;
-background: #EED8AE ;
-background: transparent ;
+background: <?=$this->color("menuPrincipal-01")?> ;
+}
+#menu td:hover {
+  background: <?=$this->color("menuPrincipal-02")?>;
+  color: <?=$this->color("menuPrincipal-03")?>;
+  padding: 0 10px 0 10px;
 }
 #menu td {
 text-align: center;
-background: #EED8AE ;
-background: transparent ;
-color: <?=$this->color("body-11")?>;
-padding: 3px;
+background: <?=$this->color("menuPrincipal-04")?> ;
+background: <?=$this->color("menuPrincipal-05")?> ;
+color: <?=$this->color("menuPrincipal-06")?>;
+padding: 0;
 margin: 0;
+border-right: 1px solid <?=$this->color("menuPrincipal-07")?>;
 }
 #menu td a {
-margin: 15px 15px;
-padding: 3px 15px 3px 15px;
-color:<?=$this->color("body-11")?>;
+margin: 5px 5px;
+padding: 3px 5px 3px 5px;
+color:<?=$this->color("menuPrincipal-08")?>;
 text-decoration: none;
-background: #EED8AE;
-background: transparent ;
-border: 1px solid transparent;
+  display: inline-block;
 }
 #menu td a:hover {
-background: #4B87AD ;
-color: <?=$this->color("body-06")?>;
-border: 1px solid <?=$this->color("body-11")?>;
+  /* font-size: 140%; */
 }
 #menu td a:active {
-background: #EED8AE;
-color: <?=$this->color("body-11")?>;
+  color: <?=$this->color("menuPrincipal-09")?>;
 }
 /* Estamos aqui del menu principal */
-#menu td#menuOff a {
-background: <?=$this->color("body-12")?>;
-color: <?=$this->color("body-11")?>;
-border: 1px solid <?=$this->color("body-11")?>;	
+#menu td#menuOff {
+      background: none repeat scroll 0 0 <?=$this->color("menuPrincipal-10")?>;
+ 
+    color: <?=$this->color("menuPrincipal-11")?>;
 }

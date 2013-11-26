@@ -87,7 +87,8 @@ ul.navmenu-h ul li {
   float: left; /*For IE 7 lack of compliance*/
   display: block !important;
   display: inline; /*For IE*/
-  background: black;
+  background: url("../../../../../gcm/gcm/modulos/temas/img/header_bg.png") repeat-x scroll 0 0 rgb(34, 34, 34) ;
+
 }
 /* Root Menu */
 ul.navmenu-h a {

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Mon Apr 15 16:02:56 CEST 2013
+// Archivo generado automáticamente por GcmConfig Tue Nov 26 7:38:32 CET 2013
 $GCM_LG_ca['Administracion de los diferentes idiomas']='';
 $GCM_LG_ca['Administración']='';
 $GCM_LG_ca['Administración de usuarios']='';
@@ -88,4 +88,15 @@ $GCM_LG_ca['ver_registros']='';
 $GCM_LG_ca['Administración de roles']='';
 $GCM_LG_ca['Configuración de comentarios']='';
 $GCM_LG_ca['Configuración de ver_registros']='';
+$GCM_LG_ca['Contraseña no pasa verificación']='';
+$GCM_LG_ca['El correo no parece valido']='';
+$GCM_LG_ca['Campo requerido']='';
+$GCM_LG_ca['mapas']='';
+$GCM_LG_ca['Roles']='';
+$GCM_LG_ca['Gestionar SEO']='';
+$GCM_LG_ca['Configuración de mapas']='';
+$GCM_LG_ca['victor']='';
+$GCM_LG_ca['Temas actual']='';
+$GCM_LG_ca['Selecciona tema']='';
+$GCM_LG_ca['Usuario']='';
 ?>
