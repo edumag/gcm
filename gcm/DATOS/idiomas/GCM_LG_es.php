@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Nov 26 7:40:17 CET 2013
+// Archivo generado automáticamente por GcmConfig Tue Nov 26 12:25:53 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -137,4 +137,9 @@ $GCM_LG_es['Nuevo idioma']='';
 $GCM_LG_es['Pagina no encontrada']='';
 $GCM_LG_es['Página no encontrada']='';
 $GCM_LG_es['Procesar fichero proyecto.css modificado']='';
+$GCM_LG_es['masmonell']='';
+$GCM_LG_es['Modo administración']='';
+$GCM_LG_es['Modo usuario']='';
+$GCM_LG_es['trabajos']='';
+$GCM_LG_es['proyecto']='';
 ?>
