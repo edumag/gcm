@@ -1,11 +1,10 @@
 #pie {
-   float: left;
-   width: 90%;
-   margin: 10px 5%;
-   margin-bottom:10px;
-   color: rgb(229, 215, 177);
-   background: <?=$this->color("body-07")?>;
-   border: 1px solid <?=$this->color("pie-00")?>;
+    background: none repeat scroll 0 0 rgb(0, 0, 0);
+    border: 0 none;
+    color: rgb(255, 222, 244);
+    float: left;
+    margin: 0;
+    width: 100%;
    }
 #pie img:first-child	{ 
    float: left;
