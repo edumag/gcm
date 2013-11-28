@@ -17,7 +17,7 @@ body {
    padding:0;
 background-color: <?=$this->color("body-00")?>;
 color: <?=$this->color("body-01")?>;
-font-family: Palatino, 'Book Antiqua', serif;
+font-family: 'Ubuntu', sans-serif, Palatino, 'Book Antiqua';
 line-height: 20px;
 /* Gradiante */
 background: <?=$this->color("body-02")?>;

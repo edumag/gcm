@@ -59,12 +59,25 @@ $menuAdmin['Administración']['title']='Administrar proyecto';
 $menuAdmin['Configuración']['title']='Configurar proyecto';
 $menuAdmin['Seguimiento']['title']='Seguimiento del proyecto';
 
+/** Sección proyecto */
+$proyecto = $gcm->config('admin','Proyecto');
+$menuAdmin[$proyecto]['boton']['Modo view']['activado']= 1;
+$menuAdmin[$proyecto]['boton']['Modo view']['title']="Modo usuario";
+$menuAdmin[$proyecto]['boton']['Modo view']['link']=dirname($_SERVER['PHP_SELF'])."?tema=";
+$menuAdmin[$proyecto]['boton']['Modo admin']['activado']= 1;
+$menuAdmin[$proyecto]['boton']['Modo admin']['title']="Modo administración";
+$menuAdmin[$proyecto]['boton']['Modo admin']['link']=dirname($_SERVER['PHP_SELF'])."?tema=admin";
+
+
 /** Especificamos peso para ordenar menú */
 
+
+$menuAdmin[$proyecto]        ['peso'] = -20;
 $menuAdmin['Contenidos']     ['peso'] = -10;
 $menuAdmin['Administración'] ['peso'] = -8;
 $menuAdmin['Configuración']  ['peso'] = -6;
 $menuAdmin['Seguimiento']    ['peso'] = -4;
+
 
 /** @} */
 ?>

@@ -328,7 +328,7 @@ class LiteralesAdmin extends Literales {
       $args['eliminar'] = TRUE; // Se permet elimiar variables
       $args['ampliar']  = TRUE; // Se permet ampliar variables
 
-      $configuracion->idiomaxdefecto = 'es';
+      $configuracion->idiomaxdefecto = $idiomaxdefecto;
       $configuracion->idioma = Router::$i;
 
       $configuracion->formulario($args);

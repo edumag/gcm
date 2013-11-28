@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Nov 26 12:25:53 CET 2013
+// Archivo generado automáticamente por GcmConfig Thu Nov 28 9:00:39 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -142,4 +142,7 @@ $GCM_LG_es['Modo administración']='';
 $GCM_LG_es['Modo usuario']='';
 $GCM_LG_es['trabajos']='';
 $GCM_LG_es['proyecto']='';
+$GCM_LG_es['Confirmar borrado']='';
+$GCM_LG_es['Borrado de contenido']='';
+$GCM_LG_es['Contenido borrado']='';
 ?>

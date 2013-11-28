@@ -235,7 +235,7 @@ class GcmConfig {
 
       $idioma = ( $idioma ) ? $idioma : $this->idioma ;
 
-      if ( $this->descripciones_recogidas[$idioma] == TRUE ) {
+      if ( isset($this->descripciones_recogidas[$idioma]) && $this->descripciones_recogidas[$idioma] == TRUE ) {
          return;
          }
       
@@ -461,7 +461,7 @@ class GcmConfig {
 
       /* Idioma actual */
 
-      if ( !$this->descripciones_recogidas[$idioma] ) { $this->recoger_descripciones($idioma); }
+      if ( !isset($this->descripciones_recogidas[$idioma]) ) { $this->recoger_descripciones($idioma); }
 
       // Si es un grupo
       if ( $grupo && isset($this->descripciones[$idioma][$grupo][$variable])) {
