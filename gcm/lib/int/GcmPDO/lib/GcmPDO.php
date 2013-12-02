@@ -163,19 +163,33 @@ class GcmPDO {
 
       $arAll = $this->resultado->fetchAll(PDO::FETCH_ASSOC);
 
-      $fp = fopen('/tmp/'.$file_csv, 'w');
+      $carpeta_temporal = getTempFolder();
 
+      if ( !$carpeta_temporal ) return FALSE;
+
+      if ( !is_readable($carpeta_temporal) ) {
+         registrar(__FILE__,__LINE__,"Sin permisos en carpeta temporal [$carpeta_temporal]","ERROR");
+         return FALSE;
+         }
+
+      $fp = fopen($carpeta_temporal.$file_csv, 'w');
+
+      if ( ! $fp ) {
+         registrar(__FILE__,__LINE__,"No se pudo crear archivo temporal",'ERROR');
+         return FALSE;
+         }
+         
       foreach ($arAll as $campos) {
           fputcsv($fp, $campos);
       }
 
       fclose($fp);
 
-      $len = filesize('/tmp/'.$file_csv);
+      $len = filesize($carpeta_temporal.$file_csv);
       header('Content-Type: application/csv; utf-8');
       header("Content-Length: $len");
-      header("Content-Disposition: inline; filename=".basename('/tmp/'.$file_csv));
-      readfile('/tmp/'.$file_csv);
+      header("Content-Disposition: inline; filename=".basename($file_csv));
+      readfile($carpeta_temporal.$file_csv);
       exit();
       }
 

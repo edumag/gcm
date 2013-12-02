@@ -1158,9 +1158,7 @@ function esc_value($cadena) {
    }
 
 /**
- * @file formGcmConfigGui.phtml
- * @brief Plantilla para generar formulario de configuración
- * @ingroup plantilla_GcmConfig
+ * Contabilizar saltos de linea dentro de una cadena de texto
  */
 
 
@@ -1181,5 +1179,40 @@ function contabilizar_saltos_linea($cadena) {
    return substr_count($cad,$eol)+1; 
 
    }
+
+if ( ! function_exists("getTempFolder") ) {
+
+/**
+ * Devolver url de carpeta temporal
+ *
+ * En caso de tenerla la creamos en el directorio base
+ *
+ * @param $dir_base Directorio base por defecto $DIR_BASE
+ */
+
+function getTempFolder($dir_base=FALSE) {
+
+   // Para proyectos gcm
+   $dir_base = Router::$enlace_relativo;
+
+   if ( ! $dir_base && ! isset($GLOBALS['DIR_BASE']) ) {
+      registrar(__FILE__,__LINE__,"Es necesario un directorio base para definir el tempral",'ERROR');
+      return FALSE;
+      }
+
+   $dir_base = ( $dir_base ) ? $dir_base : $GLOBALS['DIR_BASE'] ;
+
+   $tmp = comprobar_barra($dir_base).'tmp/';
+
+   if ( !file_exists($tmp) ) {
+      if(!mkdir($tmp, 0700)) {
+         registrar(__FILE__,__LINE__,"Fallo al crear carpeta temporal [$tmp]",'ERROR');
+         return FALSE;
+         }
+      }
+
+   return $tmp;
+   }
+}
 
 ?>
