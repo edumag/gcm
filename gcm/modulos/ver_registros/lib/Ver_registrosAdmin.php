@@ -65,6 +65,8 @@ class Ver_registrosAdmin extends Ver_registros {
     * csv
     *
     * Utilizamos las variables configurables:
+    *
+    * @todo Poner exportación a cvs en Registros.php
     */
 
    function envio_registros_mail($e, $args=FALSE) {
@@ -76,19 +78,31 @@ class Ver_registrosAdmin extends Ver_registros {
 
       $filtro = 'fecha > '.$fecha_periocidad.' ORDER BY id desc';
 
-      $sql = 'SELECT id
-         ,strftime("%d/%m/%Y %H:%M:%S", datetime(fecha,"unixepoch")) as fecha
-         ,tipo
-         ,mensaje
-         , "sesion: " || sesion || " " || fichero || ":" || linea || "\n\n" || descripcion as descripcion  
-         FROM '.$gcm->sufijo.'registros
+      if ( $gcm->reg->conexion->getAttribute(constant("PDO::ATTR_DRIVER_NAME")) == 'sqlite' ) {
+
+         $sql = 'SELECT id
+            ,strftime("%d/%m/%Y %H:%M:%S", datetime(fecha,"unixepoch")) as fecha
+            ,tipo
+            ,mensaje
+            , "sesion: " || sesion || " " || fichero || ":" || linea || "\n\n" || descripcion as descripcion  
+            FROM '.$gcm->sufijo.'registros
+            ';
+
+      } else {
+         $sql= 'SELECT id
+            ,DATE_FORMAT(FROM_UNIXTIME(fecha),"%d/%m/%y %T") as fecha
+            ,tipo
+            ,mensaje
+            ,CONCAT("sesion: ",sesion," ",fichero,":",linea,"\n\n",descripcion) as descripcion  
+            FROM '.$gcm->sufijo.'registros
          ';
+         }
 
       $sql .= 'WHERE '.$filtro;
 
       require_once GCM_DIR.'lib/int/GcmPDO/lib/GcmPDO.php';
       $export = new GcmPDO($gcm->reg->conexion, $sql);
-      $adjunto = $export->to_csv('registros-'.date("Y-m-d").'csv', FALSE); 
+      $adjunto = $export->to_csv('registros-'.$gcm->config('admin','Proyecto').'-'.date("Y-m-d").'csv', FALSE); 
       
          
       if ( ! $adjunto ) {
