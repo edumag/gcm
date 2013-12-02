@@ -151,9 +151,11 @@ class GcmPDO {
     * Exportar a csv
     *
     * @param $file_csv Fichero destino 
+    * @param $enviar_fichero Si queremos enviar el fichero generado al usuario 
+    *          o simplemente lo guardamos TRUE/FALSE
     */
 
-   function to_csv($file_csv=FALSE) {
+   function to_csv($file_csv=FALSE, $enviar_fichero=TRUE) {
 
       $file_csv = ( $file_csv ) ? $file_csv : 'export.csv' ;
 
@@ -185,12 +187,18 @@ class GcmPDO {
 
       fclose($fp);
 
-      $len = filesize($carpeta_temporal.$file_csv);
-      header('Content-Type: application/csv; utf-8');
-      header("Content-Length: $len");
-      header("Content-Disposition: inline; filename=".basename($file_csv));
-      readfile($carpeta_temporal.$file_csv);
-      exit();
+      if ( $enviar_fichero == TRUE ) {
+
+         $len = filesize($carpeta_temporal.$file_csv);
+         header('Content-Type: application/csv; utf-8');
+         header("Content-Length: $len");
+         header("Content-Disposition: inline; filename=".basename($file_csv));
+         readfile($carpeta_temporal.$file_csv);
+         exit();
+         } 
+
+      return $carpeta_temporal.$file_csv;
+
       }
 
    }
