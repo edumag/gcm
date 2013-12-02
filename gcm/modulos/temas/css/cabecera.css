@@ -24,7 +24,8 @@
 #cabecera{
 color: <?=$this->color("cabecera-06")?>;
 background: <?=$this->color("cabecera-07")?>;
-padding: 15px;
+font-family: serif;
+line-height: 50px;
 }
 #cabecera form, #cabecera div , #cabecera h1, #cabecera h2 {
 display: inline;
@@ -45,7 +46,7 @@ width: 60%;
 text-align:right;
 }
 #subcabecera {
-background: #000;
+background: #171512;
 color:  #FBFBFB;
 }
 #subcabecera a {

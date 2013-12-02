@@ -8,6 +8,7 @@ margin-top: 3px;
 border: 0px;
 padding: 0px;
 background: <?=$this->color("menuPrincipal-01")?> ;
+width: 100%;
 }
 #menu td:hover {
   background: <?=$this->color("menuPrincipal-02")?>;
