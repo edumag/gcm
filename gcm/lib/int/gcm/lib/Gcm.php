@@ -629,10 +629,11 @@ class Gcm {
 
       ob_end_clean();
 
-      if ( empty($this->contenidos[$evento])  ) {
-         registrar(__FILE__,__LINE__,'Gcm->procesaContenido: Evento ['.$evento.'] sin contenido');
-         return FALSE;
-         }
+      // Aun sin tener contenido procesamos para evitar que se muestre {contenido}
+      // if ( empty($this->contenidos[$evento])  ) {
+      //    registrar(__FILE__,__LINE__,'Gcm->procesaContenido: Evento ['.$evento.'] sin contenido');
+      //    return FALSE;
+      //    }
 
       $salida  = PHP_EOL.'<!-- '.$evento.' -->'.PHP_EOL;
       if ( $evento == 'titulo' ) {

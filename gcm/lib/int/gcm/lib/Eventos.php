@@ -386,7 +386,7 @@ class Eventos {
       /* Comprobar que no se haya anulado el evento */
 
       if (  isset($this->cEventos[$e]['anular']) )   {
-         registrar(__FILE__,__LINE__,'Eventos->lanzarEvento('.$e.','.$args.') Evento anulado nos volvemos');
+         registrar(__FILE__,__LINE__,'Eventos->lanzarEvento('.$e.','.$args.') Evento anulado por ['.$this->cEventos[$e]['anular'].'] nos volvemos');
          return;
          }
 

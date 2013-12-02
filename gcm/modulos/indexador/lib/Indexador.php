@@ -307,8 +307,8 @@ class Indexador extends Modulos {
                }
 
          } else {
-            if ( $e != 'error' ) {
-               $gcm->registra(__FILE__,__LINE__,literal('No hubo resultados dentro del contenido <b>'.implode(' ',$palabras)).'</b>','AVISO');
+            if ( $e !== 'error' ) {
+               echo literal('No hubo resultados dentro del contenido <b>'.implode(' ',$palabras)).'</b>';
                }
             return FALSE;
             }
