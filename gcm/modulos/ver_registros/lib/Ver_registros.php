@@ -21,12 +21,12 @@ $GLOBALS['DIR_BASE'] = Router::$dir;
 class Ver_registros extends Modulos {
 
    // Configurables
-   private $nombre_envio_email;   ///< Nombre del destinatario del email con registros
-   private $mail_envio;           ///< Mail del destinatario
-   private $nombre_remitente;     ///< Nombre del remitente
-   private $mail_remitente;       ///< Mail del remitente
-   private $periocidad;           ///< Cada cuantas horas enviamos el email
-   private $dias_borrado;         ///< Se borran los registros con más de X días de antiguedad
+   protected $nombre_envio_email;   ///< Nombre del destinatario del email con registros
+   protected $mail_envio;           ///< Mail del destinatario
+   protected $nombre_remitente;     ///< Nombre del remitente
+   protected $mail_remitente;       ///< Mail del remitente
+   protected $periocidad;           ///< Cada cuantas horas enviamos el email
+   protected $dias_borrado;         ///< Se borran los registros con más de X días de antiguedad
 
    function __construct() { 
 
