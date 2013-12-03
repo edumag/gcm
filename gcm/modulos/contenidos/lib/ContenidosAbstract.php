@@ -237,6 +237,7 @@ abstract class ContenidosAbstract extends Modulos {
       $titulo = '';
       $contenido = '';
 
+      $seccion_seleccionada = Router::$dd.Router::$s;
       include ($gcm->event->instancias['temas']->ruta('contenidos','html','form_nuevo.html'));
 
       }
@@ -436,10 +437,10 @@ abstract class ContenidosAbstract extends Modulos {
       $gcm->titulo = literal('Mover o renombrar sección');
 
       $titulo_seccion = comprobar_barra(basename(Router::$s),'eliminar');
-      $titulo_seccion = literal($titulo_seccion);
       // Descartamos mover sobre la misma sección
-      $seccion_descartada = comprobar_barra(Router::$dd.str_replace($titulo_seccion,'',Router::$s));
-      $seccion_seleccionada = FALSE;
+      $seccion_descartada = Router::$s;
+      $seccion_seleccionada = Router::$d;
+      $titulo_seccion = literal($titulo_seccion);
 
       include ($gcm->event->instancias['temas']->ruta('contenidos','html','form_mover_seccion.html'));
 

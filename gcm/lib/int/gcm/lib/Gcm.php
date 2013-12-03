@@ -398,7 +398,7 @@ class Gcm {
       } else {
 
          $mens = 'Seleccionados viene por defecto archivo actual';
-         $this->seleccionado = array(Router::$d.Router::$url);
+         $this->seleccionado = array(Router::$d.Router::$s.Router::$c);
 
          }
 

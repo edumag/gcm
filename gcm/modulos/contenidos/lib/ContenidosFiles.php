@@ -285,9 +285,6 @@ class Contenidos extends ContenidosAbstract {
 
       global $gcm;
 
-      // Si no tenemos permisos selecccionable pasa a FALSE
-      if ( !permiso('editar_contenido') ) $seleccionable = FALSE;
-
       // Comprobar descartados
       // Añadimos a los descartados por configuración el que se desea ocultar
 
