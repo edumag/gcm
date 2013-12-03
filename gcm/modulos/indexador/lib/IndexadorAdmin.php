@@ -217,17 +217,20 @@ class IndexadorAdmin extends Indexador {
 
    function cambio_ruta_seccion($e, $args=NULL) {
 
-      $seccion = ( $_POST['seleccionado'][0] ) ? $_POST['seleccionado'][0] : ''; 
-      $seccion = comprobar_barra($seccion).$_POST['nuevo_nombre'];
+      global $gcm;
 
-      if ( empty($seccion) ) {
+      $literal = $_POST['titulo_seccion'];
+      $nombre_seccion = GUtil::textoplano($literal);
+      $seccion_nueva = ( isset($gcm->seleccionado[0]) ) ? $gcm->seleccionado[0] : Router::$dd.Router::$s; 
+      $seccion_nueva = comprobar_barra($seccion_nueva).$nombre_seccion;
+
+      if ( empty($seccion_nueva) ) {
          registrar(__FILE__,__LINE__,'Sin sección para seleccionada para renombrar','ERROR');
          return FALSE;
          }
 
       // Limpiar nombre de sección
-      $ruta_destino=GUtil::textoplano($seccion);
-      $ruta_destino=str_replace(Router::$dd,'',$ruta_destino);
+      $ruta_destino=$nombre_seccion;
       $ruta_origen = Router::$s;
 
       $sql = "SELECT id, url FROM ".$this->prefijo."archivos WHERE url like '%".$ruta_origen."%'";
