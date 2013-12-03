@@ -50,7 +50,7 @@ if ( permiso('editar','contenidos') ) {
 
    $menuAdmin['Contenidos']['boton']['Borrar sección']['activado']= ( Router::$s ) ? 1 : 0;
    $menuAdmin['Contenidos']['boton']['Borrar sección']['title']="Borrar sección";
-   $menuAdmin['Contenidos']['boton']['Borrar sección']['link']=Router::$dir.Router::$url."?e=borrar_seccion";
+   $menuAdmin['Contenidos']['boton']['Borrar sección']['link']=Router::$dir.Router::$s."?e=borrar";
 
    }
 

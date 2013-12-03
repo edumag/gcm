@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Dec 2 19:57:55 CET 2013
+// Archivo generado automáticamente por GcmConfig Tue Dec 3 11:44:38 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -146,4 +146,6 @@ $GCM_LG_es['Confirmar borrado']='';
 $GCM_LG_es['Borrado de contenido']='';
 $GCM_LG_es['Contenido borrado']='';
 $GCM_LG_es['mamedu.com/gcm']='';
+$GCM_LG_es['Administración de constantes']='';
+$GCM_LG_es['Renombrando o moviendo sección']='';
 ?>
