@@ -8,6 +8,15 @@ Sistema para autentificar a los usuarios
 
 @{
 
+Si utilizamos Autentificación en un proyecto tener en cuenta que se creara un primer usuario administrador
+con todos los permisos, con identificador admin y contraseña admin.
+
+Es importante una vez creado modificar su contraseña para que no sea la que viene por defecto.
+
+Este sistema nos permite tener un mecanismo sencillo donde hay usuarios administrativos y otros que no, para
+tener un sistema de roles de usuario habrá que recurrir a Roles.
+
+@see modulo_roles
 
 
 @}

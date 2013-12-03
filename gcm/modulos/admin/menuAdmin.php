@@ -18,6 +18,7 @@ $usuario = $_SESSION[$gcm->sufijo.'usuario'];
 $menuAdmin2[$usuario]['boton']['Editar perfil']['activado']= 1;
 $menuAdmin2[$usuario]['boton']['Editar perfil']['title']="Editar información de usuario";
 $menuAdmin2[$usuario]['boton']['Editar perfil']['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
+// $menuAdmin2[$usuario]['class']='user';
 
 $menuAdmin2['Salir']['title']="Cerrar sessión";
 $menuAdmin2['Salir']['link']='./?salir=1';
@@ -52,6 +53,31 @@ if ( permiso('configurar_conexiones','admin') ) {
    $menuAdmin['Administración']['boton']['Visualizar conexiones']['link']=dirname($_SERVER['PHP_SELF'])."/admin/configurar_conexiones";
 
    }
+
+/** Secciones del menú predeterminadas */
+$menuAdmin['Administración']['title']='Administrar proyecto';
+$menuAdmin['Configuración']['title']='Configurar proyecto';
+$menuAdmin['Seguimiento']['title']='Seguimiento del proyecto';
+
+/** Sección proyecto */
+$proyecto = $gcm->config('admin','Proyecto');
+$menuAdmin[$proyecto]['boton']['Modo view']['activado']= 1;
+$menuAdmin[$proyecto]['boton']['Modo view']['title']="Modo usuario";
+$menuAdmin[$proyecto]['boton']['Modo view']['link']=dirname($_SERVER['PHP_SELF'])."?tema=";
+$menuAdmin[$proyecto]['boton']['Modo admin']['activado']= 1;
+$menuAdmin[$proyecto]['boton']['Modo admin']['title']="Modo administración";
+$menuAdmin[$proyecto]['boton']['Modo admin']['link']=dirname($_SERVER['PHP_SELF'])."?tema=admin";
+
+
+/** Especificamos peso para ordenar menú */
+
+
+$menuAdmin[$proyecto]        ['peso'] = -20;
+$menuAdmin['Contenidos']     ['peso'] = -10;
+$menuAdmin['Administración'] ['peso'] = -8;
+$menuAdmin['Configuración']  ['peso'] = -6;
+$menuAdmin['Seguimiento']    ['peso'] = -4;
+
 
 /** @} */
 ?>

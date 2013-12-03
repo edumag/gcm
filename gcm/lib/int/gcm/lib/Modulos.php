@@ -115,7 +115,7 @@ abstract class Modulos {
       global $gcm;
 
       if ( $gcm && $gcm instanceof Gcm ) {
-         registrar(__FILE__,__LINE__,'Añadimos librería externa tipo ['.$tipo.'] url: ['.$this->nombre_clase.']');
+         registrar(__FILE__,__LINE__,'Añadimos librería externa tipo: ['.$tipo.'] url: ['.$url.'] Módulo: ['.$this->nombre_clase.']');
          $gcm->add_ext_lib($tipo,$url);
       } else {
          registrar(__FILE__,__LINE__,'Modulos->add_ext_lib('.$tipo.','.$url.') $gcm no esta definida','ERROR');
@@ -190,7 +190,7 @@ abstract class Modulos {
 
       global $gcm;
 
-      if ( !permiso('configuracion') ) {
+      if ( !permiso('configuracion',lcfirst($this->nombre_clase)) ) {
          registrar(__FILE__,__LINE__,'Sin permisos para configurar','AVISO');
          return FALSE;
          }

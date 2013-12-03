@@ -3,6 +3,7 @@
 Documentación para el desarrollo con GCM
 
 @defgroup permisos_usuarios Permisos para los roles de usuario
+@ingroup  modulo_roles
 
 ### eventos_usuario.php eventos_admin.php
 

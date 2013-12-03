@@ -3,6 +3,7 @@
 /**
  * @file Gcm.php
  * @brief Clase que inicia y conecta todos los elementos del framework
+ * @ingroup gcm_lib
  *
  * @author    Eduardo Magrané eduardo.mamedu.com
  * licencia: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
@@ -23,6 +24,7 @@
  * En producción solo se debera comentar la linea en proyecto/index.php y se anula la posibilidad 
  * de debug
  *
+ * @ingroup gcm_lib
  * @{
  */
 
@@ -78,13 +80,15 @@ function __autoload($clase) {
 /* Gestionamos los errores */
 set_error_handler("Gutil::gestion_errores");
 
-/** Clase principal
+/** 
+ * Clase principal
  * 
  * Con la clase gcm interconectamos los eventos con los módulos.
  *
  * Una vez Detectadas las variables generales por Router, lanzamos elevento precarga
  * esto nos permite una acción rapida hacia modulos que utilizan ajax.
  *
+ * @ingroup gcm_lib
  */
 
 class Gcm {
@@ -301,6 +305,11 @@ class Gcm {
 
       require_once(GCM_DIR.'lib/int/GcmConfig/lib/GcmConfigFactory.php');
 
+      if ( ! $modulo ) {
+         registrar(__FILE__,__LINE__,"Error sin modulo definido",'ERROR');
+         return FALSE;
+         }
+         
       // Nombre de módulo con primera letra en minusculas
       $modulo = strtolower($modulo[0]).substr($modulo,1);
 
@@ -389,7 +398,7 @@ class Gcm {
       } else {
 
          $mens = 'Seleccionados viene por defecto archivo actual';
-         $this->seleccionado = array(Router::$d.Router::$s.Router::$c);
+         $this->seleccionado = array(Router::$d.Router::$url);
 
          }
 
@@ -427,6 +436,8 @@ class Gcm {
          }
 
       $this->librerias_externas[] = $tipo.":".$url;
+      registrar(__FILE__,__LINE__,"Contenido de librerias_externas",'DEBUG',depurar($this->librerias_externas));
+      
       }
 
    /**
@@ -467,8 +478,9 @@ class Gcm {
    function pdo_conexion($conexion='principal') {
 
       // Si ya tenemos conexión la devolvemos
-      //
-      if ( isset($this->pdo[$conexion]) ) return $this->pdo[$conexion];
+      if ( isset($this->pdo[$conexion]) ) {
+         return $this->pdo[$conexion];
+         }
 
       // Ubicación de la aplicación, por defecto local
       $ubicacion = 'local';
@@ -617,10 +629,11 @@ class Gcm {
 
       ob_end_clean();
 
-      if ( empty($this->contenidos[$evento])  ) {
-         registrar(__FILE__,__LINE__,'Gcm->procesaContenido: Evento ['.$evento.'] sin contenido');
-         return FALSE;
-         }
+      // Aun sin tener contenido procesamos para evitar que se muestre {contenido}
+      // if ( empty($this->contenidos[$evento])  ) {
+      //    registrar(__FILE__,__LINE__,'Gcm->procesaContenido: Evento ['.$evento.'] sin contenido');
+      //    return FALSE;
+      //    }
 
       $salida  = PHP_EOL.'<!-- '.$evento.' -->'.PHP_EOL;
       if ( $evento == 'titulo' ) {

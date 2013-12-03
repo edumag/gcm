@@ -20,6 +20,8 @@
 
    <?php if ( is_array($seccion) ) { ?>
 
+   <?php if ( ! isset($seccion['boton']) ) continue ; ?>
+
    <?php $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ; ?>
    <?php $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#'; ?>
 
@@ -73,8 +75,10 @@
    <?php $title = ( isset($seccion['title']) ) ? literal($seccion['title'],3) : NULL ; ?>
    <?php $enlace_seccion = ( isset($seccion['link']) ) ? $seccion['link'] : '#'; ?>
 
+   <?php $class_a = ( isset($seccion['class']) ) ? 'class="'.$seccion['class'].'"' : '' ; ?>
+
    <li>
-      <a <?php if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' "; ?>>
+      <a <?php echo $class_a;?> <?php if ( isset($title) ) echo "title='".$title."' href='".$enlace_seccion."' "; ?>>
          <?php echo literal($keySeccion,3);?>
       </a>
       <ul>

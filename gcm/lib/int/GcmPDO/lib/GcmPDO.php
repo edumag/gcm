@@ -1,14 +1,13 @@
 <?php
 
 /**
- * @file      GcmPDO.php
- * @brief     Extensión para PDO
+ * @file    GcmPDO.php
+ * @brief   Extensión para PDO
+ * @ingroup gcmpdo
  *
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  14/05/10
- *  Revision  SVN $Id: PaginarPDO.php 278 2010-07-13 12:24:14Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -19,7 +18,7 @@
 /**
  * @class GcmPDO
  * @brief Extensión para PDO
- * @version 0.1
+ * @ingroup gcmpdo
  */
 
 class GcmPDO {
@@ -63,7 +62,7 @@ class GcmPDO {
          $file  = $ex->getFile();
          $line  = $ex->getLine();
 
-         registrar($file,$line,$error,'ERROR');
+         // registrar($file,$line,$error,'ERROR');
          registrar($file,$line,"SQL: ".$this->sql."\n\n".$error,'ADMIN');
          return FALSE;
          }
@@ -152,9 +151,11 @@ class GcmPDO {
     * Exportar a csv
     *
     * @param $file_csv Fichero destino 
+    * @param $enviar_fichero Si queremos enviar el fichero generado al usuario 
+    *          o simplemente lo guardamos TRUE/FALSE
     */
 
-   function to_csv($file_csv=FALSE) {
+   function to_csv($file_csv=FALSE, $enviar_fichero=TRUE) {
 
       $file_csv = ( $file_csv ) ? $file_csv : 'export.csv' ;
 
@@ -164,20 +165,40 @@ class GcmPDO {
 
       $arAll = $this->resultado->fetchAll(PDO::FETCH_ASSOC);
 
-      $fp = fopen('/tmp/'.$file_csv, 'w');
+      $carpeta_temporal = getTempFolder();
 
+      if ( !$carpeta_temporal ) return FALSE;
+
+      if ( !is_readable($carpeta_temporal) ) {
+         registrar(__FILE__,__LINE__,"Sin permisos en carpeta temporal [$carpeta_temporal]","ERROR");
+         return FALSE;
+         }
+
+      $fp = fopen($carpeta_temporal.$file_csv, 'w');
+
+      if ( ! $fp ) {
+         registrar(__FILE__,__LINE__,"No se pudo crear archivo temporal",'ERROR');
+         return FALSE;
+         }
+         
       foreach ($arAll as $campos) {
           fputcsv($fp, $campos);
       }
 
       fclose($fp);
 
-      $len = filesize('/tmp/'.$file_csv);
-      header('Content-Type: application/csv; utf-8');
-      header("Content-Length: $len");
-      header("Content-Disposition: inline; filename=".basename('/tmp/'.$file_csv));
-      readfile('/tmp/'.$file_csv);
-      exit();
+      if ( $enviar_fichero == TRUE ) {
+
+         $len = filesize($carpeta_temporal.$file_csv);
+         header('Content-Type: application/csv; utf-8');
+         header("Content-Length: $len");
+         header("Content-Disposition: inline; filename=".basename($file_csv));
+         readfile($carpeta_temporal.$file_csv);
+         exit();
+         } 
+
+      return $carpeta_temporal.$file_csv;
+
       }
 
    }

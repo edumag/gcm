@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @file      Idiomas.php
- * @brief     Módulo para la manipulación de literales
+ * @file    Idiomas.php
+ * @brief   Módulo para la manipulación de literales
+ * @ingroup Idiomas
  *
  * @author    Eduardo Magrané 
  *
@@ -17,7 +18,9 @@
 
 //require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
 
-/** Idiomas
+/** 
+ * Idiomas
+ *
  * para la administración de los idiomas
  *
  * Se presentan los idiomas disponobles, se puede cambiar la imagen correspondiente
@@ -34,7 +37,7 @@
  * - se añade imagen al directorio.
  *
  * @author Eduardo Magrané
- *
+ * @ingroup Idiomas
  */
 
 class IdiomasCore {

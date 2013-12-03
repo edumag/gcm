@@ -1,28 +1,11 @@
 <?php
 
 /**
- * @file formGcmConfigGui.php
- * @brief Plantilla para generar formulario de configuración
+ * @file formGcmConfigGui.phtml
+ * @brief Plantilla para los formularios de GcmConfigGui
+ * @ingroup GcmConfig
+ * @ingroup plantilla_GcmConfig
  */
-
-
-function contabilizar_saltos_linea($cadena) {
-
-   //Definimos el ancho que queramos en una variable
-   $ancho=55; 
-
-   if (strtoupper(substr(PHP_OS,0,3)=='WIN')) { 
-     $eol="\r\n"; 
-   } elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) { 
-     $eol="\r"; 
-   } else { 
-     $eol="\n"; 
-      } 
-
-   $cad=wordwrap($cadena, $ancho, $eol, 1); 
-   return substr_count($cad,$eol)+1; 
-
-   }
 
 ?>
 <script type="text/javascript">
@@ -207,6 +190,13 @@ function contabilizar_saltos_linea($cadena) {
 
    <br /><br />
    <a class='boton' onclick="javascript:nuevaVariable('<?php echo $this->idioma ?>'); return false;">Añadir nuevo elemento </a>
+
+   <?php } ?>
+
+   <?php if ( $ampliar_lista ) { ?>
+
+   <br /><br />
+   <a class='boton' onclick="javascript:nueva_lista('<?php echo $this->idioma ?>'); return false;">Añadir nueva lista </a>
 
    <?php } ?>
 

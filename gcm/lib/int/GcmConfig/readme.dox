@@ -100,4 +100,11 @@ gcm/lib/int/GcmConfig/
   + TestPhpGcmConfigGui.php         php
 
 @}
+
+@defgroup plantilla_GcmConfig Plantillas para GcmConfig
+@ingroup plantilla_libreria
+@ingroup GcmConfig
+@{
+
+@}
 */

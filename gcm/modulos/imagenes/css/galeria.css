@@ -62,6 +62,7 @@
    background: none repeat scroll 0 0 white;
    padding: 10px;
    margin: 5px;
+   max-width: 200px;
 }
 .img_editar img {
     display: block;

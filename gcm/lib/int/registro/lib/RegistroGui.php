@@ -3,6 +3,7 @@
 /**
  * @file RegistroGui.php
  * @brief Presentación de registros
+ * @ingroup registro
  */
 
 require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
@@ -11,12 +12,13 @@ require_once(dirname(__FILE__).'/Registro.php');
 /** Modulo para la visualización de los registros de la aplizació
  *
  * Uso:
- * <pre>
+ * @code
  * $reg = Registro::getInstance();
  * $reg->registra(__FILE__,__LINE__,'Mensaje a registrar','ADMIN');         // Regsitro tipo ADMIN
  * $reg->ver_registros('sesion=21221212 AND tipo=ADMIN'); // Devolver registros de la session x que sean del tipo ADMIN 
- * </pre>
+ * @endcode
  *
+ * @ingroup registro
  */
 
 class RegistroGui extends Registro {

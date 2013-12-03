@@ -9,7 +9,7 @@
  ?>
 <form method="post" enctype="multipart/form-data" >
 <fieldset>
-   <legend><?=literal('Subir fichero proyecto.css modificado',3)?></legend>
+   <legend><?php echo literal('Subir fichero proyecto.css modificado',3)?></legend>
    <div class="ayuda">
       El fichero css a procesar debe tener las marcas de las secciones. La idea es coger el css que genera el proyecto
       modificarlo con el editor externo de tu gusto y procesarlo desde aquí para tener el listado de los colores e imagenes
@@ -24,4 +24,4 @@
    <input type="hidden" name="m" value="temas" />
    <input type="hidden" name="a" value="fichero_css" />
 </fieldset>
-</form>'
+</form>

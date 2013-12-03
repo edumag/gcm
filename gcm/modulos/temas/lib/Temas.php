@@ -328,23 +328,8 @@ class Temas extends Modulos {
 
       global $gcm;
 
-      $ruta = $this->ruta('temas','html','titulo.html');
-
-      if ( $ruta ) {
-         include($ruta);
-      } else {
-         registrar(__FILE__,__LINE__,'No tenemos plantilla ['.$ruta.']');
-         ?>
-         <a href="" title="<?php echo literal('inicio');?>">
-            <h1>
-               <?php echo literal($this->Titulo,1); ?>
-            </h1>
-            <h2>
-               <?php echo literal($this->Subtitulo,1); ?>
-            </h2>
-         </a>
-         <?php
-         }
+      include($gcm->event->instancias['temas']->ruta('temas','html','titulo.html'));
+      return;
 
       }
 

@@ -3,6 +3,7 @@
 /**
  * @file      helpers.php
  * @brief     Funciones para facilitar la programación de módulos para gcm
+ * @ingroup gcm_lib
  *
  * @author    Eduardo Magrané 
  *
@@ -183,7 +184,18 @@ function registrar($fichero,$linea,$mensaje,$tipo='DEBUG',$descripcion=FALSE) {
       // $registro = RegistroFactory::getRegistro();
       // $registro->registra($fichero,$linea,$mensaje,$tipo);
    } else {
-      $gcm->registra($fichero,$linea,$mensaje,$tipo, $descripcion);
+
+      $usuario = ( isset($_SESSION[$gcm->sufijo.'usuario']) && $_SESSION[$gcm->sufijo.'usuario'] ) 
+         ? $_SESSION[$gcm->sufijo.'usuario'] 
+         : 'Anonimo' ;
+
+      $descripcion_extra = "Usuario: $usuario IP: ".mostrar_ip();
+
+      if ( isset($_SERVER['REQUEST_URI']) ) $descripcion_extra .= "\n\nREQUEST_URI: ".$_SERVER['REQUEST_URI'];
+
+      $descripcion_extra .= $descripcion;
+
+      $gcm->registra($fichero,$linea,$mensaje,$tipo, $descripcion_extra);
       }
 
    }
@@ -1144,5 +1156,63 @@ function esc_value($cadena) {
 
    return htmlspecialchars($cadena,ENT_QUOTES,'UTF-8');
    }
+
+/**
+ * Contabilizar saltos de linea dentro de una cadena de texto
+ */
+
+
+function contabilizar_saltos_linea($cadena) {
+
+   //Definimos el ancho que queramos en una variable
+   $ancho=55; 
+
+   if (strtoupper(substr(PHP_OS,0,3)=='WIN')) { 
+     $eol="\r\n"; 
+   } elseif (strtoupper(substr(PHP_OS,0,3)=='MAC')) { 
+     $eol="\r"; 
+   } else { 
+     $eol="\n"; 
+      } 
+
+   $cad=wordwrap($cadena, $ancho, $eol, 1); 
+   return substr_count($cad,$eol)+1; 
+
+   }
+
+if ( ! function_exists("getTempFolder") ) {
+
+/**
+ * Devolver url de carpeta temporal
+ *
+ * En caso de tenerla la creamos en el directorio base
+ *
+ * @param $dir_base Directorio base por defecto $DIR_BASE
+ */
+
+function getTempFolder($dir_base=FALSE) {
+
+   // Para proyectos gcm
+   $dir_base = Router::$enlace_relativo;
+
+   if ( ! $dir_base && ! isset($GLOBALS['DIR_BASE']) ) {
+      registrar(__FILE__,__LINE__,"Es necesario un directorio base para definir el tempral",'ERROR');
+      return FALSE;
+      }
+
+   $dir_base = ( $dir_base ) ? $dir_base : $GLOBALS['DIR_BASE'] ;
+
+   $tmp = comprobar_barra($dir_base).'tmp/';
+
+   if ( !file_exists($tmp) ) {
+      if(!mkdir($tmp, 0700)) {
+         registrar(__FILE__,__LINE__,"Fallo al crear carpeta temporal [$tmp]",'ERROR');
+         return FALSE;
+         }
+      }
+
+   return $tmp;
+   }
+}
 
 ?>

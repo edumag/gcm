@@ -61,9 +61,12 @@ class Ver_registrosAdmin extends Ver_registros {
       }
 
    /**
-    * Enviar email al programador con los mensajes del sistema
+    * Enviar email al programador con los mensajes del sistema en un archivo
+    * csv
     *
     * Utilizamos las variables configurables:
+    *
+    * @todo Poner exportación a cvs en Registros.php
     */
 
    function envio_registros_mail($e, $args=FALSE) {
@@ -75,34 +78,47 @@ class Ver_registrosAdmin extends Ver_registros {
 
       $filtro = 'fecha > '.$fecha_periocidad.' ORDER BY id desc';
 
-      $registros = $gcm->reg->ver_registros(NULL,$filtro);
+      if ( $gcm->reg->conexion->getAttribute(constant("PDO::ATTR_DRIVER_NAME")) == 'sqlite' ) {
 
-      if ( !is_array($registros) || count($registros) < 1 ) {
+         $sql = 'SELECT id
+            ,strftime("%d/%m/%Y %H:%M:%S", datetime(fecha,"unixepoch")) as fecha
+            ,tipo
+            ,mensaje
+            , "sesion: " || sesion || " " || fichero || ":" || linea || "\n\n" || descripcion as descripcion  
+            FROM '.$gcm->sufijo.'registros
+            ';
+
+      } else {
+         $sql= 'SELECT id
+            ,DATE_FORMAT(FROM_UNIXTIME(fecha),"%d/%m/%y %T") as fecha
+            ,tipo
+            ,mensaje
+            ,CONCAT("sesion: ",sesion," ",fichero,":",linea,"\n\n",descripcion) as descripcion  
+            FROM '.$gcm->sufijo.'registros
+         ';
+         }
+
+      $sql .= 'WHERE '.$filtro;
+
+      require_once GCM_DIR.'lib/int/GcmPDO/lib/GcmPDO.php';
+      $export = new GcmPDO($gcm->reg->conexion, $sql);
+      $adjunto = $export->to_csv('registros-'.$gcm->config('admin','Proyecto').'-'.date("Y-m-d").'csv', FALSE); 
+      
+         
+      if ( ! $adjunto ) {
          registrar(__FILE__,__LINE__,'Sin registros a enviar');
          return ;
          }
 
-      $resultado  = '<pre>
-
-         0: id
-         1: sesion
-         2: fecha
-         3: tipo
-         4: fichero
-         5: linea
-         6: mensaje
-         7: descripcion
-         ';
-      $resultado .= '<pre>'.depurar($registros).'</pre>';
-
       // Enviamos email
 
-      $args['cuerpo']  = $resultado;
+      $args['cuerpo']  = literal('Registros de los últimos'.' '.$this->periocidad.' '.literal('días'));
       $args['asunto']  = 'Registros en '.$gcm->config('admin','Proyecto');
       $args['mail']    = $this->mail_envio;
       $args['nombre_destinatario'] = $this->nombre_envio_email;
       $args['nombre_remitente'] = $this->nombre_remitente;
       $args['mail_remitente'] = $this->mail_remitente;
+      $args['adjuntos'] = array($adjunto);
 
       registrar(__FILE__,__LINE__,'Enviamos email con los registros','ADMIN');
 

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Nov 15 9:57:45 CET 2013
+// Archivo generado automáticamente por GcmConfig Tue Dec 3 11:44:38 CET 2013
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -130,4 +130,22 @@ $GCM_LG_es['masmonelledu']='';
 $GCM_LG_es['Nombre de sección']='';
 $GCM_LG_es['Iconos']='';
 $GCM_LG_es['Contenido añadido']='';
+$GCM_LG_es['victor']='';
+$GCM_LG_es['Galería de imágenes']='';
+$GCM_LG_es['Idiomas Activados']='';
+$GCM_LG_es['Nuevo idioma']='';
+$GCM_LG_es['Pagina no encontrada']='';
+$GCM_LG_es['Página no encontrada']='';
+$GCM_LG_es['Procesar fichero proyecto.css modificado']='';
+$GCM_LG_es['masmonell']='';
+$GCM_LG_es['Modo administración']='';
+$GCM_LG_es['Modo usuario']='';
+$GCM_LG_es['trabajos']='';
+$GCM_LG_es['proyecto']='';
+$GCM_LG_es['Confirmar borrado']='';
+$GCM_LG_es['Borrado de contenido']='';
+$GCM_LG_es['Contenido borrado']='';
+$GCM_LG_es['mamedu.com/gcm']='';
+$GCM_LG_es['Administración de constantes']='';
+$GCM_LG_es['Renombrando o moviendo sección']='';
 ?>

@@ -9,7 +9,7 @@
  ?>
 <h2>Colores</h3>
 
-<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
 <div id="picker"></div>
 
 <div id="selector_colores">
@@ -28,8 +28,8 @@
 </thead>
 <?php } ?>
 <tr class="form-item">
-   <td><?=$key?></td>
-   <td><input type="text" id="<?=$key?>" name="colores[<?=$key?>]" class="colorwell" value="<?=$this->rgb2html($color)?>" /></td>
+   <td><?php echo $key?></td>
+   <td><input type="text" id="<?php echo $key?>" name="colores[<?php echo $key?>]" class="colorwell" value="<?php echo $this->rgb2html($color)?>" /></td>
 </tr>
 <?php } ?>
 </table>
@@ -37,16 +37,15 @@
 <br /><br />
 <input type="hidden" name="m" value="temas" />
 <input type="hidden" name="a" value="administrar" />
-<button type="submit" name="accion" value="guardar_colores"><?=literal('Guardar colores',3)?></button>
+<button type="submit" name="accion" value="guardar_colores"><?php echo literal('Guardar colores',3)?></button>
 </form>
 <br />
-<form method="post" action="<?=$_SERVER['PHP_SELF']?>" style="width: 500px;">
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']?>" style="width: 500px;">
 <fieldset>
-<legend><?=literal('Añadir un color',3)?></legend>
+<legend><?php echo literal('Añadir un color',3)?></legend>
 <input type="text" name="color" cols="15" value="1-fuenteb"/>
 <input type="hidden" name="m" value="temas" />
 <input type="hidden" name="a" value="administrar" />
-<button type="submit" name="accion" value="anyadir_color"><?=literal('Añadir',3)?></button>
+<button type="submit" name="accion" value="anyadir_color"><?php echo literal('Añadir',3)?></button>
 </fieldset>
 </form>
-

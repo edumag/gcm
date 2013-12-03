@@ -24,7 +24,7 @@
  * Inspirado en @see http://www.jourmoly.com.ar/introduccion-a-mvc-con-php-segunda-parte/
  * 
  * Las descripciones de las variables se guardan en archivos a parte uno por cada idioma 
- * que utilicamos, Podemos especificar el idioma por defecto de la aplicación y el idioma
+ * que utilizamos, Podemos especificar el idioma por defecto de la aplicación y el idioma
  * actual.
  *
  * En caso de no tener todas las descripciones del idioma actual las cogeremos del idioma 
@@ -36,37 +36,38 @@
  * El nombre de la variable debe coincidir con el nombre del archivo, el resto será
  * ignorado y por lo tanto perdido al volver a escribir el archivo.
  *
- * <pre>
+ * @code
  * <?php
  * $TGC[v1]="variable1";
  * $TGC[v2]="variable2";
  * ?>
- * </pre>
+ * @endcode
  *
  * Formato para archivo de descripciones TGC_es.php:
  *
- * <pre>
+ * @code
  * <?php
  * $TGC_DESC[v1]="descripcion_variable1";
  * $TGC_DESC[v2]="descripcion_variable2"; 
  * ?>
- * </pre>
+ * @endcode
  *
  * Ejemplo de uso:
  *
- * <pre>
+ * @code
  * $config = new GcmConfig('config/TGC.php');
  * $variable1 = $config->get('v1');
  * $config->set('v1','NUEVO VALOR PARA v1');
  * $config->setDescripcion('v1','NUEVO VALOR PARA DESCRIPCION v1');
  * $config->del('v4');
- * </pre>
+ * @endcode
  *
  * La clase recibe la ruta del archivo que contiene las variables, a partir de la ruta
  * se deduce el nombre de la variable, que sera el del archivo sin '.php'.
  *
  * Los ficheros de idiomas contendran su especificación en el nombre, ejemplo: TGC_es.php
  *
+ * @ingroup GcmConfig
  */
 
 class GcmConfig {
@@ -213,9 +214,9 @@ class GcmConfig {
       }
 
    /**
-    * Definir un archivo con las descripciones
+    * Definir directorio donde se guardan y recogen las descripciones
     *
-    * @param $archivo Archivo con las descripciones
+    * @param $directorio Directorio descripciones
     */
 
    function directorio_descripciones($directorio) {
@@ -234,7 +235,7 @@ class GcmConfig {
 
       $idioma = ( $idioma ) ? $idioma : $this->idioma ;
 
-      if ( $this->descripciones_recogidas[$idioma] == TRUE ) {
+      if ( isset($this->descripciones_recogidas[$idioma]) && $this->descripciones_recogidas[$idioma] == TRUE ) {
          return;
          }
       
@@ -460,7 +461,7 @@ class GcmConfig {
 
       /* Idioma actual */
 
-      if ( !$this->descripciones_recogidas[$idioma] ) { $this->recoger_descripciones($idioma); }
+      if ( !isset($this->descripciones_recogidas[$idioma]) ) { $this->recoger_descripciones($idioma); }
 
       // Si es un grupo
       if ( $grupo && isset($this->descripciones[$idioma][$grupo][$variable])) {
@@ -607,9 +608,9 @@ class GcmConfig {
 
       try {
 
-         $ubicacion = dirname($_SERVER['SCRIPT_FILENAME']);
+         // $ubicacion = dirname($_SERVER['SCRIPT_FILENAME']).'/';
 
-         if ( ! $file = @fopen($ubicacion.'/'.$archivo, "w",TRUE) ) {
+         if ( ! $file = @fopen($archivo, "w",TRUE) ) {
             $error = error_get_last();
             $msg = "No se pudo abrir archivo $archivo para incluir $nombre_array ";
             $msg .= "\nDirectori actual: ".getcwd();

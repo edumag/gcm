@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @file      RegistroFactory.php
- * @brief     Patron Factory para la clase Registro
+ * @file    RegistroFactory.php
+ * @brief   Patron Factory para la clase Registro
+ * @ingroup registro
  *
  * @author    Eduardo Magrané 
  *
@@ -19,6 +20,7 @@
 /**
  * @class RegistroFactory
  * @brief Patron Factory para la clase Registro
+ * @ingroup registro
  *
  * Para asegurarnos que recogemos la misma instancia para cada fichero de 
  * configuración

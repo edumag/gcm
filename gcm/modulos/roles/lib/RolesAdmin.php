@@ -3,8 +3,6 @@
 /**
  * @file RolesAdmin.php
  * @brief Clase para administración de roles
- *
- * @package Modulos
  */
 
 require_once ( 'Roles.php' );
@@ -53,6 +51,7 @@ class RolesAdmin extends Roles {
 
          $args = array();
          $args['eliminar'] = 'si';
+         $args['ampliar_lista'] = 'si';
 
          // $configuracion->directorio_descripciones(GCM_DIR.'modulos/'.$modulo.'/config');
 
@@ -92,6 +91,7 @@ class RolesAdmin extends Roles {
 
             $configuracion = new GcmConfigGui($_POST['archivo']);
 
+            $configuracion->directorio_descripciones(dirname(__FILE__).'/../config/roles/descripciones/');
             $configuracion->escribir_desde_post();
 
          } catch (Exception $ex) {
@@ -173,6 +173,12 @@ class RolesAdmin extends Roles {
 
       }
 
+   /**
+    * Administrar roles de usuarios
+    *
+    * @todo procesar texto de readme para presentarlo
+    */
+
    function usuarios($e, $args=FALSE){
 
       global $gcm;
@@ -181,7 +187,17 @@ class RolesAdmin extends Roles {
       $gcm->event->unico('titulo','roles');
       $gcm->titulo = literal('Roles de usuarios');
 
-      echo '<div class="ayuda">'; echo nl2br(file_get_contents(dirname(__FILE__).'/../readme.dox')) ; echo '</div>';
+      require GCM_DIR.'lib/ext/parsedown-master/Parsedown.php';
+      $ayuda = file_get_contents(dirname(__FILE__).'/../usuario.md');   
+      $reemplazar = array(
+         '@defgroup info_usuario_roles Información para usuario'
+         ,'@ingroup modulo_roles'
+         ,'@{'
+         ,'@}'
+         );
+      $ayuda = str_replace($reemplazar,'',$ayuda);
+      $ayuda = Parsedown::instance()->parse($ayuda);
+      echo '<div class="ayuda">'; echo $ayuda ; echo '</div>';
 
       // Archivo con los roles de usuario del proyecto
       $archivo = self::$dir_roles.'../usuarios.php';
@@ -215,7 +231,8 @@ class RolesAdmin extends Roles {
       <form action="" method="POST">
       <fieldset>
       <legend  accesskey="r">Adjudicar roles a usuarios</legend>
-      <?php echo HTML::form_text('contenido_usuarios', $contenido, array('maxlength' => 2000 , 'required' )); ?>
+      <?php $lineas=contabilizar_saltos_linea($contenido); ?>
+      <?php echo HTML::form_text('contenido_usuarios', $contenido, array('maxlength' => 2000 , 'required','class'=>'editor_codigo','rows'=>$lineas )); ?>
       <input name="usuarios_roles" type="submit" value="Enviar" />
       </fieldset>
       </form>

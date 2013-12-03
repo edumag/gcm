@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @file      GcmConfigGui.php
- *
- * Interface para modificar variables de php de un archivo.
+ * @file  GcmConfigGui.php
+ * @brief Interface para modificar variables de php de un archivo.
+ * @ingroup GcmConfig
  *
  * @author    Eduardo Magrané 
  * @ingroup GcmConfig
@@ -18,9 +18,9 @@
 require_once('GcmConfig.php');
 
 /**
- * @class GcmConfig
- *
- * @brief     Lectura y edición de archivos de configuración
+ * @class   GcmConfig
+ * @brief   Lectura y edición de archivos de configuración
+ * @ingroup GcmConfig
  *
  * Esta clase nos permite leer archivos de configuración nativos de php y
  * a la vez la edición de su contenido con formularios php.
@@ -55,10 +55,11 @@ class GcmConfigGui extends GcmConfig {
 
    function formulario($args = NULL) {
 
-      $ampliar   = ( isset($args['ampliar']) ) ? $args['ampliar'] : FALSE;
-      $eliminar  = ( isset($args['eliminar']) ) ? $args['eliminar'] : FALSE;
-      $plantilla = ( isset($args['plantilla']) ) ? $args['plantilla'] : dirname(__FILE__).'/../html/formGcmConfigGui.phtml';
-      $css       = ( isset($args['css']) ) ? $args['css'] : FALSE;
+      $ampliar       = ( isset($args['ampliar']) ) ? $args['ampliar'] : FALSE;
+      $ampliar_lista = ( isset($args['ampliar_lista']) ) ? $args['ampliar_lista'] : FALSE;
+      $eliminar      = ( isset($args['eliminar']) ) ? $args['eliminar'] : FALSE;
+      $plantilla     = ( isset($args['plantilla']) ) ? $args['plantilla'] : dirname(__FILE__).'/../html/formGcmConfigGui.phtml';
+      $css           = ( isset($args['css']) ) ? $args['css'] : FALSE;
       $modificar_descripciones = ( isset($args['modificar_descripciones']) ) ? $args['modificar_descripciones'] : FALSE;
 
 
@@ -118,7 +119,7 @@ class GcmConfigGui extends GcmConfig {
 
       /* Descripciones */
 
-      if ( count($_POST['descripcion_'.$idioma]) > 0 ) {
+      if ( isset($_POST['descripcion_'.$idioma]) && count($_POST['descripcion_'.$idioma]) > 0 ) {
 
          $this->descripciones[$idioma] = array();
 

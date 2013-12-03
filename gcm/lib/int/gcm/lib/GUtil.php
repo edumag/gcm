@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @file      GUtil.php
+ * @file  GUtil.php
+ * @brief Utilidades para GCM
+ * @ingroup gcm_lib
  *
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  08/02/10
- *  Revision  SVN $Id: GUtil.php 573 2012-02-08 15:30:49Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -24,6 +24,7 @@
  * <pre>
  * Gutil::archibo_manipulable('/temas/ejemplo.css');
  * </pre>
+ * @ingroup gcm_lib
  */
 
 class GUtil {
@@ -204,7 +205,7 @@ class GUtil {
 
           // Errores que mostramos
 
-          registrar($nombre_archivo,$num_linea, $mens_err,'ERROR');
+          registrar($nombre_archivo,$num_linea, $mens_err,'ADMIN');
 
        } elseif ( in_array($num_err, $errores_a_registrar) ) {
 
@@ -383,8 +384,6 @@ class GUtil {
     *
     * Presentamos la url recibida separada por secciones, con los 
     * literales y sus enlaces correspondientes
-    *
-    * @todo Aplicar enlaces en camino
     *
     * @param $url url
     * @param $enlazar Enlazar las secciones o contenidos, por defecto FALSE

@@ -42,7 +42,7 @@ class Enviomail extends Modulos {
     *
     */
 
-   function enviaMailHtml($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL,$html='true'){
+   function enviaMailHtml($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL,$html='true', $adjuntos=FALSE){
 
       global $gcm;
 
@@ -62,7 +62,7 @@ class Enviomail extends Modulos {
          $contenido = $contenidoMail;
       }
 
-      if ( $this->procesaEnvioMail($asunto,$contenido,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos,$html) ) {
+      if ( $this->procesaEnvioMail($asunto,$contenido,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos,$html,$adjuntos) ) {
          return TRUE;
       } else {
          return FALSE;
@@ -81,13 +81,14 @@ class Enviomail extends Modulos {
     * @param emailRemitente
     * @param ocultos
     * @param html true/false
+    * @param $adjuntos Array con ficheros adjuntos array('ruta_fichero','ruta_otro_fichero')
     *
     * @author Eduardo Magrané
     * @version 1.0
     *
     */
 
-   function procesaEnvioMail($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL, $html='true'){
+   function procesaEnvioMail($asunto,$contenidoMail,$nombreDestinatario,$emailDestinatario,$nombreRemite,$emailRemitente,$ocultos=NULL, $html='true', $adjuntos=FALSE){
 
       global $gcm;
 
@@ -139,6 +140,13 @@ class Enviomail extends Modulos {
       if ( $ocultos ) {
          foreach( $ocultos as $email => $nom ) {
             $mail->AddBCC($email, $nom);
+            }
+         }
+
+      // Adjuntos
+      if ( $adjuntos ) {
+         foreach ( $adjuntos as $adjunto ) {
+            $mail->AddAttachment($adjunto, basename($adjunto));
             }
          }
 
@@ -272,7 +280,13 @@ class Enviomail extends Modulos {
       $contenido_mail =  $args['cuerpo'];
       $asunto_mail    =  $args['asunto'];
 
-      if ( $this->enviaMailHtml($asunto_mail, $contenido_mail, $nombre_destinatario, $mail, $nombre_remitente, $mail_remitente,NULL,TRUE) ) {
+      if ( isset($args['adjuntos']) ) {
+         $adjuntos = $args['adjuntos'];
+      } else {
+         $adjuntos = FALSE;
+         }
+
+      if ( $this->enviaMailHtml($asunto_mail, $contenido_mail, $nombre_destinatario, $mail, $nombre_remitente, $mail_remitente,NULL,TRUE, $adjuntos) ) {
 
          return TRUE;
       } else {

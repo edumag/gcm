@@ -9,10 +9,14 @@
  * @{
  */
 
-/** Información sobre SEO del proyecto */
+if ( permiso('seo','aplicar_SEO') ) {
 
-$menuAdmin['Administración']['boton']['SEO']['activado']= 1;
-$menuAdmin['Administración']['boton']['SEO']['title']="Gestionar SEO";
-$menuAdmin['Administración']['boton']['SEO']['link']=dirname($_SERVER['PHP_SELF'])."/seo";
+   /** Información sobre SEO del proyecto */
+   $menuAdmin['Administración']['boton']['SEO']['activado']= 1;
+   $menuAdmin['Administración']['boton']['SEO']['title']="Gestionar SEO";
+   $menuAdmin['Administración']['boton']['SEO']['link']=dirname($_SERVER['PHP_SELF'])."/seo";
+
+   }
+
 /** @} */
 ?>

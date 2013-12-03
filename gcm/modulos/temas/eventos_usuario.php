@@ -22,6 +22,7 @@ $eventos['pie']['pie'][1] = '';
 
 /** Llenar el título de página */
 $eventos['cabeceraIzquierda']['presentar_titulo'][1]='';
+$eventos['tituloProyecto']['presentar_titulo'][1]='';
 
 /** Añadir css a los heads */
 $eventos['heads']['incluir_css_head'][5] = '';

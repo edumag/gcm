@@ -1,12 +1,11 @@
 /**
- * @file      GcmConfigGui.js
- * @brief     Javascript para formulario
+ * @file    GcmConfigGui.js
+ * @brief   Javascript para formulario
+ * @ingroup GcmConfig
  *
  * Funciones para añadir eliminar o modificar variables y descripciones
  *
  * @author    Eduardo Magrané 
- * @ingroup GcmConfig
- *
  * @internal
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
@@ -26,6 +25,38 @@ function eliminarElemento(ID) {
 
    var CAJA = document.getElementById(ID);
    CAJA.parentNode.removeChild(CAJA);
+
+   }
+
+/** 
+ * Añadir nueva lista 
+ *
+ * @param idioma Idioma del formulario
+ */
+
+function nueva_lista(idioma) {
+
+   CONTA++;
+   var descripcion = prompt('Nueva lista','');
+   var valor = prompt('Valor','');
+   var concepto = descripcion.replace(/ /g,'_');
+
+   var cajaForm = document.getElementById('cajaForm_'+idioma);
+   var subCaja = document.createElement('div');
+   // subCaja.width='100%';
+   subCaja.innerHTML = "<br /><b>"+concepto+"</b><br />";
+   subCaja.id = concepto + "-" + CONTA;
+   var newTextarea = document.createElement('textarea');
+   var newText = document.createElement('input');
+   newText.type='text';
+   newText.value=descripcion;
+   newText.name='descripcion_' + idioma + '[' + concepto + ']';;
+   newTextarea.rows=3;
+   newTextarea.name='escribir_' + idioma + '[' + concepto + '][]';
+   newTextarea.value = valor ;
+   cajaForm.appendChild(subCaja);
+   subCaja.appendChild(newText);
+   subCaja.appendChild(newTextarea);
 
    }
 

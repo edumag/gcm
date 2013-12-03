@@ -1,6 +1,7 @@
 /** 
- * javascript para el módulo ver_registros
- *
+ * @file registro.js
+ * @brief javascript para el módulo ver_registros
+ * @ingroup registro
  */
 
 /**

@@ -1,4 +1,3 @@
-*{padding: 0; margin: 0;}
 #TB_window {
 	font: 12px Arial, Helvetica, sans-serif;
 	color: <?=$this->color("thickbox-00")?>;

@@ -45,3 +45,9 @@ fieldset input[type="text"] {
     height: 20px;
     margin: 0 10px;
 }
+
+textarea.editor_codigo {
+    background: none repeat scroll 0 0 rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    width: 100%;
+}

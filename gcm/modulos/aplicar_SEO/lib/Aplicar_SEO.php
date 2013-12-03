@@ -42,8 +42,6 @@ class Aplicar_SEO extends Modulos {
 
       $dominio = $gcm->config('admin','Proyecto');
 
-      $url = str_replace('seo','',$_SERVER['HTTP_REFERER']);
-
       $titulo = 'SEO';
       $contenido = get_include_contents(dirname(__FILE__).'/../html/info.phtml',array('dominio'=>$dominio));
 

@@ -1,18 +1,13 @@
 /**
-
-@defgroup {libreria} Librería
+@defgroup {libreria} {libreria}
+@ingroup librerias
+@{
 
 {Descripción conrta}
 
-@ingroup librerias
-
-@{
-
-{Documentación}
-
 @}
 
-@defgroup plantilla_{libreria} Plantillas para {Libreria}
+@defgroup plantilla_{libreria} Plantillas para {libreria}
 @ingroup plantilla_libreria
 @ingroup {libreria}
 @{

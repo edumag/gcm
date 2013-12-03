@@ -3,13 +3,13 @@
 /**
  * @file      Router.php
  * @brief     Enrutar segun url
+ * @ingroup gcm_lib
  *
  * Detailed description starts here.
  *
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  23/07/10
  *  Revision  SVN $Id: Router.php 554 2012-01-17 17:12:56Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
@@ -20,6 +20,7 @@
 /**
  * @class Router
  * @brief Clase destinada a determinar donde estamos, y que queremos hacer.
+ * @ingroup gcm_lib
  * 
  * Podemos definir desde la url los eventos a lanzar, formatos, idioma, etc.., 
  * indicando al inicio de la url es decir justo antes de la sección especificada.
@@ -52,7 +53,7 @@
  * de cada proyecto un archivo .htaccess con el siguiente contenido y tener activado
  * RewriteRule en apache.
  *
- * <pre>
+ * @code
  * RewriteEngine on
  * RewriteOptions MaxRedirects=20
  * 
@@ -67,7 +68,7 @@
  * RewriteCond %{REQUEST_FILENAME} !-f
  * 
  * RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
- * </pre>
+ * @endcode
  *
  */
 
@@ -437,6 +438,7 @@ class Router {
                }
             }
          $archivo_contenido = file_get_contents($archivo);
+         ob_clean();
          header('Content-type: '. self::$mime_type);
          header ("Expires: ".gmdate("D, d M Y H:i:s",time()+86400).' GMT'); // 86400 segundos, 24 horas 24x60x60
          echo $archivo_contenido;

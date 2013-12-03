@@ -46,7 +46,7 @@ font-weight: bold;
 }
 #barraNavegacion ul ul {
    font-size: 90%;
-   margin: 5px 16px;
+   margin: 0 0 0 2px;
 }
 #barraNavegacion li a {
 font-weight: normal;

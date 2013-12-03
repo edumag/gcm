@@ -1,10 +1,9 @@
 <?php
 
 /**
- * @file roles.php
+ * @file Roles.php
  * @brief Clase Roles
- *
- * @package Modulos
+ * @ingroup modulo_roles
  */
 
 /**
@@ -83,18 +82,11 @@ class Roles extends Modulos {
 
       if ( isset(self::$acciones[$m]) && in_array($a, self::$acciones[$m]) ) return TRUE;
 
+      registrar(__FILE__,__LINE__,"Sin permisos para $m -> $a");
+      
       return FALSE;
 
       }
-
-   /**
-    * @defgroup roles Roles
-    *
-    * Gestión de roles de usuarios.
-    *
-    * @ingroup usuarios
-    * @{
-    */
 
    /**
     * Recogemos $acciones de archivo de configuración
@@ -157,8 +149,6 @@ class Roles extends Modulos {
       // echo "<pre>Acciones: " ; print_r(self::$acciones) ; echo "</pre>"; // DEV  
       
       }
-
-   /** @} */
 
    }
 

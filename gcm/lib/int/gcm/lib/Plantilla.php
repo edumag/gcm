@@ -3,12 +3,11 @@
 /**
  * @file      Plantilla.php
  * @brief     Sistema de plantilla
+ * @ingroup gcm_lib
  *
  * @author    Eduardo Magrané 
  *
  * @internal
- *   Created  22/10/10
- *  Revision  SVN $Id: Plantilla.php 511 2011-05-12 09:52:27Z eduardo $
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -35,7 +34,7 @@
  * que cuando procesemos contenido haya pasado ya por todo lo demas y si hay algún mensaje
  * que contenido deba de presentar lo tendra en cuenta.
  *
- * @package   Plantilla
+ * @ingroup gcm_lib
  */
 
 class Plantilla {

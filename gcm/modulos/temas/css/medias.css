@@ -5,101 +5,108 @@
 - Los títulos de los paneles se convierten en botones
 - Las tablas pasan a modo vertical
 */
-@media screen and (max-width: 640px){
+@media screen and (max-width: 640px) {
 
-/* 
- ### Barra de navegación pasa a abajo
-*/
-#lateral, #contenedor {
-float: none;
-margin: 0 auto;
-width: 96%;
-}
-#lateral { 
-   margin-left: 10px;
-}
-/*  ## Los títulos de los paneles se convierten en botones
+   /* 
+    ### Barra de navegación pasa a abajo
+   */
+   #lateral, #contenedor {
+      float: none;
+      margin: 0 auto;
+      width: 96%;
+      }
+   #lateral { 
+      margin-left: 10px;
+      }
+   /*  ## Los títulos de los paneles se convierten en botones
 
-    <div class="panel_titulo"><a href="#">Título</a></div>
-*/
-.panel_titulo a:first-child  {
--moz-border-radius:5px;
--webkit-border-radius:5px;
-border-radius:5px;
--moz-box-shadow:0 1px 0 #000000;
--webkit-box-shadow:0 1px 0 #000000;
-box-shadow:0 1px 0 #000000;
-background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
-background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
-color: #3C3B37;
-text-shadow:1px 1px 0 #ffffff;
-padding: 5px;
-display: block;
-}
+       <div class="panel_titulo"><a href="#">Título</a></div>
+   */
+   .panel_titulo a:first-child  {
+      -moz-border-radius:5px;
+      -webkit-border-radius:5px;
+      border-radius:5px;
+      -moz-box-shadow:0 1px 0 #000000;
+      -webkit-box-shadow:0 1px 0 #000000;
+      box-shadow:0 1px 0 #000000;
+      background: -moz-linear-gradient(19% 75% 90deg, #E0E0E0, #FAFAFA);
+      background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#E0E0E0));
+      color: #3C3B37;
+      text-shadow:1px 1px 0 #ffffff;
+      padding: 5px;
+      display: block;
+      }
 
-/* ## Tablas adaptables, cada registro se muestra verticalmente
+   /* ## Tablas adaptables, cada registro se muestra verticalmente
 
-    <table>
-       <thead>
-          <tr>
-             <th>head 01</th>
-             <th>head 02</th>
-             <th>head 03</th>
-          </tr>
-       </thead>
-       <tbody>
-          <tr>
-             <td>fila 01 col 01</td>
-             <td>fila 01 col 02</td>
-             <td>fila 01 col 03</td>
-          </tr>
-          <tr>
-             <td>fila 02 col 01</td>
-             <td>fila 02 col 02</td>
-             <td>fila 02 col 03</td>
-          </tr>
-          <tr>
-             <td>fila 03 col 01</td>
-             <td>fila 03 col 02</td>
-             <td>fila 03 col 03</td>
-          </tr>
-       </tbody>
-    </table>
-*/
-table, thead, tr, th, tbody, td{
-   display:block;
-}
-tr { border-bottom: 4px solid #3C3B37; }
-td { 
-   border: none;
-   border-bottom: 1px solid #3C3B37; 
-   position: relative;
-}
-}
+       <table>
+          <thead>
+             <tr>
+                <th>head 01</th>
+                <th>head 02</th>
+                <th>head 03</th>
+             </tr>
+          </thead>
+          <tbody>
+             <tr>
+                <td>fila 01 col 01</td>
+                <td>fila 01 col 02</td>
+                <td>fila 01 col 03</td>
+             </tr>
+             <tr>
+                <td>fila 02 col 01</td>
+                <td>fila 02 col 02</td>
+                <td>fila 02 col 03</td>
+             </tr>
+             <tr>
+                <td>fila 03 col 01</td>
+                <td>fila 03 col 02</td>
+                <td>fila 03 col 03</td>
+             </tr>
+          </tbody>
+       </table>
+   */
+   table, thead, tr, th, tbody, td{
+      display:block;
+      }
+   tr { border-bottom: 4px solid #3C3B37; }
+   td { 
+      border: none;
+      border-bottom: 1px solid #3C3B37; 
+      position: relative;
+      }
+   }
+
+
 /*  ## 400px
 
 - Adaptamos cabecera
 
 */
-@media screen and (max-width: 400px){
-#cabeceraDerecha {
-   display: inline;
-   width: 100%;
-}
-}
+@media screen and (max-width: 400px) {
+
+   #cabeceraDerecha {
+      display: inline;
+      width: 100%;
+      }
+
+   }
+
 /*  ## 320px
 - Adaptamos selector de idiomas
 - Adaptamos formulario de busqueda
 */
-@media screen and (max-width: 320px){
-#cabeceraDerecha select {
-display: inline;
-width: 100%;
-}
-#cabeceraDerecha input[type="text"] {
-display: inline;
-width: 100%;
-margin-top: 4px;
-}
-}
-}
+@media screen and (max-width: 320px) {
+
+   #cabeceraDerecha select {
+   display: inline;
+   width: 100%;
+   }
+   #cabeceraDerecha input[type="text"] {
+   display: inline;
+   width: 100%;
+   margin-top: 4px;
+   }
+
+   }
+
