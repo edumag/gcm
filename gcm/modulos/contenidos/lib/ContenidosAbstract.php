@@ -279,7 +279,8 @@ abstract class ContenidosAbstract extends Modulos {
          $gcm->contenido=$buffer;
 
       } else {
-         echo $contenido;
+         // echo $contenido;
+         $gcm->contenido=$contenido;
          }
 
       }

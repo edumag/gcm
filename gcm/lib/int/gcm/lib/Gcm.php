@@ -559,7 +559,7 @@ class Gcm {
    function __get($elemento) {
 
       if ( isset($this->contenidos[$elemento] )  ) {
-         registrar(__FILE__,__LINE__,'Gcm->__get('.$elemento.')');
+         registrar(__FILE__,__LINE__,'Gcm->__get('.$elemento.')','DEBUG',$this->contenidos[$elemento]);
          return $this->contenidos[$elemento];
          }
 
@@ -573,7 +573,7 @@ class Gcm {
 
    function __set($elemento, $valor) {
 
-      registrar(__FILE__,__LINE__,'Gcm->__set('.$elemento.')');
+      registrar(__FILE__,__LINE__,'Gcm->__set('.$elemento.')','DEBUG',$valor);
       $this->contenidos[$elemento] = $valor;
 
       }

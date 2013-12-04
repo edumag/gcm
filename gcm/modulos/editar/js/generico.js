@@ -34,33 +34,3 @@ function insertaReferencia(formulario) {
 
    }
 
-/*
-* Presentamos los constantes para poder ser insertados en el formulario
-* de tiny.
-*/
-
-function presentaConstantes(){
-
-   if (pedido.readyState == 4 ) {
-      if ( pedido.status == 200 ) {
-         var container = document.getElementById('panelConstantes');
-         var salida = '<br />' ;
-         var datos = eval('['+pedido.responseText+']');
-         if ( datos ) {
-            for ( var elemento in datos ) {
-               for ( var subelemento in datos[elemento] ) {
-                  //salida += '<p class="subpanel" style="text-align:left">';
-                  salida += '<p class="subpanel" >';
-                  salida += '<a href="javascript:;" onmousedown="tinyMCE.execCommand(\'mceInsertContent\',false,\'{C{' + subelemento + '}}\');" ';
-                  salida += 'title="' + datos[elemento][subelemento][0] + ' | ' + datos[elemento][subelemento][1] + '" >';
-                  salida += subelemento + '</a>';
-                  salida += '</p>';
-               }
-            }
-            container.innerHTML = salida ;
-         }
-
-      }
-   }
-
-   }

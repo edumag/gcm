@@ -1,0 +1,60 @@
+/**
+
+@defgroup modulo_constantes Módulo Constantes
+
+Administrar los constantes de la aplicación
+
+@ingroup modulos_aplicacion
+@ingroup modulo_constantes
+
+@{
+
+El sistema de constantes es el mismo que el de los archivos de configuración
+
+Hay un archivo que tiene las constantes, GCM_CONS.php
+y archivos con las definiciones en cada idioma, GCM_CONS_es.php
+
+formato de GCM_CONS.php:
+
+@code
+<?php
+$GCM_CONS["ejemplo_constante"]="1500€";
+?>
+@endcode
+
+formato de GCM_CONS_es.php:
+
+@code
+<?php
+$GCM_CONS_DESC["ejemplo_constante"]="Ejemplo de constante";
+?>
+@endcode
+
+Contenido
+---------
+
+<pre>
+gcm/modulos/constantes/
+|-- css
+|   `-- panel_constantes.css
+|-- eventos_admin.php
+|-- eventos_usuario.php
+|-- js
+|   `-- constantes.js
+|-- lib
+|   |-- ConstantesAdmin.php
+|   `-- Constantes.php
+|-- menuAdmin.php
+`-- readme.dox
+
+3 directories, 8 files
+</pre>
+
+@}
+
+@defgroup plantilla_constantes Plantillas pata Constantes
+@ingroup modulo_constantes
+@ingroup plantillas_modulos
+@{
+
+@} */
