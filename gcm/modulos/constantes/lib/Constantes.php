@@ -94,7 +94,8 @@ class Constantes extends Modulos {
 
       $this->recuperar_constantes();
 
-      if ( isset($this->constantes[$etiqueta]) ) return $this->constantes[$etiqueta] ;
+      $etiqueta = html_entity_decode($etiqueta,ENT_NOQUOTES,'UTF-8');
+      if ( !empty($this->constantes[$etiqueta]) ) return $this->constantes[$etiqueta] ;
 
       registrar(__FILE__,__LINE__,"Constante sin definir [".$etiqueta."]",'ADMIN');
       

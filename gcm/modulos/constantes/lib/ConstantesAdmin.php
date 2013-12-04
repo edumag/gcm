@@ -20,9 +20,6 @@ require_once(dirname(__FILE__).'/Constantes.php');
 /**
  * @class ConstantesAdmin
  * @brief Administración de constantes
- * @version 0.3
- *
- * @todo Crear mecanismo para eliminar constante de todos los idiomas no solo del que estamos.
  */
 
 class ConstantesAdmin extends Constantes {
@@ -34,11 +31,7 @@ class ConstantesAdmin extends Constantes {
       }
 
    /**
-    * Devolvemos lista con formato json para javascript con el contenido del array 
-    * de las constantes
-    *
-    * @return array en formato json
-    *
+    * Devolvemos contenido del panel de constantes
     */
 
    function devolverConstantes() {
@@ -73,10 +66,6 @@ class ConstantesAdmin extends Constantes {
 
       return;
 
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      print json_encode($arr->variables());
-
       }
 
    /** 
@@ -88,8 +77,6 @@ class ConstantesAdmin extends Constantes {
     */
 
    function panel_constantes($e,$args='') {
-
-      $this->javascripts('constantes.js');
 
       $panel = array();
       $panel['titulo'] = literal('Añadir constantes',3);
@@ -103,110 +90,11 @@ class ConstantesAdmin extends Constantes {
       }
 
    /**
-    * Eliminar constante
-    *
-    * Eliminamos constante especifico
-    *
-    * @todo Hacer los mismo en todos los idiomas.
-    *
-    */
-
-   function eliminarConstante() {
-
-      global $gcm;
-
-      $idioma = Router::$i;
-      $file   = $this->fichero_constantes;
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-      $arr->del($_GET['elemento']);
-      $arr->guardar_variables();
-
-      echo "Elemento [ ".$_GET['elemento']." ] eliminado";
-
-      }
-
-   /**
-    * Modificar array
-    *
-    * $_GET Parametros recogidos mediante GET
-    *   - elemento: clave del array a modificar
-    *   - valor:    Valor a añadir
-    *   - file:     Archivo con array, de formato especifico
-    *               En caso de no haberlo cogemos el del idioma actual
-    *
-    * @see GcmConfig
-    */
-
-   function modificarConstante() {
-
-      global $gcm;
-
-      $file=$gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      $arr->set($_GET['elemento'],$_GET['valor']);
-
-      $arr->guardar_variables();
-
-      echo "[ ".$_GET['elemento']." ] = [ ".$_GET['valor']." ] en [ ".$file." ]";
-
-      }
-
-   /** Añadir constante para el contenido nuevo
-    *
-    * En caso de que ya exista constante no lo modificamos.
-    *
-    * @param $e    Evento
-    * @param $args Array de argumentos
-    *
-    * @see GcmConfig
-    */
-
-   function contenido_nuevo($e, $args='') {
-
-      $extension = ( $e == "postGuardar" ) ? '.html' : '.btml' ;
-
-      $nombre_fichero  = str_replace($extension,'',Router::$c);
-      $constante_fichero = str_replace($extension,'',$_POST['documento']);
-
-      /* Eliminar secciones de documento para el constante */
-
-      $conts = explode('/',$constante_fichero);
-      $constante_fichero = $conts[count($conts)-1];
-
-      $file   = $this->fichero_constantes;
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      /* si hay constante no hacemos nada */
-
-      $litold = $arr->get($nombre_fichero);
-
-      if ( empty($litold)  ) {
-
-         $arr->set($nombre_fichero,$constante_fichero);
-
-         $arr->guardar_variables();
-
-         /* Incluimos elemento en Array global para que no sea añadido con varlor nulo en la recarga de página */
-
-         global $LG;
-         $LG[$nombre_fichero]=stripslashes($constante_fichero);
-
-         }
-
-      }
-
-   /**
     * Administración de constantes
     *
     * @param  $e Evento
     * @param  $args Argumentos
     * @return TRUE/FALSE
-    * @bug Al presentar de nuevo el formulario despues de una actualización no muestra los cambios
-    *
     */
    
    function administrar($e,$args=NULL) {
