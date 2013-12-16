@@ -64,9 +64,15 @@
    margin: 5px;
    max-width: 200px;
 }
+#cajaImg tt {
+    display: list-item;
+    overflow: auto;
+    width: 100%;
+}
 .img_editar img {
     display: block;
     margin: 10px;
+   max-width: 90%;
 }
 /* Columna al editar entrada */
 #thumbnails_columna .img_editar {

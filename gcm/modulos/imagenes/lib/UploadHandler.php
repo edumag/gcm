@@ -532,7 +532,10 @@ class UploadHandler
                         FILE_APPEND
                     );
                 } else {
-                    move_uploaded_file($uploaded_file, $file_path);
+                   if ( ! move_uploaded_file($uploaded_file, $file_path) ) {
+                      registrar(__FILE__,__LINE__,"No se pudo mover imagen a su destino",'ERROR');
+                      
+                     }
                 }
             } else {
                 // Non-multipart uploads (PUT method support)
