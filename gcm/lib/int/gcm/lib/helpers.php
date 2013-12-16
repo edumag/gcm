@@ -66,7 +66,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          } elseif ( is_array($LG) && ! @array_key_exists  ( $literal , $LG  ) ) {
 
-            /* Si se pide un literal que no tenemos lo añadimos al archivo vacio
+            /* Si se pide un literal que no tenemos lo añadimos al archivo vacío
              * para tener constancia de ello.
              */
 

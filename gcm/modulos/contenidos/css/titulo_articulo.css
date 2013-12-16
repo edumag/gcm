@@ -26,3 +26,6 @@ display: inline;
 /* color: <?=$this->color("body-11")?>; */
 font-weight: bold !IMPORTANT ;
 }
+.titulo_articulo a {
+text-transform: capitalize;
+}

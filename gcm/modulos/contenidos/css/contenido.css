@@ -46,9 +46,9 @@ margin: 8px;
 
 #listar_dir_recur li {
 list-style: none;
-padding: 3px 0px 5px 17px;
+padding: 3px 0px 5px 7px;
 }
 
 #contenido ul, #contenido ol {
-   margin-left: 34px;
+   margin-left: 0;
 }
