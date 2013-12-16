@@ -469,16 +469,20 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
 function modificarGet($var, $valor) {
 
-   $salida = "?".$var."=".$valor;
+   $salida = FALSE;
+
+   if ( $valor ) $salida .= $var."=".$valor;
+
    foreach($_GET as $key => $val ) {
-      if ( $key != $var ) {
+      if ( $key !== $var ) {
          // Descartamos url, ya viene con la dirección
          if ( $key != "url" ) {
             $salida .= "&".$key."=".$val;
          }
       }
    }
-   return $salida;
+   
+   return ( $salida ) ? '?'.$salida : FALSE ;
 
    }
 
