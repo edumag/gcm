@@ -66,7 +66,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          } elseif ( is_array($LG) && ! @array_key_exists  ( $literal , $LG  ) ) {
 
-            /* Si se pide un literal que no tenemos lo añadimos al archivo vacio
+            /* Si se pide un literal que no tenemos lo añadimos al archivo vacío
              * para tener constancia de ello.
              */
 
@@ -469,16 +469,20 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
 
 function modificarGet($var, $valor) {
 
-   $salida = "?".$var."=".$valor;
+   $salida = FALSE;
+
+   if ( $valor ) $salida .= $var."=".$valor;
+
    foreach($_GET as $key => $val ) {
-      if ( $key != $var ) {
+      if ( $key !== $var ) {
          // Descartamos url, ya viene con la dirección
          if ( $key != "url" ) {
             $salida .= "&".$key."=".$val;
          }
       }
    }
-   return $salida;
+   
+   return ( $salida ) ? '?'.$salida : FALSE ;
 
    }
 
