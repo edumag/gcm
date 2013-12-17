@@ -4,12 +4,13 @@
 @brief Documentación para GCM
 @mainpage
 
-**Presentación**
+## Presentación
+
 
 Librerías y gestor de contenido para la creación de proyectos web.
 
  
-*Características*
+### Características
 
 - Creación de proyectos nuevos fácil y rápidamente.
 - Creación de contenido por secciones
