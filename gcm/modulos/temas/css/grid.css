@@ -1,0 +1,27 @@
+
+/* ## Columnas
+ 
+   <div id="cabecera" class="columnas">
+      <div class="col3" id="cabeceraIzquierda">{cabeceraIzquierda}</div>
+      <div class="col3" id="cabeceraCentral">{cabecera}</div>
+      <div class="col3" id="cabeceraDerecha">{cabeceraDerecha}</div>
+   </div>
+
+*/
+.columnas {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+}
+.col3 {
+    display: block;
+    float:left;
+    width: 32%;
+}
+@media only screen and (max-width: 680px) {
+    .col3 {
+        width: 100%;
+        margin: 0;
+        text-align:center;
+    }
+}
