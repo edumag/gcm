@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Fri Mar 8 19:23:24 CET 2013
+// Archivo generado automáticamente por GcmConfig Thu Dec 19 11:18:29 CET 2013
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
@@ -105,4 +105,22 @@ $GCM_LG_fr['Guardar contenido']='';
 $GCM_LG_fr['El correo no parece valido']='';
 $GCM_LG_fr['Registros en base de datos']='';
 $GCM_LG_fr['Filtro']='';
+$GCM_LG_fr['Contraseña no pasa verificación']='';
+$GCM_LG_fr['Campo requerido']='';
+$GCM_LG_fr['comentarios']='';
+$GCM_LG_fr['mapas']='';
+$GCM_LG_fr['redes_sociales']='';
+$GCM_LG_fr['responsiveslides']='';
+$GCM_LG_fr['ver_registros']='';
+$GCM_LG_fr['masmonell']='';
+$GCM_LG_fr['Modo usuario']='';
+$GCM_LG_fr['Modo administración']='';
+$GCM_LG_fr['Roles']='';
+$GCM_LG_fr['Gestionar SEO']='';
+$GCM_LG_fr['Configuración de comentarios']='';
+$GCM_LG_fr['Configuración de mapas']='';
+$GCM_LG_fr['Configuración de redes_sociales']='';
+$GCM_LG_fr['Configuración de responsiveslides']='';
+$GCM_LG_fr['Configuración de ver_registros']='';
+$GCM_LG_fr['masmonelledu']='';
 ?>

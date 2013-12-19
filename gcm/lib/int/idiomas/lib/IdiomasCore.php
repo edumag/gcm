@@ -332,9 +332,9 @@ class IdiomasCore {
             foreach($this->idiomas_activados as $idioma) {
 
                if ($idioma != $_SESSION[$this->proyecto."-idioma"]) {
-                  echo '<li><a href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
+                  echo '<li class="idioma_off"><a href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
                } else {
-                  echo '<li><a class="idioma_activado" href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
+                  echo '<li class="idioma_on"><a class="idioma_activado" href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
                   }
                }
             echo '</ul>';

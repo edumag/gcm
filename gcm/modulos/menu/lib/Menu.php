@@ -41,6 +41,10 @@ class Menu extends Modulos {
 
    static $pesos_menu = array() ;
 
+   /** Opciones generales del menú */
+
+   public $opciones_generales = array();
+
    /**
     * El constructor necesita como argumento el directorio
     * del contenido y el filtro si deseamos filtrar.
@@ -272,13 +276,15 @@ class Menu extends Modulos {
 
          if("inicio" == $sActual) {
 
-            if ( $imagenes ) {
+            if ( isset($this->opciones_generales['ocultar_inicio']) && $this->opciones_generales['ocultar_inicio'] == 1 ) {
+               if ( $imagenes ) {
 
-               echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" /></a></td>';	 
-            } else {
-               echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="" alt="'.literal('inicio').'" /></a></td>';	 
+                  echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" /></a></td>';	 
+               } else {
+                  echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
+                  }
+
                }
-
          } else {
 
             if ( $imagenes ) {
@@ -456,7 +462,10 @@ class Menu extends Modulos {
     *
     */
 
-   function menu_principal() {
+   function menu_principal($e, $args=FALSE) {
+
+
+      $this->opciones_generales = array_merge($this->opciones_generales, recoger_parametros($args));
 
       /**
        * Presentar el menu de las secciones principales
