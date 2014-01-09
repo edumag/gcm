@@ -563,6 +563,8 @@ class GcmConfig {
 
    function guardar_variables() {
       
+      if ( $this->variables_modificadas ) return;
+
       return $this->escribirArchivos($this->archivo, $this->variables, $this->nombre_array);
 
       }
