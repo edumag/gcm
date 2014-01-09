@@ -718,12 +718,6 @@ class Gcm {
 
       if ( GCM_DEBUG || $this->au->logeado() ) $this->reg->nivel('ADMIN');
 
-      /* Comprobamos si se desea salir de administración */
-      if (isset($_POST['salir']) || isset($_GET['salir'])) {	
-         $this->au->salir();
-         $this->registra(__FILE__,__LINE__,"gcm->inicia: Sessión terminada");
-         }
-
       /* Comprobar administrador que nos llega */
 
       if ( isset($_POST['loginPro']) ){

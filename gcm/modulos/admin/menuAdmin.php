@@ -21,7 +21,7 @@ $menuAdmin2[$usuario]['boton']['Editar perfil']['link']=dirname($_SERVER['PHP_SE
 // $menuAdmin2[$usuario]['class']='user';
 
 $menuAdmin2['Salir']['title']="Cerrar sessión";
-$menuAdmin2['Salir']['link']='./?salir=1';
+$menuAdmin2['Salir']['link']=Router::$base.Router::$s.Router::$c.'?e=salir';
 
 if ( permiso('test','admin') ) {
 

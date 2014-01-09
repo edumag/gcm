@@ -946,5 +946,22 @@ class AdminAdmin extends Admin {
 
       }
 
+   /**
+    * Cerrar sesión
+    * 
+    */
+   
+    function cerrar_sesion($e, $args=FALSE) {
+   
+      global $gcm;
+   
+      registrar(__FILE__,__LINE__,'cerramos sesión');
+
+      $gcm->au->salir();
+      header ("Location:".Router::$dir.Router::$s.Router::$c);
+      exit();
+
+      }
+   
    }
 ?>
