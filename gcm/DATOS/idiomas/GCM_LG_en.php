@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Wed Dec 18 19:05:23 CET 2013
+// Archivo generado automáticamente por GcmConfig Fri Dec 20 11:54:48 CET 2013
 $GCM_LG_en['Contenido pendiente de traducción']='';
 $GCM_LG_en['Registros de página actual']='';
 $GCM_LG_en['Registros']='';
@@ -89,4 +89,7 @@ $GCM_LG_en['Subir fichero proyecto.css modificado']='';
 $GCM_LG_en['Guardar colores']='';
 $GCM_LG_en['Añadir un color']='';
 $GCM_LG_en['Añadir']='';
+$GCM_LG_en['Últimas entradas en']='';
+$GCM_LG_en['Página no encontrada']='';
+$GCM_LG_en['no encontrado']='';
 ?>

@@ -272,29 +272,29 @@ class Menu extends Modulos {
       // Preparamos la tabla
       echo '<table id="menu" cellspacing="0"><tr>';
 
-      if ($principal=="si") {
+      if ( isset($this->opciones_generales['ocultar_inicio']) && $this->opciones_generales['ocultar_inicio'] == 1 ) {
 
-         if("inicio" == $sActual) {
+         if ($principal=="si") {
 
-            if ( isset($this->opciones_generales['ocultar_inicio']) && $this->opciones_generales['ocultar_inicio'] == 1 ) {
-               if ( $imagenes ) {
+            if("inicio" == $sActual) {
 
-                  echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" /></a></td>';	 
-               } else {
-                  echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
-                  }
+                  if ( $imagenes ) {
 
-               }
-         } else {
+                     echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" /></a></td>';	 
+                  } else {
+                     echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
+                     }
 
-            if ( $imagenes ) {
-               echo '<td><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('').'" alt="'.literal('inicio').'" /></a></td>';	 
             } else {
-               echo '<td><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
-               }
 
+               if ( $imagenes ) {
+                  echo '<td><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('').'" alt="'.literal('inicio').'" /></a></td>';	 
+               } else {
+                  echo '<td><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
+                  }
+               }
+            }
          }
-      }
 
       // nos situamos al inicio de la matriz de enlaces
       reset($this->sEnlaces);
