@@ -358,7 +358,7 @@ class Eventos {
    /** lanzarEvento 
     *
     * Recogemos la información del arreglo eventos para ordenarla por orden
-    * de prioridad y lanzar los metodos especificados.
+    * de prioridad y lanzar los métodos especificados.
     *
     * @param e Evento que se lanza
     * @param args Argumentos para el evento, estos argumentos son añadidos en tiempo de ejecución del evento y son sumados
@@ -433,7 +433,7 @@ class Eventos {
 
                if ( isset($this->cEventos[$e]['unico']) && $this->cEventos[$e]['unico'] != $m )   {          // unico
 
-                  /* El evento tiene comportamiento de unico y no es para este modulo */
+                  /* El evento tiene comportamiento de único y no es para este modulo */
 
                   registrar(__FILE__,__LINE__,
                      'Comportamiento [ unico ] para evento ['.$e.'] por parte de [ '.$this->cEventos[$e]['unico'].' ]');

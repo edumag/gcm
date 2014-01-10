@@ -314,5 +314,34 @@ class IdiomasCore {
          }
       }
 
+   /**
+    * Listado de idiomas
+    *
+    * @param $plantilla Archivo con la plantilla
+    */
+
+   function lista_idiomas($plantilla = FALSE) {
+
+      global $gcm;
+
+      if ( ! $plantilla ) {
+
+         // Solo se presenta selecctor si hay más de un idioma activo
+         if ( count($this->idiomas_activados) > 1 ) {
+            echo '<ul id="lista_idiomas">';
+            foreach($this->idiomas_activados as $idioma) {
+
+               if ($idioma != $_SESSION[$this->proyecto."-idioma"]) {
+                  echo '<li class="idioma_off"><a href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
+               } else {
+                  echo '<li class="idioma_on"><a class="idioma_activado" href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
+                  }
+               }
+            echo '</ul>';
+            }
+      } else {
+         include($plantilla);
+         }
+      }
    }
 ?>

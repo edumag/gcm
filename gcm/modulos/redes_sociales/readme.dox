@@ -1,0 +1,57 @@
+/**
+
+@defgroup modulo_redes_sociales Módulo Redes_sociales
+
+Descripción del módulo
+
+@ingroup modulos_aplicacion
+@ingroup modulo_redes_sociales
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- alt                  Alternativas a los archivos por defecto
+|-- config               Configuración por defecto
+|-- css                  css por defecto
+|-- eventos_admin.php    Eventos de administración
+|-- eventos_usuario.php  Eventos de usuario
+|-- ext                  Librerías externas
+|-- html                 Plantillas
+|-- iconos               Iconos
+|-- img                  Imágenes
+|-- js                   Javascripts
+|-- lib                  
+|   -- Redes_sociales.php       Clase del módulo
+|   -- Redes_socialesAdmin.php  Clase que extiende de Modulo con métodos administrativos 
+|-- libjs               Librerías js propias
+|-- menuAdmin.php       Entradas del menú administrativo
+|-- modelos             Modelos para Crud
+`-- readme.dox          Este archivo
+</pre>
+
+/**
+ * @defgroup lista_blanca Lista de los métodos que no requieren de permisos
+ * @ingroup modulos_aplicacion
+ * @{
+ */
+
+Ejemplo para el envio de emails en el módulo Enviomails
+
+@code
+/** Permitimos envio de email a usuarios */
+$this->set_lista_blanca('enviomail','enviar_email');
+@endcode
+
+@}
+
+@defgroup plantilla_redes_sociales Plantillas pata Redes_sociales
+@ingroup modulo_redes_sociales
+@ingroup plantillas_modulos
+@{
+
+@} 
+
+*/

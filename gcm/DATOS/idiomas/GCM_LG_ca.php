@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Dec 2 21:00:36 CET 2013
+// Archivo generado automáticamente por GcmConfig Fri Jan 10 11:32:00 CET 2014
 $GCM_LG_ca['Administracion de los diferentes idiomas']='';
 $GCM_LG_ca['Administración']='';
 $GCM_LG_ca['Administración de usuarios']='';
@@ -113,4 +113,16 @@ $GCM_LG_ca['Cambiar nombre']='';
 $GCM_LG_ca['proyecto']='';
 $GCM_LG_ca['Mostrar únicamente literales vacíos']='';
 $GCM_LG_ca['Añadir literal a contenido']='';
+$GCM_LG_ca['redes_sociales']='';
+$GCM_LG_ca['Configuración de redes_sociales']='';
+$GCM_LG_ca['Administración de temas']='';
+$GCM_LG_ca['Creación de un tema nuevo']='';
+$GCM_LG_ca['Nuevo tema']='';
+$GCM_LG_ca['Editar ficheros de tema']='';
+$GCM_LG_ca['Ficheros por defecto']='';
+$GCM_LG_ca['Ficheros de tema']='';
+$GCM_LG_ca['Subir fichero proyecto.css modificado']='';
+$GCM_LG_ca['Guardar colores']='';
+$GCM_LG_ca['Añadir un color']='';
+$GCM_LG_ca['Añadir constantes']='';
 ?>

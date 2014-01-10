@@ -87,13 +87,14 @@ class LiteralesAdmin extends Literales {
       }
 
    /**
-   * Devolvemos lista con formato json para javascript con el contenido del array especificado
+   * Creamos panel con lista de literales para editar.
    *
-   * La lista se compondra de los valores.
+   * Recogemos primero los literales por defecto para poder modificarlos y 
+   * añadimos los del idioma actual.
    *
    * @param $file Archivo que contiene los literales.
    *
-   * @return array en formato json
+   * @return HTML con panel para gestionar literales
    *
    */
 
@@ -101,15 +102,29 @@ class LiteralesAdmin extends Literales {
 
       global $gcm;
 
-
       $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+      $arr = GcmConfigFactory::GetGcmConfig($file);
 
-      if ( !file_exists($file) ) {
-         trigger_error('Archivo de idiomas ['.$file.'] no existe', E_USER_ERROR);
-         return FALSE;
+      if ( Router::$i != Router::$ii ) {
+
+         $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+         if ( !file_exists($file_default) ) {
+            trigger_error('Archivo de idiomas ['.$file_default.'] no existe', E_USER_ERROR);
+            return FALSE;
+            }
+         $arr_default = GcmConfigFactory::GetGcmConfig($file_default);
+         $literales = array();
+         
+         foreach ( $arr_default->variables() as $key => $val ) { 
+            $literales[$key] = FALSE;  
+            }
+         
+         $literales = array_merge($literales,$arr->variables());
+
+      } else {
+         $literales = $arr->variables();
          }
 
-      $arr = GcmConfigFactory::GetGcmConfig($file);
 
       $salida = '<div id="panelLiterales">';
       $salida .= '<br />';
@@ -122,9 +137,9 @@ class LiteralesAdmin extends Literales {
 
       $salida .= '<br /><br />';
 
-      if ( $arr->variables() ) {
+      if ( $literales ) {
 
-         foreach ( $arr->variables() as $key => $valor ) {
+         foreach ( $literales as $key => $valor ) {
 
             $clase = ( empty($valor) ) ? 'subpanelNegativo' : "subpanel" ;
                
@@ -155,7 +170,7 @@ class LiteralesAdmin extends Literales {
       }
 
    /**
-    * Modificar array
+    * Modificar literal
     *
     * $_GET Parametros recogidos mediante GET
     *   - elemento: clave del array a modificar
@@ -269,7 +284,6 @@ class LiteralesAdmin extends Literales {
     * @param  $e Evento
     * @param  $args Argumentos
     * @return TRUE/FALSE
-    * @bug Al presentar de nuevo el formulario despues de una actualización no muestra los cambios
     *
     */
    
@@ -306,6 +320,8 @@ class LiteralesAdmin extends Literales {
 
             $configuracion->escribir_desde_post();
 
+            unset($configuracion);
+
          } catch (Exception $ex) {
             registrar($ex->getFile(),$ex->getLine(),$ex->getMessage(),'ERROR');
             return FALSE;
@@ -324,6 +340,19 @@ class LiteralesAdmin extends Literales {
          }
 
       $configuracion = new GcmConfigGui($file);
+
+      // si no es el idioma por defecto añadimos fichero por defecto para tener los
+      // literales por defecto.
+
+      if ( Router::$i != Router::$ii ) {
+         $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+         $configuracion_default = new GcmConfigGui($file_default);
+         
+         foreach ( $configuracion_default->variables() as $key => $val ) { 
+            $configuracion->set($key,$configuracion->get($key));  
+            }
+
+         }
 
       $args['eliminar'] = TRUE; // Se permet elimiar variables
       $args['ampliar']  = TRUE; // Se permet ampliar variables

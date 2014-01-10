@@ -323,15 +323,25 @@ class Idiomas extends Modulos {
    function selector_idiomas() { $this->iIdiomas->selector_idiomas(); }
 
    /** 
-    * lista_idiomas
-    *
+    * banderas de idiomas
     */
       
-   function banderas() { 
+   function banderas($e, $args=FALSE) { 
       
       global $gcm;
 
       $this->iIdiomas->banderas($gcm->event->instancias['temas']->ruta('idiomas','html','banderas.html')); 
+      }
+
+   /** 
+    * lista de idiomas
+    */
+      
+   function lista_idiomas($e, $args=FALSE) { 
+      
+      global $gcm;
+
+      $this->iIdiomas->lista_idiomas(); 
       }
 
    }
