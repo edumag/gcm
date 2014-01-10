@@ -24,3 +24,9 @@
    text-align: center;
    margin: 0 10px 0 0;
 }
+.idioma_on {
+    border: 1px solid;
+    border-radius: 50%;
+    font-size: 77%;
+    padding: 5px;
+}
