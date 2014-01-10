@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Dec 19 12:03:22 CET 2013
+// Archivo generado automáticamente por GcmConfig Fri Jan 10 11:32:00 CET 2014
 $GCM_LG_ca['Administracion de los diferentes idiomas']='';
 $GCM_LG_ca['Administración']='';
 $GCM_LG_ca['Administración de usuarios']='';
@@ -124,4 +124,5 @@ $GCM_LG_ca['Ficheros de tema']='';
 $GCM_LG_ca['Subir fichero proyecto.css modificado']='';
 $GCM_LG_ca['Guardar colores']='';
 $GCM_LG_ca['Añadir un color']='';
+$GCM_LG_ca['Añadir constantes']='';
 ?>
