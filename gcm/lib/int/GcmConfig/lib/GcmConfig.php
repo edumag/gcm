@@ -614,7 +614,7 @@ class GcmConfig {
 
          if ( ! $file = @fopen($archivo, "w",TRUE) ) {
             $error = error_get_last();
-            $msg = "No se pudo abrir archivo $archivo para incluir $nombre_array ";
+            $msg = "No se pudo abrir archivo $archivo para incluir en [$nombre_array] ";
             $msg .= "\nDirectori actual: ".getcwd();
             if ( $error ) $msg .= "\nError: ".$error['message'];
             throw new Exception($msg);
