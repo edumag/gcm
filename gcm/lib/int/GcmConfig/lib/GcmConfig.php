@@ -122,7 +122,7 @@ class GcmConfig {
       $this->archivoxdefecto = $archivoxdefecto;
 
       $this->leer_variables();
-
+      
       }
 
    /**
