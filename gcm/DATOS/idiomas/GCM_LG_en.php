@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Jan 10 12:21:32 CET 2014
+// Archivo generado automáticamente por GcmConfig Mon Jan 13 18:07:28 CET 2014
 $GCM_LG_en['Contenido pendiente de traducción']='';
 $GCM_LG_en['Registros de página actual']='';
 $GCM_LG_en['Registros']='';
@@ -92,4 +92,15 @@ $GCM_LG_en['Añadir']='';
 $GCM_LG_en['Últimas entradas en']='';
 $GCM_LG_en['Página no encontrada']='';
 $GCM_LG_en['no encontrado']='';
+$GCM_LG_en['victor']='';
+$GCM_LG_en['Configuración guardada en DATOS/configuracion/idiomas/LG_en.php']='';
+$GCM_LG_en['Menú']='';
+$GCM_LG_en['Imágenes']='';
+$GCM_LG_en['Añadir constantes']='';
+$GCM_LG_en['Literales']='';
+$GCM_LG_en['Informar de error']='';
+$GCM_LG_en['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
+$GCM_LG_en['Gracias']='';
+$GCM_LG_en['Enviar error']='';
+$GCM_LG_en['Informe de errores']='';
 ?>
