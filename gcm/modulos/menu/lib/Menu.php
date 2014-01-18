@@ -1,49 +1,48 @@
 <?php
+
 /**
- * @file      Menu
- * @category  Modulos
- * @author    Eduardo Magrané <eduardo mamedu com>
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
- * @version   SVN $Id: Menu.php 634 2012-07-19 14:15:30Z eduardo $ 
+ * @file Menu.php
+ * @brief Creación de menús
+ *
+ * @ingroup modulo_menu
+ * @author    Eduardo Magrané 
+ *
+ * @internal
+ * Copyright  Copyright (c) 2011, Eduardo Magrané
+ *
+ * This source code is released for free distribution under the terms of the
+ * GNU General Public License as published by the Free Software Foundation.
  */
 
 /**
+ * @class Menu
+ * @brief Presentamos menús
+ *
  * Esta clase compondrá un menú a partir del
  * contenido de un directorio, ofreciendo varios
  * estilos:
  *
- * 1 -> Menú en la parte superior en forma de pestañas
+ * 1 -> Menú principal con tabla para la parte superior
  * 2 -> Menú como secuencia de enlaces vertical al margen
  * 3 -> Menú como lista desplegable de opciones
  *
  * Se busca los literales de los nombres de los archivos, y si encontramos 
  * literales con el sufijo literal_title lo añadimos al title del enlace.
  *
- * @author Eduardo Magrané
- * @version 1.0
  */
 
 class Menu extends Modulos {
 
-   public $descartar;                          ///< Archivos o directorios a descartar, configurable
+   static $pesos_menu   = FALSE   ; ///< Pesos de los items del menú
+   static $descartar    = FALSE   ; ///< Archivos o directorios a descartar, configurable
 
-   /** Matrices con el texto de las opciones y los enlaces */
-   public $sOpciones, $sEnlaces;
+   public $opciones     = array() ; ///< Opciones generales del menú
+   public $actual                 ; ///< elemento en el que nos encontramos
+   public $base_enlace            ; ///< Base del enlace de los elementos
 
-   /** Matriz asociativa con opciones y enlaces */
-   public $sMenu;
-
-   /** Presentar secciones si/no */
-
-   public $SECCIONES;
-
-   /** Pesos de los items del menú */
-
-   static $pesos_menu = array() ;
-
-   /** Opciones generales del menú */
-
-   public $opciones_generales = array();
+   private $elementos   = FALSE   ; ///< Lista de elementos del menú
+   private $dir_contenido         ; ///< Directorio con el contenido 
+   private $filtro                ; ///< Filtro para los contenidos
 
    /**
     * El constructor necesita como argumento el directorio
@@ -54,21 +53,31 @@ class Menu extends Modulos {
     * @param $SECCIONES    Presentamos subsecciones TRUE/FALSE
     */
 
-   function __construct($sDirectorio=NULL, $filtro="no", $SECCIONES=true) {
+   function __construct($dir_contenido = FALSE, $filtro = FALSE ) {
 
-      global $gcm ;
+      global $gcm;
 
-      parent::__construct() ;
-
-      $this->descartar = $this->config('descartar');
+      parent::__construct();
 
       // Recogemos pesos de los items del menú de la configuración
 
-      $pesos_configuracion = $this->config('orden_presentacion');
+      $pesos_menu = $this->config('orden_presentacion');
 
-      if ( $pesos_configuracion ) {
+      if ( !self::$descartar  ) self::$descartar  = $this->config('descartar');
 
-         foreach ( $pesos_configuracion as $pesos ) {
+      $this->dir_contenido   = ( $dir_contenido ) ? $dir_contenido : Router::$dd ;
+      $this->base_enlace     = '' ;
+      $this->filtro          = ( $filtro ) ? $filtro : '.html'    ;
+
+      $aSecciones = explode('/',Router::$d.Router::$s);
+
+      $this->actual = ( $aSecciones[count($aSecciones)-1] ) 
+         ?  $aSecciones[count($aSecciones)-1] 
+         :  $aSecciones[count($aSecciones)-2];
+
+      if ( $pesos_menu ) {
+
+         foreach ( $pesos_menu as $pesos ) {
 
             $array = explode('@',$pesos);
             self::$pesos_menu[$array[0]] = $array[1];
@@ -77,133 +86,10 @@ class Menu extends Modulos {
 
          }
 
-      // Creamos las matrices
-      $this->sOpciones = array();
-      $this->sEnlaces = array();
-      $this->sTitles  = array();
-      $this->sMenu = array();
-      $this->sDirectorio = $sDirectorio;
-      $this->SECCIONES = $SECCIONES ;
-
-      // Comprobar si $sDirectorio tiene una / al final sino hay que añadirle
-      if ( isset($sDirectorio) && substr($sDirectorio, -1, 1) != '/' ) {
-         $this->sDirectorio=$sDirectorio.'/';
-         }
-
-      /// Leemos el contenido del directorio
-      if ( file_exists($this->sDirectorio) && $directorio = dir($this->sDirectorio) ) {
-
-         while ($archivos = $directorio->read()) {
-
-            // Comprobar descartados
-
-            if ( ! empty($this->descartar) ) {
-
-               $descartar = FALSE;
-               foreach ( $this->descartar as $descartado ) {
-                  if ( strpos($archivos,$descartado) !== FALSE ) {
-                     registrar(__FILE__,__LINE__,'Descartado: '.$archivos. ' coincide con '.$descartado);
-                     $descartar = TRUE;
-                     }
-                  }
-
-               if ( $descartar ) {
-                  continue;
-                  }
-               }
-
-            $item=$this->sDirectorio.$archivos;
-
-            // Descartamos ., .. e index.html
-            // Descartar cualquier archivo o directorio que comience por '.'
-
-            if ( $archivos{0} != "." && $archivos != "index.html" ) {
-               // Si hay filtro solo listamos los que coinciden
-               if ($filtro <> "no") {
-
-                  if (!substr_count($archivos,$filtro)==0 || is_dir($item)){
-
-                     /* Directorios primero */
-
-                     if ( is_dir($item)  ) {
-                        $ElementosDir[] = $archivos;
-                     } else {
-                        $Elementos[] = $archivos;
-                        }
-                  }
-
-               } else {
-
-                  if ( is_dir($item)  ) {
-                     $ElementosDir[] = $archivos;
-                  } else {
-                     $Elementos[] = $archivos;
-                     }
-                  }
-               }
-            }
-
-      } else {
-
-         $gcm->registra(__FILE__, __LINE__, 'No se puede abrir directorio:'.$this->sDirectorio,'DEBUG');
-
-         return;
       }
-
-      if ( !empty($ElementosDir)  ) {
-         if (empty($Elementos)) {
-            $Elementos = $ElementosDir;
-         } else {
-            $Elementos = array_merge($ElementosDir,$Elementos);
-            }
-         }
-
-      // Recorremos los elementos que son directorios
-      // Comprobar que hay algún elemento
-      if (empty($Elementos)) {
-         return;
-      }
-
-      // Ordenamos campos por su peso
-      uasort($Elementos, array("Menu", 'ordenar_por_peso'));
-
-      foreach($Elementos as $Elemento) {
-         // Extrayendo el texto de la opción y el enlace
-         if (is_dir($this->sDirectorio.$Elemento) ) {
-            // Si no queremos seciones salimos
-            if ( $SECCIONES==false) { break ; }
-            $dirReplace=str_replace('File/'.Router::$ii.'/','',$this->sDirectorio.$Elemento);
-            //$Enlace = $PHP_SELF."?s=".$dirReplace;
-            // utilizamos el sistema de rewrite de apache
-            $Enlace = $dirReplace.'/';
-         } else {
-            $dirReplace=str_replace('File/'.Router::$ii.'/','',$this->sDirectorio);
-            // $Enlace = $PHP_SELF."?s=".$dirReplace."&c=".$Elemento;
-            // utilizamos el sistema de rewrite de apache
-            $Enlace = $dirReplace.$Elemento;
-         }
-         $Opcion = $Elemento;
-         // Si no hay literal mostramos su nombre original
-         $Literal= literal($Elemento);
-         $Title  = literal($Elemento.'_title');
-         if ( $Title == $Elemento.'_title' ) {
-            $Title = '';
-         }
-
-         // Los guardamos en las matrices simples
-         $this->sOpciones[] = $Opcion;
-         $this->sLiteral[]  = $Literal;
-         $this->sEnlaces[] = $Enlace;
-         $this->sTitles[]  = $Title;
-
-         // y en la matriz asociativa
-         $this->sMenu[$Opcion] = $Enlace;
-      }
-
-   }
 
    /**
-    * Ordenar elementos si se empecifico orden desde config
+    * Ordenar elementos si se especifico orden desde config
     */
 
    static function ordenar_por_peso($a, $b) {
@@ -216,243 +102,105 @@ class Menu extends Modulos {
       }
 
    /**
-    * Este método es al que hay que llamar para agregar
-    * el menú a la página
-    *
-    * Tipos de menu:
-    * 0 - Menu paginas
-    * 1 - Barra de navegación
-    * 2 - Menu desplegable
-    * 3 - Menu paginas (Menu principal)
-    *
+    * Devolver lista de elementos del menú a partir de un directorio
     */
 
-   function InsertaMenu($sActual, $iTipoMenu) {
+   function buscar_elementos($directorio=FALSE) {
 
-      // Comprobamos que hay contenido
-      if (empty($this->sOpciones)) {
-         return;
+      $directorios = array();
+      $contenidos = array();
+
+      if ( $directorio ) $directorio = comprobar_barra($directorio);
+
+      if ( ! $directorio ) {
+         $directorio = $this->dir_contenido ;
+      } else {
+         if ( $this->dir_contenido != $directorio ) {
+            $this->base_enlace = $directorio;
+            $directorio = $this->dir_contenido.$directorio;
+            }
+         }
+
+      if ( $directorio ) {
+         if ( ! is_dir($directorio) ) {
+            registrar(__FILE__,__LINE__,"Si no es un directorio no se puede buscar elementos [$directorio]","ADMIN");
+            registrar(__FILE__,__LINE__,"Error construyendo menú sobre [$directorio]","ERROR");
+            return FALSE;
+            }
+         }
+
+      $items = glob($directorio.'*');
+
+      // Recorremos directorio para recoger solo documentos html o secciones (directorios)
+      foreach ( $items as $key => $el ) {
+
+         $nombre = basename($el);
+
+         if ( is_dir($el) ) {
+            // $this->buscar_elementos($el);
+            if ( $this->validar($nombre, FALSE) ) $directorios[] = $nombre ;
+         } else {
+            if ( $this->validar($nombre) ) $contenidos[] = $nombre ;
+            }
+         }
+
+      return array_merge($directorios, $contenidos);
       }
-      // Dependiendo del tipo de menú
-      switch($iTipoMenu) {
-         // invocamos a un método u otro
-      case 0: $this->MenuPaginas($sActual, "no");
-         break;
-
-      case 1: $this->MenuBarra($sActual);
-         break;
-
-      case 2: $this->MenuDesplegable($sActual);
-         break;
-
-      case 3: $this->MenuPaginas($sActual, "si");
-         break;
-
-      case 4: $this->MenuBotones($sActual, "si");
-         break;
-
-      default: // Tipo incorrecto
-         echo "Tipo no disponible";
-      }
-   }
-
+      
    /**
-    * Este método generaría el menú en forma de páginas
-    * accesibles desde una pestaña
+    * Validar elemento de menu
     *
-    * @param $sActual Sección actual
-    * @param $principal (T/F) Si es el menu principal hay que colocar el
-    *                   elemento inicio y descartar los que no son directorios
-    * @param $imagenes (T/F) Crear el menú con las imágenes de la sección 
-    *                  menu_on.gif y menu_off.gif
+    * @param $elemento Elemento a validar
+    * @param $filtro Aplicar filtro o no, en caso de las secciones especificar 
+    *                que no.
     */
 
-   function MenuPaginas($sActual, $principal, $imagenes = FALSE) {
+   function validar($elemento, $filtro = TRUE) {
 
-      // Preparamos la tabla
-      echo '<table id="menu" cellspacing="0"><tr>';
+      // Comprobar descartados
 
-      if ( isset($this->opciones_generales['ocultar_inicio']) && $this->opciones_generales['ocultar_inicio'] == 1 ) {
+      if ( ! empty(self::$descartar) ) {
 
-         if ($principal=="si") {
-
-            if("inicio" == $sActual) {
-
-                  if ( $imagenes ) {
-
-                     echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" /></a></td>';	 
-                  } else {
-                     echo '<td id="menuOff"><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
-                     }
-
-            } else {
-
-               if ( $imagenes ) {
-                  echo '<td><a href="'.Router::$base.'" title="'.literal('inicio_title').'" ><img src="'.$this->boton_seccion('').'" alt="'.literal('inicio').'" /></a></td>';	 
-               } else {
-                  echo '<td><a href="'.Router::$base.'" title="'.literal('inicio_title').'" >'.literal('inicio').'</a></td>';	 
-                  }
+         $descartar = FALSE;
+         foreach ( self::$descartar as $descartado ) {
+            if ( strpos($elemento,$descartado) !== FALSE ) {
+               registrar(__FILE__,__LINE__,'Descartado: '.$elemento. ' coincide con '.$descartado);
+               return FALSE;
                }
             }
          }
 
-      // nos situamos al inicio de la matriz de enlaces
-      reset($this->sEnlaces);
-      reset($this->sTitles);
-      reset($this->sLiteral);
+      if ( $elemento{0} == "." || $elemento == "index.html" || $elemento == "thumbnail"  ) return FALSE ;
 
-      // y obtenemos el primero de ellos
-      $Enlace = current($this->sEnlaces);
-      $Title  = current($this->sTitles);
-      $Literal  = current($this->sLiteral);
-
-      // Vamos recorriendo las opciones existentes
-      foreach($this->sOpciones as $Opcion) {
-
-         if ( is_dir(Router::$dd.$Enlace) ) {
-
-            // si es la opción actual
-            if($Opcion == $sActual) {
-
-               // la mostramos con un fondo distinto
-               if ( $imagenes ) {
-                  echo '<td id="menuOff"><a href="'.Router::$base.$Enlace.'" title="'.literal($Title,1).'" ><img src="'.$this->boton_seccion($Enlace, TRUE).'" alt="'.$Literal.'" /></a></td>';	 
-               } else {
-                  echo '<td id="menuOff"><a href="'.Router::$base.$Enlace.'" title="'.literal($Title,1).'" >'.$Literal.'</td>';
-                  }
-
-            } else {
-
-               if ( $imagenes ) {
-                  echo '<td id="'.$Opcion.'"><a href="'.Router::$base.$Enlace.'" title="'.literal($Title,1).'" ><img src="'.$this->boton_seccion($Enlace).'" alt="'.$Literal.'" /></a></td>';	 
-               } else {
-                  echo '<td id="'.$Opcion.'" ><a href="'.Router::$base.$Enlace.'" title="'.literal($Title,1).'" >'.$Literal.'</a></td>';
-                  }
-
-               }
-
+      // Si hay filtro solo añadimos los que coinciden
+      if ( $filtro && $this->filtro && substr_count($elemento,$this->filtro) == FALSE ) {
+         return FALSE;
          }
 
-         // Obtenemos el enlace siguiente
-         $Enlace = next($this->sEnlaces);
-         $Title  = next($this->sTitles);
-         $Literal  = next($this->sLiteral);
+      return TRUE;
 
       }
 
+   /**
+    * Insertar menú
+    *
+    * @param $tipo      Tipo de menu a insertar
+    * @param $seccion   Sección a buscar contenido
+    * @param $seccion   Sección en la que nos encontramos
+    */
 
-      echo '</tr></table>'; // Cerramos la tabla
-   }
-
-
-   /// Este método genera la barra de navegacíon
-
-   function MenuBarra($sActual) {
+   function inserta_menu($tipo = 'principal', $seccion = '', $preseccion = '') {
 
       global $gcm;
 
-      // sActual es toda la lista de secciones hay que dividirla
-      if ( $sActual ) {
+      $seccion    = ( ! empty($seccion) )    ? comprobar_barra($seccion)    : '' ;
+      $preseccion = ( ! empty($preseccion) ) ? comprobar_barra($preseccion) : '' ;
 
-         $aSecciones = explode('/',$sActual);
-         $sActual = ( $aSecciones[count($aSecciones)-1] ) ?  $aSecciones[count($aSecciones)-1] :  $aSecciones[count($aSecciones)-2];
-         $seccion=literal($sActual,1);
+      $elementos = $this->buscar_elementos($preseccion.$seccion);
 
-      } else {
-         
-         $aSecciones = array();
-         $seccion=literal('inicio',1);
+      $plantilla = dirname(__FILE__).'/../html/'.$tipo.'.phtml' ;
 
-      }
-
-      $aURL = explode('/',$_SERVER['REQUEST_URI']);
-
-      echo "\n<ul>";
-      foreach($this->sMenu as $Opcion => $Enlace) {
-
-         $aEnlace = explode('/',$Enlace);
-
-         // Limpiar $Opcion de .html
-         $Literal=str_replace('.html','',$Opcion);
-
-         if ( in_array($Opcion,$aSecciones) ) {
-
-            echo "\n<li>";
-            echo "<a class='m_on' href='".Router::$enlace_relativo.Router::$dir.$Enlace."' >";
-            echo '<img src="'.$gcm->event->instancias['temas']->icono('-').'" alt="-"/>';
-            echo " </a>";
-            echo "<a href='".Router::$enlace_relativo.Router::$dir.$Enlace."'>";
-            echo literal($Literal,1);
-            echo '</a></li>';
-            $submenu[$Opcion] = new Menu($this->sDirectorio.$Opcion.'/', '.html', true);
-            $submenu[$Opcion]->InsertaMenu(Router::$s,1);
-
-         } else {
-            // si en un archivo y no una sección
-            if ( substr($Enlace, -5) == '.html' ) {
-               if ( str_replace('%20',' ',$aURL[count($aURL)-1])  == $aEnlace[count($aEnlace)-1]) {
-                  echo "\n<li class='listaOff' >".literal($Literal,1).'</li>';
-               } else {
-                  echo "\n<li><a href='".Router::$enlace_relativo.Router::$dir.$Enlace."'>".literal($Literal,1).'</a></li>';
-               }
-            } else {
-               echo "\n<li>";
-               echo "<a class='m_off' href='".Router::$enlace_relativo.Router::$dir.$Enlace."'>";
-               echo '<img src="'.$gcm->event->instancias['temas']->icono('+').'" alt="+"/>';
-               echo " </a>";
-               echo "<a href='".Router::$enlace_relativo.Router::$dir.$Enlace."'>".literal($Literal,1);
-               echo '</a></li>';
-               }
-            }
-         }
-
-      echo "\n</ul>";
-
-   }
-
-   /// Este método produce el menú desplegable
-
-   function MenuDesplegable($sActual) {
-
-      // Generamos el formulario con la lista desplegable,
-      // redireccionando a la página correspondiente a la
-      // opción elegida
-      echo '<form action="">'.
-         '<select name="Menu" onChange="top.location.href='.
-         'this.form.Menu.value'.
-         '">';
-
-      // Vamos añadiendo las opciones a la lista
-      foreach($this->sMenu as $Opcion => $Enlace)
-         if($Opcion == $sActual)
-            echo '<option value="'.$Enlace.
-               '" selected>'.literal($Opcion,1).'</option>';
-         else
-            echo '<option value="'.$Enlace.'">'.literal($Opcion,1).'</option>';
-
-      echo '</select></form>'; // cerramos el formulario
-   }
-
-
-   /** Menú principal con imágenes 
-    *
-    * Presentamos menú principal con las imágenes que encontramos dentro de cada sección
-    *
-    * - menu_on.gif: Para cuando estamos en ella
-    * - menu_off.gif: Para cuando no estamos.
-    *
-    * En caso de no encontrar una imagen se presenta nombre de sección
-    */
-
-   function menu_principal_img() {
-
-      echo "\n<div id='menu_principal'>";
-
-      // Solo buscamos contenido en el idioma predeterminado
-      $menuPrincipal = new Menu("File/".Router::$ii."/");
-      $menuPrincipal->InsertaMenu(Router::$estamos,4);
-
-      echo "\n</div> <!-- Acaba menu_principal -->";
+      include ($plantilla);
 
       }
 
@@ -464,19 +212,10 @@ class Menu extends Modulos {
 
    function menu_principal($e, $args=FALSE) {
 
-
-      $this->opciones_generales = array_merge($this->opciones_generales, recoger_parametros($args));
-
-      /**
-       * Presentar el menu de las secciones principales
-       */
+      $this->opciones = array_merge($this->opciones, recoger_parametros($args));
 
       echo "\n<div id='menu_principal'>";
-
-      // Solo buscamos contenido en el idioma predeterminado
-      $menuPrincipal = new Menu("File/".Router::$ii."/");
-      $menuPrincipal->InsertaMenu(Router::$estamos,3);
-
+      $this->inserta_menu();
       echo "\n</div> <!-- Acaba menu_principal -->";
 
       }
@@ -485,226 +224,58 @@ class Menu extends Modulos {
     * Menu para la barra de navegación
     */
 
-   function barra_navegacion() {
+   function barra_navegacion($e, $args=FALSE) {
 
       global $gcm;
 
-      $this->javascripts('menu.js');
+      $seccion = '';
 
       ob_start();
-      echo '<a href="'.$_SERVER['PHP_SELF'].'" >'.literal('inicio').'</a>';
-      echo '<div id="barraNavegacion">';
-      $barraNavegacion = new Menu("File/".Router::$ii."/", '.html', true);
-      $barraNavegacion->InsertaMenu(Router::$s,1);
-      echo '</div>';
+
+      if ( Router::$formato != 'ajax' ) {
+
+         // Desactivamos ajax hasta asegurarnos que funciona bien
+         // $this->javascripts('menu.js');
+
+         echo '<a href="'.$_SERVER['PHP_SELF'].'" >'.literal('inicio').'</a>';
+         echo '<div id="barraNavegacion">';
+
+      } else {
+         // $args = Router::$args;
+         // if ( isset($_GET['url']) ) $seccion = $_GET['url'];
+         $seccion = Router::$s;
+         // $seccion = implode('/',$args);
+         // echo '<pre>args: ' ; print_r($args) ; echo '</pre>'; // exit() ; // DEV  
+         // echo '<pre>Router: ' ; print_r(Router::$args) ; echo '</pre>'; // exit() ; // DEV  
+         echo '<pre>absoluta: ' ; print_r(Router::$base_absoluta) ; echo '</pre>'; // exit() ; // DEV  
+         echo '<pre>seccion: ' ; print_r($seccion) ; echo '</pre>'; // exit() ; // DEV  
+
+         }
+
+
+      $this->inserta_menu('navegacion',$seccion);
+
+      if ( Router::$formato != 'ajax' ) {
+
+         echo '</div>';
+
+         }
+
       $contenido = ob_get_contents();
       ob_end_clean(); 
 
+      if ( Router::$formato != 'ajax' ) {
 
-      $panel = array();
-      $panel['titulo'] = literal('Menú',3);
-      $panel['contenido'] =$contenido;
+         $panel = array();
+         $panel['titulo'] = literal('Menú',3);
+         $panel['contenido'] =$contenido;
 
-      Temas::panel($panel);
-
-      }
-
-   function menu_ajax() {
-
-      global $gcm;
-
-      ob_end_clean();
-
-      // coger la última sección
-      $secciones = explode('/',comprobar_barra(Router::$s,'eliminar'));
-      $seccion = $secciones[count($secciones)-1];
-      echo "\n<li>";
-      echo "<a class='m_on' href='".Router::$s."' >";
-      echo '<img src="'.$gcm->event->instancias['temas']->icono('-').'" alt="-"/>';
-      echo " </a>";
-      echo "<a href='".Router::$s."'>";
-      echo literal($seccion,1);
-      echo '</a></li>';
-      $submenu = new Menu(Router::$dd.Router::$s, '.html', true);
-      $submenu->InsertaMenu(Router::$s,1);
-      //salir();
-      exit();
-
-      }
-
-   function menu_ajax_off() {
-
-      global $gcm;
-
-      ob_end_clean();
-      // coger la última sección
-      $secciones = explode('/',comprobar_barra(Router::$s,'eliminar'));
-      $seccion = $secciones[count($secciones)-1];
-      //echo "\n<li>";
-      echo "<a class='m_off' href='".Router::$s."' >";
-      echo '<img src="'.$gcm->event->instancias['temas']->icono('+').'" alt="+"/>';
-      echo " </a>";
-      //salir();
-      exit();
-      }
-
-   /**
-    * Buscamos las imágenes que hacen de botones para el menu principal
-    *
-    * Las imáges pueden estar en gif o png.
-    *
-    * Si no encontramos imágenes del idioma especificado las cogemos del por defecto.
-    *
-    * @param $seccion Sección del boton
-    * @param $on Activado o desativado, por defecto desactivado
-    */
-
-   function boton_seccion($seccion, $on = FALSE) {
-
-      $estado = ( $on ) ? 'on' : 'off';
-
-      $img = Router::$d. $seccion.'menu_'.$estado.'.png'; if ( file_exists($img) ) return Router::$base.$img;
-      $img = Router::$d. $seccion.'menu_'.$estado.'.gif'; if ( file_exists($img) ) return Router::$base.$img;
-      $img = Router::$dd.$seccion.'menu_'.$estado.'.png'; if ( file_exists($img) ) return Router::$base.$img;
-      $img = Router::$dd.$seccion.'menu_'.$estado.'.gif'; if ( file_exists($img) ) return Router::$base.$img;
-
-      $seccion_ = ($seccion)?$seccion:'inicio';
-      registrar(__FILE__,__LINE__,'No se encontro boton de sección para '.$seccion_,'ADMIN');
-      }
-
-   /**
-    * Este método genera el menú principal con botones y presenta un submenu
-    * al pasar el cursor sobre él.
-    *
-    * Las imágenes de los botones de cada sección estaran en su directorio
-    * correspondiente. menu_on.gif y menu_off.gif o en formato png.
-    *
-    * @param $sActual Sección actual
-    */
-
-   function MenuBotones($sActual, $principal) {
-
-      echo '<ul id="menu_botones_horizontal">';
-
-      // Botón de inicio
-
-      $title_inicio = ( literal('inicio_title') != 'inicio_title' ) ? literal('inicio_title') : '' ;
-      if("inicio" == $sActual || empty(Router::$s) ) {
-
-         echo '<li id="menuOff">';
-         echo '<a href="'.Router::$base.'" title="'.$title_inicio.'" ><img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" /></a>';
+         Temas::panel($panel);
 
       } else {
-
-         echo '<li>';
-         echo '<a href="'.Router::$base.'" title="'.$title_inicio.'" ><img src="'.$this->boton_seccion('').'" alt="'.literal('inicio').'" /></a>';	 
-
+         echo $contenido;
+         exit();
          }
-
-      // Presentar subtitulos con paginas html de inicio
-
-      $salida = FALSE;
-      $ficheros_seccion = glob(Router::$dd.'*.html');
-      $contenidos = array();
-      foreach ( $ficheros_seccion as $file ) {
-         $contenidos[] = basename($file,'.html');
-         }
-      uasort($contenidos, array("Menu", 'ordenar_por_peso'));
-      
-      foreach ( $contenidos as $nombre ) {
-
-         $literal = literal($nombre,1);
-         $enlace  = Router::$base.$nombre.'.html';
-         $clase   = ( Router::$c == $nombre.'.html' ) ? 'ma_on' : 'ma_off';
-
-         if ( $nombre != 'index' ) {
-
-            $salida .= '<li class="'.$clase.'">';
-            if ( Router::$c != $nombre.'.html' ) $salida .= '<a href="'.$enlace.'">';
-            $salida .= $literal;
-            if ( Router::$c != $nombre.'.html' ) $salida .= '</a>';
-            $salida .= '</li><br />';
-
-            }
-
-         }
-
-      if ( $salida ) echo '<ul>'.$salida.'</ul>';
-      echo '</li>';	 
-
-      // Botones de secciones
-
-      // nos situamos al inicio de la matriz de enlaces
-      reset($this->sEnlaces);
-      reset($this->sTitles);
-      reset($this->sLiteral);
-
-      // y obtenemos el primero de ellos
-      $Enlace = current($this->sEnlaces);
-      $Title  = current($this->sTitles);
-      $Literal  = current($this->sLiteral);
-
-      // Vamos recorriendo las opciones existentes
-      foreach($this->sOpciones as $Opcion) {
-
-         if ( is_dir(Router::$dd.$Enlace) ) {
-
-            // si es la opción actual
-            if($Opcion == $sActual) {
-
-               echo '<li id="menuOff">';
-               echo '<a href="'.Router::$base.$Enlace.'" title="'.$Title.'" ><img src="'.$this->boton_seccion($Enlace, TRUE).'" alt="'.$Literal.'" /></a>';	 
-
-            } else {
-
-               echo '<li id="'.$Opcion.'">';
-               echo '<a href="'.Router::$base.$Enlace.'" title="'.$Title.'" ><img src="'.$this->boton_seccion($Enlace).'" alt="'.$Literal.'" /></a>';	 
-
-               }
-
-      // Presentar subtitulos con paginas html de sección
-
-      $salida = FALSE;
-      $ficheros_seccion = glob(Router::$dd.$Enlace.'*.html');
-      $contenidos = array();
-      foreach ( $ficheros_seccion as $file ) {
-         $contenidos[] = basename($file,'.html');
-         }
-      uasort($contenidos, array("Menu", 'ordenar_por_peso'));
-      
-      foreach ( $contenidos as $nombre ) {
-
-         $literal = literal($nombre,1);
-         $enlace  = Router::$base.$Enlace.$nombre.'.html';
-         $clase   = ( Router::$c == $nombre.'.html' ) ? 'ma_on' : 'ma_off';
-
-         if ( $nombre != 'index' ) {
-
-            $salida .= '<li class="'.$clase.'">';
-            if ( Router::$c != $nombre.'.html' ) $salida .= '<a href="'.$enlace.'">';
-            $salida .= $literal;
-            if ( Router::$c != $nombre.'.html' ) $salida .= '</a>';
-            $salida .= '</li><br />';
-
-            }
-
-         }
-
-      if ( $salida ) echo '<ul>'.$salida.'</ul>';
-      echo '</li>';	 
-
-         }
-
-         // Obtenemos el enlace siguiente
-         $Enlace = next($this->sEnlaces);
-         $Title  = next($this->sTitles);
-         $Literal  = next($this->sLiteral);
-
-      }
-
-
-      if ($principal=="si") echo '</ul>';
-
 
       }
 
