@@ -16,7 +16,7 @@ function initMenu(contexto) {
       lista.html("Cargando...");
 
       if ( url ) {
-         $.get('?formato=ajax&a=barra_navegacion&m=menu&url='+url,function(data){
+         $.get('?formato=ajax&a=menu_ajax_off&m=menu&url='+url,function(data){
             lista.replaceWith(data);
             initMenu("#barraNavegacion");
            });
@@ -27,14 +27,19 @@ function initMenu(contexto) {
    $('.m_on', contexto).click(function() {
 
       var lista = $(this);
+      var caja = $(this).parent();
       var url = lista.attr("href"); // alert(url);
+      // var base = '<?php echo dirname($_SERVER['REDIRECT_URL']);?>';
+      caja.css('background','green');
 
       if ( url ) {
-         lista.html("");
+         caja.html("");
          //$.get('?a=menu_ajax_off&m=menu&url='+url,function(data){
-         $.get(url+'?formato=ajax&a=barra_navegacion&m=menu&url='+url,function(data){
-            lista.parent().next().remove();
-            lista.replaceWith(data);
+         $.get(url+'?formato=ajax&a=menu_ajax_on&m=menu&url='+url,function(data){
+         // $.get(url+'?formato=ajax&a=barra_navegacion&m=menu&base='+base,function(data){
+            // lista.parent().next().remove();
+            //caja.next().remove();
+            caja.replaceWith(data);
             initMenu("#barraNavegacion");
            });
          }

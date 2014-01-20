@@ -14,7 +14,7 @@
 
 <?php $nombre = basename($elemento,'.html'); ?>
 
-<?php if ( is_dir(Router::$dd.$this->base_enlace.$elemento) ) { ?>
+<?php if ( is_dir(Router::$dd.$this->base_enlace.$base_ajax.$elemento) ) { ?>
 
 <?php if ( stripos(Router::$s,$elemento) !== FALSE ) { // si la sección esta en el camino ?>
 
@@ -23,30 +23,30 @@
    <li class="m_actual">
       <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
       <?php echo literal($nombre,1);?>
-   </li>
 
 <?php } else { // Subsección pero no actual aun ?>
 
    <li>
-      <a class='m_off' href='<?php echo Router::$base.$this->base_enlace.$elemento;?>'>
+      <a class='m_off' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
       </a>
-      <a href='<?php echo Router::$base.$this->base_enlace.$elemento;?>'>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <?php echo literal($nombre,1);?>
       </a>
-   </li>
 
 <?php } ?>
 
 <?php $submenu = new Menu(); $submenu->inserta_menu('navegacion', $elemento, $preseccion.$seccion); ?>
 
+   </li>
+
 <?php } else {  // Acaba es la opción actual ?>
 
    <li>
-      <a class='m_on' href='<?php echo Router::$base.$this->base_enlace.$elemento;?>'>
+      <a class='m_on' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <img src="<?php echo $gcm->event->instancias['temas']->icono('+')?>" alt="+"/>
       </a>
-      <a href='<?php echo Router::$base.$this->base_enlace.$elemento;?>'>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <?php echo literal($nombre,1);?>
       </a>
    </li>
@@ -64,7 +64,7 @@
 <?php } else { ?>
 
    <li>
-      <a href='<?php echo Router::$base.$this->base_enlace.$elemento?>'>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento?>'>
          <?php echo literal($nombre,1)?>
       </a>
    </li>
@@ -74,10 +74,10 @@
 <?php } else { ?>
 
    <li>
-      <a class='m_off' href='<?php echo Router::$base.$this->base_enlace.$elemento;?>'>
+      <a class='m_on' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <img src="<?php echo $gcm->event->instancias['temas']->icono('+')?>" alt="+"/>
       </a>
-      <a href='<?php echo Router::$base.$this->base_enlace.$elemento?>'>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento?>'>
          <?php echo literal($nombre,1)?>
       </a>
    </li>

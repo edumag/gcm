@@ -189,12 +189,13 @@ class Menu extends Modulos {
     * @param $seccion   Sección en la que nos encontramos
     */
 
-   function inserta_menu($tipo = 'principal', $seccion = '', $preseccion = '') {
+   function inserta_menu($tipo = 'principal', $seccion = '', $preseccion = '', $base_ajax='') {
 
       global $gcm;
 
       $seccion    = ( ! empty($seccion) )    ? comprobar_barra($seccion)    : '' ;
       $preseccion = ( ! empty($preseccion) ) ? comprobar_barra($preseccion) : '' ;
+      $base_ajax  = ( ! empty($base_ajax) )  ? comprobar_barra($base_ajax)  : '' ;
 
       $elementos = $this->buscar_elementos($preseccion.$seccion);
 
@@ -232,53 +233,86 @@ class Menu extends Modulos {
 
       ob_start();
 
-      if ( Router::$formato != 'ajax' ) {
+      /** @todo Desactivamos ajax hasta asegurarnos que funciona bien */
+      // $this->javascripts('menu.js');
 
-         // Desactivamos ajax hasta asegurarnos que funciona bien
-         // $this->javascripts('menu.js');
-
-         echo '<a href="'.$_SERVER['PHP_SELF'].'" >'.literal('inicio').'</a>';
-         echo '<div id="barraNavegacion">';
-
-      } else {
-         // $args = Router::$args;
-         // if ( isset($_GET['url']) ) $seccion = $_GET['url'];
-         $seccion = Router::$s;
-         // $seccion = implode('/',$args);
-         // echo '<pre>args: ' ; print_r($args) ; echo '</pre>'; // exit() ; // DEV  
-         // echo '<pre>Router: ' ; print_r(Router::$args) ; echo '</pre>'; // exit() ; // DEV  
-         echo '<pre>absoluta: ' ; print_r(Router::$base_absoluta) ; echo '</pre>'; // exit() ; // DEV  
-         echo '<pre>seccion: ' ; print_r($seccion) ; echo '</pre>'; // exit() ; // DEV  
-
-         }
-
+      echo '<a href="'.$_SERVER['PHP_SELF'].'" >'.literal('inicio').'</a>';
+      echo '<div id="barraNavegacion">';
 
       $this->inserta_menu('navegacion',$seccion);
 
-      if ( Router::$formato != 'ajax' ) {
+      echo '</div>';
 
-         echo '</div>';
-
-         }
 
       $contenido = ob_get_contents();
       ob_end_clean(); 
 
-      if ( Router::$formato != 'ajax' ) {
+      $panel = array();
+      $panel['titulo'] = literal('Menú',3);
+      $panel['contenido'] =$contenido;
 
-         $panel = array();
-         $panel['titulo'] = literal('Menú',3);
-         $panel['contenido'] =$contenido;
-
-         Temas::panel($panel);
-
-      } else {
-         echo $contenido;
-         exit();
-         }
+      Temas::panel($panel);
 
       }
 
+   function menu_ajax_on() {
+
+      global $gcm;
+
+      // $args = Router::$args;
+      // if ( isset($_GET['url']) ) $seccion = $_GET['url'];
+      $seccion = Router::$s;
+      $url = ( isset($_GET['url'] ) ) ? $_GET['url'] : '' ;
+      $url = preg_replace('/^\.\/|\/\.\/$/', '', $url);
+      $seccion = preg_replace('/^\.\/|\/\.\/$/', '', $seccion);
+      $base = comprobar_barra(str_replace($seccion,'',comprobar_barra($url)));
+      $base = preg_replace('/^\.\/|\/\.\/$/', '', $base);
+      $base = rtrim($base,'/').'/'; 
+      $this->base_enlace = $base ;
+      // $seccion = implode('/',$args);
+      // echo '<pre>seccion: ' ; print_r($seccion) ; echo '</pre>'; // exit() ; // DEV  
+      // echo '<pre>url: ' ; print_r($url) ; echo '</pre>'; // exit() ; // DEV  
+      // echo '<pre>base: ' ; print_r($base) ; echo '</pre>'; // exit() ; // DEV  
+      // echo '<pre>Router: ' ; print_r(Router::$args) ; echo '</pre>'; // exit() ; // DEV  
+      // echo '<pre>absoluta: ' ; print_r(Router::$base_absoluta) ; echo '</pre>'; // exit() ; // DEV  
+      // echo '<pre>SERVER: ' ; print_r($_SERVER) ; echo '</pre>'; // exit() ; // DEV  
+
+      ?>
+         <li>
+            <a class='m_off' href='<?php echo $url;?>'>
+               <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
+            </a>
+            <a href='<?php echo $url;?>'>
+               <?php echo literal(basename($seccion),1);?>
+            </a>
+            <?php $this->inserta_menu('navegacion',$seccion,'',$base); ?>
+         </li>
+      <?php
+      exit();
+
+      }
+   
+   function menu_ajax_off() {
+
+      global $gcm;
+   
+      $url = ( isset($_GET['url'] ) ) ? $_GET['url'] : '' ;
+      $seccion = basename($url);
+
+
+?>
+   <li>
+      <a class='m_on' href='<?php echo $url;?>'>
+         <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="+"/>
+      </a>
+      <a href='<?php echo $url;?>'>
+         <?php echo literal(basename($seccion),1);?>
+      </a>
+   </li>
+<?php
+
+      exit();
+      }
 
    }
 
