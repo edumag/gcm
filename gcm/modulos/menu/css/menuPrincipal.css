@@ -3,12 +3,11 @@
  */
 
 #menu_switch { 
-   display: none;
-    float: right;
+    display: none;
     font-size: 250%;
+    left: 4px;
     position: relative;
-    right: 17px;
-    top: -55px;
+    top: -12px;
    }
 
 /**
