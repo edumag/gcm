@@ -215,9 +215,20 @@ class Menu extends Modulos {
 
       $this->opciones = array_merge($this->opciones, recoger_parametros($args));
 
-      echo "\n<div id='menu_principal'>";
-      $this->inserta_menu();
-      echo "\n</div> <!-- Acaba menu_principal -->";
+      ?>
+      <a id="menu_switch" href="#">≡</a>
+      <div id='menu_principal'>
+      <?php $this->inserta_menu();?>
+      </div> <!-- Acaba menu_principal -->
+      <script>
+      addLoadEvent(function(){
+         $("#menu_switch").click(function() {
+            $("#menu_principal").toggle();
+            return false;
+            }); 
+         }); 
+      </script>
+      <?php
 
       }
 

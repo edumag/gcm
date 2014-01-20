@@ -1,5 +1,24 @@
+/**
+ ## Boton de menu adaptable para conmutar visualización
+ */
 
-/* menuPrincipal.css */
+#menu_switch { 
+   display: none;
+    float: right;
+    font-size: 250%;
+    position: relative;
+    right: 17px;
+    top: -55px;
+   }
+
+/**
+ ## Boton de menu adaptable para conmutar visualización
+ ##
+ ## @todo La visualización del menu cuando desde una resolución pequeña hemos
+ ## ocultado el menú, al volver a una grande sigue oculto, debería hacerse 
+ ## el cambio desde javascript
+ */
+
 #menu_principal {
 background: <?=$this->color("menuPrincipal-00")?>;
 }
@@ -43,3 +62,11 @@ text-decoration: none;
  
     color: <?=$this->color("menuPrincipal-11")?>;
 }
+
+@media screen and (max-width: 640px) {
+
+#menu_principal { display: none; }
+#menu_switch { display: block; }
+
+}
+
