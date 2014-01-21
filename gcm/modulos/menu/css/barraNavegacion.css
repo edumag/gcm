@@ -20,6 +20,11 @@ text-align: left;
 #barraNavegacion .m_off, #barraNavegacion .m_on {
    font-size: 110%;
 }
+#barraNavegacion .m_actual {
+    font-style: italic;
+    font-weight: bold;
+    padding: 4px 4px 0 0;
+}
 #barraNavegacion a {
 border: 1px;
 color: <?=$this->color("body-11")?>;
@@ -47,6 +52,14 @@ font-weight: bold;
 #barraNavegacion ul ul {
    font-size: 90%;
    margin: 0 0 0 2px;
+}
+#barraNavegacion ul ul li {
+   font-size: 90%;
+   margin: 0 0 0 2px;
+}
+#barraNavegacion ul ul ul li {
+   font-size: 90%;
+   margin: 0 0 0 12px;
 }
 #barraNavegacion li a {
 font-weight: normal;

@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file imagenes.phtml
+ * @brief Menú principal con imágenes
+ * @ingroup plantilla_menu
+ */
+
+?>
+
+<table id="menu" cellspacing="0">
+   <tr>
+
+<?php if ( isset($this->opciones['ocultar_inicio']) && $this->opciones['ocultar_inicio'] == 1 ) { ?>
+
+<?php if("inicio" == $this->actual ) { ?>
+
+<?php if ( $imagenes ) { ?>
+
+      <td id="menuOff">
+         <a href="'.Router::$base.'" title="'.literal('inicio_title').'" >
+            <img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" />
+         </a>
+      </td>
+
+<?php } else { // Acaba si es con imagen ?>
+
+      <td id="menuOff">
+         <a href="'.Router::$base.'" title="'.literal('inicio_title').'" >
+            <?php echo literal('inicio'); ?>
+         </a>
+      </td>
+
+<?php } // Acaba sin imagen ?>
+
+<?php } else { // Acaba si estamos en inicio ?>
+
+
+<?php if ( $imagenes ) { ?>
+
+      <td>
+         <a href="'.Router::$base.'" title="'.literal('inicio_title').'" >
+            <img src="<?php echo $this->boton_seccion('');?>" alt="<?php echo literal('inicio');?>" />
+         </a>
+      </td>	 
+
+<?php } else { // Acaba con imagen ?>
+
+      <td>
+         <a href="<?php echo Router::$base;?>" title="<?php echo literal('inicio_title'); ?>" >
+            <?php echo literal('inicio');?>
+         </a>
+      </td>	 
+
+<?php } // Acaba sin imagen ?>
+
+<?php } // Acaba no estamos en inicio ?>
+
+<?php } // Acaba ocultando inicio ?>
+
+<?php foreach($this->elementos as $elemento) { // Vamos recorriendo las opciones existentes ?>
+
+<?php if ( is_dir(Router::$dd.$elemento) ) { ?>
+
+<?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
+
+<?php if ( $imagenes ) {   // la mostramos con un fondo distinto ?>
+
+   <td id="menuOff">
+      <a href="<?php echo Router::$base.$Enlace;?>" title="<?php echo literal($Title,1);?>" >
+         <img src="<?php echo $this->boton_seccion($Enlace, TRUE);?>" alt="<?php echo $Literal;?>" />
+      </a>
+   </td>
+ 
+<?php } else { // Acaba si es una imagen ?>
+
+   <td id="menuOff">
+      <a href="<?php echo Router::$base.$Enlace;?>" title="<?php echo literal($Title,1);?>" >
+         <?php echo $Literal;?>
+   </td>
+
+<?php } // Acaba no es imagen ?>
+
+<?php } else {  // Acaba es la opción actual ?>
+
+<?php if ( $imagenes ) { ?>
+
+      <td id="<?php echo $elemento?>">
+         <a href="<?php echo Router::$base.$Enlace?>" title="<?php echo literal($Title,1)?>" >
+            <img src="<?php echo $this->boton_seccion($Enlace)?>" alt="<?php echo $Literal?>" />
+         </a>
+      </td>
+
+<?php } else { ?>
+
+      <td id="'.$elemento.'" >
+         <a href="'.Router::$base.$elemento.'" title="'.literal('title_'.$elemento,1).'" >
+            <?php echo literal($elemento)?>
+         </a>
+      </td>
+
+<?php } ?>
+
+<?php } ?>
+
+<?php } ?>
+
+<?php } ?>
+
+   </tr>
+</table> 

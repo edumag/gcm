@@ -13,6 +13,7 @@
    #lateral, #contenedor {
       float: none;
       margin: 0 auto;
+      padding: 0;
       width: 96%;
       }
    #lateral { 

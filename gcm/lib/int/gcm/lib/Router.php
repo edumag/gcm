@@ -487,8 +487,7 @@ class Router {
       $base_absoluta = rtrim('http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']),'/');
       self::$base_absoluta = $base_absoluta.'/'.self::$s;
 
-      // echo "<br>absoluta: ".self::$base_absoluta;
-      // echo "<pre>" ; print_r($_SERVER) ; echo "</pre>"; // DEV  
+      self::$base_absoluta = str_replace('/./','/',self::$base_absoluta);
 
       registrar(__FILE__,__LINE__,'Variables en Router',FALSE,depurar(get_class_vars(__CLASS__)));
 

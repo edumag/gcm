@@ -1,7 +1,77 @@
+/**
+ ## Botón de menú adaptable para conmutar visualización
 
-/* menuPrincipal.css */
+    <a id="menu_switch" href="#">≡</a>
+
+ */
+
+#menu_switch { 
+   display: none;
+   float: right;
+   font-size: 250%;
+   position: relative;
+   right: 17px;
+   top: -55px;
+   }
+
+/*
+ ## Menú principal adaptable 
+
+    <nav id="subcabecera">
+          <a href="#" id="menu_switch">≡</a>
+          <div id="menu_principal" style="display: none;">
+    <table cellspacing="0" id="menu">
+       <tbody><tr>
+          <td id="Alojamiento">
+             <a href="./Alojamiento">
+                Alojamiento         </a>
+          </td>
+          <td id="Tarifas">
+             <a href="./Tarifas">
+                Tarifas         </a>
+          </td>
+          <td id="Gastronomia">
+             <a href="./Gastronomia">
+                Gastronomía         </a>
+          </td>
+          <td id="Eventos">
+             <a href="./Eventos">
+                Eventos         </a>
+          </td>
+          <td id="Ofertas">
+             <a href="./Ofertas">
+                Ofertas         </a>
+          </td>
+          <td id="Actividades">
+             <a href="./Actividades">
+                Actividades         </a>
+          </td>
+          <td id="Libro_de_visitas">
+             <a href="./Libro_de_visitas">
+                Libro de visitas         </a>
+          </td>
+          <td id="Contacto">
+             <a href="./Contacto">
+                Contacto         </a>
+          </td>
+       </tr>
+    </tbody>
+    </table> 
+    </div> <!-- Acaba menu_principal -->
+    <script>
+    addLoadEvent(function(){
+       $("#menu_switch").click(function() {
+          $("#menu_principal").toggle();
+          return false;
+          }); 
+       }); 
+    </script>
+    </nav>
+ */
+
 #menu_principal {
 background: <?=$this->color("menuPrincipal-00")?>;
+display: block;
 }
 table#menu {
 margin-top: 3px;
@@ -42,4 +112,15 @@ text-decoration: none;
       background: none repeat scroll 0 0 <?=$this->color("menuPrincipal-10")?>;
  
     color: <?=$this->color("menuPrincipal-11")?>;
+}
+
+@media screen and (max-width: 640px) {
+
+#menu_principal { display: none; }
+#menu_switch { display: block; }
+
+}
+
+@media screen and (min-width: 680px) {
+   #menu_principal { display: block!IMPORTANT; }
 }

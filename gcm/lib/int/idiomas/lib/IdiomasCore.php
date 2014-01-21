@@ -211,7 +211,11 @@ class IdiomasCore {
 
       if ( file_exists($file) ) {
          include($file);
-         if ( isset(${$prefijo_array.$idioma}) ) $LG = array_merge($LG,${$prefijo_array.$idioma});
+         if ( isset(${$prefijo_array.$idioma}) ) {
+            foreach ( ${$prefijo_array.$idioma} as $key => $literal ) {
+               if ( ! empty($literal) ) $LG[$key] = $literal;
+               }
+            }
          }
 
       }

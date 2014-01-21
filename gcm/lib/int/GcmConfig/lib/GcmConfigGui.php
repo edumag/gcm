@@ -139,6 +139,9 @@ class GcmConfigGui extends GcmConfig {
 
          }
       
+      $this->guardar_variables();
+      $this->guardar_descipciones();
+
       // echo "<pre>POST" ; print_r($_POST) ; echo "</pre>"; // DEV  
       // echo "<pre>variables" ; print_r($this->variables) ; echo "</pre>"; // DEV  
       // echo "<pre>descripciones" ; print_r($this->descripciones) ; echo "</pre>"; // DEV  

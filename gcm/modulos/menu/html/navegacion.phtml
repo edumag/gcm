@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file navegacion.phtml
+ * @brief Menú para navegación
+ * @ingroup plantilla_menu
+ */
+
+// echo '<pre>DEPURANDO: ' ; print_r($elementos) ; echo '</pre>'; // exit() ; // DEV  
+?>
+
+<ul>
+
+<?php foreach($elementos as $elemento ) { ?>
+
+<?php $nombre = basename($elemento,'.html'); ?>
+
+<?php if ( is_dir(Router::$dd.$this->base_enlace.$base_ajax.$elemento) ) { ?>
+
+<?php if ( stripos(Router::$s,$elemento) !== FALSE ) { // si la sección esta en el camino ?>
+
+<?php if ( Router::$c == 'index.html' && basename(Router::$s) == $elemento ) { // Sección actual ?>
+
+   <li class="m_actual">
+      <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
+      <?php echo literal($nombre,1);?>
+
+<?php } else { // Subsección pero no actual aun ?>
+
+   <li>
+      <a class='m_off' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+         <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
+      </a>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+         <?php echo literal($nombre,1);?>
+      </a>
+
+<?php } ?>
+
+<?php $submenu = new Menu(); $submenu->inserta_menu('navegacion', $elemento, $preseccion.$seccion); ?>
+
+   </li>
+
+<?php } else {  // Acaba es la opción actual ?>
+
+   <li>
+      <a class='m_on' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+         <img src="<?php echo $gcm->event->instancias['temas']->icono('+')?>" alt="+"/>
+      </a>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+         <?php echo literal($nombre,1);?>
+      </a>
+   </li>
+
+<?php } ?>
+
+<?php } else { // Acaba si es una sección ?>
+
+<?php if ( substr($elemento, -5) == '.html' ) { // si en un archivo ?>
+
+<?php if ( Router::$c == $elemento ) { ?>
+
+      <li class='listaOff' ><?php echo literal($nombre,1)?></li>
+
+<?php } else { ?>
+
+   <li>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento?>'>
+         <?php echo literal($nombre,1)?>
+      </a>
+   </li>
+
+<?php } ?>
+
+<?php } else { ?>
+
+   <li>
+      <a class='m_on' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+         <img src="<?php echo $gcm->event->instancias['temas']->icono('+')?>" alt="+"/>
+      </a>
+      <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento?>'>
+         <?php echo literal($nombre,1)?>
+      </a>
+   </li>
+
+<?php } ?>
+
+<?php } ?>
+
+<?php } ?>
+
+</ul>

@@ -14,27 +14,31 @@ Contenido
 
 <pre>
 gcm/modulos/menu/
-|-- alt
-|   |-- menuPrincipal-02.css
-|   `-- menuPrincipal-decagora.css
 |-- config
 |   |-- config_es.php
-|   `-- config.php
+|   |-- config.php
 |-- css
 |   |-- barraNavegacion.css
 |   |-- menu_botones.css
-|   `-- menuPrincipal.css
+|   |-- menuPrincipal.css
 |-- eventos_usuario.php
+|-- html
+|   |-- imagenes.phtml
+|   |-- navegacion.phtml
+|   |-- principal.phtml
 |-- img
-|   |-- boton_activado.gif
-|   `-- boton_desactivado.gif
 |-- js
-|   `-- menu.js
+|   |-- menu.js
 |-- lib
-|   `-- Menu.php
-`-- readme.dox
-
-6 directories, 13 files
+|   |-- Menu.php
+|-- readme.dox
+|-- temas
+|   |-- menuimg
+|       |-- css
+|       |   |-- menuprincipal.css
+|       |-- img
+|           |-- boton_activado.gif
+|           |-- boton_desactivado.gif
 </pre>
 
 @}
