@@ -11,8 +11,7 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 
 ?>
 
-<table id="menu" cellspacing="0">
-   <tr>
+<ul id="menu">
 
 <?php if ( isset($this->opciones['ocultar_inicio']) && $this->opciones['ocultar_inicio'] == 1 ) { ?>
 
@@ -20,21 +19,21 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 
 <?php } else { // Acaba ocultar inicio ?>
 
-<?php if("inicio" == $this->actual ) { ?>
+<?php if("inicio" == $this->actual ) {  // Elemento inicio no actual ?>
 
-      <td id="menuOff">
+      <li id="menuOff">
          <a href="<?php echo Router::$base?>" title="<?php echo literal('inicio_title')?>" >
             <?php echo literal('inicio'); ?>
          </a>
-      </td>
+      </li>
 
 <?php } else { // Acaba si estamos en inicio ?>
 
-      <td>
+      <li>
          <a href="<?php echo Router::$base;?>" title="<?php echo literal('inicio_title'); ?>" >
             <?php echo literal('inicio');?>
          </a>
-      </td>	 
+      </li>	 
 
 <?php } // Acaba no estamos en inicio ?>
 
@@ -48,18 +47,18 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 
 <?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
 
-   <td id="menuOff">
+   <li id="menuOff">
       <a href="<?php echo Router::$base.$elemento;?>" >
          <?php echo literal($elemento);?>
-   </td>
+   </li>
 
 <?php } else {  // Acaba es la opción actual ?>
 
-      <td id="<?php echo $elemento ?>" >
+      <li id="<?php echo $elemento ?>" >
          <a href="<?php echo Router::$base.$elemento ?>" >
             <?php echo literal($elemento)?>
          </a>
-      </td>
+      </li>
 
 <?php } ?>
 
@@ -67,5 +66,4 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 
 <?php } ?>
 
-   </tr>
-</table> 
+</ul> 
