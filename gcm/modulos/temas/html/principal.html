@@ -1,69 +1,45 @@
-<?php
-
-/**
- * @file tabla.phtml
- * @brief Menú en formato tabla
- * @ingroup gcmMenus
- * @ingroup plantilla_gcmMenus
- */
-
-// Ordenamos campos por su peso
-if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
-
-?>
-
-<table id="menu" cellspacing="0">
-   <tr>
-
-<?php if ( isset($this->opciones['ocultar_inicio']) && $this->opciones['ocultar_inicio'] == 1 ) { ?>
-
-   <!-- Sin enlace a inicio -->
-
-<?php } else { // Acaba ocultar inicio ?>
-
-<?php if("inicio" == $this->actual ) { ?>
-
-      <td id="menuOff">
-         <a href="<?php echo Router::$base?>" title="<?php echo literal('inicio_title')?>" >
-            <?php echo literal('inicio'); ?>
-         </a>
-      </td>
-
-<?php } else { // Acaba si estamos en inicio ?>
-
-      <td>
-         <a href="<?php echo Router::$base;?>" title="<?php echo literal('inicio_title'); ?>" >
-            <?php echo literal('inicio');?>
-         </a>
-      </td>	 
-
-<?php } // Acaba no estamos en inicio ?>
-
-<?php } // Acaba no se oculta inicio ?>
-
-<?php foreach($elementos as $elemento) { // Vamos recorriendo las opciones existentes ?>
-
-   <?php $nombre = basename($elemento); ?>
-
-<?php if ( is_dir(Router::$dd.$elemento) ) { ?>
-
-<?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
-
-   <td id="menuOff">
-      <a href="<?php echo Router::$base.$elemento;?>" ><?php echo literal($elemento);?></a>
-   </td>
-
-<?php } else {  // Acaba es la opción actual ?>
-
-      <td id="<?php echo $elemento ?>" >
-         <a href="<?php echo Router::$base.$elemento ?>" ><?php echo literal($elemento)?></a>
-      </td>
-
-<?php } ?>
-
-<?php } ?>
-
-<?php } ?>
-
-   </tr>
-</table> 
+<!DOCTYPE HTML>
+<html lang="es">
+   <head>
+      <meta charset="utf-8">
+      <!--autor: eduardo magrane-->
+      <!--email: eduardo@mamedu.com-->
+      <meta name="viewport" content="width=device−width, initial−scale=1.0" />
+      <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+      <!--[if lt IE 9]> <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script> < ![endif]-->
+      {heads}
+   </head>
+   <body>
+      {menuadmin}
+         <div id="cabecera">
+            <div id="cabeceraIzquierda">
+               {cabeceraIzquierda}
+            </div>
+            <div id="cabeceraDerecha">
+               {cabeceraDerecha}
+            </div>
+         </div>
+         <div id="subcabecera">
+            {subcabecera}
+         </div>
+         <div style="clear: both"></div>
+         <div id="contenedor">
+            <div id="titulo">
+               {titulo}
+            </div>
+            {avisos}
+            {contenido}
+         </div>
+         <div id="lateral">
+            {columna}
+         </div>
+         <div style="clear: both"></div>
+         <div id="pie">
+            {pie}
+         </div>
+         <div id="scripts">
+            {debug}
+            {scripts}
+      </div>
+   </body>
+</html>
