@@ -103,4 +103,13 @@ $GCM_LG_en['Por favor añade toda la información que puedas respecto a la acci�
 $GCM_LG_en['Gracias']='';
 $GCM_LG_en['Enviar error']='';
 $GCM_LG_en['Informe de errores']='';
+$GCM_LG_en['Mostrar únicamente literales vacíos']='';
+$GCM_LG_en['Filtrar']='';
+$GCM_LG_en['Añadir literal a contenido']='';
+$GCM_LG_en['Añadir email oculto a los spammers']='';
+$GCM_LG_en['Nombre a mostrar']='';
+$GCM_LG_en['Email']='';
+$GCM_LG_en['Insertar']='';
+$GCM_LG_en['Configuración guardada en DATOS/configuracion/idiomas/LG_en.php']='';
+$GCM_LG_en['Últimas entradas en']='';
 ?>
