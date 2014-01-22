@@ -199,9 +199,11 @@ class Menu extends Modulos {
 
       $elementos = $this->buscar_elementos($preseccion.$seccion);
 
-      $plantilla = dirname(__FILE__).'/../html/'.$tipo.'.phtml' ;
+      //$plantilla = dirname(__FILE__).'/../html/'.$tipo.'.phtml' ;
+      // include ($plantilla);
 
-      include ($plantilla);
+      include ($gcm->event->instancias['temas']->ruta('menu','html',$tipo.'.phtml'));
+
 
       }
 
