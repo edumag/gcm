@@ -61,6 +61,9 @@ class Temas extends Modulos {
    public $plataforma;                 ///< Plataforma del visitante
    public $navegador;                  ///< Navegador del visitante
    public $version;                    ///< Versión del navegador
+   public $Titulo;       ///< Título de proyecto definido en el módulo metatags
+   public $Subtitulo;    ///< Subtítulo de proyecto definido en el módulo metatags
+
 
    protected $tema;                    ///< Instancia de 'Tema'
    protected $ficheros_xdefecto;       ///< Lista de los ficheros de los módulos
@@ -75,9 +78,6 @@ class Temas extends Modulos {
    protected $fich_colores;            ///< Fichero con el array de los colores
 
    private $tipos_ficheros = array('css','html','js','img','iconos','libjs');  ///< Tipos de ficheros a buscar
-
-   private $Titulo;       ///< Título de proyecto definido en el módulo metatags
-   private $Subtitulo;    ///< Subtítulo de proyecto definido en el módulo metatags
 
    /**
     * Constructor
