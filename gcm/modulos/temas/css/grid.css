@@ -12,10 +12,12 @@
     clear: both;
     padding: 0px;
     margin: 0px;
+    display: table;
 }
 .col_1de2, .col_1de3, .col_2de3, .col_1de4, .col_2de4, .col_3de4, .col_2de5, .col_3de5, .col_4de5 {
     display: block;
     float:left;
+    height: inherit;
 }
 
 .col_1de2 { width: 50%; }
