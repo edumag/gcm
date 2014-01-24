@@ -199,9 +199,11 @@ class Menu extends Modulos {
 
       $elementos = $this->buscar_elementos($preseccion.$seccion);
 
-      $plantilla = dirname(__FILE__).'/../html/'.$tipo.'.phtml' ;
+      //$plantilla = dirname(__FILE__).'/../html/'.$tipo.'.phtml' ;
+      // include ($plantilla);
 
-      include ($plantilla);
+      include ($gcm->event->instancias['temas']->ruta('menu','html',$tipo.'.phtml'));
+
 
       }
 
@@ -213,21 +215,16 @@ class Menu extends Modulos {
 
    function menu_principal($e, $args=FALSE) {
 
+      global $gcm;
+
       $this->opciones = array_merge($this->opciones, recoger_parametros($args));
 
+      include ($gcm->event->instancias['temas']->ruta('menu','html','menu_switch.phtml'));
+
       ?>
-      <a id="menu_switch" href="#">≡</a>
       <div id='menu_principal'>
       <?php $this->inserta_menu();?>
       </div> <!-- Acaba menu_principal -->
-      <script>
-      addLoadEvent(function(){
-         $("#menu_switch").click(function() {
-            $("#menu_principal").toggle();
-            return false;
-            }); 
-         }); 
-      </script>
       <?php
 
       }

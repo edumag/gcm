@@ -536,6 +536,9 @@ class TemasAdmin extends Temas {
       $this->librerias_js('farbtastic.js');
       $this->javascripts('iniciar_selector_color.js');
 
+      // Colocamos selecctor de color en columna.
+      $gcm->event->accion2evento('columna','temas','selector_colores',8);
+
       /* Recogemos información de los colores actuales del tema */
 
       $arch_colores_tema_xdefecto = $this->dir_modulos.'/temas/css/colores.php';
@@ -610,6 +613,24 @@ class TemasAdmin extends Temas {
       if ( GCM_DEBUG ) echo "\n<br /><h3>Resultado de procesar archivos css</h3><br />\n<pre>\n$proceso_css\n</pre>";
       }
 
+      
+   /** Presentar selector de colores */
+
+   function selector_colores($e, $args=FALSE) {
+
+      global $gcm;
+
+      
+      $panel = array();
+      $panel['titulo'] = literal('Selector de colores',3);
+      $panel['oculto'] = TRUE;
+      $panel['href'] = 'javascript:visualizar(\'selector_colores\');';
+      $panel['subpanel'] ='selector_colores';
+      $panel['contenido'] = '<div id="picker"></div>';
+
+      self::panel($panel);
+      
+      }
    /**
     * @brief Presentar formulario de temas
     *

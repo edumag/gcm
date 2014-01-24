@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jan 21 13:53:00 CET 2014
+// Archivo generado automáticamente por GcmConfig Fri Jan 24 14:10:02 CET 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -152,4 +152,5 @@ $GCM_LG_es['Añadir constantes']='';
 $GCM_LG_es['redes_sociales']='';
 $GCM_LG_es['Configuración de redes_sociales']='';
 $GCM_LG_es['mamedu.com']='';
+$GCM_LG_es['Selector de colores']='';
 ?>
