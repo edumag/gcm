@@ -251,7 +251,7 @@ class GcmConfig {
 
       /* Los valores del array del archivo son introducidos en $this->variables */
 
-      $this->descripciones[$idioma] = ${$this->nombre_array.'_DESC'};
+      $this->descripciones[$idioma] = ( isset(${$this->nombre_array.'_DESC'}) ) ? ${$this->nombre_array.'_DESC'} : FALSE;
 
       }
 
@@ -318,8 +318,6 @@ class GcmConfig {
          return FALSE;
          }
 
-      $this->variables_modificadas = TRUE;
-
       if ( is_array($valor)) {   // si es un array 
          $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
          $conta=0;
@@ -327,10 +325,12 @@ class GcmConfig {
             if ( is_array($val) ) {   // si es un grupo
                foreach ( $val as $k => $v ) {
                   $v = html_entity_decode($v,ENT_NOQUOTES,'UTF-8');
+                  if ( $v ) $this->variables_modificadas = TRUE;
                   $this->variables[$variable][$conta][$k] = $v;
                   }
             } else {
                $val = html_entity_decode($val,ENT_NOQUOTES,'UTF-8');
+               if ( $val ) $this->variables_modificadas = TRUE;
                $this->variables[$variable][] = $val;
                }
             $conta++;
@@ -338,6 +338,7 @@ class GcmConfig {
       } else {
          $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
          $valor    = html_entity_decode($valor,ENT_NOQUOTES,'UTF-8');
+         if ( $valor ) $this->variables_modificadas = TRUE;
          $this->variables[$variable] = $valor;
          }
 
@@ -702,6 +703,8 @@ class GcmConfig {
    /** Antes de terminar guardar cambios si los han habido */
 
    function __destruct() {
+
+      global $gcm;
 
       if ( $this->variables_modificadas ) { 
 
