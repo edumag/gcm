@@ -105,8 +105,16 @@ class IdiomasCore {
 
    function idioma_actual() {
 
+      global $gcm;
 
       if ( $this->idioma_actual ) return $this->idioma_actual;
+
+      // Si hay un idioma definido en GET se redefine idioma actual
+      if (isset($_GET["idioma"])) { 
+         $_SESSION[$this->proyecto."-idioma"] = $_GET["idioma"]; 
+         $this->idioma_actual = $_GET['idioma'];
+         return $_GET['idioma'];
+         }
 
       // Si hay un idioma definido en el url se redefine idioma actual
       if (isset($_GET["idioma"])) { 
@@ -127,13 +135,15 @@ class IdiomasCore {
          $sitelang = getenv("HTTP_ACCEPT_LANGUAGE");
          $sitelang = $sitelang[0].$sitelang[1];
 
-         if ( array_key_exists($sitelang,$this->idiomas_activados ) ) {    // Si es un idioma activado lo definimos
+         if ( in_array($sitelang,$this->idiomas_activados ) ) {    // Si es un idioma activado lo definimos
 
             $_SESSION[$this->proyecto."-idioma"] = $sitelang;
             $this->idioma_actual = $sitelang;
 
          } else {                                                // sino es un idioma activado cogemos el por defecto
 
+            
+            registrar(__FILE__,__LINE__,"No tenemos idioma de usuario [$sitelang]",'ADMIN');
             $_SESSION[$this->proyecto."-idioma"] = $this->idiomaxdefecto;
             $this->idioma_actual = $this->idiomaxdefecto;
 
@@ -347,5 +357,6 @@ class IdiomasCore {
          include($plantilla);
          }
       }
+
    }
 ?>
