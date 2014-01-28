@@ -43,17 +43,8 @@ require_once(GCM_DIR.'lib/ext/detectar_navegador/browser_class_inc.php');
  * la carpeta del tema se buscara una subcarpeta con el nombre 'condicion' donde deben estar los 
  * archivos css especificos para el navegador actual. @see coincide_archivo_css 
  *
- *
- * @todo 
- *
- * - Previsualizar
- * - Borrar fichero de tema
- * - Configurar tema por defecto en administrador de temas
- * - Aplicar plantilla() en otros módulos
- * - Metodo icono que nos presente el icono correspondiente o su grafica alternativa si no
- *   lo encuentra.
- * - Estaria bien diferenciar entre archivos de administración y de usuarios
- *
+ * @todo Previsualizar
+ * @todo Borrar fichero de tema
  */
 
 class Temas extends Modulos {
@@ -77,12 +68,12 @@ class Temas extends Modulos {
    protected $dir_tema_actual;         ///< Directorio de tema actual
    protected $fich_colores;            ///< Fichero con el array de los colores
 
+   protected $configuracion;           ///< Configuració del tema
+
    private $tipos_ficheros = array('css','html','js','img','iconos','libjs');  ///< Tipos de ficheros a buscar
 
    /**
     * Constructor
-    *
-    * @todo Si se requiere generar el tema admin se hace
     *
     * - Construimos lista de ficheros
     * - Construimos lista de colores
@@ -135,6 +126,13 @@ class Temas extends Modulos {
 
       $this->contruir_lista_colores();
 
+      // Buscar configuración de tema
+      $file_config = $this->dir_tema_actual.'config/config.php';
+      if ( file_exists($file_config) ) {
+         include($file_config);
+         if ( isset($config) ) $this->configuracion = $config ;
+         }
+
       /* Construimos listado de ficheros de módulos */
 
       if ( ! is_dir($this->dir_modulos) ) {
@@ -145,7 +143,7 @@ class Temas extends Modulos {
          
          $this->ficheros_xdefecto = $this->buscar_fichero($this->dir_modulos);
 
-         /* Si tenemos módulos del proyecto tambien añadimos */
+         /* Si tenemos módulos del proyecto también añadimos */
 
          if ( is_dir('modulos')  ) {
 
@@ -160,13 +158,33 @@ class Temas extends Modulos {
          }
 
 
+      // Si tenemos tema padre recogemos los archivos.
+      $ficheros_tema_padre = FALSE ;
+      if ( isset($this->configuracion['tema_padre']) ) {
+
+         $tema_padre = $this->configuracion['tema_padre'];
+         $dir_tema_padre = $this->dir_temas.$tema_padre.'/modulos/';
+         $ficheros_tema_padre = $this->buscar_fichero($dir_tema_padre);
+
+         }
+      
       /* Añadimos o modificamos listado de ficheros css si coincide con el css
        * de algún módulo prevalece el del tema
        */
 
       if ( is_dir($this->dir_tema_actual) ) {
-
          $this->ficheros_tema = $this->buscar_fichero($this->dir_tema_actual.'modulos/');
+         }
+
+      if ( $ficheros_tema_padre ) {
+
+         foreach ( $ficheros_tema_padre as $key => $valor ) {
+            if ( isset($this->ficheros_tema[$key])  ) {
+               $this->ficheros_tema[$key] = array_merge($ficheros_tema_padre[$key],$this->ficheros_tema[$key]);
+            } else {
+               $this->ficheros_tema[$key] = $ficheros_tema_padre[$key];
+               }
+            }
 
          }
 
@@ -506,8 +524,6 @@ class Temas extends Modulos {
     * - Linux_all_all.css      Para todos los que vengan de linux.
     * - all_Safari_all.css     Navegadores safari
     * - all_Firefox_3.css      Firefox version 3
-    *
-    * @todo Implementar comparación de versión
     *
     * @param $archivo    Nombre del archivo
     *
