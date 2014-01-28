@@ -3,14 +3,12 @@
 /**
  * @file      Router.php
  * @brief     Enrutar segun url
- * @ingroup gcm_lib
- *
- * Detailed description starts here.
+ * @ingroup   gcm_lib
  *
  * @author    Eduardo Magrané 
  *
  * @internal
- *  Revision  SVN $Id: Router.php 554 2012-01-17 17:12:56Z eduardo $
+ *
  * Copyright  Copyright (c) 2010, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -149,29 +147,23 @@ class Router {
 
    public static $enlace_relativo;
 
-   /**
-    * Construir lista de idiomas activados
-    *
-    * @todo La lista a de venir del módulo idiomas
-    */
+   /** Construir lista de idiomas activados */
 
    function set_idiomas() {
-      self::$idiomas = array('es','ca');
+
+      global $gcm;
+
+      self::$idiomas = $gcm->config('idiomas','Idiomas activados');
+
       }
 
-   /**
-    * Construir lista de formatos
-    */
+   /** Construir lista de formatos */
 
    function set_formatos() {
       self::$formatos = array('html', 'ajax', 'rst');
       }
 
-   /**
-    * Construir lista de eventos
-    *
-    * @todo Recoger los eventos de la clase Eventos
-    */
+   /** Construir lista de eventos */
 
    function set_eventos() {
 
@@ -182,25 +174,6 @@ class Router {
          self::$eventos = array_keys($gcm->event->eventos);
 
          }
-
-      // $ficheros_gcm = glob(GCM_DIR.'modulos/*/eventos_*.php');
-      // $ficheros_pro = glob('DATOS/eventos/*/eventos_*.php');
-
-      // if ( ! empty($ficheros_pro)  ) {
-      //    $ficheros_eventos = array_merge($ficheros_gcm, $ficheros_pro);
-      // } else {
-      //    $ficheros_eventos = $ficheros_gcm;
-      // }
-
-      // foreach ($ficheros_eventos as $fichero) {
-      //    $eventos = FALSE;
-      //    include($fichero);
-      //    if ( $eventos ) {
-      //       foreach ($eventos as $key => $evento) {
-      //          if ( ! self::$eventos || ! in_array($key,self::$eventos) ) self::$eventos[] = $key;
-      //          }
-      //       }
-      //    }
 
       }
 
@@ -327,7 +300,6 @@ class Router {
       if ( ! isset($url) ) $url = stripslashes((isset($_REQUEST['url'])) ? $_REQUEST['url'] : '' );
       $retorno = self::desglosarUrl($url);
 
-      // echo "<p>".$url."</p><pre>" ; print_r($retorno) ; echo "</pre>"; // DEV  "")""
       /* Definir url */
       self::$url = $retorno['url'];
       self::$s = $retorno['s'];
@@ -345,14 +317,6 @@ class Router {
       self::$mime_type = $retorno['mime_type'];
       self::$esBorrador = $retorno['esBorrador'];
       self::$forma_comentarios = $retorno['forma_comentarios'];
-
-      if ( isset($_REQUEST['i'])  ) {
-         self::$i = $_REQUEST['i'];
-      } elseif ( isset($_REQUEST['idioma']) ) {
-         self::$i = $_REQUEST['idioma'];
-      } elseif ( isset($_SESSION[$proyecto."-idioma"]) ) {
-         self::$i = $_SESSION[$proyecto."-idioma"];
-         }
 
       if ( isset($_REQUEST['formato']) ) { self::$formato = $_REQUEST['formato']; }
 
@@ -642,7 +606,6 @@ class Router {
       // al ir a buscar información , ya que los subdirectorios son respectivos de la url pero desde php nos vamos 
       // del directorio del proyecto.
       $url_sin_subdirectorios = str_replace('../','',$url);
-      // registrar(__FILE__,__LINE__,'url: '.$url.' url_sin: '.$url_sin_subdirectorios,'ADMIN');  // DEV
       $mime_type = GUtil::tipo_de_archivo($dd.$url_sin_subdirectorios);
 
       if ( substr_count($url,".btml") != 0) {
@@ -721,6 +684,7 @@ class Router {
       $retorno['esBorrador'] = $esBorrador;
       $retorno['forma_comentarios'] = $forma_comentarios;
 
+      // echo '<pre>ROUTER: ' ; print_r($retorno) ; echo '</pre>'; // exit() ; // DEV  
       return $retorno;
 
       }

@@ -192,14 +192,14 @@ class GUtil {
           $tipo = $num_err;
          }
 
-       if ( GCM_DEBUG  ) {
-          echo "<div class='error'>";
-          echo "<p><b>$mens_err</b></p>";
-          echo '<a href="vim://'.$nombre_archivo.'@'.$num_linea.'">';
-          echo "<p>$nombre_archivo : $num_linea $tipo</p>";
-          echo "</a>";
-          echo "</div>";
-          }
+       // if ( GCM_DEBUG  ) {
+       //    echo "<div class='error'>";
+       //    echo "<p><b>$mens_err</b></p>";
+       //    echo '<a href="vim://'.$nombre_archivo.'@'.$num_linea.'">';
+       //    echo "<p>$nombre_archivo : $num_linea $tipo</p>";
+       //    echo "</a>";
+       //    echo "</div>";
+       //    }
 
        if (in_array($num_err, $errores_a_mostrar)) {
 

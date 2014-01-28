@@ -73,7 +73,8 @@ class Plantilla {
 
       /* Los elementos los buscamos en plantilla */
 
-      $this->cPlantilla = @file_get_contents($this->plantilla);
+      //$this->cPlantilla = @file_get_contents($this->plantilla);
+      $this->cPlantilla = get_include_contents($this->plantilla);
 
       preg_match_all('/\{[A-Za-z]+\}/', $this->cPlantilla, $el, PREG_PATTERN_ORDER);
 

@@ -527,8 +527,6 @@ if( ! function_exists("permiso") ) {
  * Comprobamos si la función ya existe, de esta manera permitimos con facilidad
  * implementar otro sistema de verificación de permisos diferente.
  *
- * @todo Crear módulo que gestione el enrutamiento a paginas de error.
- *
  * @param $accion     Acción a realizar
  * @param $modulo     Módulo que realiza la acción
  * @param $salir En caso de no tener permisos enrutamos
