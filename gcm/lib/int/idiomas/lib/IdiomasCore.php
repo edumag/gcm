@@ -8,8 +8,6 @@
  * @author    Eduardo Magrané 
  *
  * @internal
- * Created    13/11/09
- * Revision   SVN $Id: Idiomas.php 469 2011-02-04 07:56:07Z eduardo $
  * Copyright  Copyright (c) 2009, Eduardo Magrané
  *
  * This source code is released for free distribution under the terms of the
@@ -107,21 +105,25 @@ class IdiomasCore {
 
       global $gcm;
 
-      if ( $this->idioma_actual ) return $this->idioma_actual;
-
       // Si hay un idioma definido en GET se redefine idioma actual
       if (isset($_GET["idioma"])) { 
          $_SESSION[$this->proyecto."-idioma"] = $_GET["idioma"]; 
          $this->idioma_actual = $_GET['idioma'];
+         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
+         // variable GET
+         header("Location: ".Router::$base.$_GET['idioma'].'/'.Router::$s.Router::$c);
+         exit();
          return $_GET['idioma'];
          }
 
       // Si hay un idioma definido en el url se redefine idioma actual
-      if (isset($_GET["idioma"])) { 
-         $_SESSION[$this->proyecto."-idioma"] = $_GET["idioma"]; 
-         $this->idioma_actual = $_GET['idioma'];
-         return $_GET['idioma'];
+      if ( Router::$i != Router::$ii ) { 
+         $_SESSION[$this->proyecto."-idioma"] = Router::$i; 
+         $this->idioma_actual = Router::$i;
+         return Router::$i;
          }
+
+      if ( $this->idioma_actual ) return $this->idioma_actual;
 
       // Si no existe variable de session se crea el predeterminado.
       if (isset($_SESSION[$this->proyecto."-idioma"])) {
@@ -316,9 +318,9 @@ class IdiomasCore {
                $bandera = ( file_exists($this->dir_idiomas.''.$idioma.'.png') ) ? $this->dir_idiomas.''.$idioma.'.png' : Router::$base.GCM_DIR.'lib/int/idiomas/img/'.$idioma.'.png' ;
 
                if ($idioma != $_SESSION[$this->proyecto."-idioma"]) {
-                  echo '<a href="?idioma='.$idioma.'" ><img alt="'.$idioma.'" src="'.$bandera.'" /></a> ';
+                  echo '<a href="'.Router::$base.$idioma.'/'.Router::$s.Router::$c.'" ><img alt="'.$idioma.'" src="'.$bandera.'" /></a> ';
                } else {
-                  echo '<a class="idioma_activado" href="?idioma='.$idioma.'" ><img alt="'.$idioma.'" src="'.$bandera.'" /></a> ';
+                  echo '<a class="idioma_activado" href="'.Router::$base.$idioma.'/'.Router::$s.Router::$c.'" ><img alt="'.$idioma.'" src="'.$bandera.'" /></a> ';
                   }
                }
             echo '</div>';
@@ -346,9 +348,13 @@ class IdiomasCore {
             foreach($this->idiomas_activados as $idioma) {
 
                if ($idioma != $_SESSION[$this->proyecto."-idioma"]) {
-                  echo '<li class="idioma_off"><a href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
+                  ?>
+                  <li class="idioma_off"><a href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo $idioma; ?></a></li>
+                  <?php
                } else {
-                  echo '<li class="idioma_on"><a class="idioma_activado" href="?idioma='.$idioma.'" >'.$idioma.'</a></li>';
+                  ?>
+                  <li class="idioma_on"><a class="idioma_activado" href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo $idioma;?></a></li>
+                  <?php
                   }
                }
             echo '</ul>';

@@ -1,0 +1,43 @@
+<?php
+// Archivo generado automáticamente por GcmConfig Fri Jan 10 13:02:42 CET 2014
+$GCM_LG_al['Contenido pendiente de traducción']='';
+$GCM_LG_al['Registros']='';
+$GCM_LG_al['Últimas entradas en']='';
+$GCM_LG_al['Usuario']='';
+$GCM_LG_al['Contraseña']='';
+$GCM_LG_al['Campo obligatorio']='';
+$GCM_LG_al['Longitud máxima']='';
+$GCM_LG_al['Contraseña no pasa verificación']='';
+$GCM_LG_al['El correo no parece valido']='';
+$GCM_LG_al['Campo requerido']='';
+$GCM_LG_al['Traducir documento actual']='';
+$GCM_LG_al['mapas']='';
+$GCM_LG_al['Configuración de ']='';
+$GCM_LG_al['masmonell']='';
+$GCM_LG_al['Modo usuario']='';
+$GCM_LG_al['Modo administración']='';
+$GCM_LG_al['Contenidos']='';
+$GCM_LG_al['Crear nuevo contenido']='';
+$GCM_LG_al['Editar documento actual']='';
+$GCM_LG_al['Borrar documento actual']='';
+$GCM_LG_al['Mover o cambiar nombre de contenido']='';
+$GCM_LG_al['Guardar contenido con otro nombre']='';
+$GCM_LG_al['Crear una nueva sección']='';
+$GCM_LG_al['Renombrar o mover sección actual']='';
+$GCM_LG_al['Borrar sección']='';
+$GCM_LG_al['Listar contenido']='';
+$GCM_LG_al['Administrar proyecto']='';
+$GCM_LG_al['Administración']='';
+$GCM_LG_al['Editar literales']='';
+$GCM_LG_al['Listado de comentarios']='';
+$GCM_LG_al['Editar constantes']='';
+$GCM_LG_al['Administrar imágenes']='';
+$GCM_LG_al['Configurar proyecto']='';
+$GCM_LG_al['Configuración']='';
+$GCM_LG_al['Configuración de mapas']='';
+$GCM_LG_al['victor']='';
+$GCM_LG_al['Editar información de usuario']='';
+$GCM_LG_al['Cerrar sessión']='';
+$GCM_LG_al['Salir']='';
+$GCM_LG_al['Configuración guardada en DATOS/configuracion/idiomas/LG_al.php']='';
+?>

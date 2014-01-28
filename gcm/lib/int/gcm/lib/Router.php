@@ -156,7 +156,11 @@ class Router {
     */
 
    function set_idiomas() {
-      self::$idiomas = array('es','ca');
+
+      global $gcm;
+
+      self::$idiomas = $gcm->config('idiomas','Idiomas activados');
+
       }
 
    /**
@@ -327,7 +331,6 @@ class Router {
       if ( ! isset($url) ) $url = stripslashes((isset($_REQUEST['url'])) ? $_REQUEST['url'] : '' );
       $retorno = self::desglosarUrl($url);
 
-      // echo "<p>".$url."</p><pre>" ; print_r($retorno) ; echo "</pre>"; // DEV  "")""
       /* Definir url */
       self::$url = $retorno['url'];
       self::$s = $retorno['s'];
@@ -345,14 +348,6 @@ class Router {
       self::$mime_type = $retorno['mime_type'];
       self::$esBorrador = $retorno['esBorrador'];
       self::$forma_comentarios = $retorno['forma_comentarios'];
-
-      if ( isset($_REQUEST['i'])  ) {
-         self::$i = $_REQUEST['i'];
-      } elseif ( isset($_REQUEST['idioma']) ) {
-         self::$i = $_REQUEST['idioma'];
-      } elseif ( isset($_SESSION[$proyecto."-idioma"]) ) {
-         self::$i = $_SESSION[$proyecto."-idioma"];
-         }
 
       if ( isset($_REQUEST['formato']) ) { self::$formato = $_REQUEST['formato']; }
 
@@ -642,7 +637,6 @@ class Router {
       // al ir a buscar información , ya que los subdirectorios son respectivos de la url pero desde php nos vamos 
       // del directorio del proyecto.
       $url_sin_subdirectorios = str_replace('../','',$url);
-      // registrar(__FILE__,__LINE__,'url: '.$url.' url_sin: '.$url_sin_subdirectorios,'ADMIN');  // DEV
       $mime_type = GUtil::tipo_de_archivo($dd.$url_sin_subdirectorios);
 
       if ( substr_count($url,".btml") != 0) {
@@ -721,6 +715,7 @@ class Router {
       $retorno['esBorrador'] = $esBorrador;
       $retorno['forma_comentarios'] = $forma_comentarios;
 
+      // echo '<pre>ROUTER: ' ; print_r($retorno) ; echo '</pre>'; // exit() ; // DEV  
       return $retorno;
 
       }
