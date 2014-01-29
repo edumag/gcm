@@ -90,3 +90,23 @@ function modificarLiteral(key,val) {
    pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirmarAnaydirLiteral');
    }
 
+/*************************************** NUEVO ***********************************************/
+
+function eliminar_elemento(key) {
+   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirma');
+   }
+
+/**
+ * Confirmación para las acciones
+ */
+
+function confirma()
+   {
+   if (pedido.readyState == 4 ) {
+      if ( pedido.status == 200 ) {
+         // actualizar_literales();
+         alert('OK'); // DEV
+         }
+      }
+   }
+

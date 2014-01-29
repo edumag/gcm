@@ -14,7 +14,7 @@ if ( permiso('administrar','literales') ) {
    /** Administrar literales */
    $menuAdmin['Administración']['boton']['Literales']['activado']=1;
    $menuAdmin['Administración']['boton']['Literales']['title']="Editar literales";
-   $menuAdmin['Administración']['boton']['Literales']['link']="?m=literales&a=administrar";
+   $menuAdmin['Administración']['boton']['Literales']['link']=Router::$base."literales/administrar";
 
    }
 

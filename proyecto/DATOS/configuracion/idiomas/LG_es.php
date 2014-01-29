@@ -1,8 +1,7 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jan 21 9:04:35 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Jan 28 18:40:51 CET 2014
 $LG_es['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instalación, pasos a seguir';
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
-$LG_es['Apariencia']='';
 $LG_es['April']='Abril';
 $LG_es['Augost']='Agosto';
 $LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Apariencia o como cambiar el aspecto de tu proyecto';

@@ -116,6 +116,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          if ( $valor ) {
 
+            // @todo Guardar lista de literales faltantes para la columna
             $mens = 'Nuevo literal ['.$literal.'] de Gcm con valor ['.$valor.']';
 
          } elseif ( ! array_key_exists  ( $literal  , $GCM_LG  ) ) {

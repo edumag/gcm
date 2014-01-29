@@ -9,9 +9,38 @@
 .GcmConfigCajaForm .cajaElemento {border: 1px solid white;padding: 5px;margin: 5px 0;}
 .cajaElemento b{padding-left:5px;}
 .textAreaDescripLLista textarea {margin:5px; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
-textarea.textAreaDescrip{ float:left; width:56%; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
-textarea.textAreaValor{ float:left; width:36%;margin-left:6px;}
-textarea.textAreaDescripGrande{ float:left; width:95%; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
-textarea.textAreaValorGrande{ float:left; width:95%;}
+textarea.textAreaDescrip{ margin:0;float:left; width:49%; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
+textarea.textAreaValor{ margin:0;float:right; width:49%;}
+textarea.textAreaDescripGrande{ float:left; width:100%; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
+textarea.textAreaValorGrande{ float:left; width:100%;}
 .GcmConfigCajaForm fieldset { border: 1px solid grey; margin: 10px 4px 4px;}
 .grupo_config b { display: block; float: left; padding:0; width: 100%; }
+.cajaElemento a {float: right;}
+.GcmConfigCajaForm ul { margin: 0; padding: 0;}
+.GcmConfigCajaForm li {margin: 12px 4px 0 0!important; float: left; width: 48%;overflow: auto;}
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding:3px 5px;
+	margin:2px;
+	color:white;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color:#DB5C04;
+}
+.active_page{
+	background-color:white !important;
+	color:black !important;
+}	
+
+.content, .alt_content{
+	color: black;
+}
+
+.content li, .alt_content li, .content > p{
+	padding: 5px
+}

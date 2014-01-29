@@ -673,7 +673,18 @@ class Router {
       $retorno['dd'] = $dd;
       $retorno['d'] = ( $d ) ? $d : $dd ;
       $retorno['ii'] = $ii;
-      $retorno['i'] = ( $i ) ? $i : $ii ;
+      // Si no tenemos definido idioma en la url cogemos el de sesión y si
+      // tampoco tenemos el por defecto.
+      if ( ! Router::$i ) {
+         $proyecto = $gcm->config('admin','Proyecto');
+         if ( isset($_SESSION[$proyecto.'-idioma']) ) {
+            $retorno['i'] = $_SESSION[$proyecto.'-idioma'];
+         } else {
+            $retorno['i'] = $ii ;
+            } 
+      } else {
+         $retorno['i'] = $i ;
+         }
       $retorno['a'] = $a;
       $retorno['m'] = $m;
       $retorno['args'] = $args;
