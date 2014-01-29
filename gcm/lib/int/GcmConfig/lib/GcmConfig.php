@@ -603,6 +603,8 @@ class GcmConfig {
 
    private function escribirArchivos($archivo, $datos, $nombre_array, $descripciones=FALSE) {
 
+      if ( ! $datos ) return ;
+
       /* Ordenamos variables */
 
       if ( $this->ordenar ) ksort($datos);
