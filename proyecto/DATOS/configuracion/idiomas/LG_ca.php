@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Wed Jan 29 17:12:57 CET 2014
+// Archivo generado automáticamente por GcmConfig Thu Jan 30 11:53:49 CET 2014
 $LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instal·lació passos a seguir per realitzar-la';
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Afegir javascript desde un mòdul';
 $LG_ca['April']='';
@@ -70,27 +70,27 @@ $LG_ca['Trabajando_con_imagenes']='';
 $LG_ca['Traducciones']='';
 $LG_ca['Tratar_las_diferencias_entre_navegadores']='';
 $LG_ca['Tratar_las_diferencias_entre_navegadores.html']='';
-$LG_ca['ca']='Català';
+$LG_ca['Tratar_las_diferencias_entre_navegadores2']='';
+$LG_ca['Una_mas']='';
+$LG_ca['ca']='càtala';
 $LG_ca['crud']='';
 $LG_ca['documento_nuevo']='';
 $LG_ca['eliminar']='';
 $LG_ca['es']='Castellano';
 $LG_ca['gcm']='';
+$LG_ca['index']='index';
 $LG_ca['ing']='';
 $LG_ca['inicio']='Inici';
+$LG_ca['iniciot']='';
 $LG_ca['literales']='';
+$LG_ca['probando']='';
+$LG_ca['probando nuevo']='';
+$LG_ca['proyecto']='';
+$LG_ca['seccion nueva']='';
 $LG_ca['sección']='';
 $LG_ca['sin_traduccion']='';
 $LG_ca['tema']='';
 $LG_ca['tema_nuevo']='';
 $LG_ca['thumbnail']='';
 $LG_ca['tiny_mce']='';
-$LG_ca['Tratar_las_diferencias_entre_navegadores2']='';
-$LG_ca['Una_mas']='';
-$LG_ca['index']='';
-$LG_ca['iniciot']='';
-$LG_ca['probando']='';
-$LG_ca['probando nuevo']='';
-$LG_ca['proyecto']='';
-$LG_ca['seccion nueva']='';
 ?>

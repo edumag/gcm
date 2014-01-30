@@ -491,7 +491,7 @@ class Router {
       $retorno = array();
       $url = str_replace('//','/',$url);
 
-      /** Definir idioma predeterminado e idioma actual */
+      /** Definir idioma por defecto */
 
       $ii = $gcm->config('idiomas','Idioma por defecto');
 
@@ -580,18 +580,6 @@ class Router {
 
          }
 
-      /* 
-       * Comprobar si la url lleva con sigo el idioma especificado.
-       * si es así debemos especificar idioma actual y carpeta de contenido
-       * del idioma actual
-       */
-
-      if(stristr($url, 'File/') !== FALSE) {
-         $d = substr($url,0,7);
-         $i = str_replace('File/','',$d);
-         $d = comprobar_barra($d);
-         }
-
       $dd = 'File/'.$ii.'/';
 
       /* Limpiar url de carpeta inicial File/<idioma> */
@@ -667,35 +655,69 @@ class Router {
          $enlace_relativo = './';
          }
 
-      $retorno['url'] = $url;
-      $retorno['s'] = $s;
-      $retorno['c'] = $c;
-      $retorno['dd'] = $dd;
-      $retorno['d'] = ( $d ) ? $d : $dd ;
-      $retorno['ii'] = $ii;
-      // Si no tenemos definido idioma en la url cogemos el de sesión y si
-      // tampoco tenemos el por defecto.
-      if ( ! Router::$i ) {
-         $proyecto = $gcm->config('admin','Proyecto');
+      /*
+       * Definir idioma del usuario
+       * 
+       * Si no tenemos definido idioma en la url cogemos el de sesión y si
+       * tampoco tenemos comprobamos idiomas definidos en el navegador y si
+       * no tiene ninguno que tengamos activado el por defecto.
+       */
+
+      $proyecto = $gcm->config('admin','Proyecto');
+
+      // Si hay un idioma definido en GET se redefine idioma actual
+      if (isset($_GET["idioma"])) { 
+         $_SESSION[$proyecto."-idioma"] = $_GET["idioma"]; 
+         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
+         // variable GET
+         header("Location: ".self::$base.$_GET['idioma'].'/'.$s.$c);
+         exit();
+         return $_GET['idioma'];
+         }
+
+      if ( ! $i ) {
+
          if ( isset($_SESSION[$proyecto.'-idioma']) ) {
-            $retorno['i'] = $_SESSION[$proyecto.'-idioma'];
+            $i = $_SESSION[$proyecto.'-idioma'];
          } else {
-            $retorno['i'] = $ii ;
+            // comprobar idiomas en navegador
+            $sitelang = getenv("HTTP_ACCEPT_LANGUAGE");
+            $sitelang = $sitelang[0].$sitelang[1];
+
+            if ( in_array($sitelang,self::$idiomas) ) {    // Si es un idioma activado lo definimos
+
+               $_SESSION[$proyecto."-idioma"] = $sitelang;
+               $i = $sitelang;
+
+            } else {                                                // sino es un idioma activado cogemos el por defecto
+               
+               $_SESSION[$proyecto."-idioma"] = $ii;
+               $i = $ii ;
+
+               }
+
             } 
       } else {
-         $retorno['i'] = $i ;
+         $_SESSION[$proyecto."-idioma"] = $i;
          }
-      $retorno['a'] = $a;
-      $retorno['m'] = $m;
-      $retorno['args'] = $args;
-      $retorno['e'] = $e;
-      $retorno['enlace_relativo'] = $enlace_relativo;
-      $retorno['mime_type'] = $mime_type;
-      $retorno['formato'] = $formato;
-      $retorno['esBorrador'] = $esBorrador;
+
+      $retorno['url']               = $url;
+      $retorno['ii']                = $ii;
+      $retorno['i']                 = $i;
+      $retorno['s']                 = $s;
+      $retorno['c']                 = $c;
+      $retorno['dd']                = $dd;
+      $retorno['d']                 = 'File/'.$i.'/' ;
+      $retorno['a']                 = $a;
+      $retorno['m']                 = $m;
+      $retorno['args']              = $args;
+      $retorno['e']                 = $e;
+      $retorno['enlace_relativo']   = $enlace_relativo;
+      $retorno['mime_type']         = $mime_type;
+      $retorno['formato']           = $formato;
+      $retorno['esBorrador']        = $esBorrador;
       $retorno['forma_comentarios'] = $forma_comentarios;
 
-      // echo '<pre>ROUTER: ' ; print_r($retorno) ; echo '</pre>'; // exit() ; // DEV  
       return $retorno;
 
       }

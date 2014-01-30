@@ -22,7 +22,7 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 <?php if("inicio" == $this->actual ) {  // Elemento inicio no actual ?>
 
       <li id="menuOff">
-         <a href="<?php echo Router::$base?>" title="<?php echo literal('inicio_title')?>" >
+         <a href="<?php echo Router::$base?>">
             <?php echo literal('inicio'); ?>
          </a>
       </li>
@@ -30,7 +30,7 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 <?php } else { // Acaba si estamos en inicio ?>
 
       <li>
-         <a href="<?php echo Router::$base;?>" title="<?php echo literal('inicio_title'); ?>" >
+         <a href="<?php echo Router::$base;?>">
             <?php echo literal('inicio');?>
          </a>
       </li>	 

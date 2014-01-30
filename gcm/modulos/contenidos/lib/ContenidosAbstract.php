@@ -548,7 +548,7 @@ abstract class ContenidosAbstract extends Modulos {
 
             $this->crear_nueva_seccion(Router::$d.Router::$s);
 
-            $titulo = $_POST['titulo'];
+            $titulo = ( isset($_POST['titulo']) ) ? $_POST['titulo'] : FALSE ;
             $nombre_contenido = $this->devolver_titulo();
             $destino = Router::$d.Router::$s.$nombre_contenido;
             if ( substr_count($destino,".html") == 0) $destino .=  ".html";
@@ -589,6 +589,9 @@ abstract class ContenidosAbstract extends Modulos {
          case 'actualizar_contenido':
 
             $destino = $gcm->seleccionado[0];
+            // Si estamos en otro idioma pero editando el destino es el contenido
+            // del idioma por defecto.
+            if ( Router::$i != Router::$ii ) $destino = str_replace('File/'.Router::$i,'File/'.Router::$ii,$destino);
             $mens = literal('Contenido actualizado',3);
             break;
 
@@ -621,6 +624,10 @@ abstract class ContenidosAbstract extends Modulos {
             }
 
          }
+
+      // $destino sin File/idioma 
+      $destino = str_replace('File/'.Router::$i,'File/'.Router::$ii,$destino);
+      $destino = str_replace('File/'.Router::$i.'/','',$destino);
 
       $gcm->router->inicia($destino);
 

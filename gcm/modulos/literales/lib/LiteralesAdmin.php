@@ -242,14 +242,17 @@ class LiteralesAdmin extends Literales {
 
       }
 
+/************************************************************* NUEVO ****************************/
+
+
     /**
-    * Administración de literales
-    *
-    * @param  $e Evento
-    * @param  $args Argumentos
-    * @return TRUE/FALSE
-    *
-    */
+     * Administración de literales
+     *
+     * @param  $e Evento
+     * @param  $args Argumentos
+     * @return TRUE/FALSE
+     *
+     */
    
    function administrar($e,$args=NULL) {
 
@@ -332,9 +335,6 @@ class LiteralesAdmin extends Literales {
 
       }
    
-/************************************************************* NUEVO ****************************/
-
-
     /**
      * Administración de literales
      *
