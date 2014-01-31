@@ -20,9 +20,6 @@ require_once(dirname(__FILE__).'/Literales.php');
 /**
  * @class LiteralesAdmin
  * @brief Administración de literales
- * @version 0.3
- *
- * @todo Crear mecanismo para eliminar literal de todos los idiomas no solo del que estamos.
  */
 
 class LiteralesAdmin extends Literales {
@@ -66,9 +63,6 @@ class LiteralesAdmin extends Literales {
     * Eliminar literal
     *
     * Eliminamos literal especifico
-    *
-    * @todo Hacer los mismo en todos los idiomas.
-    *
     */
 
    function eliminarLiteral() {
@@ -395,7 +389,7 @@ class LiteralesAdmin extends Literales {
          <a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >
             <?php echo literal('Añadir',3);?>
          </a>
-         <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra()" >
+         <a class="boton_activo" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this);" >
             <?php echo literal('Filtrar',3) ?>
          </a>
 
@@ -438,9 +432,6 @@ class LiteralesAdmin extends Literales {
     * Eliminar literal
     *
     * Eliminamos literal especifico
-    *
-    * @todo Eliminar de todos los idiomas.
-    *
     */
 
    function eliminar_elemento() {

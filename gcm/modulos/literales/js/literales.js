@@ -129,7 +129,14 @@ function modificar_literal(key,val) {
  * Ocultamos literales que ya tienen contenido
  */
 
-function filtra() {
-   $("#panel_admin .subpanel").css('display','none');
+function filtra(elemento) {
+   clase =  elemento.className;
+   if ( clase == 'boton_activo' ) {
+      elemento.className='boton';
+      $("#panel_admin .subpanel").css('display','');
+   } else {
+      elemento.className='boton_activo';
+      $("#panel_admin .subpanel").css('display','none');
+      }
    }
 
