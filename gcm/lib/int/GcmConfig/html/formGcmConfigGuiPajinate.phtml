@@ -86,6 +86,8 @@
 
             <li id='<?php echo $claveArray."-".$conta2?>' >
 
+               <div>
+
                <?php
                // Si el número de filas supera las dos presentamos descripción sobre el valor
                // y no al lado.
@@ -116,6 +118,7 @@
 
                <textarea class="item_valor formulari2 <?php echo $ta_class_valor.' GC_'.$claveArray2 ?>" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $ta_valor?></textarea>
 
+               </div>
             </li>
 
 
@@ -127,12 +130,15 @@
 
             <li id='<?php echo $clave."-".$conta?>' >
 
-               <?php if ( 0 !== $conta ) { ?>
-               [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
-               <?php } ?>
-               <br />
-               <textarea class="formulari2" rows='<?php echo contabilizar_saltos_linea($valorArray);  ?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+               <div>
 
+                  <?php if ( 0 !== $conta ) { ?>
+                  [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
+                  <?php } ?>
+                  <br />
+                  <textarea class="formulari2" rows='<?php echo contabilizar_saltos_linea($valorArray);  ?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+
+               </div>
             </li>
             <?php } // Acaba si es un array ?>
 
@@ -162,28 +168,31 @@
 
          <li id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
 
-            <b><?php echo $clave?></b>
-            <?php if ( $eliminar ) { ?>
-            <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
-            <?php   } ?>
-
             <div>
 
-            <?php if ( $ta_descripcion || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
+               <b><?php echo $clave?></b>
+               <?php if ( $eliminar ) { ?>
+               <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+               <?php   } ?>
 
-            <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc; ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
-            <?php if ( ! $modificar_descripciones ) { ?>
-            class='inputLectura' readonly
-            <?php } ?> ><?php echo $ta_descripcion?></textarea>
+               <div>
 
-            <?php } ?>
+               <?php if ( $ta_descripcion || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
 
-            <textarea class="<?php echo $ta_class_valor.' GC_'.$clave ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
+               <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc; ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+               <?php if ( ! $modificar_descripciones ) { ?>
+               class='inputLectura' readonly
+               <?php } ?> ><?php echo $ta_descripcion?></textarea>
 
-            <?php } ?>
+               <?php } ?>
 
+               <textarea class="<?php echo $ta_class_valor.' GC_'.$clave ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
+
+               <?php } ?>
+
+               </div>
+               <div style="clear: both;"></div>
             </div>
-            <div style="clear: both;"></div>
          </li>
 
       <?php } ?>

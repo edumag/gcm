@@ -1,8 +1,4 @@
-.GcmConfigCajaForm {
-   background: none repeat scroll 0 0 window;
-   color: captiontext;
-   padding: 4px 6px;
-}
+.GcmConfigCajaForm {background: none repeat scroll 0 0 window;color: captiontext;padding: 4px 6px;}
 .GcmConfigCajaForm input {width: 100%; height:100%;display: block;}
 .GcmConfigCajaForm textarea {width: 96%;font-family: Verdana,Arial,Helvetica,sans-serif; font-size:100%; min-height: 40px;}
 .GcmConfigCajaForm textarea[readonly] {background: #455;}
@@ -17,30 +13,10 @@ textarea.textAreaValorGrande{ float:left; width:100%;}
 .grupo_config b { display: block; float: left; padding:0; width: 100%; }
 .cajaElemento a {float: right;}
 .GcmConfigCajaForm ul { margin: 0; padding: 0;}
-.GcmConfigCajaForm li {margin: 12px 4px 0 0!important; float: left; width: 48%;overflow: auto;}
-.page_navigation , .alt_page_navigation{
-	padding-bottom: 10px;
-}
-
-.page_navigation a, .alt_page_navigation a{
-	padding:3px 5px;
-	margin:2px;
-	color:white;
-	text-decoration:none;
-	float: left;
-	font-family: Tahoma;
-	font-size: 12px;
-	background-color:#DB5C04;
-}
-.active_page{
-	background-color:white !important;
-	color:black !important;
-}	
-
-.content, .alt_content{
-	color: black;
-}
-
-.content li, .alt_content li, .content > p{
-	padding: 5px
-}
+.GcmConfigCajaForm li {padding:0!important;margin: 0!important;border: 0!important; float: left; width: 50%;overflow: auto;}
+.page_navigation , .alt_page_navigation{padding-bottom: 10px;}
+.page_navigation a, .alt_page_navigation a{	padding:3px 5px;	margin:2px;	color:white;	text-decoration:none;	float: left;	font-family: Tahoma;	font-size: 12px;	background-color:#DB5C04;}
+.active_page{background-color:white !important;	color:black !important;}	
+.content, .alt_content{	color: black;}
+.content li, .alt_content li, .content > p{	padding: 5px}
+.GcmConfigCajaForm li > div {border: 1px solid rgb(128, 128, 128);margin: 2px;padding: 4px;}
