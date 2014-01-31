@@ -1,0 +1,28 @@
+/* Administración */
+
+#litadmin .subpanelNegativo {
+   color: red;
+}
+
+#litadmin ul {
+    margin: 20px 0;
+    padding: 0;
+}
+#litadmin li {
+ display: inline-flex;
+   background: transparent;
+   margin: 0;
+   padding: 2px;
+}
+#litadmin li div { margin: 0 0 0 4px; }
+
+#litadmin li:hover {
+    border: 1px solid;
+    border-radius: 7px;
+}
+#litadmin li:hover div { visibility: visible!important;}
+#litadmin li.subpanelNegativo {
+   background: transparent!important;
+}
+#litadmin .subpanelNegativo > div {
+}

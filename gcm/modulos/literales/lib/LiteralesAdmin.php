@@ -386,49 +386,51 @@ class LiteralesAdmin extends Literales {
          $literales = $arr->variables();
          }
 
+      // Acciones
 
-      $salida = '<div id="panelLiterales">';
-      $salida .= '<br />';
-      $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >'
-         .literal('Añadir',3)
-         .'</a>';
-      $salida .= '<a class="boton" title="'.htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8").'" style="cursor: pointer;" onclick="javascript:filtra()" >'
-         .literal('Filtrar',3)
-         .'</a>';
+      ?>
 
-      $salida .= '<ul>';
+      <div id="panel_admin">
+         <br />
+         <a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >
+            <?php echo literal('Añadir',3);?>
+         </a>
+         <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra()" >
+            <?php echo literal('Filtrar',3) ?>
+         </a>
 
-      if ( $literales ) {
+         <ul id="litadmin">
 
-         foreach ( $literales as $key => $valor ) {
+            <?php
+            if ( $literales ) {
 
-            $clase = ( empty($valor) ) ? 'subpanelNegativo' : "subpanel" ;
-               
-            $salida .= '
-               <li class="'.$clase.'">
-               <a style="font-size: smaller;" title="Eliminar" 
-                  href="javascript:;" onclick="eliminar_elemento(\''.str_replace("'","\'",$key).'\')" >
-                  [X]
-               </a>
-               <a style="font-size: smaller;" title="Modificar" 
-                  href="javascript:;" onclick="modificarLiteral(\''.$key.'\',\''.$valor.'\')" >
-                  [M]
-               </a>
-               <a href="javascript:;" 
-                  onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'{L{'.$key.'}}\'); return false"
-                  title="'.htmlentities(literal('Añadir literal a contenido',3).' ('.$valor.')',ENT_QUOTES, "UTF-8").'" 
-                  >
-                  '.$key.'
-               </a>
-               <input type="text" name="'.htmlentities($key,ENT_QUOTES, "UTF-8").'" value="'.htmlentities($valor,ENT_QUOTES, "UTF-8").'"/>
-               </li>';
-            }
-         }
+               foreach ( $literales as $key => $valor ) {
 
-      $salida .= '</ul>';
-      $salida .= '</div>';
+                  $clase = ( empty($valor) ) ? 'subpanelNegativo' : "subpanel" ;
+                     
+                  $valor = ($valor) ? $valor : $key ;
 
-      echo $salida;
+                     ?>
+                     <li id="<?php echo $key ?>" class="<?php echo $clase?>">
+                        <a title="Modificar" 
+                           href="javascript:;" onclick="modificar_literal('<?php echo $key?>','<?php echo $valor?>')" >
+                           <?php echo $valor ?>
+                        </a>
+                        <div style="visibility: hidden;">
+                           <a title="Eliminar" 
+                              href="javascript:;" onclick="eliminar_elemento('<?php echo $key ?>')" >
+                              [X]
+                           </a>
+                        </div>
+                     </li>
+                     <?php
+                  }
+               }
+
+            ?>
+         </ul>
+      </div>
+      <?php
 
       }
 
@@ -437,7 +439,7 @@ class LiteralesAdmin extends Literales {
     *
     * Eliminamos literal especifico
     *
-    * @todo Hacer los mismo en todos los idiomas.
+    * @todo Eliminar de todos los idiomas.
     *
     */
 
@@ -445,12 +447,12 @@ class LiteralesAdmin extends Literales {
 
       global $gcm;
 
-      $idioma = Router::$i;
-      $file=$gcm->config('idiomas','Directorio idiomas')."LG_".$idioma.".php";
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-      $arr->del($_GET['elemento']);
-      $arr->guardar_variables();
+      foreach ( Router::$idiomas as $idioma ) {
+         $file=$gcm->config('idiomas','Directorio idiomas')."LG_".$idioma.".php";
+         $arr = GcmConfigFactory::GetGcmConfig($file);
+         $arr->del($_GET['elemento']);
+         $arr->guardar_variables();
+         }
 
       echo "Elemento [ ".$_GET['elemento']." ] eliminado";
 

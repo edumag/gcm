@@ -23,14 +23,6 @@ function actualizar_literales() {
    }
 
 /**
- * Ocultamos literales que ya tienen contenido
- */
-
-function filtra() {
-   $("#panelLiterales .subpanel").css('display','none');
-   }
-
-/**
  * Confirmación para la inserción de elementos
  */
 
@@ -92,8 +84,14 @@ function modificarLiteral(key,val) {
 
 /*************************************** NUEVO ***********************************************/
 
-function eliminar_elemento(key) {
-   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirma');
+/**
+ * Actualizar panel de literales
+ */
+
+function actualizar_literales(panel) {
+   panel = document.getElementById(panel);
+   $(panel).empty();
+   $(panel).load("?formato=ajax&m=literales&a=lista");
    }
 
 /**
@@ -104,9 +102,34 @@ function confirma()
    {
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
-         // actualizar_literales();
-         alert('OK'); // DEV
+         actualizar_literales('panel_admin');
+         // alert('OK'); // DEV
          }
       }
+   }
+
+function eliminar_elemento(key) {
+   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirma');
+   }
+
+/**
+ * Modificar literales de los idiomas
+ *
+ * @param key Clave del literal que queremos modificar
+ * @param val Valor actual del literal
+ *
+ */
+
+function modificar_literal(key,val) {
+   var res = prompt('Modificaión de '+key,val);
+   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirma');
+   }
+
+/**
+ * Ocultamos literales que ya tienen contenido
+ */
+
+function filtra() {
+   $("#panel_admin .subpanel").css('display','none');
    }
 

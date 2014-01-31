@@ -115,7 +115,7 @@ class Router {
     * Listado de idiomas activados
     */
 
-   private static $idiomas = NULL ;
+   public static $idiomas = NULL ;
 
    public static $url;                     ///< Url que nos llega
    public static $dir;                     ///< Base de url relativa al directorio
