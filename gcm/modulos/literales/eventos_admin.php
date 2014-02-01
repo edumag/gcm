@@ -28,6 +28,8 @@ $eventos['columna']['panel_literales'][5] = '';
 
 /** Permitimos administrar literales a editores */
 $acciones['literales']['panel_literales'][] = 'editor';
+$acciones['literales']['lista'][] = 'editor';
+$acciones['literales']['eliminar_elemento'][] = 'editor';
 
 /** Permitimos administrar literales a traductores */
 $acciones['literales']['panel_literales'][] = 'traductor';

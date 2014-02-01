@@ -108,6 +108,18 @@ function confirma()
       }
    }
 
+/**
+ * Insertar literal nuevo
+ */
+
+function insertar_literal() {
+   var key = prompt('literal','');
+   if (key) {
+      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key,'confirma');
+      }
+   }
+
+
 function eliminar_elemento(key) {
    pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirma');
    }

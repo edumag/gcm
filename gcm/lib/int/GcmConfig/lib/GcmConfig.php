@@ -340,7 +340,7 @@ class GcmConfig {
       } else {
          $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
          $valor    = html_entity_decode($valor,ENT_NOQUOTES,'UTF-8');
-         if ( $valor ) $this->variables_modificadas = TRUE;
+         $this->variables_modificadas = TRUE;
          $this->variables[$variable] = $valor;
          }
 

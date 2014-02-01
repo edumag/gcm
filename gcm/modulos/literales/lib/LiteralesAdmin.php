@@ -248,7 +248,7 @@ class LiteralesAdmin extends Literales {
      *
      */
    
-   function administrar($e,$args=NULL) {
+   function admin($e,$args=NULL) {
 
       global $gcm;
 
@@ -338,9 +338,11 @@ class LiteralesAdmin extends Literales {
      *
      */
    
-   function admin($e,$args=NULL) {
+   function administrar($e,$args=NULL) {
 
       global $gcm;
+
+      $this->javascripts('literales.js');
 
       // Añadimos contenido a título
       $gcm->titulo = 'Literales de '.literal(Router::$i);
@@ -386,7 +388,7 @@ class LiteralesAdmin extends Literales {
 
       <div id="panel_admin">
          <br />
-         <a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >
+         <a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal()" >
             <?php echo literal('Añadir',3);?>
          </a>
          <a class="boton_activo" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this);" >
