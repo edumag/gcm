@@ -15,68 +15,68 @@
 $usuario = $_SESSION[$gcm->sufijo.'usuario'];
 
 /** Editar perfil usuario */
-$menuAdmin2[$usuario]['boton']['Editar perfil']['activado']= 1;
-$menuAdmin2[$usuario]['boton']['Editar perfil']['title']="Editar información de usuario";
-$menuAdmin2[$usuario]['boton']['Editar perfil']['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
+$menuAdmin2[$usuario]['boton'][literal('Editar perfil',3)]['activado']= 1;
+$menuAdmin2[$usuario]['boton'][literal('Editar perfil',3)]['title']=literal("Editar información de usuario",3);
+$menuAdmin2[$usuario]['boton'][literal('Editar perfil',3)]['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
 // $menuAdmin2[$usuario]['class']='user';
 
-$menuAdmin2['Salir']['title']="Cerrar sessión";
-$menuAdmin2['Salir']['link']=Router::$base.Router::$s.Router::$c.'?e=salir';
+$menuAdmin2[literal('Salir',3)]['title']=literal("Cerrar sesión",3);
+$menuAdmin2[literal('Salir',3)]['link']=Router::$base.Router::$s.Router::$c.'?e=salir';
 
 if ( permiso('test','admin') ) {
 
-$menuAdmin['Administración']['boton']['Tests']['activado']= 1;
-$menuAdmin['Administración']['boton']['Tests']['title']="Ejecutar tests";
-$menuAdmin['Administración']['boton']['Tests']['link']=dirname($_SERVER['PHP_SELF'])."/test";
+$menuAdmin[literal('Administración',3)]['boton']['Tests']['activado']= 1;
+$menuAdmin[literal('Administración',3)]['boton']['Tests']['title']=literal("Ejecutar tests",3);
+$menuAdmin[literal('Administración',3)]['boton']['Tests']['link']=dirname($_SERVER['PHP_SELF'])."/test";
 
    }
 
 if ( permiso('usuarios','admin') ) {
 
-   $menuAdmin['Administración']['boton']['Usuarios']['activado']= 1;
-   $menuAdmin['Administración']['boton']['Usuarios']['title']="Administración de usuarios";
-   $menuAdmin['Administración']['boton']['Usuarios']['link']=dirname($_SERVER['PHP_SELF'])."/admin/usuarios/";
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Usuarios',3)]['activado']= 1;
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Usuarios',3)]['title']=literal("Administración de usuarios",3);
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Usuarios',3)]['link']=dirname($_SERVER['PHP_SELF'])."/admin/usuarios/";
    }
 
 if ( permiso('infoserver','admin') ) {
 
-   $menuAdmin['Administración']['boton']['Info server']['activado']= 1;
-   $menuAdmin['Administración']['boton']['Info server']['title']="Información de servidor";
-   $menuAdmin['Administración']['boton']['Info server']['link']=dirname($_SERVER['PHP_SELF'])."/admin/infoserver";
+   $menuAdmin[literal('Administración',3)]['boton']['Info server']['activado']= 1;
+   $menuAdmin[literal('Administración',3)]['boton']['Info server']['title']=literal("Información de servidor",3);
+   $menuAdmin[literal('Administración',3)]['boton']['Info server']['link']=dirname($_SERVER['PHP_SELF'])."/admin/infoserver";
    }
 
 if ( permiso('configurar_conexiones','admin') ) {
 
 
-   $menuAdmin['Administración']['boton']['Visualizar conexiones']['activado']= 1;
-   $menuAdmin['Administración']['boton']['Visualizar conexiones']['title']="Visualizar conexiones entre Eventos y módulos";
-   $menuAdmin['Administración']['boton']['Visualizar conexiones']['link']=dirname($_SERVER['PHP_SELF'])."/admin/configurar_conexiones";
+   $menuAdmin[literal('Administración',3)]['boton']['Visualizar conexiones']['activado']= 1;
+   $menuAdmin[literal('Administración',3)]['boton']['Visualizar conexiones']['title']=literal("Visualizar conexiones entre Eventos y módulos",3);
+   $menuAdmin[literal('Administración',3)]['boton']['Visualizar conexiones']['link']=dirname($_SERVER['PHP_SELF'])."/admin/configurar_conexiones";
 
    }
 
 /** Secciones del menú predeterminadas */
-$menuAdmin['Administración']['title']='Administrar proyecto';
-$menuAdmin['Configuración']['title']='Configurar proyecto';
-$menuAdmin['Seguimiento']['title']='Seguimiento del proyecto';
+$menuAdmin[literal('Administración',3)]['title']=literal('Administrar proyecto',3);
+$menuAdmin[literal('Configuración',3)]['title']=literal('Configurar proyecto',3);
+$menuAdmin[literal('Seguimiento',3)]['title']=literal('Seguimiento del proyecto',3);
 
 /** Sección proyecto */
 $proyecto = $gcm->config('admin','Proyecto');
-$menuAdmin[$proyecto]['boton']['Modo view']['activado']= 1;
-$menuAdmin[$proyecto]['boton']['Modo view']['title']="Modo usuario";
-$menuAdmin[$proyecto]['boton']['Modo view']['link']=dirname($_SERVER['PHP_SELF'])."?tema=";
-$menuAdmin[$proyecto]['boton']['Modo admin']['activado']= 1;
-$menuAdmin[$proyecto]['boton']['Modo admin']['title']="Modo administración";
-$menuAdmin[$proyecto]['boton']['Modo admin']['link']=dirname($_SERVER['PHP_SELF'])."?tema=admin";
+$menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['activado']= 1;
+$menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['title']="Modo usuario";
+$menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['link']=dirname($_SERVER['PHP_SELF'])."?tema=";
+$menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['activado']= 1;
+$menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['title']="Modo administración";
+$menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['link']=dirname($_SERVER['PHP_SELF'])."?tema=admin";
 
 
 /** Especificamos peso para ordenar menú */
 
 
 $menuAdmin[$proyecto]        ['peso'] = -20;
-$menuAdmin['Contenidos']     ['peso'] = -10;
-$menuAdmin['Administración'] ['peso'] = -8;
-$menuAdmin['Configuración']  ['peso'] = -6;
-$menuAdmin['Seguimiento']    ['peso'] = -4;
+$menuAdmin[literal('Contenidos',3)]     ['peso'] = -10;
+$menuAdmin[literal('Administración',3)] ['peso'] = -8;
+$menuAdmin[literal('Configuración',3)]  ['peso'] = -6;
+$menuAdmin[literal('Seguimiento',3)]    ['peso'] = -4;
 
 
 /** @} */

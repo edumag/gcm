@@ -12,9 +12,9 @@
 if ( permiso('administrar','constantes') ) {
 
    /** Administrar constantes */
-   $menuAdmin['Administración']['boton']['constantes']['activado']=1;
-   $menuAdmin['Administración']['boton']['constantes']['title']="Editar constantes";
-   $menuAdmin['Administración']['boton']['constantes']['link']="?m=constantes&a=administrar";
+   $menuAdmin[literal('Administración',3)]['boton'][literal('constantes',3)]['activado']=1;
+   $menuAdmin[literal('Administración',3)]['boton'][literal('constantes',3)]['title']=literal("Editar constantes",3);
+   $menuAdmin[literal('Administración',3)]['boton'][literal('constantes',3)]['link']="?m=constantes&a=administrar";
 
    }
 

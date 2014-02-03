@@ -105,6 +105,7 @@ class GcmConfig {
  
    public $ordenar = FALSE;                     ///< Ordenar variables al escribir archivo (T/F)
 
+   private $directorio_actual ;                 ///< Definimos directorio para que en el destruct se mantenga.
 
    /**
     * Constructor
@@ -120,6 +121,7 @@ class GcmConfig {
       $this->nombre_array = str_replace('.php','',basename($this->archivo));
       $this->directorio_descripciones = dirname($this->archivo);
       $this->archivoxdefecto = $archivoxdefecto;
+      $this->directorio_actual = getcwd();
 
       $this->leer_variables();
       
@@ -338,7 +340,7 @@ class GcmConfig {
       } else {
          $variable = html_entity_decode($variable,ENT_NOQUOTES,'UTF-8');
          $valor    = html_entity_decode($valor,ENT_NOQUOTES,'UTF-8');
-         if ( $valor ) $this->variables_modificadas = TRUE;
+         $this->variables_modificadas = TRUE;
          $this->variables[$variable] = $valor;
          }
 
@@ -580,13 +582,13 @@ class GcmConfig {
        * archivo sin contenido
        */
 
-      if ( $this->descripciones_modificadas[$idioma] != TRUE ) {
+      if ( isset($this->descripciones_modificadas[$idioma]) && $this->descripciones_modificadas[$idioma] != TRUE ) {
          return TRUE;
          }
 
       $archivo_descripciones = $this->directorio_descripciones.'/'.$this->nombre_array.'_'.$idioma.'.php';
 
-      $this->escribirArchivos($archivo_descripciones, $this->descripciones[$idioma], $this->nombre_array.'_DESC', TRUE);
+      if ( isset($this->descripciones[$idioma]) ) $this->escribirArchivos($archivo_descripciones, $this->descripciones[$idioma], $this->nombre_array.'_DESC', TRUE);
 
       return TRUE;
 
@@ -603,6 +605,8 @@ class GcmConfig {
 
    private function escribirArchivos($archivo, $datos, $nombre_array, $descripciones=FALSE) {
 
+      if ( ! $datos ) return ;
+
       /* Ordenamos variables */
 
       if ( $this->ordenar ) ksort($datos);
@@ -611,7 +615,7 @@ class GcmConfig {
 
       try {
 
-         // $ubicacion = dirname($_SERVER['SCRIPT_FILENAME']).'/';
+         $archivo = ( file_exists($archivo) ) ? $archivo : $this->directorio_actual.'/'.$archivo ;
 
          if ( ! $file = @fopen($archivo, "w",TRUE) ) {
             $error = error_get_last();

@@ -12,9 +12,9 @@
 if ( permiso('visualizar','ver_registros') ) {
 
    /** Visualizar registros del proyecto */
-   $menuAdmin['Seguimiento']['boton']['Registros']['activado']=1;
-   $menuAdmin['Seguimiento']['boton']['Registros']['title']="Visualización de los registros de la aplicación";
-   $menuAdmin['Seguimiento']['boton']['Registros']['link']=Router::$base.'ver_registros/visualizar/'.Router::$url;
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('Registros',3)]['activado']=1;
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('Registros',3)]['title']=literal("Visualización de los registros de la aplicación",3);
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('Registros',3)]['link']=Router::$base.'ver_registros/visualizar/'.Router::$url;
 
    }
 

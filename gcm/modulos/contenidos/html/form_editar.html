@@ -9,7 +9,7 @@
 ?>
 <div id="caja_form_editar">
    <form action="<?=$_SERVER['PHP_SELF']?>" id="formularioTexto" name="formularioTexto" method="post">
-      <?php if ( $evento == 'ejecutar_traducir' ) include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_titulo.html')); ?>
+      <?php if ( $evento == 'ejecutar_traducir' && Router::$c != 'index.html' ) include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_titulo.html')); ?>
       <?php include ($gcm->event->instancias['temas']->ruta('contenidos','html','_form_contenido.html')); ?>
       <fieldset>
          <legend><?=literal('Acciones',3)?></legend>

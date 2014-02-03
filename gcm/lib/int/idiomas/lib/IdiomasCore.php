@@ -101,59 +101,7 @@ class IdiomasCore {
     * Detectar idioma actual de usuario
     */
 
-   function idioma_actual() {
-
-      global $gcm;
-
-      // Si hay un idioma definido en GET se redefine idioma actual
-      if (isset($_GET["idioma"])) { 
-         $_SESSION[$this->proyecto."-idioma"] = $_GET["idioma"]; 
-         $this->idioma_actual = $_GET['idioma'];
-         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
-         // variable GET
-         header("Location: ".Router::$base.$_GET['idioma'].'/'.Router::$s.Router::$c);
-         exit();
-         return $_GET['idioma'];
-         }
-
-      // Si hay un idioma definido en el url se redefine idioma actual
-      if ( Router::$i != Router::$ii ) { 
-         $_SESSION[$this->proyecto."-idioma"] = Router::$i; 
-         $this->idioma_actual = Router::$i;
-         return Router::$i;
-         }
-
-      if ( $this->idioma_actual ) return $this->idioma_actual;
-
-      // Si no existe variable de session se crea el predeterminado.
-      if (isset($_SESSION[$this->proyecto."-idioma"])) {
-
-            $this->idioma_actual = $_SESSION[$this->proyecto."-idioma"] ;
-
-      } else {
-
-         // Miramos el idioma que el usuario tiene definido en el navegador
-
-         $sitelang = getenv("HTTP_ACCEPT_LANGUAGE");
-         $sitelang = $sitelang[0].$sitelang[1];
-
-         if ( in_array($sitelang,$this->idiomas_activados ) ) {    // Si es un idioma activado lo definimos
-
-            $_SESSION[$this->proyecto."-idioma"] = $sitelang;
-            $this->idioma_actual = $sitelang;
-
-         } else {                                                // sino es un idioma activado cogemos el por defecto
-
-            
-            registrar(__FILE__,__LINE__,"No tenemos idioma de usuario [$sitelang]",'ADMIN');
-            $_SESSION[$this->proyecto."-idioma"] = $this->idiomaxdefecto;
-            $this->idioma_actual = $this->idiomaxdefecto;
-
-            }
-
-         }
-
-      }
+   function idioma_actual() { $this->idioma_actual = Router::$i ; return Router::$i ; }
 
    /**
     * Instalación
@@ -219,13 +167,17 @@ class IdiomasCore {
 
    private function incluir_literales($file, $idioma, $prefijo_array = 'LG_') {
 
-      global $LG;
+      global $LG, $GCM_LG;
 
       if ( file_exists($file) ) {
          include($file);
          if ( isset(${$prefijo_array.$idioma}) ) {
             foreach ( ${$prefijo_array.$idioma} as $key => $literal ) {
-               if ( ! empty($literal) ) $LG[$key] = $literal;
+               if ( $prefijo_array == 'LG_' ) {
+                  if ( ! empty($literal) ) $LG[$key] = $literal;
+               } else {
+                  if ( ! empty($literal) ) $GCM_LG[$key] = $literal;
+                  }
                }
             }
          }
@@ -349,11 +301,11 @@ class IdiomasCore {
 
                if ($idioma != $_SESSION[$this->proyecto."-idioma"]) {
                   ?>
-                  <li class="idioma_off"><a href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo $idioma; ?></a></li>
+                  <li class="idioma_off"><a href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo literal($idioma); ?></a></li>
                   <?php
                } else {
                   ?>
-                  <li class="idioma_on"><a class="idioma_activado" href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo $idioma;?></a></li>
+                  <li class="idioma_on"><a class="idioma_activado" href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo literal($idioma);?></a></li>
                   <?php
                   }
                }

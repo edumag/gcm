@@ -1,3 +1,22 @@
 .subpanelNegativo a {
    color: <?=$this->color("body-11")?>;
 }
+
+/* Administración */
+#panelLiterales ul {
+    margin: 20px 0;
+    padding: 0;
+}
+#panelLiterales li {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+    margin: 8px 0 2px 25px;
+    padding: 4px;
+}
+
+#panelLiterales li input {
+    display: block;
+    width: 98%;
+}
+li.subpanelNegativo {
+    background: none repeat scroll 0 0 rgb(173, 95, 23) !important;
+}

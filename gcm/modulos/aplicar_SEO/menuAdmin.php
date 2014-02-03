@@ -12,9 +12,9 @@
 if ( permiso('seo','aplicar_SEO') ) {
 
    /** Información sobre SEO del proyecto */
-   $menuAdmin['Administración']['boton']['SEO']['activado']= 1;
-   $menuAdmin['Administración']['boton']['SEO']['title']="Gestionar SEO";
-   $menuAdmin['Administración']['boton']['SEO']['link']=dirname($_SERVER['PHP_SELF'])."/seo";
+   $menuAdmin[literal('Administración',3)]['boton']['SEO']['activado']= 1;
+   $menuAdmin[literal('Administración',3)]['boton']['SEO']['title']=literal("Gestionar SEO",3);
+   $menuAdmin[literal('Administración',3)]['boton']['SEO']['link']=dirname($_SERVER['PHP_SELF'])."/seo";
 
    }
 

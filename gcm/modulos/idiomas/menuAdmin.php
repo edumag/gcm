@@ -12,10 +12,10 @@
 if ( permiso() ) {
 
    /** Administrar idiomas */
-   $menuAdmin['Administración']['boton']['idiomas']['activado']=1;
-   $menuAdmin['Administración']['boton']['idiomas']['nombre']="Idiomas";
-   $menuAdmin['Administración']['boton']['idiomas']['title']="Administracion de los diferentes idiomas";
-   $menuAdmin['Administración']['boton']['idiomas']['link']= Router::$base."idiomas/administrar";
+   $menuAdmin[literal('Administración',3)]['boton'][literal('idiomas',3)]['activado']=1;
+   $menuAdmin[literal('Administración',3)]['boton'][literal('idiomas',3)]['nombre']=literal("Idiomas",3);
+   $menuAdmin[literal('Administración',3)]['boton'][literal('idiomas',3)]['title']=literal("Administracion de los diferentes idiomas",3);
+   $menuAdmin[literal('Administración',3)]['boton'][literal('idiomas',3)]['link']= Router::$base."idiomas/administrar";
 
    }
 

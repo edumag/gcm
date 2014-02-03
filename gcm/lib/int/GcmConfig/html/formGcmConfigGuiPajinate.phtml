@@ -16,7 +16,13 @@
 
    <div id="cajaForm_<?php echo $this->idioma ?>" class="GcmConfigCajaForm">
 
-      <?php if ( isset($this->variables) ) { while (list($clave, $val)=each($this->variables)){ ?>
+      <?php if ( isset($this->variables) ) { ?>
+
+      <div class="page_navigation"></div>
+      <div style="clear: both"></div>
+      <ul class="content">
+
+      <?php while (list($clave, $val)=each($this->variables)){ ?>
 
       <?php // Si es un array se debe permitir añadir más valores o eliminarlos ?>
 
@@ -27,13 +33,12 @@
       <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
 
          <b><?php echo $clave?></b>
-         <span class="botones_derecha">
-            <?php if ( $eliminar ) { ?>
-            <a onclick='javascript:eliminarElemento<?php echo $grupo ?>("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
-            <?php   } ?>
+         <?php if ( $eliminar ) { ?>
+         <a onclick='javascript:eliminarElemento<?php echo $grupo ?>("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+         <?php   } ?>
 
-            [<a title='<?php echo literal('Añadir más').' '.literal($clave) ?>' href="javascript:anadirVariable<?php echo $grupo ?>('<?php echo $this->idioma ?>','<?php echo $clave ?>',<?php echo count($val);?>)" >+</a>]
-         </span>
+         [<a title='<?php echo literal('Añadir más').' '.literal($clave) ?>' href="javascript:anadirVariable<?php echo $grupo ?>('<?php echo $this->idioma ?>','<?php echo $clave ?>',<?php echo count($val);?>)" >+</a>]
+
       <div>
 
          <div class="textAreaDescripLLista">
@@ -52,7 +57,7 @@
 
          </div>
 
-         <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>' class="lista_config">
+         <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>'>
 
             <?php $conta=0; ?>
 
@@ -78,7 +83,10 @@
 
             <?php while (list($claveArray2, $valorArray2)=each($valorArray)) { $conta2++; ?>
 
-            <div class="grupo_config" id='<?php echo $claveArray."-".$conta2?>'>
+
+            <li id='<?php echo $claveArray."-".$conta2?>' >
+
+               <div>
 
                <?php
                // Si el número de filas supera las dos presentamos descripción sobre el valor
@@ -110,7 +118,8 @@
 
                <textarea class="item_valor formulari2 <?php echo $ta_class_valor.' GC_'.$claveArray2 ?>" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave ?>][<?php echo $claveArray?>][<?php echo $claveArray2 ?>]' ><?php echo $ta_valor?></textarea>
 
-            </div>
+               </div>
+            </li>
 
 
             <?php } /// Acaba while ?>
@@ -119,15 +128,18 @@
 
             <?php } else { // No es un array ?>
 
-            <div id='<?php echo $clave."-".$conta?>' class="elemento_lista">
+            <li id='<?php echo $clave."-".$conta?>' >
 
-               <?php if ( 0 !== $conta ) { ?>
-               [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
-               <?php } ?>
-               <br />
-               <textarea class="formulari2" rows='<?php echo contabilizar_saltos_linea($valorArray);  ?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+               <div>
 
-            </div>
+                  <?php if ( 0 !== $conta ) { ?>
+                  [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
+                  <?php } ?>
+                  <br />
+                  <textarea class="formulari2" rows='<?php echo contabilizar_saltos_linea($valorArray);  ?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>][]' ><?php echo $valorArray?></textarea>
+
+               </div>
+            </li>
             <?php } // Acaba si es un array ?>
 
             <?php } // Acaba while de array ?>
@@ -154,31 +166,34 @@
             }
          ?>
 
-         <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
+         <li id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
 
-            <b><?php echo $clave?></b>
-            <?php if ( $eliminar ) { ?>
-            <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
-            <?php   } ?>
+            <div>
 
-         <div>
+               <b><?php echo $clave?></b>
+               <?php if ( $eliminar ) { ?>
+               <a onclick='javascript:eliminarElemento("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+               <?php   } ?>
 
-         <?php if ( $ta_descripcion || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
+               <div>
 
-         <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc; ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
-         <?php if ( ! $modificar_descripciones ) { ?>
-         class='inputLectura' readonly
-         <?php } ?> ><?php echo $ta_descripcion?></textarea>
+               <?php if ( $ta_descripcion || $modificar_descripciones) { // si no hay descripción no la presentamos a no ser que podamos modificarla ?>
 
-         <?php } ?>
+               <textarea class="<?php echo $ta_class_descr ?>" rows='<?php echo $ta_row_desc; ?>' name='descripcion_<?php echo $this->idioma ?>[<?php echo $clave ?>]'
+               <?php if ( ! $modificar_descripciones ) { ?>
+               class='inputLectura' readonly
+               <?php } ?> ><?php echo $ta_descripcion?></textarea>
 
-         <textarea class="<?php echo $ta_class_valor.' GC_'.$clave ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
+               <?php } ?>
 
-         <?php } ?>
+               <textarea class="<?php echo $ta_class_valor.' GC_'.$clave ?> formulari2" rows='<?php echo $ta_row_valor;?>' name='escribir_<?php echo $this->idioma ?>[<?php echo $clave?>]' ><?php echo $ta_valor?></textarea>
 
-	</div>
-      <div style="clear: both;"></div>
-   </div>
+               <?php } ?>
+
+               </div>
+               <div style="clear: both;"></div>
+            </div>
+         </li>
 
       <?php } ?>
 
@@ -186,6 +201,8 @@
       <p class="error"><?php echo literal("Sin contenido",3)?></p>
       <?php } ?>
    </div>
+
+   <div style="clear: both"></div>
 
    <?php if ( $ampliar ) { ?>
 

@@ -12,9 +12,9 @@
 if ( permiso('borrar_cache','cache_http') ) {
 
    /** Contenido para menú de administración de Cache_http */
-   $menuAdmin['Administración']['boton']['Borrar cache']['activado']= 1;
-   $menuAdmin['Administración']['boton']['Borrar cache']['title']="Borrar cache";
-   $menuAdmin['Administración']['boton']['Borrar cache']['link'] = 
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Borrar cache',3)]['activado']= 1;
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Borrar cache',3)]['title']=literal("Borrar cache",3);
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Borrar cache',3)]['link'] = 
       "javascript:pedirDatos(\"".Router::$dir."ajax/borrar_cache\",\"respuesta_borrar_cache\");";
 
    }

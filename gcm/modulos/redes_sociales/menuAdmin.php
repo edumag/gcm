@@ -10,9 +10,9 @@
  */
 
 /** Administrar comentarios */
-// $menuAdmin['Administración']['boton']['Comentarios']['activado']= 1;
-// $menuAdmin['Administración']['boton']['Comentarios']['title']="Listado de comentarios";
-// $menuAdmin['Administración']['boton']['Comentarios']['link'] = Router::$base.'comentarios/listar';
+// $menuAdmin[literal('Administración',3)]['boton'][literal('Comentarios',3)]['activado']= 1;
+// $menuAdmin[literal('Administración',3)]['boton'][literal('Comentarios',3)]['title']=literal("Listado de comentarios",3);
+// $menuAdmin[literal('Administración',3)]['boton'][literal('Comentarios',3)]['link'] = Router::$base.'comentarios/listar';
 
 /** @} */
 ?>

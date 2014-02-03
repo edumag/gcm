@@ -20,9 +20,6 @@ require_once(dirname(__FILE__).'/Literales.php');
 /**
  * @class LiteralesAdmin
  * @brief Administración de literales
- * @version 0.3
- *
- * @todo Crear mecanismo para eliminar literal de todos los idiomas no solo del que estamos.
  */
 
 class LiteralesAdmin extends Literales {
@@ -52,11 +49,11 @@ class LiteralesAdmin extends Literales {
       $salida = ob_get_contents() ; ob_end_clean();
 
       $panel = array();
-      $panel['titulo']    = literal('Literales',3).'['.Router::$i.']';
-      $panel['oculto']    = TRUE;
-      $panel['subpanel']  ='panelLiterales';
+      $panel['titulo']     = literal('Literales',3).'['.Router::$i.']';
+      $panel['oculto']     = TRUE;
+      $panel['subpanel']   ='panelLiterales';
       $panel['jajax']      = "?formato=ajax&m=literales&a=devolverLiterales"; 
-      $panel['contenido'] = $salida; 
+      $panel['contenido']  = $salida; 
          
       Temas::panel($panel);
 
@@ -66,9 +63,6 @@ class LiteralesAdmin extends Literales {
     * Eliminar literal
     *
     * Eliminamos literal especifico
-    *
-    * @todo Hacer los mismo en todos los idiomas.
-    *
     */
 
    function eliminarLiteral() {
@@ -185,11 +179,15 @@ class LiteralesAdmin extends Literales {
 
       global $gcm;
 
-      $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+      if ( isset($_GET['admin']) && $_GET['admin'] == 1 ) {
+         $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
+      } else {
+         $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+         }
 
       $arr = GcmConfigFactory::GetGcmConfig($file);
 
-      $arr->set($_GET['elemento'],$_GET['valor']);
+      $arr->set($_GET['elemento'],trim($_GET['valor']));
 
       $arr->guardar_variables();
 
@@ -242,57 +240,24 @@ class LiteralesAdmin extends Literales {
 
       }
 
-   /**
-    * Administración de literales
-    *
-    * @param  $e Evento
-    * @param  $args Argumentos
-    * @return TRUE/FALSE
-    */
+/************************************************************* NUEVO ****************************/
+
+
+    /**
+     * Administración de literales
+     *
+     * @param  $e Evento
+     * @param  $args Argumentos
+     * @return TRUE/FALSE
+     *
+     */
    
-   function administrar_old($e,$args=NULL) {
+   function admin($e,$args=NULL) {
 
       global $gcm;
 
       // Añadimos contenido a título
-      $gcm->titulo = 'Administración de literales';
-      // Anulamos eventos que son llamados para generar el título
-      $gcm->event->anular('titulo','literales');  
-      $gcm->event->anular('contenido','literales');  
-
-      $this->javascripts('literales.js');
-      
-      ob_start(); 
-      echo '<div id="panelLiterales">';
-      // $this->devolverLiterales(); 
-      echo '</div>';
-      $salida = ob_get_contents() ; ob_end_clean();
-
-      $panel = array();
-      $panel['titulo']    = literal('Literales',3).'['.Router::$i.']';
-      // $panel['oculto']    = TRUE;
-      $panel['subpanel']  ='panelLiterales';
-      $panel['jajax']      = "?formato=ajax&m=literales&a=devolverLiterales"; 
-      $panel['contenido'] = $salida; 
-         
-      Temas::panel($panel);
-
-      }
-      /**
-    * Administración de literales
-    *
-    * @param  $e Evento
-    * @param  $args Argumentos
-    * @return TRUE/FALSE
-    *
-    */
-   
-   function administrar($e,$args=NULL) {
-
-      global $gcm;
-
-      // Añadimos contenido a título
-      $gcm->titulo = 'Administración de literales';
+      $gcm->titulo = 'Literales de '.literal(Router::$i);
       // Anulamos eventos que son llamados para generar el título
       $gcm->event->anular('titulo','literales');  
       $gcm->event->anular('contenido','literales');  
@@ -356,6 +321,10 @@ class LiteralesAdmin extends Literales {
 
       $args['eliminar'] = TRUE; // Se permet elimiar variables
       $args['ampliar']  = TRUE; // Se permet ampliar variables
+      // $args['css']      = Router::$base.GCM_DIR.'lib/ext/pajinate/styles.css'; // Se permet ampliar variables
+      $args['plantilla']= GCM_DIR.'lib/int/GcmConfig/html/formGcmConfigGuiPajinate.phtml'; // Se permet ampliar variables
+
+      $this->javascripts('paginacion.js');
 
       $configuracion->idiomaxdefecto = $idiomaxdefecto;
       $configuracion->idioma = Router::$i;
@@ -364,6 +333,159 @@ class LiteralesAdmin extends Literales {
 
       }
    
+    /**
+     * Administración de literales
+     *
+     * @param  $e Evento
+     * @param  $args Argumentos
+     * @return TRUE/FALSE
+     *
+     */
+   
+   function administrar($e,$args=NULL) {
+
+      global $gcm;
+
+      $this->javascripts('literales.js');
+
+      // Añadimos contenido a título
+      $gcm->titulo = 'Literales de '.literal(Router::$i);
+      // Anulamos eventos que son llamados para generar el título
+      $gcm->event->anular('titulo','literales');  
+      $gcm->event->anular('contenido','literales');  
+
+      $this->lista();
+      echo '<h3>'.literal('Literales de aplicación').'</h3>';
+      $this->lista(TRUE);
+
+      return; // DEV
+   
+      }
+
+   /**
+    * Listado de literales para modificar
+    *
+    * @param $admin Literales de admin o no TRUE/FALSE
+    */
+
+   function lista($admin = FALSE) {
+
+      global $gcm;
+
+      $admin_js = ( $admin ) ? '1' : '0' ;
+      $panel_admin = ( $admin ) ? 'panel_admin_gcm' : 'panel_admin' ;
+
+      $literales_default = FALSE;
+
+      if ( $admin ) {
+         $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
+      } else {
+         $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+         }
+
+      $arr = GcmConfigFactory::GetGcmConfig($file);
+
+      $literales = $arr->variables();
+
+      if ( Router::$i != Router::$ii ) {
+
+         if ( $admin ) {
+            $file_default = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
+         } else {
+            $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+            }
+
+         if ( !file_exists($file_default) ) {
+            trigger_error('Archivo de idiomas ['.$file_default.'] no existe', E_USER_ERROR);
+            return FALSE;
+            }
+         $arr_default = GcmConfigFactory::GetGcmConfig($file_default);
+         $literales_default = $arr_default->variables();
+         
+         }
+
+      if ( $literales_default ) {
+         foreach ( $literales_default as $key => $lit ) {
+            if ( ! isset($literales[$key]) ) $literales[$key] = '';
+            }
+         }
+
+      // Acciones
+
+      ?>
+
+      <div id="<?php echo $panel_admin ?>">
+         <br />
+         <a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal(<?php echo $admin_js ?>)" >
+            <?php echo literal('Añadir',3);?>
+         </a>
+         <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this,<?php echo $admin_js ?>);" >
+            <?php echo literal('Ocultar literales con contenido',3) ?>
+         </a>
+
+         <ul id="litadmin">
+
+            <?php
+            if ( $literales ) {
+
+               foreach ( $literales as $key => $valor ) {
+
+                  $clase = ( empty($valor) ) ? 'subpanelNegativo' : "subpanel" ;
+                     
+                  $valor = ($valor) ? $valor : $key ;
+
+                     ?>
+                     <li id="<?php echo $key ?>" class="<?php echo $clase?>">
+                        <a title="Modificar" 
+                           href="javascript:;" onclick="modificar_literal('<?php echo $key?>','<?php echo $valor?>',<?php echo $admin_js ?>)" >
+                           <?php echo $valor ?>
+                        </a>
+                        <div style="visibility: hidden;">
+                           <a title="Eliminar" 
+                              href="javascript:;" onclick="eliminar_elemento('<?php echo $key ?>',<?php echo $admin_js ?>)" >
+                              [X]
+                           </a>
+                        </div>
+                     </li>
+                     <?php
+                  }
+               }
+
+            ?>
+         </ul>
+      </div>
+      <?php
+
+      }
+
+   /**
+    * Eliminar literal
+    *
+    * Eliminamos literal especifico
+    */
+
+   function eliminar_elemento() {
+
+      global $gcm;
+
+      if ( isset($_GET['admin']) && $_GET['admin'] == 1 ) {
+         $dir   = GCM_DIR."DATOS/idiomas/";
+         $array = "GCM_LG_";
+      } else {
+         $dir   = $gcm->config('idiomas','Directorio idiomas');
+         $array = "LG_";
+         }
+
+      foreach ( Router::$idiomas as $idioma ) {
+         $file=$dir.$array.$idioma.".php";
+         $arr = GcmConfigFactory::GetGcmConfig($file);
+         $arr->del($_GET['elemento']);
+         $arr->guardar_variables();
+         }
+
+      echo "Elemento [ ".$_GET['elemento']." ] eliminado";
+
+      }
    }
 
 ?>

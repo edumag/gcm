@@ -23,14 +23,6 @@ function actualizar_literales() {
    }
 
 /**
- * Ocultamos literales que ya tienen contenido
- */
-
-function filtra() {
-   $("#panelLiterales .subpanel").css('display','none');
-   }
-
-/**
  * Confirmación para la inserción de elementos
  */
 
@@ -88,5 +80,78 @@ function eliminarLiteral(key) {
 function modificarLiteral(key,val) {
    var res = prompt('Modificaión de '+key,val);
    pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirmarAnaydirLiteral');
+   }
+
+/*************************************** NUEVO ***********************************************/
+
+/**
+ * Actualizar panel de literales
+ */
+
+function actualizar_literales(panel) {
+   panel = document.getElementById(panel);
+   $(panel).empty();
+   $(panel).load("?formato=ajax&m=literales&a=administrar");
+   }
+
+/**
+ * Confirmación para las acciones
+ */
+
+function confirma()
+   {
+   if (pedido.readyState == 4 ) {
+      if ( pedido.status == 200 ) {
+         actualizar_literales('contenido');
+         // alert('OK'); // DEV
+         }
+      }
+   }
+
+/**
+ * Insertar literal nuevo
+ */
+
+function insertar_literal(admin) {
+   var key = prompt('literal','');
+   if (key) {
+      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key+'&admin='+admin,'confirma');
+      }
+   }
+
+
+function eliminar_elemento(key,admin) {
+   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key+'&admin='+admin,'confirma');
+   }
+
+/**
+ * Modificar literales de los idiomas
+ *
+ * @param key Clave del literal que queremos modificar
+ * @param val Valor actual del literal
+ *
+ */
+
+function modificar_literal(key,val,admin) {
+   var res = prompt('Modificaión de '+key,val);
+   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&admin='+admin,'confirma');
+   }
+
+/**
+ * Ocultamos literales que ya tienen contenido
+ */
+
+function filtra(elemento,admin) {
+
+   var clase =  elemento.className;
+   var panel =  ( admin == 1 ) ? '#panel_admin_gcm' : '#panel_admin' ;
+
+   if ( clase == 'boton_activo' ) {
+      elemento.className='boton';
+      $(panel + " .subpanel").css('display','');
+   } else {
+      elemento.className='boton_activo';
+      $(panel + " .subpanel").css('display','none');
+      }
    }
 
