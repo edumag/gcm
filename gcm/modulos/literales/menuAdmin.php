@@ -12,9 +12,9 @@
 if ( permiso('administrar','literales') ) {
 
    /** Administrar literales */
-   $menuAdmin['Administración']['boton']['Literales']['activado']=1;
-   $menuAdmin['Administración']['boton']['Literales']['title']="Editar literales";
-   $menuAdmin['Administración']['boton']['Literales']['link']=Router::$base."literales/administrar";
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Literales',3)]['activado']=1;
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Literales',3)]['title']=literal("Editar literales",3);
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Literales',3)]['link']=Router::$base."literales/administrar";
 
    }
 

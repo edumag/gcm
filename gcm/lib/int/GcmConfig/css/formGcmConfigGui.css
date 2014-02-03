@@ -11,7 +11,8 @@ textarea.textAreaDescripGrande{ float:left; width:100%; background: none repeat 
 textarea.textAreaValorGrande{ float:left; width:100%;}
 .GcmConfigCajaForm fieldset { border: 1px solid grey; margin: 10px 4px 4px;}
 .grupo_config b { display: block; float: left; padding:0; width: 100%; }
-.cajaElemento a {float: right;}
+.botones_derecha {float: right;}
+.elemento_lista { border: 1px solid; border-radius: 0.4em; margin: 4px; padding: 4px;}
 .GcmConfigCajaForm ul { margin: 0; padding: 0;}
 .GcmConfigCajaForm li {padding:0!important;margin: 0!important;border: 0!important; float: left; width: 50%;overflow: auto;}
 .page_navigation , .alt_page_navigation{padding-bottom: 10px;}

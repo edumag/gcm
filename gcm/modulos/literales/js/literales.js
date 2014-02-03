@@ -91,7 +91,7 @@ function modificarLiteral(key,val) {
 function actualizar_literales(panel) {
    panel = document.getElementById(panel);
    $(panel).empty();
-   $(panel).load("?formato=ajax&m=literales&a=lista");
+   $(panel).load("?formato=ajax&m=literales&a=administrar");
    }
 
 /**
@@ -102,7 +102,7 @@ function confirma()
    {
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
-         actualizar_literales('panel_admin');
+         actualizar_literales('contenido');
          // alert('OK'); // DEV
          }
       }
@@ -112,16 +112,16 @@ function confirma()
  * Insertar literal nuevo
  */
 
-function insertar_literal() {
+function insertar_literal(admin) {
    var key = prompt('literal','');
    if (key) {
-      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key,'confirma');
+      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key+'&admin='+admin,'confirma');
       }
    }
 
 
-function eliminar_elemento(key) {
-   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirma');
+function eliminar_elemento(key,admin) {
+   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key+'&admin='+admin,'confirma');
    }
 
 /**
@@ -132,23 +132,26 @@ function eliminar_elemento(key) {
  *
  */
 
-function modificar_literal(key,val) {
+function modificar_literal(key,val,admin) {
    var res = prompt('Modificaión de '+key,val);
-   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirma');
+   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&admin='+admin,'confirma');
    }
 
 /**
  * Ocultamos literales que ya tienen contenido
  */
 
-function filtra(elemento) {
-   clase =  elemento.className;
+function filtra(elemento,admin) {
+
+   var clase =  elemento.className;
+   var panel =  ( admin == 1 ) ? '#panel_admin_gcm' : '#panel_admin' ;
+
    if ( clase == 'boton_activo' ) {
       elemento.className='boton';
-      $("#panel_admin .subpanel").css('display','');
+      $(panel + " .subpanel").css('display','');
    } else {
       elemento.className='boton_activo';
-      $("#panel_admin .subpanel").css('display','none');
+      $(panel + " .subpanel").css('display','none');
       }
    }
 

@@ -107,7 +107,11 @@ class Literales extends Modulos {
       
       global $gcm;
 
-      $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+      if ( isset($_GET['admin']) && $_GET['admin'] == 1 ) {
+         $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
+      } else {
+         $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+         }
 
       $arr = GcmConfigFactory::GetGcmConfig($file);
       $arr->set($_GET['elemento'],$_GET['valor']);

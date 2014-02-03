@@ -152,7 +152,7 @@ class TemasAdmin extends Temas {
       $this->anularEvento('contenido','temas');
       $this->anularEvento('titulo','temas');
 
-      $gcm->titulo = literal('Procesar fichero proyecto.css modificado',3);
+      $gcm->titulo = literal('Procesar fichero css',3);
 
       $fichero = $_FILES['fichero']['name'];
       $fichero_tmp = $_FILES['fichero']['tmp_name'];

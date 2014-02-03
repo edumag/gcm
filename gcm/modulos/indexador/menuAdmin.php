@@ -11,10 +11,10 @@
 
 if ( permiso() ) {
 
-   $menuAdmin['Seguimiento']['boton']['indexador']['activado']=1;
-   $menuAdmin['Seguimiento']['boton']['indexador']['nombre']="Reindexador";
-   $menuAdmin['Seguimiento']['boton']['indexador']['title']="Reindexar el contenido";
-   $menuAdmin['Seguimiento']['boton']['indexador']['link']=Router::$base."?e=reindexar";
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('indexador',3)]['activado']=1;
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('indexador',3)]['nombre']=literal("Reindexador",3);
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('indexador',3)]['title']=literal("Reindexar el contenido",3);
+   $menuAdmin[literal('Seguimiento',3)]['boton'][literal('indexador',3)]['link']=Router::$base."?e=reindexar";
 
    }
 

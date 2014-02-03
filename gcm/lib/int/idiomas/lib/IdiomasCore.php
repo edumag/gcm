@@ -132,7 +132,7 @@ class IdiomasCore {
 
    public function seleccion_idioma() {
 
-      global $LG;
+      global $LG, $GCM_LG;
 
       // Incluimos literales del propio gcm
 
@@ -167,13 +167,17 @@ class IdiomasCore {
 
    private function incluir_literales($file, $idioma, $prefijo_array = 'LG_') {
 
-      global $LG;
+      global $LG, $GCM_LG;
 
       if ( file_exists($file) ) {
          include($file);
          if ( isset(${$prefijo_array.$idioma}) ) {
             foreach ( ${$prefijo_array.$idioma} as $key => $literal ) {
-               if ( ! empty($literal) ) $LG[$key] = $literal;
+               if ( $prefijo_array == 'LG_' ) {
+                  if ( ! empty($literal) ) $LG[$key] = $literal;
+               } else {
+                  if ( ! empty($literal) ) $GCM_LG[$key] = $literal;
+                  }
                }
             }
          }
@@ -297,11 +301,11 @@ class IdiomasCore {
 
                if ($idioma != $_SESSION[$this->proyecto."-idioma"]) {
                   ?>
-                  <li class="idioma_off"><a href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo $idioma; ?></a></li>
+                  <li class="idioma_off"><a href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo literal($idioma); ?></a></li>
                   <?php
                } else {
                   ?>
-                  <li class="idioma_on"><a class="idioma_activado" href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo $idioma;?></a></li>
+                  <li class="idioma_on"><a class="idioma_activado" href="<?php echo Router::$base.$idioma.'/'.Router::$s.Router::$c;?>" ><?php echo literal($idioma);?></a></li>
                   <?php
                   }
                }

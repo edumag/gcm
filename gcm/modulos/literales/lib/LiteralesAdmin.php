@@ -179,11 +179,15 @@ class LiteralesAdmin extends Literales {
 
       global $gcm;
 
-      $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+      if ( isset($_GET['admin']) && $_GET['admin'] == 1 ) {
+         $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
+      } else {
+         $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+         }
 
       $arr = GcmConfigFactory::GetGcmConfig($file);
 
-      $arr->set($_GET['elemento'],$_GET['valor']);
+      $arr->set($_GET['elemento'],trim($_GET['valor']));
 
       $arr->guardar_variables();
 
@@ -351,48 +355,72 @@ class LiteralesAdmin extends Literales {
       $gcm->event->anular('contenido','literales');  
 
       $this->lista();
+      echo '<h3>'.literal('Literales de aplicación').'</h3>';
+      $this->lista(TRUE);
+
       return; // DEV
    
       }
 
-   function lista($file=NULL) {
+   /**
+    * Listado de literales para modificar
+    *
+    * @param $admin Literales de admin o no TRUE/FALSE
+    */
+
+   function lista($admin = FALSE) {
 
       global $gcm;
 
-      $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+      $admin_js = ( $admin ) ? '1' : '0' ;
+      $panel_admin = ( $admin ) ? 'panel_admin_gcm' : 'panel_admin' ;
+
+      $literales_default = FALSE;
+
+      if ( $admin ) {
+         $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
+      } else {
+         $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
+         }
+
       $arr = GcmConfigFactory::GetGcmConfig($file);
+
+      $literales = $arr->variables();
 
       if ( Router::$i != Router::$ii ) {
 
-         $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+         if ( $admin ) {
+            $file_default = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
+         } else {
+            $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+            }
+
          if ( !file_exists($file_default) ) {
             trigger_error('Archivo de idiomas ['.$file_default.'] no existe', E_USER_ERROR);
             return FALSE;
             }
          $arr_default = GcmConfigFactory::GetGcmConfig($file_default);
-         $literales = array();
+         $literales_default = $arr_default->variables();
          
-         foreach ( $arr_default->variables() as $key => $val ) { 
-            $literales[$key] = FALSE;  
-            }
-         
-         $literales = array_merge($literales,$arr->variables());
+         }
 
-      } else {
-         $literales = $arr->variables();
+      if ( $literales_default ) {
+         foreach ( $literales_default as $key => $lit ) {
+            if ( ! isset($literales[$key]) ) $literales[$key] = '';
+            }
          }
 
       // Acciones
 
       ?>
 
-      <div id="panel_admin">
+      <div id="<?php echo $panel_admin ?>">
          <br />
-         <a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal()" >
+         <a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal(<?php echo $admin_js ?>)" >
             <?php echo literal('Añadir',3);?>
          </a>
-         <a class="boton_activo" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this);" >
-            <?php echo literal('Filtrar',3) ?>
+         <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this,<?php echo $admin_js ?>);" >
+            <?php echo literal('Ocultar literales con contenido',3) ?>
          </a>
 
          <ul id="litadmin">
@@ -409,12 +437,12 @@ class LiteralesAdmin extends Literales {
                      ?>
                      <li id="<?php echo $key ?>" class="<?php echo $clase?>">
                         <a title="Modificar" 
-                           href="javascript:;" onclick="modificar_literal('<?php echo $key?>','<?php echo $valor?>')" >
+                           href="javascript:;" onclick="modificar_literal('<?php echo $key?>','<?php echo $valor?>',<?php echo $admin_js ?>)" >
                            <?php echo $valor ?>
                         </a>
                         <div style="visibility: hidden;">
                            <a title="Eliminar" 
-                              href="javascript:;" onclick="eliminar_elemento('<?php echo $key ?>')" >
+                              href="javascript:;" onclick="eliminar_elemento('<?php echo $key ?>',<?php echo $admin_js ?>)" >
                               [X]
                            </a>
                         </div>
@@ -440,8 +468,16 @@ class LiteralesAdmin extends Literales {
 
       global $gcm;
 
+      if ( isset($_GET['admin']) && $_GET['admin'] == 1 ) {
+         $dir   = GCM_DIR."DATOS/idiomas/";
+         $array = "GCM_LG_";
+      } else {
+         $dir   = $gcm->config('idiomas','Directorio idiomas');
+         $array = "LG_";
+         }
+
       foreach ( Router::$idiomas as $idioma ) {
-         $file=$gcm->config('idiomas','Directorio idiomas')."LG_".$idioma.".php";
+         $file=$dir.$array.$idioma.".php";
          $arr = GcmConfigFactory::GetGcmConfig($file);
          $arr->del($_GET['elemento']);
          $arr->guardar_variables();

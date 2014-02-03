@@ -27,12 +27,13 @@
       <div id="elemento_<?php echo $this->idioma ?>-<?php echo $clave?>" class="cajaElemento" >
 
          <b><?php echo $clave?></b>
-         <?php if ( $eliminar ) { ?>
-         <a onclick='javascript:eliminarElemento<?php echo $grupo ?>("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
-         <?php   } ?>
+         <span class="botones_derecha">
+            <?php if ( $eliminar ) { ?>
+            <a onclick='javascript:eliminarElemento<?php echo $grupo ?>("elemento_<?php echo $this->idioma ?>-<?php echo $clave?>")' >[X]</a>
+            <?php   } ?>
 
-         [<a title='<?php echo literal('Añadir más').' '.literal($clave) ?>' href="javascript:anadirVariable<?php echo $grupo ?>('<?php echo $this->idioma ?>','<?php echo $clave ?>',<?php echo count($val);?>)" >+</a>]
-
+            [<a title='<?php echo literal('Añadir más').' '.literal($clave) ?>' href="javascript:anadirVariable<?php echo $grupo ?>('<?php echo $this->idioma ?>','<?php echo $clave ?>',<?php echo count($val);?>)" >+</a>]
+         </span>
       <div>
 
          <div class="textAreaDescripLLista">
@@ -51,7 +52,7 @@
 
          </div>
 
-         <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>'>
+         <div id='caja_<?php echo $this->idioma ?>-<?php echo $clave?>' class="lista_config">
 
             <?php $conta=0; ?>
 
@@ -77,7 +78,7 @@
 
             <?php while (list($claveArray2, $valorArray2)=each($valorArray)) { $conta2++; ?>
 
-            <div id='<?php echo $claveArray."-".$conta2?>' >
+            <div class="grupo_config" id='<?php echo $claveArray."-".$conta2?>'>
 
                <?php
                // Si el número de filas supera las dos presentamos descripción sobre el valor
@@ -118,7 +119,7 @@
 
             <?php } else { // No es un array ?>
 
-            <div id='<?php echo $clave."-".$conta?>' >
+            <div id='<?php echo $clave."-".$conta?>' class="elemento_lista">
 
                <?php if ( 0 !== $conta ) { ?>
                [<a href="javascript:eliminarVariable('<?php echo $clave?>-<?php echo $conta?>')" >-</a>]
