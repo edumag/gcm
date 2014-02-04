@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:43:20 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Feb 4 11:58:50 CET 2014
 $GCM_LG_ca['Administracion de los diferentes idiomas']='Administració dels diferents idiomes';
 $GCM_LG_ca['Administración']='Administració';
 $GCM_LG_ca['Administración de usuarios']='Administració d\'usuaris';
