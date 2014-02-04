@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 3 17:17:08 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:27:17 CET 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -94,7 +94,6 @@ $GCM_LG_es['Insertar']='';
 $GCM_LG_es['Mostrar únicamente literales vacíos']='';
 $GCM_LG_es['Añadir literal a contenido']='';
 $GCM_LG_es['Editar']='';
-$GCM_LG_es['trabajosedu']='';
 $GCM_LG_es['Renombrar o mover contenido']='';
 $GCM_LG_es['Ejecutar']='';
 $GCM_LG_es['Contenido renombrado o movido']='';
@@ -123,17 +122,13 @@ $GCM_LG_es['Página no encontrada']='';
 $GCM_LG_es['masmonell']='';
 $GCM_LG_es['Modo administración']='';
 $GCM_LG_es['Modo usuario']='';
-$GCM_LG_es['trabajos']='';
 $GCM_LG_es['proyecto']='';
 $GCM_LG_es['Confirmar borrado']='';
 $GCM_LG_es['Borrado de contenido']='';
 $GCM_LG_es['Contenido borrado']='';
-$GCM_LG_es['mamedu.com/gcm']='';
 $GCM_LG_es['Administración de constantes']='';
 $GCM_LG_es['Renombrando o moviendo sección']='';
 $GCM_LG_es['Añadir constantes']='';
 $GCM_LG_es['redes_sociales']='';
-$GCM_LG_es['Configuración de redes_sociales']='';
-$GCM_LG_es['mamedu.com']='';
 $GCM_LG_es['Selector de colores']='';
 ?>
