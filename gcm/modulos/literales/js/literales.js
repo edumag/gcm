@@ -17,7 +17,7 @@
  * Actualizar panel de literales
  */
 
-function actualizar_literales() {
+function actualizar_literales_columna() {
    $("#panelLiterales").empty();
    $("#panelLiterales").load("?formato=ajax&m=literales&a=devolverLiterales");
    }
@@ -26,11 +26,11 @@ function actualizar_literales() {
  * Confirmación para la inserción de elementos
  */
 
-function confirmarAnaydirLiteral()
+function confirmar_literales_columna()
    {
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
-         actualizar_literales();
+         actualizar_literales_columna();
          }
       }
    }
@@ -39,24 +39,12 @@ function confirmarAnaydirLiteral()
  * Insertar literal nuevo
  */
 
-function insertarLiteral()
+function insertar_literal_columna()
    {
       var key = prompt('concepto','');
-      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key,'confirmarAnaydirLiteral');
+      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key,'confirmar_literales_columna');
    }
 
-
-/**
- * Traducir literales de los idiomas que no son por defecto
- *
- * @param key Clave del literal que queremos traducir
- *
- */
-
-function traducirLiteral(key) {
-   var res = prompt('Traducción','');
-   pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key+'&valor='+res,'confirmarAnaydirLiteral');
-   }
 
 /**
  * Eliminar literal
@@ -64,8 +52,8 @@ function traducirLiteral(key) {
  * @param key Clave del literal que queremos eliminar
  */
 
-function eliminarLiteral(key) {
-   pedirDatos('?formato=ajax&m=literales&a=eliminarLiteral&elemento='+key,'confirmarAnaydirLiteral');
+function eliminar_literal_columna(key) {
+   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirmar_literales_columna');
    }
 
 
@@ -77,12 +65,10 @@ function eliminarLiteral(key) {
  *
  */
 
-function modificarLiteral(key,val) {
+function modificar_literal_columna(key,val) {
    var res = prompt('Modificaión de '+key,val);
-   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirmarAnaydirLiteral');
+   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirmar_literales_columna');
    }
-
-/*************************************** NUEVO ***********************************************/
 
 /**
  * Actualizar panel de literales
@@ -141,10 +127,11 @@ function modificar_literal(key,val,admin) {
  * Ocultamos literales que ya tienen contenido
  */
 
-function filtra(elemento,admin) {
+function filtra(elemento,panel) {
 
    var clase =  elemento.className;
-   var panel =  ( admin == 1 ) ? '#panel_admin_gcm' : '#panel_admin' ;
+   var panel =  '#'+panel;
+   console.log(panel);
 
    if ( clase == 'boton_activo' ) {
       elemento.className='boton';

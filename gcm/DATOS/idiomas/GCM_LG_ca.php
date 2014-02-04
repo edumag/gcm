@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 3 18:41:40 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Feb 4 11:58:50 CET 2014
 $GCM_LG_ca['Administracion de los diferentes idiomas']='Administració dels diferents idiomes';
 $GCM_LG_ca['Administración']='Administració';
 $GCM_LG_ca['Administración de usuarios']='Administració d\'usuaris';
@@ -99,7 +99,6 @@ $GCM_LG_ca['proyecto']='';
 $GCM_LG_ca['Mostrar únicamente literales vacíos']='';
 $GCM_LG_ca['Añadir literal a contenido']='';
 $GCM_LG_ca['redes_sociales']='';
-$GCM_LG_ca['Configuración de redes_sociales']='';
 $GCM_LG_ca['Administración de temas']='';
 $GCM_LG_ca['Creación de un tema nuevo']='';
 $GCM_LG_ca['Nuevo tema']='';
@@ -136,4 +135,9 @@ $GCM_LG_ca['no encontrada']='no trobada';
 $GCM_LG_ca['Cerrar sesión']='';
 $GCM_LG_ca['ver_registros']='';
 $GCM_LG_ca['admin']='';
+$GCM_LG_ca['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='Per favor afegeix tota la informació que puguis respecte a l\'acció que s\'estava realitzant en el moment de l\'error';
+$GCM_LG_ca['Contenido nuevo']='Contingut nou';
+$GCM_LG_ca['Título']='Títol';
+$GCM_LG_ca['Título del contenido']='Títol del contingut';
+$GCM_LG_ca['Acciones']='Accions';
 ?>

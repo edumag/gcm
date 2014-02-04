@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 3 17:17:08 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:27:17 CET 2014
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
@@ -105,7 +105,6 @@ $GCM_LG_fr['Modo administración']='';
 $GCM_LG_fr['Roles']='';
 $GCM_LG_fr['Gestionar SEO']='';
 $GCM_LG_fr['Configuración de mapas']='';
-$GCM_LG_fr['Configuración de redes_sociales']='';
 $GCM_LG_fr['Configuración de responsiveslides']='';
 $GCM_LG_fr['masmonelledu']='';
 ?>

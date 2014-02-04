@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 3 17:17:08 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:27:17 CET 2014
 $GCM_LG_en['Contenido pendiente de traducción']='';
 $GCM_LG_en['Registros de página actual']='';
 $GCM_LG_en['Registros']='';
@@ -55,7 +55,6 @@ $GCM_LG_en['Administracion de los diferentes idiomas']='';
 $GCM_LG_en['Configurar proyecto']='';
 $GCM_LG_en['Configuración']='';
 $GCM_LG_en['Configuración de mapas']='';
-$GCM_LG_en['Configuración de redes_sociales']='';
 $GCM_LG_en['Configuración de responsiveslides']='';
 $GCM_LG_en['Seguimiento del proyecto']='';
 $GCM_LG_en['Seguimiento']='';

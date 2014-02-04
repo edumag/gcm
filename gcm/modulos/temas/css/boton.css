@@ -12,7 +12,7 @@
     font-size: 90%;
     font-style: normal;
     line-height: 1em;
-    margin: 2px;
+    margin: 6px;
     outline: medium none;
     overflow: visible;
     padding: 0.1em 1.3em;
@@ -21,6 +21,7 @@
     text-decoration: none;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
     white-space: nowrap;
+    display: inline-block;
 }
 .boton:hover, .boton_activo:hover {
 background: -moz-linear-gradient(19% 75% 90deg,#D6D6D6, #FAFAFA);
@@ -40,7 +41,7 @@ background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D
     font-size: 90%;
     font-style: normal;
     line-height: 1em;
-    margin: 2px 6px;
+    margin: 6px 6px;
     outline: medium none;
     overflow: visible;
     padding: 0.1em 1.3em;
@@ -49,4 +50,5 @@ background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#D
     text-decoration: none;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
     white-space: nowrap;
+    display: inline-block;
    }

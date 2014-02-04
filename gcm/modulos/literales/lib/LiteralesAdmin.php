@@ -52,7 +52,7 @@ class LiteralesAdmin extends Literales {
       $panel['titulo']     = literal('Literales',3).'['.Router::$i.']';
       $panel['oculto']     = TRUE;
       $panel['subpanel']   ='panelLiterales';
-      $panel['jajax']      = "?formato=ajax&m=literales&a=devolverLiterales"; 
+      $panel['jajax']      = "?formato=ajax&m=literales&a=columna"; 
       $panel['contenido']  = $salida; 
          
       Temas::panel($panel);
@@ -86,46 +86,22 @@ class LiteralesAdmin extends Literales {
    * Recogemos primero los literales por defecto para poder modificarlos y 
    * añadimos los del idioma actual.
    *
-   * @param $file Archivo que contiene los literales.
-   *
    * @return HTML con panel para gestionar literales
    *
    */
 
-   function devolverLiterales($file=NULL) {
+   function devolverLiterales() {
 
       global $gcm;
 
-      $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      if ( Router::$i != Router::$ii ) {
-
-         $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
-         if ( !file_exists($file_default) ) {
-            trigger_error('Archivo de idiomas ['.$file_default.'] no existe', E_USER_ERROR);
-            return FALSE;
-            }
-         $arr_default = GcmConfigFactory::GetGcmConfig($file_default);
-         $literales = array();
-         
-         foreach ( $arr_default->variables() as $key => $val ) { 
-            $literales[$key] = FALSE;  
-            }
-         
-         $literales = array_merge($literales,$arr->variables());
-
-      } else {
-         $literales = $arr->variables();
-         }
-
+      $literales = $this->recoger_literales();
 
       $salida = '<div id="panelLiterales">';
       $salida .= '<br />';
-      $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:insertarLiteral()" >'
+      $salida .= '<a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal_columna()" >'
          .literal('Añadir',3)
          .'</a>';
-      $salida .= '<a class="boton" title="'.htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8").'" style="cursor: pointer;" onclick="javascript:filtra()" >'
+      $salida .= '<a class="boton" title="'.htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8").'" style="cursor: pointer;" onclick="javascript:filtra(this,\'panelLiterales\')" >'
          .literal('Filtrar',3)
          .'</a>';
 
@@ -146,11 +122,11 @@ class LiteralesAdmin extends Literales {
                   '.$key.'
                </a>
                <a style="font-size: smaller;" title="Eliminar" 
-                  href="javascript:;" onclick="eliminarLiteral(\''.str_replace("'","\'",$key).'\')" >
+                  href="javascript:;" onclick="eliminar_literal_columna(\''.str_replace("'","\'",$key).'\')" >
                   [X]
                </a>
                <a style="font-size: smaller;" title="Modificar" 
-                  href="javascript:;" onclick="modificarLiteral(\''.$key.'\',\''.$valor.'\')" >
+                  href="javascript:;" onclick="modificar_literal_columna(\''.$key.'\',\''.$valor.'\')" >
                   [M]
                </a>
                </p>';
@@ -194,54 +170,6 @@ class LiteralesAdmin extends Literales {
       echo "[ ".$_GET['elemento']." ] = [ ".$_GET['valor']." ] en [ ".$file." ]";
 
       }
-
-   /** Añadir literal para el contenido nuevo
-    *
-    * En caso de que ya exista literal no lo modificamos.
-    *
-    * @param $e    Evento
-    * @param $args Array de argumentos
-    *
-    * @see GcmConfig
-    */
-
-   function contenido_nuevo($e, $args='') {
-
-      $extension = ( $e == "postGuardar" ) ? '.html' : '.btml' ;
-
-      $nombre_fichero  = str_replace($extension,'',Router::$c);
-      $literal_fichero = str_replace($extension,'',$_POST['documento']);
-
-      /* Eliminar secciones de documento para el literal */
-
-      $conts = explode('/',$literal_fichero);
-      $literal_fichero = $conts[count($conts)-1];
-
-      $file=$gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
-
-      $arr = GcmConfigFactory::GetGcmConfig($file);
-
-      /* si hay literal no hacemos nada */
-
-      $litold = $arr->get($nombre_fichero);
-
-      if ( empty($litold)  ) {
-
-         $arr->set($nombre_fichero,$literal_fichero);
-
-         $arr->guardar_variables();
-
-         /* Incluimos elemento en Array global para que no sea añadido con varlor nulo en la recarga de página */
-
-         global $LG;
-         $LG[$nombre_fichero]=stripslashes($literal_fichero);
-
-         }
-
-      }
-
-/************************************************************* NUEVO ****************************/
-
 
     /**
      * Administración de literales
@@ -354,26 +282,34 @@ class LiteralesAdmin extends Literales {
       $gcm->event->anular('titulo','literales');  
       $gcm->event->anular('contenido','literales');  
 
-      $this->lista();
+      $this->lista('panel_admin');
       echo '<h3>'.literal('Literales de aplicación').'</h3>';
-      $this->lista(TRUE);
+      $this->lista('panel_admin_gcm',TRUE);
 
       return; // DEV
    
       }
 
-   /**
-    * Listado de literales para modificar
-    *
-    * @param $admin Literales de admin o no TRUE/FALSE
-    */
-
-   function lista($admin = FALSE) {
+   function columna($e, $args=FALSE) {
 
       global $gcm;
 
-      $admin_js = ( $admin ) ? '1' : '0' ;
-      $panel_admin = ( $admin ) ? 'panel_admin_gcm' : 'panel_admin' ;
+      $this->javascripts('literales.js');
+      $this->devolverLiterales();
+
+      }
+
+   /**
+    * Recoger literales 
+    *
+    * @param $admin Espeficificar si queremos los de administración (aplicación) T/F
+    *
+    * @return Array con los literales
+    */
+
+   function recoger_literales($admin=FALSE) {
+
+      global $gcm;
 
       $literales_default = FALSE;
 
@@ -410,16 +346,34 @@ class LiteralesAdmin extends Literales {
             }
          }
 
+      return $literales;
+
+      }
+
+   /**
+    * Listado de literales para modificar
+    *
+    * @param $admin Literales de admin o no TRUE/FALSE
+    */
+
+   function lista($panel, $admin = FALSE) {
+
+      global $gcm;
+
+      $admin_js = ( $admin ) ? '1' : '0' ;
+
+      $literales = $this->recoger_literales($admin);
+
       // Acciones
 
       ?>
 
-      <div id="<?php echo $panel_admin ?>">
+      <div id="<?php echo $panel?>">
          <br />
          <a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal(<?php echo $admin_js ?>)" >
             <?php echo literal('Añadir',3);?>
          </a>
-         <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this,<?php echo $admin_js ?>);" >
+         <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales vacíos',3),ENT_QUOTES, "UTF-8")?>" style="cursor: pointer;" onclick="javascript:filtra(this,'<?php echo $panel?>');" >
             <?php echo literal('Ocultar literales con contenido',3) ?>
          </a>
 
