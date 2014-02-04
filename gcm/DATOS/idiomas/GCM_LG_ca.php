@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Feb 4 11:58:50 CET 2014
+// Archivo generado automáticamente por GcmConfig Tue Feb 4 18:41:52 CET 2014
 $GCM_LG_ca['Administracion de los diferentes idiomas']='Administració dels diferents idiomes';
 $GCM_LG_ca['Administración']='Administració';
 $GCM_LG_ca['Administración de usuarios']='Administració d\'usuaris';
@@ -140,4 +140,5 @@ $GCM_LG_ca['Contenido nuevo']='Contingut nou';
 $GCM_LG_ca['Título']='Títol';
 $GCM_LG_ca['Título del contenido']='Títol del contingut';
 $GCM_LG_ca['Acciones']='Accions';
+$GCM_LG_ca['Selector de colores']='';
 ?>
