@@ -332,7 +332,7 @@ class TemasAdmin extends Temas {
 
       global $gcm;
 
-      $tipos = array('css','html','js');
+      $tipos = array('css','html','js','phtml');
 
       include($this->ruta('temas','html','form_ficheros_tema.html'));
 
@@ -428,8 +428,8 @@ class TemasAdmin extends Temas {
 
             }
 
-      } elseif ( $tipo_archivo == 'text/css' || $tipo_archivo == 'application/x-javascript') {
-
+      } else {
+         
          if ( ! $fich= fopen($url_archivo,"r") ) {
             registrar(__FILE__,__LINE__,"No se puede abrir archivo [".$url_archivo."]",'ERROR');
             return FALSE;
@@ -448,11 +448,6 @@ class TemasAdmin extends Temas {
             include($this->ruta('temas','html','form_editar.html'));
 
             }
-
-      } else {
-         
-         registrar(__FILE__,__LINE__,'Tipo de archivo desconocido','AVISO');
-         return FALSE;
 
          }
 

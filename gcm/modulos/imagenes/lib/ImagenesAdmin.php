@@ -49,7 +49,7 @@ class ImagenesAdmin extends Imagenes {
       $panel['titulo']    = literal('Imágenes',3);
       $panel['href']      = '/imagenes/galeria';
       $panel['oculto']    = TRUE;
-      $panel['jajax']     = Router::$dir.'?formato=ajax&m=imagenes&a=galeria_columna&s='.Router::$dd.Router::$s;
+      $panel['jajax']     = '?formato=ajax&m=imagenes&a=galeria_columna&s='.Router::$dd.Router::$s;
       $panel['contenido'] = $contenido;
 
       Temas::panel($panel);

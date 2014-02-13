@@ -73,9 +73,7 @@ class AdminAdmin extends Admin {
             $this->ejecuta_test('Verificar s: '.$seccion,$router['s'],$seccion.'/');
             $this->ejecuta_test('Verificar c: '.$contenido,$router['c'],$contenido);
             $this->ejecuta_test('Verificar dd',$router['dd'],'File/es/');
-            $this->ejecuta_test('Verificar d',$router['d'],'File/es/');
             $this->ejecuta_test('Verificar ii',$router['ii'],'es');
-            $this->ejecuta_test('Verificar i',$router['i'],'es');
             $this->ejecuta_test('Verificar a',$router['a'],NULL);
             $this->ejecuta_test('Verificar m',$router['m'],NULL);
             $this->ejecuta_test('Verificar args: palabra_a_buscar',$router['args'],array('palabra_a_buscar'));
@@ -84,6 +82,7 @@ class AdminAdmin extends Admin {
             $this->ejecuta_test('Verificar mime/type',$router['mime_type'],'text/html');
             $this->ejecuta_test('Verificar formato',$router['formato'],'html');
 
+            if ( GCM_DEBUG ) echo '<pre>DEPURANDO: ' ; print_r($router) ; echo '</pre>'; // exit() ; // DEV  
             }
 
          }
@@ -105,7 +104,6 @@ class AdminAdmin extends Admin {
             $this->ejecuta_test('Verficar s',$router['s'],'');
             $this->ejecuta_test('Verficar c: '.$contenido,$router['c'],$contenido);
             $this->ejecuta_test('Verficar dd',$router['dd'],'File/es/');
-            $this->ejecuta_test('Verficar d',$router['d'],'File/es/');
             $this->ejecuta_test('Verficar ii',$router['ii'],'es');
             $this->ejecuta_test('Verficar i',$router['i'],'ca');
             $this->ejecuta_test('Verficar a: borrar',$router['a'],'borrar');
@@ -127,7 +125,6 @@ class AdminAdmin extends Admin {
       $this->ejecuta_test('s',$router['s'],'');
       $this->ejecuta_test('c',$router['c'],'');
       $this->ejecuta_test('dd',$router['dd'],'File/es/');
-      $this->ejecuta_test('d',$router['d'],'File/es/');
       $this->ejecuta_test('ii',$router['ii'],'es');
       $this->ejecuta_test('i',$router['i'],'ca');
       $this->ejecuta_test('e: buscar',$router['e'],'buscar');

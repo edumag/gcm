@@ -89,7 +89,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -119,7 +119,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $GCM_LG, $gcm ;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->titulo = literal('Confirmar lista de contenidos a borrar');
@@ -157,7 +157,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
 
@@ -405,7 +405,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -431,7 +431,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -537,7 +537,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).')');
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $contenido = $_POST['areaTexto'];
 
@@ -695,7 +695,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).')');
 
@@ -749,7 +749,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -791,7 +791,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -825,7 +825,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      permiso('editar_contenido',TRUE);
+      permiso('editar_contenido','contenidos');
 
       $gcm->event->anular('contenido','contenidos');
       $gcm->event->anular('titulo','contenidos');
@@ -859,7 +859,7 @@ abstract class ContenidosAbstract extends Modulos {
       }
 
    /**
-    * Metodo activado para el evento contenido
+    * Método activado para el evento contenido
     *
     * @param $e     Evento que recibimos de Eventos
     * @param $args  Argumentos posibles
@@ -869,7 +869,16 @@ abstract class ContenidosAbstract extends Modulos {
 
       global $gcm;
 
-      $url = ( $url ) ? $url : Router::$f;
+      if ( is_array($url) ) $url = $url[0];
+
+      $url = ( $url ) ? $url : Router::$f ;
+
+      // @todo Aplicar este sistema en todos los métodos que lo necesiten
+      // Si no tenemos contenido traducido cogemos el del idioma por defecto
+      if ( Router::$sin_traduccion ) {
+         $url_desglosada = Router::desglosarUrl($url);
+         $url = $url_desglosada['dd'].$url_desglosada['s'].$url_desglosada['c'];
+         }
 
       /* Comprobar sección */
 
@@ -888,7 +897,6 @@ abstract class ContenidosAbstract extends Modulos {
          }
 
       /* Comprobar existencia de archivo */
-
 
       if ( $this->verificar_contenido($url) ) {
 

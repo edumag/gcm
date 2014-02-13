@@ -325,6 +325,53 @@ class Router {
       if ( isset($_REQUEST['m']) ) { self::$m = $_REQUEST['m']; }
       if ( isset($_REQUEST['args']) ) { self::$args = $_REQUEST['args']; }
 
+      /*
+       * Definir idioma del usuario
+       * 
+       * Si no tenemos definido idioma en la url cogemos el de sesión y si
+       * tampoco tenemos comprobamos idiomas definidos en el navegador y si
+       * no tiene ninguno que tengamos activado el por defecto.
+       */
+
+      $proyecto = $gcm->config('admin','Proyecto');
+
+      // Si hay un idioma definido en GET se redefine idioma actual
+      if (isset($_GET["idioma"])) { 
+         $_SESSION[$proyecto."-idioma"] = $_GET["idioma"]; 
+         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
+         // variable GET
+         header("Location: ".self::$base.$_GET['idioma'].'/'.self::$s.self::$c);
+         exit();
+         return $_GET['idioma'];
+         }
+
+      if ( self::$i == self::$ii) {
+
+         if ( isset($_SESSION[$proyecto.'-idioma']) ) {
+            self::$i = $_SESSION[$proyecto.'-idioma'];
+         } else {
+            // comprobar idiomas en navegador
+            $sitelang = getenv("HTTP_ACCEPT_LANGUAGE");
+            $sitelang = $sitelang[0].$sitelang[1];
+
+            if ( in_array($sitelang,self::$idiomas) ) {    // Si es un idioma activado lo definimos
+
+               $_SESSION[$proyecto."-idioma"] = $sitelang;
+               self::$i = $sitelang;
+
+            } else {                                                // sino es un idioma activado cogemos el por defecto
+               
+               $_SESSION[$proyecto."-idioma"] = self::$ii;
+               self::$i = self::$ii ;
+
+               }
+
+            } 
+      } else {
+         $_SESSION[$proyecto."-idioma"] = self::$i;
+         }
+
+
       /* Definir directorios de contenido */
       self::$d = "File/".self::$i.'/';
 
@@ -411,7 +458,7 @@ class Router {
 
       /* Definir fichero final */
 
-      if (!self::$s && !self::$c) {
+      if (!self::$s && ( !self::$c || self::$c == 'index.html' || self::$c == 'index.php') ) {
          registrar(__FILE__,__LINE__,'Router::inicia::No hay sección ni contenido');
          self::$f=self::$d."index.html";
          self::$c = "index.html";
@@ -503,6 +550,10 @@ class Router {
          $url = substr($url,strpos($url,'/File/'));
          }
 
+      /* Si tenemos File/ lo quitamos */
+
+      $url = preg_replace('/^File\//','',$url);
+
       /* Comprobar palabras reservadas en url */
 
       $continuar = TRUE;
@@ -582,12 +633,6 @@ class Router {
 
       $dd = 'File/'.$ii.'/';
 
-      /* Limpiar url de carpeta inicial File/<idioma> */
-
-      $url=str_replace($dd,'',$url);
-
-      if ( $d ) $url=str_replace($d,'',$url);
-
       /* Definir mime_type */
 
       // La url puede venir con los subdirectorios de la dirección http, debe limpiarse sino nos dara error
@@ -655,51 +700,15 @@ class Router {
          $enlace_relativo = './';
          }
 
-      /*
-       * Definir idioma del usuario
-       * 
-       * Si no tenemos definido idioma en la url cogemos el de sesión y si
-       * tampoco tenemos comprobamos idiomas definidos en el navegador y si
-       * no tiene ninguno que tengamos activado el por defecto.
-       */
 
-      $proyecto = $gcm->config('admin','Proyecto');
+      $i = ( $i ) ? $i : $ii ;
 
-      // Si hay un idioma definido en GET se redefine idioma actual
-      if (isset($_GET["idioma"])) { 
-         $_SESSION[$proyecto."-idioma"] = $_GET["idioma"]; 
-         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
-         // variable GET
-         header("Location: ".self::$base.$_GET['idioma'].'/'.$s.$c);
-         exit();
-         return $_GET['idioma'];
-         }
+      $d = 'File/'.$i.'/';
 
-      if ( ! $i ) {
+      /* Limpiar url de carpeta inicial File/<idioma> */
 
-         if ( isset($_SESSION[$proyecto.'-idioma']) ) {
-            $i = $_SESSION[$proyecto.'-idioma'];
-         } else {
-            // comprobar idiomas en navegador
-            $sitelang = getenv("HTTP_ACCEPT_LANGUAGE");
-            $sitelang = $sitelang[0].$sitelang[1];
-
-            if ( in_array($sitelang,self::$idiomas) ) {    // Si es un idioma activado lo definimos
-
-               $_SESSION[$proyecto."-idioma"] = $sitelang;
-               $i = $sitelang;
-
-            } else {                                                // sino es un idioma activado cogemos el por defecto
-               
-               $_SESSION[$proyecto."-idioma"] = $ii;
-               $i = $ii ;
-
-               }
-
-            } 
-      } else {
-         $_SESSION[$proyecto."-idioma"] = $i;
-         }
+      $url=str_replace($dd,'',$url);
+      $url=str_replace($d,'',$url);
 
       $retorno['url']               = $url;
       $retorno['ii']                = $ii;
@@ -707,7 +716,7 @@ class Router {
       $retorno['s']                 = $s;
       $retorno['c']                 = $c;
       $retorno['dd']                = $dd;
-      $retorno['d']                 = 'File/'.$i.'/' ;
+      $retorno['d']                 = $d ;
       $retorno['a']                 = $a;
       $retorno['m']                 = $m;
       $retorno['args']              = $args;

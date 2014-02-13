@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:27:17 CET 2014
+// Archivo generado automáticamente por GcmConfig Thu Feb 13 12:04:37 CET 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -131,4 +131,26 @@ $GCM_LG_es['Renombrando o moviendo sección']='';
 $GCM_LG_es['Añadir constantes']='';
 $GCM_LG_es['redes_sociales']='';
 $GCM_LG_es['Selector de colores']='';
+$GCM_LG_es['Reindexador']='';
+$GCM_LG_es['Comentarios']='';
+$GCM_LG_es['Editar perfil']='';
+$GCM_LG_es['Cerrar sesión']='';
+$GCM_LG_es['Usuarios']='';
+$GCM_LG_es['Modo view']='';
+$GCM_LG_es['Modo admin']='';
+$GCM_LG_es['constantes']='';
+$GCM_LG_es['Imagenes']='';
+$GCM_LG_es['Editor de temas']='';
+$GCM_LG_es['Editor']='';
+$GCM_LG_es['Idiomas']='';
+$GCM_LG_es['Nuevo']='';
+$GCM_LG_es['Traducir']='';
+$GCM_LG_es['Renombrar / Mover']='';
+$GCM_LG_es['Guardar como']='';
+$GCM_LG_es['Nueva sección']='';
+$GCM_LG_es['Renombrar sección']='';
+$GCM_LG_es['admin']='';
+$GCM_LG_es['ver_registros']='';
+$GCM_LG_es['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
+$GCM_LG_es['Ocultar literales con contenido']='';
 ?>
