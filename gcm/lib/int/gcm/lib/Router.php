@@ -345,7 +345,7 @@ class Router {
          return $_GET['idioma'];
          }
 
-      if ( self::$i == self::$ii) {
+      if ( ! self::$i ) {
 
          if ( isset($_SESSION[$proyecto.'-idioma']) ) {
             self::$i = $_SESSION[$proyecto.'-idioma'];
@@ -701,9 +701,9 @@ class Router {
          }
 
 
-      $i = ( $i ) ? $i : $ii ;
+      $i = ( $i ) ? $i : FALSE ;
 
-      $d = 'File/'.$i.'/';
+      $d = ( $i ) ? 'File/'.$i.'/' : FALSE ;
 
       /* Limpiar url de carpeta inicial File/<idioma> */
 
