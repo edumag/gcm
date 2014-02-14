@@ -107,6 +107,7 @@ function insertar_literal(admin) {
 
 
 function eliminar_elemento(key,admin) {
+   key = key.replace('lit_','');
    pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key+'&admin='+admin,'confirma');
    }
 
@@ -119,8 +120,12 @@ function eliminar_elemento(key,admin) {
  */
 
 function modificar_literal(key,val,admin) {
+   // Quitamos lit_ de la clave
+   key = key.replace('lit_','');
    var res = prompt('Modificaión de '+key,val);
-   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&admin='+admin,'confirma');
+   if ( res ) {
+      pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&admin='+admin,'confirma');
+      }
    }
 
 /**

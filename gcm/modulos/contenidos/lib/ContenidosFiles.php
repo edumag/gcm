@@ -71,7 +71,7 @@ class Contenidos extends ContenidosAbstract {
 
       /* Si se pide un borrador mirar que tenga permisos */
 
-      if ( strpos(Router::$c,'.btml') ) permiso('editar_contenido');
+      if ( strpos(Router::$c,'.btml') ) permiso('editar','contenidos');
 
       }
 
@@ -109,7 +109,7 @@ class Contenidos extends ContenidosAbstract {
 
    function verificar_contenido($ruta) {
       if ( file_exists($ruta) ) { return TRUE; }
-      if ( file_exists(Router::$d.$ruta) ) { return TRUE; }
+      if ( file_exists(Router::$dd.$ruta) ) { return TRUE; }
       return FALSE;
       }
 
@@ -121,7 +121,7 @@ class Contenidos extends ContenidosAbstract {
 
    function verificar_seccion($ruta) {
       if ( file_exists($ruta) ) { return TRUE; }
-      if ( file_exists(Router::$d.$ruta) ) { return TRUE; }
+      if ( file_exists(Router::$dd.$ruta) ) { return TRUE; }
       return FALSE;
       }
 
@@ -132,7 +132,8 @@ class Contenidos extends ContenidosAbstract {
     */
 
    function getContenido($ruta) {
-      return file_get_contents($ruta);
+      $contenido = file_get_contents($ruta);
+      return $contenido;
       }
 
    /**
@@ -230,11 +231,13 @@ class Contenidos extends ContenidosAbstract {
     * @param $args  Argumentos posibles
     */
 
-   function devolver_titulo($url=NULL) {
+   function devolver_titulo($url=FALSE) {
    
       global $gcm;
 
-      $url = ( $url ) ? $url : Router::$f;
+      $url = Router::$dd.Router::$s.Router::$c;
+
+      if ( is_array($url) ) $url = $url[0];
 
       if ( is_file($url)  ) {
          $urls = explode('/',$url);
@@ -417,7 +420,7 @@ class Contenidos extends ContenidosAbstract {
                echo $doc;
                echo "</a>";
                // Solo ponemos link para editar si son paginas html
-               if ( permiso('editar_contenido') && GUtil::tipo_de_archivo($d->path.'/'.$doc) == 'text/html' ) {
+               if ( GUtil::tipo_de_archivo($d->path.'/'.$doc) == 'text/html' ) {
                   echo '<a title="'.literal('Editar').'" href="?e=editar_contenido&url='.htmlentities($d->path.'/'.$doc).'"> [#]</a>';
                }
                echo '<span class="detalles_fichero">';
@@ -589,7 +592,7 @@ class Contenidos extends ContenidosAbstract {
 
    function test() {
 
-      $this->ejecuta_test('Permiss en directorio contenido ['.Router::$dd.']', is_readable(Router::$dd));
+      $this->ejecuta_test('Permisos en directorio contenido ['.Router::$dd.']', is_readable(Router::$dd));
 
 
       }

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:27:17 CET 2014
+// Archivo generado automáticamente por GcmConfig Thu Feb 13 12:16:56 CET 2014
 $GCM_LG_en['Contenido pendiente de traducción']='';
 $GCM_LG_en['Registros de página actual']='';
 $GCM_LG_en['Registros']='';

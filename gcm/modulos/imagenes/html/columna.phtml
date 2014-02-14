@@ -51,17 +51,17 @@
          ?>
          <div class="img_editar">
          <a href="<?php echo $img[1];?>" class="galeria_imagenes">
-         <img id="thumb_<?php echo $conta;?>" src="<?php echo $img[2];?>" alt="Imagen <?php echo $img[0] ?>" />
+         <img id="thumb_<?php echo $conta;?>" src="<?php echo Router::$base.$img[2];?>" alt="Imagen <?php echo $img[0] ?>" />
          </a>
 
 
          <a title="<?php echo literal('Insertar').' '.literal('miniatura')?>" class="boton" 
-         onclick="tinyMCE.execCommand('mceInsertContent','false','<a href=\'<?php echo $img[1];?>\' class=\'botonImg\' ><img src=\'<?php echo $img[2]; ?>\' /></a>')" >
+         onclick="tinyMCE.execCommand('mceInsertContent','false','<a href=\'<?php echo $img[1];?>\' class=\'botonImg\' ><img src=\'<?php echo Router::$base.$img[2]; ?>\' /></a>')" >
             <-
          </a>
 
          <a title="<?php echo literal('Insertar').' '.literal('con tamaño original')?>" class="boton" 
-            onclick="tinyMCE.execCommand('mceInsertContent','false','<img src=\'<?php echo $img[1]; ?>\' />')" >
+            onclick="tinyMCE.execCommand('mceInsertContent','false','<img src=\'<?php echo Router::$base.$img[1]; ?>\' />')" >
             <-(
          </a>
 

@@ -60,8 +60,9 @@ body .colorwell-selected {
  font-weight: bold;
 }
 #selector_colores table {
-display: table-cell;
  border: 1px solid <?=$this->color("body-11")?>;
+ display: inline;
+ float: left;
 }
 #selector_colores thead td {
  border: 1px solid <?=$this->color("body-06")?>;

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Feb 4 10:27:17 CET 2014
+// Archivo generado automáticamente por GcmConfig Fri Feb 14 9:43:09 CET 2014
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
@@ -107,4 +107,25 @@ $GCM_LG_fr['Gestionar SEO']='';
 $GCM_LG_fr['Configuración de mapas']='';
 $GCM_LG_fr['Configuración de responsiveslides']='';
 $GCM_LG_fr['masmonelledu']='';
+$GCM_LG_fr['Comentarios']='';
+$GCM_LG_fr['Editar perfil']='';
+$GCM_LG_fr['Cerrar sesión']='';
+$GCM_LG_fr['Modo view']='';
+$GCM_LG_fr['Modo admin']='';
+$GCM_LG_fr['constantes']='';
+$GCM_LG_fr['Imagenes']='';
+$GCM_LG_fr['Nuevo']='';
+$GCM_LG_fr['Editar']='';
+$GCM_LG_fr['Traducir']='';
+$GCM_LG_fr['Borrar']='';
+$GCM_LG_fr['Renombrar / Mover']='';
+$GCM_LG_fr['Guardar como']='';
+$GCM_LG_fr['Nueva sección']='';
+$GCM_LG_fr['Renombrar sección']='';
+$GCM_LG_fr['Añadir constantes']='';
+$GCM_LG_fr['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
+$GCM_LG_fr['Mostrar únicamente literales vacíos']='';
+$GCM_LG_fr['Ocultar literales con contenido']='';
+$GCM_LG_fr['Sección']='';
+$GCM_LG_fr['no encontrada']='';
 ?>
