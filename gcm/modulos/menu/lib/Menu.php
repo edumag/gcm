@@ -240,7 +240,6 @@ class Menu extends Modulos {
 
       ob_start();
 
-      /** @todo Desactivamos ajax hasta asegurarnos que funciona bien */
       $this->javascripts('menu.js');
 
       echo '<a href="'.$_SERVER['PHP_SELF'].'" >'.literal('inicio').'</a>';

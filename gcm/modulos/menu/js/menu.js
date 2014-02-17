@@ -9,45 +9,46 @@
 
 function initMenu(contexto) {
 
-   $('.m_off', contexto ).click(function() {
+   var icono_on  = '<?php echo $gcm->event->instancias['temas']->icono('+')?>';
+   var icono_off = '<?php echo $gcm->event->instancias['temas']->icono('-')?>';
 
-      var lista = $(this).parent();
-      var url = $(this).attr("href");  // alert(url);
-      lista.html("Cargando...");
+   // Cerramos los menús off
+   $('.m_on', contexto).parent().find("ul").hide();
 
-      if ( url ) {
-         $.get('?formato=ajax&a=menu_ajax_off&m=menu&url='+url,function(data){
-            lista.replaceWith(data);
-            initMenu("#barraNavegacion");
-           });
-         }
-         return false;
+   $('.m_on, .m_off', contexto).click(function() {
+
+      var clase = $(this).attr('class');
+      console.log(clase);
+
+      if ( clase == 'm_on' ) {
+         $(this).removeClass('m_on');
+         $(this).addClass('m_off');
+         var img = $(this).find('img');
+         img.attr('src',icono_off);
+         img.attr('alt','-');
+         console.log($(this).find('img'));
+         var sublista = $(this).parent().find("ul");
+         console.log(sublista);
+         sublista.toggle();
+      } else {
+         $(this).removeClass('m_off');
+         $(this).addClass('m_on');
+         var img = $(this).find('img');
+         img.attr('src',icono_on);
+         img.attr('alt','+');
+         console.log($(this).find('img'));
+         var sublista = $(this).parent().find("ul");
+         console.log(sublista);
+         sublista.toggle();
+      }
+      return false;
       });
 
-   $('.m_on', contexto).click(function() {
+   function toggle(el) {
+   }
 
-      var lista = $(this);
-      var caja = $(this).parent();
-      var url = lista.attr("href"); // alert(url);
-      // var base = '<?php echo dirname($_SERVER['REDIRECT_URL']);?>';
-      caja.css('background','green');
-
-      if ( url ) {
-         caja.html("");
-         //$.get('?a=menu_ajax_off&m=menu&url='+url,function(data){
-         $.get(url+'?formato=ajax&a=menu_ajax_on&m=menu&url='+url,function(data){
-         // $.get(url+'?formato=ajax&a=barra_navegacion&m=menu&base='+base,function(data){
-            // lista.parent().next().remove();
-            //caja.next().remove();
-            caja.replaceWith(data);
-            initMenu("#barraNavegacion");
-           });
-         }
-         return false;
-      });
-
-   $('.m_off', contexto ).removeClass('m_off');
-   $('.m_on', contexto ).removeClass('m_on');
+   // $('.m_off', contexto ).removeClass('m_off');
+   // $('.m_on', contexto ).removeClass('m_on');
 }
 
 $(document).ready(function() { 

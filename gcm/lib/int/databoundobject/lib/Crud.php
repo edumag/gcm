@@ -1431,7 +1431,11 @@ class Crud extends DataBoundObject {
             $this->accion = 'guardando';
             }
       } elseif ( isset($_REQUEST[$this->sufijo.'insertar']) && $this->permisos ) {
-         $this->accion = 'insertar';
+         if ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
+            $this->accion = 'con_errores';
+         } else {
+            $this->accion = 'insertar';
+            }
       } elseif ( isset($_REQUEST[$this->sufijo.'accio_galeria']) && $_REQUEST[$this->sufijo.'accio_galeria'] == 'agafa_imatge' ) {
          $this->accion = 'agafa_imatge';
       } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'ver') {
@@ -1456,6 +1460,7 @@ class Crud extends DataBoundObject {
       // Permisos para la acción
       // Lanzar eventos si los hay para las acciones
 
+      echo '<pre>accion: ' ; print_r($this->accion) ; echo '</pre>'; // exit() ; // DEV  
       /** Acciones */
 
       if ( $this->accion == 'agafa_imatge' ) $this->galeria->inicia();
@@ -1770,6 +1775,9 @@ class Crud extends DataBoundObject {
                }
 
             }
+
+         echo '<pre>accion: ' ; print_r($this->accion) ; echo '</pre>'; // exit() ; // DEV  
+         echo '<pre>REQUEST: ' ; print_r($_REQUEST) ; echo '</pre>'; // exit() ; // DEV  
 
          $this->generar_formulario($displayHash);
          $this->botones_acciones($this->accion);

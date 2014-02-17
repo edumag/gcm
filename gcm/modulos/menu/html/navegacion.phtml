@@ -21,14 +21,16 @@
 
 <?php if ( Router::$c == 'index.html' && basename(Router::$s) == $elemento ) { // Sección actual ?>
 
-   <li class="m_actual">
-      <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
-      <?php echo literal($nombre,1);?>
+   <li>
+      <a class='m_on m_actual' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+         <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
+         <?php echo literal($nombre,1);?>
+      </a>
 
 <?php } else { // Subsección pero no actual aun ?>
 
    <li>
-      <a class='m_off' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
+      <a class='m_off m_actual' href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <img src="<?php echo $gcm->event->instancias['temas']->icono('-')?>" alt="-"/>
       </a>
       <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
@@ -50,6 +52,7 @@
       <a href='<?php echo Router::$base.$this->base_enlace.$base_ajax.$elemento;?>'>
          <?php echo literal($nombre,1);?>
       </a>
+      <?php $submenu = new Menu(); $submenu->inserta_menu('navegacion', $elemento, $preseccion.$seccion); ?>
    </li>
 
 <?php } ?>
