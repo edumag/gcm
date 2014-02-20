@@ -472,6 +472,7 @@ class Solicitud {
                $strSerialization = serialize($objToSerialize);
                //setcookie ("phprqcOriginalRequestObject", $strSerialization, time() + 3600,'/');
                $_SESSION['RESPUESTA_ERRONEA'] = $strSerialization;
+               registrar(__FILE__,__LINE__,"Recargamos página por errores en formulario");
                header("Location: $targetURL");
                exit(0);
             };

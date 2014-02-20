@@ -106,6 +106,62 @@ class HTML {
       }
 
    /**
+    * Enum
+    */
+
+   static function form_enum($name, $valor=FALSE, $atr=FALSE, $opciones) {
+
+      $salida = '';
+
+      foreach ( $opciones as $opcion ) {
+      
+         $salida .= '<p><input type="radio" ';
+
+         $salida .= ' name="'.$name.'"';
+         $salida .= ' value="'.$opcion.'"';
+
+         // Atributos
+
+         $salida .= self::get_atributos($atr);
+
+         if ( $valor == $opcion ) $salida .=  ' checked ';
+
+         $salida .= '/>'.literal($name.'_'.$opcion,1).'</p>';
+
+         }
+
+      return $salida;
+
+      }
+
+
+   /**
+    * Booleano
+    */
+
+   static function form_bool($name, $valor=FALSE, $atr=FALSE) {
+
+      $salida = '';
+
+      $salida .= '<input type="checkbox" ';
+
+      $salida .= ' name="'.$name.'"';
+      $salida .= ' id="'.$name.'"';
+
+      // Atributos
+
+      $salida .= self::get_atributos($atr);
+
+      if ( $valor ) $salida .=  ' checked ';
+
+         $salida .= '/>';
+
+
+      return $salida;
+
+      }
+
+   /**
     * Añadir un campo oculto
     */
 

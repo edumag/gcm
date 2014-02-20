@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Jan 31 11:59:23 CET 2014
+// Archivo generado automáticamente por GcmConfig Wed Feb 19 10:25:25 CET 2014
 $LG_es['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instalación, pasos a seguir';
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde los módulos';
 $LG_es['April']='Abril';
@@ -70,8 +70,15 @@ $LG_es['thumbnail']='';
 $LG_es['tiny_mce']='';
 $LG_es['Traducciones']='Traducciones';
 $LG_es['Constantes']='Constantes';
-$LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina.html']='';
-$LG_es['SEO.html']='';
-$LG_es['Tratar_las_diferencias_entre_navegadores.html']='';
-$LG_es['Forzar_eventos_por_omision.html']='';
+$LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina.html']='Evitar reenvios a formulario al actualizar una pagina';
+$LG_es['Documentación para Gcm']='';
+$LG_es['Debug']='';
+$LG_es['Forzar_eventos_por_omision']='Forzar eventos por omision';
+$LG_es['Cache_http']='';
+$LG_es['Configuracion_para_modulos']='Configuración para módulos';
+$LG_es['Ejemplo_de_uso_del_editor_web_tiny_mce']='Ejemplo de uso del editor web tiny_mce';
+$LG_es['Paginador_con_ajax']='';
+$LG_es['Plantillas']='';
+$LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='Evitar reenvios a formulario al actualizar una pagina';
+$LG_es['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='CSS o Como cambiar el aspecto de tu proyecto';
 ?>

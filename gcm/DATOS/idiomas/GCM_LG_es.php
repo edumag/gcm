@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Feb 14 9:50:14 CET 2014
+// Archivo generado automáticamente por GcmConfig Thu Feb 20 18:56:12 CET 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -85,7 +85,7 @@ $GCM_LG_es['Contenido nuevo']='';
 $GCM_LG_es['Título']='';
 $GCM_LG_es['Título del contenido']='';
 $GCM_LG_es['Acciones']='';
-$GCM_LG_es['Guardar']='';
+$GCM_LG_es['Guardar']='Enviar';
 $GCM_LG_es['Constantes']='';
 $GCM_LG_es['Añadir email oculto a los spammers']='';
 $GCM_LG_es['Nombre a mostrar']='';
@@ -153,4 +153,5 @@ $GCM_LG_es['admin']='';
 $GCM_LG_es['ver_registros']='';
 $GCM_LG_es['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 $GCM_LG_es['Ocultar literales con contenido']='';
+$GCM_LG_es['Registro incluido']='';
 ?>

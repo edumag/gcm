@@ -64,7 +64,7 @@ class Tareas extends Crud {
       }
 
    /**
-    * Devolver listao con id y nombre para poder ser utilizado en 
+    * Devolver listado con id y nombre para poder ser utilizado en 
     * select de formulario
     *
     * Si tenemos un proyecto seleccionado, limitamos el select a sus tareas, las

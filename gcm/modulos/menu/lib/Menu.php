@@ -199,8 +199,7 @@ class Menu extends Modulos {
 
       $elementos = $this->buscar_elementos($preseccion.$seccion);
 
-      //$plantilla = dirname(__FILE__).'/../html/'.$tipo.'.phtml' ;
-      // include ($plantilla);
+      if ( empty($elementos) ) return FALSE;
 
       include ($gcm->event->instancias['temas']->ruta('menu','html',$tipo.'.phtml'));
 
@@ -241,8 +240,7 @@ class Menu extends Modulos {
 
       ob_start();
 
-      /** @todo Desactivamos ajax hasta asegurarnos que funciona bien */
-      // $this->javascripts('menu.js');
+      $this->javascripts('menu.js');
 
       echo '<a href="'.$_SERVER['PHP_SELF'].'" >'.literal('inicio').'</a>';
       echo '<div id="barraNavegacion">';

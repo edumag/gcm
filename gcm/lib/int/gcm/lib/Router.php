@@ -340,6 +340,8 @@ class Router {
          $_SESSION[$proyecto."-idioma"] = $_GET["idioma"]; 
          // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
          // variable GET
+         registrar(__FILE__,__LINE__,"Recargamos pagina para tener idioma definido",'AVISO');
+         
          header("Location: ".self::$base.$_GET['idioma'].'/'.self::$s.self::$c);
          exit();
          return $_GET['idioma'];

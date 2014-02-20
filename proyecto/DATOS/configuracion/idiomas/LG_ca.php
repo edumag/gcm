@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Feb 14 8:54:43 CET 2014
+// Archivo generado automáticamente por GcmConfig Thu Feb 20 18:58:10 CET 2014
 $LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instal·lació passos a seguir per realitzar-la';
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Afegir javascript desde un mòdul';
 $LG_ca['April']='Abril';
@@ -27,7 +27,6 @@ $LG_ca['Eventos']='';
 $LG_ca['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='';
 $LG_ca['Evitar_reenvios_a_formulario_al_actualizar_una_pagina.html']='';
 $LG_ca['Forzar_eventos_por_omision']='Forzar eventos por omisión';
-$LG_ca['Forzar_eventos_por_omision.html']='';
 $LG_ca['GCM']='';
 $LG_ca['Gcm']='';
 $LG_ca['Gestor de Contenido Mamedu']='null';
@@ -45,7 +44,6 @@ $LG_ca['Presentacion']='';
 $LG_ca['Probando_contenido']='Prova de contingut';
 $LG_ca['Referencias']='';
 $LG_ca['SEO']='';
-$LG_ca['SEO.html']='';
 $LG_ca['Seccion']='';
 $LG_ca['Seccions']='';
 $LG_ca['Sistema_de_plantillas']='';
@@ -61,7 +59,6 @@ $LG_ca['TinyTable']='';
 $LG_ca['Trabajando_con_imagenes']='';
 $LG_ca['Traducciones']='';
 $LG_ca['Tratar_las_diferencias_entre_navegadores']='';
-$LG_ca['Tratar_las_diferencias_entre_navegadores.html']='';
 $LG_ca['Tratar_las_diferencias_entre_navegadores2']='';
 $LG_ca['Una_mas']='';
 $LG_ca['ca']='càtala';
@@ -83,4 +80,8 @@ $LG_ca['tema']='';
 $LG_ca['tema_nuevo']='';
 $LG_ca['thumbnail']='';
 $LG_ca['tiny_mce']='';
+$LG_ca['Cache_http']='';
+$LG_ca['Paginador_con_ajax']='';
+$LG_ca['Plantillas']='';
+$LG_ca['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='';
 ?>
