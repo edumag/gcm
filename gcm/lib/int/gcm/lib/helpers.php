@@ -546,6 +546,7 @@ function permiso($accion='administrar', $modulo = 'admin', $salir=FALSE, $mensaj
 
    if ( $salir  ) {
       registrar(__FILE__,__LINE__,'Se necesitan permisos para esta acción','ERROR');
+      registrar(__FILE__,__LINE__,"Recargamos página por falta de permisos");
       header('location:'.Router::$base.Router::$s.Router::$c);
       exit();
    } elseif ( $mensaje ) {

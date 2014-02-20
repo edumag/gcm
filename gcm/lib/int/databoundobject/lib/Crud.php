@@ -323,11 +323,11 @@ class Crud extends DataBoundObject {
    /**
     * Especificaciones de los campos de la tabla
     *
-    * Esta información nos permite añadir automaticamente las condiciones de 
-    * los campos del formulario, asi como conocer el formato en que se deben 
+    * Esta información nos permite añadir automáticamente las condiciones de 
+    * los campos del formulario, así como conocer el formato en que se deben 
     * presentar.
     *
-    * Definición de los tipos de campo y sus carateristicas.
+    * Definición de los tipos de campo y sus características.
     *
     * Ejemplo:
     * @code
@@ -533,7 +533,7 @@ class Crud extends DataBoundObject {
    /**
     * Definir tipos de campo especificado
     *
-    * Las carateristicas de los campos definidas en el modelo no se chafan con las automaticas
+    * Las características de los campos definidas en el modelo no se chafan con las automáticas
     * @see $tipos_campos
     *
     * @param $row Array con los datos del campo de la base de datos
@@ -577,12 +577,16 @@ class Crud extends DataBoundObject {
 
             }
 
-      } else {
+      } else {  // mysql
 
-         if ( ! isset($this->tipos_campos[$row['Field']]['tipo']) )                               $this->tipos_campos[$row['Field']]['tipo'] = $row['Type'];
-         if ( ! isset($this->tipos_campos[$row['Field']]['null']) )                               $this->tipos_campos[$row['Field']]['null'] = $row['Null'];
-         if ( !empty($row['Default']) && ! isset($this->tipos_campos[$row['Field']]['default']) ) $this->tipos_campos[$row['Field']]['default'] = $row['Default'];
-         if ( !empty($row['Extra']) && ! isset($this->tipos_campos[$row['Field']]['extra']) )     $this->tipos_campos[$row['Field']]['extra'] = $row['Extra'];
+         if ( ! isset($this->tipos_campos[$row['Field']]['tipo']) )                               
+            $this->tipos_campos[$row['Field']]['tipo'] = $row['Type'];
+         if ( ! isset($this->tipos_campos[$row['Field']]['null']) )                               
+            $this->tipos_campos[$row['Field']]['null'] = $row['Null'];
+         if ( !empty($row['Default']) && ! isset($this->tipos_campos[$row['Field']]['default']) ) 
+            $this->tipos_campos[$row['Field']]['default'] = $row['Default'];
+         if ( !empty($row['Extra']) && ! isset($this->tipos_campos[$row['Field']]['extra']) )     
+            $this->tipos_campos[$row['Field']]['extra'] = $row['Extra'];
 
          // Buscamos valor maximo para campo
 
@@ -609,6 +613,17 @@ class Crud extends DataBoundObject {
 
                }
 
+            }
+
+         // Campos enum máximo 20
+         if ( stripos($row['Type'],'enum') !== FALSE ) {
+            $max=20;
+            $this->tipos_campos[$row['Field']]['max'] = $max;
+            }
+
+         // Campos booleanos máximo 20
+         if ( $row['Type'] == 'tinyint(1)' ) {
+            $this->tipos_campos[$row['Field']]['max'] = 20 ;
             }
 
          }
@@ -768,6 +783,31 @@ class Crud extends DataBoundObject {
 
             $this->tipos_formulario[$row['Field']]['tipo'] = 'fecha_hora';
 
+            }
+
+         // Campos 'booleanos'
+         
+         if ( $row['Type'] == 'tinyint(1)' ) {
+
+            $this->tipos_formulario[$row['Field']]['tipo'] = 'booleano';
+
+            }
+
+         // Campos 'enum'
+
+         if ( stripos($row['Type'],'enum') !== FALSE ) {
+
+            // Buscamos valores posibles
+
+            preg_match("/\((.*)\)/",$row['Type'],$coincidencias);
+            $opciones = explode(',',$coincidencias[1]);
+            
+            $this->tipos_formulario[$row['Field']]['tipo'] = 'enum';
+            foreach ( $opciones as $op ) {
+               $this->tipos_formulario[$row['Field']]['opciones'][] = str_replace("'","",$op);
+               }
+
+            $this->tipos_formulario[$row['Field']]['maxlength'] = 20;
             }
 
          }
@@ -1325,7 +1365,7 @@ class Crud extends DataBoundObject {
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
-         <p class="botonera_crud"><input type="submit" name="<?php echo $this->sufijo; ?>guardar" value="Guardar"></p>
+         <p class="botonera_crud"><input type="submit" name="<?php echo $this->sufijo; ?>guardar" value="<?php echo literal('Guardar',3)?>"></p>
          </form>
          <?php
 
@@ -1424,14 +1464,17 @@ class Crud extends DataBoundObject {
 
       // Determinar acción actual
 
-      if ( isset($_POST[$this->sufijo.'guardar']) ) {
+      if ( isset($_SESSION['RESPUESTA_ERRONEA']) ) {
+            $this->accion = 'con_errores';
+      } elseif ( isset($_POST[$this->sufijo.'guardar']) ) {
+         
          if ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
             $this->accion = 'con_errores';
          } else {
             $this->accion = 'guardando';
             }
       } elseif ( isset($_REQUEST[$this->sufijo.'insertar']) && $this->permisos ) {
-         if ( isset($_SESSION['RESPUESTA_ERRONEA']) || isset($_POST[$this->sufijo.'formulario'])) {
+         if ( isset($_SESSION['RESPUESTA_ERRONEA']) ) {
             $this->accion = 'con_errores';
          } else {
             $this->accion = 'insertar';
@@ -1460,7 +1503,6 @@ class Crud extends DataBoundObject {
       // Permisos para la acción
       // Lanzar eventos si los hay para las acciones
 
-      echo '<pre>accion: ' ; print_r($this->accion) ; echo '</pre>'; // exit() ; // DEV  
       /** Acciones */
 
       if ( $this->accion == 'agafa_imatge' ) $this->galeria->inicia();
@@ -1734,6 +1776,7 @@ class Crud extends DataBoundObject {
          $_SESSION['dh'] = $displayHash;
          $_SESSION['mens'] = $gcm->reg->sesion;
          $redireccion = $_SERVER['REDIRECT_URL'];
+         registrar(__FILE__,__LINE__,"Recargamos página por registro guardado");
          header("Location: ".$redireccion);
          exit(0);
 
@@ -1775,9 +1818,6 @@ class Crud extends DataBoundObject {
                }
 
             }
-
-         echo '<pre>accion: ' ; print_r($this->accion) ; echo '</pre>'; // exit() ; // DEV  
-         echo '<pre>REQUEST: ' ; print_r($_REQUEST) ; echo '</pre>'; // exit() ; // DEV  
 
          $this->generar_formulario($displayHash);
          $this->botones_acciones($this->accion);
@@ -1830,7 +1870,8 @@ class Crud extends DataBoundObject {
 
 
 
-         registrar(__FILE__,__LINE__,literal("Registro eliminado"),'AVISO');
+         registrar(__FILE__,__LINE__,literal("Registro eliminado",3),'AVISO');
+         registrar(__FILE__,__LINE__,"Recargamos página por registro eliminado");
          header("Location: ".$_SERVER['PHP_SELF']);
          exit(0);
 

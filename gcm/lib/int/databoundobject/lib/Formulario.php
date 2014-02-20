@@ -132,6 +132,17 @@ class Formulario {
     *            [size] => 30
     *            [valor] => 
     *        )
+    *    [acepta_condiciones] => Array
+    *        (
+    *            [tipo] => booleano
+    *            [valor] => 
+    *        )
+    *    [desea_notificaciones] => Array
+    *        (
+    *            [tipo] => enum
+    *            [opciones] => Array ('si','no') 
+    *            [valor] => 
+    *        )
     * </pre>
     * 
     * @endcode

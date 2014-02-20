@@ -332,8 +332,8 @@ abstract class ContenidosAbstract extends Modulos {
 
       if ( file_exists(Router::$dd) ) {
          $gcm->titulo = literal('Sin sección',3);
-         registrar(__FILE__,__LINE__,literal('Sección',3).' ['.Router::$s.'] '.literal('no encontrada',3));
-         registrar(__FILE__,__LINE__,Router::$s.Router::$c.' '.literal('página no encontrada'),'ERROR');
+         registrar(__FILE__,__LINE__,"Recargamos página por sección no encontrada");
+         registrar(__FILE__,__LINE__,Router::$s.Router::$c.' '.literal('Página no encontrada'),'ERROR');
          header("HTTP/1.1 301 Moved Permanently");
          header("Location: ".Router::$base);
          exit();
@@ -511,11 +511,13 @@ abstract class ContenidosAbstract extends Modulos {
 
             $gcm->router->inicia($url);
 
+            registrar(__FILE__,__LINE__,"Recargamos página por ejecutar_borrar");
             header ("Location:".Router::$dir.Router::$url);
             exit();
             break;
 
          default:
+            registrar(__FILE__,__LINE__,"Recargamos página por pedirse desde un módulo");
             header ("Location:".Router::$dir.Router::$url);
             exit();
             break;
