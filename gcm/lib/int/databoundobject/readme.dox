@@ -110,7 +110,7 @@ class Tareas extends Crud {
    }
 @endcode
 
-@todo Separar filtro de Crud
+**filtros**
 
 Tenemos la posibilidad de añadir un formulario para crear filtros avanzados.
 
@@ -120,6 +120,7 @@ formulario en la cabecera del listado que nos permitira generar filtros.
 Ahora mismo funciona y la exportación de csv se realiza teneiendo en cuenta el
 filtro.
 
+@todo Separar filtro de Crud
 @todo Falta extender los filtros para tener más posibilidades.
 @todo Añadir un filtro simple que se base en un campo de busqueda y que mire si 
       tenemos contenido en cualquier campo.

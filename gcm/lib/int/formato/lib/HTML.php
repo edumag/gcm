@@ -50,6 +50,34 @@ class HTML {
       }
 
    /**
+    * Campo de fecha
+    *
+    * @param $name   Nombre del campo
+    * @param $valor  Valor
+    * @param $atr    Atributos para el input o textarea
+    */
+
+   static function form_fecha($name, $valor=FALSE, $atr=FALSE) {
+
+      $salida = '';
+
+      $salida .= '<input type="text" ';
+
+      $salida .= ' name="'.$name.'"';
+      $salida .= ' id="'.$name.'"';
+
+      // Atributos
+
+      $salida .= self::get_atributos($atr);
+
+      if ( $valor ) $salida .=  ' value="'.self::esc_atr($valor).'" ';
+      $salida .= '>';
+      
+      return $salida;
+
+      }
+
+   /**
     * Campo de texto
     *
     * Si el tamaño máximo del texto permitido no supera los 150 caracteres

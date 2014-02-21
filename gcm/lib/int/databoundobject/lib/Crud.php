@@ -785,6 +785,14 @@ class Crud extends DataBoundObject {
 
             }
 
+         // Campos 'int'
+
+         if ( stripos($row['Type'],'int(') !== FALSE ) {
+
+            $this->tipos_formulario[$row['Field']]['tipo'] = 'numero';
+
+            }
+
          // Campos 'booleanos'
          
          if ( $row['Type'] == 'tinyint(1)' ) {
@@ -849,6 +857,19 @@ class Crud extends DataBoundObject {
 
                $this->restricciones[$campo][RT_REQUERIDO] = 1;
                $this->mensajes[$campo][RT_REQUERIDO] = literal('Campo obligatorio',3);
+
+            }
+
+         // Si es tipo numero
+
+         if ( isset($this->tipos_formulario[$campo]['tipo']) ) {
+
+            $tipo = $this->tipos_formulario[$campo]['tipo'];
+
+            if ( $tipo == 'numero' ) {
+               $this->restricciones[$campo][RT_NO_ES_NUMERO] = 1;
+               $this->mensajes[$campo][RT_NO_ES_NUMERO] = literal('Debe ser un número',3);
+               }
 
             }
 
@@ -1975,8 +1996,10 @@ class Crud extends DataBoundObject {
                'url'           => '?'.$this->sufijo.'id='
                ,'identifiador' => 'id'
                ,'modificar'    => 'editar'  
-               // ,'eliminar'     => 'eliminar'
+               //,'eliminar'     => 'eliminar'
+               ,'eliminar'     => FALSE
                //,'ver'          => 'ver'
+               ,'ver'          => FALSE
                ,'accion'       => $this->sufijo.'accion'
                ,'ocultar_id'   => 1
                ,'dir_img'      => ( $this->dir_img_array2table ) ? $this->dir_img_array2table : NULL
@@ -2105,6 +2128,11 @@ class Crud extends DataBoundObject {
 
          $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->sufijo.$campo][$numero_registro] : $resultado[$campo];
 
+         // campos booleanos
+         if ( $this->tipos_formulario[$campo]['tipo'] == 'booleano' ) {
+            $valor = ( $valor == 'on' ) ? 1 : 0 ;
+            }
+
          if ( ! empty($valor) && $valor ) $hay_valores = TRUE;
 
          if ( isset($modelo->ID) && ! empty($modelo->ID) && $campo == 'fecha_creacion'  ) {
@@ -2130,6 +2158,7 @@ class Crud extends DataBoundObject {
             $modelo->DelAccessor($rCampo);
             continue;
             }
+
 
          // Añadimos campo generico
          if ( $campo != array_search('ID',$modelo->arRelationMap)  ) {

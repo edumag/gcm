@@ -67,15 +67,7 @@ class Array2table {
     *     url            Url para enlaces de registro'
     *     accion         Nombre de variable GET que se pasara en url, por defecto 'accion'
     *     dir_imag       Url del directorio donde se encuentran los iconos modificar, eliminar, etc...
-    *     fila_enlazada  Array con los campos que queremos que tengan su propio enlace con la base_url del mismo
-    *                    Ejemplo: fila_enlazada['nom']='../nom=';
-    *
     *     enlaces        Array con el contenido de los campos que contienen un enlace.
-    *
-    *                    El campo que se utiliza de identificador para el enlace sera ocultado.
-    *
-    *                    En caso de no definir la columna que hace de identificador para generar el enlace
-    *                    utilizaremos la misma columna.
     *
     *                    Estructura de ejemplo:
     *
@@ -133,9 +125,6 @@ class Array2table {
 
       /** Url del directorio de los iconos */
       self::$base_imagenes = ( isset($opciones['dir_img']))    ? $opciones['dir_img']    : self::$base_imagenes ;
-
-      /** Enlaces definidos desde opciones */
-      $fila_enlazada = ( isset($opciones['fila_enlazada']))    ? $opciones['fila_enlazada']    : FALSE ;
 
       /** Enlaces definidos desde opciones */
       $enlaces = ( isset($opciones['enlaces']))    ? $opciones['enlaces']    : FALSE ;
@@ -307,11 +296,6 @@ class Array2table {
                $col--;
                echo ''; 
 
-            } elseif ( $fila_enlazada && isset($fila_enlazada[$key_columna]) ) {
-                  echo "\n\t\t\t<td".$clase_columna.">";
-                  echo "<a href='".$fila_enlazada[$key_columna].$columna."'>";
-                  echo $columna;
-                  echo "</a></td> " ;
             } elseif ( $enlaces && isset($enlaces[$key_columna]) ) {
                $DATO=trim($columna);
                $campo_enlazado = $enlaces[$key_columna]['campo_enlazado'];

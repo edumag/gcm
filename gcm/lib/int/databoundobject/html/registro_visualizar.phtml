@@ -7,6 +7,8 @@
  * @ingroup plantilla_crud
  */
 
+require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
+
 ?>
 
 <?php if ( isset($this->displayHash["PROBLEMS"]) ) { ?>
@@ -22,7 +24,7 @@
     <?php if ( isset($this->campos[$campo]['privado']) && $this->campos[$campo]['privado'] == 1 ) { continue; } ?>
 
     <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
-   <input type="hidden" name="<?=$campo?>" value="<?=$this->valores($campo)?>" /> 
+   <?php echo HTML::form_hidden($campo,$this->valores($campo)); ?>
    <?php continue; } ?>
 
    <?php if ( $relacion != 'ID' && $campo != "fecha_creacion" && $campo != "fecha_modificacion" ) { ?>   
@@ -32,8 +34,12 @@
    <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
 
    <div class="caja_campo_titulo"><?=literal($campo)?></div>
-   <textarea readonly="readonly" rows="<?=$this->campos[$campo]['rows']?>" cols="<?=$this->campos[$campo]['cols']?>" name="<?=$campo?>"><?=$this->valores($campo)?></textarea>
 
+   <?php echo HTML::form_text($campo
+         ,$this->valores($campo)
+         ,array('rows'=>$this->campos[$campo]['rows'],'cols'=>$this->campos[$campo]['cols'], 'readonly'=>'readonly')
+         ,0); 
+   ?>
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
    
       <?php // si es el campo con contraseña no se presenta ?>
@@ -41,42 +47,40 @@
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
       <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'])?></div>
-      <select disabled name="<?=$campo?>">
-         <option readonly="readonly"><?=literal('Seleccionar')?></option>
-         <?php foreach ( $this->campos[$campo]['opciones'] as $res) { ?>
-            <?php $count=0; ?>
-            <?php foreach ( $res as $contenido ) { ?>
-            <?php if ( $count == 0 ) $identificador = $contenido; ?>
-            <?php if ( $count == 1 ) $nombre = $contenido; ?>
-            <?php $count++; ?>
-            <?php } ?>
-            <option value="<?=$identificador?>"<?php if ( $identificador == $this->valores($campo) ) echo ' selected' ;?>><?=$nombre?>
-            </option>
-         <?php } ?>
-      </select>
+
+      <?php echo HTML::form_select($campo, $this->campos[$campo]['opciones'],$this->valores($campo),literal('Seleccionar',1),TRUE); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha' ) { ?>
    
    <div class="caja_campo_titulo"><?=literal($campo)?></div>
-   <input readonly="readonly" name="<?=$campo?>"  type="date" value="<?=str_replace(' ','T',$this->valores($campo))?>"/>
+
+   <?php echo HTML::form_fecha($campo,$this->valores($campo),array('readonly'=>'readonly')); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
    <div class="caja_campo_titulo"><?=literal($campo)?></div>
-   <input readonly="readonly" name="<?=$campo?>"  type="datetime-local" value="<?php if ( $this->valores($campo) !== '0000-00-00 00:00:00' ) { echo strftime("%Y-%m-%dT%H:%M",strtotime($this->valores($campo))); } else { echo ''; } ?>"/>
+
+   <?php 
+   $valor = ( $this->valores($campo) && $this->valores($campo) != '0000-00-00 00:00:00' ) 
+               ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))) 
+               : strftime("%Y-%m-%d %H:%M"); 
+   ?>
+   
+   <?php echo HTML::form_fecha($campo,$valor,array('readonly'=>'readonly')); ?>
 
    <?php } else { ?>
 
    <div class="caja_campo_titulo"><?=literal($campo)?></div>
-   <input readonly="readonly" name="<?=$campo?>" 
-      <?php if ( isset($this->campos[$campo]['maxlength']) ) { ?>
-      maxlength="<?=$this->campos[$campo]['maxlength']?>" 
-      <?php } ?>
-      <?php if ( isset($this->campos[$campo]['size']) ) { ?>
-      size="<?=$this->campos[$campo]['size']?>" 
-      <?php } ?>
-      type="text" value="<?=$this->valores($campo)?>"/>
 
+   <?php $atr = FALSE ; ?>
+   <?php if ( isset($this->campos[$campo]['maxlength']) ) $atr['maxlength'] = $this->campos[$campo]['maxlength'] ; ?>
+   <?php if ( isset($this->campos[$campo]['size']) ) $atr['size'] = $this->campos[$campo]['size'] ; ?>
+   <?php $atr['readonly'] = 'readonly'; ?>
+
+   <?php echo HTML::form_text($campo
+         ,$this->valores($campo)
+         ,$atr); 
+   ?>
    <?php } ?>
 
    <div class="caja_campo_error">
