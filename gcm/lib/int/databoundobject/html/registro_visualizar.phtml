@@ -68,6 +68,20 @@ require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
    
    <?php echo HTML::form_fecha($campo,$valor,array('readonly'=>'readonly')); ?>
 
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'booleano'  ) { ?>
+
+   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+
+   <?php echo HTML::form_bool($campo ,( $this->valores($campo) ) ? TRUE : FALSE,array('readonly'=>'readonly') ); 
+   ?>
+
+   <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'enum'  ) { ?>
+
+   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+
+   <?php echo HTML::form_enum($campo ,$this->valores($campo),array('readonly'=>'readonly'),$this->campos[$campo]['opciones']); 
+   ?>
+
    <?php } else { ?>
 
    <div class="caja_campo_titulo"><?=literal($campo)?></div>
