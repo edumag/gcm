@@ -55,7 +55,7 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
    <?php $cargar_codigo_fechas[] = $campo; ?>
 
    <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
-   <?php echo HTML::form_text($campo,$this->valores($campo)); ?>
+   <?php echo HTML::form_fecha($campo,$this->valores($campo)); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
@@ -67,7 +67,7 @@ $dir_codigo_fechas          = '../'.GCM_DIR.'lib/int/databoundobject/ext/jquery.
                : strftime("%Y-%m-%d %H:%M"); 
    ?>
    
-   <?php echo HTML::form_text($campo,$valor); ?>
+   <?php echo HTML::form_fecha($campo,$valor); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
    
