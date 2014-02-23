@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Feb 20 18:56:12 CET 2014
+// Archivo generado automáticamente por GcmConfig Fri Feb 21 20:18:21 CET 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -154,4 +154,6 @@ $GCM_LG_es['ver_registros']='';
 $GCM_LG_es['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 $GCM_LG_es['Ocultar literales con contenido']='';
 $GCM_LG_es['Registro incluido']='';
+$GCM_LG_es['Debe ser un número']='';
+$GCM_LG_es['Debe ser un numero']='';
 ?>
