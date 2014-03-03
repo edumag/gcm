@@ -139,7 +139,7 @@ $galeria = GaleriaFactory::galeria($config, $id);
 
 // Posibles configuracións
 
-// $galeria->descripcions = new DescripcionesGalerias('desc_galeria_test') ; // Descripcions
+$galeria->descripcions = new DescripcionesGalerias('desc_galeria_test') ; // Descripcions
 
 // Limit d'imatges
 
