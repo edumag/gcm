@@ -1,0 +1,152 @@
+/**
+
+@defgroup galeria galeria
+@ingroup librerias
+@{
+
+El mòdul galeria ens permet automatitzar la creació de galeries per a 
+diferents seccions de forma fàcil i personalizable. 
+
+Per a la creació i proves de galeries i les seves presentacions podem 
+utilitzar el test de galeries en test/galeriaTest.php
+
+@todo Crear un orden para la presentación de galerías
+
+@see GaleriaAbstract
+@see DescripcionesGalerias
+
+Exemple d'ús
+------------
+
+Galeria per als actes
+
+Preparació
+----------
+
+Creació del directori on es guardaran les imatges. (img/totbisbal/noticies)
+
+En cas de voler tenir un títol i un subtítol per a cada imatge, s'ha de crear 
+la taula corresponent en la base de dades. en el cas de les notícies creguem 
+desc_galeria_noticies tal com ens indica DescripcionesGalerias
+
+Incloure el codi necessari
+--------------------------
+
+Abans de recollir la sessió en una pàgina hem d'incloure el següent codi. Això 
+ens permet recuperar una galeria de la sessió ja que per a això és necessari 
+que php tingui constància de la classe abans de recuperar la seva instància de 
+la sessió.
+
+      require_once($this->dir_base.'moduls/galeria3/lib/GaleriaFile.php');
+      require_once($this->dir_base."moduls/galeria3/lib/GaleriaFactory.php");
+
+Configuració
+------------
+
+@code
+$amplaria_max        = 600;                  ///< Amplària maxima 600px per defecta
+$altura_max          = 400;                  ///< Altura max 400px por defecta
+$amplada_presentacio = 150;                  ///< Amplada de miniatura
+$altura_presentacio  = 180;                  ///< Altura de miniatura
+$limit_imatges       = 5;                    ///< Limit de imatges 
+$grandaria_max       = NULL;                 ///< Grandaría max de la imatge (pes) 
+$nom_div_galeria     = 'galeriaDIV';         ///< Per a diferenciar entre galeries 
+$plantilla_presentacio;                      ///< Plantilla que agafem per presentar la galeria
+$plantilla_edita_imatge;                     ///< Plantilla per presentar imatge al editar
+$descripcions = FALSE ;                      ///< Instancia de DescripcionesGaleria
+@endcode
+
+Per no repetir codi podem crear un arxiu de configuració de la galeria exemple en acte/configuracio_galeria.php
+
+Exemple:
+
+@code
+$seccion_galeria = 'img/'.$GLOBALS['sTotArr'].'/actes';
+$nom_galeria = ( $galeria_id ) ? $galeria_id : FALSE ;
+$galeria = GaleriaFactory::galeria($seccion_galeria,'File',$nom_galeria); 
+$galeria->limit_imatges = 1;
+$galeria->amplada_presentacio = 150;
+$galeria->altura_presentacio = 180;
+$galeria->amplaria_max  = 600;
+// $galeria->descripcions = new DescripcionesGalerias('desc_galeria_actes',$nom_galeria) ;
+@endcode
+
+Editar la galeria dins del formulari de creació o edició
+--------------------------------------------------------
+
+Definim l'identificador de la galeria, que serà en aquest cas l'identificador de la notícia. 
+
+      $galeria_id = $idActe;
+      include('configuracio_galeria.php');
+
+Si el formulari està en manera veure
+
+      $galeria->presentaGaleria(); 
+
+Si està en manera edició
+
+      $galeria->formulario();
+      
+Es pot veure l'exemple en acte/formulari.php
+
+
+Guardar la galeria dins de l'administració de notícies
+------------------------------------------------------
+
+Si l'acte es va inserir correctament, recollim la galeria de la sessió i la guardem en disc.
+
+      $galeria_id = $result;
+      include('configuracio_galeria.php');
+      $galeria = GaleriaFactory::galeria($seccion_galeria,'File'); 
+      $galeria->guardar($galeria_id);
+
+Si l'acte va ser modificat correctament
+
+      $galeria_id = $idActe;
+      include('configuracio_galeria.php');
+      $galeria->guardar($galeria_id);
+
+Es pot veure l'exemple en acte/admin.php
+
+Mostra la galeria
+-----------------
+
+   $galeria_id = $nActeID;
+   include('configuracio_galeria.php');
+   if ($galeria->count() > 0 ) $galeria->presentaGaleria();
+
+Es pot veure l'exemple en lib/actesPO.php 105
+
+
+Afegim la possibilitat d'inserir un titulo i un subtitulo a les imatges
+-----------------------------------------------------------------------
+
+Per a això sera necessari crear una taula en la base de dades per 
+guardar-les, DescripcionesGalerias.
+
+      $galeria->descripcions = new DescripcionesGalerias('desc_galeria_noticies',$nom_galeria) ;
+      
+Si tenim contingut presentem la galeria.::
+
+      if ($galeria->count() > 0 ) $galeria->presentaGaleria();
+
+
+@}
+
+@defgroup plantilla_galeria Plantillas para galeria
+@ingroup plantilla_libreria
+@ingroup galeria
+@{
+
+Creació d'una plantilla de presentació
+--------------------------------------
+
+En la carpeta "presentacions" ens trobem amb les possibles presentacions que 
+podem utilitzar.
+
+Per crear noves farem un directori amb el seu nom afegim el trepa.phtml que 
+contindrà la plantilla i un include.php amb els arxius que s'han de carregar 
+en presentar-la. (css i javascripts)
+
+@}
+*/

@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file galleria/trepa.phtml 
+ * @brief Plantilla para presentar las imagenes con galleria
+ * @ingroup galeria
+ * @ingroup plantilla_galeria
+ *
+ * Es necesario que la pagina que presente las imagenes incluya los scripts y css
+ *
+ * @code
+ * <script src="../moduls/galleria/themes/classic/galleria.classic.min.js"></script>
+ * @endcode
+ *
+ * Exemple:
+ *
+ * @code
+ * <div id="gallery">
+ *  <a rel="img/big1.jpg" href="/img/large1.jpg"><img src="/img/thumb1.jpg" alt="My description" title="My title"></a>
+ *  <a rel="img/big2.jpg" href="/img/large2.jpg"><img src="/img/thumb2.jpg" alt="Another text" title="Another title"></a>
+ * </div>
+ * @endcode
+ */
+
+?>
+
+<?php if ( $this->count() > 0 ) { ?>
+
+
+   <div id="gallery">
+
+   <?php for ($i=0;$i<$this->count();$i++){ ?>
+
+   <?php $sql="SELECT titol, subtitol FROM galeries_fotos_imatges WHERE galeries_fotos_id = ".
+         $_REQUEST['galeries_fotos_id']. " AND nom = '".$this->imatges[$i]->getId()."'"; ?>
+   <?php $rs = mysql_query($sql) ; if ( $rs ) $row = mysql_fetch_array($rs) ; list($titol, $subtitol) = $row; ?> 
+
+   <a rel="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>" 
+      href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>">
+      <img src="<?php echo DIR_BASE.$this->imatges[$i]->getMiniaturaSrc();?>" 
+      alt="<?php echo ( empty($titol) ) ? $this->imatges[$i]->getId() : $titol?>" 
+      title="<?php echo ( empty($subtitol) ) ? $this->imatges[$i]->getId() : $subtitol?>" />
+   </a>
+
+   <?php } ?>
+
+   </div>
+
+<?php } ?>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script src="<?php echo DIR_BASE?>moduls/galeria3/moduls/galleria/galleria-1.2.6.js"></script>
+<script src="<?php echo DIR_BASE?>moduls/galeria3/moduls/galleria/themes/classic/galleria.classic.js"></script>
+
+<script>
+   $("#gallery").galleria({
+       width: 600,
+       height: 400
+   });
+</script>

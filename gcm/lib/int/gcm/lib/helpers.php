@@ -44,7 +44,11 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
    global $LG, $GCM_LG, $gcm;
 
-   $proyecto = $gcm->config('admin','Proyecto');
+   if ( $gcm ) {
+      $proyecto = $gcm->config('admin','Proyecto');
+   } else {
+      $Proyecto = 'SinProyecto';
+   }
 
    $literal = html_entity_decode($literal,ENT_NOQUOTES,'UTF-8');
 

@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * @file notis_popey/trepa.phtml 
+ * @ingroup galeria
+ * @ingroup plantilla_galeria
+ * @brief Plantilla para presentar las imagenes con notis_popey
+ *
+ * Per no repetir la inclusió dels css i els javascript en els llistats de 
+ * notícies cal afegir aquestes línies des de la pàgina que mostra la galeria
+ *
+ * @code
+ * <link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
+ * <link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/totarreu/jquery.popeye.style.css" media="screen" />
+ * 
+ * <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+ * <script type="text/javascript" src="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/lib/popeye/jquery.popeye-2.1.min.js"></script>
+ * @endcode
+ *
+ */
+
+?>
+
+<?php if ( $this->count() > 0 ) { ?>
+
+<div class="ppy" id="<?php echo $this->id;?>">
+            <ul class="ppy-imglist">
+
+   <?php for ($i=0;$i<$this->count();$i++){ $imatge = $this->imatges[$i]; ?>
+
+       <li>
+           <a href="<?php echo DIR_BASE.$imatge->getSrc();?>">
+               <img src="<?php echo DIR_BASE.$imatge->getMiniaturaSrc();?>" alt="" />
+           </a>
+           <span class="ppy-extcaption">
+               <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) ) { ?>
+           <?php echo $this->descripcions->descripcions[$imatge->getNom()]['titol']?>
+               <?php } ?>
+               <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['subtitol']) ) { ?>
+               <br />
+               <em><?php echo $this->descripcions->descripcions[$imatge->getNom()]['subtitol']?></em>
+               <?php } ?>
+           </span>
+       </li>
+
+   <?php } ?>
+
+         </ul>
+            <div class="ppy-outer">
+                <div class="ppy-stage">
+                    <div class="ppy-nav">
+                        <a class="ppy-prev" title="Anterior">Anterior</a>
+                        <a class="ppy-switch-enlarge" title="Ampliar">Ampliar</a>
+                        <a class="ppy-switch-compact" title="Tancar">Tancar</a>
+                        <a class="ppy-next" title="Seguent">Següent</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ppy-caption">
+                <div class="ppy-counter">
+                    Imatge <strong class="ppy-current"></strong> de <strong class="ppy-total"></strong> 
+                </div>
+                <span class="ppy-text"></span>
+            </div>
+
+      </div>
+
+<?php } ?>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    var options = {
+        direction:  'left',
+		  duration:  '600',
+		  opacity:  '0.8'
+    }
+	   $('#<?php echo $this->id;?>').popeye(options);
+});
+
+</script>
+<?php
+?>

@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file piulades/trepa.phtml 
+ * @brief Plantilla para presentar las imagenes con piulades
+ * @ingroup galeria
+ * @ingroup plantilla_galeria
+ *
+ * Es necesario que la pagina que presente las imagenes incluya los scripts y css
+ *
+ * <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+ * <script type="text/javascript" src="../moduls/galeria3/moduls/thickbox/thickbox_totbisbal.js.php?dir_base=<?php echo $DIR_BASE?>"></script>
+ * <link rel="stylesheet" href="../moduls/galeria3/moduls/thickbox/thickbox.css" type="text/css" media="screen" />
+ *
+ */
+
+if ( $this->count() > 0 ) {
+
+   for ($i=0;$i<$this->count();$i++){
+
+      if ( $this->tipo == 'FileEVITO' ) {
+
+         ?>
+         <a href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>" 
+            title="Imatge: <?php echo $this->imatges[$i]->getId()?>" 
+            class="thickbox"
+            rel="<?php echo $this->id; ?>">
+            <img src="<?php echo DIR_BASE.$this->imatges[$i]->getMiniaturaSrc();?>" 
+               class="caixaGenerala" 
+               height="90"
+               alt="Plant <?php echo $i;?>" />
+         </a>
+         <?php
+
+       } else { ?>
+
+         <a href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>?keepThis=true&TB_iframe=true&height=<?php echo $this->imatges[$i]->getAltura() + 4?>&width=<?php echo $this->imatges[$i]->getAmplada()?>" 
+            title=" Ampliar imatge " 
+            class="thickbox">
+            <img class="caixaGenerala" src="<?php echo DIR_BASE.$this->imatges[$i]->getMiniaturaSrc();?>" 
+               height="90"
+               alt="Imatge <?php echo $i?>" />
+         </a>
+
+         <?php } ?>
+
+      <?php } ?>
+
+<?php } ?>
+
+

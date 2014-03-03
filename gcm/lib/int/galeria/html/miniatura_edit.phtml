@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file miniatura_edit.phtml
+ * @brief Trepa per edició de galeries
+ */
+?>
+
+<!-- Trepa per galeries -->
+<div id="miniatura_div<?php echo $i; ?>" class="presentaImatgeEditar">
+   <img id="miniatura<?php echo $i;?>" src="<?php echo $this->dir_base.$href;?>" style=" margin-bottom:3px;border: 1px solid #<?php echo $GLOBALS['sColorLinia']; ?>"
+   <?php // if ( $this->temporal ) echo ' width="'.$this->amplada_presentacio.'" '; ?>
+   <?php if ( $this->temporal ) echo ' height="'.$this->altura_presentacio.'" '; ?>
+   />
+
+   <div id="boto<?php echo $i;?>" style=" padding:4px 0 0 5px;">
+      <a href="javascript:esborrarImatge('<?php echo $this->identificador_unic?>','<?php echo $imatgeId;?>',<?php echo $i;?>);">
+         <img src="<?php echo $this->dir_base.$this->dir_mod;?>icons/goma.gif" width="18" height="16" border="0"/>
+         </a>
+      <input type="hidden" name="imatgeGaleria[]" value="<?php echo $imatgeId; ?>" />
+   </div>
+
+   <?php if ( $this->descripcions ) { ?>
+
+      <br />
+      <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) ) 
+         $titol= $this->descripcions->descripcions[$imatge->getNom()]['titol']; ?>
+      <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['subtitol']) ) 
+         $subtitol = $this->descripcions->descripcions[$imatge->getNom()]['subtitol']; ?>
+
+      <input type="text" size="17" name="imatgeGaleria_titol[]" 
+         value="<?php echo $titol?>" placeholder="<?php echo 'Titol' ?>" class="formulari2" style="margin:2px;" />
+      <br />
+      <input type="text" size="17" name="imatgeGaleria_subtitol[]" 
+         value="<?php echo $subtitol?>" placeholder="<?php echo 'Subtitol' ?>" class="formulari2" style="margin:2px;" />
+      <br />
+
+      <?php } // Si tenim descripcions activat ?>
+
+</div>
+
+<!-- Acaba Trepa per galeries -->

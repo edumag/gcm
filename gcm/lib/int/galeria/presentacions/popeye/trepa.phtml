@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * @file popeye/trepa.phtml 
+ * @brief Plantilla para presentar las imagenes con popeye
+ * @ingroup galeria
+ * @ingroup plantilla_galeria
+ *
+ * Es necesario que la pagina que presente las imagenes incluya los scripts y css
+ *
+ * <script src="../moduls/galleria/themes/classic/galleria.classic.min.js"></script>
+ *
+ * Exemple:
+ *
+ * <div id="gallery">
+ *  <a rel="img/big1.jpg" href="/img/large1.jpg"><img src="/img/thumb1.jpg" alt="My description" title="My title"></a>
+ *  <a rel="img/big2.jpg" href="/img/large2.jpg"><img src="/img/thumb2.jpg" alt="Another text" title="Another title"></a>
+ * </div>
+ */
+
+?>
+
+<?php if ( $this->count() > 0 ) { ?>
+
+        <div class="ppy" id="ppy1">
+            <ul class="ppy-imglist">
+
+   <?php for ($i=0;$i<$this->count();$i++){ ?>
+
+       <li>
+           <a href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>">
+               <img src="<?php echo DIR_BASE.$this->imatges[$i]->getMiniaturaSrc();?>" alt="" />
+           </a>
+           <span class="ppy-extcaption">
+               <!-- <strong><?php echo $titol?></strong><br /><?php echo $subtitol?><br /> -->
+               <a href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>">Ampliar</a>
+           </span>
+       </li>
+
+   <?php } ?>
+
+         </ul>
+            <div class="ppy-outer">
+                <div class="ppy-stage">
+                    <div class="ppy-nav">
+                        <a class="ppy-prev" title="Previous image">Previous image</a>
+                        <a class="ppy-switch-enlarge" title="Enlarge">Enlarge</a>
+                        <a class="ppy-switch-compact" title="Close">Close</a>
+                        <a class="ppy-next" title="Next image">Next image</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ppy-caption">
+                <div class="ppy-counter">
+                    Image <strong class="ppy-current"></strong> of <strong class="ppy-total"></strong> 
+                </div>
+                <span class="ppy-text"></span>
+            </div>
+
+      </div>
+
+<?php } ?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/popeye/jquery.popeye.style.css" media="screen" />
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/lib/popeye/jquery.popeye-2.1.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#ppy1').popeye();
+});
+
+</script>
+
