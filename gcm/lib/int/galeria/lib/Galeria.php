@@ -101,8 +101,6 @@ class Galeria implements Iterator {
 
    protected $loaded = FALSE ;                         ///< Para saber si ya se fue a buscar la información
 
-   public $tipos_permisos = 0644;                      ///< Permisos para las imágenes
-
    /**
     * Constructor
     *
@@ -113,18 +111,6 @@ class Galeria implements Iterator {
 
    function __construct($config=FALSE, $id=FALSE) {
 
-      // Si tenemos galeria en sesión recuperamos
-
-      if ( isset($_SESSION['galeria']) ) {
-
-         $config  = $_SESSION['galeria']['config'];
-
-         $id = ( isset($_SESSION['id']) && ! empty($_SESSION['id']) ) ? $_SESSION['id'] : FALSE ;
-
-         unset ( $_SESSION['galeria'] );
-
-         }
-
       /**
        * Configuración por defecto
        */
@@ -134,7 +120,7 @@ class Galeria implements Iterator {
       $this->config['amplada_presentacio']     = 150;                  ///< Amplada de miniatura
       $this->config['altura_presentacio']      = 180;                  ///< Altura de miniatura
       $this->config['limit_imatges']           = 5;                    ///< Limit de imatges 
-      $this->config['grandaria_max']           = FALSE;                 ///< Grandaría max de la imatge (pes) 
+      $this->config['grandaria_max']           = FALSE;                ///< Grandaría max de la imatge (pes) 
       $this->config['nom_div_galeria']         = 'galeriaDIV';         ///< Per a diferenciar entre galeries 
       $this->config['plantilla_presentacio']   = FALSE;                ///< Plantilla que agafem per presentar la galeria
       $this->config['plantilla_edita_imatge']  = FALSE;                ///< Plantilla per presentar imatge al editar
@@ -143,6 +129,8 @@ class Galeria implements Iterator {
       $this->config['dir_base']                = FALSE ;               ///< Directorio base respecto a html
       $this->config['dir_mod']                 = FALSE ;               ///< Directorio html del módulo
       $this->config['dir_tmp']                 = FALSE ;               ///< Directorio temporal donde podamos escribir, para las imagenes temporales
+      $this->config['tipos_permisos']          = 0644;                 ///< Permisos para las imágenes
+
 
       if ( $config ) $this->config = array_merge($this->config, $config);
 
@@ -156,7 +144,6 @@ class Galeria implements Iterator {
 
       if ( $this->temporal ) {
          $this->galeria_url = $this->config['dir_tmp'].session_id().'/';
-         registrar(__FILE__,__LINE__,"Galeria temporal");
          
       } else {
          $this->galeria_url = $this->config['dir_gal'].$this->id.'/';
@@ -165,7 +152,7 @@ class Galeria implements Iterator {
       // Comprobaciones
 
       if ( !file_exists($this->dir_tmp) ) 
-         registrar(__FILE__,__LINE__,"No se puede acceder a carpeta temporal [".$this->dir_tmp."]");
+         registrar(__FILE__,__LINE__,"No se puede acceder a carpeta temporal [".$this->dir_tmp."]",'ERROR');
 
 
       $_SESSION['galeria']['config'] = $config;
@@ -191,14 +178,14 @@ class Galeria implements Iterator {
       $url = $this->galeria_url;
       
       if ( !file_exists($url) ) {
-         registrar(__FILE__,__LINE__,"No existe url galeria: $url");
          return;
          }
 
       $archivos = glob($this->galeria_url.'/*');
       foreach ( $archivos as $img) {
          if ( esImagen($img) ) {
-            $imatge = new Imatge(basename($img), $this);
+            $imatge = new Imatge(basename($img), $this->config, $this->id);
+            $imatge->load();
             $this->addImatge($imatge);
             }
          }
@@ -232,8 +219,7 @@ class Galeria implements Iterator {
 
       if ( count($this->imatges) <= $this->limit_imatges ) {
          $this->imatges[] = $imatge;
-         registrar(__FILE__,__LINE__,"Imagen añadida: ".print_r($imatge,1),'AVISO');
-         registrar(__FILE__,__LINE__,"Imagen añadida: ".print_r($this,1),'AVISO');
+         if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"Imagen añadida: ".print_r($imatge,1),'AVISO');
       } else {
          return FALSE;
          }
@@ -424,7 +410,7 @@ class Galeria implements Iterator {
    /**
     * Guardar imatges
     *
-    * Si pasamos un identificador para guardar las imagenes definitivas
+    * Si pasamos un identificador para guardar las imágenes definitivas
     * la galería pasa a no estar en estado temporal.
     *
     * @param $id Identificador del element al que pertany la galeria
@@ -436,6 +422,8 @@ class Galeria implements Iterator {
 
       if ( $this->descripcions ) $this->descripcions->guardar($this->id); 
 
+      $this->galeria_url = $this->config['dir_gal'].$this->id.'/';
+
       // Si la galeria esta en estado temporal se guardan las imagenes a directorio
       // definitivo, en caso contrario no se hace nada, ya que se suben al momento.
 
@@ -443,13 +431,13 @@ class Galeria implements Iterator {
 
       foreach ( $this->imatges as $imatge ) {
 
-         $imatge->guardar($this);
+         $imatge->guardar($this->config, $this->id);
 
          }
 
       $this->temporal = FALSE ;
 
-      // unset($_SESSION[$this->dir_gal]);            // esborrem galeria de sessio
+      unset($_SESSION['galeria']);            // esborrem galeria de sessio
 
       return TRUE;
       }
@@ -510,7 +498,7 @@ class Galeria implements Iterator {
 
       // Definir acción a realizar
       
-      registrar(__FILE__,__LINE__,"accion: ".$accion);
+      if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"accion: ".$accion);
 
       switch ($_REQUEST['galeria_accion']) {
 
@@ -557,23 +545,16 @@ class Galeria implements Iterator {
 
    function __toString() {
 
-      $salida  = '<br />dir_gal: '.$this->dir_gal;
-      $salida .= '<br />id: '.$this->id;
-      $salida .= '<br />amplaria_max: '.$this->amplaria_max;
-      $salida .= '<br />altura_max: '.$this->altura_max;
-      $salida .= '<br />amplada_presentacio: '.$this->amplada_presentacio;
-      $salida .= '<br />altura_presentacio: '.$this->altura_presentacio;
-      $salida .= '<br />limit_imatges: '.$this->limit_imatges;
-      $salida .= '<br />grandaria_max: '.$this->grandaria_max;
-      $salida .= '<br />nom_div_galeria: '.$this->nom_div_galeria;
-      $salida .= '<br />plantilla_presentacio: '.$this->plantilla_presentacio;
-      $salida .= '<br />temporal: '.$this->temporal;
-      $salida .= '<br />dir_mod: '.$this->dir_mod;
-      $salida .= '<br />dir_tmp: '.$this->dir_tmp;
+      $temporal = ( $this->temporal ) ? 'TRUE' : 'FALSE';
+
+      $salida  = '<br />id: '.$this->id;
+      $salida .= '<br />temporal: '.$temporal ;
+      $salida .= '<br />galeria_url: '.$this->galeria_url;
+      $salida .= '<br />config: '.print_r($this->config,1);
       $salida .= "<br />Imagenes: ";
 
       foreach ( $this as $imatge ) {
-         $salida .= depurar($imatge);
+         $salida .= print_r($imatge,1);
          }
 
       return $salida;
@@ -586,7 +567,7 @@ class Galeria implements Iterator {
          return $this->config[$variable_configuracion];
          }
 
-      registrar(__FILE__,__LINE__,"Error $variable_configuracion no es una variable de configuración");
+      registrar(__FILE__,__LINE__,"Error $variable_configuracion no es una variable de configuración",'ERROR');
       
       return FALSE;
       }
@@ -599,7 +580,7 @@ class Galeria implements Iterator {
          }
 
       registrar(__FILE__,__LINE__,
-         "Error $variable_configuracion no es una variable de configuración, no se puede añadir valor [".$valor."]");
+         "Error $variable_configuracion no es una variable de configuración, no se puede añadir valor [".$valor."]",'ERROR');
       
       }
 

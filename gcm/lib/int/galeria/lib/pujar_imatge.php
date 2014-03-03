@@ -7,8 +7,6 @@
 
 // $nom_camp_imatge_formulari = ( isset($nom_camp_imatge_formulari) ) ? $nom_camp_imatge_formulari : 'fimatge';
 
-registrar(__FILE__,__LINE__,"Galeria desde pujar_imatge: ".depurar($this));
-
 
 /* Comprobar directorio temporal */
 
@@ -26,9 +24,6 @@ if ( $this->count() >= $this->limit_imatges ) {
 $miniatura_id	= ( isset($_POST["pIdThumb"]) ) ? $_POST["pIdThumb"] : FALSE; ///< Nombre de miniatura
 $altura_galeria     = $this->altura_max;             ///< Forçar imatge a l'altura establerta 
 $amplaria_galeria   = $this->amplaria_max;           ///< Forçar imatge a l'amplària establerta 
-
-registrar(__FILE__,__LINE__,"Altura max de galeria: $altura_galeria");
-registrar(__FILE__,__LINE__,"Anchura max de galeria: $amplaria_galeria");
 
 /** tenim una imatge per pujar */
 
@@ -138,8 +133,6 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
                   $imatge_vertical = FALSE;
                   if ( $altura_imatge > $amplaria_imatge ) $imatge_vertical = TRUE;
 
-                  registrar(__FILE__,__LINE__,"Imagen vertical ".( $imatge_vertical ) ? 'SI' : 'NO' );
-                  
                   /* Deduïm si hem de transformar depenent dels paràmetres rebuts */
 
                   $transformacio = FALSE;
@@ -149,7 +142,7 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
                      // Volem imatge amb amplària fixada
                      $amplaria = $amplaria_imatge * $altura_galeria / $altura_imatge ; 
                      $altura = $altura_galeria;
-                     registrar(__FILE__,__LINE__,"amplaria: $amplaria_imatge X $altura_galeria / $altura_imatge = $amplaria");
+                     if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"amplaria: $amplaria_imatge X $altura_galeria / $altura_imatge = $amplaria");
                      $transformacio = TRUE;
 
                   } else {
@@ -157,7 +150,7 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
                      // Volem imatge amb altura fixada
                      $altura	= $altura_imatge * $amplaria_galeria / $amplaria_imatge ; 
                      $amplaria = $amplaria_galeria;
-                     registrar(__FILE__,__LINE__,"altura: $altura_imatge X $amplaria_imatge / $amplaria_imatge = $altura");
+                     if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"altura: $altura_imatge X $amplaria_imatge / $amplaria_imatge = $altura");
                      $transformacio = TRUE;
 
                   }
@@ -204,32 +197,22 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
                   $src_img = $this->galeria_url.$nom_imatge;
 
                   if ( ! file_exists($this->galeria_url) ) { 
-                     if ( ! mkdir($this->galeria_url) ) {
+                     if ( ! mkdir_recursivo($this->galeria_url) ) {
                         $strMessage = literal("No se pudo crear directorio destino",3). "[".$this->galeria_url."]";
                         echo stripslashes($strMessage);
                         exit();
                         } 
                      }
-                  registrar(__FILE__,__LINE__,"src_img: $src_img");
+                  if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"src_img: $src_img");
                   
                   rename($fFileTmpName,$src_img);
-                  // @todo Hacer configurable los permisos a modificar
-                  chmod($src_img,0777);
+                  chmod($src_img,$this->tipos_permisos);
 
-                  if ( $this->temporal ) {
+                  $imatge = new Imatge($nom_imatge, $this->config, $this->id);
+                  $this->addImatge($imatge);
 
-                     $imatge = new Imatge($nom_imatge);
-                     $this->addImatge($imatge);
-                     $imatge_id = $nom_imatge;
+                  if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"Galeria al guardar imagen: ".print_r($this,1));
 
-                  } else {
-
-                     $imatge = new Imatge($nom_imatge, $this);
-                     $imatge_id = $imatge->guardar($this);
-                     $this->addImatge($imatge);
-                     $src_img = $this->dir_base.$imatge->getMiniaturaSrc();
-
-                     }
                   }
                }
             }
@@ -244,11 +227,8 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
 // <degug>
 if ( empty($strMessage) ) {
    echo $src_img;
-   registrar(__FILE__,__LINE__,"Imagen guardada en $src_img");
-   
 } else {
    echo stripslashes($strMessage);
-   registrar(__FILE__,__LINE__,$strMessage);
    }
 // </debug>
 ?>

@@ -28,12 +28,12 @@
    <?php for ($i=0;$i<$this->count();$i++){ ?>
 
        <li>
-           <a href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>">
-               <img src="<?php echo DIR_BASE.$this->imatges[$i]->getMiniaturaSrc();?>" alt="" />
+           <a href="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>">
+               <img src="<?php echo $this->dir_base.$this->imatges[$i]->getMiniaturaSrc();?>" alt="" />
            </a>
            <span class="ppy-extcaption">
                <!-- <strong><?php echo $titol?></strong><br /><?php echo $subtitol?><br /> -->
-               <a href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>">Ampliar</a>
+               <a href="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>">Ampliar</a>
            </span>
        </li>
 
@@ -61,11 +61,11 @@
 
 <?php } ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/popeye/jquery.popeye.style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->dir_base.$this->dir_mod?>moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo $this->dir_base.$this->dir_mod?>moduls/popeye/css/popeye/jquery.popeye.style.css" media="screen" />
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/lib/popeye/jquery.popeye-2.1.js"></script>
+<script type="text/javascript" src="<?php echo $this->dir_base.$this->dir_mod?>moduls/popeye/lib/popeye/jquery.popeye-2.1.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function () {

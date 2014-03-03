@@ -26,13 +26,23 @@ function registrar($file, $line,$mensaje, $tipo='DEBUG') {
 
 define('GCM_DIR','../../../../');
 
-require('../lib/GaleriaFactory.php');
-
-foreach ( $_GET as $key => $val ) {
+foreach ( $_REQUEST as $key => $val ) {
 
    $_SESSION[$key] = $val;
 
    }
+
+// Configuración de galería
+
+$config = array(
+    "dir_tmp"              => '../../../../tmp/'
+   ,"dir_gal"              => GCM_DIR.'tmp/'.'galeriaTest/'
+   ,"dir_base"             => "./"
+   ,"dir_mod"              => "./".GCM_DIR.'lib/int/galeria/'
+   ,"amplada_presentacio"  => 248
+   ,"amplaria_max"         => 600 
+
+   );
 
 ?>
 <!DOCTYPE HTML>
@@ -57,23 +67,48 @@ h2 {
 .presentaImatgeEditar, .presentaImatgeEditar div {
    display: inline;
    }
+.error { background: red; color: white; }
 </style>
 
 <?php
 
 /* Opciones */
 
-$id           = ( isset($_GET['id']) )            ? $_GET['id']           : FALSE;
-$accion       = ( isset($_GET['accion']) )        ? $_GET['accion']       : 'ver';
-$modulo       = ( isset($_GET['modulo'] ) )       ? $_GET['modulo']       : FALSE;
-$presentacion = ( isset($_GET['presentacion'] ) ) ? $_GET['presentacion'] : FALSE;
-$debug        = ( isset($_GET['debug'] ) )        ? TRUE                  : FALSE;
+$id           = ( isset($_REQUEST['id']) )            ? $_REQUEST['id']           : FALSE;
+$id_select    = ( isset($_REQUEST['id_select']) )     ? $_REQUEST['id_select']    : FALSE;
+$accion       = ( isset($_REQUEST['accion']) )        ? $_REQUEST['accion']       : 'ver';
+$modulo       = ( isset($_REQUEST['modulo'] ) )       ? $_REQUEST['modulo']       : FALSE;
+$presentacion = ( isset($_REQUEST['presentacion'] ) ) ? $_REQUEST['presentacion'] : FALSE;
+$debug        = ( isset($_REQUEST['debug'] ) )        ? TRUE                      : FALSE;
+
+// Si hemos seleccionado una galeria cambiamos id por el de la selección
+
+if ( isset($id_select) && ! empty($id_select) ) $id = $id_select;
+
+if ( $debug == 1 ) {
+   // define("GCM_DEBUG",TRUE);
+   error_reporting( E_ALL );
+   }
+
+require('../lib/GaleriaFactory.php');
 
 ?>
-<form action="" method="GET">
+<form action="">
+
+Nom de la galeria: <input type="text" name="id" value="<?php echo $id ?>"/>
+
+Seleccionar galeria: 
+<select name="id_select" 
+onchange="this.form.id.value = '';return false;"
+>
+<option value="">Galerías</option>
+<?php foreach (glob($config['dir_gal'].'*') as $gal) { $galeria = basename($gal); ?>
+<option <?php if ( $gal == $id ) echo 'selected' ; ?> value="<?php echo $galeria?>"><?php echo $galeria?></option>
+<?php } ?>
+</select>
 
 Presentació: 
-<select name="presentacion" >
+<select name="presentacion">
 <option value="">sense</option>
 <?php foreach (glob('../presentacions/*') as $pre) { $presenta = basename($pre,'.phtml'); ?>
 <option <?php if ( $presentacion == $presenta ) echo 'selected' ; ?> value="<?php echo $presenta?>"><?php echo $presenta?></option>
@@ -96,42 +131,39 @@ Moduls:
 
 <input <?php if ( $debug ) echo 'checked' ; ?> type="checkbox" name="debug" value="debug" /> debug
 
-<input type="submit" value="nova_galeria" />
 <input type="submit" value=">" />
 
-</form>
 <?php
-
-$config = array(
-    "dir_tmp"              => '../../../../tmp/'
-   ,"dir_gal"              => GCM_DIR.'tmp/'.'galeria_tmp/'
-   ,"dir_base"             => "./"
-   ,"dir_mod"              => "./".GCM_DIR.'lib/int/galeria/'
-   ,"amplada_presentacio"  => 248
-   ,"amplaria_max"         => 600 
-
-   );
 
 $galeria = GaleriaFactory::galeria($config, $id); 
 
 // Posibles configuracións
 
-// $galeria->descripcions = new DescripcionesGalerias('desc_galeria_noticies') ; // Descripcions
+// $galeria->descripcions = new DescripcionesGalerias('desc_galeria_test') ; // Descripcions
 
 // Limit d'imatges
 
 $galeria->limit_imatges = 5;
-$galeria->id = 'test';
 
 
 // Si se ha ejecutado submit hay que guardar la
 // galería
-if ( isset($_POST['guardar_galeria']) ) {
+if ( isset($_REQUEST['guardar_galeria']) ) {
 
-   $accion = 'ver';
+   if ( ! $id ) {
 
-   $galeria->guardar('test');
+      ?>
+      <div class="error">
+      Es Necesario un nombre de galería para poder guardar
+      </div>
+      <?php
 
+   } else {
+
+      $accion = 'ver';
+      $galeria->guardar($id);
+
+      }
    }
 
 if ( $accion == 'ver' ) {
@@ -170,7 +202,6 @@ if ( $accion == 'ver' ) {
 } else {
 
    ?>
-   <form action="" method="POST" >
    <?php $galeria->formulario();?>
    <div style="clear: both"></div>
    <input name="guardar_galeria" type="submit"/>
@@ -188,17 +219,19 @@ if ( $accion == 'ver' ) {
 
 if ( $debug == 1 ) {
 
-   error_reporting( E_ALL );
+   ?>
+   <div style="clear:both"></div>
+   <h2>SESSION</h2>
+   <pre>
+      <?php print_r($_SESSION) ;?>
+   </pre>
 
-   echo "<br />SESSION:<pre>" ; print_r($_SESSION) ; echo "</pre>"; // DEV  
+   <h2>Galeria</h2>
+   <pre>
+      <?php echo $galeria;?>
+   </pre>
+   <?php
 
-   echo "<br />Directorio base del proyecto: <br /><b>".$galeria->dir_base."</b></p>";
-   echo "<br />Directorio temporal en relacion a <br /><b>".$galeria->dir_tmp."</b></p>";
-   echo "<br />Directorio principal del modulo: <br /><b>".$galeria->dir_mod."</b></p>";
-
-   echo '<pre>';
-   echo $galeria;
-   echo '</pre>';
 
    }
 ?>

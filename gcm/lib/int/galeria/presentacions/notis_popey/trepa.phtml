@@ -5,18 +5,6 @@
  * @ingroup galeria
  * @ingroup plantilla_galeria
  * @brief Plantilla para presentar las imagenes con notis_popey
- *
- * Per no repetir la inclusió dels css i els javascript en els llistats de 
- * notícies cal afegir aquestes línies des de la pàgina que mostra la galeria
- *
- * @code
- * <link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
- * <link rel="stylesheet" type="text/css" href="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/css/totarreu/jquery.popeye.style.css" media="screen" />
- * 
- * <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
- * <script type="text/javascript" src="<?php echo DIR_BASE?>moduls/galeria3/moduls/popeye/lib/popeye/jquery.popeye-2.1.min.js"></script>
- * @endcode
- *
  */
 
 ?>
@@ -29,8 +17,8 @@
    <?php for ($i=0;$i<$this->count();$i++){ $imatge = $this->imatges[$i]; ?>
 
        <li>
-           <a href="<?php echo DIR_BASE.$imatge->getSrc();?>">
-               <img src="<?php echo DIR_BASE.$imatge->getMiniaturaSrc();?>" alt="" />
+           <a href="<?php echo $this->dir_base.$imatge->getSrc();?>">
+               <img src="<?php echo $this->dir_base.$imatge->getMiniaturaSrc();?>" alt="" />
            </a>
            <span class="ppy-extcaption">
                <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) ) { ?>

@@ -33,8 +33,7 @@ ul.thumb li img.hover {margin-top:15px;background:url(<?php echo $this->dir_mod;
          global $vComentari;
          if ( $this->count() > 0 ) {
             for ($i=0;$i<$this->count();$i++){
-               $parametres = '?id='.$this->imatges[$i]->getId().'&g='.$this->nom;
-               $src = $this->dir_mod."veure_imatge.php".$parametres
+               $src = $this->dir_base.$this->imatges[$i]->getSrc();
                ?>
                <li>
                   <a href="<?php echo $src?>"><img src="<?php echo $src;?>" alt="<?php echo htmlentities($this->atributs['alt'])?>" />
@@ -45,7 +44,7 @@ ul.thumb li img.hover {margin-top:15px;background:url(<?php echo $this->dir_mod;
 </ul>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="<?php echo $this->dir_mod;?>moduls/zoomer/zoomer/zoomer.js"></script> 
+<script type="text/javascript" src="<?php echo $this->dir_base.$this->dir_mod;?>moduls/zoomer/zoomer/zoomer.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
  	$('ul.thumb li').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:800,debug:false});

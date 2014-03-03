@@ -21,7 +21,9 @@ class  Imatge {
 
    protected $atributs = array(); ///< atributs de imatges
 
-   protected $galeria;          ///< Instancia de galeria a la que pertany
+   protected $config;           ///< Configuración de Imágenes, (Viene de Galeria)
+
+   protected $galeria_id;       ///< Identificador de galeria
 
    protected $loaded;           ///< Tenim la informació de la imatge? TRUE/FALSE 
 
@@ -33,12 +35,13 @@ class  Imatge {
     * @param $atributs Atributs de imatge, de moment sense us.
     */
 
-   function __construct($id, $galeria=NULL, $atributs=FALSE) {
+   function __construct($id, $config=FALSE, $galeria_id=FALSE, $atributs=FALSE) {
 
       $this->id = $id;
       $this->loaded = FALSE;
 
-      if ( $galeria ) $this->galeria = $galeria;
+      if ( $config ) $this->config = $config;
+      if ( $galeria_id ) $this->galeria_id = $galeria_id;
 
       }
 
@@ -294,8 +297,8 @@ class  Imatge {
          if ( !file_exists($dir_miniatura) ) mkdir($dir_miniatura);
 
          $this->generarImatge($this->src, $url_miniatura
-            , $this->galeria->altura_presentacio
-            , $this->galeria->amplada_presentacio);
+            , $this->config['altura_presentacio']
+            , $this->config['amplada_presentacio']);
 
          }
 
@@ -325,7 +328,11 @@ class  Imatge {
 
       if ( $this->loaded ) return;
 
-      $this->src = comprobar_barra($this->galeria->galeria_url).$this->id;
+      // si estamos recogiendo imágenes de una galería existente
+      if ( ! $this->src && $this->galeria_id ) {
+         $this->src = $this->config['dir_gal'].$this->galeria_id.'/'.$this->id;
+
+         }
 
       if ( file_exists($this->src) ) {
 
@@ -356,15 +363,16 @@ class  Imatge {
    /**
     * Guardar imagen temporal a destino
     *
-    * @param $galeria Instancia de galeria
+    * @param $config     Configuración de galería
+    * @param $galeria_id Identificador de galería
     */
 
-   function guardar($galeria) {
+   function guardar($config, $galeria_id) {
 
-      $this->galeria = $galeria;
+      $this->config = $config;
 
-      $dir_tmp     = $galeria->galeria_url;
-      $dir_destino = comprobar_barra($galeria->dir_gal);
+      $dir_tmp     = $config['dir_tmp'].session_id().'/';
+      $dir_destino = comprobar_barra($config['dir_gal'].$galeria_id);
 
       $img_tmp     = $dir_tmp.$this->id;
       $img_destino = $dir_destino.$this->id;
@@ -376,14 +384,11 @@ class  Imatge {
 
       // permisos
 
-      chmod($img_destino,$this->galeria->tipos_permisos); 
+      chmod($img_destino,$this->config['tipos_permisos']); 
 
-      $galeria->galeria_url = $dir_destino;
+      $this->src = $img_destino;
 
       $this->load();
-
-      // generamos miniatura
-      $this->generarMiniatura();
 
       }
 

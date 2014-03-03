@@ -35,9 +35,9 @@
          $_REQUEST['galeries_fotos_id']. " AND nom = '".$this->imatges[$i]->getId()."'"; ?>
    <?php $rs = mysql_query($sql) ; if ( $rs ) $row = mysql_fetch_array($rs) ; list($titol, $subtitol) = $row; ?> 
 
-   <a rel="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>" 
-      href="<?php echo DIR_BASE.$this->imatges[$i]->getSrc();?>">
-      <img src="<?php echo DIR_BASE.$this->imatges[$i]->getMiniaturaSrc();?>" 
+   <a rel="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>" 
+      href="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>">
+      <img src="<?php echo $this->dir_base.$this->imatges[$i]->getMiniaturaSrc();?>" 
       alt="<?php echo ( empty($titol) ) ? $this->imatges[$i]->getId() : $titol?>" 
       title="<?php echo ( empty($subtitol) ) ? $this->imatges[$i]->getId() : $subtitol?>" />
    </a>
@@ -49,8 +49,8 @@
 <?php } ?>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-<script src="<?php echo DIR_BASE?>moduls/galeria3/moduls/galleria/galleria-1.2.6.js"></script>
-<script src="<?php echo DIR_BASE?>moduls/galeria3/moduls/galleria/themes/classic/galleria.classic.js"></script>
+<script src="<?php echo $this->dir_base.$this->dir_mod;?>moduls/galleria/galleria-1.2.6.js"></script>
+<script src="<?php echo $this->dir_base.$this->dir_mod;?>moduls/galleria/themes/classic/galleria.classic.js"></script>
 
 <script>
    $("#gallery").galleria({
