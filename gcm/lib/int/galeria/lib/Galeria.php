@@ -426,6 +426,8 @@ class Galeria implements Iterator {
 
       if ( $id ) $this->id = $id;
 
+      $this->load();
+
       if ( $this->descripcions ) $this->descripcions->guardar($this->id); 
 
       $this->galeria_url = $this->config['dir_gal'].$this->id.'/';

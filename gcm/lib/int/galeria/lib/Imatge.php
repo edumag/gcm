@@ -402,7 +402,6 @@ class  Imatge {
 
       if (! @unlink($this->src) ) {
 
-         echo '<pre>DEPURANDO: ' ; print($this) ; echo '</pre>'; // exit() ; // DEV  
          trigger_error("No s'ha pogut esborrar la imatge [".$this->src."]", E_USER_ERROR); // FALTA LITERAL
          return FALSE;
 

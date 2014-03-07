@@ -1657,7 +1657,7 @@ class Crud extends DataBoundObject {
                      }
 
                   if ( $this->galeria ) {
-                     registrar(__FILE__,__LINE__,"Guardamos galeria");
+                     registrar(__FILE__,__LINE__,"Guardamos galeria ".$this->ID);
                      $this->galeria->guardar($this->ID);
                      }
 
