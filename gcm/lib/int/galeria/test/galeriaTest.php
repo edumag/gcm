@@ -34,14 +34,11 @@ foreach ( $_REQUEST as $key => $val ) {
 
 // Configuración de galería
 
-$config = array(
-    "dir_tmp"              => '../../../../tmp/'
-   ,"dir_gal"              => GCM_DIR.'tmp/'.'galeriaTest/'
+$config_galeria = array(
+    "dir_gal"              => GCM_DIR.'tmp/'.'galeriaTest/'
    ,"dir_base"             => "./"
-   ,"dir_mod"              => "./".GCM_DIR.'lib/int/galeria/'
-   ,"amplada_presentacio"  => 248
+   ,"amplada_presentacio"  => 250
    ,"amplaria_max"         => 600 
-
    );
 
 ?>
@@ -93,7 +90,7 @@ if ( $debug == 1 ) {
 require('../lib/GaleriaFactory.php');
 
 ?>
-<form action="">
+<form action="" method="POST">
 
 Nom de la galeria: <input type="text" name="id" value="<?php echo $id ?>"/>
 
@@ -102,8 +99,8 @@ Seleccionar galeria:
 onchange="this.form.id.value = '';return false;"
 >
 <option value="">Galerías</option>
-<?php foreach (glob($config['dir_gal'].'*') as $gal) { $galeria = basename($gal); ?>
-<option <?php if ( $gal == $id ) echo 'selected' ; ?> value="<?php echo $galeria?>"><?php echo $galeria?></option>
+<?php foreach (glob($config_galeria['dir_gal'].'*') as $gal) { $galerias = basename($gal); ?>
+<option <?php if ( $gal == $id ) echo 'selected' ; ?> value="<?php echo $galerias?>"><?php echo $galerias?></option>
 <?php } ?>
 </select>
 
@@ -135,11 +132,12 @@ Moduls:
 
 <?php
 
-$galeria = GaleriaFactory::galeria($config, $id); 
+$galeria = GaleriaFactory::inicia($config_galeria, $id); 
 
 // Posibles configuracións
 
-$galeria->descripcions = new DescripcionesGalerias('desc_galeria_test') ; // Descripcions
+$pdo = new PDO('sqlite:test.db');
+$galeria->descripcions = new DescripcionesGalerias('descripciones',$id,FALSE, $pdo) ; // Descripcions
 
 // Limit d'imatges
 
@@ -220,6 +218,11 @@ if ( $accion == 'ver' ) {
 if ( $debug == 1 ) {
 
    ?>
+   <div style="clear:both"></div>
+   <h2>POST</h2>
+   <pre>
+      <?php print_r($_POST) ;?>
+   </pre>
    <div style="clear:both"></div>
    <h2>SESSION</h2>
    <pre>

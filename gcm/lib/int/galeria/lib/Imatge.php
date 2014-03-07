@@ -380,7 +380,9 @@ class  Imatge {
       // Si no existe la carpeta se crea
       if ( !file_exists($dir_destino) ) mkdir_recursivo($dir_destino);
 
-      rename($img_tmp,$img_destino);
+      if ( ! rename($img_tmp,$img_destino) ) {
+         registrar(__FILE__,__LINE__,"ERROR Guardando imagen: [".$img_tmp."] [".$img_destino."]","ERROR");
+         }
 
       // permisos
 
@@ -398,9 +400,10 @@ class  Imatge {
 
       $this->load();
 
-      if (!unlink($this->src) ) {
+      if (! @unlink($this->src) ) {
 
-         trigger_error("No s'ha pogut esborrar la imatge: ".$this->src, E_USER_ERROR); // FALTA LITERAL
+         echo '<pre>DEPURANDO: ' ; print($this) ; echo '</pre>'; // exit() ; // DEV  
+         trigger_error("No s'ha pogut esborrar la imatge [".$this->src."]", E_USER_ERROR); // FALTA LITERAL
          return FALSE;
 
          }

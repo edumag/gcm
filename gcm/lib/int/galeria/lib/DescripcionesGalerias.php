@@ -16,7 +16,7 @@
  * @code
  * CREATE TABLE IF NOT EXISTS `desc_galeria_noticies` (
  *   `id` int(11) NOT NULL AUTO_INCREMENT,
- *   `galeria_id` int(11) NOT NULL,
+ *   `galeria` int(11) NOT NULL,
  *   `nom_imatge` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
  *   `titol` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
  *   `subtitol` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -29,10 +29,10 @@
 
 class DescripcionesGalerias {
 
-   private $galeria_id;            ///< Identificador de la galeria
+   private $galeria;            ///< Identificador de la galeria
    private $pdo;                   ///< Instancia de PDO
    private $taula;                 ///< Taula on es troba la informació
-   private $cam_galeria_id;        ///< Nom del camp que porta l'identificador de l'imatge
+   private $camp_galeria;       ///< Nom del camp que porta l'identificador de l'imatge
    private $camp_titol;            ///< Nom del camp que porta el titol
    private $camp_subtitol;         ///< Nom del camp que porta el subtitol
    private $sql;                   ///< sql 
@@ -45,7 +45,8 @@ class DescripcionesGalerias {
     * Posibles configuracións:
     *
     * @code
-    * array('cam_galeria_id' =>      'noticiaId',
+    * array('camp_galeria' =>      'noticiaId',
+    *       'nom_imatge =>    'nom_imatge' ,
     *       'camp_titol =>    'titol' ,
     *       'camp_subtitol => 'subtitol' ,
     *       );
@@ -53,34 +54,63 @@ class DescripcionesGalerias {
     *
     * Per defecta:
     *
-    * - cam_galeria_id: galeria_id
+    * - camp_galeria: galeria
     * - camp_titol: titol
     * - camp_subtitol: subtitol
     *
     * @param $taula            Taula de la base de dades
-    * @param $galeria_id       Identificador de galeria
+    * @param $galeria       Identificador de galeria
     * @param $configuracio     Array amb la configuracio
     * @param $pdo              Instancia de PDO, si no per defecta mysql
     */
 
    private $configuracio;
 
-   function __construct($taula, $galeria_id = FALSE, $configuracio = FALSE, $pdo = FALSE) {
+   function __construct($taula, $galeria = FALSE, $configuracio = FALSE, $pdo = FALSE) {
 
-      $this->galeria_id = $galeria_id;
+      $this->galeria = $galeria;
       $this->pdo = $pdo;
       $this->taula = $taula;
 
 
-      $this->cam_galeria_id = "galeria_id"       ;
-      $this->camp_titol     = "titol"     ;
-      $this->camp_subtitol  = "subtitol"  ;
+      $this->camp_galeria = "galeria"  ;
+      $this->camp_titol     = "titol"       ;
+      $this->camp_subtitol  = "subtitol"    ;
 
       $this->descripcions = FALSE;
 
       if ( $configuracio ) {
          foreach ( $configuracio as $conf_atr => $val_atr ) {
             $this->$conf_atr = $val_atr;
+            }
+         }
+
+      // Comprobar existencia de tabla
+      $sql = 'SELECT COUNT(*) FROM '.$this->taula;
+
+      if ( ! $sth = $this->pdo->prepare($sql) ) {
+
+         registrar(__FILE__,__LINE__, literal('No existe tabla para descripciones de imágenes la creamos',3),'AVISO');
+
+         // Si no hay tabla crearla
+         if ( $this->pdo->getAttribute(constant("PDO::ATTR_DRIVER_NAME")) == 'sqlite' ) {
+            $autoincrement = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+         } else {
+            $autoincrement = 'INT(11) AUTO_INCREMENT';
+            }
+
+         $SQL="CREATE TABLE $this->taula (
+            id $autoincrement ,
+            ".$this->camp_galeria." VARCHAR(70) ,
+            nom_imatge VARCHAR(70) ,
+            ".$this->camp_titol." VARCHAR(150) , 
+            ".$this->camp_subtitol." VARCHAR(300)
+            )";
+
+         if ( ! $sqlResult = $pdo->query($SQL) ) {
+            registrar(__FILE__,__LINE__,"SQL: ".$SQL,'ERROR');
+            registrar(__FILE__,__LINE__,literal("Error al crear tabla para descripciones de imágenes",3),"ERROR");
+            exit();
             }
          }
 
@@ -105,19 +135,26 @@ class DescripcionesGalerias {
          return;
          }
 
-      if ( ! $this->galeria_id ) return FALSE;
+      if ( ! $this->galeria ) return FALSE;
 
       $sql = "SELECT id, nom_imatge, ".$this->camp_titol.", ".$this->camp_subtitol.
          " FROM ".$this->taula.
-         " WHERE ".$this->cam_galeria_id."=".$this->galeria_id;
+         " WHERE ".$this->camp_galeria."='".$this->galeria."'";
 
-      if ( $pdo ) {
+      if ( $this->pdo ) {
 
          try {
 
-            $resultado=$this->pdo->prepare($sql);
+            if ( ! $resultado=$this->pdo->prepare($sql) ) {
+               return FALSE;
+               }
             $resultado->execute();
             $arAll = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ( $arAll as $fila ) {
+               if ( !empty($fila['nom_imatge']) ) $this->descripcions[$fila['nom_imatge']]['titol']    = $fila['titol'];
+               if ( !empty($fila['nom_imatge']) ) $this->descripcions[$fila['nom_imatge']]['subtitol'] = $fila['subtitol'];
+               }
 
             } catch (Exception $ex) {
                registrar(__FILE__,__LINE__,"Error con la base de datos",'ERROR');
@@ -159,7 +196,7 @@ class DescripcionesGalerias {
 
       foreach ( $this->descripcions as $nom_imatge => $valors ) {
 
-         $sql = "INSERT INTO ".$this->taula." (  ".$this->cam_galeria_id.", nom_imatge, ".$this->camp_titol.", ".$this->camp_subtitol." ) 
+         $sql = "INSERT INTO ".$this->taula." (  ".$this->camp_galeria.", nom_imatge, ".$this->camp_titol.", ".$this->camp_subtitol." ) 
             VALUES ( '".$id."', '".$nom_imatge."' , '".$valors['titol']."', '".$valors['subtitol']."')";
 
          if ( $this->pdo ) {
@@ -193,7 +230,7 @@ class DescripcionesGalerias {
 
    function esborrar($id) {
 
-      $sql_delete = "DELETE FROM ".$this->taula." WHERE ".$this->cam_galeria_id."=".$id;
+      $sql_delete = "DELETE FROM ".$this->taula." WHERE ".$this->camp_galeria."=".$id;
       if ( $this->pdo ) {
          $this->pdo->query($sql_delete);
       } else {

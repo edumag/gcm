@@ -732,12 +732,13 @@ function mostrar_ip() {
 function mkdir_recursivo($ruta) {
 
    $directorios = explode('/',$ruta);
-   $dir = '';
+   $dir = ( $directorios[0] == '' ) ? '/' : '' ;
    for ( $i=0;$i<=count($directorios)-1;$i++ ) {
       $dir=$dir.$directorios[$i];
+      $dir = str_replace('//','/',$dir);
       if ( ! is_dir($dir) ) {
-         if ( ! @mkdir( $dir) ) {
-            $mens = 'Debe crearse el directorio de los idiomas con los literales en: ['.$dir.'] con los permisos adecuados' ;
+         if ( ! mkdir( $dir) ) {
+            $mens = 'No pudo crearse directorio ['.$dir.']' ;
             registrar(__FILE__,__LINE__,$mens,'ERROR');
             return FALSE;
             }

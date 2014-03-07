@@ -12,13 +12,13 @@ utilitzar el test de galeries en test/galeriaTest.php
 
 @todo Crear un orden para la presentación de galerías
 
-@see GaleriaAbstract
+@see Galeria
 @see DescripcionesGalerias
 
 Exemple d'ús
 ------------
 
-Galeria per als actes
+@see test/GaleriaTest.php
 
 Preparació
 ----------
@@ -36,9 +36,6 @@ Abans de recollir la sessió en una pàgina hem d'incloure el següent codi. Aix
 ens permet recuperar una galeria de la sessió ja que per a això és necessari 
 que php tingui constància de la classe abans de recuperar la seva instància de 
 la sessió.
-
-      require_once($this->dir_base.'moduls/galeria3/lib/GaleriaFile.php');
-      require_once($this->dir_base."moduls/galeria3/lib/GaleriaFactory.php");
 
 Configuració
 ------------
@@ -68,7 +65,7 @@ $galeria->limit_imatges = 1;
 $galeria->amplada_presentacio = 150;
 $galeria->altura_presentacio = 180;
 $galeria->amplaria_max  = 600;
-// $galeria->descripcions = new DescripcionesGalerias('desc_galeria_actes',$nom_galeria) ;
+$galeria->descripcions = new DescripcionesGalerias('desc_galeria_actes',$nom_galeria) ;
 @endcode
 
 Editar la galeria dins del formulari de creació o edició
@@ -79,34 +76,59 @@ Definim l'identificador de la galeria, que serà en aquest cas l'identificador d
       $galeria_id = $idActe;
       include('configuracio_galeria.php');
 
-Si el formulari està en manera veure
+En plantilla de visualización::
 
-      $galeria->presentaGaleria(); 
+   require_once(GCM_DIR.'lib/int/galeria/lib/GaleriaFactory.php');
 
-Si està en manera edició
+   // Presentación para Galería
+   $presentacion = 'notis_popey';
 
-      $galeria->formulario();
+   $galeria_config = array( 
+       "dir_gal"               => 'File/es/libro_visitas/img/'
+      ,"dir_base"              => Router::$base
+      ,"amplada_presentacio"   => 250
+      ,"amplaria_max"          => 600 
+      ,"limit_imatges"         => 6
+      ,"plantilla_presentacio" => 'piulades'
+      );
+
+   $galeria = GaleriaFactory::inicia($galeria_config,$id);
+   if ( $presentacion ) $galeria->plantilla_presentacio = $presentacion;
+   $galeria->presentaGaleria();
+
+Si està en manera edició::
+
+   $config_galeria = array(
+       "dir_gal"              => GCM_DIR.'tmp/'.'galeriaTest/'
+      ,"dir_base"             => "./"
+      ,"amplada_presentacio"  => 250
+      ,"amplaria_max"         => 600 
+      );
+
+   $galeria = GaleriaFactory::inicia($config_galeria, $id); 
       
-Es pot veure l'exemple en acte/formulari.php
+   $pdo = new PDO('sqlite:test.db');
+   $galeria->descripcions = new DescripcionesGalerias('descripciones',$id,FALSE, $pdo) ; // Descripcions
 
+   // Limit d'imatges
+
+   $galeria->limit_imatges = 5;
+
+   // Aplicamos plantilla para piulades
+
+   if ( $presentacion ) $galeria->plantilla_presentacio = $presentacion;
+
+   // presentaGaleria
+
+   $galeria->presentaGaleria();
 
 Guardar la galeria dins de l'administració de notícies
 ------------------------------------------------------
 
 Si l'acte es va inserir correctament, recollim la galeria de la sessió i la guardem en disc.
 
-      $galeria_id = $result;
-      include('configuracio_galeria.php');
-      $galeria = GaleriaFactory::galeria($seccion_galeria,'File'); 
+      $galeria_id = $id;
       $galeria->guardar($galeria_id);
-
-Si l'acte va ser modificat correctament
-
-      $galeria_id = $idActe;
-      include('configuracio_galeria.php');
-      $galeria->guardar($galeria_id);
-
-Es pot veure l'exemple en acte/admin.php
 
 Mostra la galeria
 -----------------
@@ -114,9 +136,6 @@ Mostra la galeria
    $galeria_id = $nActeID;
    include('configuracio_galeria.php');
    if ($galeria->count() > 0 ) $galeria->presentaGaleria();
-
-Es pot veure l'exemple en lib/actesPO.php 105
-
 
 Afegim la possibilitat d'inserir un titulo i un subtitulo a les imatges
 -----------------------------------------------------------------------

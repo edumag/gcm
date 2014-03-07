@@ -31,6 +31,7 @@ $drh = $this->dir_base.$this->dir_mod;
 <script type="text/javascript" src="<?php echo $drh?>lib/plupload/plupload/js/plupload.html5.js"></script>
 <script type="text/javascript" src="<?php echo $drh?>lib/plupload/plupload/js/i18n/es.js"></script> 
 
+<div style="clear:both"></div>
 <div id="container">
    <div id="missatge"><?php echo literal('Afefir imatge');?></div>
        <div id="filelist">No se encontraron extensiones.</div>
@@ -40,6 +41,8 @@ $drh = $this->dir_base.$this->dir_mod;
        <a class="formulari2 ma" id="uploadfiles" href="#">Pujar arxius</a>
        </div>
 </div>
+
+<div style="clear:both"></div>
 
 <script type="text/javascript">
 

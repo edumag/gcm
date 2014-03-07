@@ -33,7 +33,6 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  *   tabla relacionada.
  * - fecha_creacion como timestamp.
  * - fecha_modificacion como timestamp
- * - imagen_url Campo para url de imagen.
  *
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
@@ -257,6 +256,17 @@ class Crud extends DataBoundObject {
    public $url_formulario = FALSE;
 
    /**
+    * Configuración de galería
+    *
+    * Podemos tener un sistema completo de galerías de imágees relacionadas
+    * con los registros.
+    *
+    * @see Galeria
+    */
+
+   public $galeria_config = FALSE;
+
+   /**
     * Podemos definir un metodo personalizado para la visualización de los registros 
     * individuales, en caso de no tenerlo se presentara el formulario en versión
     * de solo lectura
@@ -428,6 +438,12 @@ class Crud extends DataBoundObject {
 
       // Definimos url_formulario
       $this->url_formulario = $_SERVER['REQUEST_URI'] ;
+
+      // Galeria de imágenes
+      if ( $this->galeria_config ) {
+         require_once(GCM_DIR.'lib/int/galeria/lib/GaleriaFactory.php');
+         $this->galeria = GaleriaFactory::inicia($this->galeria_config, $this->ID);
+         }
       }
 
    /**
@@ -680,12 +696,6 @@ class Crud extends DataBoundObject {
             $this->tipos_formulario[$row['name']]['tipo'] = 'mail';
             }
 
-         /* Para campos imagen_url */
-
-         if ( $row['name'] == 'imagen_url'  ) {
-            $this->tipos_formulario[$row['name']]['tipo'] = 'imagen_url';
-            }
-
          // Campos 'text' seran 'textarea'
          
          if ( ! isset($this->tipos_formulario[$row['name']]['tipo'])  && $row['type'] == 'text' ) {
@@ -749,12 +759,6 @@ class Crud extends DataBoundObject {
 
          if ( $row['Field'] == 'mail'  ) {
             $this->tipos_formulario[$row['Field']]['tipo'] = 'mail';
-            }
-
-         /* Para campos imagen_url */
-
-         if ( $row['Field'] == 'imagen_url'  ) {
-            $this->tipos_formulario[$row['Field']]['tipo'] = 'imagen_url';
             }
 
          // Campos 'text' seran 'textarea'
@@ -1158,7 +1162,9 @@ class Crud extends DataBoundObject {
 
       $this->visualizar_registros_relacionados();
 
-      if ( $this->galeria ) $this->galeria->inicia();
+      if ( $this->galeria ) {
+         $this->galeria->formulario();
+         }
 
       }
    
@@ -1380,7 +1386,7 @@ class Crud extends DataBoundObject {
 
       $this->formulario_registros_combinados($displayHash);
 
-      if ( $this->galeria ) $this->galeria->inicia();
+      if ( $this->galeria ) $this->galeria->formulario();
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
@@ -1637,8 +1643,6 @@ class Crud extends DataBoundObject {
 
                if ( $this->save() ) {
 
-                  /* Si utilizamos galería hay que guardar imagenes */
-
                   $this->ID = ( isset($this->ID) && ! empty($this->ID) ) ? $this->ID : $this->ultimo_identificador();
 
                   /* Si tenemos eventos los lanzamos */
@@ -1652,7 +1656,11 @@ class Crud extends DataBoundObject {
                      $this->$metodo($this->ID);
                      }
 
-                  if ( $this->galeria ) $this->galeria->guardar($this->ID);
+                  if ( $this->galeria ) {
+                     registrar(__FILE__,__LINE__,"Guardamos galeria","ERROR");
+                     
+                     $this->galeria->guardar($this->ID);
+                     }
 
                   // Si tenemos registros relacionados de otras tablas hay que guardarlos tambien
                   // Primero borramos los que ya existan relacionados al registro padre

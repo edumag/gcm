@@ -7,6 +7,11 @@
 
 if ( ! defined("GCM_DEBUG") ) define("GCM_DEBUG",FALSE);
 
+if ( ! defined("GCM_DIR") ) {
+   // $dir_gcm = $_SESSION['galeria']['config']['dir_gcm'];
+   define('GCM_DIR','../../../../');
+}
+
 require('Galeria.php');
 
 class GaleriaFactory {
@@ -29,7 +34,7 @@ class GaleriaFactory {
 
          $id = ( isset($_SESSION['galeria']['id']) && ! empty($_SESSION['galeria']['id']) ) ? $_SESSION['galeria']['id'] : FALSE ;
 
-         unset ( $_SESSION['galeria'] );
+         self::clean();
 
          $galeria = new Galeria($config, $id);
          $galeria->load();
@@ -38,12 +43,23 @@ class GaleriaFactory {
 
          }
 
+      $galeria = new Galeria($config, $id);
 
+      // Añadimos dir_gcm a config para no perder la referencia
+      $config['dir_gcm'] = $galeria->dir_gcm;
       $_SESSION['galeria']['config'] = $config;
       $_SESSION['galeria']['id']     = $id;
 
-      return new Galeria($config, $id);
+      return $galeria;
 
       }
 
+   static function inicia($config=FALSE, $id=FALSE) {
+      self::clean();
+      return self::galeria($config, $id);
+      }
+
+   static function clean() {
+      unset ( $_SESSION['galeria'] );
+      }
 }

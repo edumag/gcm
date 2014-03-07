@@ -1,11 +1,15 @@
 <?php
 
 /** 
- * @file GaleriaAbstract.php
- * Clase abstracta para la gestión de las galerías
+ * @file Galeria.php
+ * Clase Galeria para la gestión de las galerías
  */
 
-if (!defined('GCM_DIR')) define('GCM_DIR',dirname(__FILE__).'/../../../../../gcm/');
+if (!defined('GCM_DIR')) {
+   echo 'GCM_DIR debe estar definido';
+   exit();
+   //define('GCM_DIR',dirname(__FILE__).'/../../../../../gcm/');
+   }
 
 if ( ! function_exists('literal') ) { function literal($l,$t=0) { echo $l; } }
 
@@ -23,7 +27,7 @@ function registrar($file, $line,$mensaje, $tipo='DEBUG') {
    }
 }
 
-require_once(GCM_DIR.'lib/int/gcm/lib/helpers.php');
+require_once(dirname(__FILE__).'/../../../../lib/int/gcm/lib/helpers.php');
 require_once(dirname(__FILE__).'/Imatge.php');
 require_once(dirname(__FILE__).'/DescripcionesGalerias.php');
 
@@ -127,8 +131,9 @@ class Galeria implements Iterator {
       $this->config['descripcions']            = FALSE ;               ///< Instancia de DescripcionesGaleria
       $this->config['dir_gal']                 = FALSE ;               ///< Directorio de las galerías
       $this->config['dir_base']                = FALSE ;               ///< Directorio base respecto a html
-      $this->config['dir_mod']                 = FALSE ;               ///< Directorio html del módulo
-      $this->config['dir_tmp']                 = FALSE ;               ///< Directorio temporal donde podamos escribir, para las imagenes temporales
+      $this->config['dir_mod']                 = GCM_DIR.'lib/int/galeria/' ; ///< Directorio html del módulo
+      $this->config['dir_tmp']                 = GCM_DIR.'tmp/' ;      ///< Directorio temporal donde podamos escribir, para las imagenes temporales
+      $this->config['dir_gcm']                 = GCM_DIR ;             ///< Directorio de GCM
       $this->config['tipos_permisos']          = 0644;                 ///< Permisos para las imágenes
 
 
@@ -140,6 +145,7 @@ class Galeria implements Iterator {
       $this->imatges = array();
       $this->temporal = ( $this->id ) ? FALSE : TRUE ;
 
+      // @todo comprobar si es necesario con los nuevos cambios
       $this->identificador_unic = ( $id ) ? $this->config['dir_gal'].'_'.$id : $this->config['dir_gal'];
 
       if ( $this->temporal ) {
@@ -219,7 +225,6 @@ class Galeria implements Iterator {
 
       if ( count($this->imatges) <= $this->limit_imatges ) {
          $this->imatges[] = $imatge;
-         if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"Imagen añadida: ".print_r($imatge,1),'AVISO');
       } else {
          return FALSE;
          }
@@ -343,7 +348,8 @@ class Galeria implements Iterator {
 
          chmod($this->galeria_url.$imatgeId,$this->tipos_permisos);
 
-         $href = $this->galeria_url.$imatgeId;
+         //$href = $this->galeria_url.$imatgeId;
+         $href = $this->dir_gcm.'tmp/'.session_id().'/'.$imatgeId;
 
       } else {
 
@@ -471,7 +477,7 @@ class Galeria implements Iterator {
 
       } else {
 
-         $imatge = new Imatge($id, $this);
+         $imatge = new Imatge($id, $this->config, $this->id);
          if ( $imatge->borrar() === FALSE ) {
             return FALSE;
          } else {
@@ -498,8 +504,6 @@ class Galeria implements Iterator {
 
       // Definir acción a realizar
       
-      if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,"accion: ".$accion);
-
       switch ($_REQUEST['galeria_accion']) {
 
          case 'actualizar':
