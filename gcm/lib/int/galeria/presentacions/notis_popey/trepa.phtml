@@ -56,15 +56,20 @@
 <?php } ?>
 
 <script type="text/javascript">
-$(document).ready(function () {
-    var options = {
-        direction:  'left',
-		  duration:  '600',
-		  opacity:  '0.8'
-    }
-	   $('#<?php echo $this->id;?>').popeye(options);
-});
 
+addLoadEvent(function(){
+   $(document).ready(function () {
+
+      <?php  echo get_include_contents($this->dir_mod."moduls/popeye/lib/popeye/jquery.popeye-2.1.min.js"); ?>
+
+       var options = {
+           direction:  'right',
+           duration:  '600',
+           opacity:  '0.8'
+       }
+         $('#<?php echo $this->id;?>').popeye(options);
+   });
+});
 </script>
 <?php
 ?>

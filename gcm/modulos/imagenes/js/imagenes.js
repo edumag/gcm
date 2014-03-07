@@ -125,20 +125,23 @@ function borrar_imagen(img){
 
 function img2thickbox() {
 
-   var links = document.links;
-   var num   = 0;
-
-   for (var x=0 ; x<links.length ; x++ ) {
-
-      var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);
-      if ( tipo == '.gif' || tipo == '.jpg' || tipo == 'jpeg' || tipo == '.png' || tipo == 'tiff' || tipo == '.JPG' || tipo == '.GIF'  ) {
-         var ancla = links[x];
-         //ancla.setAttribute('onclick','verImgEnGaleria(\''+links[x].href+'\'); return false;');
-         // ancla.setAttribute('rel','galeria_imagenes');
-         ancla.setAttribute('class',"galeria_imagenes");
-         num++;
-      }
-   }
+   // Es mejor hacerlo manual sino coge todas las imágenes que se presentan
+   // en la pagina.
+   // 
+   //    var links = document.links;
+   //    var num   = 0;
+   // 
+   //    for (var x=0 ; x<links.length ; x++ ) {
+   // 
+   //       var tipo = links[x].href.substring(links[x].href.length-4,links[x].href.length);
+   //       if ( tipo == '.gif' || tipo == '.jpg' || tipo == 'jpeg' || tipo == '.png' || tipo == 'tiff' || tipo == '.JPG' || tipo == '.GIF'  ) {
+   //          var ancla = links[x];
+   //          //ancla.setAttribute('onclick','verImgEnGaleria(\''+links[x].href+'\'); return false;');
+   //          // ancla.setAttribute('rel','galeria_imagenes');
+   //          ancla.setAttribute('class',"galeria_imagenes");
+   //          num++;
+   //       }
+   //    }
 
    $(document).ready(function(){
       //Examples of how to assign the ColorBox event to elements

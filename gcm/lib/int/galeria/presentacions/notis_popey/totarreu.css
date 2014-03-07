@@ -23,7 +23,7 @@
 
 
 /* popeye */
-.ppy.ppy-active {width:248px;float: right;margin: 2px 0 0 10px;}
+.ppy.ppy-active {width:248px;margin: 2px 0 0 10px;}
 
 .ppy .ppy-outer {padding: 1px;/*border: 1px solid #e1f1a1;*/border-radius: 7px 0 7px 7px;-moz-border-radius: 7px 0 7px 7px;-webkit-border-radius: 7px 0 7px 7px;background: #CC9900;}
 .ppy .ppy-stage {width: 248px;height: 165px;border-radius: 5px 0 5px 5px;-moz-border-radius: 5px 0 5px 5px;-webkit-border-radius: 5px 0 5px 5px;cursor: pointer;}

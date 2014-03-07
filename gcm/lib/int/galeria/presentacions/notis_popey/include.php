@@ -3,5 +3,5 @@
 
 <!--
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
--->
 <script type="text/javascript" src="<?php echo $this->dir_base.$this->dir_mod;?>moduls/popeye/lib/popeye/jquery.popeye-2.1.min.js"></script>
+-->
