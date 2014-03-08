@@ -189,13 +189,41 @@ Mides: <?php echo $galeria->amplaria_max.'x'.$galeria->altura_max
 
 if ( $accion == 'ver' ) {
 
-   // Aplicamos plantilla para piulades
-
    if ( $presentacion ) $galeria->plantilla_presentacio = $presentacion;
 
-   // presentaGaleria
+   // si no tenemos galeria seleccionada presentamos todas.
 
-   $galeria->presentaGaleria();
+   if ( $id ) {
+
+      // presentaGaleria
+
+      $galeria->presentaGaleria();
+      if ( $galeria->carga_lib ) include($galeria->carga_lib);
+      ?>
+      <script type="text/javascript" charset="utf-8">
+         <?php echo $galeria->carga_js; ?>   
+      </script>
+      <?php
+
+   } else {
+
+      $javascript = "";
+
+      foreach (glob($config_galeria['dir_gal'].'*') as $gal) { $galerias = basename($gal); 
+         echo "<h2>$galerias</h2>";
+         $galeria = GaleriaFactory::inicia($config_galeria, $galerias); 
+         if ( $presentacion ) $galeria->plantilla_presentacio = $presentacion;
+         $galeria->presentaGaleria();
+         $javascript .= $galeria->carga_js;
+         }
+
+         if ( $galeria->carga_lib ) include($galeria->carga_lib);
+         ?>
+         <script type="text/javascript" charset="utf-8">
+            <?php echo $javascript; ?>   
+         </script>
+         <?php
+      }
 
 } else {
 

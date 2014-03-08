@@ -95,15 +95,26 @@ class Galeria implements Iterator {
 
    public $identificador_unic;
 
-   public $connector           = NULL;                 ///< Funció javascript que rep el numero de miniatura que es va pujar
-   public $accio_esborra       = NULL;                 ///< Funció javascript que rep avis de imatge esborrada
+   public $connector           = NULL; ///< Funció javascript que rep el numero de miniatura que es va pujar
+   public $accio_esborra       = NULL; ///< Funció javascript que rep avis de imatge esborrada
 
-   private $fitxer_js;                                 ///< Fitxer amb al javascript
+   private $fitxer_js;                 ///< Fitxer amb al javascript necesari per editar galería
 
-   public $imatges;                                    ///< Instancias de imatges
-   private $puntero;                                   ///< Puntero
+   public $imatges;                    ///< Instancias de imatges
+   private $puntero;                   ///< Puntero
 
-   protected $loaded = FALSE ;                         ///< Para saber si ya se fue a buscar la información
+   protected $loaded = FALSE ;         ///< Para saber si ya se fue a buscar la información
+
+   public $carga_php_general = FALSE ; ///< Torna la ubicació (respecta a GCM_DIR) de un arxiu php general, aqui pot averi les trocadas els css
+
+   public $carga_js  = FALSE ;         ///< Codi javascript per activa la galería individualment
+
+   /**
+    * Devuelve la ubicación ( Respecto a GCM_DIR ) del archivo con el javascript necesarios para la presentación, 
+    * solo debe cargarse una vez y antes del javascript individual de cada galería.
+    */
+
+   public $carga_js_general = FALSE ;
 
    /**
     * Constructor
@@ -364,6 +375,21 @@ class Galeria implements Iterator {
 
       }
 
+   public function carga_php_general() {
+      $include_php='lib/int/galeria/presentacions/'.$this->plantilla_presentacio.'/include.php';
+      if ( file_exists(GCM_DIR.$include_php) ) $this->carga_php_general = $include_php;
+      return $this->carga_php_general;
+      }
+
+   public function carga_js_general() {
+      $include_config=dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/config.php';
+      if ( file_exists($include_config) ) {
+         include($include_config);
+         $this->carga_js_general = $carga_js_general;
+         }
+      return $this->carga_js_general;
+      }
+
    /**
     * Presentem galeria
     */
@@ -379,8 +405,6 @@ class Galeria implements Iterator {
       // Si tenim una plantilla seleccionada la apliquem
 
       if ( $this->plantilla_presentacio ) {
-         $include_trepa=dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/include.php';
-         if ( file_exists($include_trepa) ) include_once($include_trepa);
          include (dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/trepa.phtml');
          return;
          }
