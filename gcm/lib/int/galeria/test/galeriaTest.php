@@ -176,17 +176,25 @@ if ( $accion == 'ver' ) {
 
    // si no tenemos galeria seleccionada presentamos todas.
 
+   // Juntamos el código javascript de cada galería
+   $javascript = '';
+
+   // Posible código con libreria de presentación en javascript
+   $librerias = FALSE ;
+
    if ( $id ) {
 
       // presentaGaleria
 
       $galeria->presentaGaleria();
-      if ( $galeria->carga_lib ) include($galeria->carga_lib);
-      ?>
-      <script type="text/javascript" charset="utf-8">
-         <?php echo $galeria->carga_js; ?>   
-      </script>
-      <?php
+      $javascript .= $galeria->carga_js;
+
+      if ( $galeria->carga_js_general() ) $librerias = $galeria->carga_js_general();
+
+      if ( $galeria->carga_php_general() ) include(GCM_DIR.$galeria->carga_php_general());
+
+
+
 
    } else {
 
@@ -197,16 +205,49 @@ if ( $accion == 'ver' ) {
          $galeria = GaleriaFactory::inicia(dirname(__FILE__).'/config.php', $galerias); 
          if ( $presentacion ) $galeria->plantilla_presentacio = $presentacion;
          $galeria->presentaGaleria();
+         ?>
+         <div style="clear:both"></div>
+         <?php
          $javascript .= $galeria->carga_js;
+         if ( $galeria->carga_js_general() ) $librerias = $galeria->carga_js_general();
+
+         if ( $galeria->carga_php_general() ) include(GCM_DIR.$galeria->carga_php_general());
+
          }
 
-         if ( $galeria->carga_lib ) include($galeria->carga_lib);
-         ?>
-         <script type="text/javascript" charset="utf-8">
-            <?php echo $javascript; ?>   
-         </script>
-         <?php
       }
+
+      ?>
+      <script type="text/javascript" charset="utf-8">
+
+         $(document).ready(function () {
+
+         // Cargamos librería de presentación
+
+         <?php 
+         if ( $librerias ) {
+            foreach ( $librerias as $lib ) {
+               if ( file_exists(GCM_DIR.$lib) ) {
+                  echo "\n";
+                  echo file_get_contents(GCM_DIR.$lib);
+                  echo "\n";
+               } else {
+                  ?>
+               // ERROR no se pudo obtener librería
+
+               console.log('Error cargando librería: <?php echo GCM_DIR.$lib?>');
+
+                  <?php
+               }
+            }
+         }
+          ?>
+         <?php echo $javascript; ?>   
+
+      });
+      </script>
+
+      <?php
 
 } else {
 

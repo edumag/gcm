@@ -26,14 +26,15 @@
 
 <?php if ( $this->count() > 0 ) { ?>
 
+   <div id="gallery_<?php echo $this->id;?>">
 
-   <div id="gallery">
 
    <?php for ($i=0;$i<$this->count();$i++){ ?>
 
-   <?php $sql="SELECT titol, subtitol FROM galeries_fotos_imatges WHERE galeries_fotos_id = ".
-         $_REQUEST['galeries_fotos_id']. " AND nom = '".$this->imatges[$i]->getId()."'"; ?>
-   <?php $rs = mysql_query($sql) ; if ( $rs ) $row = mysql_fetch_array($rs) ; list($titol, $subtitol) = $row; ?> 
+   <?php // $sql="SELECT titol, subtitol FROM galeries_fotos_imatges WHERE galeries_fotos_id = ".
+         // $_REQUEST['galeries_fotos_id']. " AND nom = '".$this->imatges[$i]->getId()."'"; ?>
+   <?php // $rs = mysql_query($sql) ; if ( $rs ) $row = mysql_fetch_array($rs) ; list($titol, $subtitol) = $row; ?> 
+   <?php $titol = 'titol' ; $subtitol = 'subtitol'; ?>
 
    <a rel="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>" 
       href="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>">
@@ -48,13 +49,13 @@
 
 <?php } ?>
 
+<?php
+$this->carga_js = '$("#gallery_'.$this->id.'").galleria({width: 600, height: 400 });';
+?>
+
+<!--
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 <script src="<?php echo $this->dir_base.$this->dir_mod;?>moduls/galleria/galleria-1.2.6.js"></script>
 <script src="<?php echo $this->dir_base.$this->dir_mod;?>moduls/galleria/themes/classic/galleria.classic.js"></script>
+-->
 
-<script>
-   $("#gallery").galleria({
-       width: 600,
-       height: 400
-   });
-</script>

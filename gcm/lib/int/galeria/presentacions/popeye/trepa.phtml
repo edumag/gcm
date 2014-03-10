@@ -27,6 +27,9 @@
 
    <?php for ($i=0;$i<$this->count();$i++){ ?>
 
+   <?php $titol = "TITOL"; ?>
+   <?php $subtitol = "SUBTITOL"; ?>
+
        <li>
            <a href="<?php echo $this->dir_base.$this->imatges[$i]->getSrc();?>">
                <img src="<?php echo $this->dir_base.$this->imatges[$i]->getMiniaturaSrc();?>" alt="" />
@@ -61,16 +64,16 @@
 
 <?php } ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo $this->dir_base.$this->dir_mod?>moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="<?php echo $this->dir_base.$this->dir_mod?>moduls/popeye/css/popeye/jquery.popeye.style.css" media="screen" />
-
+<!--
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->dir_base.$this->dir_mod?>moduls/popeye/lib/popeye/jquery.popeye-2.1.js"></script>
+-->
 
-<script type="text/javascript">
-$(document).ready(function () {
+<?php
+
+$this->carga_js = "
+
   $('#ppy1').popeye();
-});
 
-</script>
-
+";
+?>
