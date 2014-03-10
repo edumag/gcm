@@ -256,9 +256,9 @@ class Crud extends DataBoundObject {
    public $url_formulario = FALSE;
 
    /**
-    * Configuración de galería
+    * Archivo con la Configuración de galería
     *
-    * Podemos tener un sistema completo de galerías de imágees relacionadas
+    * Podemos tener un sistema completo de galerías de imágenes relacionadas
     * con los registros.
     *
     * @see Galeria

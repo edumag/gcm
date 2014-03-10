@@ -8,7 +8,6 @@
 if ( ! defined("GCM_DEBUG") ) define("GCM_DEBUG",FALSE);
 
 if ( ! defined("GCM_DIR") ) {
-   // $dir_gcm = $_SESSION['galeria']['config']['dir_gcm'];
    define('GCM_DIR','../../../../');
 }
 
@@ -45,8 +44,6 @@ class GaleriaFactory {
 
       $galeria = new Galeria($config, $id);
 
-      // Añadimos dir_gcm a config para no perder la referencia
-      $config['dir_gcm'] = $galeria->dir_gcm;
       $_SESSION['galeria']['config'] = $config;
       $_SESSION['galeria']['id']     = $id;
 

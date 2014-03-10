@@ -47,4 +47,14 @@ if ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) && iss
    alt="<?php echo htmlentities($alt);?>"
    >
    </a>
+   <span>
+      <strong><?php echo literal('Título',3) ?>: </strong>
+      <p>
+      <?php echo $this->descripcions->descripcions[$imatge->getNom()]['titol']; ?>
+      </p>
+      <strong><?php echo literal('Subtitulo',3) ?>: </strong>
+      <p>
+      <?php echo $this->descripcions->descripcions[$imatge->getNom()]['subtitol']; ?>
+      </p>
+   </span>
 </div>

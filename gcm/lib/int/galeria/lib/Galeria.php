@@ -101,6 +101,7 @@ class Galeria implements Iterator {
    private $fitxer_js;                 ///< Fitxer amb al javascript necesari per editar galería
 
    public $imatges;                    ///< Instancias de imatges
+
    private $puntero;                   ///< Puntero
 
    protected $loaded = FALSE ;         ///< Para saber si ya se fue a buscar la información
@@ -116,15 +117,36 @@ class Galeria implements Iterator {
 
    public $carga_js_general = FALSE ;
 
+   /** Cargar css TRUE / FALSE */
+
+   public $incluir_css = TRUE ;
+
+   /**
+    * Instancia de descripciones
+    */
+
+   public $descripcions = FALSE ;
+
    /**
     * Constructor
     *
-    * @param $config Array con la configuración
+    * @param $file_config Archivo con la configuración
     * @param $id Identificador de la galeria, si no tenemos identificador la 
     *            galería es temporal
     */
 
-   function __construct($config=FALSE, $id=FALSE) {
+   function __construct($file_config=FALSE, $id=FALSE) {
+
+      if ( ! $file_config ) {
+         $msg = "Error hay que definir archivo con configuración";
+         registrar(__FILE__,__LINE__,$msg,'ERROR');
+         }
+      if ( ! file_exists($file_config) ) {
+         $msg = "Error no existe archivo de configuración [$file_config]";
+         registrar(__FILE__,__LINE__,$msg,'ERROR');
+         }
+
+      include($file_config);
 
       /**
        * Configuración por defecto
@@ -139,7 +161,7 @@ class Galeria implements Iterator {
       $this->config['nom_div_galeria']         = 'galeriaDIV';         ///< Per a diferenciar entre galeries 
       $this->config['plantilla_presentacio']   = FALSE;                ///< Plantilla que agafem per presentar la galeria
       $this->config['plantilla_edita_imatge']  = FALSE;                ///< Plantilla per presentar imatge al editar
-      $this->config['descripcions']            = FALSE ;               ///< Instancia de DescripcionesGaleria
+      $this->config['descripcions_config']     = FALSE ;               ///< Instancia de DescripcionesGaleria
       $this->config['dir_gal']                 = FALSE ;               ///< Directorio de las galerías
       $this->config['dir_base']                = FALSE ;               ///< Directorio base respecto a html
       $this->config['dir_mod']                 = GCM_DIR.'lib/int/galeria/' ; ///< Directorio html del módulo
@@ -147,9 +169,16 @@ class Galeria implements Iterator {
       $this->config['dir_gcm']                 = GCM_DIR ;             ///< Directorio de GCM
       $this->config['tipos_permisos']          = 0644;                 ///< Permisos para las imágenes
 
+      if ( $galeria_config ) $this->config = array_merge($this->config, $galeria_config);
 
-      if ( $config ) $this->config = array_merge($this->config, $config);
-
+      if ( $this->config['descripcions_config'] ) {
+         $this->descripcions = new DescripcionesGalerias($this->config['descripcions_config']['tabla']
+            ,$id
+            ,$this->config['descripcions_config']['config']
+            ,$galeria_pdo
+            );
+         $this->descripcions->load();
+         }
       $this->puntero = 0;
       $this->id = $id;
       $this->fitxer_js = dirname(__FILE__).'/../js/galeria_js.php';
@@ -172,8 +201,8 @@ class Galeria implements Iterator {
          registrar(__FILE__,__LINE__,"No se puede acceder a carpeta temporal [".$this->dir_tmp."]",'ERROR');
 
 
-      $_SESSION['galeria']['config'] = $config;
-      $_SESSION['galeria']['id']     = $id;
+      $_SESSION['galeria']['config']  = $file_config;
+      $_SESSION['galeria']['id']      = $id;
 
       }
 
@@ -301,6 +330,17 @@ class Galeria implements Iterator {
       <?php
 
       require(dirname(__FILE__).'/plupload/caixa_input.php');
+
+      if ( $this->incluir_css ) {
+
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/galeria.css.php'); ?>
+         </style>
+         <?php
+
+         }
+
       return;
       }
 
@@ -359,8 +399,7 @@ class Galeria implements Iterator {
 
          chmod($this->galeria_url.$imatgeId,$this->tipos_permisos);
 
-         //$href = $this->galeria_url.$imatgeId;
-         $href = $this->dir_gcm.'tmp/'.session_id().'/'.$imatgeId;
+         $href = $this->dir_base.$this->dir_gcm.'tmp/'.session_id().'/'.$imatgeId;
 
       } else {
 
@@ -371,6 +410,16 @@ class Galeria implements Iterator {
          include($this->plantilla_edita_imatge);
       } else {
          include(dirname(__FILE__).'/../html/miniatura_edit.phtml');
+         }
+
+      if ( $this->incluir_css ) {
+
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/galeria.css.php'); ?>
+         </style>
+         <?php
+
          }
 
       }
@@ -385,9 +434,16 @@ class Galeria implements Iterator {
       $include_config=dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/config.php';
       if ( file_exists($include_config) ) {
          include($include_config);
-         $this->carga_js_general = $carga_js_general;
+         if ( ! isset($carga_js_general) ) {
+            registrar(__FILE__,__LINE__,"Error con configuración de ".$this->plantilla_presentacio,'ERROR');
+         } else {
+            $this->carga_js_general = $carga_js_general;
+            return $this->carga_js_general;
+            }
+      } else {
+         registrar(__FILE__,__LINE__,"Falta rchivo config de presentación de ".$this->plantilla_presentacio,'ERROR');
          }
-      return $this->carga_js_general;
+      return FALSE;
       }
 
    /**
@@ -401,6 +457,16 @@ class Galeria implements Iterator {
 
       // Si no tenim imatges sortim
       if ( !$this->count() > 0 ) return;
+
+      if ( $this->incluir_css ) {
+
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/galeria.css.php'); ?>
+         </style>
+         <?php
+
+         }
 
       // Si tenim una plantilla seleccionada la apliquem
 
@@ -562,14 +628,14 @@ class Galeria implements Iterator {
 
    function formulario($displayHash=FALSE) {
 
-      // Añadimos input para insertar imagen nueva
-      $this->caixa_input();
-
       // Añadimos caja de presentación de las imagenes
       $this->caixa_galeria($displayHash);
       
       // Añadimos caja de mensajes de la galería
       $this->caixa_missatges();
+
+      // Añadimos input para insertar imagen nueva
+      $this->caixa_input();
 
       }
 

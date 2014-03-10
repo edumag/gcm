@@ -77,7 +77,7 @@
       var galeria  = '<?php echo $this->id; ?>';
       var temporal = '<?php echo ($this->temporal) ? 'si' : 'no' ; ?>';
 
-      ognMakeAjaxRequest('<?php echo $this->dir_base.$this->dir_mod;?>lib/acciones.php?galeria_accion=esborra&id=<?php echo $this->id?>&g='+galeria+'&tmp='+temporal+'&idThumb='+idThumb+'&id='+id,null,esborrarMiniatura);
+      ognMakeAjaxRequest('<?php echo $this->dir_base.$this->dir_mod;?>lib/acciones.php?galeria_dir_gcm=<?php echo $this->dir_gcm ?>&galeria_accion=esborra&id=<?php echo $this->id?>&g='+galeria+'&tmp='+temporal+'&idThumb='+idThumb+'&id='+id,null,esborrarMiniatura);
       
       var fimatge = document.getElementById('fimatge');
       fimatge.style.display	= 'block';
@@ -145,7 +145,7 @@
 
    function actualizarGaleria() {
 
-      var src = "<?php echo $this->dir_base.$this->dir_mod;?>lib/acciones.php?galeria_accion=actualizar&id=<?php echo $this->id?>";
+      var src = "<?php echo $this->dir_base.$this->dir_mod;?>lib/acciones.php?galeria_dir_gcm=<?php echo $this->dir_gcm ?>&galeria_accion=actualizar&id=<?php echo $this->id?>";
 
       ognMakeAjaxRequest(src,null,presentaGaleria);
 

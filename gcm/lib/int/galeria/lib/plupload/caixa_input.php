@@ -12,17 +12,6 @@
 $drh = $this->dir_base.$this->dir_mod;
 
 ?>
-<style type="text/css">
-	.item{ padding:4px 0;}
-	.name{ min-width:100px;padding-right: 6px;}
-	.remove{ color:#F00; cursor: pointer;}
-	.presentaImatgeEditar{float: left; padding: 3px;}
-   #container {border: 1px solid #efefef;background: #eee; margin-bottom:8px;}
-   #missatge {border: 1px solid #fff;background: #efefef;padding: 5px;}
-	#uploader {margin: 4px;font-family:Verdana, Geneva, sans-serif;font-size:13px;color:#333;background:url(<?php echo $drh?>lib/plupload/bg.jpg);}
-   #filelist {margin: 4px;font-family:Verdana, Geneva, sans-serif;font-size:13px;color:#333;background:url(<?php echo $drh?>lib/plupload/bg.jpg);}
-   .boto {margin: 6px;margin-botom: 116px;padding: 3px;background: white;border: 1px solid white;display: inline-block;}
-</style>
 <!--
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 -->
@@ -117,7 +106,7 @@ var uploader = new plupload.Uploader({
       browse_button : 'pickfiles',
       container : 'container',
 		runtimes : runtimesList,
-      url : '<?php echo $drh?>lib/acciones.php?galeria_id=<?php echo $this->id?>&galeria_accion=subir',
+      url : '<?php echo $drh?>lib/acciones.php?galeria_dir_gcm=<?php echo $this->dir_gcm ?>&galeria_id=<?php echo $this->id?>&galeria_accion=subir',
 		max_file_size : '1000mb',
       max_file_count: maxim_imatges,
 		chunk_size : '1mb',

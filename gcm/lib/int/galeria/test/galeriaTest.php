@@ -32,14 +32,27 @@ foreach ( $_REQUEST as $key => $val ) {
 
    }
 
-// Configuración de galería
+/* Opciones */
 
-$config_galeria = array(
-    "dir_gal"              => GCM_DIR.'tmp/'.'galeriaTest/'
-   ,"dir_base"             => "./"
-   ,"amplada_presentacio"  => 250
-   ,"amplaria_max"         => 600 
-   );
+$id           = ( isset($_POST['id']) )               ? $_POST['id']              : FALSE;
+$id_select    = ( isset($_REQUEST['id_select']) )     ? $_REQUEST['id_select']    : FALSE;
+$accion       = ( isset($_REQUEST['accion']) )        ? $_REQUEST['accion']       : 'ver';
+$modulo       = ( isset($_REQUEST['modulo'] ) )       ? $_REQUEST['modulo']       : FALSE;
+$presentacion = ( isset($_REQUEST['presentacion'] ) ) ? $_REQUEST['presentacion'] : FALSE;
+$debug        = ( isset($_REQUEST['debug'] ) )        ? TRUE                      : FALSE;
+
+// Si hemos seleccionado una galeria cambiamos id por el de la selección
+
+if ( isset($id_select) && ! empty($id_select) ) $id = $id_select;
+
+if ( $debug == 1 ) {
+   // define("GCM_DEBUG",TRUE);
+   error_reporting( E_ALL );
+   }
+
+require('../lib/GaleriaFactory.php');
+
+include('config.php');
 
 ?>
 <!DOCTYPE HTML>
@@ -69,26 +82,6 @@ h2 {
 
 <?php
 
-/* Opciones */
-
-$id           = ( isset($_REQUEST['id']) )            ? $_REQUEST['id']           : FALSE;
-$id_select    = ( isset($_REQUEST['id_select']) )     ? $_REQUEST['id_select']    : FALSE;
-$accion       = ( isset($_REQUEST['accion']) )        ? $_REQUEST['accion']       : 'ver';
-$modulo       = ( isset($_REQUEST['modulo'] ) )       ? $_REQUEST['modulo']       : FALSE;
-$presentacion = ( isset($_REQUEST['presentacion'] ) ) ? $_REQUEST['presentacion'] : FALSE;
-$debug        = ( isset($_REQUEST['debug'] ) )        ? TRUE                      : FALSE;
-
-// Si hemos seleccionado una galeria cambiamos id por el de la selección
-
-if ( isset($id_select) && ! empty($id_select) ) $id = $id_select;
-
-if ( $debug == 1 ) {
-   // define("GCM_DEBUG",TRUE);
-   error_reporting( E_ALL );
-   }
-
-require('../lib/GaleriaFactory.php');
-
 ?>
 <form action="" method="POST">
 
@@ -99,7 +92,7 @@ Seleccionar galeria:
 onchange="this.form.id.value = '';return false;"
 >
 <option value="">Galerías</option>
-<?php foreach (glob($config_galeria['dir_gal'].'*') as $gal) { $galerias = basename($gal); ?>
+<?php foreach (glob(GCM_DIR.'tmp/'.'galeriaTest/'.'*') as $gal) { $galerias = basename($gal); ?>
 <option <?php if ( $gal == $id ) echo 'selected' ; ?> value="<?php echo $galerias?>"><?php echo $galerias?></option>
 <?php } ?>
 </select>
@@ -132,17 +125,7 @@ Moduls:
 
 <?php
 
-$galeria = GaleriaFactory::inicia($config_galeria, $id); 
-
-// Posibles configuracións
-
-$pdo = new PDO('sqlite:test.db');
-$galeria->descripcions = new DescripcionesGalerias('descripciones',$id,FALSE, $pdo) ; // Descripcions
-
-// Limit d'imatges
-
-$galeria->limit_imatges = 5;
-
+$galeria = GaleriaFactory::inicia(dirname(__FILE__).'/config.php', $id); 
 
 // Si se ha ejecutado submit hay que guardar la
 // galería
@@ -209,9 +192,9 @@ if ( $accion == 'ver' ) {
 
       $javascript = "";
 
-      foreach (glob($config_galeria['dir_gal'].'*') as $gal) { $galerias = basename($gal); 
+      foreach (glob($galeria_config['dir_gal'].'*') as $gal) { $galerias = basename($gal); 
          echo "<h2>$galerias</h2>";
-         $galeria = GaleriaFactory::inicia($config_galeria, $galerias); 
+         $galeria = GaleriaFactory::inicia(dirname(__FILE__).'/config.php', $galerias); 
          if ( $presentacion ) $galeria->plantilla_presentacio = $presentacion;
          $galeria->presentaGaleria();
          $javascript .= $galeria->carga_js;
