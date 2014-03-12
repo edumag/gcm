@@ -48,9 +48,8 @@ class Menu extends Modulos {
     * El constructor necesita como argumento el directorio
     * del contenido y el filtro si deseamos filtrar.
     *
-    * @param $sDirectorio  Directorio a presentar
+    * @param $dir_contenido  Directorio a presentar
     * @param $filtro       Filtro para archivos
-    * @param $SECCIONES    Presentamos subsecciones TRUE/FALSE
     */
 
    function __construct($dir_contenido = FALSE, $filtro = FALSE ) {
@@ -103,9 +102,12 @@ class Menu extends Modulos {
 
    /**
     * Devolver lista de elementos del menú a partir de un directorio
+    *
+    * @param $directorio Directorio donde buscar
+    * @param $solodir    Solo presentar directorios
     */
 
-   function buscar_elementos($directorio=FALSE) {
+   function buscar_elementos($directorio=FALSE, $solodir=FALSE) {
 
       $directorios = array();
       $contenidos = array();
@@ -140,7 +142,9 @@ class Menu extends Modulos {
             // $this->buscar_elementos($el);
             if ( $this->validar($nombre, FALSE) ) $directorios[] = $nombre ;
          } else {
-            if ( $this->validar($nombre) ) $contenidos[] = $nombre ;
+            if ( ! $solodir ) {
+               if ( $this->validar($nombre) ) $contenidos[] = $nombre ;
+               }
             }
          }
 
@@ -170,7 +174,7 @@ class Menu extends Modulos {
             }
          }
 
-      if ( $elemento{0} == "." || $elemento == "index.html" || $elemento == "thumbnail"  ) return FALSE ;
+      if ( $elemento{0} == "." || $elemento == "index.html" || $elemento == "thumbnail" || $elemento == "img"  ) return FALSE ;
 
       // Si hay filtro solo añadimos los que coinciden
       if ( $filtro && $this->filtro && substr_count($elemento,$this->filtro) == FALSE ) {
@@ -187,9 +191,11 @@ class Menu extends Modulos {
     * @param $tipo      Tipo de menu a insertar
     * @param $seccion   Sección a buscar contenido
     * @param $seccion   Sección en la que nos encontramos
+    * @param $base_ajax Base para los enlaces con ajax
+    * @param $solodir   Solo presentar directorios
     */
 
-   function inserta_menu($tipo = 'principal', $seccion = '', $preseccion = '', $base_ajax='') {
+   function inserta_menu($tipo = 'principal', $seccion = '', $preseccion = '', $base_ajax='', $solodir=FALSE) {
 
       global $gcm;
 
@@ -197,7 +203,7 @@ class Menu extends Modulos {
       $preseccion = ( ! empty($preseccion) ) ? comprobar_barra($preseccion) : '' ;
       $base_ajax  = ( ! empty($base_ajax) )  ? comprobar_barra($base_ajax)  : '' ;
 
-      $elementos = $this->buscar_elementos($preseccion.$seccion);
+      $elementos = $this->buscar_elementos($preseccion.$seccion, $solodir);
 
       if ( empty($elementos) ) return FALSE;
 

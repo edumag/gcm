@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file sub_principal.phtml
+ * @brief Submenu 
+ * @ingroup plantilla_menu
+ */
+
+// Ordenamos campos por su peso
+if ( $elementos && !empty($elementos) && count($elementos) > 0 ) {
+   
+uasort($elementos, array("Menu", 'ordenar_por_peso'));
+
+?>
+
+<ul class="submenu_principal">
+
+<?php foreach($elementos as $elemento) { // Vamos recorriendo las opciones existentes ?>
+
+   <?php $nombre = basename($elemento); ?>
+
+<?php if ( is_dir(Router::$dd.$this->base_enlace.$elemento) ) { ?>
+
+<?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
+
+   <li id="menuOff">
+         <?php echo literal($elemento);?>
+   </li>
+
+<?php } else {  // Acaba es la opción actual ?>
+
+      <li id="<?php echo $elemento ?>" >
+         <a href="<?php echo Router::$base.$this->base_enlace.$elemento ?>" >
+            <?php echo literal($elemento)?>
+         </a>
+      </li>
+
+<?php } ?>
+
+<?php } ?>
+
+<?php } ?>
+
+</ul> 
+
+<?php
+
+} // Acaba si no hay elementos
