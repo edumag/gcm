@@ -76,7 +76,7 @@ class Mapas extends Modulos {
       $this->cargar_script();
       ?>
       <div id="<?php echo $caja_mapa ?>" class="mapa" ><?php echo literal('Cargando mapa')?>...</div>
-      <div id="<?php echo $caja_mapa ?>_info" class="mapa_info" ></div>
+      <div id="<?php echo $caja_mapa ?>_info_default" class="mapa_info" ></div>
       <script type="text/javascript">
 
          // 'tipo': '<?php echo $tipo ?>',
