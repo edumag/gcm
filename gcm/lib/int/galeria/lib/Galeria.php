@@ -663,7 +663,7 @@ class Galeria implements Iterator {
          return $this->config[$variable_configuracion];
          }
 
-      registrar(__FILE__,__LINE__,"Error $variable_configuracion no es una variable de configuración",'ERROR');
+      registrar(__FILE__,__LINE__,"Error [$variable_configuracion] no es una variable de configuración",'ERROR');
       
       return FALSE;
       }

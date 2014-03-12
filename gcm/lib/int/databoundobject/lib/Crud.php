@@ -442,7 +442,7 @@ class Crud extends DataBoundObject {
       // Galeria de imágenes
       if ( $this->galeria_config ) {
          require_once(GCM_DIR.'lib/int/galeria/lib/GaleriaFactory.php');
-         $this->galeria = GaleriaFactory::inicia($this->galeria_config, $this->ID);
+         $this->galeria = GaleriaFactory::inicia($this->galeria_config, $id);
          }
       }
 
@@ -1163,7 +1163,10 @@ class Crud extends DataBoundObject {
       $this->visualizar_registros_relacionados();
 
       if ( $this->galeria ) {
-         $this->galeria->formulario();
+         if ( $this->ID ) {
+            $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
+            $this->galeria->presentaGaleria();
+            }
          }
 
       }
@@ -1386,7 +1389,12 @@ class Crud extends DataBoundObject {
 
       $this->formulario_registros_combinados($displayHash);
 
-      if ( $this->galeria ) $this->galeria->formulario();
+      if ( $this->galeria ) {
+         if ( $this->ID ) {
+            $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
+            $this->galeria->formulario($displayHash);
+            }
+         }
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>

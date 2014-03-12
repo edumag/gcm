@@ -65,6 +65,9 @@ function inicia_mapa(container,mapa,markers) {
 
 /**
  * Presentar información del marcador
+ *
+ * Por defecto se muestra caja modal con la información. Pero podemos definir
+ * un div con id=NOMBRE_MAPA_info para que se presente en él.
  * 
  * @param container Identificador de la caja donde se presenta el contenido 
  * @param id Identificador del marcador que contiene el contenido
@@ -72,19 +75,31 @@ function inicia_mapa(container,mapa,markers) {
 
 function presenta_info_mapa(container,id) {
    var caja = document.getElementById(container+'_info');
-   var contenido = '<section class="semantic-content" id="modal-text" ';
-   contenido += ' tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">';
-   contenido += '<div class="modal-inner">';
-   contenido += '<div class="modal-content">';
-   contenido += '<p>'+contenidos[id]+'</p>';
-   contenido += '</div>';
-   contenido += '</div>';
-   contenido += '</section>';
 
-   caja.innerHTML = contenido;
-   $("#"+container+"_info").modal({
-      escapeClose: true
-      ,clickClose: true
-      ,showClose: true
-      });
+   if ( caja ) {
+
+      caja.innerHTML = contenidos[id];
+
+   } else {
+
+      var caja = document.getElementById(container+'_info_default');
+
+      var contenido = '<section class="semantic-content" id="modal-text" ';
+      contenido += ' tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">';
+      contenido += '<div class="modal-inner">';
+      contenido += '<div class="modal-content">';
+      contenido += '<p>'+contenidos[id]+'</p>';
+      contenido += '</div>';
+      contenido += '</div>';
+      contenido += '</section>';
+
+      caja.innerHTML = contenido;
+      $("#"+container+"_info_default").modal({
+         escapeClose: true
+         ,clickClose: true
+         ,showClose: true
+         });
+
+      }
+
    }
