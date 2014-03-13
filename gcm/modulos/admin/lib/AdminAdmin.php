@@ -876,6 +876,8 @@ class AdminAdmin extends Admin {
 
    function caja_info_dev($e, $args) {
 
+      if ( ! permiso('caja_info_dev', 'admin') ) return FALSE;
+
       global $gcm;
 
       ob_start();
@@ -899,7 +901,7 @@ class AdminAdmin extends Admin {
    function contenido_caja_info_dev($e, $args=FALSE) {
 
       ?>
-      <h2>Admin</h2>
+      <h3>Admin</h3>
       <ul>
       <?php
 
