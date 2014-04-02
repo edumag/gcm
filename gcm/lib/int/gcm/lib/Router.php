@@ -458,6 +458,16 @@ class Router {
          exit();
          }
 
+      /*
+       * Si recibimos la url hacia una sección sin barra al final la redirigimos
+       * para añadirle la barra y que no den problemas los enlaces absolutos
+       */
+
+      if ( self::$s !== "" && self::$c == "" && self::$url{strlen(self::$url)-1} !== '/' ) {
+         header( "HTTP/1.1 301 Moved Permanently" );
+         header("Location: ".self::$base.self::$s.self::$c);
+         }
+
       /* Definir fichero final */
 
       if (!self::$s && ( !self::$c || self::$c == 'index.html' || self::$c == 'index.php') ) {
