@@ -30,7 +30,7 @@ uasort($elementos, array("Menu", 'ordenar_por_peso'));
 <?php } else {  // Acaba es la opción actual ?>
 
       <li id="<?php echo $elemento ?>" >
-         <a href="<?php echo Router::$base.$this->base_enlace.$elemento ?>" >
+         <a href="<?php echo Router::$base.$this->base_enlace.comprobar_barra($elemento) ?>" >
             <?php echo literal($elemento)?>
          </a>
       </li>
