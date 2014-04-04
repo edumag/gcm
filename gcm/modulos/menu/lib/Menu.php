@@ -163,10 +163,16 @@ class Menu extends Modulos {
 
       // Comprobar descartados
 
-      if ( ! empty(self::$descartar) ) {
+      // Añadimos descartados de opciones si se han añadido
+      if ( isset($this->opciones['descartar']) ) {
+         $descartar = array_merge(self::$descartar, array($this->opciones['descartar']));
+      } else {
+         $descartar = self::$descartar;
+         }
 
-         $descartar = FALSE;
-         foreach ( self::$descartar as $descartado ) {
+      if ( ! empty($descartar) ) {
+
+         foreach ( $descartar as $descartado ) {
             if ( strpos($elemento,$descartado) !== FALSE ) {
                registrar(__FILE__,__LINE__,'Descartado: '.$elemento. ' coincide con '.$descartado);
                return FALSE;
