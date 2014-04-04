@@ -163,12 +163,7 @@ class Menu extends Modulos {
 
       // Comprobar descartados
 
-      // Añadimos descartados de opciones si se han añadido
-      if ( isset($this->opciones['descartar']) ) {
-         $descartar = array_merge(self::$descartar, array($this->opciones['descartar']));
-      } else {
-         $descartar = self::$descartar;
-         }
+      $descartar = self::$descartar;
 
       if ( ! empty($descartar) ) {
 
