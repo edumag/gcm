@@ -17,7 +17,11 @@ require_once(dirname(__FILE__).'/Admin.php');
 class AdminAdmin extends Admin {
 
    function __construct() {
-      parent::__construct();
+     parent::__construct();
+
+     if ( isset($_GET['administrando']) ) $_SESSION['administrando'] = $_GET['administrando'] ;
+
+
       }
 
    /**
