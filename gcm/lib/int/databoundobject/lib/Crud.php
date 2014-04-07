@@ -249,11 +249,18 @@ class Crud extends DataBoundObject {
    public $conf_paginador = FALSE;        
 
    /**
-    * Definimos la url del formulario al que se debe volver en caso de errpres,
+    * Definimos la url del formulario al que se debe volver 
     * pordefecto es $_SERVER["REDIRECT_URL"] 
     */
 
    public $url_formulario = FALSE;
+
+   /**
+    * Definimos la url del formulario al que se debe volver en caso de errores
+    * pordefecto es $_SERVER["REDIRECT_URL"] 
+    */
+
+   public $url_formulario_con_fallos = FALSE;
 
    /**
     * Archivo con la Configuración de galería
@@ -1390,11 +1397,9 @@ class Crud extends DataBoundObject {
       $this->formulario_registros_combinados($displayHash);
 
       if ( $this->galeria ) {
-         if ( $this->ID ) {
-            $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
-            $this->galeria->formulario($displayHash);
-            }
-         }
+          $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
+          $this->galeria->formulario($displayHash);
+          }
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
@@ -1544,7 +1549,7 @@ class Crud extends DataBoundObject {
 
          $solicitud = new Solicitud();
          $solicitud->SetRedirectOnConstraintFailure(true);
-         $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
+         $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario_con_fallos);
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
          if ( isset($this->restricciones) && ! empty($this->restricciones) ) {
