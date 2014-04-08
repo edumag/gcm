@@ -1171,8 +1171,52 @@ class Crud extends DataBoundObject {
 
       if ( $this->galeria ) {
          if ( $this->ID ) {
+           // @todo Reorganizar
+           $galeria = $this->galeria; ///< Importante para que coja bien 
             $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
             $this->galeria->presentaGaleria();
+            
+            $javascript = $this->galeria->carga_js;
+
+            if ( $this->galeria->carga_js_general() ) $librerias = $this->galeria->carga_js_general();
+
+            if ( $this->galeria->carga_php_general() ) include(GCM_DIR.$this->galeria->carga_php_general());
+
+            ?>
+            <script type="text/javascript" charset="utf-8">
+
+            <?php if ( Router::$formato != 'ajax' ) { ?>
+            addLoadEvent(function(){
+            <?php } ?>
+
+               // Cargamos librería de presentación
+               // <?php echo $librerias ?>
+
+               <?php 
+               if ( $librerias ) {
+                  foreach ( $librerias as $lib ) {
+                     if ( file_exists(GCM_DIR.$lib) ) {
+                        echo "\n";
+                        echo file_get_contents(GCM_DIR.$lib);
+                        echo "\n";
+                     } else {
+                        ?>
+                     // ERROR no se pudo obtener librería
+
+                     console.log('Error cargando librería: <?php echo GCM_DIR.$lib?>');
+
+                        <?php
+                     }
+                  }
+               }
+                ?>
+               <?php echo $javascript; ?>   
+            <?php if ( Router::$formato != 'ajax' ) { ?>
+            });
+            <?php } ?>
+            </script>
+            <?php
+
             }
          }
 
