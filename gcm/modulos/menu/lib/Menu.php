@@ -134,19 +134,21 @@ class Menu extends Modulos {
       $items = glob($directorio.'*');
 
       // Recorremos directorio para recoger solo documentos html o secciones (directorios)
-      foreach ( $items as $key => $el ) {
+      if ( $items ) {
+        foreach ( $items as $key => $el ) {
 
-         $nombre = basename($el);
+           $nombre = basename($el);
 
-         if ( is_dir($el) ) {
-            // $this->buscar_elementos($el);
-            if ( $this->validar($nombre, FALSE) ) $directorios[] = $nombre ;
-         } else {
-            if ( ! $solodir ) {
-               if ( $this->validar($nombre) ) $contenidos[] = $nombre ;
-               }
-            }
-         }
+           if ( is_dir($el) ) {
+              // $this->buscar_elementos($el);
+              if ( $this->validar($nombre, FALSE) ) $directorios[] = $nombre ;
+           } else {
+              if ( ! $solodir ) {
+                 if ( $this->validar($nombre) ) $contenidos[] = $nombre ;
+                 }
+              }
+           }
+        }
 
       return array_merge($directorios, $contenidos);
       }
