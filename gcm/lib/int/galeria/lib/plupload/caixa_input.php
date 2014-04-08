@@ -103,40 +103,40 @@ if ( limit_galeria == 1 ) seleccio_multiples_imatges = false;
 
 var uploader = new plupload.Uploader({
 
-      browse_button : 'pickfiles',
-      container : 'container',
-		runtimes : runtimesList,
-      url : '<?php echo $drh?>lib/acciones.php?galeria_dir_gcm=<?php echo $this->dir_gcm ?>&galeria_id=<?php echo $this->id?>&galeria_accion=subir',
-		max_file_size : '1000mb',
-      max_file_count: maxim_imatges,
-		chunk_size : '1mb',
-		unique_names : true,
-      multiple_queues : false,
-      multi_selection:seleccio_multiples_imatges,
-		rename : true,
+  browse_button : 'pickfiles',
+  container : 'container',
+  runtimes : runtimesList,
+  url : '<?php echo $drh?>lib/acciones.php?galeria_dir_gcm=<?php echo $this->dir_gcm ?>&galeria_id=<?php echo $this->id?>&galeria_accion=subir',
+  max_file_size : '1000mb',
+  max_file_count: maxim_imatges,
+  chunk_size : '1mb',
+  unique_names : true,
+  multiple_queues : false,
+  multi_selection:seleccio_multiples_imatges,
+  rename : true,
 
-		// Resize images on clientside if we can
-      resize : {width : <?php echo ( $this->amplaria_max ) ? $this->amplaria_max : 'null'?>, height : <?php echo ( $this->altura_max ) ? $this->altura_max : 'null'?>, quality : 90},
-		
-		// Rename files by clicking on their titles
-		rename: true,
-		
-		// Sort files
-		sortable: true,
+  // Resize images on clientside if we can
+  resize : {width : <?php echo ( $this->amplaria_max ) ? $this->amplaria_max : 'null'?>, height : <?php echo ( $this->altura_max ) ? $this->altura_max : 'null'?>, quality : 90},
 
-		// Specify what files to browse for
-		filters : [
-			{title : "Image files", extensions : "jpg,gif,png,jpeg"},
-			{title : "Zip files", extensions : "zip"}
-		],
+  // Rename files by clicking on their titles
+  rename: true,
 
-		// Flash settings
-		flash_swf_url : '<?php echo $drh?>lib/plupload/plupload/js/plupload.flash.swf',
+  // Sort files
+  sortable: true,
 
-		// Silverlight settings
-      silverlight_xap_url : '<?php echo $drh?>lib/plupload/plupload/js/plupload.silverlight.xap'
+  // Specify what files to browse for
+  filters : [
+    {title : "Image files", extensions : "jpg,gif,png,jpeg"},
+    {title : "Zip files", extensions : "zip"}
+    ],
 
-	});
+// Flash settings
+flash_swf_url : '<?php echo $drh?>lib/plupload/plupload/js/plupload.flash.swf',
+
+// Silverlight settings
+silverlight_xap_url : '<?php echo $drh?>lib/plupload/plupload/js/plupload.silverlight.xap'
+
+});
 
 uploader.bind('Init', function(up, params) {
    // getEl('filelist').innerHTML = "<div>Current runtime: " + params.runtime + "</div>";
@@ -198,6 +198,9 @@ uploader.bind('FilesAdded', function(up, files) {
    //    }
 
    up.refresh(); // Reposition Flash/Silverlight
+
+   // Subimos las imágenes automáticamente
+   setTimeout(function () { up.start(); }, 100);
    });
 
 uploader.bind('UploadProgress', function(up, file) {
@@ -235,7 +238,7 @@ getEl('uploadfiles').onclick = function() {
     uploader.start();
     return false;
 };
- 
+
 /**
  * esborrar imatge de la llista si pasem del limit
  */
