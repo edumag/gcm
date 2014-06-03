@@ -46,6 +46,7 @@ class AdminAdmin extends Admin {
       
    /** 
     * Generamos test administrativos 
+    * @ingroup testgcm
     */
 
    function test() {

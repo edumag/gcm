@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Jun 2 11:57:44 CEST 2014
+// Archivo generado automáticamente por GcmConfig Tue Jun 3 8:05:35 CEST 2014
 $LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instal·lació passos a seguir per realitzar-la';
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Afegir javascript desde un mòdul';
 $LG_ca['April']='Abril';

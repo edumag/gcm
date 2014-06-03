@@ -440,6 +440,33 @@ class LiteralesAdmin extends Literales {
       echo "Elemento [ ".$_GET['elemento']." ] eliminado";
 
       }
+
+   /**
+    * Test para literales.
+    * @ingroup testgcm
+    */
+   function test() {
+
+      global $gcm;
+
+      $gcm->event->anular('titulo','admin');
+      $gcm->event->anular('contenido','admin');
+
+      $gcm->titulo = '<h1>Testeando proyecto</h1>';
+
+      $url = 'ca/ajax/contenidos/borrar/12/28/'.$contenido;
+      $router = Router::desglosarUrl($url);
+
+      $this->ejecuta_test('Verficar url: '.$url,$router['url'],$contenido);
+
+     // Crear un literal de prueba.
+     // Comprobar que devuelve bien el resultado.
+     // Modificarlo.
+     // Borrarlo.
+     // Hacer lo mismo en otro idioma.
+
+     }
+
    }
 
 ?>
