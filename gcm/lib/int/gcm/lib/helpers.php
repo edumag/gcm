@@ -92,9 +92,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          registrar(__FILE__,__LINE__,$mens);
 
-         $LG[$literal] = '';
+         $LG[$literal] = ( $valor ) ? $valor : '';
 
-         return $literal;
+         return ( $valor ) ? $valor : $literal ;
 
          break;
 
@@ -145,9 +145,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          /* Añadimos a $GCM_LG para que haya constancia inmediata */
 
-         $GCM_LG[$literal]='';
+         $GCM_LG[$literal] = ( $valor ) ? $valor : '';
 
-         return $literal;
+         return ( $valor ) ? $valor : $literal ;
 
          break;
       }

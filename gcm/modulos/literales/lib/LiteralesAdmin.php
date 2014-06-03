@@ -447,25 +447,30 @@ class LiteralesAdmin extends Literales {
     */
    function test() {
 
-      global $gcm;
+     global $gcm;
 
-      $gcm->event->anular('titulo','admin');
-      $gcm->event->anular('contenido','admin');
+     $gcm->event->anular('titulo','admin');
+     $gcm->event->anular('contenido','admin');
 
-      $gcm->titulo = '<h1>Testeando proyecto</h1>';
-
-      $url = 'ca/ajax/contenidos/borrar/12/28/'.$contenido;
-      $router = Router::desglosarUrl($url);
-
-      $this->ejecuta_test('Verficar url: '.$url,$router['url'],$contenido);
+     $gcm->titulo = '<h1>Testeando proyecto</h1>';
 
      // Crear un literal de prueba.
+     $litg = literal('Probando_literal',3,'Probando literal gcm');
+     $litp = literal('Probando_literal',1,'Probando literal proyecto');
      // Comprobar que devuelve bien el resultado.
+     $this->ejecuta_test('Verficar literal de GCM: '.$litg,$litg, 'Probando literal gcm');
+     $this->ejecuta_test('Verficar literal de proyecto: '.$litp,$litp, 'Probando literal proyecto');
+
      // Modificarlo.
+     $litg = literal('Probando_literal',3,'Probando literal gcm modificado');
+     $litp = literal('Probando_literal',1,'Probando literal proyecto modificado');
+     $this->ejecuta_test('Verficar literal de GCM: '.$litg,$litg, 'Probando literal gcm modificado');
+     $this->ejecuta_test('Verficar literal de proyecto: '.$litp,$litp, 'Probando literal proyecto modificado');
+
      // Borrarlo.
      // Hacer lo mismo en otro idioma.
 
-     }
+   }
 
    }
 

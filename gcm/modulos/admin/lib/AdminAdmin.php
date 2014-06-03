@@ -87,7 +87,6 @@ class AdminAdmin extends Admin {
             $this->ejecuta_test('Verificar mime/type',$router['mime_type'],'text/html');
             $this->ejecuta_test('Verificar formato',$router['formato'],'html');
 
-            if ( GCM_DEBUG ) echo '<pre>DEPURANDO: ' ; print_r($router) ; echo '</pre>'; // exit() ; // DEV  
             }
 
          }

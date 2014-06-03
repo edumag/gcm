@@ -1,15 +1,15 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jun 3 8:05:35 CEST 2014
-$LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='A falta de un script de instal·lació passos a seguir per realitzar-la';
-$LG_ca['Anyadir_javascript_desde_un_modulo']='Afegir javascript desde un mòdul';
+// Archivo generado automáticamente por GcmConfig Tue Jun 3 9:37:45 CEST 2014
+$LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='';
+$LG_ca['Anyadir_javascript_desde_un_modulo']='';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';
-$LG_ca['Caja_con_informacion_de_los_modulos']='Caixa de informació dels móduls';
-$LG_ca['Cambio_de_tema_al_vuelo']='Camvi de tema al vol';
+$LG_ca['Caja_con_informacion_de_los_modulos']='';
+$LG_ca['Cambio_de_tema_al_vuelo']='Cambio de tema al vuelo';
 $LG_ca['Como trata gcm las imágenes']='Com tracta les imatges GCM';
-$LG_ca['Como_crear_un_modulo']='Com crear un módul';
-$LG_ca['Conceptos_generales']='Conceptes generals';
-$LG_ca['Conexion_entre_modulos']='Conexió entre móduls';
+$LG_ca['Como_crear_un_modulo']='';
+$LG_ca['Conceptos_generales']='';
+$LG_ca['Conexion_entre_modulos']='';
 $LG_ca['Configuracion_para_modulos']='';
 $LG_ca['Constantes']='';
 $LG_ca['Crud']='';
@@ -17,21 +17,21 @@ $LG_ca['Debug']='';
 $LG_ca['December']='desembre';
 $LG_ca['Desarrollo']='';
 $LG_ca['Descargar']='';
-$LG_ca['Documentacion']='Documentació';
+$LG_ca['Documentacion']='';
 $LG_ca['Documentación para Gcm']='';
 $LG_ca['Editando_contenido']='';
 $LG_ca['Ejemplo_de_documento']='Exemple de document';
-$LG_ca['Ejemplo_de_uso_de_GcmConfig']='Exemple de GcmConfig';
+$LG_ca['Ejemplo_de_uso_de_GcmConfig']='';
 $LG_ca['Ejemplo_de_uso_del_editor_web_tiny_mce']='';
 $LG_ca['Eventos']='';
 $LG_ca['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='';
 $LG_ca['Evitar_reenvios_a_formulario_al_actualizar_una_pagina.html']='';
-$LG_ca['Forzar_eventos_por_omision']='Forzar eventos por omisión';
+$LG_ca['Forzar_eventos_por_omision']='';
 $LG_ca['GCM']='';
 $LG_ca['Gcm']='';
 $LG_ca['Gestor de Contenido Mamedu']='null';
 $LG_ca['Guia_usuario']='';
-$LG_ca['Instalacion']='Instalació';
+$LG_ca['Instalacion']='';
 $LG_ca['Instalar']='';
 $LG_ca['Literales']='';
 $LG_ca['Modificar_secciones_definidas_en_la_plantilla_dinamicamente']='';
@@ -83,5 +83,5 @@ $LG_ca['tiny_mce']='';
 $LG_ca['Cache_http']='';
 $LG_ca['Paginador_con_ajax']='';
 $LG_ca['Plantillas']='';
-$LG_ca['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='';
+$LG_ca['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='Com cambiar el aspecta del proyecta';
 ?>
