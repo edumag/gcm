@@ -391,12 +391,12 @@ class LiteralesAdmin extends Literales {
                      ?>
                      <li id="lit_<?php echo $key ?>" class="<?php echo $clase?>">
                         <a title="Modificar <?php echo htmlentities($key) ?>" 
-                           href="javascript:;" onclick="modificar_literal('lit_<?php echo $key?>','<?php echo str_replace("'","\'",$valor)?>',<?php echo $admin_js ?>)" >
+                           href="javascript:;" onclick="modificar_literal('<?php echo $key?>','<?php echo str_replace("'","\'",$valor)?>',<?php echo $admin_js ?>)" >
                            <?php echo $key ?>
                         </a>
                         <div style="visibility: hidden;">
                            <a title="Eliminar" 
-                              href="javascript:;" onclick="eliminar_elemento('lit_<?php echo $key ?>',<?php echo $admin_js ?>)" >
+                              href="javascript:;" onclick="eliminar_elemento('<?php echo $key ?>',<?php echo $admin_js ?>)" >
                               [X]
                            </a>
                         </div>

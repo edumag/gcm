@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jun 3 15:28:55 CEST 2014
+// Archivo generado automáticamente por GcmConfig Mon Jun 30 9:47:49 CEST 2014
 $LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='';
 $LG_ca['Anyadir_javascript_desde_un_modulo']='';
 $LG_ca['April']='Abril';

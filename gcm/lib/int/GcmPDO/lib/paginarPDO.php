@@ -225,6 +225,8 @@ class PaginarPDO extends GcmPDO {
 
    function botonera() {
 
+     global $gcm;
+
       // require_once(dirname(__FILE__).'/../../gcm/lib/helpers.php');
 
       if ( ! $this->resultado  ) $this->resultado();
