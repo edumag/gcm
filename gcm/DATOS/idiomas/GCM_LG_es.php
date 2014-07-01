@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Jun 30 11:57:35 CEST 2014
+// Archivo generado automáticamente por GcmConfig Tue Jul 1 8:45:16 CEST 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -160,4 +160,5 @@ $GCM_LG_es['Libro de visitas']='';
 $GCM_LG_es['Administrar libro de visitas']='';
 $GCM_LG_es['Ofertas']='';
 $GCM_LG_es['Administrar ofertas']='';
+$GCM_LG_es['formularios']='';
 ?>
