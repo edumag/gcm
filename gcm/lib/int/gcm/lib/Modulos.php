@@ -239,6 +239,13 @@ abstract class Modulos {
 
          $archivo = 'DATOS/configuracion/'.$modulo.'/config.php';
 
+         $config_original = GCM_DIR.'modulos/'.$modulo.'/config/config.php';
+         $directorio_descripciones = GCM_DIR.'modulos/'.$modulo.'/config';
+         if ( !file_exists($config_original) ) {
+           $config_original = 'modulos/'.$modulo.'/config/config.php';
+           $directorio_descripciones = 'modulos/'.$modulo.'/config';
+          }
+
          /* Si se pide volver a los valores por defecto, borramos
           * archivo de configuración del proyecto, para que se coja 
           * el del módulo
@@ -249,7 +256,7 @@ abstract class Modulos {
          if ( !file_exists('DATOS/configuracion')  ) mkdir('DATOS/configuracion');
          if ( !file_exists('DATOS/configuracion/'.$modulo)  ) mkdir('DATOS/configuracion/'.$modulo);
 
-         if ( !file_exists($archivo) ) copy(GCM_DIR.'modulos/'.$modulo.'/config/config.php', $archivo);
+         if ( !file_exists($archivo) ) copy($config_original, $archivo);
 
          try {
 
@@ -260,7 +267,7 @@ abstract class Modulos {
             $args = array();
             $args['eliminar'] = 'si';
 
-            $configuracion->directorio_descripciones(GCM_DIR.'modulos/'.$modulo.'/config');
+            $configuracion->directorio_descripciones($directorio_descripciones);
 
             $configuracion->formulario($args);
 
