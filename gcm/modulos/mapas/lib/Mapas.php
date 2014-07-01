@@ -53,11 +53,15 @@ class Mapas extends Modulos {
       
       $mapa_nombre = $args;
 
+      $mapa_encontrado = FALSE ;
       foreach ( $this->mapas as $mapa ) {
-         if ( $mapa['nombre'] == $mapa_nombre ) continue;
+         if ( $mapa['nombre'] == $mapa_nombre ) {
+            $mapa_encontrado = TRUE;
+            continue;
+            }
          }
 
-      if ( ! $mapa ) { registrar(__FILE__,__LINE__,"No se ha encontrado un mapa con este nombre [$mapa_nombre]",'ERROR') ; return FALSE ;}
+      if ( ! $mapa_encontrado ) { registrar(__FILE__,__LINE__,"No se ha encontrado un mapa con este nombre [$mapa_nombre]",'ERROR') ; return FALSE ;}
 
       $latitud        = $mapa['latitud'];
       $longitud       = $mapa['longitud'];
@@ -65,10 +69,13 @@ class Mapas extends Modulos {
       $zoom           = intval($mapa['zoom']);
       $otras_opciones = $mapa['Otras opciones'];
 
-      foreach ( $this->marcadores as $marcador ) {
-         if ( $marcador['mapa'] == $mapa_nombre ) {
-            $marcadores[] = $marcador;
+      if ( $this->marcadores ) {
+         foreach ( $this->marcadores as $marcador ) {
+            if ( $marcador['mapa'] == $mapa_nombre ) {
+               $marcadores[] = $marcador;
+               }
             }
+
          }
 
       $caja_mapa     = str_replace(' ','_',$mapa_nombre);
@@ -76,7 +83,7 @@ class Mapas extends Modulos {
       $this->cargar_script();
       ?>
       <div id="<?php echo $caja_mapa ?>" class="mapa" ><?php echo literal('Cargando mapa')?>...</div>
-      <div id="<?php echo $caja_mapa ?>_info" class="mapa_info" ></div>
+      <div id="<?php echo $caja_mapa ?>_info_default" class="mapa_info" ></div>
       <script type="text/javascript">
 
          // 'tipo': '<?php echo $tipo ?>',
@@ -89,18 +96,21 @@ class Mapas extends Modulos {
             'otras_opciones': '<?php echo $otras_opciones ?>',
          };
 
+
          var markers = {
+      <?php if ( $marcadores ) { ?>
            'marca': [
          <?php foreach ( $marcadores as $marca ) { ?>
              {
                'name': '<?php echo $marca['nombre'] ?>'
                ,'location': [<?php echo $marca['latitud'] ?>, <?php echo $marca['longitud'] ?>]
-               ,'contenido': '<?php echo preg_replace("/[\n|\r|\n\r]/", ' ', nl2br($marca['contenido']));?>'
+               ,'contenido': '<?php echo preg_replace("/[\n|\r|\n\r]/", ' ', $marca['contenido']);?>'
                ,'icon': '<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('mapas','iconos',$marca['icono'])?>'
 
              },
          <?php } ?>
            ]
+         <?php } ?>
          };
 
       addLoadEvent(function(){

@@ -9,9 +9,15 @@
 
 ?>
 
+<a target="_blank" href="https://www.facebook.com/<?php echo $gcm->config('redes_sociales','usuario_facebook');?>">
    <img alt="twitter" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','twitter.png') ?>" />
+</a>
 
+<a target="_blank" href="https://twitter.com/<?php echo $gcm->config('redes_sociales','usuario_twitter');?>">
    <img alt="facebook" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','facebook.png') ?>" />
+</a>
 
+<a target="_blank" href="">
    <img alt="pic" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','tripadvisor.png') ?>" />
+</a>
 

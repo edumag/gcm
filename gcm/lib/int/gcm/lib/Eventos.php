@@ -294,6 +294,7 @@ class Eventos {
             if ( isset($eventos) && is_array($eventos) ) $this->recoger_eventos($modulo,$directorio,$eventos,$nivel);
             unset($eventos);
          } else {
+registrar(__FILE__,__LINE__,"fichero_modulo: $fichero_modulo",'AVISO');
             include($fichero_modulo);
             if ( isset($eventos) && is_array($eventos) ) $this->recoger_eventos($modulo,$directorio,$eventos,$nivel);
             unset($eventos);

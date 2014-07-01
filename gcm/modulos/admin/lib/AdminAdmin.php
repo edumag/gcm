@@ -17,7 +17,11 @@ require_once(dirname(__FILE__).'/Admin.php');
 class AdminAdmin extends Admin {
 
    function __construct() {
-      parent::__construct();
+     parent::__construct();
+
+     if ( isset($_GET['administrando']) ) $_SESSION['administrando'] = $_GET['administrando'] ;
+
+
       }
 
    /**
@@ -42,6 +46,7 @@ class AdminAdmin extends Admin {
       
    /** 
     * Generamos test administrativos 
+    * @ingroup testgcm
     */
 
    function test() {
@@ -82,7 +87,6 @@ class AdminAdmin extends Admin {
             $this->ejecuta_test('Verificar mime/type',$router['mime_type'],'text/html');
             $this->ejecuta_test('Verificar formato',$router['formato'],'html');
 
-            if ( GCM_DEBUG ) echo '<pre>DEPURANDO: ' ; print_r($router) ; echo '</pre>'; // exit() ; // DEV  
             }
 
          }
@@ -876,6 +880,8 @@ class AdminAdmin extends Admin {
 
    function caja_info_dev($e, $args) {
 
+      if ( ! permiso('caja_info_dev', 'admin') ) return FALSE;
+
       global $gcm;
 
       ob_start();
@@ -899,7 +905,7 @@ class AdminAdmin extends Admin {
    function contenido_caja_info_dev($e, $args=FALSE) {
 
       ?>
-      <h2>Admin</h2>
+      <h3>Admin</h3>
       <ul>
       <?php
 

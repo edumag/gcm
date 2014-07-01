@@ -1,630 +1,685 @@
 <?php
 
-/**
- * @file      Galeria.php
- * @brief     Galería de imagenes
- *
- * Detailed description starts here.
- *
- * @author    Eduardo Magrané
- *
- * @internal
- *   Created  16/02/11
- *  Revision  SVN $Id: $
- * Copyright  Copyright (c) 2011, Eduardo Magrané
- *
- * This source code is released for free distribution under the terms of the
- * GNU General Public License as published by the Free Software Foundation.
+/** 
+ * @file Galeria.php
+ * Clase Galeria para la gestión de las galerías
  */
 
+if (!defined('GCM_DIR')) {
+   echo 'GCM_DIR debe estar definido';
+   exit();
+   //define('GCM_DIR',dirname(__FILE__).'/../../../../../gcm/');
+   }
 
-/**
- * Galería de imágenes
+if ( ! function_exists('literal') ) { function literal($l,$t=0) { echo $l; } }
+
+if ( ! function_exists('registrar') ) {
+
+function registrar($file, $line,$mensaje, $tipo='DEBUG') {
+
+   $_SESSION['msg'][] = $mensaje;
+   return;
+
+   ?>
+   <div class="<?php echo strtolower($tipo); ?>"><?php echo $mensaje; ?></div>
+   <?php
+
+   }
+}
+
+require_once(dirname(__FILE__).'/../../../../lib/int/gcm/lib/helpers.php');
+require_once(dirname(__FILE__).'/Imatge.php');
+require_once(dirname(__FILE__).'/DescripcionesGalerias.php');
+
+/** 
+ * @class Galeria
  *
- * Añadimos galeria desde un formulario de registro, se presentaraun input para subir
- * imágenes que seran subidas inmediatamente a una carpeta temporal del proyecto, que
- * debe ser definida.
+ * Aquest mòdul fa la funció de gestionar tot el relacionat amb les imatges de l'aplicació, 
+ * visualització de galeries completes, visualització d'una imatge en concret, inserció, esborrat, etc
  *
- * El formulario ocultara campos input text con los nombres de las imágenes al hacer
- * submit sobre el formulario, se recibira el nombre de las imágenes y se podran incluir
- * con el método especificado:
+ * @warning
+ *   El formulario que contendra la galería no debe tener un campo con el nombre submit, para evitar 
+ *   interferencias que darían error con javascript.
  *
- * - tabla:         La imagen se añade en el mismo registro teniendo que especificar el
- *                  campo blob que debe contener la imagen y el campo miemetipe para
- *                  saber el tipo de imagen.
+ * Tenemos un ejemplo donde hacer pruebas en test/GaleriaTest.php
  *
- * - archivo:       La imagen se añade a una carpeta destino.
- *
- * - tabla-archivo: La imagen se guarda en carpeta pero a la vez generamos una referencia
- *                  en la base de datos, tabla galerias que apunta al registro y su tabla,
- *                  con este sistema conseguimos tener la ventaja de poder saber desde una
- *                  sentencia sql que registros tienen imágenes y cuantas, pero sin
- *                  guardarlas en la base de datos,
- *
- * @todo Falta implementar tipo: archivo y tabla
- * @todo Flata presentación de imágenes en sus distintas formas; imagen() formato original
- *       como galeria() con miniaturas de las imágenes con scripts javascript para visuali-
- *       zarlas de forma amena, y miniatura() para presentar su miniatura solamente.
- * @todo Metodo cron que borre las imágenes que se vayan quedando en la carpeta temporal.
+ * @todo Cron deberá borrar tambien los directorios viejos.
  */
 
-class Galeria {
-
-   /* Configurable */
-
-   public $limit_imatges       = 1;        ///< Nombre maxim de imatges de galeria
-   public $grandaria_max       = '520000'; ///< Grandaria maxima permesa per imatge en Bytes
-   public $amplaria_max        = 640;      ///< Amplària maxima
-   public $altura_max          = NULL;     ///< Altura max
-   public $amplada_presentacio = 140;      ///< Amplada de presentació
-   public $altura_presentacio  = NULL;     ///< Altura de presentació
-   public $js_post_pujada      = NULL;     ///< Funció javascript que rep el numero de miniatura que es va pujar
-   public $js_post_esborra     = NULL;     ///< Funció javascript que rep avis de imatge esborrada
-   public $imatge_espera       = '../imatges/uploading.gif'; ///< Imatge de 'imatge pujan'
-   /** Contingut del enllaç per a esborrar */
-   public $contingut_enllac_borrar = '<img src="../grafics/goma.gif" width="18" height="16" border="0">';
-   public $color_bord          = '#000';   ///< Color bord
-   public $dir_tmp             = 'tmp/';   ///< Directorio temporal para las imágenes
-   public $url_raiz            = '../';    ///< Camino para llegar a la raiz del proyecto
-   public $amplada_boto_file   = 30;       ///< Amplària en caràcters per al camp de pujar fitxer
-   public $sufijo              = '01_';    ///< Nos permite trabajar con más de una a la vez y que no choquen.
-
-   /* Internes */
-
-   private $num_miniatures = 0;            ///< Nombre de miniatures
-   private $imagenes       = NULL;         ///< Colecció d'imatges
-   private $errores        = array();      ///< Llistat d'errors
+class Galeria implements Iterator {
 
    /**
-    * Estado de la galería, nos permite saber en que estado se encuentra:
-    *
-    * - insertando:    Para cuando se esta añadiendo un nuevo registro y la imagen de añade
-    *                  sin tener por el momento un registro a la que ser vinculada.
-    * - modifcando:    Tenemos registro y se puede borrar o añadir imagenes vinculadas a él.
-    * - visualizando:  Se muestran imagenes sin permitir edición
+    * Configuración
     */
 
-   private $estado = NULL;
+   public $config;
+
+   /** 
+    * Carpeta definitiva
+    *
+    * Juntamos la url de las galerías con la de la galería en concreto
+    *
+    * En caso de ser temporal sera $dir_tmp.session_id.'/'
+    */
+
+   public $galeria_url = FALSE;
 
    /**
-    * Tipo de galeria
+    * Podemos crear atributos de galeria para poder utilizarlos en las plantillas de presentación.
     *
-    * - tabla-archivo: Tenemos una tabla galeria donde se guarda la referencia a la imagen en archivo
-    * - archivo:       Se guarda la imagen en carpeta sin relacionarse
-    * - tabla:         Un registro tiene los campos imagen y tipomime.
+    * <pre>
+    * $galeria = GaleriaFactory::galeria('galeries_comentaris','Mysql',$idComentari);
+    * $galeria->plantilla_presentacio = 'piulades';
+    * $galeria->atributs = array('alt' => $vComentari);
+    * if ( $galeria->count() > 0 ) {
+    *    $galeria->presentaGaleria();
+    * }
+    * </pre>
     */
 
-   private $tipoGaleria;
+   public $atributs;
 
-   private $identificador;   ///< Identificador de galería
+   /**
+    * Identificador de galería
+    *
+    * la carpeta on estan las imatges
+    */
 
-   private $clase_imagen;    ///< Nombre de la clase a utilizar para Imagen, según tipoGaleria
+   public $id;
 
-   private $conf_imatges;    ///< Configuracio per Imatges
+   /** Si no tenim galeria traballem en modo termporal */
 
-   private $fitxer_js;       ///< Fitxer javascript necesari per el funcionament de la galeria
+   public $temporal = FALSE;
+
+   /** Identifiador unic */
+
+   public $identificador_unic;
+
+   public $connector           = NULL; ///< Funció javascript que rep el numero de miniatura que es va pujar
+   public $accio_esborra       = NULL; ///< Funció javascript que rep avis de imatge esborrada
+
+   private $fitxer_js;                 ///< Fitxer amb al javascript necesari per editar galería
+
+   public $imatges;                    ///< Instancias de imatges
+
+   private $puntero;                   ///< Puntero
+
+   protected $loaded = FALSE ;         ///< Para saber si ya se fue a buscar la información
+
+   public $carga_php_general = FALSE ; ///< Torna la ubicació (respecta a GCM_DIR) de un arxiu php general, aqui pot averi les trocadas els css
+
+   public $carga_js  = FALSE ;         ///< Codi javascript per activa la galería individualment
+
+   /**
+    * Devuelve la ubicación ( Respecto a GCM_DIR ) del archivo con el javascript necesarios para la presentación, 
+    * solo debe cargarse una vez y antes del javascript individual de cada galería.
+    */
+
+   public $carga_js_general = FALSE ;
+
+   /** Cargar css TRUE / FALSE */
+
+   public $incluir_css = TRUE ;
+
+   /**
+    * Instancia de descripciones
+    */
+
+   public $descripcions = FALSE ;
 
    /**
     * Constructor
     *
-    * Si recibimos un identificador el estado sera 'visualizando' por defecto, a no ser que
-    * especifiquemos otra cosa.
-    *
-    * Si no tenemos identificadaor de galería el estado es 'insertando'
-    *
-    * @param $conf_imatges   Configuracio per les imatges
-    * @param $identificadaor Identificador de la galería
+    * @param $file_config Archivo con la configuración
+    * @param $id Identificador de la galeria, si no tenemos identificador la 
+    *            galería es temporal
     */
 
-   public function __construct($conf_imatges, $identificador=NULL) {
+   function __construct($file_config=FALSE, $id=FALSE) {
 
-      $this->conf_imatges = $conf_imatges;
-      $this->imagenes = array();
-      $this->tipoGaleria = $this->conf_imatges['tipo'];
-      $this->identificador = $identificador;
-      $this->fitxer_js = dirname(__FILE__).'/../js/galeria.js';
-
-      $this->estado = ( $this->identificador ) ? 'visualizando' : 'insertando' ;
-
-      switch($this->tipoGaleria) {
-
-      case 'tabla-archivo':
-         $this->clase_imagen = 'ImagenesTablaArchivo';
-         break;
-      case 'archivo':
-         $this->clase_imagen = 'ImagenesArchivo';
-         break;
-      case 'tabla':
-         $this->clase_imagen = 'ImagenesMysql';
-         break;
-      default:
-         $this->clase_imagen = 'ImagenesTablaArchivo';
-         break;
+      if ( ! $file_config ) {
+         $msg = "Error hay que definir archivo con configuración";
+         registrar(__FILE__,__LINE__,$msg,'ERROR');
+         }
+      if ( ! file_exists($file_config) ) {
+         $msg = "Error no existe archivo de configuración [$file_config]";
+         registrar(__FILE__,__LINE__,$msg,'ERROR');
          }
 
-      require(dirname(__FILE__).'/'.$this->clase_imagen.'.php');
+      include($file_config);
+
+      /**
+       * Configuración por defecto
+       */
+
+      $this->config['amplaria_max']            = 600;                  ///< Amplària maxima 600px per defecta
+      $this->config['altura_max']              = 400;                  ///< Altura max 400px por defecta
+      $this->config['amplada_presentacio']     = 150;                  ///< Amplada de miniatura
+      $this->config['altura_presentacio']      = 180;                  ///< Altura de miniatura
+      $this->config['limit_imatges']           = 5;                    ///< Limit de imatges 
+      $this->config['grandaria_max']           = FALSE;                ///< Grandaría max de la imatge (pes) 
+      $this->config['nom_div_galeria']         = 'galeriaDIV';         ///< Per a diferenciar entre galeries 
+      $this->config['plantilla_presentacio']   = FALSE;                ///< Plantilla que agafem per presentar la galeria
+      $this->config['plantilla_edita_imatge']  = FALSE;                ///< Plantilla per presentar imatge al editar
+      $this->config['descripcions_config']     = FALSE ;               ///< Instancia de DescripcionesGaleria
+      $this->config['dir_gal']                 = FALSE ;               ///< Directorio de las galerías
+      $this->config['dir_base']                = FALSE ;               ///< Directorio base respecto a html
+      $this->config['dir_mod']                 = GCM_DIR.'lib/int/galeria/' ; ///< Directorio html del módulo
+      $this->config['dir_tmp']                 = GCM_DIR.'tmp/' ;      ///< Directorio temporal donde podamos escribir, para las imagenes temporales
+      $this->config['dir_gcm']                 = GCM_DIR ;             ///< Directorio de GCM
+      $this->config['tipos_permisos']          = 0644;                 ///< Permisos para las imágenes
+
+      if ( $galeria_config ) $this->config = array_merge($this->config, $galeria_config);
+
+      if ( $this->config['descripcions_config'] ) {
+         $this->descripcions = new DescripcionesGalerias($this->config['descripcions_config']['tabla']
+            ,$id
+            ,$this->config['descripcions_config']['config']
+            ,$galeria_pdo
+            );
+         $this->descripcions->load();
+         }
+      $this->puntero = 0;
+      $this->id = $id;
+      $this->fitxer_js = dirname(__FILE__).'/../js/galeria_js.php';
+      $this->imatges = array();
+      $this->temporal = ( $this->id ) ? FALSE : TRUE ;
+
+      // @todo comprobar si es necesario con los nuevos cambios
+      $this->identificador_unic = ( $id ) ? $this->config['dir_gal'].'_'.$id : $this->config['dir_gal'];
+
+      if ( $this->temporal ) {
+         $this->galeria_url = $this->config['dir_tmp'].session_id().'/';
+         
+      } else {
+         $this->galeria_url = $this->config['dir_gal'].$this->id.'/';
+         }
+
+      // Comprobaciones
+
+      if ( !file_exists($this->dir_tmp) ) 
+         registrar(__FILE__,__LINE__,"No se puede acceder a carpeta temporal [".$this->dir_tmp."]",'ERROR');
+
+
+      $_SESSION['galeria']['config']  = $file_config;
+      $_SESSION['galeria']['id']      = $id;
 
       }
 
    /**
-    * Subir imagen a directorio temporal
+    * Recollir identificadors de imatges per $this->imatges
     */
 
-   function subir_imagen() {
+   public function load() {
 
-      if ( ! file_exists($this->dir_tmp)  ) {
-         $this->errores[] = "Sin directorio temporal para imágenes [".$this->dir_tmp."]";
+      if ( $this->loaded ) return TRUE;
+
+      $extensions_imatges[] = 'image/jpeg';
+      $extensions_imatges[] = 'image/gif';
+      $extensions_imatges[] = 'image/png';
+
+      $this->imatges = array();
+
+      // Si no existe la carpeta es que aun no hay galería
+      $url = $this->galeria_url;
+      
+      if ( !file_exists($url) ) {
+         return;
+         }
+
+      $archivos = glob($this->galeria_url.'/*');
+      foreach ( $archivos as $img) {
+         if ( esImagen($img) ) {
+            $imatge = new Imatge(basename($img), $this->config, $this->id);
+            $imatge->load();
+            $this->addImatge($imatge);
+            }
+         }
+
+      $this->loaded = TRUE;
+
+      }
+
+   /**
+    * Eliminar galeria de la bse de dades
+    */
+
+   function esborraGaleria() {
+
+      $dir = $this->dir_base.$this->galeria_url;
+
+      if ( file_exists($dir) ) {
+         rmdir_recursivo($dir);
+         }
+
+      $nom_galeria_session = 'galeria_imatges_'.$this->dir_gal;
+      // unset($_SESSION[$nom_galeria_session]);            // esborrem galeria de sessio
+
+      if ( $this->descripcions ) $this->descripcions->esborrar($this->id);
+
+      }
+
+   public function addImatge (Imatge $imatge) {
+
+      // Comprovar que no hem arribat al màxim 
+
+      if ( count($this->imatges) <= $this->limit_imatges ) {
+         $this->imatges[] = $imatge;
+      } else {
          return FALSE;
          }
 
-      /* Paràmetres enviats des del formulari */
-
-      $nIdThumb	= $_POST["nummin"];     ///< Nombre de miniatura
-      $altura     = $this->altura_max;                  ///< Forçar imatge a l'altura establerta
-      $amplaria   = $this->amplaria_max;                ///< Forçar imatge a l'amplària establerta
-
-      /** tenim una imatge per pujar */
-
-      $fFileTmpName 	= $_FILES['fimatge']['tmp_name'];
-      $fFileName		= $_FILES['fimatge']['name'];
-      $fFileSize		= $_FILES['fimatge']['size'];
-      $fFileType		= $_FILES['fimatge']['type'];
-      $fFileError		= $_FILES['fimatge']['error'];
-
-      if ($fFileError==4){	//No s'ha pujat cap fitxer
-
-         $fFileTmpName	= null;
-         $fFileName		= null;
-         $fFileSize		= null;
-         $fFileType		= null;
-
-         $this->errores[]	= "No ha seleccionat cap fitxer";
-         return FALSE;
-
-      } else {
-
-         // *** Control de errores
-         if ($fFileError>0){
-
-             switch ($fFileError){
-
-               case 1:  // ** Mida més gran que limit al php.ini (upload_max_filesize)
-                  $this->errores[]	= "El fitxer no pot superar les ".$_POST['MAX_FILE_SIZE']." bytes";
-               break;
-
-               case 2:  // ** Mida més gran que MAX_FILE_SIZE
-                  if ( $_POST['MAX_FILE_SIZE'] ) {
-                     $this->errores[]	= "El fitxer no pot superar les ".$_POST['MAX_FILE_SIZE']." bytes";
-                  } else {
-                     $this->errores[] = 'El fitxer a superat el pes permès pel servidor';
-                  }
-               break;
-
-               case 3:  // ** Upload interrumput (parcial)
-                  $this->errores[]	= "S'ha produit un error en el procés d'upload";
-               break;
-
-             }
-
-         } else {
-
-            // *** Control de seguridad
-            if (!is_uploaded_file($fFileTmpName)){
-
-               $this->errores[]	= "S'ha produit un error en el procés d'upload del fitxer. Possible intent d'accès no autoritzat al servidor";
-
-            } else {
-
-               $vDatosImg = @getimagesize($_FILES['fimatge']['tmp_name']);
-
-
-               if (!$vDatosImg) {
-
-                  $this->errores[] = 'Error llegint informació d\'imatge';
-
-               } else {
-
-                  if (isset($vDatosImg['mime'])) {
-                     $sTipo = $vDatosImg['mime'];
-                  } else if(isset($vDatosImg[2])) {
-                      $sTipo = image_type_to_mime_type($vDatosImg[2]);
-                  } else if (isset($iTipo)) {
-                      $sTipo = image_type_to_mime_type($iTipo);
-                  }
-
-                  if ( !$sTipo ) {
-
-                     $this->errores[] = 'Error llegint informació d\'imatge: mime';
-
-                  } else {
-
-                     switch($sTipo){
-                        case "image/gif":
-                           $fuente = imagecreatefromgif($fFileTmpName) or
-                              $this->errores[] = 'Error treballant amb format d\'imatge gif, provi amb altre format';
-                           break;
-                        case "image/jpeg":
-                           $fuente = imagecreatefromjpeg($fFileTmpName) or
-                              $this->errores[] = 'Error treballant amb format d\'imatge jpeg, provi amb altre format';
-                           break;
-                        case "image/png":
-                           $fuente = imagecreatefrompng($fFileTmpName) or
-                              $this->errores[] = 'Error treballant amb format d\'imatge png, provi amb altre format';
-                           break;
-                        default:
-                           $this->errores[] = 'Error treballant amb format d\'imatge '.$sTipo.', provi amb altre format';
-                           break;
-                        }
-
-
-                     if ( empty($this->errores) ) {
-
-                        $amplaria_imatge	= $vDatosImg[0];
-                        $altura_imatge	= $vDatosImg[1];
-
-                        /* Deduïm si hem de transformar depenent dels paràmetres rebuts */
-
-                        $transformacio = FALSE;
-
-                        if ( !empty($amplaria) && empty($altura) ) {
-
-                           // Volem imatge amb altura fixada
-                           $altura	= $altura_imatge * $amplaria / $amplaria_imatge ;
-                           $transformacio = TRUE;
-
-                        } elseif ( !empty($altura) && empty($amplaria) ) {
-
-                           // Volem imatge amb amplària fixada
-                           $amplaria = $amplaria_imatge * $altura / $altura_imatge ;
-                           $transformacio = TRUE;
-
-                        } elseif ( !empty($altura) && !empty($amplaria) ) {
-
-                           // Volem imatge amb amplària i altura fixada
-                           $transformacio = TRUE;
-
-                        }
-
-                        /* Transformen nomes si es mes gran */
-
-                        if ( $transformacio && ( $amplaria_imatge > $amplaria || $altura_imatge > $altura ) ) {
-
-                           $nova_imatge= ImageCreateTrueColor($amplaria, $altura)
-                             or $nova_imatge=ImageCreate($amplaria, $altura);
-
-                           ImageCopyResized($nova_imatge,$fuente,0,0,0,0,$amplaria,$altura,$amplaria_imatge,$altura_imatge);
-
-                           /*
-                            * Un tercer parametro podemos definir la calidad
-                            * que es de 0 a 100 siendo 100 la max calidad.
-                            * Por defecto es 75.
-                            * imagejpeg($nova_imatge,$fFileTmpName);
-                            */
-
-                           /* Se pinta la imagen según el tipo */
-
-                            switch($sTipo){
-                                case "image/gif":
-                                    imagegif($nova_imatge,$fFileTmpName);
-                                    break;
-                                case "image/jpeg":
-                                    imagejpeg($nova_imatge,$fFileTmpName, 100);
-                                    break;
-                                case "image/png":
-                                    imagepng($nova_imatge,$fFileTmpName, 9);
-                                    break;
-                                default:
-                                    $this->errores[] = 'Error treballant amb format d\'imatge '.$sTipo.', provi amb altre format';
-                                    break;
-                            }
-
-                           $fLogoSize	= filesize($fFileTmpName);
-
-                        }
-
-                       //  la imatge es guarda en directori temporal
-                       $nom_imatge = $fFileName ;
-                       $src_img = $this->dir_tmp.$nom_imatge;
-
-                       if ( ! rename($fFileTmpName,$src_img) ) {
-                          $this->errores[] = 'No se pudo guardar imagen en directorio temporal';
-                           }
-                        }
-                     }
-                  }
-               }
-
-            }
-
-         }
-
-      $src_img = ( isset($src_img) ) ? $src_img : '';
-
-      ?>
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html xmlns="http://www.w3.org/1999/xhtml">
-      <head>
-      <title></title>
-      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-      </head>
-
-      <script language="JavaScript">
-
-         if (document.images) {
-            thumbIO = new Image();
-            thumbIO.src='<?php echo $this->url_raiz.$src_img;?>';
-         }
-
-         function showResult(){
-
-           <?php if (empty($this->errores)) { ?>
-
-               /* Canviar el src del darrer thumbnail	*/
-               oThumb		=	parent.document.getElementById('thumbIMG<?php echo $nIdThumb;?>');
-
-               oThumb.src	= 	thumbIO.src;
-
-               // Afegim nom d'imatge a formulari
-
-               var input_imatge = document.createElement('input');
-               input_imatge.name = 'imatges_formulari[]';
-               input_imatge.value = thumbIO.src;
-               input_imatge.type = 'text';
-               input_imatge.style.display = 'none';
-               oThumb.appendChild(input_imatge);
-
-
-               oThumbButton			= parent.document.getElementById('buttonDIV<?php echo $nIdThumb;?>');
-               oThumbButton.innerHTML	= '<a href=\"javascript:esborrarImatge(\'<?=$this->sufijo?>\',<?php echo $nIdThumb;?>);\"><?=$this->contingut_enllac_borrar?></a>';
-
-           <?php } else { ?>
-
-              //** Mostrar missatge d'error
-              <?php foreach ( $this->errores as $error ) { ?>
-              parent.showMessageBoard('<?php echo addslashes($error);?>');
-              <?php } ?>
-
-              //** Esborrar darrer thumbnail
-              oThumb		= parent.document.getElementById('thumbDIV<?php echo $nIdThumb;?>');
-              oThumb.style.display	= 'none';
-
-              parent.document.getElementById('<?=$this->sufijo?>fimatge').style.display = 'block';
-
-           <?php } ?>
-
-         }
-
-         window.onload	= 	showResult;
-
-      </script>
-
-      <body>
-      <?php
-      if ( empty($this->errores) ) {
-        echo '<img src="'.$this->url_raiz.$src_img.'"/>';
-      } else {
-         foreach ( $this->errores as $error ) echo '<br />- '.$error;
-        }
-      ?>
-
-      </body>
-      </html>
-      <?php
-      exit();
-
       }
 
-   /**
-    * Inicia
-    *
-    * - Comprobamos POST en busca del estado de la galeria
-    * - segun estado actuamos
-    */
-
-   public function inicia() {
-
-      if ( isset($_GET['accio_galeria']) && $_GET['accio_galeria'] == 'agafa_imatge' ) {
-
-         $this->subir_imagen();
-
-      } else {
-
-         $this->presentaGaleria();
-
-         }
-
+   public function current () {
+      if (! $this->valid()) return false;
+      if (empty($this->imatges[$this->puntero])) return array();
+      return $this->imatges[$this->puntero];
       }
 
-   /**
-    * Guardar imagenes de galería
-    *
-    * Recogemos imagenes de formulario y las guardamos, la forma en que se guardan
-    * depende de Imagenes.
-    */
-
-   function guardar($id_tabla) {
-
-      if ( isset($_POST['imatges_formulari'])  ) {
-         foreach ( $_POST['imatges_formulari'] as $nombre_imagen ) {
-            $img = new $this->clase_imagen($this->conf_imatges,$id_tabla);
-            $img->guardar($nombre_imagen);
-            $this->addItem($img);
-            }
-         }
-
-      if (isset($_POST['imatges_borrar']) ) {
-
-         foreach ( $_POST['imatges_borrar'] as $nombre_imagen ) {
-            $img = new $this->clase_imagen($this->conf_imatges,$id_tabla);
-            $img->borrar($nombre_imagen);
-            $this->removeItem($img);
-            }
-
-         }
-
+   public function key() {
+      $this->load();
+      if ( $this->descripcions ) $this->descripcions->load();
+      return $this->puntero;
       }
 
-   /**
-    * Presentar galería
+   public function next() {
+      $this->load();
+      if ( $this->descripcions ) $this->descripcions->load();
+      return ++ $this->puntero;
+      }
+
+   public function rewind() {
+      $this->load();
+      if ( $this->descripcions ) $this->descripcions->load();
+      $this->puntero = 0;
+      }
+
+   public function valid() {
+      $this->load();
+      if ( $this->descripcions ) $this->descripcions->load();
+      return ( isset($this->imatges[$this->puntero]) ) ? TRUE : FALSE ;
+      }
+
+   public function count() {
+      $this->load();
+      return sizeof($this->imatges);
+      }
+
+   /** 
+    * caixa amb l'input per pujar imatge
     *
-    * Recogemos imágenes de galería
-    * presentamos imagenes
-    * Presentamos input para subir imagen
+    * Creamos variable de sesión con la instancia de Galeria
+    *
+    * @param $size_input_file grandària d'input d'imatge
+    * @param $imatge Nom de imatge tempoaral
     */
 
-   public function presentaGaleria($nom_imatge_temporal=NULL) {
+   function caixa_input($size_input_file = '31', $imatge=NULL) {
 
-      echo '<script language="JavaScript">';
+      $this->load();
+      if ( $this->descripcions ) $this->descripcions->load();
+
       include_once($this->fitxer_js);
-      echo '</script>';
 
-
-      if ( $this->identificador ) {
-         $this->recoger_imagenes_galeria();
-         }
-
-      ?>
-
-		<div class="galeria_imatges" id="<?=$this->sufijo?>galeria">
+      if ( $this->grandaria_max ) { ?>
       <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->grandaria_max;?>" />
-      <input type="hidden" id="<?=$this->sufijo?>nummin" name="nummin" value="<?=$this->num_miniatures?>" />
-      <input type="hidden" id="<?=$this->sufijo?>total_miniaturas" name="total_miniaturas" value="<?=$this->num_miniatures?>" />
-      <input type="hidden" name="estado" value="<?=$this->estado?>" />
-      <input type="hidden" name="identificador" value="<?=$this->identificador?>" />
-      <input id="<?=$this->sufijo?>fimatge" name="fimatge"
-      <?php if ( $nom_imatge_temporal ) {
-         echo 'value="'.$imatge.'" type="text"';
-      } else {
-         echo ' type="file" ';
-      } ?>
-      <?php if ( $this->num_miniatures >= $this->limit_imatges  ) echo " style='display: none;'"; ?>
-      size="<?php echo $this->amplada_boto_file; ?>"
-      <?php if ( $this->js_post_pujada ) { ?>
-      onchange="javascript: pujarImatge(this.form,<?=$this->limit_imatges?>,'<?=$this->js_post_pujada?>');" />
-      <?php } else { ?>
-      onchange="javascript: pujarImatge(this.form,<?=$this->limit_imatges?>);" />
       <?php } ?>
-      <iframe name="frameImatge" width="100%" height="200px" style="display:none;"></iframe>
-      </div>
 
+      <input type="hidden" name="contador" id="contador_<?php echo $this->identificador_unic?>" value="<?php echo $this->count() ?>" />
       <?php
 
-      $this->caixa_galeria();
-      $this->caixa_missatges();
+      require(dirname(__FILE__).'/plupload/caixa_input.php');
 
-      /* css */
+      if ( $this->incluir_css ) {
 
-      echo '<style>';
-      include(dirname(__FILE__).'/../css/galeria.css');
-      echo '</style>';
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/galeria.css.php'); ?>
+         </style>
+         <?php
+
+         }
+
+      return;
       }
 
    /** Caixa amb missatges de error */
 
    function caixa_missatges() {
 
-      ?>
+      ?>   
       <div id="messageBoardDIV" style="display:none;">
          <div>&nbsp;</div>
-         <div class="genButton"><a href="javascript:hideMessageBoard();">ok</a></div>
+         <div class="genButton"><a href="javascript:hideMessageBoard();">ok</a></div>	
       </div>
       <?php
-
+         
       }
 
-   /**
+   /** 
     * Presentem caixa amb les imatges
     *
-    * @param $imatge En cas de tindre una imatge temporal pasem el nom
+    * Guardamos una instanca de Galeria en sessión que nos permitira
+    * borrar o editar
+    *
+    * @param $displayHash Array con contenido de formularios @see Solicitud
     */
 
-   function caixa_galeria($imatge=NULL) {
+   function caixa_galeria($displayHash=FALSE) {
 
-      $nIdImg = ( isset($_POST['nIdImg']) ) ? $_POST['nIdImg'] : '';
+      echo '<div id="caixa_galeria">';
 
-      echo '<div id="galleryContainerDIV">';
+      if ( $this->count() > 0 ) {
 
-      if ( ! empty($this->imagenes) ) {
-
-         $conta=0;
-         foreach ( $this->imagenes as $img ) {
-            $conta++;
-            $this->presentaImatgeEditar($img,$conta);
-            $this->num_miniatures++;
-            }
-
+         for($i=0;$i<$this->count();$i++){
+            $this->presentaImatgeEditar($this->imatges[$i],$i+1, $displayHash);
+            } 	
          }
-   ?>
-      </div>
-   <?php
-   }
 
-   /**
-    * Recoger identificador de imágenes de galeria
-    */
-
-   private function recoger_imagenes_galeria() {
-
-      if ( empty($this->imagenes) ) {
-         $imagenes = call_user_func( array($this->clase_imagen, "listado"),$this->conf_imatges, $this->identificador );
-         foreach ( $imagenes as $nombre_imagen) {
-            $this->num_miniatures++;
-            $this->imagenes[] = new $this->clase_imagen($this->conf_imatges, $this->identificador, $nombre_imagen);
-            }
-         }
+      echo '</div>';
 
       }
 
-   /**
+   /** 
     * Editar Imatge
     *
-    * @param $img Objecto Imagen
-    * @param $num_miniatura Numero de miniatura
-    *
+    * @param $imatge Objecta d'Imatge
+    * @param $i      Nombre de miniatura
+    * @param $displayHash Array con contenido de formularios @see Solicitud
     */
 
-   function presentaImatgeEditar($img, $conta=1) {
+   function presentaImatgeEditar(Imatge $imatge,$i, $displayHash=FALSE) {
+
+      $imatgeId = $imatge->getId();
+
+      if ( $this->temporal ) {
+
+         // permisos
+
+         chmod($this->galeria_url.$imatgeId,$this->tipos_permisos);
+
+         $href = $this->dir_base.$this->dir_gcm.'tmp/'.session_id().'/'.$imatgeId;
+
+      } else {
+
+         $href = $imatge->getMiniaturaSrc();
+         }
+
+      if ( $this->plantilla_edita_imatge ) {
+         include($this->plantilla_edita_imatge);
+      } else {
+         include(dirname(__FILE__).'/../html/miniatura_edit.phtml');
+         }
+
+      if ( $this->incluir_css ) {
+
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/galeria.css.php'); ?>
+         </style>
+         <?php
+
+         }
+
+      }
+
+   public function carga_php_general() {
+      $include_php='lib/int/galeria/presentacions/'.$this->plantilla_presentacio.'/include.php';
+      if ( file_exists(GCM_DIR.$include_php) ) $this->carga_php_general = $include_php;
+      return $this->carga_php_general;
+      }
+
+   public function carga_js_general() {
+      $include_config=dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/config.php';
+      if ( file_exists($include_config) ) {
+         include($include_config);
+         if ( ! isset($carga_js_general) ) {
+            registrar(__FILE__,__LINE__,"Error con configuración de ".$this->plantilla_presentacio,'ERROR');
+         } else {
+            $this->carga_js_general = $carga_js_general;
+            return $this->carga_js_general;
+            }
+      } else {
+         registrar(__FILE__,__LINE__,"Falta rchivo config de presentación de ".$this->plantilla_presentacio,'ERROR');
+         }
+      return FALSE;
+      }
+
+   /**
+    * Presentem galeria
+    */
+
+   function presentaGaleria(){
+
+      $this->load();
+      if ( $this->descripcions ) $this->descripcions->load();
+
+      // Si no tenim imatges sortim
+      if ( !$this->count() > 0 ) return;
+
+      if ( $this->incluir_css ) {
+
+         ?>
+         <style>
+         <?php include(dirname(__FILE__).'/../css/galeria.css.php'); ?>
+         </style>
+         <?php
+
+         }
+
+      // Si tenim una plantilla seleccionada la apliquem
+
+      if ( $this->plantilla_presentacio ) {
+         include (dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/trepa.phtml');
+         return;
+         }
 
       ?>
-      <div id="thumbDIV<?php echo $conta; ?>" class="galleryThumbnail">
-         <div>
-            <img id="thumbIMG<?=$conta?>" 
-               src="<?=$this->url_raiz.$img->getUrl();?>" 
-               style="border: 1px solid <?php echo $this->color_bord;?>" 
-               <?php if ( $this->amplada_presentacio ) echo " width='".$this->amplada_presentacio."'"; ?>
-               <?php if ( $this->altura_presentacio ) echo " height='".$this->altura_presentacio."'"; ?>
-               >
-         </div>
-         <div id="buttonDIV<?php echo $conta;?>">
-            <a href="javascript:esborrarImatge('<?=$this->sufijo?>',<?=$conta?>);">
-            <?=$this->contingut_enllac_borrar?>
-            </a>
-            <input type="hidden" name="imatgeGaleria[<?=$conta?>]" value="<?=$img->getNombre()?>" />
-         </div>
+      <!-- Comença el cos de galeria Galeria -->
+
+      <div id="<?php echo $this->nom_div_galeria ?>">
+         <?php
+         if ( $this->count() > 0 ) {
+            for ($i=0;$i<$this->count();$i++){
+               $this->presentarImatge($this->imatges[$i],$i);
+               }
+            }
+         ?>
+
       </div>
       <?php
+   }
+
+   /** Presentar imatge
+    *
+    * @param $imatge  Objecta d'imatge
+    * @param $idThumb Nombre de miniatura
+    */
+
+   function presentarImatge(Imatge $imatge, $idThumb) {
+
+      include(dirname(__FILE__).'/../html/miniatura_veure.phtml');
 
       }
 
    /**
-    * Añadir imagen
+    * Guardar imatges
+    *
+    * Si pasamos un identificador para guardar las imágenes definitivas
+    * la galería pasa a no estar en estado temporal.
+    *
+    * @param $id Identificador del element al que pertany la galeria
     */
 
-   function addItem($img) {
-   
-      $this->imagenes[] = $img;
-      $this->num_miniatures++;
+   function guardar($id=FALSE) {
 
+      if ( $id ) $this->id = $id;
+
+      $this->load();
+
+      if ( $this->descripcions ) $this->descripcions->guardar($this->id); 
+
+      $this->galeria_url = $this->config['dir_gal'].$this->id.'/';
+
+      // Si la galeria esta en estado temporal se guardan las imagenes a directorio
+      // definitivo, en caso contrario no se hace nada, ya que se suben al momento.
+
+      if ( !$this->temporal ) return TRUE ;
+
+      foreach ( $this->imatges as $imatge ) {
+
+         $imatge->guardar($this->config, $this->id);
+
+         }
+
+      $this->temporal = FALSE ;
+
+      unset($_SESSION['galeria']);            // esborrem galeria de sessio
+
+      return TRUE;
       }
 
    /**
-    * Eliminar imagen de la lista
+    * Esborra imatge de galeria
+    *
+    * Si no existeix la imatge entenem que estem volent canviar una imatge
+    * de la base de dades per altra temporal. Per tant la imatge no es podrà
+    * esborrar ja que si ho fem esborrem tot el registre.
+    *
+    * @param $id      Identificador d'imatge
+    * @param $idThumb Nombre de miniatura
     */
 
-   function removeItem($img) {
-   
-      $this->num_miniatures--;
+   function esborrarImatge($id,$idThumb) {
 
+      $src = $this->galeria_url.$id;
+
+      if ( $this->temporal ) {
+         
+         if ( file_exists($src)) {
+            if ( unlink($src) ) {
+               echo $idThumb;
+            } else {
+               echo "No s'ha pogut esborrar la imatge temporal"; // FALTA LITERAL
+               }
+         } else {
+            echo $idThumb;
+         }
+
+      } else {
+
+         $imatge = new Imatge($id, $this->config, $this->id);
+         if ( $imatge->borrar() === FALSE ) {
+            return FALSE;
+         } else {
+            echo $idThumb;
+            }
+
+         }
+
+      $imatges = $this->imatges;
+      $this->imatges = array();
+
+      foreach ( $imatges as $imatge ) {
+         if ( ! empty($imatge) && ( $imatge->id != $id ) ) $this->imatges[] = $imatge;
+         }
+
+      // if ( isset($_SESSION[$this->dir_gal]) ) {
+      //    $_SESSION[$this->dir_gal]['config']  = $this->config;
+      //    $_SESSION[$this->dir_gal]['imatges'] = $this->imatges;
+      //    }
+
+      }
+
+   function accion($accion) {
+
+      // Definir acción a realizar
+      
+      switch ($_REQUEST['galeria_accion']) {
+
+         case 'actualizar':
+            include('actualizar_galeria.php');
+            exit();
+            break;
+         
+         case 'subir':
+            include('pujar_imatge.php');
+            exit();
+            break;
+         
+         case 'esborra':
+            include('esborra_imatge.php');
+            exit();
+            break;
+         
+         default:
+            die(literal("Acción no definida"));
+            // code...
+            break;
+         }
+      }
+
+   /**
+    * Presentación de galeria para su modificación
+    *
+    * @param $displayHash Array con contenido de formularios @see Solicitud
+    */
+
+   function formulario($displayHash=FALSE) {
+
+      // Añadimos caja de presentación de las imagenes
+      $this->caixa_galeria($displayHash);
+      
+      // Añadimos caja de mensajes de la galería
+      $this->caixa_missatges();
+
+      // Añadimos input para insertar imagen nueva
+      $this->caixa_input();
+
+      }
+
+   function __toString() {
+
+      $temporal = ( $this->temporal ) ? 'TRUE' : 'FALSE';
+
+      $salida  = '<br />id: '.$this->id;
+      $salida .= '<br />temporal: '.$temporal ;
+      $salida .= '<br />galeria_url: '.$this->galeria_url;
+      $salida .= '<br />config: '.print_r($this->config,1);
+      $salida .= "<br />Imagenes: ";
+
+      foreach ( $this as $imatge ) {
+         $salida .= print_r($imatge,1);
+         }
+
+      return $salida;
+
+      }
+
+   function __get($variable_configuracion) {
+
+      if ( isset($this->config[$variable_configuracion]) ) {
+         return $this->config[$variable_configuracion];
+         }
+
+      registrar(__FILE__,__LINE__,"Error [$variable_configuracion] no es una variable de configuración",'ERROR');
+      
+      return FALSE;
+      }
+
+   function __set($variable_configuracion, $valor) {
+
+      if ( isset($this->config[$variable_configuracion]) ) {
+         $this->config[$variable_configuracion] = $valor ;
+         return;
+         }
+
+      registrar(__FILE__,__LINE__,
+         "Error $variable_configuracion no es una variable de configuración, no se puede añadir valor [".$valor."]",'ERROR');
+      
       }
 
    }
+
+?>

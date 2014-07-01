@@ -76,7 +76,12 @@ function __autoload($clase) {
       $fich = 'modulos/'.$clase.'/lib/'.ucfirst($clase).'.php';
 
       if ( ! file_exists($fich) ) {
-         $gcm->registra(__FILE__,__LINE__,'Error al requerir módulo ['.$clase.'] El archivo ['.$fich.'] no existe','ERROR');
+         $msg = 'Error al requerir módulo ['.$clase.'] El archivo ['.$fich.'] no existe';
+         if ( $gcm ) {
+            $gcm->registra(__FILE__,__LINE__,$msg,'ERROR');
+         } else {
+            die($msg);
+            }
          return FALSE;
          }
    

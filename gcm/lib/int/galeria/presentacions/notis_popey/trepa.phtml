@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file notis_popey/trepa.phtml 
+ * @ingroup galeria
+ * @ingroup plantilla_galeria
+ * @brief Plantilla para presentar las imagenes con notis_popey
+ */
+
+?>
+
+<?php if ( $this->count() > 0 ) { ?>
+
+<div class="ppy" id="<?php echo $this->id;?>">
+            <ul class="ppy-imglist">
+
+   <?php for ($i=0;$i<$this->count();$i++){ $imatge = $this->imatges[$i]; ?>
+
+       <li>
+           <a href="<?php echo $this->dir_base.$imatge->getSrc();?>">
+               <img src="<?php echo $this->dir_base.$imatge->getMiniaturaSrc();?>" alt="" />
+           </a>
+           <span class="ppy-extcaption">
+               <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) ) { ?>
+           <?php echo $this->descripcions->descripcions[$imatge->getNom()]['titol']?>
+               <?php } ?>
+               <?php if ( isset($this->descripcions->descripcions[$imatge->getNom()]['subtitol']) ) { ?>
+               <br />
+               <em><?php echo $this->descripcions->descripcions[$imatge->getNom()]['subtitol']?></em>
+               <?php } ?>
+           </span>
+       </li>
+
+   <?php } ?>
+
+         </ul>
+            <div class="ppy-outer">
+                <div class="ppy-stage">
+                    <div class="ppy-nav">
+                        <a class="ppy-prev" title="Anterior">Anterior</a>
+                        <a class="ppy-switch-enlarge" title="Ampliar">Ampliar</a>
+                        <a class="ppy-switch-compact" title="Tancar">Tancar</a>
+                        <a class="ppy-next" title="Seguent">Següent</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ppy-caption">
+                <div class="ppy-counter">
+                    Imatge <strong class="ppy-current"></strong> de <strong class="ppy-total"></strong> 
+                </div>
+                <span class="ppy-text"></span>
+            </div>
+
+      </div>
+
+<?php } ?>
+
+<?php
+
+$this->carga_js = "
+
+       var options = {
+           direction:  'right',
+           duration:  '600',
+           opacity:  '0.8'
+       }
+         $('#".$this->id."').popeye(options);
+";
+
+?>

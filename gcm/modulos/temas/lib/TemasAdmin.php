@@ -855,7 +855,7 @@ class TemasAdmin extends Temas {
       global $gcm;
 
       ?>
-      <h2>Temas</h2>
+      <h3>Temas</h3>
       <?php
       $temas = glob($this->dir_temas.'*');
 

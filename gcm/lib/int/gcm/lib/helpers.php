@@ -44,7 +44,11 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
    global $LG, $GCM_LG, $gcm;
 
-   $proyecto = $gcm->config('admin','Proyecto');
+   if ( $gcm ) {
+      $proyecto = $gcm->config('admin','Proyecto');
+   } else {
+      $Proyecto = 'SinProyecto';
+   }
 
    $literal = html_entity_decode($literal,ENT_NOQUOTES,'UTF-8');
 
@@ -88,9 +92,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          registrar(__FILE__,__LINE__,$mens);
 
-         $LG[$literal] = '';
+         $LG[$literal] = ( $valor ) ? $valor : '';
 
-         return $literal;
+         return ( $valor ) ? $valor : $literal ;
 
          break;
 
@@ -141,9 +145,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          /* Añadimos a $GCM_LG para que haya constancia inmediata */
 
-         $GCM_LG[$literal]='';
+         $GCM_LG[$literal] = ( $valor ) ? $valor : '';
 
-         return $literal;
+         return ( $valor ) ? $valor : $literal ;
 
          break;
       }
@@ -390,20 +394,20 @@ function presentarBytes($bytes) {
  *
  * @param $time tiempo unix
  * @param $formato_salida Formato de salida 
- *                        1- 08 de May, 2008
- *                        2- 08 de May, 2008 23.34
- *                        3- 08 May
+ *          1. 08 de May, 2008
+ *          2. 08 de May, 2008 23.34
+ *          3. 08 May
  * @param $formato_entrada Formatos de entrada (por defecto unix):
- *                         - unix
- *                         - mysql   datatime
- *                         - sqlite  se espera unix
- *                         - deducir Intentaremos deducir cual es
+ *          1. unix
+ *          2. mysql   datatime
+ *          3. sqlite  se espera unix
+ *          4. deducir Intentaremos deducir cual es
+ * @param $salida_personal Formato de salida personalizado
  *
  * @return fecha formateada
- *
  */
 
-function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
+function presentarFecha($time, $formato_salida=1, $formato_entrada='unix', $salida_personal=FALSE) {
 
    if ( $formato_entrada == 'sqlite' ) $formato_entrada = 'unix';
 
@@ -412,7 +416,7 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
       if ( is_int($time) ) {
          $formato_entrada = 'unix';
       } else {
-         registrar(__FILE__,__LINE__, "No se pudo dedicir el formato de la fecha [".$time."]",'ADMIN');
+         registrar(__FILE__,__LINE__, "No se pudo deducir el formato de la fecha [".$time."]",'ADMIN');
          }
       }
 
@@ -429,30 +433,44 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix') {
          }
       }
 
-   $mes = date('F', $time);
-   $dia = date('d', $time);
-   $anyo = date('Y', $time);
-   $hora = date('H', $time);
-   $minutos = date('i', $time);
+   $dia        = date('d', $time);
+   $dia_letras = date('D', $time);
+   $mes        = date('F', $time);
+   $mes_numero = date('m', $time);
+   $anyo       = date('Y', $time);
+   $hora       = date('H', $time);
+   $minutos    = date('i', $time);
 
    $mes = literal($mes);
 
-   switch ($formato_salida) {
+   if ( !$salida_personal ) {
+     switch ($formato_salida) {
 
-       case 2:
-          return $dia.' de '.$mes.', '.$anyo. ' '.$hora.':'.$minutos;
-          break;
+         case 2:
+            return $dia.' de '.$mes.', '.$anyo. ' '.$hora.':'.$minutos;
+            break;
 
-       case 3:
-          return $dia.' de '.$mes;
-          break;
+         case 3:
+            return $dia.' de '.$mes;
+            break;
 
-       default:
-         return $dia.' de '.$mes.', '.$anyo;
-         break;
+         default:
+           return $dia.' de '.$mes.', '.$anyo;
+           break;
 
-      }
+        }
 
+     }
+
+   $salida = str_replace('%dia_letras',$dia_letras,$salida_personal);
+   $salida = str_replace('%dia',$dia,$salida_personal);
+   $salida = str_replace('%mes_numero',$mes_numero,$salida);
+   $salida = str_replace('%mes',$mes,$salida);
+   $salida = str_replace('%anyo',$anyo,$salida);
+   $salida = str_replace('%hora',$hora,$salida);
+   $salida = str_replace('%minutos',$minutos,$salida);
+   
+   return $salida;
    }
 
 /**
@@ -728,12 +746,13 @@ function mostrar_ip() {
 function mkdir_recursivo($ruta) {
 
    $directorios = explode('/',$ruta);
-   $dir = '';
+   $dir = ( $directorios[0] == '' ) ? '/' : '' ;
    for ( $i=0;$i<=count($directorios)-1;$i++ ) {
       $dir=$dir.$directorios[$i];
+      $dir = str_replace('//','/',$dir);
       if ( ! is_dir($dir) ) {
-         if ( ! @mkdir( $dir) ) {
-            $mens = 'Debe crearse el directorio de los idiomas con los literales en: ['.$dir.'] con los permisos adecuados' ;
+         if ( ! mkdir( $dir) ) {
+            $mens = 'No pudo crearse directorio ['.$dir.']' ;
             registrar(__FILE__,__LINE__,$mens,'ERROR');
             return FALSE;
             }

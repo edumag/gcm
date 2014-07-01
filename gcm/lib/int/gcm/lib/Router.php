@@ -335,18 +335,6 @@ class Router {
 
       $proyecto = $gcm->config('admin','Proyecto');
 
-      // Si hay un idioma definido en GET se redefine idioma actual
-      if (isset($_GET["idioma"])) { 
-         $_SESSION[$proyecto."-idioma"] = $_GET["idioma"]; 
-         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
-         // variable GET
-         registrar(__FILE__,__LINE__,"Recargamos pagina para tener idioma definido",'AVISO');
-         
-         header("Location: ".self::$base.$_GET['idioma'].'/'.self::$s.self::$c);
-         exit();
-         return $_GET['idioma'];
-         }
-
       if ( ! self::$i ) {
 
          if ( isset($_SESSION[$proyecto.'-idioma']) ) {
@@ -458,6 +446,16 @@ class Router {
          exit();
          }
 
+      /*
+       * Si recibimos la url hacia una sección sin barra al final la redirigimos
+       * para añadirle la barra y que no den problemas los enlaces absolutos
+       */
+
+      if ( self::$s !== "" && self::$c == "" && self::$url{strlen(self::$url)-1} !== '/' ) {
+         header( "HTTP/1.1 301 Moved Permanently" );
+         header("Location: ".self::$base.self::$s.self::$c);
+         }
+
       /* Definir fichero final */
 
       if (!self::$s && ( !self::$c || self::$c == 'index.html' || self::$c == 'index.php') ) {
@@ -501,6 +499,18 @@ class Router {
       self::$base_absoluta = $base_absoluta.'/'.self::$s;
 
       self::$base_absoluta = str_replace('/./','/',self::$base_absoluta);
+
+      // Si hay un idioma definido en GET se redefine idioma actual
+      if (isset($_GET["idioma"])) { 
+         $_SESSION[$proyecto."-idioma"] = $_GET["idioma"]; 
+         // Enrutamos para evitar la inconcruencia de tener el idioma en la url y en la
+         // variable GET
+         registrar(__FILE__,__LINE__,"Recargamos pagina para tener idioma definido",'AVISO');
+
+         header("Location: ".self::$base.$_GET['idioma'].'/'.self::$s.self::$c);
+         exit();
+         return $_GET['idioma'];
+         }
 
       registrar(__FILE__,__LINE__,'Variables en Router',FALSE,depurar(get_class_vars(__CLASS__)));
 

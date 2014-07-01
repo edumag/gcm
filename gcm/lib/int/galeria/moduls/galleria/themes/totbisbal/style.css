@@ -1,0 +1,13 @@
+BODY {MARGIN-TOP: 10px;FONT-SIZE: 11px;BACKGROUND-ATTACHMENT: scroll;MARGIN-LEFT:10px;FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;BACKGROUND-COLOR: #ffffff;margin-bottom: 10px;}
+TD { FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif } 
+P { BACKGROUND: white FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+H1 { FONT-SIZE: 12px; COLOR: #979797; FONT-FAMILY: Helvetica, Verdana, Arial }
+H2 { FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+H3 { FONT-SIZE: 18px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+.textsm { FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+.textbg { FONT-SIZE: 20px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+.textreg { FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+.framethumbnail { FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif }
+.textrans {color: #FFFFFF;}
+.textreg {font-size: 13px;font-weight: bolder;}
+.ad:hover{font-size:11px;color:#CC9900;text-decoration:none;}

@@ -20,8 +20,6 @@ require_once(dirname(__FILE__).'/DataBoundObject.php');
 
 require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
 
-// require_once(GCM_DIR.'lib/int/galeria/lib/Galeria.php');
-
 /**
  * Extendemos DataBoundObject para automatizar los procesos de insertar,
  * modificar, y borrar registros de la base de datos.
@@ -35,7 +33,6 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  *   tabla relacionada.
  * - fecha_creacion como timestamp.
  * - fecha_modificacion como timestamp
- * - imagen_url Campo para url de imagen.
  *
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
@@ -252,11 +249,29 @@ class Crud extends DataBoundObject {
    public $conf_paginador = FALSE;        
 
    /**
-    * Definimos la url del formulario al que se debe volver en caso de errpres,
+    * Definimos la url del formulario al que se debe volver 
     * pordefecto es $_SERVER["REDIRECT_URL"] 
     */
 
    public $url_formulario = FALSE;
+
+   /**
+    * Definimos la url del formulario al que se debe volver en caso de errores
+    * pordefecto es $_SERVER["REDIRECT_URL"] 
+    */
+
+   public $url_formulario_con_fallos = FALSE;
+
+   /**
+    * Archivo con la Configuración de galería
+    *
+    * Podemos tener un sistema completo de galerías de imágenes relacionadas
+    * con los registros.
+    *
+    * @see Galeria
+    */
+
+   public $galeria_config = FALSE;
 
    /**
     * Podemos definir un metodo personalizado para la visualización de los registros 
@@ -430,6 +445,12 @@ class Crud extends DataBoundObject {
 
       // Definimos url_formulario
       $this->url_formulario = $_SERVER['REQUEST_URI'] ;
+
+      // Galeria de imágenes
+      if ( $this->galeria_config ) {
+         require_once(GCM_DIR.'lib/int/galeria/lib/GaleriaFactory.php');
+         $this->galeria = GaleriaFactory::inicia($this->galeria_config, $id);
+         }
       }
 
    /**
@@ -682,12 +703,6 @@ class Crud extends DataBoundObject {
             $this->tipos_formulario[$row['name']]['tipo'] = 'mail';
             }
 
-         /* Para campos imagen_url */
-
-         if ( $row['name'] == 'imagen_url'  ) {
-            $this->tipos_formulario[$row['name']]['tipo'] = 'imagen_url';
-            }
-
          // Campos 'text' seran 'textarea'
          
          if ( ! isset($this->tipos_formulario[$row['name']]['tipo'])  && $row['type'] == 'text' ) {
@@ -751,12 +766,6 @@ class Crud extends DataBoundObject {
 
          if ( $row['Field'] == 'mail'  ) {
             $this->tipos_formulario[$row['Field']]['tipo'] = 'mail';
-            }
-
-         /* Para campos imagen_url */
-
-         if ( $row['Field'] == 'imagen_url'  ) {
-            $this->tipos_formulario[$row['Field']]['tipo'] = 'imagen_url';
             }
 
          // Campos 'text' seran 'textarea'
@@ -1160,7 +1169,56 @@ class Crud extends DataBoundObject {
 
       $this->visualizar_registros_relacionados();
 
-      if ( $this->galeria ) $this->galeria->inicia();
+      if ( $this->galeria ) {
+         if ( $this->ID ) {
+           // @todo Reorganizar
+           $galeria = $this->galeria; ///< Importante para que coja bien 
+            $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
+            $this->galeria->presentaGaleria();
+            
+            $javascript = $this->galeria->carga_js;
+
+            if ( $this->galeria->carga_js_general() ) $librerias = $this->galeria->carga_js_general();
+
+            if ( $this->galeria->carga_php_general() ) include(GCM_DIR.$this->galeria->carga_php_general());
+
+            ?>
+            <script type="text/javascript" charset="utf-8">
+
+            <?php if ( Router::$formato != 'ajax' ) { ?>
+            addLoadEvent(function(){
+            <?php } ?>
+
+               // Cargamos librería de presentación
+               // <?php echo $librerias ?>
+
+               <?php 
+               if ( $librerias ) {
+                  foreach ( $librerias as $lib ) {
+                     if ( file_exists(GCM_DIR.$lib) ) {
+                        echo "\n";
+                        echo file_get_contents(GCM_DIR.$lib);
+                        echo "\n";
+                     } else {
+                        ?>
+                     // ERROR no se pudo obtener librería
+
+                     console.log('Error cargando librería: <?php echo GCM_DIR.$lib?>');
+
+                        <?php
+                     }
+                  }
+               }
+                ?>
+               <?php echo $javascript; ?>   
+            <?php if ( Router::$formato != 'ajax' ) { ?>
+            });
+            <?php } ?>
+            </script>
+            <?php
+
+            }
+         }
 
       }
    
@@ -1382,7 +1440,10 @@ class Crud extends DataBoundObject {
 
       $this->formulario_registros_combinados($displayHash);
 
-      if ( $this->galeria ) $this->galeria->inicia();
+      if ( $this->galeria ) {
+          $this->galeria = GaleriaFactory::inicia($this->galeria_config,$this->ID);
+          $this->galeria->formulario($displayHash);
+          }
 
       if ( $this->tipo_tabla == 'normal' ) {
          ?>
@@ -1532,7 +1593,7 @@ class Crud extends DataBoundObject {
 
          $solicitud = new Solicitud();
          $solicitud->SetRedirectOnConstraintFailure(true);
-         $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario);
+         $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario_con_fallos);
          $_SESSION['VALORES'] = $solicitud->GetParameters();
 
          if ( isset($this->restricciones) && ! empty($this->restricciones) ) {
@@ -1639,8 +1700,6 @@ class Crud extends DataBoundObject {
 
                if ( $this->save() ) {
 
-                  /* Si utilizamos galería hay que guardar imagenes */
-
                   $this->ID = ( isset($this->ID) && ! empty($this->ID) ) ? $this->ID : $this->ultimo_identificador();
 
                   /* Si tenemos eventos los lanzamos */
@@ -1654,7 +1713,10 @@ class Crud extends DataBoundObject {
                      $this->$metodo($this->ID);
                      }
 
-                  if ( $this->galeria ) $this->galeria->guardar($this->ID);
+                  if ( $this->galeria ) {
+                     registrar(__FILE__,__LINE__,"Guardamos galeria ".$this->ID);
+                     $this->galeria->guardar($this->ID);
+                     }
 
                   // Si tenemos registros relacionados de otras tablas hay que guardarlos tambien
                   // Primero borramos los que ya existan relacionados al registro padre

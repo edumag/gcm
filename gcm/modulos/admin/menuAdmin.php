@@ -63,10 +63,10 @@ $menuAdmin[literal('Seguimiento',3)]['title']=literal('Seguimiento del proyecto'
 $proyecto = $gcm->config('admin','Proyecto');
 $menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['activado']= 1;
 $menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['title']="Modo usuario";
-$menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['link']=dirname($_SERVER['PHP_SELF'])."?tema=";
+$menuAdmin[$proyecto]['boton'][literal('Modo view',3)]['link']=dirname($_SERVER['PHP_SELF'])."?administrando=0";
 $menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['activado']= 1;
 $menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['title']="Modo administración";
-$menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['link']=dirname($_SERVER['PHP_SELF'])."?tema=admin";
+$menuAdmin[$proyecto]['boton'][literal('Modo admin',3)]['link']=dirname($_SERVER['PHP_SELF'])."?administrando=1";
 
 
 /** Especificamos peso para ordenar menú */

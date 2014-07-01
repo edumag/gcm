@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file miniatura_veure.phtml
+ * @brief Trepa per defecta.
+ */
+
+$title = "";   ///< Title d'imatge
+$alt   = "";   ///< alt d'imatge
+
+if ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) && isset($this->descripcions->descripcions[$imatge->getNom()]['subtitol']) ) { 
+
+   // Tenim titol i subtitol
+   $alt   = $this->descripcions->descripcions[$imatge->getNom()]['titol'];
+   $title = $this->descripcions->descripcions[$imatge->getNom()]['titol'].
+            "\n\n".
+            $this->descripcions->descripcions[$imatge->getNom()]['subtitol'];
+
+} elseif ( isset($this->descripcions->descripcions[$imatge->getNom()]['titol']) ) { 
+
+   // nomes tenim titol
+   $alt   = $this->descripcions->descripcions[$imatge->getNom()]['titol'];
+   $title = $this->descripcions->descripcions[$imatge->getNom()]['titol'];
+   
+} elseif ( isset($this->descripcions->descripcions[$imatge->getNom()]['subtitol']) ) { 
+
+   // nomes tenim subtitol
+   $alt   = $this->descripcions->descripcions[$imatge->getNom()]['subtitol'];
+   $title = $this->descripcions->descripcions[$imatge->getNom()]['subtitol'];
+
+} else {
+
+   // No tenim cap
+   $alt   = "Imatge de galeria ".$imatge->getId();
+   $title = "Imatge de galeria ".$imatge->getId();
+
+   }
+
+?>
+<div id="miniatura_div<?php echo $imatge->getId(); ?>" class="presentaImatges">
+   <a href="#" onclick="javascript:window.open('<?php echo $this->dir_base.$imatge->getSrc()?>','galeriaWIN','menubar=no,scrollbars=yes,toolbar=no,resizable,status=no');">
+   <img id='miniatura<?php echo $idThumb?>' class="thumbGaleria" 
+   <?php if ( $this->amplada_presentacio ) echo ' width="'.$this->amplada_presentacio.'"'; ?>
+   <?php // if ( $this->altura_presentacio ) echo ' height="'.$this->altura_presentacio.'"'; ?>
+   src="<?php echo $this->dir_base.$imatge->getMiniaturaSrc();?>" border="0" 
+   title="<?php echo htmlentities($title);?>"
+   alt="<?php echo htmlentities($alt);?>"
+   >
+   </a>
+   <span>
+      <strong><?php echo literal('Título',3) ?>: </strong>
+      <p>
+      <?php echo $this->descripcions->descripcions[$imatge->getNom()]['titol']; ?>
+      </p>
+      <strong><?php echo literal('Subtitulo',3) ?>: </strong>
+      <p>
+      <?php echo $this->descripcions->descripcions[$imatge->getNom()]['subtitol']; ?>
+      </p>
+   </span>
+</div>

@@ -48,7 +48,6 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 <?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
 
    <li id="menuOff">
-      <a href="<?php echo Router::$base.$elemento;?>" >
          <?php echo literal($elemento);?>
    </li>
 

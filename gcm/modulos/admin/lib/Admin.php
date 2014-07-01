@@ -306,7 +306,12 @@ class Admin extends Modulos {
          if ( $pos1 && $pos2 && $etiqueta && $remplazar ) {
 
             ob_start();
-            list($modulo,$accion,$args) = explode(',',$etiqueta);
+            
+            $elementos = explode(',',$etiqueta) ;
+            $modulo = $elementos[0];
+            $accion = $elementos[1];
+            $args   = ( isset($elementos[2]) ) ? $elementos[2] : FALSE;
+
             $gcm->event->lanzar_accion_modulo($modulo,$accion,'shortcode',$args);
             $etiqueta = ob_get_contents();
             ob_end_clean();

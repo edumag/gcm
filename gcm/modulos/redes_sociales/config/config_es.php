@@ -11,6 +11,9 @@
 
 // $config_DESC['variable de ejemplo'] = 'Descripción de ejemplo';
 
+$config_DESC['usuario_facebook'] = 'Usuario de facebook';
+$config_DESC['usuario_twitter'] = 'Usuario de twitter';
+$config_DESC['usuario_tripadvisor'] = 'Usuario de tripadvisor';
 /** @} */
 
 ?>

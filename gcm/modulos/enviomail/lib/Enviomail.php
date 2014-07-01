@@ -242,13 +242,13 @@ class Enviomail extends Modulos {
       registrar(__FILE__,__LINE__,__CLASS__.'->'.__FUNCTION__.'('.$e.','.depurar($args).') ');
 
       if ( isset($args['mail']) ) {
-         $mail = $args['mail'];
+         $mails = explode(',',$args['mail']);
       } else {
          // Mirar si estamos en local o en servidor para enviar a uno u otro sitio
          if ( $_SERVER['HTTP_HOST'] == 'localhost' ) {
-            $mail = 'eduardo@mamedu.com';
+            $mails = 'eduardo@mamedu.com';
          } else {
-            $mail = 'eduardo@mamedu.com';
+            $mails = 'eduardo@mamedu.com';
             }
          }
 
@@ -286,12 +286,9 @@ class Enviomail extends Modulos {
          $adjuntos = FALSE;
          }
 
-      if ( $this->enviaMailHtml($asunto_mail, $contenido_mail, $nombre_destinatario, $mail, $nombre_remitente, $mail_remitente,NULL,TRUE, $adjuntos) ) {
-
-         return TRUE;
-      } else {
-         return FALSE; 
-         }
+      foreach( $mails as $mail ) {
+        $this->enviaMailHtml($asunto_mail, $contenido_mail, $nombre_destinatario, $mail, $nombre_remitente, $mail_remitente,NULL,TRUE, $adjuntos);
+        }
 
       }
 

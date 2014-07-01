@@ -225,6 +225,8 @@ class PaginarPDO extends GcmPDO {
 
    function botonera() {
 
+     global $gcm;
+
       // require_once(dirname(__FILE__).'/../../gcm/lib/helpers.php');
 
       if ( ! $this->resultado  ) $this->resultado();
@@ -281,7 +283,6 @@ class PaginarPDO extends GcmPDO {
             // antes de tiempo
             ?>
             <script>
-            //document.getElementById('<?php echo $div ?>').style.visibility = "hidden";
             var contenedor = document.getElementById('<?php echo $div ?>');
             var hijos = contenedor.getElementsByTagName("span");
             for (i=0;i<hijos.length;i++){
