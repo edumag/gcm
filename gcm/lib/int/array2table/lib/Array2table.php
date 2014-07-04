@@ -41,7 +41,7 @@ class Array2table {
       self::$img_modificar = 'modificar.png' ;
       self::$img_borrar    = 'borrar.png'    ;
       self::$img_ver       = 'ver.png'       ;
-      if ( is_object('Router') ) self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
+      if ( isset($GLOBALS['gcm']) ) self::$base_imagenes = Router::$base.GCM_DIR.'lib/int/array2table/img/';
 
       }
 
@@ -81,7 +81,8 @@ class Array2table {
     *           Para que funcione correctamente el campo url debe llegar primero desde la sql que el campo al que enlaza
     *
     *     fila_unica   Campo que deseamos que se muestre en una sola fila de la tabla, util para cuando 
-    *                   es un campo con mucho texto, sin necesidad de ordenarse por él.
+    *                  es un campo con mucho texto, sin necesidad de ordenarse por él.
+    *                  Puede ser el nombre del campo, o un array con más de un campo.
     * 
     * @param $orden Nombre de la columna por la que se esta ordenando
     * @param $tipo_orden (asc/desc) 
@@ -130,7 +131,10 @@ class Array2table {
       $enlaces = ( isset($opciones['enlaces']))    ? $opciones['enlaces']    : FALSE ;
 
       /** Campos que se desean mostrar en una sola fila */
-      $fila_unica = ( isset($opciones['fila_unica']))    ? $opciones['fila_unica']    : FALSE ;
+      $fila_unica = ( isset($opciones['fila_unica']) && is_array($opciones['fila_unica']) ) ? $opciones['fila_unica']    : FALSE ;
+      if ( isset($opciones['fila_unica']) && ! is_array($opciones['fila_unica']) ) {
+        $fila_unica = array($opciones['fila_unica']);
+      }
 
       /* Si no se indica el campo identificador cogemos id por defecto */
 
@@ -196,7 +200,7 @@ class Array2table {
             } elseif ( isset($enlaces_iniciados) && in_array($columna, $enlaces_iniciados) ) {
                $num_columnas--;
                continue;
-            } elseif ( isset($fila_unica) && $fila_unica == $columna ) {
+            } elseif ( isset($fila_unica) && in_array($columna, $fila_unica) ) {
                // Si es un campo que se desea presentar en una sola linea de la tabla
                // no se debe mostrar su cabecera
                $num_columnas--;
@@ -310,10 +314,10 @@ class Array2table {
                if ( isset($enlaces_creados[$clave_enlace]['inicio']) && isset($enlaces_creados[$clave_enlace]['final']) ) 
                   echo $enlaces_creados[$clave_enlace]['inicio'].$enlaces_creados[$clave_enlace]['final'];
 
-            } elseif ( isset($fila_unica) && $fila_unica == $key_columna ) {
+            } elseif ( isset($fila_unica) && in_array($key_columna, $fila_unica) ) {
                $DATO=trim($columna);
                if ( !empty($DATO) ) {
-                  $salida_fila_unica .= sprintf("\n\t\t<tr><td class='fila_unica' colspan='%s' %s><div id='fila_".$this->sufijo.$num_fila."'>%s</div></td></tr>",$num_columnas,$clase_columna,nl2br($DATO));
+                  $salida_fila_unica .= sprintf("\n\t\t<tr><td title='".$key_columna."' class='fila_unica' onclick=\"mostrar_fila_unica('fila_".$this->sufijo.$num_fila."')\" colspan='%s' %s><div id='fila_".$this->sufijo.$num_fila."'>%s</div></td></tr>",$num_columnas,$clase_columna,nl2br($DATO));
                   }
                
             } elseif ($key_columna == "img" ) {

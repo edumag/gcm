@@ -1,6 +1,6 @@
 /**
 
-@defgroup crud CRUD Automatización de la gestión de datos
+@defgroup crud_group CRUD Automatización de la gestión de datos
 
 Automatización de la gestión de la base de datos. Creación, modificación y borrado de registros
 

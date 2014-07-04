@@ -2,7 +2,10 @@
 
 /**
  * @file      Crud.php
- * @brief     Automatización de manipulación de base de datos
+ * Clase que gestiona todo el sistema de automatizar el mantenimiento
+ * de los registros.
+ *
+ * @ingroup crud_group
  *
  * @author    Eduardo Magrané 
  *
@@ -13,12 +16,16 @@
  * GNU General Public License as published by the Free Software Foundation.
  *
  * @todo Crear formulario con filtros para listado
- * @ingroup crud
+ *
+ * @{
  */
 
 require_once(dirname(__FILE__).'/DataBoundObject.php');
 
 require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
+
+/**
+ */
 
 /**
  * Extendemos DataBoundObject para automatizar los procesos de insertar,
@@ -37,7 +44,6 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
  *
- * @ingroup crud
  */
 
 class Crud extends DataBoundObject {
