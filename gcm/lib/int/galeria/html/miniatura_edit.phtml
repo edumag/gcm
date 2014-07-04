@@ -35,7 +35,7 @@ if ( $this->descripcions ) {
 
    <div id="boto<?php echo $i;?>" style=" padding:4px 0 0 5px;">
       <a href="javascript:esborrarImatge('<?php echo $this->identificador_unic?>','<?php echo $imatgeId;?>',<?php echo $i;?>);">
-         <img src="<?php echo $this->dir_base.$this->dir_gcm.'lib/int/galeria/';?>icons/goma.gif" width="18" height="16" border="0"/>
+         <img alt="[X]" src="<?php echo $this->dir_base.$this->dir_gcm.'lib/int/galeria/';?>icons/goma.gif" width="18" height="16" border="0"/>
          </a>
       <input type="hidden" name="imatgeGaleria[]" value="<?php echo $imatgeId; ?>" />
    </div>

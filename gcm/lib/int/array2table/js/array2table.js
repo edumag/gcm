@@ -10,8 +10,17 @@
 
 function mostrar_fila_unica(t) {
 
-   $('#'+t).toggle();
-   console.log(t);
+  var altura_caja = 200;
+  var altura_mini = 16;
 
-   }
+  var altura = $('#'+t).height();
+
+  if ( altura > altura_caja ) {
+    $('#'+t).height(altura_mini + 'px');
+  } else {
+    $('#'+t).height('auto');
+    console.log(t);
+    }
+
+  }
 
