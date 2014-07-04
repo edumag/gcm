@@ -200,7 +200,7 @@ class Array2table {
             } elseif ( isset($enlaces_iniciados) && in_array($columna, $enlaces_iniciados) ) {
                $num_columnas--;
                continue;
-            } elseif ( isset($fila_unica) && in_array($columna, $fila_unica) ) {
+            } elseif ( $fila_unica && in_array($columna, $fila_unica) ) {
                // Si es un campo que se desea presentar en una sola linea de la tabla
                // no se debe mostrar su cabecera
                $num_columnas--;
@@ -314,7 +314,7 @@ class Array2table {
                if ( isset($enlaces_creados[$clave_enlace]['inicio']) && isset($enlaces_creados[$clave_enlace]['final']) ) 
                   echo $enlaces_creados[$clave_enlace]['inicio'].$enlaces_creados[$clave_enlace]['final'];
 
-            } elseif ( isset($fila_unica) && in_array($key_columna, $fila_unica) ) {
+            } elseif ( $fila_unica && in_array($key_columna, $fila_unica) ) {
                $DATO=trim($columna);
                if ( !empty($DATO) ) {
                   $salida_fila_unica .= sprintf("\n\t\t<tr><td title='".$key_columna."' class='fila_unica' onclick=\"mostrar_fila_unica('fila_".$this->sufijo.$num_fila."')\" colspan='%s' %s><div id='fila_".$this->sufijo.$num_fila."'>%s</div></td></tr>",$num_columnas,$clase_columna,nl2br($DATO));
