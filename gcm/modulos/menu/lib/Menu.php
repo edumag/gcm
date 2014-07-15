@@ -33,8 +33,9 @@
 
 class Menu extends Modulos {
 
-   static $pesos_menu   = FALSE   ; ///< Pesos de los items del menú
-   static $descartar    = FALSE   ; ///< Archivos o directorios a descartar, configurable
+   static $pesos_menu        = FALSE   ; ///< Pesos de los items del menú
+   static $descartar         = FALSE   ; ///< Archivos o directorios a descartar, configurable
+   static $entradas_manuales = FALSE   ; ///< Entradas manuales.
 
    public $opciones     = array() ; ///< Opciones generales del menú
    public $actual                 ; ///< elemento en el que nos encontramos

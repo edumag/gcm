@@ -193,11 +193,15 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
                   }
 
                   $nom_imatge = $fFileName ;
-                  //  la imatge es guarda en directori temporal 
-                  $src_img = $this->galeria_url.$nom_imatge;
+                  if ( $this->temporal ) {
+                    $dir_img = $this->galeria_url;
+                  } else {
+                    $dir_img = $this->dir_base_acciones.$this->galeria_url;
+                    }
+                  $src_img = $dir_img.$nom_imatge;
 
-                  if ( ! file_exists($this->galeria_url) ) { 
-                     if ( ! mkdir_recursivo($this->galeria_url) ) {
+                  if ( ! file_exists($dir_img) ) { 
+                     if ( ! mkdir_recursivo($dir_img) ) {
                         $strMessage = literal("No se pudo crear directorio destino",3). "[".$this->galeria_url."]";
                         echo stripslashes($strMessage);
                         exit();
@@ -226,7 +230,7 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
 
 // <degug>
 if ( empty($strMessage) ) {
-   echo $src_img;
+   echo $this->dir_base.$this->galeria_url.$nom_imatge;
 } else {
    echo stripslashes($strMessage);
    }

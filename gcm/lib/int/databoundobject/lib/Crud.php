@@ -25,9 +25,6 @@ require_once(dirname(__FILE__).'/DataBoundObject.php');
 require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
 
 /**
- */
-
-/**
  * Extendemos DataBoundObject para automatizar los procesos de insertar,
  * modificar, y borrar registros de la base de datos.
  *

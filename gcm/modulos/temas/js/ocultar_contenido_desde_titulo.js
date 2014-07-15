@@ -9,7 +9,7 @@ function initTituloOcultaContenido() {
    };
 
 addLoadEvent(function(){
-   initTituloOcultaContenido();
+   // initTituloOcultaContenido();
    });
 
 

@@ -65,6 +65,8 @@ class Constantes extends Modulos {
          $remplazar = substr($buffer, $pos1, $pos2 - $pos1 + 2);
          $etiqueta = str_replace($this->etiqueta_inicio,'',$remplazar);
          $etiqueta = str_replace($this->etiqueta_final,'',$etiqueta);
+         $etiqueta = html_entity_decode($etiqueta,ENT_NOQUOTES,'UTF-8');
+         $etiqueta = trim($etiqueta);
 
          if ( $pos1 && $pos2 && $etiqueta && $remplazar ) {
 
@@ -94,10 +96,13 @@ class Constantes extends Modulos {
 
       $this->recuperar_constantes();
 
-      $etiqueta = html_entity_decode($etiqueta,ENT_NOQUOTES,'UTF-8');
-      if ( !empty($this->constantes[$etiqueta]) ) return $this->constantes[$etiqueta] ;
+      $constantes = $this->constantes;
+      if ( isset($constantes[$etiqueta]) ) {
+        return $constantes[$etiqueta];
+      } else {
+        registrar(__FILE__,__LINE__,"Constante sin definir [".$etiqueta."]",'ADMIN');
+        }
 
-      registrar(__FILE__,__LINE__,"Constante sin definir [".$etiqueta."]",'ADMIN');
       
 
       }

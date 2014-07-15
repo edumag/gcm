@@ -400,20 +400,23 @@ class  Imatge {
 
       $this->load();
 
-      if (! @unlink($this->src) ) {
+      $src_img = $this->config['dir_base_acciones'].$this->src;
+      $src_min = $this->config['dir_base_acciones'].$this->getMiniaturaSrc();
 
-         trigger_error("No s'ha pogut esborrar la imatge [".$this->src."]", E_USER_ERROR); // FALTA LITERAL
+      if (! unlink($src_img) ) {
+
+         trigger_error("No s'ha pogut esborrar la imatge [".$src_img."]", E_USER_ERROR); // FALTA LITERAL
          return FALSE;
 
          }
 
       // Borramos miniatura
 
-      if ( file_exists($this->getMiniaturaSrc()) ) {
+      if ( file_exists($src_min) ) {
 
-         if (!unlink($this->getMiniaturaSrc()) ) {
+         if (!unlink($src_min) ) {
             trigger_error(
-               "No s'ha pogut esborrar la miniatura: ".$this->getMiniaturaSrc
+               "No s'ha pogut esborrar la miniatura: ".$src_min
                , E_USER_ERROR);
             }
 
