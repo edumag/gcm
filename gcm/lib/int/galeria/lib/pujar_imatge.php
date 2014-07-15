@@ -193,7 +193,11 @@ if ($fFileError==4){	//No s'ha pujat cap arxiu
                   }
 
                   $nom_imatge = $fFileName ;
-                  $dir_img = $this->dir_base_acciones.$this->galeria_url;
+                  if ( $this->temporal ) {
+                    $dir_img = $this->galeria_url;
+                  } else {
+                    $dir_img = $this->dir_base_acciones.$this->galeria_url;
+                    }
                   $src_img = $dir_img.$nom_imatge;
 
                   if ( ! file_exists($dir_img) ) { 
