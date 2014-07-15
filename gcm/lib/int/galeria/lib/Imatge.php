@@ -400,7 +400,7 @@ class  Imatge {
 
       $this->load();
 
-      if (! @unlink($this->src) ) {
+      if (! unlink($this->src) ) {
 
          trigger_error("No s'ha pogut esborrar la imatge [".$this->src."]", E_USER_ERROR); // FALTA LITERAL
          return FALSE;
