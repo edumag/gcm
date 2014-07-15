@@ -1,6 +1,6 @@
 
-<link rel="stylesheet" type="text/css" href="<?php echo $galeria->dir_base.$galeria->dir_mod;?>moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="<?php echo $galeria->dir_base,$galeria->dir_mod;?>presentacions/masmonell/masmonell.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo Router::$base.$galeria->dir_mod;?>moduls/popeye/css/popeye/jquery.popeye.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo Router::$base.$galeria->dir_mod;?>presentacions/masmonell/masmonell.css" media="screen" />
 
 <!--
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
