@@ -102,9 +102,9 @@ class Mapas extends Modulos {
            'marca': [
          <?php foreach ( $marcadores as $marca ) { ?>
              {
-               'name': '<?php echo $marca['nombre'] ?>'
+               'name': '<?php echo str_replace('\'','\\\'',$marca['nombre']) ?>'
                ,'location': [<?php echo $marca['latitud'] ?>, <?php echo $marca['longitud'] ?>]
-               ,'contenido': '<?php echo preg_replace("/[\n|\r|\n\r]/", ' ', $marca['contenido']);?>'
+               ,'contenido': '<h2><?php echo str_replace('\'','\\\'',$marca['nombre']) ?></h2><?php echo preg_replace("/[\n|\r|\n\r]/", ' ', str_replace('\'','\\\'',$marca['contenido']));?>'
                ,'icon': '<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('mapas','iconos',$marca['icono'])?>'
 
              },
