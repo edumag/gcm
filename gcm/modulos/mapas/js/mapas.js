@@ -5,6 +5,7 @@
  */
 
 contenidos = [];
+map = undefined;
 
 /**
  * Inicializamos mapa
@@ -61,12 +62,12 @@ function inicia_mapa(container,mapa,markers) {
                var id = id.replace(/\'/g,'');
                var id = id.replace(/"/g,'');
                // infowindow[id].open(map,marcadores[i]); // Cancelamos infowindows
-               presenta_info_mapa(container,id);
+               presenta_info_mapa(container,id,details.location[0],details.location[1]);
             });
 
             var caja_iconos = document.getElementById('iconos_mapa');
             if ( caja_iconos ) {
-              salida += '<a onmouseover="presenta_info_mapa(\''+container+'\',\''+id+'\')">';
+              salida += '<a onmouseover="presenta_info_mapa(\''+container+'\',\''+id+'\','+details.location[0]+','+details.location[1]+')">';
               salida += '<img src="'+marcadores[i]['icon']+'"/>';
               salida += '</a>';
 
@@ -75,7 +76,8 @@ function inicia_mapa(container,mapa,markers) {
       }
 
       if ( salida ) caja_iconos.innerHTML = salida;
-      console.log(contenidos);
+      // console.log(contenidos);
+
    }
 }
 
@@ -89,7 +91,7 @@ function inicia_mapa(container,mapa,markers) {
  * @param id Identificador del marcador que contiene el contenido
  */
 
-function presenta_info_mapa(container,id) {
+function presenta_info_mapa(container,id,lat,lon) {
    var caja = document.getElementById(container+'_info');
    if ( caja ) {
 
@@ -116,5 +118,7 @@ function presenta_info_mapa(container,id) {
          });
 
       }
-
+   
+   //map.setCenter(new google.maps.LatLng(mapa['latitud'], mapa['longitud']));
+   map.setCenter(new google.maps.LatLng(lat, lon));
    }
