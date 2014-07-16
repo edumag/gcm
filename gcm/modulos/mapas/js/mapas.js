@@ -5,6 +5,7 @@
  */
 
 contenidos = [];
+map = undefined;
 
 /**
  * Inicializamos mapa
@@ -27,6 +28,7 @@ function inicia_mapa(container,mapa,markers) {
 
    var marcadores = [];
    var infowindow = [];
+   var salida = '' ; // Salida para caja_iconos
 
    console.log(markers);
 
@@ -36,7 +38,10 @@ function inicia_mapa(container,mapa,markers) {
             var details = markers[level][i];
             console.log('details');
             console.log(details);
-            var id = details.name.replace(' ','_');
+            // var id = details.name.replace(' ','_');
+            var id = details.name.replace(/ /g,'_');
+            var id = id.replace(/\'/g,'');
+            var id = id.replace(/"/g,'');
             contenidos[id] = details.contenido;
             marcadores[i] = new google.maps.Marker({
                map: map
@@ -53,13 +58,26 @@ function inicia_mapa(container,mapa,markers) {
                ,maxWidth: 590
                });
             google.maps.event.addListener(marcadores[i], 'click', function(e) {
-               var id = this.title.replace(' ','_');
+               var id = this.title.replace(/ /g,'_');
+               var id = id.replace(/\'/g,'');
+               var id = id.replace(/"/g,'');
                // infowindow[id].open(map,marcadores[i]); // Cancelamos infowindows
-               presenta_info_mapa(container,id);
+               presenta_info_mapa(container,id,details.location[0],details.location[1]);
             });
+
+            var caja_iconos = document.getElementById('iconos_mapa');
+            if ( caja_iconos ) {
+              salida += '<a onmouseover="presenta_info_mapa(\''+container+'\',\''+id+'\','+details.location[0]+','+details.location[1]+')">';
+              salida += '<img src="'+marcadores[i]['icon']+'"/>';
+              salida += '</a>';
+
+            }
          }
       }
-      console.log(contenidos);
+
+      if ( salida ) caja_iconos.innerHTML = salida;
+      // console.log(contenidos);
+
    }
 }
 
@@ -73,9 +91,8 @@ function inicia_mapa(container,mapa,markers) {
  * @param id Identificador del marcador que contiene el contenido
  */
 
-function presenta_info_mapa(container,id) {
+function presenta_info_mapa(container,id,lat,lon) {
    var caja = document.getElementById(container+'_info');
-
    if ( caja ) {
 
       caja.innerHTML = contenidos[id];
@@ -101,5 +118,7 @@ function presenta_info_mapa(container,id) {
          });
 
       }
-
+   
+   //map.setCenter(new google.maps.LatLng(mapa['latitud'], mapa['longitud']));
+   map.setCenter(new google.maps.LatLng(lat, lon));
    }
