@@ -233,6 +233,12 @@ class Gcm {
       );
 
    /**
+    * Modo: 'view' o 'admin'
+    */
+
+   public $modo = 'view';
+
+   /**
     * Constructor
     *
     * Iniciamos sistema de registros
@@ -762,6 +768,30 @@ class Gcm {
       $this->contenidos['contenido'] = '';     //< Contenido central
 
       $this->construir_seleccionado();
+
+      // Definimos modo
+     $var_administrando = 'administrando_'.$this->config('admin','Proyecto');
+
+     // Comprobamos si se desea modo admin
+     if ( isset($_GET['administrando']) 
+          && $_GET['administrando'] == 1 
+        ) {
+
+       $_SESSION[$var_administrando] = 1 ;
+      }
+
+     // Limpiamos variable de sesión administrando
+     if ( ( ! $this->au->logeado() && isset($_SESSION[$var_administrando]) )
+       || ( isset($_SESSION[$var_administrando]) && isset($_GET['administrando']) && $_GET['administrando'] == 0 ) 
+     ) {
+       unset($_SESSION[$var_administrando]);
+        }
+
+     if ( isset($_SESSION[$var_administrando]) ) {
+       $this->modo = 'admin';
+     } else {
+       $this->modo = 'view';
+     }
 
       /* Guardamos salida en buffer */
       ob_start();
