@@ -157,7 +157,7 @@ if ( $cargar_codigo_fechas_horas ) {
 if ( $cargar_codigo_fechas ) {
 
    $objeto_padre->ficheros_css['jquery.datepick.css'] = $dir_codigo_fechas.'jquery.datepick.css';
-   $objeto_padre->codigo_js .= file_get_contents(dirname(__FILE__).'/../ext/jquery.datepick/jquery.datepick.js');
+   $objeto_padre->codigo_js .= file_get_contents(GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/jquery.datepick.js');
 
    foreach ( $cargar_codigo_fechas as $campo_fecha ) {
       $objeto_padre->codigo_js .= "

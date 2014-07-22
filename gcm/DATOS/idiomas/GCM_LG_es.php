@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Wed Jul 16 15:56:10 CEST 2014
+// Archivo generado automáticamente por GcmConfig Mon Jul 21 16:47:47 CEST 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
