@@ -874,7 +874,10 @@ class Crud extends DataBoundObject {
 
          // Si es tipo numero
 
-         if ( isset($this->tipos_formulario[$campo]['tipo']) ) {
+         if ( isset($this->tipos_campos[$campo]['null']) 
+              && $this->tipos_campos[$campo]['null'] == 'NO' 
+              && isset($this->tipos_formulario[$campo]['tipo']) 
+            ) {
 
             $tipo = $this->tipos_formulario[$campo]['tipo'];
 
