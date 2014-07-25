@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Feb 14 9:43:09 CET 2014
+// Archivo generado automáticamente por GcmConfig Fri Jul 25 13:42:11 CEST 2014
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
@@ -128,4 +128,9 @@ $GCM_LG_fr['Mostrar únicamente literales vacíos']='';
 $GCM_LG_fr['Ocultar literales con contenido']='';
 $GCM_LG_fr['Sección']='';
 $GCM_LG_fr['no encontrada']='';
+$GCM_LG_fr['Administrar libro de visitas']='';
+$GCM_LG_fr['Administrar libro de reservas']='';
+$GCM_LG_fr['Administrar ofertas']='';
+$GCM_LG_fr['formularios']='';
+$GCM_LG_fr['Guardar contenido en el idioma (fr)']='';
 ?>

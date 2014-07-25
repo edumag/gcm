@@ -246,12 +246,11 @@ class Galeria implements Iterator {
 
    function esborraGaleria() {
 
-      $dir = $this->dir_base.$this->galeria_url;
+      $dir = $this->galeria_url;
 
-      if ( file_exists($dir) ) {
+      if ( is_dir($dir) ) {
          rmdir_recursivo($dir);
          }
-
       $nom_galeria_session = 'galeria_imatges_'.$this->dir_gal;
       // unset($_SESSION[$nom_galeria_session]);            // esborrem galeria de sessio
 
