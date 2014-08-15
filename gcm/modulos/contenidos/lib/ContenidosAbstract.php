@@ -595,9 +595,6 @@ abstract class ContenidosAbstract extends Modulos {
          case 'actualizar_contenido':
 
             $destino = $gcm->seleccionado[0];
-            // Si estamos en otro idioma pero editando el destino es el contenido
-            // del idioma por defecto.
-            if ( Router::$i != Router::$ii ) $destino = str_replace('File/'.Router::$i,'File/'.Router::$ii,$destino);
             $mens = literal('Contenido actualizado',3);
             break;
 
@@ -621,7 +618,7 @@ abstract class ContenidosAbstract extends Modulos {
             literal('Error').' '.literal('guardando contenido').': '.$destino,'ERROR');
          return FALSE;
       } else {
-         registrar(__FILE__,__LINE__,$mens,'AVISO');
+         registrar(__FILE__,__LINE__,$mens. '['.$destino.']','AVISO');
 
          /* Si tenemos un nuevo literal lo añadimos */
 
@@ -635,8 +632,6 @@ abstract class ContenidosAbstract extends Modulos {
       $destino = str_replace('File/'.Router::$i,'File/'.Router::$ii,$destino);
       $destino = str_replace('File/'.Router::$ii.'/','',$destino);
 
-      registrar(__FILE__,__LINE__,"Destino: ".$destino,'AVISO');
-      
       $gcm->router->inicia($destino);
 
       }
