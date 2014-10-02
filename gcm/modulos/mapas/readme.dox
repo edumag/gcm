@@ -31,7 +31,7 @@ Utilizamos ventanas modales para presentar los detalles de los marcadores al
 clicar en ellos, Es más vistoso que los infowindows de API de google, pero se 
 podría hacer que fuera configurable este comportamiento.
 
-Los iconos al utilizar el sistema de gcm permiten ser personalizados segun el tema.
+Los iconos al utilizar el sistema de gcm permiten ser personalizados según el tema.
 
 Documentación externa
 ---------------------

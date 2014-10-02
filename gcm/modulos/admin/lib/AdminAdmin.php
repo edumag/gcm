@@ -385,7 +385,7 @@ class AdminAdmin extends Admin {
          }
 
       ?>
-      <form action="<? echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
+      <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
       <fieldset>
       <legend  accesskey="s">Eventos para usuario</legend>
       <?php if ( ! $diff_usuario ) echo '<div class="aviso">Sin diferencias con la versión por defecto</div>'; ?>
@@ -414,7 +414,7 @@ class AdminAdmin extends Admin {
          
 
          ?>
-         <form action="<? echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
+         <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
          <fieldset>
          <legend  accesskey="s">Eventos para administración</legend>
          <?php if ( ! $diff_admin ) echo '<div class="aviso">Sin diferencias con la versión por defecto</div>'; ?>
@@ -892,7 +892,7 @@ class AdminAdmin extends Admin {
 
    function caja_info_dev($e, $args) {
 
-      if ( ! permiso('caja_info_dev', 'admin') ) return FALSE;
+      if ( ! permiso('caja_info_dev', 'admin') ) return ;
 
       global $gcm;
 

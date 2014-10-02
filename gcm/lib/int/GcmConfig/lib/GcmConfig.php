@@ -509,7 +509,7 @@ class GcmConfig {
          return $this->idiomaxdefecto.'::'.$this->descripciones[$this->idiomaxdefecto][$variable];
          }
 
-      return FALSE;
+      return $variable;
 
       }
 
