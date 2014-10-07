@@ -418,7 +418,11 @@ class Router {
 
       if ( esImagen( self::$url) ) {
 
-         $archivo = self::$dd.self::$url;
+         $archivo = self::$d.self::$url;
+         // Comprobar si existe en el idioma actual.
+         if ( !is_file($archivo) ) {
+           $archivo = self::$dd.self::$url;
+         }
          if ( !is_file($archivo) ) {
             // Si no se encuentra la imagen el directorio de la sección actual
             // intentamos encontrarla creando una dirección absoluta.
