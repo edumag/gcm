@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Jul 25 13:41:48 CEST 2014
+// Archivo generado automáticamente por GcmConfig Sat Oct 11 7:58:24 CEST 2014
 $GCM_LG_en['Contenido pendiente de traducción']='';
 $GCM_LG_en['Registros de página actual']='';
 $GCM_LG_en['Registros']='';
@@ -131,4 +131,5 @@ $GCM_LG_en['Contenido actualizado']='';
 $GCM_LG_en['Guardar contenido']='';
 $GCM_LG_en['Contenido traducido']='';
 $GCM_LG_en['Actualizar traducción en idioma (en)']='';
+$GCM_LG_en['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 ?>

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Oct 7 6:02:55 CEST 2014
+// Archivo generado automáticamente por GcmConfig Sat Oct 11 7:58:27 CEST 2014
 $GCM_LG_de['Contenido pendiente de traducción']='';
 $GCM_LG_de['Registros']='';
 $GCM_LG_de['Campo obligatorio']='';
@@ -54,4 +54,15 @@ $GCM_LG_de['Administrar ofertas']='';
 $GCM_LG_de['mapas']='';
 $GCM_LG_de['Configuración de ']='';
 $GCM_LG_de['formularios']='';
+$GCM_LG_de['Debe ser un número']='';
+$GCM_LG_de['Debe ser un numero']='';
+$GCM_LG_de['Cancelar']='';
+$GCM_LG_de['Menú']='';
+$GCM_LG_de['Imágenes']='';
+$GCM_LG_de['Añadir constantes']='';
+$GCM_LG_de['Informar de error']='';
+$GCM_LG_de['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
+$GCM_LG_de['Gracias']='';
+$GCM_LG_de['Enviar error']='';
+$GCM_LG_de['Informe de errores']='';
 ?>
