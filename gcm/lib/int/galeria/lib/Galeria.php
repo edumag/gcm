@@ -228,13 +228,15 @@ class Galeria implements Iterator {
          }
 
       $archivos = glob($this->galeria_url.'/*');
-      foreach ( $archivos as $img) {
-         if ( esImagen($img) ) {
-            $imatge = new Imatge(basename($img), $this->config, $this->id);
-            $imatge->load();
-            $this->addImatge($imatge);
-            }
-         }
+      if ( $archivos && !empty($archivos) ) {
+        foreach ( $archivos as $img) {
+           if ( esImagen($img) ) {
+              $imatge = new Imatge(basename($img), $this->config, $this->id);
+              $imatge->load();
+              $this->addImatge($imatge);
+              }
+           }
+        }
 
       $this->loaded = TRUE;
 
