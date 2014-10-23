@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sat Oct 11 8:03:59 CEST 2014
+// Archivo generado automáticamente por GcmConfig Thu Oct 23 9:52:29 CEST 2014
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -165,4 +165,5 @@ $GCM_LG_es['Administrar libro de reservas']='';
 $GCM_LG_es['Registro eliminado']='';
 $GCM_LG_es['Actualizar contenido en idioma por defecto (es)']='';
 $GCM_LG_es['Actualizar traducción en idioma (es)']='';
+$GCM_LG_es['Ayuda para el administrador']='';
 ?>

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sat Oct 11 8:09:58 CEST 2014
+// Archivo generado automáticamente por GcmConfig Thu Oct 23 9:52:25 CEST 2014
 $GCM_LG_ca['Administracion de los diferentes idiomas']='Administració dels diferents idiomes';
 $GCM_LG_ca['Administración']='';
 $GCM_LG_ca['Administración de usuarios']='Administració d\'usuaris';
@@ -165,4 +165,6 @@ $GCM_LG_ca['Administrar libro de reservas']='';
 $GCM_LG_ca['Iconos']='';
 $GCM_LG_ca['Actualizar traducción en idioma (ca)']='';
 $GCM_LG_ca['Guardar contenido en el idioma (ca)']='';
+$GCM_LG_ca['Actualizar contenido en idioma por defecto (es)']='';
+$GCM_LG_ca['Ayuda para el administrador']='';
 ?>
