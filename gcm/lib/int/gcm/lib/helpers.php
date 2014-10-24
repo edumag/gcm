@@ -78,7 +78,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
             $valor = '';
 
          } else {
-            return $literal;
+            // Si no tenemos literal devolvemos la clave cambiando los
+            // guiones bajos por espacios.
+            return str_replace('_', ' ', $literal);
             }
 
          $idioma_actual = $_SESSION[$proyecto.'-idioma'];
@@ -94,7 +96,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          $LG[$literal] = ( $valor ) ? $valor : '';
 
-         return ( $valor ) ? $valor : $literal ;
+         // Si no tenemos literal devolvemos la clave cambiando los
+         // guiones bajos por espacios.
+         return ( $valor ) ? $valor : str_replace('_', ' ', $literal) ;
 
          break;
 
@@ -108,7 +112,10 @@ function literal($literal, $nivel=2, $valor=NULL) {
             // No se encontro literal ni de proyecto ni de gcm
             // Añadimos literal al proyecto para poder ser añadido
             // En caso de no estar ya en el array.
-            return $literal;
+
+            // Si no tenemos literal devolvemos la clave cambiando los
+            // guiones bajos por espacios.
+            return str_replace('_', ' ', $literal);
             }
          break;
 
