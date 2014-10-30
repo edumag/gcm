@@ -25,6 +25,18 @@ class Redes_sociales extends Modulos {
 
   protected $metatags = array();
 
+  /**
+    Para conocer si ya hemos añadido el contenido genérico de la pagina
+   */
+
+  static $contenido_general_incluido = FALSE;
+
+  /**
+    Para conocer si ya hemos añadido los metatags
+   */
+
+  static $metatags_incluido = FALSE;
+
    /** Constructor */
 
   function __construct() {
@@ -50,30 +62,6 @@ class Redes_sociales extends Modulos {
 
       include ($gcm->event->instancias['temas']->ruta('redes_sociales','html','redes_sociales.phtml'));
       }
-
-   function informacion_cabecera($e, $args=FALSE) {
-
-      global $gcm;
-
-      
-      /* facebook
-       * Include the JavaScript SDK on your page once, ideally right after the opening <body> tag.
-
-      <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.0";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-      */
-
-      /* Imagen a coger 
-        <meta property="og:title"           content="Chocolate Pecan Pie" /> 
-       */
-
-    }
 
   /**
    * Insertar boton de facebook
@@ -106,16 +94,10 @@ class Redes_sociales extends Modulos {
      $color = ( isset($args['color']) ) ? $args['color'] : FALSE ;
      if ( ! $color ) { $color = $this->config['color']; }
 
-     // Botón compartir para el administrador
-     //  ? >
-     //  <a target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<?php echo urlencode($url) ? >">
-     //    <img src="facebook.png" border="0" alt="Compartir" />
-     //  </a>
-     // < ?php
-     //  return;
+     if ( ! $this->contenido_general_incluido ) {
+       $this->contenido_general_incluido = TRUE;
 
-
-     // @todo Definir idioma de facebook según idioma actual.
+       $idioma = conversion_idioma(Router::$i);
       ?>
       <div id="fb-root"></div>
       <script type="text/javascript">
@@ -124,13 +106,14 @@ class Redes_sociales extends Modulos {
       element.type = "text/javascript";
       element.async = true;
       element.id = "facebook-jssdk"
-      element.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+      element.src = "//connect.facebook.net/<?php echo $idioma ?>/all.js#xfbml=1";
       var s = document.getElementsByTagName('script')[0];
       s.parentNode.insertBefore(element, s);
       })();
       </script>
-
       <?php
+
+     }
 
       ?>
         <div class="fb-like" 
@@ -191,14 +174,17 @@ class Redes_sociales extends Modulos {
 
      global $gcm;
 
-     echo "\n".'<meta property="og:type" content="website" />';
-     echo "\n".'<meta property="fb:admins" content="'.$this->config['usuario_facebook'].'" />';
+     if ( ! $this->metatags_incluido ) {
+       $this->metatags_incluido = TRUE;
+       echo "\n".'<meta property="og:type" content="website" />';
+       echo "\n".'<meta property="fb:admins" content="'.$this->config['usuario_facebook'].'" />';
 
-      foreach ( $this->metatags as $name => $valor ) {
+        foreach ( $this->metatags as $name => $valor ) {
 
-         echo "\n".'<meta property="og:'.$name.'" content="'.$valor.'" />';
+           echo "\n".'<meta property="og:'.$name.'" content="'.$valor.'" />';
 
-         }
+           }
+       }
     }
 
    }
