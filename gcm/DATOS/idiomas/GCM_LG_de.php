@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sat Oct 18 8:52:00 CEST 2014
+// Archivo generado automáticamente por GcmConfig Thu Oct 30 9:13:19 CET 2014
 $GCM_LG_de['Contenido pendiente de traducción']='';
 $GCM_LG_de['Registros']='';
 $GCM_LG_de['Campo obligatorio']='';
@@ -65,4 +65,6 @@ $GCM_LG_de['Por favor añade toda la información que puedas respecto a la acci�
 $GCM_LG_de['Gracias']='';
 $GCM_LG_de['Enviar error']='';
 $GCM_LG_de['Informe de errores']='';
+$GCM_LG_de['Ayuda para el administrador']='';
+$GCM_LG_de['redes_sociales']='';
 ?>

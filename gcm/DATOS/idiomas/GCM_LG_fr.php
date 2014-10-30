@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Oct 21 7:26:57 CEST 2014
+// Archivo generado automáticamente por GcmConfig Thu Oct 30 9:14:42 CET 2014
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
@@ -134,4 +134,5 @@ $GCM_LG_fr['Administrar ofertas']='';
 $GCM_LG_fr['formularios']='';
 $GCM_LG_fr['Guardar contenido en el idioma (fr)']='';
 $GCM_LG_fr['Cancelar']='';
+$GCM_LG_fr['Ayuda para el administrador']='';
 ?>

@@ -1245,4 +1245,34 @@ function getTempFolder($dir_base=FALSE) {
    }
 }
 
+/**
+ * Conversor de código de idioma de ISO 639-1 que es el que lleva el navegador
+ * a ISO 639-1 junto con ISO 3166-1 que es el formato que se pide por ejemplo 
+ * en los scripts de facebbok
+ */
+
+function conversion_idioma($iso6391) {
+
+  switch ($iso6391) {
+    case 'es':
+      return 'es_ES';
+      break;
+    case 'ca':
+      return 'ca_ES';
+      break;
+    case 'en':
+      return 'en_EN';
+      break;
+    case 'fr':
+      return 'fr_FR';
+      break;
+    case 'de':
+      return 'de_DE';
+      break;
+    
+    default:
+      return 'es_ES';
+      break;
+    }
+  }
 ?>
