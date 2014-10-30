@@ -20,7 +20,7 @@
 .ppy .ppy-extcaption {width:440px;display: block;}
 .ppy .ppy-imglist li {width:440px;height: 206px;}
 .ppy .ppy-imglist li, .ppy .ppy-imglist li a {width: 440px;height: 206px;overflow: hidden;display: block;}
-.ppy-placeholder { margin: 0 !important;padding: 0 !important;text-align: center;}
+.ppy-placeholder {margin: 0px auto !important;padding: 0 !important;text-align: center;}
 .ppy.ppy-active {width:440px;margin: 0;}
 .ppy .ppy-outer {padding: 1px;border: 0px solid #e1f1a1;}
 .ppy .ppy-stage {width: 440px;height: 206px;border-radius: 0;-moz-border-radius: 0 ;-webkit-border-radius: 0;cursor: pointer;}
