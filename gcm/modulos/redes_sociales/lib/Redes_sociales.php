@@ -21,15 +21,28 @@
 
 class Redes_sociales extends Modulos {
 
+  public $config = array();
+
   protected $metatags = array();
 
    /** Constructor */
 
-   function __construct() {
+  function __construct() {
 
-      parent::__construct();
+    global $gcm;
 
-      }
+    parent::__construct();
+
+    $this->config['usuario_facebook']    = 
+      $gcm->config('redes_sociales','usuario_facebook');
+    $this->config['usuario_twitter']     =
+      $gcm->config('redes_sociales','usuario_twitter');
+    $this->config['usuario_tripadvisor'] =
+      $gcm->config('redes_sociales','usuario_tripadvisor');
+
+    $this->config['color'] =
+      $gcm->config('redes_sociales','color');
+  }
 
    function botones($e, $args=FALSE) {
       
@@ -62,32 +75,76 @@ class Redes_sociales extends Modulos {
 
     }
 
-   /**
-    * Insertar boton de facebook
-    *
-    * La forma de llamar este metodo desde otro módulo sería:
-    *
-    * <code>
-    * <?php echo $gcm->event->lanzar_accion_modulo('redes_sociales','insert_button','insertar_boton', array('color' => 166)); ?>
-    * </code>
-    */
+  /**
+   * Insertar boton de facebook
+   *
+   * La forma de llamar este metodo desde otro módulo sería:
+   *
+   * <code>
+   * <?php echo $gcm->event->lanzar_accion_modulo(
+   *   'redes_sociales','insert_button','insertar_boton', 
+   *   array('color' => 166)); ?>
+   * </code>
+   *
+   * Personalizar color del botón de facebook
+   * http://members.chello.nl/~sgm.jansen/facebook-button-colorizer/
+   *
+   * @param $e    Evento
+   * @param $args Array con parametros:
+   *     url: Url del contenido
+   *     color: Color personalizado, en caso de no llegar se coge de la 
+   *       configuración
+   */
 
    function insert_button($e, $args = FALSE) {
 
      global $gcm;
 
+     $permisos = ( permiso('editar','contenidos') ) ? 'true' : 'false';
+
+     $url = $args['url'];
      $color = ( isset($args['color']) ) ? $args['color'] : FALSE ;
+     if ( ! $color ) { $color = $this->config['color']; }
+
+     // Botón compartir para el administrador
+     //  ? >
+     //  <a target="_blank" rel="nofollow" href="http://www.facebook.com/share.php?u=<?php echo urlencode($url) ? >">
+     //    <img src="facebook.png" border="0" alt="Compartir" />
+     //  </a>
+     // < ?php
+     //  return;
+
+
+     // @todo Definir idioma de facebook según idioma actual.
+      ?>
+      <div id="fb-root"></div>
+      <script type="text/javascript">
+      (function() {
+      var element = document.createElement('script');
+      element.type = "text/javascript";
+      element.async = true;
+      element.id = "facebook-jssdk"
+      element.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(element, s);
+      })();
+      </script>
+
+      <?php
 
       ?>
         <div class="fb-like" 
-          data-href="http://masmonell.com/dev/tarifas/ofertas/" 
+          data-href="<?php echo $url ?>" 
           data-layout="button" 
           data-action="like" 
           data-show-faces="true" 
-          data-share="false" 
+          data-share="<?php echo $permisos ?>" 
           data-colorscheme="dark">
         </div>
-      <?php if ( $color ) { ?>
+      <?php
+   
+     if ( $color ) {  // No se ve bien lo quitamos
+        ?>
         <!-- Personalizamos colores del botón de facebook -->
         <svg height="0" width="0">
           <filter id="fb-filter">
@@ -95,15 +152,16 @@ class Redes_sociales extends Modulos {
           </filter>
         </svg>
         <style>
-          .fb-like, .fb-send, .fb-share-button {
+          /* .fb-like, .fb-send, .fb-share-button { */
+          .fb-like {
             -webkit-filter: url(#fb-filter); 
             filter: url(#fb-filter);
+            z-index: 100;
           }
         </style>
-      <?php } ?>
+        <?php 
+      } 
 
-      <?php
-   
     }
 
    function insert_metatags($e, $args=FALSE) {
@@ -132,6 +190,9 @@ class Redes_sociales extends Modulos {
    function presentar_heads_dinamicos($e, $args = FALSE) {
 
      global $gcm;
+
+     echo "\n".'<meta property="og:type" content="website" />';
+     echo "\n".'<meta property="fb:admins" content="'.$this->config['usuario_facebook'].'" />';
 
       foreach ( $this->metatags as $name => $valor ) {
 

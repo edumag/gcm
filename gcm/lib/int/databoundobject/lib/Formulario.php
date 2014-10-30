@@ -216,6 +216,8 @@ class Formulario {
 
    function genera_formulario($ver = FALSE, $accion = 'insertando', $objeto_padre = FALSE, $nombre_tabla_relacionada=FALSE, $contador=FALSE) {
 
+     global $gcm;
+
       if ( $ver ) {
          $plantilla = $this->plantilla_visualizar;
       } else {
