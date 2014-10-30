@@ -8,7 +8,7 @@
 textarea.textAreaDescrip{ margin:0;float:left; width:49%; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
 textarea.textAreaValor{ margin:0;float:right; width:49%;}
 textarea.textAreaDescripGrande{ float:left; width:100%; background: none repeat scroll 0 0 rgb(0, 0, 0);color: rgb(255, 255, 255);}
-textarea.textAreaValorGrande{ float:left; width:100%;}
+textarea.textAreaValorGrande{ float:left; width:100%; height: 400px;}
 .GcmConfigCajaForm fieldset { border: 1px solid grey; margin: 10px 4px 4px;}
 .grupo_config b { display: block; float: left; padding:0; width: 100%; }
 .botones_derecha {float: right;}
