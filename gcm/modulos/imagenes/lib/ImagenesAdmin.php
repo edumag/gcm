@@ -23,7 +23,6 @@ class ImagenesAdmin extends Imagenes {
 
       }
 
-
    /**
    * Administrador de imagenes
    *
@@ -53,7 +52,6 @@ class ImagenesAdmin extends Imagenes {
       $panel['contenido'] = $contenido;
 
       Temas::panel($panel);
-
 
    }
 
