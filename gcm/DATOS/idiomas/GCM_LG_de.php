@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Oct 30 9:13:19 CET 2014
+// Archivo generado automáticamente por GcmConfig Sun Nov 2 7:17:45 CET 2014
 $GCM_LG_de['Contenido pendiente de traducción']='';
 $GCM_LG_de['Registros']='';
 $GCM_LG_de['Campo obligatorio']='';

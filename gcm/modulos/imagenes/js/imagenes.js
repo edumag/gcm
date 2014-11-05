@@ -51,6 +51,14 @@ function galeria(){
             // Si tenemos una ventana abierta la cerramos
             var v = document.getElementById('ventana_subeImagen');
             if ( v ) v.parentNode.removeChild(v);
+
+            // Presentar las imágenes ampliadas desde colorbox.
+            // Si no lo hacemos se va de la pagina para mostrarla.
+
+             $(".galeria_imagenes").colorbox({
+                rel:'galeria_imagenes'
+                , slideshow:true
+             });
          } else {
             container.innerHTML = "<p class='aviso' style='width: 100px'>Sin Imágenes</p>";
          }

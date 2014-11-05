@@ -81,7 +81,7 @@ class Imagenes extends Modulos {
 
       global $gcm;
 
-      $seccion = ( isset($_REQUEST['s']) ) ? $_REQUEST['s'] : FALSE;
+      $seccion = ( isset($_REQUEST['seccion']) ) ? $_REQUEST['seccion'] : FALSE;
       if ( ! $seccion ) $seccion = Router::$dd.Router::$s ;
       $seccion = comprobar_barra($seccion);
       if ( strpos($seccion,Router::$dd) === FALSE ) {

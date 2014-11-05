@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Oct 30 9:14:42 CET 2014
+// Archivo generado automáticamente por GcmConfig Sun Nov 2 8:41:27 CET 2014
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
