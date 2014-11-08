@@ -205,6 +205,7 @@ class Temas extends Modulos {
       registrar(__FILE__,__LINE__,'Ficheros del tema',FALSE,depurar($ficheros));
       registrar(__FILE__,__LINE__,'Colores del tema ',FALSE,depurar($this->colores));
       registrar(__FILE__,__LINE__,'Sistema: '.$this->plataforma.' Navegador: '.$this->navegador.' Versión: '.$this->version);
+      registrar(__FILE__,__LINE__,'User agent: '.$_SERVER['HTTP_USER_AGENT']);
 
       $this->tema = new TemaGcm($ficheros,$this->colores);
 
