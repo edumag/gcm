@@ -224,9 +224,6 @@ class GcmCache {
          if ( function_exists('apc_clear_cache') ) apc_clear_cache();
          }
 
-      registrar(__FILE__,__LINE__,
-         __CLASS__.'->'.__FUNCTION__.'(url: '.depurar($url).')',FALSE,'Archivos a borrar: '.depurar($archivos));
-
       if ( !isset($archivos) || empty($archivos) ) return;
 
       foreach ( $archivos as $archivo ) {

@@ -412,6 +412,7 @@ function presentarBytes($bytes) {
  * @param $salida_personal Formato de salida personalizado
  *
  * @return fecha formateada
+ *
  */
 
 function presentarFecha($time, $formato_salida=1, $formato_entrada='unix', $salida_personal=FALSE) {
@@ -493,7 +494,7 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix', $sali
 *
 */
 
-function modificarGet($var, $valor) {
+function modificarGet($var, $valor=FALSE) {
 
    $salida = FALSE;
 
@@ -503,12 +504,12 @@ function modificarGet($var, $valor) {
       if ( $key !== $var ) {
          // Descartamos url, ya viene con la dirección
          if ( $key != "url" ) {
-            $salida .= "&".$key."=".$val;
+            $salida .= $key."=".$val."&";
          }
       }
    }
    
-   return ( $salida ) ? '?'.$salida : FALSE ;
+   return ( $salida ) ? '?'.rtrim($salida,'&') : FALSE ;
 
    }
 
@@ -552,6 +553,8 @@ if( ! function_exists("permiso") ) {
  *
  * Comprobamos si la función ya existe, de esta manera permitimos con facilidad
  * implementar otro sistema de verificación de permisos diferente.
+ *
+ * @todo Crear módulo que gestione el enrutamiento a paginas de error.
  *
  * @param $accion     Acción a realizar
  * @param $modulo     Módulo que realiza la acción
@@ -753,13 +756,13 @@ function mostrar_ip() {
 function mkdir_recursivo($ruta) {
 
    $directorios = explode('/',$ruta);
-   $dir = ( $directorios[0] == '' ) ? '/' : '' ;
+   $dir = '';
    for ( $i=0;$i<=count($directorios)-1;$i++ ) {
       $dir=$dir.$directorios[$i];
       $dir = str_replace('//','/',$dir);
       if ( ! is_dir($dir) ) {
-         if ( ! mkdir( $dir) ) {
-            $mens = 'No pudo crearse directorio ['.$dir.']' ;
+         if ( ! @mkdir( $dir) ) {
+            $mens = 'Debe crearse el directorio de los idiomas con los literales en: ['.$dir.'] con los permisos adecuados' ;
             registrar(__FILE__,__LINE__,$mens,'ERROR');
             return FALSE;
             }
