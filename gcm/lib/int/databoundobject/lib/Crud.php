@@ -799,7 +799,7 @@ class Crud extends DataBoundObject {
 
          // Campos 'int'
 
-         if ( stripos($row['Type'],'int(') !== FALSE ) {
+         if ( !isset($this->tipos_formulario[$row['Field']]['tipo']) && stripos($row['Type'],'int(') !== FALSE ) {
 
             $this->tipos_formulario[$row['Field']]['tipo'] = 'numero';
 
@@ -865,7 +865,8 @@ class Crud extends DataBoundObject {
          if ( isset($this->tipos_campos[$campo]['null']) 
             && $this->tipos_campos[$campo]['null'] == 'NO' 
             && !isset($this->tipos_campos[$campo]['Default']) 
-            && $this->tipo_tabla == 'normal' ) {
+            && $this->tipo_tabla == 'normal' 
+            && !$this->tipos_formulario[$campo]['tipo'] == 'relacion' ) {
 
                $this->restricciones[$campo][RT_REQUERIDO] = 1;
                $this->mensajes[$campo][RT_REQUERIDO] = literal('Campo obligatorio',3);
@@ -1393,7 +1394,7 @@ class Crud extends DataBoundObject {
             $id_relacionado = $this->GetAccessor($campo);
             $relacion = new $modelo_relacionado($this->objPDO,$id_relacionado);
             $this->tipos_formulario[$campo]['opciones'] = $relacion->listado_para_select();
-            }
+          }
 
          }
 
