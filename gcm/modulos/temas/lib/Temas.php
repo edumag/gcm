@@ -105,8 +105,6 @@ class Temas extends Modulos {
       $this->version    = $bb['version'];
       $this->plataforma = $bb['platform'];
 
-      registrar(__FILE__,__LINE__,"Plataforma: ".$this->plataforma." Navegador: ".$this->navegador." Versión: ".$this->version,'AVISO'); // DEV
-      
       $this->Titulo = $gcm->config('metatags','title');
       $this->Subtitulo = $gcm->config('metatags','subject');
 
