@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sun Dec 21 18:34:48 CET 2014
+// Archivo generado automáticamente por GcmConfig Sun Jan 11 17:07:19 CET 2015
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -166,4 +166,7 @@ $GCM_LG_es['Registro eliminado']='';
 $GCM_LG_es['Actualizar contenido en idioma por defecto (es)']='';
 $GCM_LG_es['Actualizar traducción en idioma (es)']='';
 $GCM_LG_es['Ayuda para el administrador']='';
+$GCM_LG_es['Administrar Mapas']='';
+$GCM_LG_es['Administrar marcadores de mapas']='';
+$GCM_LG_es['Subtitulo']='';
 ?>
