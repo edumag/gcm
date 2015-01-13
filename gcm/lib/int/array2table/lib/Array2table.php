@@ -321,8 +321,8 @@ class Array2table {
                   }
                
             } elseif ($key_columna == "img" ) {
-               $DATO=trim($columna);
-               printf("\n\t\t\t<td".$clase_columna."> <img width='60px' src='%s' /></td>",$DATO);
+              $DATO=trim($columna);
+              printf("\n\t\t\t<td".$clase_columna."> <img width='60px' src='%s' /></td>",$DATO);
                
             } elseif ($key_columna == "%") {
                $DATO=trim($columna);
