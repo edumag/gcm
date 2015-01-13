@@ -432,6 +432,7 @@ class Galeria implements Iterator {
       }
 
    public function carga_js_general() {
+     if ( ! $this->plantilla_presentacio ) return FALSE;
       $include_config=dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/config.php';
       if ( file_exists($include_config) ) {
          include($include_config);
@@ -442,7 +443,7 @@ class Galeria implements Iterator {
             return $this->carga_js_general;
             }
       } else {
-         registrar(__FILE__,__LINE__,"Falta rchivo config de presentación de ".$this->plantilla_presentacio,'ERROR');
+         registrar(__FILE__,__LINE__,"Falta archivo config de presentación de ".$this->plantilla_presentacio,'ERROR');
          }
       return FALSE;
       }

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * @brief Acciones para galeria
+ * @brief Acciones para galería
  */
 
 session_start();
