@@ -441,6 +441,14 @@ class Crud extends DataBoundObject {
 
       parent::__construct($objPdo, $id);
  
+      // Si tenemos constantes definimos el tipo de campo.
+      if ( $this->constantes ) {
+         foreach ( $this->constantes as $constante => $valor_constante ) {
+           $this->tipos_formulario[$constante]['oculto_form'] = 1;
+           $this->tipos_formulario[$constante]['valor'] = $valor_constante;
+           $this->opciones_array2table['op']['ocultar'][] = $constante;
+         }
+       }
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
 
@@ -866,7 +874,8 @@ class Crud extends DataBoundObject {
             && $this->tipos_campos[$campo]['null'] == 'NO' 
             && !isset($this->tipos_campos[$campo]['Default']) 
             && $this->tipo_tabla == 'normal' 
-            && !$this->tipos_formulario[$campo]['tipo'] == 'relacion' ) {
+            && !$this->tipos_formulario[$campo]['tipo'] == 'relacion' ) 
+            {
 
                $this->restricciones[$campo][RT_REQUERIDO] = 1;
                $this->mensajes[$campo][RT_REQUERIDO] = literal('Campo obligatorio',3);
@@ -2038,6 +2047,21 @@ class Crud extends DataBoundObject {
 
    function listado($condicion = FALSE, $order = FALSE) {
 
+     if ( $this->constantes ) {
+       foreach ( $this->constantes as $constante => $valor_constante ) {
+         if ( is_numeric($valor_constante) ) {
+           $strQuery .= $this->strTableName.'.'.$constante . '=' . $valor_constante . ' AND ' ;
+         } else {
+           $strQuery .= $this->strTableName.'.'.$constante . '=\'' . $valor_constante . '\' AND ' ;
+         }
+       }
+       if ( $condicion ) {
+         $condicion = $strQuery . $condicion;
+       } else {
+         $condicion = rtrim($strQuery, 'AND ');
+       } 
+     }
+
       $sql = ( isset($this->sql_listado) ) ? $this->sql_listado : 'SELECT * FROM '.$this->strTableName;
       
       // La condición debe añadirse antes de GROUP en caso de lo haya.
@@ -2336,6 +2360,7 @@ class Crud extends DataBoundObject {
                ,$campo_relacion    
                ) = explode(',',$combinados); 
 
+            // DEV
             // echo "<br>tabla_contenido    $tabla_contenido    ";
             // echo "<br>campo_contenido    $campo_contenido    ";
             // echo "<br>tabla_combinatoria $tabla_combinatoria ";

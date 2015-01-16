@@ -57,7 +57,7 @@ class Formulario {
     *
     * - tipo: text, 
     * - ['oculto_form'] = 1 No se muestra.
-    * - ['ignorar'] = 1 Se ignora al presentar en formulario 
+    * - ['ignorar'] = 1     Se ignora al presentar en formulario.
     *
     * Ejemplos:
     *
@@ -131,6 +131,11 @@ class Formulario {
     *            [maxlength] => 100
     *            [size] => 30
     *            [valor] => 
+    *        )
+    *    [localizacion] => Array
+    *        (
+    *            [tipo] => constante
+    *            [valor] => 6
     *        )
     *    [acepta_condiciones] => Array
     *        (

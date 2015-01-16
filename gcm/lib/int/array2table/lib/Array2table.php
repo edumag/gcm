@@ -67,6 +67,7 @@ class Array2table {
     *     url            Url para enlaces de registro'
     *     accion         Nombre de variable GET que se pasara en url, por defecto 'accion'
     *     dir_imag       Url del directorio donde se encuentran los iconos modificar, eliminar, etc...
+    *     ocultar        Array con los nombres de los campos que no se quieren mostrar.
     *     enlaces        Array con el contenido de los campos que contienen un enlace.
     *
     *                    Estructura de ejemplo:
@@ -92,6 +93,8 @@ class Array2table {
       
       $num_registros = count($res);
       $num_columnas  = count($res[0]);
+
+      $ocultar_campos = ( isset($opciones['ocultar']) ) ? $opciones['ocultar'] : FALSE;
 
       /** Se presenta en una sola fila, para permitir gran cantidad de datos */
 
@@ -177,6 +180,8 @@ class Array2table {
                }
 
              */
+
+            if ( $ocultar_campos && in_array($columna, $ocultar_campos) ) continue;
 
             if ( $columna == $identificador  && $ocultar_id ) continue;
 
@@ -297,6 +302,10 @@ class Array2table {
             /* Si tenemos columna con % Añadimos efecto visual para representarlo */
 
             if ( $key_columna == $identificador  && $ocultar_id ) { // id oculto
+               $col--;
+               echo ''; 
+
+            } elseif ( $ocultar_campos && in_array($key_columna, $ocultar_campos) ) { // Ocultar campo.
                $col--;
                echo ''; 
 

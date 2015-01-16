@@ -32,6 +32,9 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
 
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
+   <?php if ( isset($this->campos[$campo]['ignorar']) && $this->campos[$campo]['ignorar'] == 1 ) { ?>
+   <?php continue; } ?>
+
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
    <?php echo HTML::form_hidden($campo,$this->valores($campo)); ?>
    <?php continue; } ?>

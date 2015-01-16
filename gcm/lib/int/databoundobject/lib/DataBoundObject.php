@@ -25,13 +25,25 @@
 
 abstract class DataBoundObject {
 
+   public $objPDO;                         ///< Instancia de PDO
+
    protected $ID;                          ///< Identificador de registro
-   public $objPDO;                      ///< PDO
    protected $strTableName;                ///< Nombre de tabla
    protected $arRelationMap;               ///< Array con las relaciones campo tabla->nombre_variable
    protected $blForDeletion;               ///< Para saber si se debe borrar el registro
    protected $blIsLoaded;                  ///< Saber si ya se fue ha buscar a la BD
    protected $arModifiedRelations;         ///< listado de campos modificados
+
+   /**
+    * Nos permite definir campos con valores establecidos donde no se requiere la interacción del
+    * usuario.
+    * Si tenemos constantes añadiremos la condición de que el campo sea igual al valor indicado
+    * en el modelo al buscar registros y añadiremos el valor en el campo al hacer un INSERT.
+    * Debe definirse como un array donde el indice es el nombre del campo y el valor.
+    * Ejemplo: $this->constantes = array('localitzacio' => LOCALITZACIO, 'autor' => $autor);
+    */
+
+   protected $contantes;
 
    /**
     * Array con los nombres de los campo que hacen de indice de la tabla, por lo general 
@@ -116,6 +128,16 @@ abstract class DataBoundObject {
          }
          $strQuery = substr($strQuery, 0, strlen($strQuery)-1);
          $strQuery .= " FROM " . $this->strTableName . " WHERE ";
+
+         if ( $this->constantes ) {
+           foreach ( $this->constantes as $constante => $valor_constante ) {
+             if ( is_numeric($valor_constante) ) {
+               $strQuery .= $constante . '=' . $valor_constante . ' AND ' ;
+             } else {
+               $strQuery .= $constante . '=\'' . $valor_constante . '\' AND ' ;
+             }
+           }
+         }
 
          $condicion = "";
          $conta = 0;
@@ -280,6 +302,7 @@ abstract class DataBoundObject {
 
             $msg = $e->getMessage();
             registrar(__FILE__,__LINE__,$msg,'ERROR');
+            registrar(__FILE__,__LINE__,"SQL: $sql",'ADMIN');
             return FALSE;
          }
 
@@ -564,14 +587,41 @@ abstract class DataBoundObject {
 
       $sql = "SELECT $seleccion FROM ".$this->strTableName;
 
-      if ( $condicion ) $sql .= " WHERE $condicion";
+      if ( $this->constantes ) {
+        $sql .= ' WHERE ';
+         foreach ( $this->constantes as $constante => $valor_constante ) {
+           if ( is_numeric($valor_constante) ) {
+             $sql .= $constante . '=' . $valor_constante . ' AND ' ;
+           } else {
+             $sql .= $constante . '=\'' . $valor_constante . '\' AND ' ;
+           }
+         }
+       }
+
+      if ( $condicion && ! $this->constantes ) $sql .= 
+        " WHERE $condicion";
+
+      if ( $condicion && $this->constantes ) $sql .= 
+        " $condicion";
+
+      $sql = rtrim($sql,'AND ');
 
       if ( isset($orden)  ) $sql .= " ORDER BY ".$orden;
 
-      registrar(__FILE__,__LINE__,$sql,'DEBUG');
+      registrar(__FILE__,__LINE__,$sql);
       $objStatement = $this->objPDO->prepare($sql);
-      $objStatement->execute();
 
+      try {
+
+         $objStatement->execute();
+
+      } catch (PDOException $e) {
+
+         $msg = $e->getMessage();
+         registrar(__FILE__,__LINE__,$msg,'ERROR');
+         registrar(__FILE__,__LINE__,"SQL: $sql",'ADMIN');
+         return FALSE;
+      }
       $arAll = $objStatement->fetchAll(PDO::FETCH_ASSOC);
 
       $conta = 0;
