@@ -13,7 +13,10 @@
 // $eventos['evento']['metodo'][6]='';
 
 $eventos['cabeceraDerecha']['botones'][2]='';
+$eventos['heads']['presentar_heads_dinamicos'][1] = '';
 
+$this->set_lista_blanca('redes_sociales','insert_button');
+$this->set_lista_blanca('redes_sociales','insert_metatags');
 
 /** @} */
 ?>

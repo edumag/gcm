@@ -1,9 +1,7 @@
-Gestor de contenido mamedu
+Framework y Gestor de contenido.
 
-Framework de PHP.
+![Pantalla de ejemplo](docs/img/gcm.png)
 
-![Pantalla de ejemplo](docs/img/ejemplo.png)
+Documentación: http://lesolivex.com/dev/gcm/proyecto/
 
-Documentación: http://mamedu.com/dev/gcm/proyecto/
-
-Documentación interna: http://mamedu.com/dev/gcm/docs/doxygen/html/index.html
+Documentación interna: http://lesolivex.com/gcm/docs/doxygen/html/index.html

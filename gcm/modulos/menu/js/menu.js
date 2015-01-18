@@ -14,6 +14,7 @@ function initMenu(contexto) {
 
    // Cerramos los menús off
    $('.m_on', contexto).parent().find("ul").hide();
+   $('.m_actual', contexto).parent().find("ul").show();
 
    $('.m_on, .m_off', contexto).click(function() {
 

@@ -13,7 +13,7 @@ if ( permiso('galeria','imagenes') ) {
 
    $menuAdmin[literal('Administración',3)]['boton'][literal('Imagenes',3)]['activado']= 1;
    $menuAdmin[literal('Administración',3)]['boton'][literal('Imagenes',3)]['title']=literal("Administrar imágenes",3);
-   $menuAdmin[literal('Administración',3)]['boton'][literal('Imagenes',3)]['link']=Router::$dir.Router::$url."?m=imagenes&a=galeria";
+   $menuAdmin[literal('Administración',3)]['boton'][literal('Imagenes',3)]['link']=Router::$dir.'imagenes/galeria/'.Router::$s;
    }
 
 /** @} */

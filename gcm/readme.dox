@@ -21,7 +21,7 @@ Librerías y gestor de contenido para la creación de proyectos web.
 - Todo son módulos, permite activar y desactivar para mantener el proyecto rápido.
 - Librerías propias para por ejemplo hacer CRUDs automáticos.
 
-@image html ejemplo-01.png
+@image html gcm.png
  
 Descarga: https://github.com/edumag/gcm
 

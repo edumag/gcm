@@ -8,7 +8,7 @@
  * Nos permite guardar los registros que se van generando
  *
  * @package Registro
- * @author    Eduardo Magrané <eduardo mamedu com>
+ * @author    Eduardo Magrané <eduardo lesolivex com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  * @version   SVN $Id: Registro.php 661 2012-11-02 11:26:56Z eduardo $ 
  */

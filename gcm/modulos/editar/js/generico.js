@@ -3,7 +3,7 @@
 /**
  * @category  Modulos
  * @package   Editar
- * @author    Eduardo Magrané <eduardo mamedu com>
+ * @author    Eduardo Magrané <edu lesolivex com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  * @version   0.2
  */

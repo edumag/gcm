@@ -441,6 +441,14 @@ class Crud extends DataBoundObject {
 
       parent::__construct($objPdo, $id);
  
+      // Si tenemos constantes definimos el tipo de campo.
+      if ( $this->constantes ) {
+         foreach ( $this->constantes as $constante => $valor_constante ) {
+           $this->tipos_formulario[$constante]['oculto_form'] = 1;
+           $this->tipos_formulario[$constante]['valor'] = $valor_constante;
+           $this->opciones_array2table['op']['ocultar'][] = $constante;
+         }
+       }
       $this->restricciones_automaticas();
       $this->mensajes_automaticos();
 
@@ -799,7 +807,7 @@ class Crud extends DataBoundObject {
 
          // Campos 'int'
 
-         if ( stripos($row['Type'],'int(') !== FALSE ) {
+         if ( !isset($this->tipos_formulario[$row['Field']]['tipo']) && stripos($row['Type'],'int(') !== FALSE ) {
 
             $this->tipos_formulario[$row['Field']]['tipo'] = 'numero';
 
@@ -865,7 +873,9 @@ class Crud extends DataBoundObject {
          if ( isset($this->tipos_campos[$campo]['null']) 
             && $this->tipos_campos[$campo]['null'] == 'NO' 
             && !isset($this->tipos_campos[$campo]['Default']) 
-            && $this->tipo_tabla == 'normal' ) {
+            && $this->tipo_tabla == 'normal' 
+            && !$this->tipos_formulario[$campo]['tipo'] == 'relacion' ) 
+            {
 
                $this->restricciones[$campo][RT_REQUERIDO] = 1;
                $this->mensajes[$campo][RT_REQUERIDO] = literal('Campo obligatorio',3);
@@ -874,7 +884,10 @@ class Crud extends DataBoundObject {
 
          // Si es tipo numero
 
-         if ( isset($this->tipos_formulario[$campo]['tipo']) ) {
+         if ( isset($this->tipos_campos[$campo]['null']) 
+              && $this->tipos_campos[$campo]['null'] == 'NO' 
+              && isset($this->tipos_formulario[$campo]['tipo']) 
+            ) {
 
             $tipo = $this->tipos_formulario[$campo]['tipo'];
 
@@ -1390,7 +1403,7 @@ class Crud extends DataBoundObject {
             $id_relacionado = $this->GetAccessor($campo);
             $relacion = new $modelo_relacionado($this->objPDO,$id_relacionado);
             $this->tipos_formulario[$campo]['opciones'] = $relacion->listado_para_select();
-            }
+          }
 
          }
 
@@ -1655,35 +1668,37 @@ class Crud extends DataBoundObject {
 
                $clase_contenido    = ucwords($tabla_contenido);
                $clase_combinatoria = ucwords($tabla_combinatoria);
-               $condicion_combinatoria = "$campo_relacion = $this->ID";
                $rel = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
-               $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
+               if ( $this->ID ) {
+                 $condicion_combinatoria = "$campo_relacion = $this->ID";
+                 $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
 
-               if ( $ids_relacionados ) {
+                 if ( $ids_relacionados ) {
 
-                  foreach ( $ids_relacionados as $id_relacionado ) {
+                    foreach ( $ids_relacionados as $id_relacionado ) {
 
-                     $id = $id_relacionado[$campo_combinatoria];
-                     $condicion_contenido = "$campo_contenido = ".$id.' ';
+                       $id = $id_relacionado[$campo_combinatoria];
+                       $condicion_contenido = "$campo_contenido = ".$id.' ';
 
-                     $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
+                       $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
 
-                     if ( isset($rel_contenido->restricciones) && ! empty($rel_contenido->restricciones) ) {
-                        $conta=0;
-                        foreach ( $rel_contenido->restricciones() as $campo => $restriccion ) {
-                           foreach ( $restriccion as $tipo => $valor ) {
-                              $restricciones[$conta] = new Restricciones($tipo, $valor);
-                              // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
-                              // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
-                              // estar vacio.
-                              if ( ! isset($this->ID) && !empty($this->ID) && $campo == $nombre_campo_relacional ) continue;
-                              $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
-                              $conta++;
-                              }
-                           }
-                        }
-                     }
-                  }
+                       if ( isset($rel_contenido->restricciones) && ! empty($rel_contenido->restricciones) ) {
+                          $conta=0;
+                          foreach ( $rel_contenido->restricciones() as $campo => $restriccion ) {
+                             foreach ( $restriccion as $tipo => $valor ) {
+                                $restricciones[$conta] = new Restricciones($tipo, $valor);
+                                // En caso de estar insertando un registro nuevo hay que evitar las restricciones sobre
+                                // el campo relacionado ya que al no tener un identificativo todavia nos dara error por 
+                                // estar vacio.
+                                if ( ! isset($this->ID) && !empty($this->ID) && $campo == $nombre_campo_relacional ) continue;
+                                $solicitud->AddConstraint($rel->sufijo.$campo, ENTRADAS_POST, $restricciones[$conta]);
+                                $conta++;
+                                }
+                             }
+                          }
+                       }
+                    }
+                 }
                }
             }
 
@@ -1730,18 +1745,19 @@ class Crud extends DataBoundObject {
                      foreach ( $this->relaciones_varios as $relacion_varios ) {
                         list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
                         $nombre_clase = ucwords($nombre_tabla);
-                        $condicion_relacion = "$nombre_campo_relacional = $this->ID";
                         $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
-
-                        // Recorremos identificadores de los registros relacionados existentes
-                        $ids_relacionados = $rel->find($condicion_relacion, array('id'));
-                        if ( $ids_relacionados ) {
-                           foreach ( $ids_relacionados as $id_relacionado ) {
-                              //echo "<br>id: ".$id_relacionado['id'];
-                              $rel = new $nombre_clase($this->objPDO, $id_relacionado['id']);
-                              $rel->MarkForDeletion();
-                              }
-                           }
+                        if ( $this->ID ) {
+                          $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+                          // Recorremos identificadores de los registros relacionados existentes
+                          $ids_relacionados = $rel->find($condicion_relacion, array('id'));
+                          if ( $ids_relacionados ) {
+                             foreach ( $ids_relacionados as $id_relacionado ) {
+                                //echo "<br>id: ".$id_relacionado['id'];
+                                $rel = new $nombre_clase($this->objPDO, $id_relacionado['id']);
+                                $rel->MarkForDeletion();
+                                }
+                             }
+                          }
 
                         // Guardar registros relacionado
 
@@ -1763,6 +1779,7 @@ class Crud extends DataBoundObject {
                            $nueva_relacion->save();
                         
                            }
+                        
                         }
                      }
 
@@ -1770,6 +1787,9 @@ class Crud extends DataBoundObject {
                   // Primero borramos los que ya existan relacionados al registro padre
                   // Despues añadimos teniendo en cuenta que vendran en forma de arrays y con el
                   // nombre de la tabla como prefijo.
+
+                  // @todo Diferenciar entre los que han sido seleccionados y los nuevos sino
+                  //       no recoge bien los resultados.
 
                   if ( $this->combinar_tablas ) {
 
@@ -1810,6 +1830,7 @@ class Crud extends DataBoundObject {
                         // a la lista de ids relacionados para añadirlos en la tabla combinatoria
 
                         $numero_registros_formulario = 20; // Ponemos un limite pero al darse cuenta que no hay datos parara
+                        
                         for ( $index = 0 ; $index < $numero_registros_formulario ; $index++ ) {
 
                            // Comprobar que no este marcado para eliminar
@@ -1818,15 +1839,20 @@ class Crud extends DataBoundObject {
 
                            // Si tiene su propio identificador no hay que guardarlo
                            $nombre_campo_identificativo = $tabla_contenido.'_'.$tabla_contenido.'_id';
+                           
                            if ( isset($resultado[$nombre_campo_identificativo][$index]) ) { 
+                             
                               $ID = $resultado[$nombre_campo_identificativo][$index]; 
                               $identificadores_contenido_insertados[] = $ID;
                            } else {
                               $ID = NULL;
 
                               $nueva_relacion = new $clase_contenido($this->objPDO, $ID, 'relacion_externa');
-                              if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) break ;
 
+                              if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) {
+                                exit();
+                                break ;
+                              }
                               $nueva_relacion->save();
                               $identificadores_contenido_insertados[] = $nueva_relacion->ID;
                               unset($nueva_relacion);
@@ -1857,6 +1883,7 @@ class Crud extends DataBoundObject {
                   registrar(__FILE__,__LINE__,literal('Error al añadir o modificar registro'),'ERROR');
                   }
 
+               exit(); // DEV
             }
 
          $_SESSION['dh'] = $displayHash;
@@ -2034,6 +2061,21 @@ class Crud extends DataBoundObject {
 
    function listado($condicion = FALSE, $order = FALSE) {
 
+     if ( $this->constantes ) {
+       foreach ( $this->constantes as $constante => $valor_constante ) {
+         if ( is_numeric($valor_constante) ) {
+           $strQuery .= $this->strTableName.'.'.$constante . '=' . $valor_constante . ' AND ' ;
+         } else {
+           $strQuery .= $this->strTableName.'.'.$constante . '=\'' . $valor_constante . '\' AND ' ;
+         }
+       }
+       if ( $condicion ) {
+         $condicion = $strQuery . $condicion;
+       } else {
+         $condicion = rtrim($strQuery, 'AND ');
+       } 
+     }
+
       $sql = ( isset($this->sql_listado) ) ? $this->sql_listado : 'SELECT * FROM '.$this->strTableName;
       
       // La condición debe añadirse antes de GROUP en caso de lo haya.
@@ -2128,7 +2170,6 @@ class Crud extends DataBoundObject {
 
             list($nombre_tabla,$nombre_campo_relacional) = explode('.',$relacion_varios); 
             $nombre_clase = ucwords($nombre_tabla);
-            $condicion_relacion = "$nombre_campo_relacional = $this->ID";
             $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
 
             ?>
@@ -2137,20 +2178,23 @@ class Crud extends DataBoundObject {
 
             <?php
             // Recorremos identificadores de los registros relacionados existentes
-            $ids_relacionados = $rel->find($condicion_relacion, array('id'));
-            $conta = 0;
-            if ( $ids_relacionados ) {
+            $conta = 1;
+            if ( $this->ID ) {
+              $condicion_relacion = "$nombre_campo_relacional = $this->ID";
+              $ids_relacionados = $rel->find($condicion_relacion, array('id'));
+              if ( $ids_relacionados ) {
 
-               foreach ( $ids_relacionados as $id_relacionado ) {
+                 foreach ( $ids_relacionados as $id_relacionado ) {
 
-                  $rel->ID = $id_relacionado['id'];
-                  $rel->tipos_formulario = FALSE;
-                  $rel->load();
-                  $rel->generar_formulario($displayHash, $nombre_campo_relacional, $this, $conta);
-                  $conta++;
+                    $rel->ID = $id_relacionado['id'];
+                    $rel->tipos_formulario = FALSE;
+                    $rel->load();
+                    $rel->generar_formulario($displayHash, $nombre_campo_relacional, $this, $conta);
+                    $conta++;
 
-                  }
-               }
+                    }
+                 }
+              }
 
             // Añadimos una más para poder añadir registros nuevos
             $rel = new $nombre_clase($this->objPDO, NULL, 'relacion_varios');
@@ -2187,11 +2231,19 @@ class Crud extends DataBoundObject {
 
       // Retornamos T/F para conocer si hay valores o no
 
+     echo '<h1>INICIO</h1>';
+     echo '<pre>modelo: ' ; print_r($modelo) ; echo '</pre>'; // exit() ; // DEV  
+     echo '<pre>resultado: ' ; print_r($resultado) ; echo '</pre>'; // exit() ; // DEV  
+     echo '<pre>numero_registro: ' ; print_r($numero_registro) ; echo '</pre>';  // exit() ; // DEV  
+
       $hay_valores = FALSE;
 
       foreach ( $modelo->arRelationMap as $campo => $rCampo ) {
 
          $valor = ( $numero_registro !== FALSE ) ? $resultado[$modelo->sufijo.$campo][$numero_registro] : $resultado[$campo];
+
+        echo '<pre>campo: ' ; print_r($campo) ; echo '</pre>'; // exit() ; // DEV  
+         echo '<pre>valor: ' ; print_r($valor) ; echo '</pre>'; // exit() ; // DEV  
 
          // campos booleanos
          if ( $this->tipos_formulario[$campo]['tipo'] == 'booleano' ) {
@@ -2332,6 +2384,7 @@ class Crud extends DataBoundObject {
                ,$campo_relacion    
                ) = explode(',',$combinados); 
 
+            // DEV
             // echo "<br>tabla_contenido    $tabla_contenido    ";
             // echo "<br>campo_contenido    $campo_contenido    ";
             // echo "<br>tabla_combinatoria $tabla_combinatoria ";
@@ -2341,8 +2394,6 @@ class Crud extends DataBoundObject {
             $clase_contenido    = ucwords($tabla_contenido);
             $clase_combinatoria = ucwords($tabla_combinatoria);
 
-            $condicion_combinatoria = "$campo_relacion = $this->ID";
-
             $rel = new $clase_combinatoria($this->objPDO, NULL, 'combinatoria');
 
             ?>
@@ -2351,28 +2402,31 @@ class Crud extends DataBoundObject {
 
             <?php
             // Recorremos identificadores de los registros relacionados existentes
-            $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
-
             $conta = 0;
-            if ( $ids_relacionados ) {
+            if ( $this->ID ) {
+              $condicion_combinatoria = "$campo_relacion = $this->ID";
+              $ids_relacionados = $rel->find($condicion_combinatoria, array($campo_combinatoria));
+              if ( $ids_relacionados ) {
 
-               foreach ( $ids_relacionados as $id_relacionado ) {
+                 foreach ( $ids_relacionados as $id_relacionado ) {
 
-                  // Creamos instancias del modelo que contiene el contenido
+                    // Creamos instancias del modelo que contiene el contenido
 
-                  $id = $id_relacionado[$campo_combinatoria];
-                  $condicion_contenido = "$campo_contenido = ".$id.' ';
+                    $id = $id_relacionado[$campo_combinatoria];
+                    $condicion_contenido = "$campo_contenido = ".$id.' ';
 
-                  $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
-                  $rel_contenido->ID = $id;
-                  $rel_contenido->tipos_formulario = FALSE;
-                  $rel_contenido->load();
-                  $rel_contenido->generar_formulario($displayHash, $campo_contenido, $this, $conta);
-                  $conta++;
+                    $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
+                    $rel_contenido->ID = $id;
+                    $rel_contenido->tipos_formulario = FALSE;
+                    $rel_contenido->load();
+                    $rel_contenido->generar_formulario($displayHash, $campo_contenido, $this, $conta);
+                    $conta++;
 
-                  }
-               }
+                    }
+                 }
+              }
 
+            if ( $conta == 0 ) $conta = 1;
             // Añadimos una más para poder añadir registros nuevos
             $rel_contenido = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
             $rel_contenido->generar_formulario(FALSE, $campo_contenido, $this, $conta);

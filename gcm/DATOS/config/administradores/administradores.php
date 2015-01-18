@@ -1,3 +1,3 @@
 <?php
-$administradores[] = "mamedu|@|kkkk";
+$administradores[] = "admin|@|kkkk";
 ?>

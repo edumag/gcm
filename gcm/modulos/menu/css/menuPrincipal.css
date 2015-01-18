@@ -7,11 +7,7 @@
 
 #menu_switch { 
     display: none;
-    float: right;
     font-size: 250%;
-    left: 2px;
-    position: absolute;
-    top: 190px;
    }
 
 /*
@@ -99,6 +95,11 @@ text-decoration: none;
     padding: 4px;
 }
 
+#menu_movil {
+    display: block;
+    text-align: center !important;
+    margin: 0 auto;
+}
 @media screen and (max-width: 680px) {
 
 #menu_principal { display: none; }
@@ -113,7 +114,6 @@ width: 100%;
 padding: 8px 0;
 }
 }
-
 @media screen and (min-width: 680px) {
    #menu_principal { display: block!IMPORTANT; }
 }

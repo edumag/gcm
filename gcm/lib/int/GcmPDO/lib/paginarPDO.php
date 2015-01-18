@@ -160,6 +160,8 @@ class PaginarPDO extends GcmPDO {
       if ( $this->elemento_inicio < 1  ) $this->elemento_inicio=1;
       if ( $this->elemento_final > $this->total_de_paginas  ) $this->elemento_final=$this->total_de_paginas;
 
+      registrar(__FILE__,__LINE__,$sql);
+      
 
       // DEV
       // if ( isset($ordenadox) ) echo '<br>ordenadox: '.$ordenadox;
@@ -188,7 +190,6 @@ class PaginarPDO extends GcmPDO {
       // echo "<pre>resultado: " ; print_r($this->resultado()) ; echo "</pre>"; // DEV  
       // echo "<pre>array: " ; print_r($this->to_array()) ; echo "</pre>"; // DEV  
       // echo "<pre>opciones_array2table: " ; print_r($opciones_array2table) ; echo "</pre>"; // DEV  
-      // echo "<pre>opciones: " ; print_r($opciones) ; echo "</pre>"; // DEV  
 
       if ( $this->plantilla_resultados  ) {
 

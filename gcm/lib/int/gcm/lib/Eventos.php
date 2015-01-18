@@ -627,22 +627,21 @@ registrar(__FILE__,__LINE__,"fichero_modulo: $fichero_modulo",'AVISO');
             /* Si estamos en debug calculamos tiempo de ejecución de la acción */
             if ( GCM_DEBUG ) $tiempo_inicio = microtime(TRUE);
             if ( $this->instancias[$m]->$a($e,$args) === FALSE )  {
-               registrar(__FILE__,__LINE__,'Eventos->lanzar_accion_modulo('.$m.','.$a.','.$e.','.$args.') Error al lanzar evento');
+               registrar(__FILE__,__LINE__,'Eventos->lanzar_accion_modulo('.$m.','.$a.','.$e.','.$args.') Error al lanzar evento', 'ERROR');
                // Anulamos evento por error en uno de los módulos
-               if ( stripos($e,'pre') !== FALSE ) {
-                  $evento_original = str_replace('pre','',$e);
-                  $this->anular('pre'.$evento_original, $m);
-                  $this->anular($evento_original, $m);
-                  $this->anular('post'.$evento_original, $m);
-               } elseif ( stripos($e,'post') !== FALSE ) {
-                  $evento_original = str_replace('post','',$e);
-                  $this->anular($evento_original, $m);
-                  $this->anular('post'.$evento_original, $m);
-               } else {
-                  $this->anular($e, $m);
-                  $this->anular('post'.$e, $m);
-                  }
-
+               // if ( stripos($e,'pre') !== FALSE ) {
+               //    $evento_original = str_replace('pre','',$e);
+               //    $this->anular('pre'.$evento_original, $m);
+               //    $this->anular($evento_original, $m);
+               //    $this->anular('post'.$evento_original, $m);
+               // } elseif ( stripos($e,'post') !== FALSE ) {
+               //    $evento_original = str_replace('post','',$e);
+               //    $this->anular($evento_original, $m);
+               //    $this->anular('post'.$evento_original, $m);
+               // } else {
+               //    $this->anular($e, $m);
+               //    $this->anular('post'.$e, $m);
+               //    }
                }
             if ( GCM_DEBUG ) $tiempo_total = round(microtime(TRUE)-$tiempo_inicio,4);
             if ( GCM_DEBUG ) registrar(__FILE__,__LINE__,'Tiempo de ejecución de '.$m.'->'.$a.'('.$e.','.depurar($args).'): ('.$tiempo_total.')'); 

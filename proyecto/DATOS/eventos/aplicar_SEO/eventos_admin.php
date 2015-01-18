@@ -16,7 +16,7 @@
  * $eventos['columna']['ultimas_entradas'][2] = "num=7&seccion=".Router::get_s()."&formato=1";
  * @endcode
  *
- * @author    Eduardo Magrané eduardo@mamedu.com
+ * @author    Eduardo Magrané edu@lesolivex.com
  *
  * @internal
  *   Created  25/11/09

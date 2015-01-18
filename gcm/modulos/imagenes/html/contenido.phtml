@@ -26,14 +26,14 @@
    <?php if ( $otraseccion[0] == literal('subir') ) { ?>
 
       <a class="boton" href="#" 
-         onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[1];?>','galeria');return false;">
+         onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&seccion=<?php echo $otraseccion[1];?>','galeria');return false;">
          <?php echo $otraseccion[0]; ?>
       </a>
 
    <?php } else { ?>
 
       <a class="boton"  href="#" 
-         onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&s=<?php echo $otraseccion[0];?>','galeria');return false;">
+         onclick="pedirDatos('?formato=ajax&m=imagenes&a=galeria&seccion=<?php echo $otraseccion[0];?>','galeria');return false;">
          <?php echo $otraseccion[1]; ?>
       </a>
 
@@ -96,4 +96,3 @@
    <?php } ?>
 
    </div>
-

@@ -13,6 +13,7 @@
 $config['usuario_facebook'] = '';
 $config['usuario_twitter'] = '';
 $config['usuario_tripadvisor'] = '';
+$config['color'] = '';
 
 /** @} */
 

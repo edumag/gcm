@@ -81,7 +81,7 @@ BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 </ifmodule>
 
 ## Sense www
-RewriteCond %{HTTP_HOST} ^www.mamedu.com$ [NC]
-RewriteRule ^(.*)$ http://mamedu.com/dev/gcm/proyecto/$1 [L,R=301]
+RewriteCond %{HTTP_HOST} ^www.lesolivex.com$ [NC]
+RewriteRule ^(.*)$ http://lesolivex.com/dev/gcm/proyecto/$1 [L,R=301]
 
 

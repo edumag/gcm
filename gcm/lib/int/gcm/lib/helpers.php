@@ -78,7 +78,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
             $valor = '';
 
          } else {
-            return $literal;
+            // Si no tenemos literal devolvemos la clave cambiando los
+            // guiones bajos por espacios.
+            return str_replace('_', ' ', $literal);
             }
 
          $idioma_actual = $_SESSION[$proyecto.'-idioma'];
@@ -94,7 +96,9 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          $LG[$literal] = ( $valor ) ? $valor : '';
 
-         return ( $valor ) ? $valor : $literal ;
+         // Si no tenemos literal devolvemos la clave cambiando los
+         // guiones bajos por espacios.
+         return ( $valor ) ? $valor : str_replace('_', ' ', $literal) ;
 
          break;
 
@@ -108,7 +112,10 @@ function literal($literal, $nivel=2, $valor=NULL) {
             // No se encontro literal ni de proyecto ni de gcm
             // Añadimos literal al proyecto para poder ser añadido
             // En caso de no estar ya en el array.
-            return $literal;
+
+            // Si no tenemos literal devolvemos la clave cambiando los
+            // guiones bajos por espacios.
+            return str_replace('_', ' ', $literal);
             }
          break;
 
@@ -405,6 +412,7 @@ function presentarBytes($bytes) {
  * @param $salida_personal Formato de salida personalizado
  *
  * @return fecha formateada
+ *
  */
 
 function presentarFecha($time, $formato_salida=1, $formato_entrada='unix', $salida_personal=FALSE) {
@@ -486,7 +494,7 @@ function presentarFecha($time, $formato_salida=1, $formato_entrada='unix', $sali
 *
 */
 
-function modificarGet($var, $valor) {
+function modificarGet($var, $valor=FALSE) {
 
    $salida = FALSE;
 
@@ -496,12 +504,12 @@ function modificarGet($var, $valor) {
       if ( $key !== $var ) {
          // Descartamos url, ya viene con la dirección
          if ( $key != "url" ) {
-            $salida .= "&".$key."=".$val;
+            $salida .= $key."=".$val."&";
          }
       }
    }
    
-   return ( $salida ) ? '?'.$salida : FALSE ;
+   return ( $salida ) ? '?'.rtrim($salida,'&') : FALSE ;
 
    }
 
@@ -545,6 +553,8 @@ if( ! function_exists("permiso") ) {
  *
  * Comprobamos si la función ya existe, de esta manera permitimos con facilidad
  * implementar otro sistema de verificación de permisos diferente.
+ *
+ * @todo Crear módulo que gestione el enrutamiento a paginas de error.
  *
  * @param $accion     Acción a realizar
  * @param $modulo     Módulo que realiza la acción
@@ -746,13 +756,13 @@ function mostrar_ip() {
 function mkdir_recursivo($ruta) {
 
    $directorios = explode('/',$ruta);
-   $dir = ( $directorios[0] == '' ) ? '/' : '' ;
+   $dir = '';
    for ( $i=0;$i<=count($directorios)-1;$i++ ) {
       $dir=$dir.$directorios[$i];
       $dir = str_replace('//','/',$dir);
       if ( ! is_dir($dir) ) {
-         if ( ! mkdir( $dir) ) {
-            $mens = 'No pudo crearse directorio ['.$dir.']' ;
+         if ( ! @mkdir( $dir) ) {
+            $mens = 'Debe crearse el directorio de los idiomas con los literales en: ['.$dir.'] con los permisos adecuados' ;
             registrar(__FILE__,__LINE__,$mens,'ERROR');
             return FALSE;
             }
@@ -1238,4 +1248,34 @@ function getTempFolder($dir_base=FALSE) {
    }
 }
 
+/**
+ * Conversor de código de idioma de ISO 639-1 que es el que lleva el navegador
+ * a ISO 639-1 junto con ISO 3166-1 que es el formato que se pide por ejemplo 
+ * en los scripts de facebbok
+ */
+
+function conversion_idioma($iso6391) {
+
+  switch ($iso6391) {
+    case 'es':
+      return 'es_ES';
+      break;
+    case 'ca':
+      return 'ca_ES';
+      break;
+    case 'en':
+      return 'en_EN';
+      break;
+    case 'fr':
+      return 'fr_FR';
+      break;
+    case 'de':
+      return 'de_DE';
+      break;
+    
+    default:
+      return 'es_ES';
+      break;
+    }
+  }
 ?>

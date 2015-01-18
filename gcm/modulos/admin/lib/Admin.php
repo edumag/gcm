@@ -45,6 +45,24 @@ class Admin extends Modulos {
 
       }
 
+   /** 
+    * Precarga 
+    */
+
+   function precarga($e, $args=FALSE) {
+
+     global $gcm;
+
+     // Limpiamos variable de sesión tema_actual
+     $var_session = $gcm->config('admin','Proyecto').'_tema';
+     if ( ( ! $gcm->au->logeado() && isset($_SESSION[$var_session]) )
+       || ( isset($_SESSION[$var_session]) && $_GET[$var_session] == '' ) 
+     ) {
+       unset($_SESSION[$var_session]);
+        }
+
+   }
+
    /**
     * Validar datos de usuario
     *
