@@ -16,7 +16,7 @@
  *
  * @ingroup Cache_http
  *
- * @author   Eduardo Magrané eduardo@mamedu.com
+ * @author   Eduardo Magrané edu@lesolivex.com
  * @internal
  *   license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  *   version   SVN $Id: eventos_usuario.php 182 2010-02-26 15:11:50Z eduardo $ 

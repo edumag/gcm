@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Gcm - Gestor de contenido mamedu
+ * Gcm - Gestor de contenido.
  *
  * @category Gcm
  * @package Modulos

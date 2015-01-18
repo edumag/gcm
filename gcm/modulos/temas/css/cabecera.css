@@ -12,7 +12,7 @@
              <form action="#"><select onchange="validaSelect(this);" name="idioma"><option value="ca">ca</option><option value="es" selected="">es</option></select>
              </form>
           </div> <!-- ACABA idiomas -->
-          <form action="/mamedu/index.php" method="get" class="quick_search" id="form_busqueda">
+          <form action="/lesolivex/index.php" method="get" class="quick_search" id="form_busqueda">
              <input type="text" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;" value="Buscar" name="buscar">
              <input type="hidden" value="" name="proyectos_id">
              <input type="submit" value="buscar" name="e" id="buscar_input" style="display: none">

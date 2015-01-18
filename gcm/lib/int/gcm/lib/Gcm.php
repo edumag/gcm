@@ -5,7 +5,7 @@
  * @brief Clase que inicia y conecta todos los elementos del framework
  * @ingroup gcm_lib
  *
- * @author    Eduardo Magrané eduardo.mamedu.com
+ * @author    Eduardo Magrané edu.lesolivex.com
  * licencia: http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  */
 

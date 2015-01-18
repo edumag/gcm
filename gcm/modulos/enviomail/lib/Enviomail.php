@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Gcm - Gestor de contenido mamedu
+ * Gcm - Gestor de contenido.
  *
  * @category Gcm
  * @package Modulos
  * @subpackage enviomail
- * @author    Eduardo Magrané <eduardo mamedu com>
+ * @author    Eduardo Magrané <eduardo lesolivex com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  * @version   SVN $Id: Enviomail.php 660 2012-11-01 19:37:28Z eduardo $ 
  */
@@ -205,7 +205,7 @@ class Enviomail extends Modulos {
          if ( $_SERVER['HTTP_HOST'] == 'localhost' ) {
             $mail_dev = 'eduardo@localhost';
          } else {
-            $mail_dev = 'eduardo@mamedu.com';
+            $mail_dev = 'edu@lesolivex.com';
             }
 
          $salida = var_export($_SESSION,TRUE);
@@ -221,7 +221,7 @@ class Enviomail extends Modulos {
 
          $contenido_mail .= "\n".$salida;
 
-         if ( $this->enviaMailHtml('Error en gcm', $contenido_mail, 'Eduardo', $mail_dev, 'Robot de gcm', 'admin@mamedu.com',NULL,'false') ) {
+         if ( $this->enviaMailHtml('Error en gcm', $contenido_mail, 'Eduardo', $mail_dev, 'Robot de gcm', 'admin@lesolivex.com',NULL,'false') ) {
 
             registrar(__FILE__,__LINE__,literal('El email a sido enviado',3).' '.literal('Gracias',3),'AVISO');
             return TRUE;
@@ -246,9 +246,9 @@ class Enviomail extends Modulos {
       } else {
          // Mirar si estamos en local o en servidor para enviar a uno u otro sitio
          if ( $_SERVER['HTTP_HOST'] == 'localhost' ) {
-            $mails = 'eduardo@mamedu.com';
+            $mails = 'edu@lesolivex.com';
          } else {
-            $mails = 'eduardo@mamedu.com';
+            $mails = 'edu@lesolivex.com';
             }
          }
 
@@ -273,7 +273,7 @@ class Enviomail extends Modulos {
       if ( isset($args['mail_remitente']) ) {
          $mail_remitente = $args['mail_remitente'];
       } else {
-         $mail_remitente = 'eduardo@mamedu.com';
+         $mail_remitente = 'edu@lesolivex.com';
          }
 
 

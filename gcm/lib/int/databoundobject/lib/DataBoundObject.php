@@ -608,7 +608,7 @@ abstract class DataBoundObject {
 
       if ( isset($orden)  ) $sql .= " ORDER BY ".$orden;
 
-      registrar(__FILE__,__LINE__,$sql);
+      registrar(__FILE__,__LINE__,$sql); // DEV
       $objStatement = $this->objPDO->prepare($sql);
 
       try {
