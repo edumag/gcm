@@ -51,6 +51,14 @@ function galeria(){
             // Si tenemos una ventana abierta la cerramos
             var v = document.getElementById('ventana_subeImagen');
             if ( v ) v.parentNode.removeChild(v);
+
+            // Presentar las imágenes ampliadas desde colorbox.
+            // Si no lo hacemos se va de la pagina para mostrarla.
+
+             $(".galeria_imagenes").colorbox({
+                rel:'galeria_imagenes'
+                , slideshow:true
+             });
          } else {
             container.innerHTML = "<p class='aviso' style='width: 100px'>Sin Imágenes</p>";
          }
@@ -75,7 +83,7 @@ function borrar_imagen_columna(img){
          var estado = eval(pedido.responseText);
          if ( estado[0] == 0 ) { // la imagen se borro bien
             // actualizar caja de imagenes
-            pedirDatos('?formato=ajax&m=imagenes&a=galeria_columna&s='+estado[1],'galeria_columna');
+            pedirDatos('?formato=ajax&m=imagenes&a=galeria_columna&seccion='+estado[1],'galeria_columna');
 
          } else {
             var res = "Error al borrar imágen";
@@ -101,7 +109,7 @@ function borrar_imagen(img){
          var estado = eval(pedido.responseText);
          if ( estado[0] == 0 ) { // la imagen se borro bien
             // actualizar caja de imagenes
-            pedirDatos('?formato=ajax&m=imagenes&a=galeria&s='+estado[1],'galeria');
+            pedirDatos('?formato=ajax&m=imagenes&a=galeria&seccion='+estado[1],'galeria');
 
          } else {
             var res = "Error al borrar imágen";
@@ -174,7 +182,7 @@ function subida_imagenes_jquery(id_input, barra_progreso, metodo_retorno, seccio
                });
 
             //pedirDatos('?m=imagenes&a=ajaxImg&s='+estado[1],'galeria');
-            pedirDatos('?formato=ajax&m=imagenes&a='+metodo_retorno+'&s='+seccion,metodo_retorno);
+            pedirDatos('?formato=ajax&m=imagenes&a='+metodo_retorno+'&seccion='+seccion,metodo_retorno);
            },
 
           progressall: function (e, data) {

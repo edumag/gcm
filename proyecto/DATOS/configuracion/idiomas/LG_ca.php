@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jul 1 8:35:57 CEST 2014
+// Archivo generado automáticamente por GcmConfig Sun Jan 18 10:11:26 CET 2015
 $LG_ca['Anyadir_javascript_desde_un_modulo']='';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';
@@ -82,4 +82,11 @@ $LG_ca['Trabajando_con_imagenes']='';
 $LG_ca['CSS_o_Como_cambiar_el_aspecto_de_tu_proyecto']='';
 $LG_ca['A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla']='';
 $LG_ca['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='';
+$LG_ca['descripcion']='';
+$LG_ca['linea']='';
+$LG_ca['fecha']='';
+$LG_ca['sesion']='';
+$LG_ca['tipo']='';
+$LG_ca['mensaje']='';
+$LG_ca['fichero']='';
 ?>

@@ -32,5 +32,9 @@ $eventos['postcontenido']['shortcode'][100]='';
 
 $eventos['error']['cabecera_error'][1] = '';
 
+/** precarga */
+
+$eventos['precarga']['precarga'][1] = '';
+
 /** @} */
 ?>

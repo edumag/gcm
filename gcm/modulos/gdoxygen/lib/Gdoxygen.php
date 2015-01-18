@@ -6,7 +6,7 @@
  * @category   Gcm
  * @package    Modulos
  * @subpackage Gdoxygen
- * @author     Eduardo Magrané eduardo@mamedu.com
+ * @author     Eduardo Magrané edu@lesolivex.com
  *
  * @internal
  *   Created  23/11/09

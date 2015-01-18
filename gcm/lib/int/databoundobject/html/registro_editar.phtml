@@ -20,7 +20,7 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
 
 <?php if ( isset($this->displayHash["PROBLEMS"]) ) { ?>
 <p class="error">Problemas con formulario</p>
-<? } ?>
+<?php } ?>
 
 <br />
 
@@ -32,17 +32,20 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
 
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
+   <?php if ( isset($this->campos[$campo]['ignorar']) && $this->campos[$campo]['ignorar'] == 1 ) { ?>
+   <?php continue; } ?>
+
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
    <?php echo HTML::form_hidden($campo,$this->valores($campo)); ?>
    <?php continue; } ?>
 
    <?php if ( $relacion != 'ID' && $campo != "fecha_creacion" && $campo != "fecha_modificacion"  ) { ?>   
 
-   <div class="caja_campo" id="caja_campo_<?=$campo?>">
+   <div class="caja_campo" id="caja_campo_<?php echo $campo?>">
 
    <?php if ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'relacion'  ) { ?>
 
-      <div class="caja_campo_titulo"><?=literal($this->campos[$campo]['tabla'],1)?></div>
+      <div class="caja_campo_titulo"><?php echo literal($this->campos[$campo]['tabla'],1)?></div>
 
       <?php echo HTML::form_select($campo, $this->campos[$campo]['opciones'],$this->valores($campo),literal('Seleccionar',1)); ?>
 
@@ -54,13 +57,13 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
    
    <?php $cargar_codigo_fechas[] = $campo; ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal($campo,1)?></div>
    <?php echo HTML::form_fecha($campo,$this->valores($campo)); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'fecha_hora' ) { ?>
    
    <?php $cargar_codigo_fechas_horas[] = $campo; ?>
-   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal($campo,1)?></div>
    <?php 
    $valor = ( $this->valores($campo) && $this->valores($campo) != '0000-00-00 00:00:00' ) 
                ? strftime("%Y-%m-%d %H:%M",strtotime($this->valores($campo))) 
@@ -71,16 +74,16 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'pass_md5' ) { ?>
    
-   <div class="caja_campo_titulo"><?=literal('contraseña',1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal('contraseña',1)?></div>
    <?php echo HTML::form_pass($campo); ?>
    </div>
    <div class="caja_campo" id="caja_campo_verificacion">
-   <div class="caja_campo_titulo"><?=literal('verificación',1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal('verificación',1)?></div>
    <?php echo HTML::form_pass('verificacion'); ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'textarea'  ) { ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal($campo,1)?></div>
 
    <?php echo HTML::form_text($campo
          ,$this->valores($campo)
@@ -90,14 +93,14 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'enum'  ) { ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal($campo,1)?></div>
 
    <?php echo HTML::form_enum($campo ,$this->valores($campo),FALSE,$this->campos[$campo]['opciones']); 
    ?>
 
    <?php } elseif ( isset($this->campos[$campo]['tipo']) && $this->campos[$campo]['tipo'] == 'booleano'  ) { ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal($campo,1)?></div>
 
    <?php echo HTML::form_bool($campo ,( $this->valores($campo) ) ? TRUE : FALSE ); 
    ?>
@@ -108,7 +111,7 @@ $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext
    <?php if ( isset($this->campos[$campo]['maxlength']) ) $atr['maxlength'] = $this->campos[$campo]['maxlength'] ; ?>
    <?php if ( isset($this->campos[$campo]['size']) ) $atr['size'] = $this->campos[$campo]['size'] ; ?>
 
-   <div class="caja_campo_titulo"><?=literal($campo,1)?></div>
+   <div class="caja_campo_titulo"><?php echo literal($campo,1)?></div>
    <?php echo HTML::form_text($campo
          ,$this->valores($campo)
          ,$atr); 
@@ -157,7 +160,7 @@ if ( $cargar_codigo_fechas_horas ) {
 if ( $cargar_codigo_fechas ) {
 
    $objeto_padre->ficheros_css['jquery.datepick.css'] = $dir_codigo_fechas.'jquery.datepick.css';
-   $objeto_padre->codigo_js .= file_get_contents(dirname(__FILE__).'/../ext/jquery.datepick/jquery.datepick.js');
+   $objeto_padre->codigo_js .= file_get_contents(GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/jquery.datepick.js');
 
    foreach ( $cargar_codigo_fechas as $campo_fecha ) {
       $objeto_padre->codigo_js .= "

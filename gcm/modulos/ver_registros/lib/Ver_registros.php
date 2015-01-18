@@ -6,7 +6,7 @@
  * @category Gcm
  * @package Modulos
  * @subpackage Registro
- * @author    Eduardo Magrané <eduardo mamedu com>
+ * @author    Eduardo Magrané <edu lesolivex com>
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt GNU/GPL
  * @version   SVN $Id: Ver_registros.php 661 2012-11-02 11:26:56Z eduardo $ 
  * @depends   General

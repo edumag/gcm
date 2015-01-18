@@ -228,13 +228,13 @@ class Menu extends Modulos {
 
       $this->opciones = array_merge($this->opciones, recoger_parametros($args));
 
-      include ($gcm->event->instancias['temas']->ruta('menu','html','menu_switch.phtml'));
-
       ?>
       <div id='menu_principal'>
       <?php $this->inserta_menu();?>
       </div> <!-- Acaba menu_principal -->
       <?php
+
+      include ($gcm->event->instancias['temas']->ruta('menu','html','menu_switch.phtml'));
 
       }
 

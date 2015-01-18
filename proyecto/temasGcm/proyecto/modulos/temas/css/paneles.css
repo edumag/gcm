@@ -1,0 +1,28 @@
+/* ## Paneles
+
+    <div class="panel">
+       <div class="panel_titulo">
+          <a href="#" class="panel_iniciado">Informe de errores</a>
+       </div>
+       <div class="subpanel" style="">
+         Contenido del panel
+       </div> <!-- Acaba subpanel -->
+    </div>
+
+*/
+.panel {
+   margin: 20px 0px 10px 0;
+}
+.panel_titulo { 
+font-size: 150%;
+margin-bottom: 10px;
+    background: none repeat scroll 0 0 #78b9a4;
+    border-radius: 7px;
+    padding: 8px;
+}
+/* subpanel */
+.subpanel_visible {
+margin-top: 4px;
+padding: 2px;
+text-align:left
+}

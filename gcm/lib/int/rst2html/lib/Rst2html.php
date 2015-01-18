@@ -6,7 +6,7 @@
  *
  * @category   Gcm
  * @subpackage Rst2html
- * @author     Eduardo Magrané eduardo@mamedu.com
+ * @author     Eduardo Magrané edu@lesolivex.com
  *
  * @internal
  *   Created  23/11/09

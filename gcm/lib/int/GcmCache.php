@@ -224,9 +224,6 @@ class GcmCache {
          if ( function_exists('apc_clear_cache') ) apc_clear_cache();
          }
 
-      registrar(__FILE__,__LINE__,
-         __CLASS__.'->'.__FUNCTION__.'(url: '.depurar($url).')',FALSE,'Archivos a borrar: '.depurar($archivos));
-
       if ( !isset($archivos) || empty($archivos) ) return;
 
       foreach ( $archivos as $archivo ) {
@@ -301,6 +298,58 @@ class GcmCache {
       
       registrar(__FILE__,__LINE__,'Guardamos variable en cache ['.$nombre_variable.'] '."\n".depurar($valor));
       }
+
+   /**
+    * Guardar contenido
+    *
+    * @param $contenido   Fichero a incluir. 
+    * @param $variables Array con las variables a tener en cuenta para 
+    *          diferenciar contenidos, ejemplo: localización.
+    * @param $duracion Tiempo de expiración de la cache, por defecto $this->duracion.
+    */
+
+   function recuperar_contenido($contenido, $variables=FALSE, $duracion=FALSE) {
+
+     $duracion = ( $duracion ) ? $duracion : $this->duracion;
+
+     if ( $variables ) {
+       $archivo_cache = $this->dir_cache.$contenido.implode('-',$variables).'.html';
+     } else {
+       $archivo_cache = $this->dir_cache.$contenido.'.html';
+       }
+
+     if (@file_exists($archivo_cache)) {
+        $fecha_cache = @filemtime($archivo_cache);
+     } else {
+        $fecha_cache = 0;
+       }
+
+     // Mostramos el archivo si aun no vence
+     if (time() - $duracion < $fecha_cache) {
+
+       // Contenido en cache
+       readfile($archivo_cache);
+
+       return TRUE;
+
+       }
+
+     return FALSE;
+     }
+
+   function guardar_contenido($contenido, $salida, $variables = FALSE) {
+   
+     if ( $variables ) {
+       $archivo_cache = $this->dir_cache.$contenido.implode('-',$variables).'.html';
+     } else {
+       $archivo_cache = $this->dir_cache.$contenido.'.html';
+       }
+
+      $fp = @fopen($archivo_cache, "w");
+      @fwrite($fp, $salida);
+      @fclose($fp);
+
+     }
 
    }
 

@@ -15,7 +15,7 @@
  * @endcode
  *
  * @ingroup Cache_http
- * @author    Eduardo Magrané eduardo@mamedu.com
+ * @author    Eduardo Magrané edu@lesolivex.com
  *
  * @internal
  *   Created  25/11/09

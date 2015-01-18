@@ -57,7 +57,7 @@ class Formulario {
     *
     * - tipo: text, 
     * - ['oculto_form'] = 1 No se muestra.
-    * - ['ignorar'] = 1 Se ignora al presentar en formulario 
+    * - ['ignorar'] = 1     Se ignora al presentar en formulario.
     *
     * Ejemplos:
     *
@@ -131,6 +131,11 @@ class Formulario {
     *            [maxlength] => 100
     *            [size] => 30
     *            [valor] => 
+    *        )
+    *    [localizacion] => Array
+    *        (
+    *            [tipo] => constante
+    *            [valor] => 6
     *        )
     *    [acepta_condiciones] => Array
     *        (
@@ -216,6 +221,8 @@ class Formulario {
 
    function genera_formulario($ver = FALSE, $accion = 'insertando', $objeto_padre = FALSE, $nombre_tabla_relacionada=FALSE, $contador=FALSE) {
 
+     global $gcm;
+
       if ( $ver ) {
          $plantilla = $this->plantilla_visualizar;
       } else {
@@ -231,6 +238,5 @@ class Formulario {
       }
 
    }
-
 
 ?>

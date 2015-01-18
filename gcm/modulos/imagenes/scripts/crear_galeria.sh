@@ -23,7 +23,7 @@ prog=`basename $0`
 ruta_galeria='../galeria/'
 # Cabecera propia
 CS="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
-CS="${CS}\n<!--Autor: Eduardo Magrane-->\n<!--Email: eduardo@mamedu.com-->\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>"
+CS="${CS}\n<!--Autor: Eduardo Magrane-->\n<!--Email: edu@lesolivex.com-->\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>"
 CS="${CS}\n<script language=\"JavaScript\"  type=\"text/javascript\" src=\"automatic.js\" ></script>"
 CS="${CS}\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"${ruta_galeria}galeria.js\" ></script>"
 CS="${CS}\n<style type=\"text/css\" media=\"screen, projection\">@import \"${ruta_galeria}galeria.css\";</style>"

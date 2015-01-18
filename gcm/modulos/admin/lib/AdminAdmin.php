@@ -19,9 +19,6 @@ class AdminAdmin extends Admin {
    function __construct() {
      parent::__construct();
 
-     if ( isset($_GET['administrando']) ) $_SESSION['administrando'] = $_GET['administrando'] ;
-
-
       }
 
    /**
@@ -35,15 +32,30 @@ class AdminAdmin extends Admin {
 
       global $gcm;
 
-      if ( Router::$m && Router::$a == 'configuracion' ) {
-         
-         registrar(__FILE__,__LINE__,'Seleccionamos tema para administración');
-         $gcm->tema = 'admin';
-
-         }
+      registrar(__FILE__,__LINE__,'Activamos tema para administración');
+      $_SESSION[$gcm->config('admin','Proyecto').'_tema'] = 'admin';
 
       }
       
+   /**
+    * Precarga
+    */
+
+   function precarga($e, $args=FALSE) {
+
+     global $gcm;
+
+     parent::precarga('Admin');
+
+     $var_administrando = 'administrando_'.$gcm->config('admin','Proyecto');
+
+     // Activamos tema admin 
+     if ( isset($_SESSION[$var_administrando]) ) {
+      $this->activar_tema_admin('interno');
+      }
+
+   }
+
    /** 
     * Generamos test administrativos 
     * @ingroup testgcm
@@ -373,7 +385,7 @@ class AdminAdmin extends Admin {
          }
 
       ?>
-      <form action="<? echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
+      <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
       <fieldset>
       <legend  accesskey="s">Eventos para usuario</legend>
       <?php if ( ! $diff_usuario ) echo '<div class="aviso">Sin diferencias con la versión por defecto</div>'; ?>
@@ -402,7 +414,7 @@ class AdminAdmin extends Admin {
          
 
          ?>
-         <form action="<? echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
+         <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
          <fieldset>
          <legend  accesskey="s">Eventos para administración</legend>
          <?php if ( ! $diff_admin ) echo '<div class="aviso">Sin diferencias con la versión por defecto</div>'; ?>
@@ -880,7 +892,7 @@ class AdminAdmin extends Admin {
 
    function caja_info_dev($e, $args) {
 
-      if ( ! permiso('caja_info_dev', 'admin') ) return FALSE;
+      if ( ! permiso('caja_info_dev', 'admin') ) return ;
 
       global $gcm;
 

@@ -228,13 +228,15 @@ class Galeria implements Iterator {
          }
 
       $archivos = glob($this->galeria_url.'/*');
-      foreach ( $archivos as $img) {
-         if ( esImagen($img) ) {
-            $imatge = new Imatge(basename($img), $this->config, $this->id);
-            $imatge->load();
-            $this->addImatge($imatge);
-            }
-         }
+      if ( $archivos && !empty($archivos) ) {
+        foreach ( $archivos as $img) {
+           if ( esImagen($img) ) {
+              $imatge = new Imatge(basename($img), $this->config, $this->id);
+              $imatge->load();
+              $this->addImatge($imatge);
+              }
+           }
+        }
 
       $this->loaded = TRUE;
 
@@ -246,12 +248,11 @@ class Galeria implements Iterator {
 
    function esborraGaleria() {
 
-      $dir = $this->dir_base.$this->galeria_url;
+      $dir = $this->galeria_url;
 
-      if ( file_exists($dir) ) {
+      if ( is_dir($dir) ) {
          rmdir_recursivo($dir);
          }
-
       $nom_galeria_session = 'galeria_imatges_'.$this->dir_gal;
       // unset($_SESSION[$nom_galeria_session]);            // esborrem galeria de sessio
 
@@ -431,6 +432,7 @@ class Galeria implements Iterator {
       }
 
    public function carga_js_general() {
+     if ( ! $this->plantilla_presentacio ) return FALSE;
       $include_config=dirname(__FILE__).'/../presentacions/'.$this->plantilla_presentacio.'/config.php';
       if ( file_exists($include_config) ) {
          include($include_config);
@@ -441,7 +443,7 @@ class Galeria implements Iterator {
             return $this->carga_js_general;
             }
       } else {
-         registrar(__FILE__,__LINE__,"Falta rchivo config de presentación de ".$this->plantilla_presentacio,'ERROR');
+         registrar(__FILE__,__LINE__,"Falta archivo config de presentación de ".$this->plantilla_presentacio,'ERROR');
          }
       return FALSE;
       }

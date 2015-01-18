@@ -418,7 +418,11 @@ class Router {
 
       if ( esImagen( self::$url) ) {
 
-         $archivo = self::$dd.self::$url;
+         $archivo = self::$d.self::$url;
+         // Comprobar si existe en el idioma actual.
+         if ( !is_file($archivo) ) {
+           $archivo = self::$dd.self::$url;
+         }
          if ( !is_file($archivo) ) {
             // Si no se encuentra la imagen el directorio de la sección actual
             // intentamos encontrarla creando una dirección absoluta.
@@ -553,6 +557,7 @@ class Router {
       /** Definir idioma por defecto */
 
       $ii = $gcm->config('idiomas','Idioma por defecto');
+      $dd = 'File/'.$ii.'/';
 
       $proyecto = $gcm->config('admin','Proyecto');
 
@@ -587,7 +592,7 @@ class Router {
                array_shift($secciones);
 
                /* Si la siguiente sección no existe es un argumento */
-               while ( isset($secciones[0]) && ! $contenidos->verificar_seccion($secciones[0]) && $secciones[0] != 'proyectos.css' && $secciones[0] != 'proyecto.js' ) {
+               while ( isset($secciones[0]) && ! empty($secciones[0]) && ! $contenidos->verificar_seccion($dd.$secciones[0]) && $secciones[0] != 'proyectos.css' && $secciones[0] != 'proyecto.js' ) {
                   $args[] = $secciones[0];
                   array_shift($secciones);
                   }
@@ -642,8 +647,6 @@ class Router {
             }
 
          }
-
-      $dd = 'File/'.$ii.'/';
 
       /* Definir mime_type */
 
@@ -739,6 +742,9 @@ class Router {
       $retorno['esBorrador']        = $esBorrador;
       $retorno['forma_comentarios'] = $forma_comentarios;
 
+      // registrar(__FILE__,__LINE__,"Router: ".depurar($retorno),'AVISO'); // DEV
+      // registrar(__FILE__,__LINE__,"POST: ".depurar($_POST),'AVISO'); // DEV
+      
       return $retorno;
 
       }

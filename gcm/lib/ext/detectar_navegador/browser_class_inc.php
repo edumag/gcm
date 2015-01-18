@@ -60,6 +60,7 @@ class browser
 	 */
 	function getBrowserOS()
 	{
+		$android = preg_match("/Android/i", $this->useragent);
 		$win = preg_match("/win/i", $this->useragent);
 		$linux = preg_match("/linux/i", $this->useragent);
 		$mac = preg_match("/mac/i", $this->useragent);
@@ -70,6 +71,10 @@ class browser
 		if($win)
 		{
 			$this->platform = "Windows";
+		}
+		elseif ($android)
+		{
+			$this->platform = "Android"; 
 		}
 		elseif ($linux)
 		{
@@ -114,6 +119,26 @@ class browser
 				$this->version = $val[1];
 			}
 			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+	
+	/**
+	 * Method to check for FireFox
+	 * @param void
+	 * @return bool false on failure
+	 */ 
+	function isChromium()
+	{
+		if(preg_match("/Chromium/i", $this->useragent))
+		{
+			$this->browsertype = "Chromium"; 
+			$val = stristr($this->useragent, "Chromium");
+			$val = explode("/",$val);
+			$this->version = $val[1];
+			return true;
 		}
 		else {
 			return FALSE;
@@ -463,7 +488,9 @@ class browser
 		if(preg_match("/safari/i", $this->useragent))
 		{
 			$this->browsertype = "Safari"; 
-			$this->version = "";
+			$val = explode("/",stristr($this->useragent,"Safari"));
+			$val = explode(" ", $val[1]);
+			$this->version = $val[0];
 			return TRUE;
 		}
 		else {
@@ -540,6 +567,7 @@ class browser
 		$this->isFirebird();
 		$this->isLynx();
 		$this->isSafari();
+		$this->isChromium();
 		return array('browsertype' => $this->browsertype, 
 					 'version' => $this->version, 
 					 'platform' => $this->platform); 

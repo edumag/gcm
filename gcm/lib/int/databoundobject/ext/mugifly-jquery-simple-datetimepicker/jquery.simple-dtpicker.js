@@ -15,6 +15,7 @@
  	var DAYS_OF_WEEK_ID = ['Min','Sen','Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
  	var DAYS_OF_WEEK_TR = ['Pz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cu', 'Cts'];
  	var DAYS_OF_WEEK_ES = ['dom', 'lun', 'mar', 'miér', 'jue', 'vié', 'sáb'];
+ 	var DAYS_OF_WEEK_CA = ['Dg', 'Dl', 'Dm', 'Dc', 'Dj', 'Dv', 'Ds'];
  	var MONTHS_EN = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
  	var MONTHS_RU = [ "Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек" ];
  	var MONTHS_BR = [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ];
@@ -24,6 +25,7 @@
  	var MONTHS_ID = [ "Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des" ];
  	var MONTHS_TR = [ "Ock", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Agu", "Eyl", "Ekm", "Kas", "Arlk" ];
  	var MONTHS_ES = [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic" ];
+ 	var MONTHS_CA = [ "Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre" ];
 
  	var PickerObjects = [];
  	var InputObjects = [];
@@ -128,6 +130,8 @@
 				dateFormat = "DD.MM.YYYY hh:mm";
 			}else if (locale === "es"){
 				dateFormat = "DD/MM/YYYY hh:mm";
+			}else if (locale === "ca"){
+				dateFormat = "YYYY-MM-DD hh:mm"; /* Ho deixem així per no montar un pollo amb el format de data i la base de dades*/
 			}else{
 				dateFormat = "YYYY-MM-DD hh:mm";
 			}
@@ -217,6 +221,8 @@
 			daysOfWeek = DAYS_OF_WEEK_TR;
 		} else if (locale === "es"){
 			daysOfWeek = DAYS_OF_WEEK_ES;
+		} else if (locale === "ca"){
+			daysOfWeek = DAYS_OF_WEEK_CA;
 		}
 
 		/* Calculate dates */
@@ -296,6 +302,8 @@
 			$now_month.text(date.getFullYear() + " - " + MONTHS_TR[date.getMonth()]);
 		} else if(locale == "es"){
 			$now_month.text(date.getFullYear() + " - " + MONTHS_ES[date.getMonth()]);
+		} else if(locale == "ca"){
+			$now_month.text(date.getFullYear() + " - " + MONTHS_CA[date.getMonth()] + " / " + zpadding(date.getMonth() + 1)  );
 		} else {
 			$now_month.text(date.getFullYear() + " - " + MONTHS_EN[date.getMonth()]);
 		}
@@ -611,10 +619,10 @@
 	 		"inputObjectId": 	undefined,
 	 		"current": 		date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes(),
 	 		"dateFormat": 	"default",
-	 		"locale": 			"en",
+	 		"locale": 			"ca",
 	 		"animation":           true,
 	 		"minuteInterval":  	30,
-	 		"firstDayOfWeek":		0,
+	 		"firstDayOfWeek":		1,
 	 		"closeOnSelected": false,
 	 		"timelistScroll": true,
 	 		"calendarMouseScroll": true,
@@ -637,10 +645,10 @@
 	 		"inline": false,
 	 		"current": date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes(),
 	 		"dateFormat": "default",
-	 		"locale": 			"en",
+	 		"locale": 			"ca",
 	 		"animation": true,
 	 		"minuteInterval":  	30,
-	 		"firstDayOfWeek":		0,
+	 		"firstDayOfWeek":		1,
 	 		"closeOnSelected": false,
 	 		"timelistScroll": true,
 	 		"calendarMouseScroll": true,

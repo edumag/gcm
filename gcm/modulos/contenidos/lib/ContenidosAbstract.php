@@ -168,10 +168,14 @@ abstract class ContenidosAbstract extends Modulos {
          case 'traducir':
             $titulo = $this->devolver_titulo();
             $evento = 'ejecutar_traducir';
+            $descripcion_accion = 'Guardar contenido en el idioma ('.Router::$i.')';
             $boton  = 'Traducir';
             break;
          default:
             $evento = 'actualizar_contenido';
+            $descripcion_accion = (Router::$sin_traduccion) 
+              ? 'Actualizar contenido en idioma por defecto ('.Router::$ii.')'
+              : 'Actualizar traducción en idioma ('.Router::$i.')';
             $boton  = 'Guardar';
             break;
          }
@@ -591,9 +595,6 @@ abstract class ContenidosAbstract extends Modulos {
          case 'actualizar_contenido':
 
             $destino = $gcm->seleccionado[0];
-            // Si estamos en otro idioma pero editando el destino es el contenido
-            // del idioma por defecto.
-            if ( Router::$i != Router::$ii ) $destino = str_replace('File/'.Router::$i,'File/'.Router::$ii,$destino);
             $mens = literal('Contenido actualizado',3);
             break;
 
@@ -617,7 +618,7 @@ abstract class ContenidosAbstract extends Modulos {
             literal('Error').' '.literal('guardando contenido').': '.$destino,'ERROR');
          return FALSE;
       } else {
-         registrar(__FILE__,__LINE__,$mens,'AVISO');
+         registrar(__FILE__,__LINE__,$mens. '['.$destino.']','AVISO');
 
          /* Si tenemos un nuevo literal lo añadimos */
 
@@ -629,7 +630,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       // $destino sin File/idioma 
       $destino = str_replace('File/'.Router::$i,'File/'.Router::$ii,$destino);
-      $destino = str_replace('File/'.Router::$i.'/','',$destino);
+      $destino = str_replace('File/'.Router::$ii.'/','',$destino);
 
       $gcm->router->inicia($destino);
 

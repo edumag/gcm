@@ -15,7 +15,7 @@
 
 <?php $nombre = basename($elemento,'.html'); ?>
 
-<?php if ( is_dir(Router::$dd.$this->base_enlace.$base_ajax.$elemento) ) { ?>
+<?php if ( is_dir(Router::$dd.$this->base_enlace.$base_ajax.$elemento) ) { // Es una sección ?>
 
 <?php if ( stripos(Router::$s,$elemento) !== FALSE ) { // si la sección esta en el camino ?>
 
@@ -59,9 +59,9 @@
 
 <?php } else { // Acaba si es una sección ?>
 
-<?php if ( substr($elemento, -5) == '.html' ) { // si en un archivo ?>
+<?php if ( substr($elemento, -5) == '.html' ) { // si en un archivo html ?>
 
-<?php if ( Router::$c == $elemento ) { ?>
+<?php if ( Router::$c == $elemento && Router::$s == $preseccion.$seccion ) { ?>
 
       <li class='listaOff' ><?php echo literal($nombre,1)?></li>
 
