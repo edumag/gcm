@@ -1,19 +1,27 @@
 <?php
 
 /**
- * @file registros.php
- * @brief Modelo para registros
+ * @file
+ * @brief Modelo para registros.
  * @ingroup registro
  */
 
 require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
 
 /**
- * Modelo para registros con CRUD
+ * @class Registros_crud
+ * @brief Modelo para registros con CRUD.
  * @ingroup registro
  */
 
 class Registros_crud extends Crud {
+
+  /**
+   * Constructor.
+   *
+   * @param $objPdo Instancia de PDO.
+   * @param $id     Identificador de registro.
+   */
 
    function __construct(PDO $objPdo, $id = NULL) {
 
@@ -45,6 +53,8 @@ class Registros_crud extends Crud {
       parent::__construct($objPdo, $id);
 
       }
+
+   /** Definimos nombre de tabla */
 
    function DefineTableName() {
 

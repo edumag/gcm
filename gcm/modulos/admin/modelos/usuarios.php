@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @file      usuarios.php
- * @brief     Modelo para usuarios
+ * @file
+ * @brief Modelo para usuarios.
  */
 
 require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
@@ -19,7 +19,6 @@ require_once(GCM_DIR.'lib/int/databoundobject/lib/Crud.php');
 /**
  * @class Usuarios
  * @brief Modelo para los usuarios de la aplicación.
- * @version 0.1
  */
 
 class Usuarios extends Crud {
