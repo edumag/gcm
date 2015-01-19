@@ -1,13 +1,9 @@
 <?php
 
 /**
- * @file      Crud.php
- * Clase que gestiona todo el sistema de automatizar el mantenimiento
- * de los registros.
- *
- * @ingroup crud_group
- *
- * @author    Eduardo Magrané 
+ * @file  Crud.php
+ * @brief Clase que gestiona todo el sistema de automatizar el mantenimiento
+ *        de los registros.
  *
  * @internal
  * Copyright  Copyright (c) 2011, Eduardo Magrané
@@ -15,9 +11,6 @@
  * This source code is released for free distribution under the terms of the
  * GNU General Public License as published by the Free Software Foundation.
  *
- * @todo Crear formulario con filtros para listado
- *
- * @{
  */
 
 require_once(dirname(__FILE__).'/DataBoundObject.php');
@@ -25,8 +18,9 @@ require_once(dirname(__FILE__).'/DataBoundObject.php');
 require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
 
 /**
- * Extendemos DataBoundObject para automatizar los procesos de insertar,
- * modificar, y borrar registros de la base de datos.
+ * @class Crud
+ * @brief Extendemos DataBoundObject para automatizar los procesos de insertar,
+ *        modificar, y borrar registros de la base de datos.
  *
  * Convenciones para facilitar el trabajo y poder automatizar:
  *
@@ -41,6 +35,11 @@ require_once(GCM_DIR.'lib/int/solicitud/lib/Solicitud.php');
  * Tener en cuenta que si estamos utilizando un módulo que requiere de otros módulos por
  * tener campos relacionados debemos hacer un require_once() con ellos.
  *
+ * @todo Crear formulario con filtros para listado
+ *
+ * @ingroup crud_group
+ *
+ * @author Eduardo Magrané 
  */
 
 class Crud extends DataBoundObject {
@@ -52,7 +51,7 @@ class Crud extends DataBoundObject {
    public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
 
    /**
-    * Nos permite diferencirar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
+    * Nos permite diferenciar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
     * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo y en los botones de acción.
     */
 
@@ -1841,16 +1840,13 @@ class Crud extends DataBoundObject {
                            $nombre_campo_identificativo = $tabla_contenido.'_'.$tabla_contenido.'_id';
                            
                            if ( isset($resultado[$nombre_campo_identificativo][$index]) ) { 
-                             
                               $ID = $resultado[$nombre_campo_identificativo][$index]; 
                               $identificadores_contenido_insertados[] = $ID;
                            } else {
                               $ID = NULL;
-
                               $nueva_relacion = new $clase_contenido($this->objPDO, $ID, 'relacion_externa');
-
                               if ( ! $this->recoger_valores_formulario($nueva_relacion, $resultado, $index) ) {
-                                exit();
+                                exit(); // DEV
                                 break ;
                               }
                               $nueva_relacion->save();

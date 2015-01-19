@@ -18,7 +18,7 @@
 
 /**
  * @class DataBoundObject
- * @brief Abstracción para manipilación de datos con PDO
+ * @brief Abstracción para manipulación de datos con PDO
  *
  * @ingroup crud
  */

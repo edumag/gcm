@@ -9,11 +9,13 @@
 
 require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
 
-/** Saber si tenemos que cargar el código para el tratamiento de fechas */
-
+/** Saber si tenemos que cargar el código para el tratamiento de fechas con horas.*/
 $cargar_codigo_fechas_horas = FALSE;
+/** Definimos directorio de los arhivos js necesarios. */
 $dir_codigo_fechas_horas    = Router::$base.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquery-simple-datetimepicker/';
+/** Saber si debemos cargar el código para las fechas. */
 $cargar_codigo_fechas       = FALSE;
+/** Directorio de los js. */
 $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/';
 
 ?>
