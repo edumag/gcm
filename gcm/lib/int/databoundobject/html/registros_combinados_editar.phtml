@@ -35,6 +35,8 @@ $editable = TRUE;
    <?php echo HTML::form_hidden($nombre_tabla_relacionada,$this->ID); ?>
    <?php } ?>
 
+   <?php echo HTML::form_hidden('tabla_combinada[]',$contador); ?>
+
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 
    <?php if ( isset($this->campos[$campo]['oculto_form']) && $this->campos[$campo]['oculto_form'] == 1 ) { ?>
