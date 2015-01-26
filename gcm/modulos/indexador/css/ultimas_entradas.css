@@ -25,6 +25,7 @@
 }
 .titulo_articulo {
 line-height: 30px;
+font-family: icon;
 }
 .titulo_articulo .doc_info {
 }

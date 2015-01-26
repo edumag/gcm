@@ -2070,9 +2070,9 @@ class Crud extends DataBoundObject {
     if ( $this->constantes ) {
       foreach ( $this->constantes as $constante => $valor_constante ) {
         if ( is_numeric($valor_constante) ) {
-          $strQuery .= $this->strTableName.'.'.$constante . '=' . $valor_constante . ' AND ' ;
+          $strQuery .= '('.$this->strTableName.'.'.$constante . '=' . $valor_constante . ') AND ' ;
         } else {
-          $strQuery .= $this->strTableName.'.'.$constante . '=\'' . $valor_constante . '\' AND ' ;
+          $strQuery .= '('.$this->strTableName.'.'.$constante . '=\'' . $valor_constante . '\') AND ' ;
         }
       }
       if ( $condicion ) {
