@@ -290,12 +290,13 @@ class Solicitud {
     * se estable a true, se redirige automáticamente a la URL apropiada, tras 
     * enviar primero una cookie temporal que ses una representación del objeto 
     * 'Solicitud' actual.
+    *
+    * @param $anyFail Permitimos definir que hubo fallo de forma externa.
     */
 
-   function TestConstraints() {
+   function TestConstraints($anyFail = FALSE) {
 
       $this->_blHasRunConstraintTests = true;
-      $anyFail = false;
 
       for ($i=0; $i<=sizeof($this->_arObjParameterMethodConstraintHash) -1; $i++) {
 
@@ -478,6 +479,7 @@ class Solicitud {
             };
          };
       };
+
       return(!($anyFail));  // Returns TRUE if all tests passed, otherwise returns
       //  FALSE
    }

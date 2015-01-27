@@ -37,6 +37,7 @@ function anyadirCaptcha($nom='default', $retorn='false') {
  * @param seg Segons minims per defecta 10
  * @param $nom Nom del captcha per poger diferencia entre captchas
  *
+ * @return Si pasa bien el captcha TRUE si no FALSE.
  */
 
 function verificarCaptcha($seg=10, $nom='default'){

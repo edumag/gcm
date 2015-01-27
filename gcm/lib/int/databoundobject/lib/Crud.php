@@ -46,6 +46,20 @@ class Crud extends DataBoundObject {
   public $url_ajax;                      ///< Si se utiliza ajax es necesaria la url a enviar
 
   /**
+   * Añadir captcha en formulario.
+   *
+   * Se debe pasar los segundos mínimos necesarios para rellenar el formulario, de esta
+   * manera podemos detectar si es un robot el que lo rellena.
+   *
+   * Ejemplo:
+   * @code
+   * $crud->captcha = 10;
+   * @endcode
+   */
+
+  public $captcha = FALSE;
+
+  /**
    * Nos permite diferenciar entre presentaciones, en caso de no definirlo se utilizara el nombre de la tabla con un 
    * guión bajo para separarlo. Al llamar a PaginadorPDO se utilizara este sufijo y en los botones de acción.
    */
@@ -1440,9 +1454,15 @@ class Crud extends DataBoundObject {
     // no hay que hacerlo
 
     if ( $this->tipo_tabla == 'normal' ) {
-?>
-         <form id="crud" name="crud" action="<?php if ( $this->url_formulario ) echo $this->url_formulario;?>" method="post">
-<?php
+      ?>
+      <form id="crud" name="crud" action="<?php if ( $this->url_formulario ) echo $this->url_formulario;?>" method="post">
+      <?php
+
+      if ( $this->captcha ) {
+        include_once GCM_DIR . "lib/int/captcha/captcha.php";
+        anyadirCaptcha($this->strTableName . 'cc');
+      }
+
     }
 
     if ( $this->tipo_tabla == 'normal' ) {
@@ -1606,6 +1626,7 @@ class Crud extends DataBoundObject {
 
     if ( $this->accion == 'guardando' ) {
 
+
       $solicitud = new Solicitud();
       $solicitud->SetRedirectOnConstraintFailure(true);
       $solicitud->SetConstraintFailureRedirectTargetURL($this->url_formulario_con_fallos);
@@ -1701,7 +1722,17 @@ class Crud extends DataBoundObject {
         }
       }
 
-      $solicitud->TestConstraints();
+      $anyFail = FALSE;
+      if ( $this->captcha ) {
+        include_once GCM_DIR . "lib/int/captcha/captcha.php";
+        if ( ! verificarCaptcha($this->captcha, $this->strTableName . 'cc') ) {
+          $anyFail = TRUE;
+          registrar(__FILE__,__LINE__,literal("El captcha dio negaativo"),'ERROR');
+          
+        }
+      }
+
+      $solicitud->TestConstraints($anyFail);
 
       // Si hemos llegado aquí hemos pasado las pruebas
 
@@ -1851,9 +1882,6 @@ class Crud extends DataBoundObject {
 
               }
 
-              // registrar(__FILE__,__LINE__,"Resultado: ".depurar($resultado)); // DEV
-              // registrar(__FILE__,__LINE__,"Identificadore: ".depurar($identificadores_contenido_insertados)); // DEV
-              
               // Tenemos que volver a pasar por el resultado para recoger los nuevos registros.
                 for ( $index = 0 ; $index < $numero_registros_formulario ; $index++ ) {
                   $nueva_relacion = new $clase_contenido($this->objPDO, NULL, 'relacion_externa');
@@ -1864,9 +1892,6 @@ class Crud extends DataBoundObject {
                   $identificadores_contenido_insertados[] = $nueva_relacion->ID;
                   unset($nueva_relacion);
                 }
-
-              // registrar(__FILE__,__LINE__,"Identificadore: ".depurar($identificadores_contenido_insertados)); // DEV
-
 
               // Guardar registros en la tabla combinatoria
 
