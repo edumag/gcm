@@ -1600,9 +1600,9 @@ class Crud extends DataBoundObject {
       $this->accion = 'agafa_imatge';
     } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'ver') {
       $this->accion = 'ver';
-    } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'eliminar') {
+    } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'eliminar' && $this->permisos) {
       $this->accion = 'eliminar';
-    } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'editar') {
+    } elseif ( isset($_REQUEST[$this->sufijo.'accion']) && $_REQUEST[$this->sufijo.'accion'] == 'editar' && $this->permisos) {
       $this->accion = 'editar';
     } elseif ( $accion_directa ) {
       $this->accion = $accion_directa;
@@ -2095,9 +2095,9 @@ class Crud extends DataBoundObject {
     if ( $this->constantes ) {
       foreach ( $this->constantes as $constante => $valor_constante ) {
         if ( is_numeric($valor_constante) ) {
-          $strQuery .= '('.$this->strTableName.'.'.$constante . '=' . $valor_constante . ') AND ' ;
+          $strQuery .= ' ('.$this->strTableName.'.'.$constante . '=' . $valor_constante . ') AND ' ;
         } else {
-          $strQuery .= '('.$this->strTableName.'.'.$constante . '=\'' . $valor_constante . '\') AND ' ;
+          $strQuery .= ' ('.$this->strTableName.'.'.$constante . '=\'' . $valor_constante . '\') AND ' ;
         }
       }
       if ( $condicion ) {
