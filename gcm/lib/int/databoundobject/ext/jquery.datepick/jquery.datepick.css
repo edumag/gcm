@@ -64,7 +64,7 @@
 	width: 8%;
 }
 a.datepick-cmd {
-	height: 1.5em;
+	height: auto;
 }
 button.datepick-cmd {
 	text-align: center;
@@ -124,15 +124,16 @@ button.datepick-cmd {
 	text-align: center;
 }
 .datepick-month-header, .datepick-month-header select, .datepick-month-header input {
-	height: 1.5em;
 	background-color: #444;
 	color: #fff;
 	font-weight: bold;
+	height: auto;
 }
 .datepick-month-header select, .datepick-month-header input {
-	height: 1.4em;
+	height: auto;
 	border: none;
 	font-size: 100%;
+  max-width: 100%;
 }
 .datepick-month-header input {
 	position: absolute;
