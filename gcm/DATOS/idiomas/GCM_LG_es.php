@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 2 15:18:30 CET 2015
+// Archivo generado automáticamente por GcmConfig Mon Feb 2 16:26:37 CET 2015
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -173,4 +173,6 @@ $GCM_LG_es['formularios']='';
 $GCM_LG_es['Añadir nuevo literal']='';
 $GCM_LG_es['Reindexador']='';
 $GCM_LG_es['Editor']='';
+$GCM_LG_es['Turismo rural y gastronómico']='Turismo rural y gastronómico';
+$GCM_LG_es['actividades']='actividades';
 ?>

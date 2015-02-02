@@ -80,7 +80,7 @@ function literales_faltantes() {
     var literal = enlace_literal.html();
     // console.log(literal);
     // console.log(enlace_literal);
-    modificar_literal(literal,literal.replace('_',' ','g'),0);
+    modificar_literal(literal,literal.replace('_',' ','g'),1);
     return false;
   });
 }
@@ -97,7 +97,7 @@ function insertar_literal(proyecto) {
       }
    }
 
-// literales_faltantes();
+literales_faltantes();
 
 /**
  * Eliminar literal
