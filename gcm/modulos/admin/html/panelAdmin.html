@@ -1,0 +1,30 @@
+<?php
+
+/** 
+ * @file panelAdmin.html
+ * @brief Plantilla para el panel administrativo
+ * @ingroup plantilla_admin
+ */
+
+?>
+
+<!-- Panel Administrativo -->
+
+<div id="panelAdmin">
+
+  <?php
+  foreach ( $this->mensajes_admin as $key => $men ) {
+  ?>
+  <div class="panelAdmin" style="display: none;" id="panelAdmin_<?php echo $key;?>"><?php echo $men['contenido']?></div>
+  <?php
+  }
+  ?>
+
+</div> <!-- Acaba panelAdmin -->
+<div style="clear: both"></div>
+<div id="mensajes_aplicacion">
+</div> <!-- Acaba mensajes_aplicacion -->
+<!-- Acaba Panel Administrativo -->
+<?php
+
+

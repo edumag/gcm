@@ -39,7 +39,7 @@ div.aviso, div.admin, div.error, div.normal, div.ayuda {
 border-radius: 5px;
 font-size: 14px;
 margin: 20px;
-padding: 10px 0 10px 40px;
+padding: 10px 12px 10px 40px;
 }
 
 div.aviso {
@@ -79,3 +79,11 @@ border: 1px solid #77BACE;
 color: #082B33;
 }
 
+.atencion {
+    background: none repeat scroll 0 0 red;
+    border-radius: 50%;
+    color: white;
+    font-size: 60%;
+    font-weight: bold;
+    padding: 3px 5px 6px 4px;
+}

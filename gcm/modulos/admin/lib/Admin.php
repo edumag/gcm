@@ -135,6 +135,8 @@ class Admin extends Modulos {
             <br /><input type="text" size="10" name="loginPro" id="loginPro" value="" />
             <br />'.literal("Contraseña",3).': 
             <br /><input type="password" size="10" name="passwd" id="passwd" value="" />
+            <br /><input type="checkbox" value="0" name="remember" id="remember">'
+               .literal('Recordar').'
             <br /><br />
             <input type="submit" value="Entrar" />
             </form>';
@@ -169,6 +171,8 @@ class Admin extends Modulos {
                <br /><input type="text" size="10" name="loginPro" id="loginPro" value="" />
                <br />'.literal("Contraseña",3).': 
                <br /><input type="password" size="10" name="passwd" id="passwd" value="" />
+               <br /><input type="checkbox" value="0" name="remember" id="remember">'
+               .literal('Recordar').'
                <br /><br />
                <input type="submit" value="Entrar" />
                </form>';

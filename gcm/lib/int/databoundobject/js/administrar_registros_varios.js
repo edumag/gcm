@@ -22,6 +22,9 @@ function Administrar_registros_varios(identificador, total_registros) {
    var _total_registros  = total_registros;
    var _boton_insertar   = "<a class='boton_insertar_registro' onclick='"+_identificador+".insertar();'>";
 
+   this.caja_posibles = document.getElementById('posibles_registros_'+identificador);
+   this.caja_relacionados = document.getElementById('relacionados_'+identificador);
+
    this.Literal_insertar = 'Insertar nuevo registro';
 
    /** Último formulari que debe ser el de entrar un nuevo registro */
@@ -78,18 +81,34 @@ function Administrar_registros_varios(identificador, total_registros) {
       }
 
    this.insertar_registro = function(id,nombre) {
-      var nuevo = document.createElement("p");
+      var nuevo = document.createElement("li");
       var input_id = document.createElement("input");
+      var texto = document.createElement("input");
+      var elemento_borrar = document.getElementById('li_posible_' + _identificador + '-' + id);
+      nuevo.id = 'li_relacionado_' + _identificador + '-' + id;
       input_id.name = _identificador+'_'+_identificador+'_id[]';
       input_id.type = 'hidden';
       input_id.value = id;
-      var texto = document.createElement("input");
       texto.value = nombre;
+      texto.type = 'hidden';
       texto.name = 'nombre';
+      contenido = '<a href="javascript:' + _identificador + '.eliminar_registro(' + id + ',\'' + nombre + '\')">';
+      contenido += nombre + '</a>'; 
+      nuevo.innerHTML = contenido;
       nuevo.appendChild(input_id);
       nuevo.appendChild(texto);
-
-      this.Caja_boton.parentNode.insertBefore(nuevo,this.Caja_boton);
+      elemento_borrar.parentNode.removeChild(elemento_borrar);
+      this.caja_relacionados.appendChild(nuevo,this.caja_relacionados);
+      }
+   this.eliminar_registro = function(id,nombre) {
+      var nuevo = document.createElement("li");
+      var elemento_borrar = document.getElementById('li_relacionado_' + _identificador + '-' + id);
+      nuevo.id = 'li_posible_' + _identificador + '-' + id;
+      contenido = '<a href="javascript:' + _identificador + '.insertar_registro(' + id + ',\'' + nombre + '\')">';
+      contenido += nombre + '</a>' + nuevo.innerHTML;
+      nuevo.innerHTML = contenido;
+      elemento_borrar.parentNode.removeChild(elemento_borrar);
+      this.caja_posibles.appendChild(nuevo,this.caja_relacionados);
       }
    }
 

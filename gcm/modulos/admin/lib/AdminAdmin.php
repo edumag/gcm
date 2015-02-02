@@ -16,9 +16,18 @@ require_once(dirname(__FILE__).'/Admin.php');
 
 class AdminAdmin extends Admin {
 
+  public $mensajes_admin = array();
+
    function __construct() {
      parent::__construct();
 
+     // Ejemplos
+     // $this->mensajes_admin['faltan_literal']['num'] = 5; 
+     // $this->mensajes_admin['faltan_literal']['mensaje'] = 'Faltan literales por traducir en esta pagina'; 
+     // $this->mensajes_admin['faltan_literal']['contenido'] = 'Faltan literales por traducir en esta pagina'; 
+     // $this->mensajes_admin['nueva_reserva']['num'] = 2; 
+     // $this->mensajes_admin['nueva_reserva']['mensaje'] = 'Nueva reserva'; 
+     // $this->mensajes_admin['nueva_reserva']['contenido'] = 'Nueva reserva'; 
       }
 
    /**
@@ -693,6 +702,7 @@ class AdminAdmin extends Admin {
       uasort($menuAdmin, 'ordenar_por_peso');
 
       include($gcm->event->instancias['temas']->ruta('admin','html','menuAdmin.html'));
+      include($gcm->event->instancias['temas']->ruta('admin','html','panelAdmin.html'));
       }
 
    /**

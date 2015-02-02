@@ -20,9 +20,6 @@ $menuAdmin2[$usuario]['boton'][literal('Editar perfil',3)]['title']=literal("Edi
 $menuAdmin2[$usuario]['boton'][literal('Editar perfil',3)]['link']=dirname($_SERVER['PHP_SELF'])."/admin/perfil_usuario";
 // $menuAdmin2[$usuario]['class']='user';
 
-$menuAdmin2[literal('Salir',3)]['title']=literal("Cerrar sesión",3);
-$menuAdmin2[literal('Salir',3)]['link']=Router::$base.Router::$s.Router::$c.'?e=salir';
-
 if ( permiso('test','admin') ) {
 
 $menuAdmin[literal('Administración',3)]['boton']['Tests']['activado']= 1;

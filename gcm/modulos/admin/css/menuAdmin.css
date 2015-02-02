@@ -181,3 +181,10 @@ ul.navmenu-h ul li.iehover ul,
 ul.navmenu-h ul ul li.iehover ul {
   display: block;
 }
+#mensajes_admin a {
+    display: inline;
+}
+#panelAdmin {
+    background: none repeat scroll 0 0 #55798a;
+    padding: 10px;
+}

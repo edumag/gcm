@@ -69,7 +69,7 @@ class Plantilla {
       $this->plantilla = $plantilla; 
 
       $this->elementos_vitales_primeros = array('contenido','titulo');
-      $this->elementos_vitales_ultimos  = array('avisos','debug','scripts');
+      $this->elementos_vitales_ultimos  = array('avisos','debug','scripts','menuadmin');
 
       /* Los elementos los buscamos en plantilla */
 
@@ -85,11 +85,11 @@ class Plantilla {
    /**
     * Procesamos la plantilla.
     *
-    * Recogemos el contenido de cada elemento para despues remplazar los
+    * Recogemos el contenido de cada elemento para después remplazar los
     * elementos de la plantilla con el contenido.
     *
-    * Primero elementos vitales primeros despúes elementos vitales 
-    * últimos y por último los elementos que encontrmos.
+    * Primero elementos vitales primeros después elementos vitales 
+    * últimos y por último los elementos que encontramos.
     *
     * Hacemos que contenido se reemplace el último para no dar 
     * problemas al editar el archivo de plantilla con los elementos
@@ -101,6 +101,7 @@ class Plantilla {
       $salida = $this->cPlantilla;
 
       foreach ( $this->elementos_vitales_primeros as $el) {
+         registrar(__FILE__,__LINE__,"Procesamos elemento [$el] de plantilla");
          $this->contenido_elementos[$el] = $this->objeto->procesaContenido($el);
          }
 
@@ -109,12 +110,14 @@ class Plantilla {
          $el = substr($el, 1, strlen($el)-2);
 
          if ( !in_array($el,$this->elementos_vitales_ultimos) && !in_array($el,$this->elementos_vitales_primeros) ) {
+           registrar(__FILE__,__LINE__,"Procesamos elemento [$el] de plantilla");
             $this->contenido_elementos[$el] = $this->objeto->procesaContenido($el);
             }
 
          }
             
       foreach ( $this->elementos_vitales_ultimos as $el) {
+         registrar(__FILE__,__LINE__,"Procesamos elemento [$el] de plantilla");
          $this->contenido_elementos[$el] = $this->objeto->procesaContenido($el);
          }
 
@@ -122,7 +125,7 @@ class Plantilla {
 
          /* Dejamos contenido para el final */
 
-         if ( $key == 'contenido'  ) continue ;
+         if ( $key == 'contenido' ) continue ;
 
          if ( !$contenidos ) {
 

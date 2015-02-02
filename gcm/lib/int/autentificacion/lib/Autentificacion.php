@@ -158,54 +158,65 @@ class Autentificacion {
     *
     * Se pide autentificación para usuario, hay que comprobar que este registrado.
     *
-    * @param usuario Nombre de usuario
-    * @param pass    Contraseña de usuario
+    * @param $usuario  Nombre de usuario
+    * @param $pass     Contraseña de usuario
     */
 
    function entrar($usuario, $pass) {
 
-      global $_SESSION;
+     global $_SESSION;
 
-      $sql = "SELECT id, usuario, admin FROM ".$this->sufijo."usuarios WHERE usuario=? AND pass_md5=? LIMIT 1";
-      $comando = $this->pdo->prepare($sql);
-      if ( ! $comando->execute(array($usuario, md5($pass)) ) ) {
-         $err = $this->pdo->errorInfo();
-         $men_error = $err[2];
-         throw new Exception('Error al insertar registro: '.$men_error);
-         }
+     /**
+      * Minutos que deseamos que se guarde la sesión.
+      * 60 minutos * 24 horas * 30 días
+      */
+     $minuts_mante_sesio_recorda = ( 60 * 24 * 30 );
 
-      $retorno = $comando->fetchAll(PDO::FETCH_NUM);
+     $sql = "SELECT id, usuario, admin FROM ".$this->sufijo."usuarios WHERE usuario=? AND pass_md5=? LIMIT 1";
+     $comando = $this->pdo->prepare($sql);
+     if ( ! $comando->execute(array($usuario, md5($pass)) ) ) {
+       $err = $this->pdo->errorInfo();
+       $men_error = $err[2];
+       throw new Exception('Error al insertar registro: '.$men_error);
+     }
 
-      if (!$comando) {
+     $retorno = $comando->fetchAll(PDO::FETCH_NUM);
 
-         $err = $this->pdo->errorInfo();
-         $men_error = $err[2];
-         throw new Exception('Error ejecutando query: '.$men_error. ' sql: '.$consulta);
-         return FALSE;
+     if (!$comando) {
 
-      } elseif ( count($retorno) < 1 ) {
+       $err = $this->pdo->errorInfo();
+       $men_error = $err[2];
+       throw new Exception('Error ejecutando query: '.$men_error. ' sql: '.$consulta);
+       return FALSE;
 
-         registrar(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
+     } elseif ( count($retorno) < 1 ) {
 
-         return FALSE;
+       registrar(__FILE__,__LINE__,'Usuario o contraseña incorrecta','AVISO');
 
-         }
+       return FALSE;
 
-      list($id,$usuario, $admin) = $retorno[0];
+     }
 
-      /* Cramos sessión para usuario */
+     list($id,$usuario, $admin) = $retorno[0];
 
-      $_SESSION[$this->sufijo.'id'] = $id;
-      $_SESSION[$this->sufijo.'usuario'] = $usuario;
-      if ( $admin == 1 ) {
-         $_SESSION[$this->sufijo.'admin'] = $admin;
-      } else {
-         if ( isset($_SESSION['admin']) ) unset($_SESSION['admin']);
-         }
+     /* Cramos sessión para usuario */
 
-      return TRUE;
+     $_SESSION[$this->sufijo.'id'] = $id;
+     $_SESSION[$this->sufijo.'usuario'] = $usuario;
+     if ( $admin == 1 ) {
+       $_SESSION[$this->sufijo.'admin'] = $admin;
+     } else {
+       if ( isset($_SESSION['admin']) ) unset($_SESSION['admin']);
+     }
 
-      }
+     if (array_key_exists('remember',$_POST)) {
+       ini_set('session.cookie_lifetime', 60 * $minuts_mante_sesio_recorda );
+       session_regenerate_id(TRUE);
+     }
+
+     return TRUE;
+
+   }
 
    /**
     * logeado

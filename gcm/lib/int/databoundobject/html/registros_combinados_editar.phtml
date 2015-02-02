@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file registros_combinados_editar.phtm
+ * @file registros_combinados_editar.phtml
  * @brief Generamos formulario según tipo de campo
  * @ingroup crud
  * @ingroup plantilla_crud
@@ -34,6 +34,8 @@ $editable = TRUE;
    <?php if ( isset($this->ID) ) { ?>
    <?php echo HTML::form_hidden($nombre_tabla_relacionada,$this->ID); ?>
    <?php } ?>
+
+   <?php echo HTML::form_hidden('tabla_combinada[]',$contador); ?>
 
    <?php foreach ( $this->campos as $campo => $relacion ) { ?>
 

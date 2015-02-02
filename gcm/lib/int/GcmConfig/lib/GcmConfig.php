@@ -18,6 +18,9 @@
  *
  * @brief     Lectura y edición de archivos de configuración
  *
+ * @bug Si solo hay un elemento en el archivo no lo borra.
+ * @bug Guarda archivos sin haber cambios.
+ *
  * Esta clase nos permite leer archivos de configuración nativos de php y
  * a la vez la edición de su contenido con formularios php.
  *
@@ -712,13 +715,14 @@ class GcmConfig {
 
       if ( $this->variables_modificadas ) { 
 
+        
          try {
 
             $this->guardar_variables();
 
          } catch (Exception $ex) {
 
-            echo 'ERROR en destructor';
+            registrar(__FILE__,__LINE__,"Error al guardar archivo",'ERROR');
             return FALSE;
             }
 
@@ -726,7 +730,7 @@ class GcmConfig {
       
       /* Recorremos array de descripciones_modificadas para saber cuales hay que actualizar */
 
-      if ( !empty($this->descripciones_modificadas) ) {
+      if ( $this->descripciones_modificadas ) {
 
          foreach ( $this->descripciones_modificadas as $i => $dm ) {
             if ( $dm ) { $this->guardar_descipciones($i); }

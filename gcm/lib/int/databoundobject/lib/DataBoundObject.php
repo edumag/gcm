@@ -18,7 +18,7 @@
 
 /**
  * @class DataBoundObject
- * @brief Abstracción para manipilación de datos con PDO
+ * @brief Abstracción para manipulación de datos con PDO
  *
  * @ingroup crud
  */
@@ -33,6 +33,7 @@ abstract class DataBoundObject {
    protected $blForDeletion;               ///< Para saber si se debe borrar el registro
    protected $blIsLoaded;                  ///< Saber si ya se fue ha buscar a la BD
    protected $arModifiedRelations;         ///< listado de campos modificados
+   protected $defaultorder;                ///< Orden por defecto.
 
    /**
     * Nos permite definir campos con valores establecidos donde no se requiere la interacción del
@@ -388,12 +389,15 @@ abstract class DataBoundObject {
             }
 
 
-         if ( $objStatement->execute() ) {
-            $this->ID = $this->ultimo_identificador();
-            return TRUE;
-         } else {
-            return FALSE;
-            }
+         try {
+           $objStatement->execute();
+           $this->ID = $this->ultimo_identificador();
+           return TRUE;
+         } catch (Exception $ex) {
+           registrar(__FILE__,__LINE__,'Error con BD: '.$ex->getMessage(),'ERROR');
+           registrar(__FILE__,__LINE__,$strQuery. ' Valores: '.depurar($this->valores),'ADMIN');
+           return FALSE;
+         }
       }
    }
 
@@ -439,7 +443,7 @@ abstract class DataBoundObject {
 
             // if ( $this->strTableName == 'tv_rel_autors' ) {echo "<pre>info: " ; print_r($strQuery) ; echo "</pre>"; exit(); } // DEV
 
-            registrar(__FILE__,__LINE__,$strQuery,'DEBUG');
+            registrar(__FILE__,__LINE__,$strQuery.' indice: '.depurar($indices));
             $objStatement = $this->objPDO->prepare($strQuery);
 
             $conta = 0;
@@ -574,6 +578,8 @@ abstract class DataBoundObject {
    function find($condicion=NULL, $campos=NULL, $orden=NULL) {
 
       $retorno = array();
+
+      $orden = ( $orden ) ? $orden : $this->defaultorder;
 
       if ( $campos  ) {
          $seleccion = '';

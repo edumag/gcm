@@ -9,11 +9,13 @@
 
 require_once(GCM_DIR.'lib/int/formato/lib/HTML.php');
 
-/** Saber si tenemos que cargar el código para el tratamiento de fechas */
-
+/** Saber si tenemos que cargar el código para el tratamiento de fechas con horas.*/
 $cargar_codigo_fechas_horas = FALSE;
+/** Definimos directorio de los arhivos js necesarios. */
 $dir_codigo_fechas_horas    = Router::$base.GCM_DIR.'lib/int/databoundobject/ext/mugifly-jquery-simple-datetimepicker/';
+/** Saber si debemos cargar el código para las fechas. */
 $cargar_codigo_fechas       = FALSE;
+/** Directorio de los js. */
 $dir_codigo_fechas          = Router::$base.GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/';
 
 ?>
@@ -161,11 +163,14 @@ if ( $cargar_codigo_fechas ) {
 
    $objeto_padre->ficheros_css['jquery.datepick.css'] = $dir_codigo_fechas.'jquery.datepick.css';
    $objeto_padre->codigo_js .= file_get_contents(GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/jquery.datepick.js');
+   // Podemos definir el idioma del calendario incluyendo el archivo.
+   // Ejemplo: 
+   // $objeto_padre->codigo_js .= file_get_contents(GCM_DIR.'lib/int/databoundobject/ext/jquery.datepick/jquery.datepick-ca.js');
 
    foreach ( $cargar_codigo_fechas as $campo_fecha ) {
       $objeto_padre->codigo_js .= "
          $(function() {
-            $('#".$campo_fecha."').datepick({dateFormat: 'yyyy-mm-dd'});
+            $('#".$campo_fecha."').datepick({dateFormat: 'yyyy-mm-dd', yearRange: 'c-100:c+10'});
          });
          ";
       }

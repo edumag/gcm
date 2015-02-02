@@ -26,3 +26,21 @@
 }
 #litadmin .subpanelNegativo > div {
 }
+.subpanela {
+    color: green;
+}
+.subpanelNegativo a {
+    color: #004400;
+
+}
+.literal_en_pagina > a {
+  color: #004400;
+  font-weight: bold;
+}
+/** Literales que faltan por traducir. */
+.destaca_literal_faltante {
+    background: none repeat scroll 0 0 olive;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+}

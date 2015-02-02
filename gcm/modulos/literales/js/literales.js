@@ -14,70 +14,24 @@
  */
 
 /**
- * Actualizar panel de literales
- */
-
-function actualizar_literales_columna() {
-   $("#panelLiterales").empty();
-   $("#panelLiterales").load("?formato=ajax&m=literales&a=devolverLiterales");
-   }
-
-/**
- * Confirmación para la inserción de elementos
- */
-
-function confirmar_literales_columna()
-   {
-   if (pedido.readyState == 4 ) {
-      if ( pedido.status == 200 ) {
-         actualizar_literales_columna();
-         }
-      }
-   }
-
-/**
- * Insertar literal nuevo
- */
-
-function insertar_literal_columna()
-   {
-      var key = prompt('concepto','');
-      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key,'confirmar_literales_columna');
-   }
-
-
-/**
- * Eliminar literal
- *
- * @param key Clave del literal que queremos eliminar
- */
-
-function eliminar_literal_columna(key) {
-   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key,'confirmar_literales_columna');
-   }
-
-
-/**
  * Modificar literales de los idiomas
  *
- * @param key Clave del literal que queremos modificar
- * @param val Valor actual del literal
+ * @param key 
+ *   Clave del literal que queremos modificar.
+ * @param val 
+ *   Valor actual del literal.
+ * @param proyecto_js 
+ *   Literal de aplicación o de proyecto 1 0=aplicación 1=proyceto.
  *
  */
 
-function modificar_literal_columna(key,val) {
+function modificar_literal(key,val,proyecto) {
+   // Quitamos lit_ de la clave
+   key = key.replace('lit_','');
    var res = prompt('Modificaión de '+key,val);
-   pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res,'confirmar_literales_columna');
-   }
-
-/**
- * Actualizar panel de literales
- */
-
-function actualizar_literales(panel) {
-   panel = document.getElementById(panel);
-   $(panel).empty();
-   $(panel).load("?formato=ajax&m=literales&a=administrar");
+   if ( res ) {
+      pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&proyecto='+proyecto,'confirma');
+      }
    }
 
 /**
@@ -88,62 +42,88 @@ function confirma()
    {
    if (pedido.readyState == 4 ) {
       if ( pedido.status == 200 ) {
-         actualizar_literales('contenido');
-         // alert('OK'); // DEV
+         var datos = eval('['+pedido.responseText+']');
+           var literal = datos[0]['elemento'];
+           var valor = datos[0]['valor'];
+           accion = typeof(datos[0]['accion']) != 'undefined' ? datos[0]['accion'] : 'modificado' ;
+           console.log(accion);
+           switch(accion) {
+             case 'insertado':
+               // alert('Literal insertado');
+               break;
+             
+             case 'borrado':
+               $('#lit_'+literal).text('');
+               break;
+             
+             default:
+               $('.literal_faltante_'+literal).each(function (index) {
+                   $(this).removeClass();
+                   $(this).text(valor);
+            
+               })
+           }
+           mostrar_avisos();
          }
       }
    }
 
 /**
+ * Administrar literales detectados sin traducir.
+ */
+function literales_faltantes() {
+  $('.literal_faltante').each(function(index) {
+    $(this).addClass('destaca_literal_faltante');
+  });
+  $('.literal_faltante').click(function(e) {
+    var enlace_literal = $(this);
+    var literal = enlace_literal.html();
+    // console.log(literal);
+    // console.log(enlace_literal);
+    modificar_literal(literal,literal.replace('_',' ','g'),1);
+    return false;
+  });
+}
+
+/**
  * Insertar literal nuevo
  */
 
-function insertar_literal(admin) {
+function insertar_literal(proyecto) {
+  proyecto = typeof(proyecto) != 'undefined' ? proyecto : 1;
    var key = prompt('literal','');
    if (key) {
-      pedirDatos('?formato=ajax&m=literales&a=anyadirLiteral&elemento='+key+'&admin='+admin,'confirma');
+      pedirDatos('?formato=ajax&m=literales&a=insertar_literal&elemento='+key+'&proyecto='+proyecto,'confirma');
       }
    }
 
-
-function eliminar_elemento(key,admin) {
-   key = key.replace('lit_','');
-   pedirDatos('?formato=ajax&m=literales&a=eliminar_elemento&elemento='+key+'&admin='+admin,'confirma');
-   }
+literales_faltantes();
 
 /**
- * Modificar literales de los idiomas
- *
- * @param key Clave del literal que queremos modificar
- * @param val Valor actual del literal
- *
+ * Eliminar literal
  */
 
-function modificar_literal(key,val,admin) {
-   // Quitamos lit_ de la clave
+function eliminar_literal(key,proyecto) {
+  proyecto = typeof(proyecto) == 'undefined' ? 1 : proyecto;
    key = key.replace('lit_','');
-   var res = prompt('Modificaión de '+key,val);
-   if ( res ) {
-      pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&admin='+admin,'confirma');
-      }
+   pedirDatos('?formato=ajax&m=literales&a=eliminar_literal&elemento='+key+'&proyecto='+proyecto,'confirma');
    }
 
 /**
- * Ocultamos literales que ya tienen contenido
+ * Filtro para listados.
  */
 
 function filtra(elemento,panel) {
 
    var clase =  elemento.className;
-   var panel =  '#'+panel;
+   var panel =  '.'+panel;
    console.log(panel);
 
    if ( clase == 'boton_activo' ) {
       elemento.className='boton';
-      $(panel + " .subpanel").css('display','');
+      $(panel).css('display','');
    } else {
       elemento.className='boton_activo';
-      $(panel + " .subpanel").css('display','none');
+      $(panel).css('display','none');
       }
    }
-
