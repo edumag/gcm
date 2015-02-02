@@ -113,9 +113,26 @@
 
    <?php } // end Tenemos array menuAdmin ?>
 
+   <li id="mensajes_admin">
+     <?php 
+     foreach ($this->mensajes_admin as $key => $men ) {
+     ?>
+     <a href="javascript:visualizar('panelAdmin_<?php echo $key?>')" class="atencion" title="<?php echo $men['mensaje'];?>"><?php echo $men['num'];?></a>
+     <?php
+     }
+     ?>
+   </li>
+   <li>
+     <a title="<?php echo literal('Cerrar sesión');?>" href="<?php echo Router::$base.Router::$s.Router::$c.'?e=salir';?>">
+       <?php echo literal('Salir'); ?>
+      </a>
+   </li>
 </ul>
 </div>
 <div style="clear: both"></div>
+<style>
+  #mainMenu { position: fixed; }
+  #panelAdmin { padding-top: 14px !important; }
+  body { padding: 0 !important;
+</style>
 <?php
-
-

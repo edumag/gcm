@@ -1,7 +1,3 @@
-.subpanelNegativo a {
-   color: <?=$this->color("body-11")?>;
-}
-
 /* Administración */
 #panelLiterales ul {
     margin: 20px 0;
@@ -19,4 +15,11 @@
 }
 li.subpanelNegativo {
     background: none repeat scroll 0 0 rgb(173, 95, 23) !important;
+}
+#columna #litadmin li {
+    display: block;
+    margin: 3px;
+}
+#columna #litadmin li div {
+    display: inline;
 }

@@ -1,10 +1,11 @@
-/** gcm.js
- *
- * Funciones javascript imprescindibles para el funcionamiento de gcm
+/**
+ * @file
+ * @brief Funciones javascript imprescindibles para el funcionamiento de gcm
  *
  */
 
-/** Ajax
+/** 
+ * Ajax
  *
  * Funciones javascript para la administración de la aplización
  * 
@@ -149,6 +150,33 @@ function is_array(obj) {
       return false;
    else
       return true;
+}
+
+/**
+ * Mostrar errores desde javascript.
+ *
+ * @param Container 
+ *   Donde mostrar los errores o avisos.
+ */
+
+function mostrar_avisos(container) {
+  container = typeof(container) != 'undefined' ? container : 'mensajes_aplicacion' ;
+  pedirDatos('?formato=ajax&m=ver_registros&a=presentar_caja_de_avisos','presentar_avisos');
+}
+
+/**
+ * Presentar caja de errores.
+ */
+function presentar_avisos() {
+  if (pedido.readyState == 4 ) {
+    if ( pedido.status == 200 ) {
+      el = document.getElementById('mensajes_aplicacion');
+      el.innerHTML = pedido.responseText;
+      $('#mensajes_aplicacion').click(function(){
+        $(this).html('');
+      });
+    }
+  }
 }
 
 /** 

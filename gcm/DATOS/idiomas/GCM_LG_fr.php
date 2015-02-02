@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Jan 27 10:40:56 CET 2015
+// Archivo generado automáticamente por GcmConfig Mon Feb 2 12:09:21 CET 2015
 $GCM_LG_fr['Registros de página actual']='';
 $GCM_LG_fr['Registros']='';
 $GCM_LG_fr['Usuario']='';
@@ -54,7 +54,6 @@ $GCM_LG_fr['Administrar mails']='';
 $GCM_LG_fr['Subir imagen a ']='';
 $GCM_LG_fr['Imágenes']='';
 $GCM_LG_fr['Literales']='';
-$GCM_LG_fr['Informar de error']='';
 $GCM_LG_fr['Gracias']='';
 $GCM_LG_fr['Enviar error']='';
 $GCM_LG_fr['Informe de errores']='';
@@ -122,17 +121,18 @@ $GCM_LG_fr['Renombrar / Mover']='';
 $GCM_LG_fr['Guardar como']='';
 $GCM_LG_fr['Nueva sección']='';
 $GCM_LG_fr['Renombrar sección']='';
-$GCM_LG_fr['Añadir constantes']='';
-$GCM_LG_fr['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 $GCM_LG_fr['Mostrar únicamente literales vacíos']='';
 $GCM_LG_fr['Ocultar literales con contenido']='';
 $GCM_LG_fr['Sección']='';
 $GCM_LG_fr['no encontrada']='';
-$GCM_LG_fr['Administrar libro de visitas']='';
 $GCM_LG_fr['Administrar libro de reservas']='';
 $GCM_LG_fr['Administrar ofertas']='';
-$GCM_LG_fr['formularios']='';
 $GCM_LG_fr['Guardar contenido en el idioma (fr)']='';
 $GCM_LG_fr['Cancelar']='';
 $GCM_LG_fr['Ayuda para el administrador']='';
+$GCM_LG_fr['Administrar Mapas']='';
+$GCM_LG_fr['Administrar marcadores de mapas']='';
+$GCM_LG_fr['Literales en página']='';
+$GCM_LG_fr['Mostrar únicamente literales pendientes']='';
+$GCM_LG_fr['Filtrar sin contenido']='';
 ?>

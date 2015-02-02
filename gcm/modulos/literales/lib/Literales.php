@@ -103,22 +103,33 @@ class Literales extends Modulos {
     *               En caso de no haberlo cogemos el del idioma actual
     */
 
-   function anyadirLiteral() {
+   function insertar_literal() {
       
       global $gcm;
 
-      if ( isset($_GET['admin']) && $_GET['admin'] == 1 ) {
+      $valor = ( isset($_GET['valor']) ) ? $_GET['valor'] : $_GET['elemento'] ;
+
+      if ( isset($_GET['proyecto']) && $_GET['proyecto'] == 0 ) {
          $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
+         $lugar = 'aplicación';
       } else {
          $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+         $lugar = 'proyecto';
          }
 
       $arr = GcmConfigFactory::GetGcmConfig($file);
-      $arr->set($_GET['elemento'],$_GET['valor']);
+      $arr->set($_GET['elemento'],$valor);
       $arr->guardar_variables();
 
-      echo "[ ".$_GET['elemento']." ] = [ ".$_GET['valor']." ] en [ ".$file." ]";
-
+      registrar(__FILE__,__LINE__,"Literal [$valor] de $lugar añadido",'AVISO');
+      
+      print json_encode(
+        array(
+          'accion' => 'insertado',
+          'elemento' => GUtil::textoplano($_GET['elemento']),
+          'valor' => $valor
+        )
+      );
       }
 
    }

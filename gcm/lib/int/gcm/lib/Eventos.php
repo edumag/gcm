@@ -613,7 +613,7 @@ registrar(__FILE__,__LINE__,"fichero_modulo: $fichero_modulo",'AVISO');
 
          if ( ! permiso($a, $m) ) {
             //registrar(__FILE__,__LINE__,$m.'->'.$a.'() sin permisos','AVISO');
-            registrar(__FILE__,__LINE__,literal('Autorización denegada'),'AVISO',$m.'->'.$a.'() sin permisos');
+            registrar(__FILE__,__LINE__,literal('Autorización denegada').' '.literal('para').' '.$m.'->'.$a,'AVISO',$m.'->'.$a.'() sin permisos');
             return FALSE;
             }
 

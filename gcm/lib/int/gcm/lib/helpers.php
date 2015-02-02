@@ -44,6 +44,8 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
    global $LG, $GCM_LG, $gcm;
 
+   if ( $valor == 'null' ) $valor = NULL;
+
    if ( $gcm ) {
       $proyecto = $gcm->config('admin','Proyecto');
    } else {
@@ -61,7 +63,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
       case 1:
 
          if ( !$valor && isset($LG[$literal]) && $LG[$literal] != "" ) {
-            return $LG[$literal] ;
+            return $LG[$literal];
             }
 
          if ( $valor ) {
@@ -76,12 +78,20 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
             $mens = 'Nuevo literal de proyecto ['.$literal.']';
             $valor = '';
-
+             if ( permiso('administrar','literales') ) {
+               $_SESSION['literales_faltantes'][] = $literal;
+               return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
+             }
          } else {
             // Si no tenemos literal devolvemos la clave cambiando los
             // guiones bajos por espacios.
+             if ( permiso('administrar','literales') ) {
+               $_SESSION['literales_faltantes'][] = $literal;
+               return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
+             }
             return str_replace('_', ' ', $literal);
             }
+
 
          $idioma_actual = $_SESSION[$proyecto.'-idioma'];
          $file=$gcm->config('idiomas','Directorio idiomas')."LG_".$idioma_actual.".php";
@@ -1278,4 +1288,18 @@ function conversion_idioma($iso6391) {
       break;
     }
   }
+
+/**
+ * Presentar avisos de la aplicación desde ajax.
+ */
+
+function presentar_avisos_ajax() {
+  global $gcm;
+  ?>
+  <script type="text/javascript" charset="utf-8">
+   mostrar_avisos(); 
+  </script>
+  <?php
+}
+
 ?>

@@ -309,6 +309,23 @@ abstract class Modulos {
 
       }
 
+   /**
+    * Mensajes administrativos con paneles.
+    */
+
+   protected function panel_admin($clave, $numero, $mensaje, $contenido) {
+
+     global $gcm;
+
+     if ( $gcm && $gcm instanceof Gcm ) {
+       $gcm->event->instancias['admin']->mensajes_admin[$clave]['num'] = $numero; 
+       $gcm->event->instancias['admin']->mensajes_admin[$clave]['mensaje'] = $mensaje; 
+       $gcm->event->instancias['admin']->mensajes_admin[$clave]['contenido'] = $contenido; 
+     } else {
+       registrar(__FILE__,__LINE__,'Error con instancia admin al crear panel admin','ERROR');
+     }
+   }
+
    }
 
 /** @} */

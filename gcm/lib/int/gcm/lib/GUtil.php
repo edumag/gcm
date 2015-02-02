@@ -63,12 +63,12 @@ class GUtil {
    static function archivo_modificable($archivo) {
 
       if ( ! self::archivo_leible($archivo) ) {
-         trigger_error('Archivo no tiene permisos de lectura ['.$archvio.']', E_USER_ERROR);
+         trigger_error('Archivo no tiene permisos de lectura ['.$archivo.']', E_USER_NOTICE);
          return FALSE;
          }
 
       if ( ! is_writable($archivo) ) {
-         trigger_error('Archivo no tiene permisos de escritura ['.$archvio.']', E_USER_ERROR);
+         trigger_error('Archivo no tiene permisos de escritura ['.$archivo.']', E_USER_WARNING);
          return FALSE;
          }
 
