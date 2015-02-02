@@ -167,9 +167,9 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
 
   if ( $filtro_pendientes ) {
     $this->boton_filtrar('subpanel','Filtro','Fitra literales con contenido');
-?>
-<br />
-<?php
+  ?>
+  <br />
+  <?php
   }
 
   if ( $literales ) {
