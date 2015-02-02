@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 2 12:09:21 CET 2015
+// Archivo generado automáticamente por GcmConfig Mon Feb 2 15:18:30 CET 2015
 $GCM_LG_es['Sin Contenido']='';
 $GCM_LG_es['no encontrado']='';
 $GCM_LG_es['Menú']='';
@@ -165,4 +165,12 @@ $GCM_LG_es['Mostrar únicamente literales pendientes']='';
 $GCM_LG_es['Pagina actual']='';
 $GCM_LG_es['Filtrar sin contenido']='';
 $GCM_LG_es['Literales en página']='';
+$GCM_LG_es['Añadir constantes']='';
+$GCM_LG_es['Informar de error']='';
+$GCM_LG_es['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
+$GCM_LG_es['Administrar libro de visitas']='';
+$GCM_LG_es['formularios']='';
+$GCM_LG_es['Añadir nuevo literal']='';
+$GCM_LG_es['Reindexador']='';
+$GCM_LG_es['Editor']='';
 ?>

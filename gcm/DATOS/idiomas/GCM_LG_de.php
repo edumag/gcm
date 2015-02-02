@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Mon Feb 2 12:09:21 CET 2015
+// Archivo generado automáticamente por GcmConfig Mon Feb 2 15:57:46 CET 2015
 $GCM_LG_de['Contenido pendiente de traducción']='';
 $GCM_LG_de['Registros']='';
 $GCM_LG_de['Campo obligatorio']='';
@@ -105,5 +105,9 @@ $GCM_LG_de['Filtrar sin contenido']='';
 $GCM_LG_de['Añadir nuevo literal']='';
 $GCM_LG_de['Añadir constantes']='';
 $GCM_LG_de['Informar de error']='';
+$GCM_LG_de['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 $GCM_LG_de['Administrar libro de visitas']='';
+$GCM_LG_de['formularios']='';
+$GCM_LG_de['Fitra literales con contenido']='';
+$GCM_LG_de['Filtro']='';
 ?>

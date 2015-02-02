@@ -49,15 +49,11 @@ function confirma()
            console.log(accion);
            switch(accion) {
              case 'insertado':
-               alert('Literal insertado');
+               // alert('Literal insertado');
                break;
              
              case 'borrado':
-               $('.literal_faltante_'+literal).parent().each(function (index) {
-                   $(this).removeClass();
-                   $(this).text('');
-            
-               })
+               $('#lit_'+literal).text('');
                break;
              
              default:
@@ -108,8 +104,26 @@ function insertar_literal(proyecto) {
  */
 
 function eliminar_literal(key,proyecto) {
-  proyecto = typeof(proyecto) != 'undefined' ? proyecto : 1;
+  proyecto = typeof(proyecto) == 'undefined' ? 1 : proyecto;
    key = key.replace('lit_','');
    pedirDatos('?formato=ajax&m=literales&a=eliminar_literal&elemento='+key+'&proyecto='+proyecto,'confirma');
    }
 
+/**
+ * Filtro para listados.
+ */
+
+function filtra(elemento,panel) {
+
+   var clase =  elemento.className;
+   var panel =  '.'+panel;
+   console.log(panel);
+
+   if ( clase == 'boton_activo' ) {
+      elemento.className='boton';
+      $(panel).css('display','');
+   } else {
+      elemento.className='boton_activo';
+      $(panel).css('display','none');
+      }
+   }

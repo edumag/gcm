@@ -5,3 +5,9 @@
 #navegador a {
 display: inline-block;
 }
+#mensajes_aplicacion {
+    position: fixed;
+    right: 0;
+    top: 30px;
+    z-index: 100;
+}

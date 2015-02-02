@@ -139,6 +139,11 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
     $proyecto = TRUE ;
   }
 
+  if ( $panel == 'panel_admin' ) {
+    $boton_insertar = TRUE;
+    $filtro_pendientes = TRUE;
+  }
+
   $proyecto_js = ( $proyecto ) ? '1' : '0' ;
 
   if ( $literales_pagina_actual ) {
@@ -161,12 +166,10 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
   }
 
   if ( $filtro_pendientes ) {
-  ?>
-    <br />
-    <a class="boton" title="<?php echo htmlentities(literal('Mostrar únicamente literales pendientes',3),ENT_QUOTES, "UTF-8");?>" style="cursor: pointer;" onclick="javascript:filtra(this,'panelLiterales','subpanelNegativo')" >
-    <?php echo literal('Filtrar sin contenido',3);?>
-    </a>
-  <?php
+    $this->boton_filtrar('subpanel','Filtro','Fitra literales con contenido');
+?>
+<br />
+<?php
   }
 
   if ( $literales ) {
@@ -205,11 +208,11 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
             <?php echo $valor ?>
          </a>
          <a style="font-size: smaller;" title="Eliminar" 
-            href="javascript:;" onclick="eliminar_literal('<?php echo str_replace("'","\'",$key) ?>')" >
+            href="javascript:;" onclick="eliminar_literal('<?php echo $key ?>',1)" >
             [X]
          </a>
          <a style="font-size: smaller;" title="Modificar" 
-            href="javascript:;" onclick="modificar_literal_columna('<?php echo $key.'\',\''.$valor?>')" >
+            href="javascript:;" onclick="modificar_literal('<?php echo $key.'\',\''.$valor?>')" >
             [M]
          </a>
        </li>
@@ -219,12 +222,12 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
   }
 
 
-}
+  }
 
-?>
+  ?>
          </ul>
       </div>
-<?php
+  <?php
 
 }
 
@@ -295,7 +298,7 @@ function recoger_literales($proyecto=TRUE) {
 
     global $gcm;
 
-    if ( isset($_GET['proyecto']) && $_GET['proyecto'] == 1 ) {
+    if ( isset($_GET['proyecto']) && $_GET['proyecto'] == 0 ) {
       $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
     } else {
       $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
@@ -384,34 +387,38 @@ function recoger_literales($proyecto=TRUE) {
 
  function eliminar_literal() {
 
-    global $gcm;
+    global $gcm, $LG, $GCM_LG;
 
     $elemento = $_GET['elemento'];
-
-    if ( isset($_GET['proyecto']) && $_GET['proyecto'] == 1 ) {
-       $dir   = $gcm->config('idiomas','Directorio idiomas');
-       $array = "LG_";
-    } else {
+    $proyecto = ( isset($_GET['proyecto']) ) ? $proyecto : 1 ;
+    
+    if ( $proyecto == 1 ) {
        $dir   = GCM_DIR."DATOS/idiomas/";
        $array = "GCM_LG_";
+       $literal_de = 'aplicación';
+    } else {
+       $dir   = $gcm->config('idiomas','Directorio idiomas');
+       $array = "LG_";
+       $literal_de = 'proyecto';
        }
 
     foreach ( Router::$idiomas as $idioma ) {
        $file=$dir.$array.$idioma.".php";
        $arr = GcmConfigFactory::GetGcmConfig($file);
        $arr->del($elemento);
-       $arr->guardar_variables();
+       unset($arr);
        }
 
-    registrar(__FILE__,__LINE__,"Literal [$elemento] eliminado",'AVISO');
+    registrar(__FILE__,__LINE__,"Literal de $literal_de [$elemento] eliminado",'AVISO');
     
     print json_encode(
       array(
         'accion' => 'borrado',
-        'elemento' => GUtil::textoplano($_GET['elemento']),
-        'valor' => $_GET['valor']
+        'elemento' => GUtil::textoplano($elemento),
+        'valor' => ''
       )
     );
+    exit();
     }
 }
 

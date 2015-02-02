@@ -61,7 +61,6 @@ class Ver_registros extends Modulos {
       if ( $tipos )  {
 
          foreach ($tipos as $tipo => $registros ) {
-           $registros = array_unique($registros);
             include($gcm->event->instancias['temas']->ruta('ver_registros','html','presentar_avisos.html'));
             }
 
