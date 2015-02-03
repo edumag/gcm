@@ -1,11 +1,11 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sun Feb 1 12:38:38 CET 2015
+// Archivo generado automáticamente por GcmConfig Tue Feb 3 7:20:58 CET 2015
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde un módulo';
 $LG_es['April']='Abril';
 $LG_es['Augost']='Agosto';
-$LG_es['Caja_con_informacion_de_los_modulos']='';
+$LG_es['Caja_con_informacion_de_los_modulos']='Caja con información de los módulos';
 $LG_es['Cambio_de_tema_al_vuelo']='Cambio de tema al vuelo';
-$LG_es['Como_crear_un_modulo']='';
+$LG_es['Como_crear_un_modulo']='Como crear un módulo';
 $LG_es['Conceptos_generales']='';
 $LG_es['Conexion_entre_modulos']='';
 $LG_es['December']='Diciembre';
@@ -68,7 +68,7 @@ $LG_es['tema_nuevo']='tema nuevo';
 $LG_es['thumbnail']='';
 $LG_es['tiny_mce']='';
 $LG_es['Traducciones']='';
-$LG_es['Constantes']='';
+$LG_es['Constantes']='Constantes';
 $LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina.html']='Evitar reenvios a formulario al actualizar una pagina';
 $LG_es['Debug']='Debug';
 $LG_es['Forzar_eventos_por_omision']='Forzar eventos por omisión';
