@@ -351,6 +351,73 @@ class GcmCache {
 
      }
 
+   /**
+    * Guardar imagen
+    *
+    * @param $imagen   Fichero a incluir. 
+    * @param $variables Array con las variables a tener en cuenta para 
+    *          diferenciar imagens, ejemplo: localización.
+    * @param $duracion Tiempo de expiración de la cache, por defecto $this->duracion.
+    */
+
+   function recuperar_imagen($imagen, $variables=FALSE, $duracion=FALSE) {
+
+     $duracion = ( $duracion ) ? $duracion : $this->duracion;
+
+     if ( $variables ) {
+       $archivo_cache = $this->dir_cache.implode('-',$variables).'-'.$imagen;
+     } else {
+       $archivo_cache = $this->dir_cache.$imagen;
+       }
+
+     if (@file_exists($archivo_cache)) {
+        $fecha_cache = @filemtime($archivo_cache);
+     } else {
+        $fecha_cache = 0;
+       }
+
+     // Mostramos el archivo si aun no vence
+     if (time() - $duracion < $fecha_cache) {
+
+       // Contenido en cache
+       ob_start();
+       readfile($archivo_cache);
+       $salida = ob_get_contents();
+       ob_clean();
+
+       return $salida;
+
+       }
+
+     return FALSE;
+     }
+
+
+   /**
+    * Guardar imagen en cache.
+    *
+    * @param $nombre
+    *   Nombre de la imagen.
+    * @param $contenido
+    *   Contenido del fichero.
+    * @param $variables
+    *   Array con las variables que las distingue.
+    */
+
+   function guardar_imagen($nombre, $contenido, $variables = FALSE) {
+   
+     if ( $variables ) {
+       $archivo_cache = $this->dir_cache.implode('-',$variables).'-'.$nombre;
+     } else {
+       $archivo_cache = $this->dir_cache.$nombre;
+       }
+
+      $fp = @fopen($archivo_cache, "w");
+      @fwrite($fp, $contenido);
+      @fclose($fp);
+
+     }
+
    }
 
 /** @} */
