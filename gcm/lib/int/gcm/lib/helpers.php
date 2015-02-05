@@ -149,16 +149,23 @@ function literal($literal, $nivel=2, $valor=NULL) {
             return $literal;
             }
 
-         $idioma_actual = $_SESSION[$proyecto.'-idioma'];
-         $file=GCM_DIR."DATOS/idiomas/GCM_LG_".$idioma_actual.".php";
+         // Si estamos en un proyecto de gcm guardamos literales de gcm en el archivo
+         // del proyecto sino no hacemos nada.
+         // @bug Siempre escribe no es necesario.
 
-         require_once(GCM_DIR."lib/int/GcmConfig/lib/GcmConfigFactory.php");
+         // $dir   = $gcm->config('idiomas','Directorio idiomas');
+         // if ( $dir ) {
+         //   $idioma_actual = $_SESSION[$proyecto.'-idioma'];
+         //   $file=$dir."GCM_LG_".$idioma_actual.".php";
 
-         $arr = GcmConfigFactory::GetGcmConfig($file);
-         $arr->set($literal,$valor);
-         $arr->guardar_variables();
+         //   require_once(GCM_DIR."lib/int/GcmConfig/lib/GcmConfigFactory.php");
 
-         registrar(__FILE__,__LINE__,$mens);
+         //   $arr = GcmConfigFactory::GetGcmConfig($file);
+         //   $arr->set($literal,$valor);
+         //   $arr->guardar_variables();
+
+         //   registrar(__FILE__,__LINE__,$mens,'ADMIN');
+         // }
 
          /* Añadimos a $GCM_LG para que haya constancia inmediata */
 

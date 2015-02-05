@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Feb 5 17:49:31 CET 2015
+// Archivo generado automáticamente por GcmConfig Thu Feb 5 18:03:29 CET 2015
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Anyadir javascript desde un modulo';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';
@@ -71,7 +71,7 @@ $LG_ca['tiny_mce']='';
 $LG_ca['Cache_http']='';
 $LG_ca['Plantillas']='';
 $LG_ca['Caja_con_informacion_de_los_modulos']='Caja con información de los módulos';
-$LG_ca['Conexion_entre_modulos']='';
+$LG_ca['Conexion_entre_modulos']='Conexión entre módulos';
 $LG_ca['Configuracion_para_modulos']='';
 $LG_ca['Paginador_con_ajax']='';
 $LG_ca['Sustitucion_en_enlaces_en_caso_de_ser_llamados_mediante_ajax']='';

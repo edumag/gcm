@@ -309,6 +309,9 @@ function recoger_literales($proyecto=TRUE) {
     $arr->set($_GET['elemento'],trim($_GET['valor']));
 
     $arr->guardar_variables();
+
+    registrar(__FILE__,__LINE__,"Literal (".$_GET['elemento'].") modifcado con [".$_GET['valor']."]",'AVISO');
+    
     print json_encode(
       array(
         'accion' => 'modificado',
