@@ -22,12 +22,12 @@ $drh = $this->dir_base.$this->dir_mod;
 
 <div style="clear:both"></div>
 <div id="container">
-   <div id="missatge"><?php echo literal('Afefir imatge');?></div>
+   <div id="missatge"><?php echo literal('Añadir imagen');?></div>
        <div id="filelist">No se encontraron extensiones.</div>
        <br />
        <div align="right" id="fimatge" <?php if ( $this->count() >= $this->limit_imatges ) echo ' style="display:none; " '; else echo ' style="padding: 5px;"';?>>
-       <a class="formulari2 ma" id="pickfiles" href="#">Seleccionar arxius</a> &nbsp; 
-       <a class="formulari2 ma" id="uploadfiles" href="#">Pujar arxius</a>
+       <a class="formulari2 ma" id="pickfiles" href="#"><?php echo literal('Seleccionar imágenes') ?></a> &nbsp; 
+       <a class="formulari2 ma" id="uploadfiles" href="#"><?php echo literal('Subir imágenes') ?></a>
        </div>
 </div>
 
@@ -267,12 +267,12 @@ function actualizar_missatges() {
 
    maxim_imatges = limit_galeria - contador.value;
 
-   getEl('missatge').innerHTML = "<div>Afegir imatges: "+contador.value+"/"+limit_galeria+"</div>";
+   getEl('missatge').innerHTML = "<div><?php echo literal('Añadir imagen') ?>: "+contador.value+"/"+limit_galeria+"</div>";
 
    if ( maxim_imatges > 0 ) {
-      getEl('missatge').innerHTML += "<div>Encara pots afegir " + maxim_imatges + " imatge/s</div>";
+      getEl('missatge').innerHTML += "<div><?php echo literal('Todavia puedes añadir') ?> " + maxim_imatges + " <?php echo literal('Imágen/es') ?></div>";
    } else {
-      getEl('missatge').innerHTML += "<div>Has arribat al màxim d'imatges</div>";
+      getEl('missatge').innerHTML += "<div><?php echo literal('Has llegado al máximo de imágenes') ?></div>";
 
       var fimatge = document.getElementById('fimatge');
       fimatge.style.display	= 'none';
