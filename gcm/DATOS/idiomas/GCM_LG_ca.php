@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Tue Feb 3 16:41:15 CET 2015
+// Archivo generado automáticamente por GcmConfig Thu Feb 5 17:49:31 CET 2015
 $GCM_LG_ca['Administracion de los diferentes idiomas']='Administració dels diferents idiomes';
 $GCM_LG_ca['Administración']='';
 $GCM_LG_ca['Administración de usuarios']='Administració d\'usuaris';
@@ -169,4 +169,7 @@ $GCM_LG_ca['Reindexador']='';
 $GCM_LG_ca['Editor']='';
 $GCM_LG_ca['Administrar libro de visitas']='';
 $GCM_LG_ca['formularios']='';
+$GCM_LG_ca['Añadir constantes']='';
+$GCM_LG_ca['Informar de error']='';
+$GCM_LG_ca['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 ?>
