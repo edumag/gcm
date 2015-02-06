@@ -24,14 +24,14 @@ uasort($elementos, array("Menu", 'ordenar_por_peso'));
 <?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
 
    <li id="submenu_activo">
-         <?php echo literal($elemento);?>
+         <?php echo literal($elemento,1);?>
    </li>
 
 <?php } else {  // Acaba es la opción actual ?>
 
       <li id="<?php echo $elemento ?>" >
          <a href="<?php echo Router::$base.$this->base_enlace.comprobar_barra($elemento) ?>" >
-            <?php echo literal($elemento)?>
+            <?php echo literal($elemento,1)?>
          </a>
       </li>
 

@@ -182,6 +182,8 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
 
       if ( ! isset($_GET['columna']) ) {
       
+        // Literales en columna.
+
        ?>
        <li id="lit_<?php echo $key ?>" class="<?php echo $clase?>">
           <a class="literal_faltante_<?php echo GUtil::textoplano($key) ?>  " title="Modificar <?php echo GUtil::textoplano($key) ?>" 
@@ -198,6 +200,8 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
       <?php
 
       } else {
+
+        // No en columna.
 
         ?>
        <li id="lit_<?php echo $key ?>" class="<?php echo $clase?>">

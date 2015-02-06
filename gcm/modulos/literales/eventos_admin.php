@@ -11,7 +11,7 @@
 
 /** Panel para acceder de forma rapida a los literales */
 $eventos['columna']['panel_literales'][5] = '';
-$eventos['contenido']['paneladmin'][1000] = '';
+$eventos['paneladmin']['paneladmin'][1000] = '';
 
 
 /** Borrar literales despues renombrar contenido */

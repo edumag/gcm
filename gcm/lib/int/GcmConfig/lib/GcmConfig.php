@@ -571,7 +571,6 @@ class GcmConfig {
       
       if ( ! $this->variables_modificadas ) return;
 
-      registrar(__FILE__,__LINE__,"Variables: ".depurar($this->descripciones_modificadas),'AVISO'); // DEV
       return $this->escribirArchivos($this->archivo, $this->variables, $this->nombre_array);
 
       }
@@ -613,8 +612,6 @@ class GcmConfig {
 
       /* Ordenamos variables */
 
-      registrar(__FILE__,__LINE__,"escribir $nombre_array".$archivo ,'AVISO'); // DEV
-      
       if ( $this->ordenar ) ksort($datos);
 
       reset($datos);

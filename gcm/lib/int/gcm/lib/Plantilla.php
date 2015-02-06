@@ -150,7 +150,7 @@ class Plantilla {
       $contenidos = $this->contenido_elementos['contenido'];
 
       if ( !$contenidos ) {
-         registrar(__FILE__,__LINE__,'No tenemos contenido para contenido ['.$contenidos.'] de plantilla ['.$this->plantilla.']');
+         registrar(__FILE__,__LINE__,'No tenemos contenido para contenido ['.$contenidos.'] de plantilla ['.$this->plantilla.']','AVISO');
       } else {
          $resultado = '<div id="'.$key.'">'.$contenidos.'</div>';
          $salida = str_replace('{'.$key.'}', $resultado, $salida);

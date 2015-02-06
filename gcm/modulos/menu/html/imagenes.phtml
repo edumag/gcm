@@ -18,16 +18,16 @@
 <?php if ( $imagenes ) { ?>
 
       <td id="menuOff">
-         <a href="'.Router::$base.'" title="'.literal('inicio_title').'" >
-            <img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio').'" />
+         <a href="'.Router::$base.'" title="'.literal('inicio_title',1).'" >
+            <img src="'.$this->boton_seccion('', TRUE).'" alt="'.literal('inicio',1).'" />
          </a>
       </td>
 
 <?php } else { // Acaba si es con imagen ?>
 
       <td id="menuOff">
-         <a href="'.Router::$base.'" title="'.literal('inicio_title').'" >
-            <?php echo literal('inicio'); ?>
+         <a href="'.Router::$base.'" title="'.literal('inicio_title',1).'" >
+            <?php echo literal('inicio',1); ?>
          </a>
       </td>
 
@@ -39,16 +39,16 @@
 <?php if ( $imagenes ) { ?>
 
       <td>
-         <a href="'.Router::$base.'" title="'.literal('inicio_title').'" >
-            <img src="<?php echo $this->boton_seccion('');?>" alt="<?php echo literal('inicio');?>" />
+         <a href="'.Router::$base.'" title="'.literal('inicio_title',1).'" >
+            <img src="<?php echo $this->boton_seccion('');?>" alt="<?php echo literal('inicio',1);?>" />
          </a>
       </td>	 
 
 <?php } else { // Acaba con imagen ?>
 
       <td>
-         <a href="<?php echo Router::$base;?>" title="<?php echo literal('inicio_title'); ?>" >
-            <?php echo literal('inicio');?>
+         <a href="<?php echo Router::$base;?>" title="<?php echo literal('inicio_title',1); ?>" >
+            <?php echo literal('inicio',1);?>
          </a>
       </td>	 
 

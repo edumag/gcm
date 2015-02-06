@@ -23,7 +23,7 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 
       <li id="menuOff">
          <a href="<?php echo Router::$base?>">
-            <?php echo literal('inicio'); ?>
+            <?php echo literal('inicio',1); ?>
          </a>
       </li>
 
@@ -31,7 +31,7 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 
       <li>
          <a href="<?php echo Router::$base;?>">
-            <?php echo literal('inicio');?>
+            <?php echo literal('inicio',1);?>
          </a>
       </li>	 
 
@@ -48,14 +48,14 @@ if ( $elementos ) uasort($elementos, array("Menu", 'ordenar_por_peso'));
 <?php if ( $elemento == $this->actual ) { // si es la opción actual ?>
 
    <li id="menuOff">
-         <?php echo literal($elemento);?>
+         <?php echo literal($elemento,1);?>
    </li>
 
 <?php } else {  // Acaba es la opción actual ?>
 
       <li id="<?php echo $elemento ?>" >
          <a href="<?php echo Router::$base.$elemento ?>" >
-            <?php echo literal($elemento)?>
+            <?php echo literal($elemento,1)?>
          </a>
       </li>
 

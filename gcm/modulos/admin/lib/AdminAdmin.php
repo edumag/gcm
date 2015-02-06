@@ -701,6 +701,9 @@ class AdminAdmin extends Admin {
       // Ordenamos según peso de la sección del menú
       uasort($menuAdmin, 'ordenar_por_peso');
 
+      // Lanzamos evento paneladmin para los módulos que desean añadir información.
+      $gcm->event->lanzarEvento('paneladmin');
+
       include($gcm->event->instancias['temas']->ruta('admin','html','menuAdmin.html'));
       include($gcm->event->instancias['temas']->ruta('admin','html','panelAdmin.html'));
       }

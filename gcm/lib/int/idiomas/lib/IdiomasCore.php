@@ -174,10 +174,13 @@ class IdiomasCore {
          if ( isset(${$prefijo_array.$idioma}) ) {
             foreach ( ${$prefijo_array.$idioma} as $key => $literal ) {
                if ( $prefijo_array == 'LG_' ) {
-                  if ( ! empty($literal) ) $LG[$key] = $literal;
-               } else {
-                  if ( ! empty($literal) ) $GCM_LG[$key] = $literal;
+                 if ( ! empty($literal) ) {
+                   $_SESSION['literales_faltantes'][] = $literal;
+                   $LG[$key] = $literal;
                   }
+                 } else {
+                   if ( ! empty($literal) ) $GCM_LG[$key] = $literal;
+                 }
                }
             }
          }
