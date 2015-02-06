@@ -54,6 +54,7 @@ class Admin extends Modulos {
      global $gcm;
 
      // Limpiamos variable de sesión tema_actual
+     // @bug Mirar bien si hace bien el proceso.
      $var_session = $gcm->config('admin','Proyecto').'_tema';
      if ( ( ! $gcm->au->logeado() && isset($_SESSION[$var_session]) )
        || ( isset($_SESSION[$var_session]) && $_GET[$var_session] == '' ) 

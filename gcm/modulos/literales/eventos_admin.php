@@ -12,6 +12,7 @@
 /** Panel para acceder de forma rapida a los literales */
 $eventos['columna']['panel_literales'][5] = '';
 $eventos['paneladmin']['paneladmin'][1000] = '';
+// $eventos['precarga']['precarga'][1000] = '';
 
 
 /** Borrar literales despues renombrar contenido */
@@ -31,12 +32,14 @@ $eventos['paneladmin']['paneladmin'][1000] = '';
 /** Permitimos administrar literales a editores */
 $acciones['literales']['panel_literales'][] = 'editor';
 $acciones['literales']['paneladmin'][] = 'editor';
+$acciones['literales']['precarga'][] = 'editor';
 $acciones['literales']['lista'][] = 'editor';
 $acciones['literales']['eliminar_elemento'][] = 'editor';
 
 /** Permitimos administrar literales a traductores */
 $acciones['literales']['panel_literales'][] = 'traductor';
 $acciones['literales']['paneladmin'][] = 'traductor';
+$acciones['literales']['precarga'][] = 'traductor';
 
 /** @} */
 

@@ -63,6 +63,12 @@ function literal($literal, $nivel=2, $valor=NULL) {
       case 1:
 
          if ( !$valor && isset($LG[$literal]) && $LG[$literal] != "" ) {
+           if ( permiso('administrar','literales') 
+             && isset($_SESSION['literales_faltantes'])
+             && in_array($literal,$_SESSION['literales_faltantes'])
+           ) {
+               return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$LG[$literal].'</span>';
+             }
             return $LG[$literal];
             }
 
@@ -137,7 +143,6 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          if ( $valor ) {
 
-            // @todo Guardar lista de literales faltantes para la columna
             $mens = 'Nuevo literal ['.$literal.'] de Gcm con valor ['.$valor.']';
 
          } elseif ( ! array_key_exists  ( $literal  , $GCM_LG  ) ) {
@@ -151,7 +156,6 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
          // Si estamos en un proyecto de gcm guardamos literales de gcm en el archivo
          // del proyecto sino no hacemos nada.
-         // @bug Siempre escribe no es necesario.
 
          // $dir   = $gcm->config('idiomas','Directorio idiomas');
          // if ( $dir ) {

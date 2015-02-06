@@ -140,7 +140,22 @@ class Idiomas extends Modulos {
     * en la variable de sessión '[proyecto]-idioma'
     */
 
-   public function seleccion_idioma() { return $this->iIdiomas->seleccion_idioma(); } 
+   public function seleccion_idioma() { 
+
+     $this->iIdiomas->seleccion_idioma(); 
+
+     // Añadimos literales de idioma actual a sesión para poder
+     // trabajar con la lista.
+
+     if ( permiso('administrar','literales') 
+       && isset($_SESSION['literales_faltantes']) 
+       && !empty($_SESSION['literales_faltantes']) ) {
+
+       if ( $this->iIdiomas->literales_faltantes ) {
+         $_SESSION['literales_faltantes'] = $this->iIdiomas->literales_faltantes;
+       }
+     }
+   } 
 
    /**
    * Formulario de entrada
@@ -169,9 +184,6 @@ class Idiomas extends Modulos {
 
    /**
     * Administración de los idiomas disponibles en el proyecto
-    *
-    * @todo Utilizar GcmConfig en vez de gcm_arrayFile.php
-    *
     */
 
    public function administrar() {
@@ -316,8 +328,6 @@ class Idiomas extends Modulos {
 
    /** 
     * Formulario para selección de idioma
-    *
-    * @todo Añadir posibilidad de hacerlo con imágenes
     */
 
    function selector_idiomas() { $this->iIdiomas->selector_idiomas(); }

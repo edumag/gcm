@@ -25,6 +25,12 @@ require_once(dirname(__FILE__).'/Literales.php');
 class LiteralesAdmin extends Literales {
 
   /**
+   * Array con los literales.
+   */
+
+  protected $literales = FALSE;
+
+  /**
    * Listado de literales que faltan en la pagina actual.
    */
   protected $literales_faltantes;
@@ -33,6 +39,10 @@ class LiteralesAdmin extends Literales {
 
     parent::__construct();
 
+  }
+
+  function precarga($e, $args=FALSE) {
+    $this->recoger_literales();
   }
 
   /**
@@ -109,10 +119,10 @@ class LiteralesAdmin extends Literales {
 
       $this->panel_admin('literales_pagina',count($this->literales_faltantes), literal('Faltan literales en la pagina actual'), $salida);
 
+    }
+
+
   }
-
-
-}
 
 /**
  * Listado de literales para modificar
@@ -247,6 +257,8 @@ function recoger_literales($proyecto=TRUE) {
 
   global $gcm;
 
+  if ( $this->literales ) return $this->literales;
+
   $literales_default = FALSE;
 
   if ( ! $proyecto ) {
@@ -257,7 +269,7 @@ function recoger_literales($proyecto=TRUE) {
 
   $arr = GcmConfigFactory::GetGcmConfig($file);
 
-  $literales = $arr->variables();
+  $this->literales = $arr->variables();
 
   if ( Router::$i != Router::$ii ) {
 
@@ -278,11 +290,20 @@ function recoger_literales($proyecto=TRUE) {
 
   if ( $literales_default ) {
     foreach ( $literales_default as $key => $lit ) {
-      if ( ! isset($literales[$key]) ) $literales[$key] = '';
+      if ( ! isset($this->literales[$key]) ) {
+        $this->literales[$key] = '';
+      }
     }
   }
 
-  return $literales;
+  if ( permiso('administrar','literales') && isset($_SESSION['literales_faltantes']) && !empty($_SESSION['literales_faltantes']) ) {
+    foreach ( $this->literales as $key => $lit ) {
+      if ( empty($lit) ) $_SESSION['literales_faltantes'][] = $key;
+    }
+    //echo '<pre>lit: ' ; print_r($_SESSION) ; echo '</pre>'; // exit() ; // DEV  
+
+  }
+  return $this->literales;
 
 }
 

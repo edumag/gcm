@@ -54,6 +54,8 @@ class IdiomasCore {
 
    private $idioma_actual;       ///< Idioma actual
 
+   public $literales_faltantes = FALSE ; ///< Literales faltantes en idioma actual.
+
    /**
     * Constructor
     *
@@ -175,11 +177,12 @@ class IdiomasCore {
             foreach ( ${$prefijo_array.$idioma} as $key => $literal ) {
                if ( $prefijo_array == 'LG_' ) {
                  if ( ! empty($literal) ) {
-                   $_SESSION['literales_faltantes'][] = $literal;
                    $LG[$key] = $literal;
-                  }
                  } else {
-                   if ( ! empty($literal) ) $GCM_LG[$key] = $literal;
+                   $this->literales_faltantes[] = $key;
+                 }
+               } else {
+                 if ( ! empty($literal) ) $GCM_LG[$key] = $literal;
                  }
                }
             }
