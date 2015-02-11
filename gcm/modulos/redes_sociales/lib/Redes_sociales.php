@@ -90,6 +90,8 @@ class Redes_sociales extends Modulos {
 
      $permisos = ( permiso('editar','contenidos') ) ? 'true' : 'false';
 
+     // Botón de facebook
+
      $url = $args['url'];
      $color = ( isset($args['color']) ) ? $args['color'] : FALSE ;
      if ( ! $color ) { $color = $this->config['color']; }
@@ -144,6 +146,9 @@ class Redes_sociales extends Modulos {
         </style>
         <?php 
       } 
+
+     // @todo Botón de twitter
+     // @todo Botón de tripadvisor
 
     }
 

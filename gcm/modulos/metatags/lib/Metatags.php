@@ -82,7 +82,7 @@ class Metatags extends Modulos {
       // Recorremos variables configurables
       foreach ( $config as $name => $valor ) {
 
-         echo "\n".'<meta name="'.$name.'" content="'.$valor.'" />';
+         echo "\n".'<meta name="'.$name.'" content="'.$valor.'">';
 
          }
 
