@@ -204,9 +204,9 @@ class Temas extends Modulos {
 
       registrar(__FILE__,__LINE__,'Ficheros del tema',FALSE,depurar($ficheros));
       registrar(__FILE__,__LINE__,'Colores del tema ',FALSE,depurar($this->colores));
-      registrar(__FILE__,__LINE__,'Sistema: '.$this->plataforma.' Navegador: '.$this->navegador.' Versión: '.$this->version,'AVISO');
-      registrar(__FILE__,__LINE__,'User agent: '.$_SERVER['HTTP_USER_AGENT'],'AVISO');
-      registrar(__FILE__,__LINE__,'Archivo condiciones: '.$this->plataforma.'_'.$this->navegador.'_'.$this->version.'.css','AVISO');
+      registrar(__FILE__,__LINE__,'Sistema: '.$this->plataforma.' Navegador: '.$this->navegador.' Versión: '.$this->version);
+      registrar(__FILE__,__LINE__,'User agent: '.$_SERVER['HTTP_USER_AGENT']);
+      registrar(__FILE__,__LINE__,'Archivo condiciones: '.$this->plataforma.'_'.$this->navegador.'_'.$this->version.'.css');
 
       $this->tema = new TemaGcm($ficheros,$this->colores);
 
@@ -506,7 +506,7 @@ class Temas extends Modulos {
       if ( empty($archivos) ) return;
 
       foreach ( $archivos as $archivo ) {
-        registrar(__FILE__,__LINE__,"Añadimos css adicional: $archivo",'ERROR');
+        registrar(__FILE__,__LINE__,"Añadimos css adicional: $archivo");
         
          echo "\n".'<style type="text/css" media="screen, projection">';
          echo "\n".'   @import "'.$archivo.'";';
@@ -560,7 +560,7 @@ class Temas extends Modulos {
          return FALSE;
          }
 
-      registrar(__FILE__,__LINE__,'Cargamos archivo css segun navegador: '.$nombre_archivo,'ADMIN');
+      registrar(__FILE__,__LINE__,'Cargamos archivo css segun navegador: '.$nombre_archivo);
 
       return TRUE;
 
