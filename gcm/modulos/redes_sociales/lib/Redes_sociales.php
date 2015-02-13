@@ -51,6 +51,10 @@ class Redes_sociales extends Modulos {
       $gcm->config('redes_sociales','usuario_twitter');
     $this->config['usuario_tripadvisor'] =
       $gcm->config('redes_sociales','usuario_tripadvisor');
+    $this->config['tripadvisor_enlace_perfil'] =
+      $gcm->config('redes_sociales','tripadvisor_enlace_perfil');
+    $this->config['tripadvisor_enlace_compartir'] =
+      $gcm->config('redes_sociales','tripadvisor_enlace_compartir');
 
     $this->config['color'] =
       $gcm->config('redes_sociales','color');
@@ -59,6 +63,10 @@ class Redes_sociales extends Modulos {
    function botones($e, $args=FALSE) {
       
       global $gcm;
+
+      $usuario_facebook          = $this->config['usuario_facebook'];
+      $usuario_twitter           = $this->config['usuario_twitter'];
+      $tripadvisor_enlace_perfil = $this->config['tripadvisor_enlace_perfil'];
 
       include ($gcm->event->instancias['temas']->ruta('redes_sociales','html','redes_sociales.phtml'));
       }
@@ -74,6 +82,8 @@ class Redes_sociales extends Modulos {
    *   array('color' => 166)); ?>
    * </code>
    *
+   * Si se esta administrando se mostrará el botón de "compartir" de facebook
+   * sino solo el de "me gusta".
    * Personalizar color del botón de facebook
    * http://members.chello.nl/~sgm.jansen/facebook-button-colorizer/
    *
@@ -90,11 +100,19 @@ class Redes_sociales extends Modulos {
 
      $permisos = ( permiso('editar','contenidos') ) ? 'true' : 'false';
 
-     // Botón de facebook
-
      $url = $args['url'];
      $color = ( isset($args['color']) ) ? $args['color'] : FALSE ;
+     $title = ( isset($args['title']) ) ? $args['title'] : $url ;
+     $tripadvisor_enlace_perfil = $this->config['tripadvisor_enlace_perfil'];
+     $tripadvisor_enlace_compartir = $this->config['tripadvisor_enlace_compartir'];
+
      if ( ! $color ) { $color = $this->config['color']; }
+
+      ?>
+      <span class="botones_redes_sociales">
+      <?php
+
+     // Botón de facebook
 
      if ( ! $this->contenido_general_incluido ) {
        $this->contenido_general_incluido = TRUE;
@@ -147,8 +165,24 @@ class Redes_sociales extends Modulos {
         <?php 
       } 
 
-     // @todo Botón de twitter
-     // @todo Botón de tripadvisor
+     // Botón de twitter
+      ?>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $url ?>" data-text="<?php echo $title ?>" data-via="magredu" data-lang="<?php echo Router::$i ?>" data-count="none">Twittear</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <?php
+
+     // Botón de tripadvisor
+     if ( $tripadvisor_enlace_compartir ) {
+        ?>
+        <a class="a_tripadvisor" target="_blank" href="https://www.tripadvisor.co.uk/UserReviewEdit?args=d5218514">
+           <img class="img_tripadvisor" width="24" height="24"  alt="pic" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','tripadvisor2.png') ?>" />
+        </a>
+        <?php
+     }
+
+      ?>
+      </span>
+      <?php
 
     }
 

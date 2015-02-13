@@ -6,18 +6,26 @@
  * @ingroup plantilla_redes_sociales
  */
 
-
+if ( $usuario_facebook ) {
 ?>
-
-<a target="_blank" href="https://www.facebook.com/<?php echo $gcm->config('redes_sociales','usuario_facebook');?>">
-   <img alt="twitter" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','facebook.png') ?>" />
-</a>
-
-<a target="_blank" href="https://twitter.com/<?php echo $gcm->config('redes_sociales','usuario_twitter');?>">
-   <img alt="facebook" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','twitter.png') ?>" />
-</a>
-
-<a target="_blank" href="">
-   <img alt="pic" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','tripadvisor.png') ?>" />
-</a>
+  <a target="_blank" href="https://www.facebook.com/<?php echo $usuario_facebook;?>">
+     <img alt="twitter" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','facebook.png') ?>" />
+  </a>
+<?php 
+}
+if ( $usuario_twitter ) {
+?>
+  <a target="_blank" href="https://twitter.com/<?php echo $usuario_twitter;?>">
+     <img alt="facebook" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','twitter.png') ?>" />
+  </a>
+<?php
+}
+if ( $tripadvisor_enlace_perfil ) {
+?>
+  <a target="_blank" href="<?php echo $tripadvisor_enlace_perfil ?>">
+     <img alt="pic" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','tripadvisor.png') ?>" />
+  </a>
+<?php
+}
+?>
 

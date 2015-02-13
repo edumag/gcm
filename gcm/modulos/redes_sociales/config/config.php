@@ -13,6 +13,8 @@
 $config['usuario_facebook'] = '';
 $config['usuario_twitter'] = '';
 $config['usuario_tripadvisor'] = '';
+$config['tripadvisor_enlace_perfil'] = '';
+$config['tripadvisor_enlace_compartir'] = '';
 $config['color'] = '';
 
 /** @} */

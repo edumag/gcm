@@ -14,6 +14,8 @@
 $config_DESC['usuario_facebook'] = 'Usuario de facebook';
 $config_DESC['usuario_twitter'] = 'Usuario de twitter';
 $config_DESC['usuario_tripadvisor'] = 'Usuario de tripadvisor';
+$config_DESC['tripadvisor_enlace_perfil'] = 'Enlace al perfil de tripadvisor';
+$config_DESC['tripadvisor_enlace_compartir'] = 'Enlace a la pagina de compartir de tripadvisor';
 $config_DESC['color'] = 'Color personalizado.
  
 Podemos especificar un color según los valores de http://members.chello.nl/~sgm.jansen/facebook-button-colorizer/';
