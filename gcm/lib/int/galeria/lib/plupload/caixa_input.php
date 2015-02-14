@@ -22,14 +22,17 @@ $drh = $this->dir_base.$this->dir_mod;
 
 <div style="clear:both"></div>
 <div id="container">
-   <div id="missatge"><?php echo literal('Añadir imagen');?></div>
-       <div id="filelist">No se encontraron extensiones.</div>
-       <br />
-       <div align="right" id="fimatge" <?php if ( $this->count() >= $this->limit_imatges ) echo ' style="display:none; " '; else echo ' style="padding: 5px;"';?>>
-       <a class="formulari2 ma" id="pickfiles" href="#"><?php echo literal('Seleccionar imágenes') ?></a> &nbsp; 
+   <div id="controles_galería" style="display: none;">
+   <div id="filelist"><?php echo literal('No se encontraron extensiones que funcionen en su navegdor')?>.</div>
+     <br />
+     <div align="right" id="fimatge" <?php if ( $this->count() >= $this->limit_imatges ) echo ' style="display:none; " '; else echo ' style="padding: 5px;"';?>>
+       <!-- <a class="formulari2 ma" id="pickfiles" href="#"><?php echo literal('Seleccionar imágenes') ?></a> &nbsp; -->
        <a class="formulari2 ma" id="uploadfiles" href="#"><?php echo literal('Subir imágenes') ?></a>
-       </div>
+     </div>
+   </div>
 </div>
+<div id="missatge"></div>
+<a id="pickfiles" href="#"><?php echo literal('Añadir imagen');?></a>
 
 <div style="clear:both"></div>
 
@@ -262,6 +265,8 @@ function removeme(id){
 
 function actualizar_missatges() {
 
+  var boton_insertar = document.getElementById('pickfiles');
+
    // Si el contador pasa del limite lo dejamos en él
    if ( contador.value > limit_galeria ) contador.value = limit_galeria;
 
@@ -271,11 +276,10 @@ function actualizar_missatges() {
 
    if ( maxim_imatges > 0 ) {
       getEl('missatge').innerHTML += "<div><?php echo literal('Todavia puedes añadir') ?> " + maxim_imatges + " <?php echo literal('Imágen/es') ?></div>";
+      boton_insertar.style.display	= 'inline';
    } else {
       getEl('missatge').innerHTML += "<div><?php echo literal('Has llegado al máximo de imágenes') ?></div>";
-
-      var fimatge = document.getElementById('fimatge');
-      fimatge.style.display	= 'none';
+      boton_insertar.style.display	= 'none';
 
       }
 
