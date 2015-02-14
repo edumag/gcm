@@ -98,6 +98,7 @@ var limit_galeria = <?php echo $this->limit_imatges;?>;
 var maxim_imatges = <?php echo ($this->limit_imatges - $this->count());?>;
 var seleccio_multiples_imatges = true;
 var contador = getEl("contador_<?php echo $this->identificador_unic?>") ;
+var img_espera = "<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('temas','img','espera.gif'); ?>";
 
 if ( limit_galeria == 1 ) seleccio_multiples_imatges = false;
 
@@ -155,6 +156,8 @@ uploader.bind('Init', function(up, params) {
  
 uploader.bind('FilesAdded', function(up, files) {
 
+  getEl('missatge').innerHTML = "<img src='"+img_espera+"' />";
+
    // for (var i in files) {
    //     getEl('filelist').innerHTML += '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
    //    }
@@ -207,6 +210,8 @@ uploader.bind('FilesAdded', function(up, files) {
    });
 
 uploader.bind('UploadProgress', function(up, file) {
+
+
    if ( getEl(file.id) ) {
       if ( navegador !== 'msie' ){   // Es internet esplorer
          getEl(file.id).getElementsByClassName('percent')[0].innerHTML = file.percent + "%";
