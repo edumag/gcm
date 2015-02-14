@@ -1,4 +1,4 @@
-<?php
+			<?php
 // Archivo generado automáticamente por GcmConfig Mon Feb 2 16:15:13 CET 2015
 $GCM_LG_de['Contenido pendiente de traducción']='';
 $GCM_LG_de['Registros']='';
@@ -48,15 +48,20 @@ $GCM_LG_de['Renombrar o mover sección actual']='';
 $GCM_LG_de['Borrar sección']='';
 $GCM_LG_de['Listar contenido']='';
 $GCM_LG_de['Módulos']='';
+$GCM_LG_de['Administrar libro de visitas']='';
 $GCM_LG_de['Administrar libro de reservas']='';
 $GCM_LG_de['Administrar ofertas']='';
 $GCM_LG_de['mapas']='';
 $GCM_LG_de['Configuración de ']='';
+$GCM_LG_de['formularios']='';
 $GCM_LG_de['Debe ser un número']='';
 $GCM_LG_de['Debe ser un numero']='';
 $GCM_LG_de['Cancelar']='';
 $GCM_LG_de['Menú']='';
 $GCM_LG_de['Imágenes']='';
+$GCM_LG_de['Añadir constantes']='';
+$GCM_LG_de['Informar de error']='';
+$GCM_LG_de['Por favor añade toda la información que puedas respecto a la acción que se estaba realizando en el momento del error']='';
 $GCM_LG_de['Gracias']='';
 $GCM_LG_de['Enviar error']='';
 $GCM_LG_de['Informe de errores']='';
