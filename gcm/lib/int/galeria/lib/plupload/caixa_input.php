@@ -32,7 +32,7 @@ $drh = $this->dir_base.$this->dir_mod;
    </div>
 </div>
 <div id="missatge"></div>
-<a id="pickfiles" href="#"><?php echo literal('Añadir imagen');?></a>
+<a class="boton" id="pickfiles" href="#"><?php echo literal('Añadir imagen');?></a>
 
 <div style="clear:both"></div>
 

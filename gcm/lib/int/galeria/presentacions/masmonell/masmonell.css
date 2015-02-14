@@ -41,3 +41,7 @@
 .ppy .ppy-nav a:hover {background-color: #FF0000;cursor: pointer;}
 
 .ppy-caption { display: none; }
+
+#container { border: 0!important;}
+#pickfiles { float: left;}
+#missatge {  background: none; border: 0 none !important;}
