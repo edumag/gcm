@@ -318,6 +318,8 @@ class Galeria implements Iterator {
 
    function caixa_input($size_input_file = '31', $imatge=NULL) {
 
+     global $gcm;
+
       $this->load();
       if ( $this->descripcions ) $this->descripcions->load();
 
