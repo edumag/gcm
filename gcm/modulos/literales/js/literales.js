@@ -28,8 +28,10 @@
 function modificar_literal(key,val,proyecto) {
    // Quitamos lit_ de la clave
    key = key.replace('lit_','');
+   val = val.replace('_',' ','g');
    var res = prompt('Modificaión de '+key,val);
    if ( res ) {
+     res = encodeURIComponent(res);
       pedirDatos('?formato=ajax&m=literales&a=modificarLiteral&elemento='+key+'&valor='+res+'&proyecto='+proyecto,'confirma');
       }
    }
@@ -93,6 +95,7 @@ function insertar_literal(proyecto) {
   proyecto = typeof(proyecto) != 'undefined' ? proyecto : 1;
    var key = prompt('literal','');
    if (key) {
+     res = encodeURIComponent(res);
       pedirDatos('?formato=ajax&m=literales&a=insertar_literal&elemento='+key+'&proyecto='+proyecto,'confirma');
       }
    }

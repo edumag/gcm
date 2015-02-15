@@ -109,6 +109,10 @@ class Literales extends Modulos {
 
       $valor = ( isset($_GET['valor']) ) ? $_GET['valor'] : $_GET['elemento'] ;
 
+      registrar(__FILE__,__LINE__,"Valor: ".$valor,'AVISO');
+      
+      $valor = htmlentities($valor);
+
       if ( isset($_GET['proyecto']) && $_GET['proyecto'] == 0 ) {
          $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
          $lugar = 'aplicación';

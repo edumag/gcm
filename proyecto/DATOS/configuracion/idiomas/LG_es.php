@@ -1,19 +1,16 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Feb 6 18:08:55 CET 2015
+// Archivo generado automáticamente por GcmConfig Sun Feb 15 13:50:11 CET 2015
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde un módulo';
 $LG_es['April']='Abril';
 $LG_es['Augost']='Agosto';
 $LG_es['Caja_con_informacion_de_los_modulos']='Caja con información de los módulos';
 $LG_es['Cambio_de_tema_al_vuelo']='Cambio de tema al vuelo';
-$LG_es['Como_crear_un_modulo']='Como crear un módulo';
-$LG_es['Conceptos_generales']='Conceptos generales';
 $LG_es['Conexion_entre_modulos']='Conexión entre módulos';
 $LG_es['December']='Diciembre';
 $LG_es['Desarrollo']='Desarrollo';
 $LG_es['Descargar']='Descargar';
 $LG_es['Documentacion']='Documentación';
 $LG_es['Editando_contenido']='Editando contenido';
-$LG_es['Ejemplo_de_documento']='Ejemplo de documento';
 $LG_es['Ejemplo_de_uso_de_GcmConfig']='Ejemplo de uso de GcmConfig';
 $LG_es['Eventos']='Eventos';
 $LG_es['GCM']='GCM';

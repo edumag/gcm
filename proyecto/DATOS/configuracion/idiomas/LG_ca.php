@@ -1,12 +1,10 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Feb 6 18:04:17 CET 2015
+// Archivo generado automáticamente por GcmConfig Sun Feb 15 13:50:11 CET 2015
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Anyadir javascript desde un modulo';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';
 $LG_ca['Cambio_de_tema_al_vuelo']='Cambio de tema al vuelo';
 $LG_ca['Como trata gcm las imágenes']='Com tracta les imatges GCM';
-$LG_ca['Como_crear_un_modulo']='';
-$LG_ca['Conceptos_generales']='';
 $LG_ca['Constantes']='constants';
 $LG_ca['Crud']='';
 $LG_ca['Debug']='Debug';
@@ -15,8 +13,7 @@ $LG_ca['Desarrollo']='Desenvolupament';
 $LG_ca['Descargar']='Baixar';
 $LG_ca['Documentacion']='Documentació';
 $LG_ca['Documentación para Gcm']='Documentació de Gcm';
-$LG_ca['Editando_contenido']='';
-$LG_ca['Ejemplo_de_documento']='Exemple de document';
+$LG_ca['Editando_contenido']='Editando';
 $LG_ca['Ejemplo_de_uso_de_GcmConfig']='';
 $LG_ca['Ejemplo_de_uso_del_editor_web_tiny_mce']='';
 $LG_ca['Eventos']='esdeveniments';
