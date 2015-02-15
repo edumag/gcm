@@ -20,7 +20,7 @@ if ( permiso('editar','contenidos') ) {
    $menuAdmin[literal('Contenidos',3)]['boton'][literal('Nuevo',3)]['title']=literal("Crear nuevo contenido",3);
    $menuAdmin[literal('Contenidos',3)]['boton'][literal('Nuevo',3)]['link']="?e=nuevo";
 
-   $menuAdmin[literal('Contenidos',3)]['boton'][literal('Editar',3)]['activado']= 1;
+   $menuAdmin[literal('Contenidos',3)]['boton'][literal('Editar',3)]['activado']= (Router::$sin_traduccion) ? 0 : 1;
    $menuAdmin[literal('Contenidos',3)]['boton'][literal('Editar',3)]['title']=literal("Editar documento actual",3);
    $menuAdmin[literal('Contenidos',3)]['boton'][literal('Editar',3)]['link']=Router::$dir.Router::$url."?e=editar_contenido";
 
