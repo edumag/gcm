@@ -267,13 +267,13 @@ class Enviomail extends Modulos {
       if ( isset($args['nombre_remitente']) ) {
          $nombre_remitente = $args['nombre_remitente'];
       } else {
-         $nombre_remitente = 'Eduardo';
+         $nombre_remitente = $gcm->config('enviomail','nombre_remitente');
          }
 
       if ( isset($args['mail_remitente']) ) {
          $mail_remitente = $args['mail_remitente'];
       } else {
-         $mail_remitente = 'edu@lesolivex.com';
+         $mail_remitente = $gcm->config('enviomail','remitente');
          }
 
 
