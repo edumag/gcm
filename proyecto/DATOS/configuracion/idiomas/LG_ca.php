@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sun Feb 15 13:50:11 CET 2015
+// Archivo generado automáticamente por GcmConfig Tue Feb 17 11:32:28 CET 2015
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Anyadir javascript desde un modulo';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';
@@ -103,4 +103,6 @@ $LG_ca['Pagina de registro']='Pàgina de registre';
 $LG_ca['Trabajando con imágenes']='Treballant amb imatges';
 $LG_ca['CSS o Como cambiar el aspecto de tu proyecto']='CSS o Com canviar l\'aspecte del teu projecte';
 $LG_ca['Instalación']='Instal·lació';
+$LG_ca['Como_crear_un_modulo']='';
+$LG_ca['Conceptos_generales']='';
 ?>
