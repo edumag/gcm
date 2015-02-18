@@ -35,12 +35,14 @@ if( ! function_exists("literal") ) {
 * @param literal cadena asociada a un literal
 * @param nivel 1:literal de proyecto, 2:literal de proyecto o gcm, 3:solo de gcm
 * @param Valor nuevo para elemento
+* @param $admin Si estamos administrando y el literal esta vacio genera una caja
+*        con la etiqueta span para poder ser modificado.
 *
 * @return literal
 *
 */
 
-function literal($literal, $nivel=2, $valor=NULL) {
+function literal($literal, $nivel=2, $valor=NULL, $admin=TRUE) {
 
    global $LG, $GCM_LG, $gcm;
 
@@ -66,6 +68,7 @@ function literal($literal, $nivel=2, $valor=NULL) {
            if ( permiso('administrar','literales') 
              && isset($_SESSION['literales_faltantes'])
              && in_array($literal,$_SESSION['literales_faltantes'])
+             && ( $admin )
            ) {
                return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$LG[$literal].'</span>';
              }
@@ -84,14 +87,14 @@ function literal($literal, $nivel=2, $valor=NULL) {
 
             $mens = 'Nuevo literal de proyecto ['.$literal.']';
             $valor = '';
-             if ( permiso('administrar','literales') ) {
+             if ( permiso('administrar','literales') && ( $admin )) {
                $_SESSION['literales_faltantes'][] = $literal;
                return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
              }
          } else {
             // Si no tenemos literal devolvemos la clave cambiando los
             // guiones bajos por espacios.
-             if ( permiso('administrar','literales') ) {
+             if ( permiso('administrar','literales') && $admin ) {
                $_SESSION['literales_faltantes'][] = $literal;
                return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
              }

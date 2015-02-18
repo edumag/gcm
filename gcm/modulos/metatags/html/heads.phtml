@@ -16,7 +16,7 @@
 <!-- metatags -->
 <meta name="name" content="<?php echo $metatags['name'] ?>">
 <meta description="description" content="<?php echo $metatags['description'] ?>">
-<meta keywords="keywords" content="<?php echo $metatags['keywords'] ?>">
+<meta keywords="keywords" content="<?php echo implode(',',$metatags['keywords']) ?>">
 <meta author="author" content="<?php echo $metatags['author'] ?>">
 <meta generator="generator" content="<?php echo $metatags['generator'] ?>">
 <meta revisit="revisit" content="<?php echo $metatags['revisit'] ?>">

@@ -11,7 +11,14 @@
 $config['name'] = 'GCM';
 $config['subject'] = 'Framework y gestor de contenido realizado en PHP';
 $config['description'] = 'Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario';
-$config['keywords'] = 'programación, informática, linux, php, bash, javascript, css, ajax';
+$config['keywords'][] = 'programación';
+$config['keywords'][] = 'informática';
+$config['keywords'][] = 'linux';
+$config['keywords'][] = 'php';
+$config['keywords'][] = 'bash';
+$config['keywords'][] = 'javascript';
+$config['keywords'][] = 'css';
+$config['keywords'][] = 'ajax';
 $config['author'] = 'Eduardo Magrané';
 $config['generator'] = 'lesolivex.com';
 $config['revisit'] = '1 day';

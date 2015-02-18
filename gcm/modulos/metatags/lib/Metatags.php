@@ -91,6 +91,13 @@ class Metatags extends Modulos {
         $metatags = array_merge($metatags, $config);
       }
 
+      // Literalizamos los metatags que sea necesario.
+      $metatags['subject'] = literal($metatags['subject'],1,NULL,FALSE);
+      $metatags['description'] = literal($metatags['description'],1,NULL,FALSE);
+      foreach ( $metatags['keywords'] as $key => $val ) {
+        $metatags[$key] = literal($val,1,NULL,FALSE);
+        }
+
       include ($gcm->event->instancias['temas']->ruta('metatags','html','heads.phtml'));
 
       }
