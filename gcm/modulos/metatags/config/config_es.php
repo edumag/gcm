@@ -9,17 +9,20 @@
  * @{
  */
 
-$config_DESC['title']='Titulo del proyecto';
-$config_DESC['author']='Titulo del proyecto';
-$config_DESC['subject']='Subtitulo del proyecto';
-$config_DESC['description']='Descripción del proyecto, para incluir en los meta tags';
-$config_DESC['keywords']='Palabras clave para los buscadores separadas por comas';
-$config_DESC['generator']='Programa para gene';
-$config_DESC['language']='Código de lenguaje ejemplo: es, en';
-$config_DESC['revisit']='Ejemplo 1 day';
-$config_DESC['distribution']='Ejemplo global';
-$config_DESC['robots']='';
-
+$config_DESC['name'] = 'Título o nombre del proyecto';
+$config_DESC['subject'] = 'Subtitulo';
+$config_DESC['description'] = 'Descripción';
+$config_DESC['keywords'] = 'Palabras clave';
+$config_DESC['author'] = 'Autor intelectual del contenido';
+$config_DESC['generator'] = 'Creador del contenido';
+$config_DESC['revisit'] = 'Tiempo de revisión, ejemplo: 1 day';
+$config_DESC['distribution'] = 'Distribución por zona, ejemplo: global';
+$config_DESC['robots'] = 'Directiva para los robots, ejemplo: all';
+$config_DESC['geo.position'] = "Posición, ejemplo: 42.107370; 3.029519";
+$config_DESC['geo.placename'] = "Lugar, ejemplo: Garrigoles, Catalunya";
+$config_DESC['geo.region'] = "Región, ejemplo: ES-Catalunya";
+$config_DESC['image'] = 'Imagen destacada, a partir del directorio base.';
+$config_DESC['type'] = 'Tipo de actividad';
 /** @} */
 
 ?>

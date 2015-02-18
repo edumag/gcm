@@ -1,13 +1,18 @@
 <?php
-// Archivo generado automaticamente por GcmConfig Sat Jan 5 9:44:35 CET 2013
-$config['title']='Gcm';
-$config['author']='https://plus.google.com/u/0/105169074373021028303/posts';
-$config['subject']='Documentación para Gcm';
-$config['description']='Herramienta para la gestión de contenido variado';
+// Archivo generado automáticamente por GcmConfig Wed Feb 18 8:36:57 CET 2015
+$config['name']='GCM';
+$config['subject']='Framework y gestor de contenido realizado en PHP';
+$config['description']='Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario';
 $config['keywords']='programación, informática, linux, php, bash, javascript, css, ajax';
-$config['generator']='vim';
-$config['language']='spanish';
+$config['author']='Eduardo Magrané';
+$config['generator']='lesolivex.com';
 $config['revisit']='1 day';
 $config['distribution']='global';
 $config['robots']='all';
+$config['geo.position']='42.107370; 3.029519';
+$config['geo.placename']='Garrigoles, Catalunya';
+$config['geo.region']='ES-Catalunya';
+$config['type']='http://purl.org/dc/dcmitype/Software';
+$config['Publisher']='lesolivex.com';
+$config['license']='GPL';
 ?>

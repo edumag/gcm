@@ -1,0 +1,46 @@
+<?php
+
+/** 
+ * @file heads.html
+ * @brief Head de la plantilla
+ * @ingroup plantilla_metatags
+ */
+
+ ?>
+
+<title><?php echo $titulo; ?></title>
+
+<!-- icono -->
+<link type="image/x-icon" href="favicon.ico" rel="shortcut icon" />
+
+<!-- metatags -->
+<meta name="name" content="<?php echo $metatags['name'] ?>">
+<meta description="description" content="<?php echo $metatags['description'] ?>">
+<meta keywords="keywords" content="<?php echo $metatags['keywords'] ?>">
+<meta author="author" content="<?php echo $metatags['author'] ?>">
+<meta generator="generator" content="<?php echo $metatags['generator'] ?>">
+<meta revisit="revisit" content="<?php echo $metatags['revisit'] ?>">
+<meta distribution="distribution" content="<?php echo $metatags['distribution'] ?>">
+<meta robots="robots" content="<?php echo $metatags['robots'] ?>">
+
+<!-- geolocalización -->
+<meta name="geo.position" content="<?php echo $metatags['geo.position'] ?>">
+<meta name="geo.placename" content="<?php echo $metatags['geo.placename'] ?>">
+<meta name="geo.region" content="<?php echo $metatags['geo.region'] ?>">
+
+<!-- dublincore -->
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
+<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
+<meta name="DCTERMS.created" content="2011-01-01">
+<meta name="DC.title" content="<?php echo $metatags['name'] ?>">
+<meta name="DC.description" content="<?php echo $metatags['description'] ?>">
+<meta name="DC.subject" content="<?php echo $metatags['subject'] ?>">
+<meta name="DC.language" content="<?php echo Router::$i ?>">
+<meta name="DC.creator" content="<?php echo $metatags['author'] ?>">
+<meta name="DC.license" content="<?php echo $metatags['license'] ?>">
+<meta name="DC.type" content="<?php echo $metatags['type'] ?>">
+<meta name="DC.Publisher" content="<?php echo $metatags['generator'] ?>">
+
+<!-- Otros -->
+<link rel="image_src" href="<?php echo Router::$base.$metatags['image'] ?>" />
+

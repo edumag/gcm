@@ -49,7 +49,7 @@ class Metatags extends Modulos {
 
       parent::__construct();
 
-      $this->Titulo      = $this->config('title');
+      $this->Titulo      = $this->config('name');
 
       }
 
@@ -62,33 +62,36 @@ class Metatags extends Modulos {
       global $gcm;
 
       if ( $gcm->titulo ) {
-         $titulo = $gcm->titulo;
+         $titulo = trim($gcm->titulo);
       } elseif ( Router::$c == 'index.html' || ! Router::$c ) {
-         $titulo=Router::$estamos;
-         $titulo = literal($titulo);
+         $titulo=trim(Router::$estamos);
+         $titulo = literal(trim($titulo),1);
       } else {
          $titulo=str_replace('.html','',Router::$c);
-         $titulo = literal($titulo);
+         $titulo = literal(trim($titulo),1);
          }
 
-      $titulo_pagina = ( $gcm->titulo ) ? $gcm->titulo : $titulo;
+      $titulo_pagina = ( $gcm->titulo ) ? trim($gcm->titulo) : trim($titulo);
+      $titulo_pagina = strip_tags($titulo_pagina);
+      $titulo_pagina = eregi_replace("[\n|\r|\n\r]",'',$titulo_pagina);
+      $titulo_pagina = trim($titulo_pagina);
+      // Quitamos más de un espacio en blanco.
+      while ( strpos($titulo_pagina,'  ') !== FALSE ) {
+        $titulo_pagina = str_replace('  ',' ',$titulo_pagina);
+      }
 
-      $titulo         = strip_tags($this->Titulo.' :: '.$titulo_pagina);
+      $titulo = eregi_replace("[\n|\r|\n\r]",'',strip_tags(trim($this->Titulo).' :: '.trim($titulo_pagina)));
 
       // Recogemos archivo de configuración
       include(dirname(__FILE__).'/../config/config.php');
-      if ( is_file('DATOS/configuracion/metatags/config.php') ) include('DATOS/configuracion/metatags/config.php');
+      $metatags = $config;
 
-      // Recorremos variables configurables
-      foreach ( $config as $name => $valor ) {
+      if ( is_file('DATOS/configuracion/metatags/config.php') ) {
+        include('DATOS/configuracion/metatags/config.php');
+        $metatags = array_merge($metatags, $config);
+      }
 
-         echo "\n".'<meta name="'.$name.'" content="'.$valor.'">';
-
-         }
-
-      echo "\n\n";
-
-      include (dirname(__FILE__).'/../html/heads.html');
+      include ($gcm->event->instancias['temas']->ruta('metatags','html','heads.phtml'));
 
       }
    }

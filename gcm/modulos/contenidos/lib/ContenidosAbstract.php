@@ -958,7 +958,7 @@ abstract class ContenidosAbstract extends Modulos {
 
          }
 
-      include(dirname(__FILE__).'/../html/titulo_articulo.html');
+      include($gcm->event->instancias['temas']->ruta('contenidos','html','titulo_articulo.html'));
 
       }
 
