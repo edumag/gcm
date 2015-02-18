@@ -206,7 +206,7 @@ class Comentarios extends Modulos {
 
       if ( !$this->cargado_javascript && Router::$formato != 'ajax') {
          $this->cargado_javascript = TRUE;
-         echo '<script type="javascript" src="'.Router::$dir.GCM_DIR.'lib/ext/tiny_mce/tiny_mce.js"></script>';
+         echo '<script type="text/javascript" src="'.Router::$dir.GCM_DIR.'lib/ext/tiny_mce/tiny_mce.js"></script>';
          }
 
       include_once(GCM_DIR.'lib/int/captcha/captcha.php');

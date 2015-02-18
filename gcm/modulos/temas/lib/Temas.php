@@ -105,7 +105,7 @@ class Temas extends Modulos {
       $this->version    = $bb['version'];
       $this->plataforma = $bb['platform'];
 
-      $this->Titulo = $gcm->config('metatags','title');
+      $this->Titulo = $gcm->config('metatags','name');
       $this->Subtitulo = $gcm->config('metatags','subject');
 
       $tema_conf = $this->config('tema_actual');

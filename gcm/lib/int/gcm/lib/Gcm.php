@@ -657,7 +657,7 @@ class Gcm {
 
       $salida  = PHP_EOL.'<!-- '.$evento.' -->'.PHP_EOL;
       if ( $evento == 'titulo' ) {
-         $salida .= '<h1 class="titulo_principal">'.$this->contenidos[$evento].'</h1>';
+         $salida .= '<div class="titulo_principal">'.$this->contenidos[$evento].'</div>';
       } else {
          $salida .= $this->contenidos[$evento];
          }
