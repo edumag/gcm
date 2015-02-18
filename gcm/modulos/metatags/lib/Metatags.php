@@ -37,11 +37,10 @@
 
 class Metatags extends Modulos {
 
-   private $Proyecto;
    private $Titulo;
-   private $Descripcion;
-   private $keywords;
 
+   // Permitimos cambios en los metatags al vuelo
+   public $metatags;
 
    /** Constructor */
 
@@ -89,6 +88,13 @@ class Metatags extends Modulos {
       if ( is_file('DATOS/configuracion/metatags/config.php') ) {
         include('DATOS/configuracion/metatags/config.php');
         $metatags = array_merge($metatags, $config);
+      }
+
+      // Recogemos cambios que nos hayan enviado desde otros módulos
+      if ( $this->metatags ) {
+        foreach ( $this->metatags as $key => $val ) {
+          $metatags[$key] = $val;
+        }
       }
 
       // Literalizamos los metatags que sea necesario.
