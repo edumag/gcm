@@ -47,6 +47,7 @@
 <?php if ( isset($datos['lista']) && $datos['lista'] ) {
 
    $conta=0;
+   echo '<pre>datos: ' ; print_r($datos) ; echo '</pre>'; // exit() ; // DEV  
    foreach ( $datos['lista'] as $img ) {
          ?>
          <div class="img_editar">
@@ -56,12 +57,12 @@
 
 
          <a title="<?php echo literal('Insertar').' '.literal('miniatura')?>" class="boton" 
-         onclick="tinyMCE.execCommand('mceInsertContent','false','<a href=\'<?php echo $img[1];?>\' class=\'botonImg\' ><img src=\'<?php echo Router::$base.$img[2]; ?>\' /></a>')" >
+         onclick="tinyMCE.execCommand('mceInsertContent','false','<a href=\'<?php echo $img[1];?>\' class=\'botonImg\' ><img src=\'<?php echo Router::$base.$img[2]; ?>\' alt=\'<?php echo $img[0] ?>\' /></a>')" >
             <-
          </a>
 
          <a title="<?php echo literal('Insertar').' '.literal('con tamaño original')?>" class="boton" 
-            onclick="tinyMCE.execCommand('mceInsertContent','false','<img src=\'<?php echo Router::$base.$img[1]; ?>\' />')" >
+            onclick="tinyMCE.execCommand('mceInsertContent','false','<img src=\'<?php echo Router::$base.$img[1]; ?>\' alt=\'<?php echo $img[0] ?>\' width=\'<?php echo $img[3] ?>\' height=\'<?php echo $img[4] ?>\' />')" >
             <-(
          </a>
 
