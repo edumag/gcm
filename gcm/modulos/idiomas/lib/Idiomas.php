@@ -39,7 +39,10 @@ require_once(GCM_DIR.'lib/int/idiomas/lib/IdiomasCore.php');
 
 class Idiomas extends Modulos {
 
-   private $iIdiomas;      ///< Isntancia de IdiomasCore
+  public $idiomaxdefecto;
+  public $idiomas_activados;
+
+  private $iIdiomas;      ///< Isntancia de IdiomasCore
 
    function __construct() {
 
@@ -51,13 +54,13 @@ class Idiomas extends Modulos {
 
       $dir_idiomas = $gcm->config('idiomas','Directorio idiomas');
 
-      $idiomaxdefecto = $gcm->config('idiomas','Idioma por defecto');
+      $this->idiomaxdefecto = $gcm->config('idiomas','Idioma por defecto');
 
-      $idiomas_activados = $gcm->config('idiomas','Idiomas activados');
+      $this->idiomas_activados = $gcm->config('idiomas','Idiomas activados');
 
       $configuracion = array( 'dir_idiomas' => $dir_idiomas
-                            , 'idiomaxdefecto' => $idiomaxdefecto
-                            , 'idiomas_activados' => $idiomas_activados
+                            , 'idiomaxdefecto' => $this->idiomaxdefecto
+                            , 'idiomas_activados' => $this->idiomas_activados
                             , 'proyecto' => $proyecto
                             );
 
@@ -353,6 +356,21 @@ class Idiomas extends Modulos {
 
       $this->iIdiomas->lista_idiomas(); 
       }
+
+   /**
+    * Añadir metatags de idiomas.
+    */
+
+   function metatags($e, $args=FALSE) {
+
+     global $gcm;
+
+      echo '<!-- Idiomas -->'."\n";
+     foreach ( $this->idiomas_activados as $i ) {
+       echo '<link rel="alternate" hreflang="'.$i.'" href="'.Router::$base_absoluta.$i.'" />'."\n";
+     }
+
+   }
 
    }
 ?>
