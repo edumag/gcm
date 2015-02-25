@@ -291,10 +291,10 @@ class Router {
 
       $proyecto = $gcm->config('admin','Proyecto');
 
-      $this->set_modulos();
-      $this->set_eventos();
-      $this->set_formatos();
-      $this->set_idiomas();
+      self::set_modulos();
+      self::set_eventos();
+      self::set_formatos();
+      self::set_idiomas();
 
       // Desglosamos url
       if ( ! isset($url) ) $url = stripslashes((isset($_REQUEST['url'])) ? $_REQUEST['url'] : '' );
@@ -495,7 +495,7 @@ class Router {
          }
 
       // if ( $gcm->au->logeado() ) {
-          $this->comprobar_reservadas();
+      self::comprobar_reservadas();
       //    }
 
       // Crear $base_absoluta
