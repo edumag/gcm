@@ -160,6 +160,8 @@ class Comentarios extends Modulos {
 
       global $gcm;
 
+      if ( Router::$sin_contenido ) return;
+
       $num_items_df = 5;
 
       $parametros = recoger_parametros($args);
@@ -201,6 +203,8 @@ class Comentarios extends Modulos {
    function formulario($e, $args=NULL) {
 
       global $gcm;
+
+      if ( Router::$sin_contenido ) return;
 
       /* si no esta cargado el javascript de editorweb lo cargamos */
 

@@ -12,6 +12,9 @@
 /** Añadimos formulario de debug */
 $eventos['debug']['debug'][15] = '';
 
+/** Avisos para usuario */
+$eventos['avisos']['presentar_caja_de_avisos'][1]='';
+
 /** @} */
 
 ?>

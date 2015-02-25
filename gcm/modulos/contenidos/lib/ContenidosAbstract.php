@@ -306,6 +306,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       registrar(__FILE__,__LINE__,literal("La página solicitada no ha sido encontrada"),'ERROR');
       
+      Router::$sin_contenido = TRUE;
       $gcm->event->lanzarEvento('error','sin_contenido='.Router::$c);
 
       registrar(__FILE__,__LINE__,literal('Contenido').' ['.Router::$s.Router::$c.'] '.literal('no encontrado',3));
@@ -338,6 +339,7 @@ abstract class ContenidosAbstract extends Modulos {
          $gcm->titulo = literal('Sin sección',3);
          registrar(__FILE__,__LINE__,"Recargamos página por sección no encontrada");
          registrar(__FILE__,__LINE__,Router::$s.Router::$c.' '.literal('Página no encontrada'),'ERROR');
+         Router::$sin_contenido = TRUE;
          $gcm->event->lanzarEvento('error','sin_contenido='.Router::$dd);
       } else {
          registrar(__FILE__,__LINE__,literal('Creamos directorio para contenido',3).' ['.Router::$dd.']','ERROR');

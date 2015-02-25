@@ -16,10 +16,6 @@ $eventos['cron']['envio_registros_mail'][100]='';
 /** Borrar registros viejos */
 $eventos['cron']['borrar_registros_antiguos'][10]='';
 
-/** Avisos para usuario */
-$eventos['avisos']['presentar_caja_de_avisos'][1]='';
-
-
 /** @} */
 
 ?>
