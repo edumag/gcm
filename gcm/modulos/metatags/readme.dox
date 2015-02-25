@@ -20,6 +20,11 @@ Dublicore
 
 http://www.hipertexto.info/documentos/dublin_core.htm
 
+Geolocalización
+---------------
+
+Tambien podemos añadir geotags, http://www.addressfix.com/
+
 @ingroup modulos_aplicacion
 @ingroup modulo_metatags
 

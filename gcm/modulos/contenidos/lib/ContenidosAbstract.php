@@ -304,7 +304,7 @@ abstract class ContenidosAbstract extends Modulos {
 
       $gcm->titulo = literal('Página no encontrada',3);
 
-      registrar(__FILE__,__LINE__,literal("La página solicitada no ha sido encontrada"),'AVISO');
+      registrar(__FILE__,__LINE__,literal("La página solicitada no ha sido encontrada"),'ERROR');
       
       $gcm->event->lanzarEvento('error','sin_contenido='.Router::$c);
 
@@ -338,9 +338,7 @@ abstract class ContenidosAbstract extends Modulos {
          $gcm->titulo = literal('Sin sección',3);
          registrar(__FILE__,__LINE__,"Recargamos página por sección no encontrada");
          registrar(__FILE__,__LINE__,Router::$s.Router::$c.' '.literal('Página no encontrada'),'ERROR');
-         header("HTTP/1.1 301 Moved Permanently");
-         header("Location: ".Router::$base);
-         exit();
+         $gcm->event->lanzarEvento('error','sin_contenido='.Router::$dd);
       } else {
          registrar(__FILE__,__LINE__,literal('Creamos directorio para contenido',3).' ['.Router::$dd.']','ERROR');
          mkdir_recursivo(Router::$dd);
