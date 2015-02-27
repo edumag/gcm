@@ -1,0 +1,57 @@
+/**
+
+@defgroup modulo_sitemap Módulo Sitemap
+
+Descripción del módulo
+
+@ingroup modulos_aplicacion
+@ingroup modulo_sitemap
+
+@{
+
+Contenido
+---------
+
+<pre>
+|-- alt                  Alternativas a los archivos por defecto
+|-- config               Configuración por defecto
+|-- css                  css por defecto
+|-- eventos_admin.php    Eventos de administración
+|-- eventos_usuario.php  Eventos de usuario
+|-- ext                  Librerías externas
+|-- html                 Plantillas
+|-- iconos               Iconos
+|-- img                  Imágenes
+|-- js                   Javascripts
+|-- lib                  
+|   -- Sitemap.php       Clase del módulo
+|   -- SitemapAdmin.php  Clase que extiende de Modulo con métodos administrativos 
+|-- libjs               Librerías js propias
+|-- menuAdmin.php       Entradas del menú administrativo
+|-- modelos             Modelos para Crud
+`-- readme.dox          Este archivo
+</pre>
+
+/**
+ * @defgroup lista_blanca Lista de los métodos que no requieren de permisos
+ * @ingroup modulos_aplicacion
+ * @{
+ */
+
+Ejemplo para el envio de emails en el módulo Enviomails
+
+@code
+/** Permitimos envio de email a usuarios */
+$this->set_lista_blanca('enviomail','enviar_email');
+@endcode
+
+@}
+
+@defgroup plantilla_sitemap Plantillas pata Sitemap
+@ingroup modulo_sitemap
+@ingroup plantillas_modulos
+@{
+
+@} 
+
+*/

@@ -962,6 +962,71 @@ abstract class ContenidosAbstract extends Modulos {
 
       }
 
+   /**
+    * Listado recursivo de contenido
+    *
+    * @param  $path A partir de la sección indicada.
+    * @param  $listado Listado con el contenido.
+    *
+    * @return Array con el contenido.
+    */
+
+   function listado($path=FALSE, &$listado=FALSE) {
+
+     global $gcm;
+
+     $items_a_descartar = $this->descartar ;
+
+     if ( ($items_a_descartar) ) {
+
+       $descartar = FALSE;
+       foreach ( $items_a_descartar as $descartado ) {
+         if ( strpos($path,$descartado) !== FALSE ) {
+           registrar(__FILE__,__LINE__,'Descartado: '.$path. ' coincide con '.$descartado);
+           return $listado;
+         }
+       }
+
+     }
+
+     $dir_por_defecto='File/'.Router::$ii;
+     $path = ( $path ) ? $path : $dir_por_defecto;
+     $d = dir($path);
+     $HAY="NO";                                          //< Para saber si hay subdirectorios
+     $subsecciones = array();
+     $documentos = array();
+     while($entry=$d->read()) {
+       if ( $entry == 'thumbnail' ) continue;
+       // descartamos directorios ocultos de linux
+       if (is_dir($path."/".$entry) && $entry{0} != "." ) {
+         $HAY="SI";
+         $subsecciones[]=$path."/".$entry;
+       } elseif ( $entry{0} != "." ) { // contenido html
+         //$documentos[$path][]=$entry;
+         $documentos[$path][]=$entry;
+       }
+
+     }
+     $d->close();
+
+     if ( ! empty($documentos[$d->path]) && count($documentos[$d->path]) > 0 ) {
+       $item = FALSE;
+       foreach( $documentos[$d->path] as $doc ) {
+         $item[$doc] = pathinfo($d->path.'/'.$doc);
+         $item[$doc]['modificado'] = filemtime($d->path.'/'.$doc);
+         $item[$doc]['url'] = $d->path.'/'.$doc;
+         $item[$doc]['type'] = GUtil::tipo_de_archivo($d->path.'/'.$doc);
+       }
+       $listado[$path] = $item;
+     }
+
+
+     foreach($subsecciones as $x) {
+       $this->listado($x, $listado);
+     }
+
+     return $listado;
+   }
 
 
    }

@@ -1,0 +1,64 @@
+<?php
+
+/** rss.php
+ *
+ * Contruim fitxer rss de notícies
+ *
+ */
+
+$ultimaData = NULL ;
+
+$resultado=mysql_query($sql) or die('Error:'.mysql_error());
+// $permalink = urlencode($permalink);
+$permalink = $permalink;
+
+header("Content-Type: text/xml");
+echo("<?xml version='1.0' encoding='utf-8'?>");
+?>
+
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+   <channel>
+   <title><![CDATA[<?php echo $titolGeneral;?>]]></title>
+   <link><![CDATA[<?php echo $linkGeneral;?>]]></link>
+      <description><![CDATA[<?php echo $descripcionGeneral;?>]]></description>
+      <language><?php echo $idioma;?></language>
+      <copyright><![CDATA[Copyright totbisbal.com 2004-2014]]></copyright>
+      <ttl>5</ttl>
+      <image>
+         <url><?php echo $imageUrl; ?></url>
+         <title><?php echo $imageTitle;?></title>
+         <link><?php echo $imagelink; ?></link>
+         <width><?php echo $imageWidth; ?></width>
+         <height><?php echo $imageHeight; ?></height>
+      </image>
+
+      <?php while($row = mysql_fetch_array($resultado)) {
+
+         if ( !$ultimaData ) {
+            $ultimaData = date('r',$row['ultimaData']);
+            ?>
+      <lastBuildDate><?php echo $ultimaData; ?></lastBuildDate>
+      <pubDate><?php echo $ultimaData; ?></pubDate>
+            <?php
+            }
+
+      // Tallem la descripció a x carácters $limit_descripcio a noticies/feet.php
+      $descripcio=strip_tags(substr($row['descripcio'],0,$limit_descripcio))."...";
+      ?>
+      <item>
+         <title><![CDATA[<?php echo $row['titol']; ?>]]></title>
+         <link><![CDATA[<?php echo $permalink.$row['id'];?>]]></link>
+         <description><![CDATA[<?php echo $descripcio; ?>]]></description>
+         <pubDate><?php echo date('r',$row['data']);?></pubDate>
+         <guid isPermaLink="true"><![CDATA[<?php echo $permalink.$row['id'];?>]]></guid>
+        <category><![CDATA[Articles]]></category>
+        <content:encoded>
+          <![CDATA[
+          <?php echo $descripcio; ?>
+          ]]>
+        </content:encoded>
+      </item>
+      <?php } ?>
+
+   </channel>
+</rss>
