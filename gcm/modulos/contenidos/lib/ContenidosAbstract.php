@@ -991,16 +991,18 @@ abstract class ContenidosAbstract extends Modulos {
 
      $dir_por_defecto='File/'.Router::$ii;
      $path = ( $path ) ? $path : $dir_por_defecto;
+     $path = comprobar_barra($path);
      $d = dir($path);
      $HAY="NO";                                          //< Para saber si hay subdirectorios
      $subsecciones = array();
      $documentos = array();
      while($entry=$d->read()) {
+       if ( in_array($entry, $items_a_descartar) ) continue;
        if ( $entry == 'thumbnail' ) continue;
        // descartamos directorios ocultos de linux
-       if (is_dir($path."/".$entry) && $entry{0} != "." ) {
+       if (is_dir($path.$entry) && $entry{0} != "." ) {
          $HAY="SI";
-         $subsecciones[]=$path."/".$entry;
+         $subsecciones[]=$path.$entry;
        } elseif ( $entry{0} != "." ) { // contenido html
          //$documentos[$path][]=$entry;
          $documentos[$path][]=$entry;
@@ -1014,7 +1016,7 @@ abstract class ContenidosAbstract extends Modulos {
        foreach( $documentos[$d->path] as $doc ) {
          $item[$doc] = pathinfo($d->path.'/'.$doc);
          $item[$doc]['modificado'] = filemtime($d->path.'/'.$doc);
-         $item[$doc]['url'] = $d->path.'/'.$doc;
+         $item[$doc]['url'] = $d->path.$doc;
          $item[$doc]['type'] = GUtil::tipo_de_archivo($d->path.'/'.$doc);
        }
        $listado[$path] = $item;

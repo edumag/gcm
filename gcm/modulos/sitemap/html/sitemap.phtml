@@ -12,18 +12,12 @@
 
 <?php foreach($listado as $seccion => $items ) { ?>
 
-<?php if ( isset($items['index.html']) ) { ?>
-  <url>
-    <loc><?php echo Router::$base_absoluta.str_replace('File/'.Router::$ii.'/','',$seccion) ?></loc>
-    <lastmod><?php echo gmdate("Y-m-d", $items['index.html']['modificado']); ?></lastmod>
-    <changefreq>daily</changefreq>
-  </url>
-<?php } ?>
-
 <?php foreach( $items as $url => $item ) { ?>
 <?php if ( $item['type'] == 'text/html' ) { ?>
+<?php $loc = str_replace('index.html','',$item['url']); ?>
+<?php $loc = str_replace(Router::$dd,'',$loc); ?>
   <url>
-    <loc><?php echo Router::$base_absoluta.$url ?></loc>
+    <loc><?php echo Router::$base_absoluta.$loc ?></loc>
     <lastmod><?php echo gmdate("Y-m-d", $item['modificado']); ?></lastmod>
     <changefreq>daily</changefreq>
   </url>
