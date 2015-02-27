@@ -421,7 +421,7 @@ class Contenidos extends ContenidosAbstract {
                echo "</a>";
                // Solo ponemos link para editar si son paginas html
                if ( GUtil::tipo_de_archivo($d->path.'/'.$doc) == 'text/html' ) {
-                  echo '<a title="'.literal('Editar').'" href="'.str_replace(Router::$dd,'',$d->path).'/'.$doc.'?e=editar_contenido"> [#]</a>';
+                  echo '<a title="'.literal('Editar').'" href="'.Router::$base.str_replace(Router::$dd,'',str_replace('File/','',$d->path)).'/'.$doc.'?e=editar_contenido"> [#]</a>';
                }
                echo '<span class="detalles_fichero">';
                echo ' ['.presentarBytes(filesize($d->path.'/'.$doc)).',  '.presentarFecha(filemtime($d->path.'/'.$doc),2).']';
