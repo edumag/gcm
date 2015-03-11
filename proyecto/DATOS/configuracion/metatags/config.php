@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Wed Feb 18 9:05:30 CET 2015
+// Archivo generado automáticamente por GcmConfig Wed Mar 11 9:25:50 CET 2015
 $config['name']='GCM';
 $config['subject']='Framework y gestor de contenido realizado en PHP';
 $config['description']='Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario';
@@ -23,4 +23,7 @@ $config['image']='logo.png';
 $config['type']='http://purl.org/dc/dcmitype/Software';
 $config['Publisher']='lesolivex.com';
 $config['license']='GPL';
+$config['url:Instalacion/A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla.html'][0]['titulo']='A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla';
+$config['url:Instalacion/A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla.html'][0]['description']='Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario';
+$config['url:Instalacion/A_falta_de_un_script_de_instalacion_pasos_a_seguir_para_realizarla.html'][0]['keywords']='programación,informática,linux,php,bash,javascript,css,ajax,instalación';
 ?>

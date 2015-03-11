@@ -100,7 +100,7 @@ function insertar_literal(proyecto) {
       }
    }
 
-literales_faltantes();
+// literales_faltantes();
 
 /**
  * Eliminar literal

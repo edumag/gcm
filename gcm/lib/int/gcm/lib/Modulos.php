@@ -162,7 +162,7 @@ abstract class Modulos {
     * Añadir o modificar elemento de configuración
     */
    
-   protected function config($elemento,$valor=NULL) {
+   protected function config($elemento=FALSE,$valor=NULL) {
 
       global $gcm;
 

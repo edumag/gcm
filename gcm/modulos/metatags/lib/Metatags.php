@@ -46,11 +46,50 @@ class Metatags extends Modulos {
 
    function __construct() {
 
+     global $gcm;
+
       parent::__construct();
 
       $this->Titulo      = $this->config('name');
+      $this->metatags    = $this->config();
 
+      $this->metatags['titulo'] = 
+        ( isset($this->metatags['url:'.Router::$s.Router::$c][0]['titulo']) )
+        ? $this->metatags['url:'.Router::$s.Router::$c][0]['titulo']
+        : $this->metatags['titulo'];
+
+      $this->metatags['description'] = 
+        ( isset($this->metatags['url:'.Router::$s.Router::$c][0]['description']) )
+        ? $this->metatags['url:'.Router::$s.Router::$c][0]['description']
+        : $this->metatags['description'];
+
+      $this->metatags['keyworks'] = 
+        ( isset($this->metatags['url:'.Router::$s.Router::$c][0]['keyworks']) )
+        ? $this->metatags['url:'.Router::$s.Router::$c][0]['keyworks']
+        : $this->metatags['keyworks'];
+
+      if ( ! $this->metatags['titulo'] ) {
+        if ( $gcm->titulo ) {
+          $this->metatags['titulo'] = $this->limpiar_cadena($gcm->titulo);
+        } else {
+          $this->metatags['titulo'] = ( Router::$c != 'index.html' ) ? str_replace('.html','',Router::$c) : Router::$s;
+        }
       }
+    }
+
+   /**
+    * Limpiar cadena.
+    */
+
+   function limpiar_cadena($cadena) {
+     $cadena = trim($cadena);
+     $cadena = strip_tags($cadena);
+     $cadena = eregi_replace("[\n|\r|\n\r]",'',$cadena);
+     while ( strpos($cadena,'  ') !== FALSE ) {
+       $cadena = str_replace('  ',' ',$cadena);
+     }
+     return $cadena;
+   }
 
    /**
     * Presentar los heads dinámicos
@@ -71,13 +110,7 @@ class Metatags extends Modulos {
          }
 
       $titulo_pagina = ( $gcm->titulo ) ? trim($gcm->titulo) : trim($titulo);
-      $titulo_pagina = strip_tags($titulo_pagina);
-      $titulo_pagina = eregi_replace("[\n|\r|\n\r]",'',$titulo_pagina);
-      $titulo_pagina = trim($titulo_pagina);
-      // Quitamos más de un espacio en blanco.
-      while ( strpos($titulo_pagina,'  ') !== FALSE ) {
-        $titulo_pagina = str_replace('  ',' ',$titulo_pagina);
-      }
+      $titulo_pagina = $this->limpiar_cadena($titulo_pagina);
 
       $titulo = eregi_replace("[\n|\r|\n\r]",'',strip_tags(trim($this->Titulo).' :: '.trim($titulo_pagina)));
 
@@ -100,10 +133,12 @@ class Metatags extends Modulos {
       // Literalizamos los metatags que sea necesario.
       $metatags['subject'] = literal($metatags['subject'],1,NULL,FALSE);
       $metatags['description'] = literal($metatags['description'],1,NULL,FALSE);
-      foreach ( $metatags['keywords'] as $key => $val ) {
-        $metatags[$key] = literal($val,1,NULL,FALSE);
-        }
-
+      $keys_array = explode(',',$metatags['keywords']);
+      $keywords = array();
+      foreach ($keys_array as $m) {
+        $keywords[] = literal($m,1);
+      }
+      $metatags['keywords'] = implode(',',$keywords);
       include ($gcm->event->instancias['temas']->ruta('metatags','html','heads.phtml'));
 
       }

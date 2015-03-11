@@ -416,7 +416,7 @@ class Contenidos extends ContenidosAbstract {
                if ( esImagen($d->path.'/'.$doc) )  {
                   echo "<img align='center' width='50px' src='".htmlentities($d->path."/".$doc)."' />";
                }
-               echo '<a title="'.literal('Visualizar').'" href="'.str_replace(Router::$dd,'',$d->path).'/'.$doc.'?edit=no">';
+               echo '<a title="'.literal('Visualizar').'" href="'.Router::$base.str_replace(Router::$dd,'',str_replace('File/','',$d->path)).'/'.$doc.'?edit=no">';
                echo $doc;
                echo "</a>";
                // Solo ponemos link para editar si son paginas html

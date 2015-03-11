@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Sun Feb 15 13:50:11 CET 2015
+// Archivo generado automáticamente por GcmConfig Fri Feb 27 12:55:46 CET 2015
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde un módulo';
 $LG_es['April']='Abril';
 $LG_es['Augost']='Agosto';
@@ -79,4 +79,16 @@ $LG_es['Configuracion_para_modulos']='Configuración para módulos';
 $LG_es['Paginador_con_ajax']='Paginador con ajax';
 $LG_es['Tests,_Creacion_de_test_sobre_modulos']='Tests, Creación de test sobre módulos';
 $LG_es['Evitar_reenvios_a_formulario_al_actualizar_una_pagina']='Evitar reenvios a formulario al actualizar una pagina';
+$LG_es['Framework y gestor de contenido realizado en PHP']='Framework y gestor de contenido realizado en PHP';
+$LG_es['Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario']='';
+$LG_es['programación']='';
+$LG_es['informática']='';
+$LG_es['linux']='';
+$LG_es['php']='';
+$LG_es['bash']='';
+$LG_es['javascript']='';
+$LG_es['css']='';
+$LG_es['ajax']='';
+$LG_es['Como_crear_un_modulo']='Como crear un modulo';
+$LG_es['Conceptos_generales']='Conceptos generales';
 ?>

@@ -19,18 +19,10 @@ margin-left: 2px;
    padding: 0;
    margin: 0;
 }
-.error a {
-color: #7B040F;
-}
-.aviso a {
-color: #082B33;
-}
-.admin a {
-color: #796616;
-}
-.normal a , .debug a {
-color: #32510F;
-}
+.error a {color: #7B040F;}
+.aviso a {color: #082B33;}
+.admin a {color: #796616;}
+.normal a , .debug a {color: #32510F;}
 
 /* h4.alert_info */
 div.aviso, div.admin, div.error, div.normal, div.ayuda {

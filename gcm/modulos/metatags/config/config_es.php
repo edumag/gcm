@@ -12,7 +12,7 @@
 $config_DESC['name'] = 'Título o nombre del proyecto';
 $config_DESC['subject'] = 'Subtitulo';
 $config_DESC['description'] = 'Descripción';
-$config_DESC['keywords'] = 'Palabras clave';
+$config_DESC['keywords'] = 'Palabras clave separadas por coma';
 $config_DESC['author'] = 'Autor intelectual del contenido';
 $config_DESC['generator'] = 'Creador del contenido';
 $config_DESC['robots'] = 'Directiva para los robots, ejemplo: all';

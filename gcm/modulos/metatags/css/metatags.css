@@ -1,0 +1,10 @@
+#panel_metatags input {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+#panel_metatags textarea {
+    height: 70px;
+    width: 100%;
+}
+#panel_metatags input[type="submit"] { width: auto; }

@@ -321,7 +321,7 @@ class Gcm {
     *         En caso de darnos un valor TRUE o FALSE dependiendo del exito de la operación
     */
 
-   function config($modulo, $nombre_variable, $valor=FALSE) {
+   function config($modulo, $nombre_variable=FALSE, $valor=FALSE) {
 
       require_once(GCM_DIR.'lib/int/GcmConfig/lib/GcmConfigFactory.php');
 
@@ -369,10 +369,15 @@ class Gcm {
             return FALSE;
             }
 
-         $arr = GcmConfigFactory::GetGcmConfig($archivo_configuracion);
-         $valor = $arr->get($nombre_variable);
-         $this->config[$modulo][$nombre_variable] = $valor;
-         return $valor;
+         if ( $nombre_variable ) {
+           $arr = GcmConfigFactory::GetGcmConfig($archivo_configuracion);
+           $valor = $arr->get($nombre_variable);
+           $this->config[$modulo][$nombre_variable] = $valor;
+           return $valor;
+         } else {
+           $arr = GcmConfigFactory::GetGcmConfig($archivo_configuracion);
+           return $arr->variables();
+         }
 
          }
 
