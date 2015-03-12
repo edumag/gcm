@@ -338,7 +338,7 @@ abstract class ContenidosAbstract extends Modulos {
       if ( file_exists(Router::$dd) ) {
          $gcm->titulo = literal('Sin sección',3);
          registrar(__FILE__,__LINE__,"Recargamos página por sección no encontrada");
-         registrar(__FILE__,__LINE__,Router::$s.Router::$c.' '.literal('Página no encontrada'),'ERROR');
+         registrar(__FILE__,__LINE__,literal("La página solicitada no ha sido encontrada"),'ERROR');
          Router::$sin_contenido = TRUE;
          $gcm->event->lanzarEvento('error','sin_contenido='.Router::$dd);
       } else {
