@@ -365,9 +365,11 @@ class Idiomas extends Modulos {
 
      global $gcm;
 
+     $contenido = ( Router::$c == 'index.html' ) ? '' : Router::$c;
+
       echo '<!-- Idiomas -->'."\n";
      foreach ( $this->idiomas_activados as $i ) {
-       echo '<link rel="alternate" hreflang="'.$i.'" href="'.Router::$base_absoluta.$i.'" />'."\n";
+       echo '<link rel="alternate" hreflang="'.$i.'" href="'.$i.'/'.Router::$s.$contenido.'" />'."\n";
      }
 
    }

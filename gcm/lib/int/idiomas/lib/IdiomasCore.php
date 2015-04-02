@@ -21,15 +21,15 @@
  *
  * para la administración de los idiomas
  *
- * Se presentan los idiomas disponobles, se puede cambiar la imagen correspondiente
+ * Se presentan los idiomas disponibles, se puede cambiar la imagen correspondiente
  * a cada idioma y eliminar un idioma, en tal caso se debe presentar las carpetas
- * que continen el contenido perteneciente a ese idioma y confirmar el borrado del mismo.
+ * que contienen el contenido perteneciente a ese idioma y confirmar el borrado del mismo.
  *
  * Se crea un select con los idiomas disponibles y se da la posibilidad de cambiar
  *
  * Se presenta formulario para la entrada de un nuevo idioma, en tal caso:
  *
- * - se creara una nueva carpeta en el directorio Files con el codigo del idioma y en copiasSeguridad 
+ * - se creara una nueva carpeta en el directorio Files con el código del idioma y en copiasSeguridad 
  * - se añade el literal del nuevo idioma en DATOS/idiomas/idiomas.php
  * - se crear archivo de literales LG_<idioma>.php
  * - se añade imagen al directorio.
@@ -121,13 +121,13 @@ class IdiomasCore {
    /**
     * Seleccionamos idioma con el que se presenta la página
     *
-    * Este metodo detecta idioma actual y genera el array de los 
+    * Este método detecta idioma actual y genera el array de los 
     * literales
     *
     * El idioma puede venir por GET o POST ['idioma'] o puede estar
     * en la variable de sessión $_SESSION[$this->proyecto."-idioma"]
     *
-    * @note Es importante que se ejecute este metodo al inicio, para comenzar sabiendo
+    * @note Es importante que se ejecute este método al inicio, para comenzar sabiendo
     *       antes de nada el idioma que se desea.
     *
     */

@@ -160,6 +160,8 @@ class PaginarPDO extends GcmPDO {
       if ( $this->elemento_inicio < 1  ) $this->elemento_inicio=1;
       if ( $this->elemento_final > $this->total_de_paginas  ) $this->elemento_final=$this->total_de_paginas;
 
+      registrar(__FILE__,__LINE__,$sql);
+      
 
       // DEV
       // if ( isset($ordenadox) ) echo '<br>ordenadox: '.$ordenadox;

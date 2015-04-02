@@ -54,11 +54,11 @@ class LiteralesAdmin extends Literales {
    */
   function boton_insertar_literal($proyecto=TRUE) {
     $proyecto_js = ( $proyecto ) ? 1 : 0;
-      ?>
+    ?>
      <a class="boton" style="cursor: pointer;" onclick="javascript:insertar_literal(<?php echo $proyecto_js ?>)" >
         <?php echo literal('Añadir',3);?>
      </a>
-      <?php
+    <?php
   }
 
   /**
@@ -124,77 +124,77 @@ class LiteralesAdmin extends Literales {
 
   }
 
-/**
- * Listado de literales para modificar
- *
- * @param $panel
- *   Nombre del panel que contendrá los literales.
- * @param $proyecto
- *   Literales de proyecto o de aplicación. TRUE = proyecto.
- * @param $literales_pagina_actual
- *   Mostrar solo los de la pagina actual.
- */
+  /**
+   * Listado de literales para modificar
+   *
+   * @param $panel
+   *   Nombre del panel que contendrá los literales.
+   * @param $proyecto
+   *   Literales de proyecto o de aplicación. TRUE = proyecto.
+   * @param $literales_pagina_actual
+   *   Mostrar solo los de la pagina actual.
+   */
 
-function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=FALSE) {
+  function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=FALSE) {
 
-  global $gcm;
+    global $gcm;
 
-  $boton_insertar = FALSE;
-  $filtro_pendientes = FALSE;
+    $boton_insertar = FALSE;
+    $filtro_pendientes = FALSE;
 
-  if ( isset($_GET['columna']) ) {
-    $boton_insertar = TRUE;
-    $filtro_pendientes = TRUE;
-    $panel = "lit_columna";
-    $proyecto = TRUE ;
-  }
+    if ( isset($_GET['columna']) ) {
+      $boton_insertar = TRUE;
+      $filtro_pendientes = TRUE;
+      $panel = "lit_columna";
+      $proyecto = TRUE ;
+    }
 
-  if ( $panel == 'panel_admin' ) {
-    $boton_insertar = TRUE;
-    $filtro_pendientes = TRUE;
-  }
+    if ( $panel == 'panel_admin' ) {
+      $boton_insertar = TRUE;
+      $filtro_pendientes = TRUE;
+    }
 
-  $proyecto_js = ( $proyecto ) ? '1' : '0' ;
+    $proyecto_js = ( $proyecto ) ? '1' : '0' ;
 
-  if ( $literales_pagina_actual ) {
-    $literales = $this->literales_faltantes;
-  } else {
-    $literales = $this->recoger_literales($proyecto);
-  }
+    if ( $literales_pagina_actual ) {
+      $literales = $this->literales_faltantes;
+    } else {
+      $literales = $this->recoger_literales($proyecto);
+    }
 
-  ?>
+?>
   <div id="<?php echo $panel?>">
   <ul id="litadmin">
-  <?php
+<?php
 
-  if ( $boton_insertar ) {
-  ?>
+    if ( $boton_insertar ) {
+?>
     <a class="boton" title="<?php echo htmlentities(literal('Añadir nuevo literal',3),ENT_QUOTES, "UTF-8");?>" style="cursor: pointer;" onclick="javascript:insertar_literal(1)">
       <?php echo literal('Añadir',3); ?>
     </a>
-  <?php
-  }
+<?php
+    }
 
-  if ( $filtro_pendientes ) {
-    $this->boton_filtrar('subpanel','Filtro','Fitra literales con contenido');
-  ?>
+    if ( $filtro_pendientes ) {
+      $this->boton_filtrar('subpanel','Filtro','Fitra literales con contenido');
+?>
   <br />
-  <?php
-  }
+<?php
+    }
 
-  if ( $literales ) {
+    if ( $literales ) {
 
-    foreach ( $literales as $key => $valor ) {
+      foreach ( $literales as $key => $valor ) {
 
-      $clase = ( empty($valor) ) ? 'subpanelNegativo' : "subpanel" ;
+        $clase = ( empty($valor) ) ? 'subpanelNegativo' : "subpanel" ;
 
-      $valor = ($valor) ? $valor : $key ;
+        $valor = ($valor) ? $valor : $key ;
 
-      if ( ! isset($_GET['columna']) ) {
-      
-        // Literales en columna.
+        if ( ! isset($_GET['columna']) ) {
 
-       ?>
+          // Literales en columna.
+
+?>
        <li id="lit_<?php echo $key ?>" class="<?php echo $clase?>">
           <a class="literal_faltante_<?php echo GUtil::textoplano($key) ?>  " title="Modificar <?php echo GUtil::textoplano($key) ?>" 
              href="javascript:;" onclick="modificar_literal('<?php echo $key?>','<?php echo str_replace("'","\'",$valor)?>',<?php echo $proyecto_js ?>)" >
@@ -207,13 +207,13 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
              </a>
           </div>
        </li>
-      <?php
+<?php
 
-      } else {
+        } else {
 
-        // No en columna.
+          // No en columna.
 
-        ?>
+?>
        <li id="lit_<?php echo $key ?>" class="<?php echo $clase?>">
          <a href="javascript:;" 
             class="literal_faltante_<?php echo GUtil::textoplano($key) ?>  
@@ -230,94 +230,94 @@ function lista($panel='lit_columna', $proyecto = TRUE, $literales_pagina_actual=
             [M]
          </a>
        </li>
-        <?php
+<?php
 
+        }
       }
-  }
 
 
-  }
+    }
 
   ?>
          </ul>
       </div>
-  <?php
+    <?php
 
-}
-
-/**
- * Recoger literales 
- *
- * @param $proyecto Especificar si queremos los de proyecto o de la aplicación.
- *
- * @return Array con los literales
- */
-
-function recoger_literales($proyecto=TRUE) {
-
-  global $gcm;
-
-  if ( $this->literales ) return $this->literales;
-
-  $literales_default = FALSE;
-
-  if ( ! $proyecto ) {
-    $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
-  } else {
-    $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
   }
 
-  $arr = GcmConfigFactory::GetGcmConfig($file);
+  /**
+   * Recoger literales 
+   *
+   * @param $proyecto Especificar si queremos los de proyecto o de la aplicación.
+   *
+   * @return Array con los literales
+   */
 
-  $this->literales = $arr->variables();
+  function recoger_literales($proyecto=TRUE) {
 
-  if ( Router::$i != Router::$ii ) {
+    global $gcm;
 
-    if ( !$proyecto ) {
-      $file_default = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
+    if ( $this->literales ) return $this->literales;
+
+    $literales_default = FALSE;
+
+    if ( ! $proyecto ) {
+      $file = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$i.".php";
     } else {
-      $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+      $file = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$i.".php";
     }
 
-    if ( !file_exists($file_default) ) {
-      trigger_error('Archivo de idiomas ['.$file_default.'] no existe', E_USER_ERROR);
-      return FALSE;
+    $arr = GcmConfigFactory::GetGcmConfig($file);
+
+    $this->literales = $arr->variables();
+
+    if ( Router::$i != Router::$ii ) {
+
+      if ( !$proyecto ) {
+        $file_default = GCM_DIR."DATOS/idiomas/GCM_LG_".Router::$ii.".php";
+      } else {
+        $file_default = $gcm->config('idiomas','Directorio idiomas')."LG_".Router::$ii.".php";
+      }
+
+      if ( !file_exists($file_default) ) {
+        trigger_error('Archivo de idiomas ['.$file_default.'] no existe', E_USER_ERROR);
+        return FALSE;
+      }
+      $arr_default = GcmConfigFactory::GetGcmConfig($file_default);
+      $literales_default = $arr_default->variables();
+
     }
-    $arr_default = GcmConfigFactory::GetGcmConfig($file_default);
-    $literales_default = $arr_default->variables();
 
-  }
-
-  if ( $literales_default ) {
-    foreach ( $literales_default as $key => $lit ) {
-      if ( ! isset($this->literales[$key]) ) {
-        $this->literales[$key] = '';
+    if ( $literales_default ) {
+      foreach ( $literales_default as $key => $lit ) {
+        if ( ! isset($this->literales[$key]) ) {
+          $this->literales[$key] = '';
+        }
       }
     }
-  }
 
-  if ( permiso('administrar','literales') && isset($_SESSION['literales_faltantes']) && !empty($_SESSION['literales_faltantes']) ) {
-    foreach ( $this->literales as $key => $lit ) {
-      if ( empty($lit) ) $_SESSION['literales_faltantes'][] = $key;
+    if ( permiso('administrar','literales') && isset($_SESSION['literales_faltantes']) && !empty($_SESSION['literales_faltantes']) ) {
+      foreach ( $this->literales as $key => $lit ) {
+        if ( empty($lit) ) $_SESSION['literales_faltantes'][] = $key;
+      }
+      //echo '<pre>lit: ' ; print_r($_SESSION) ; echo '</pre>'; // exit() ; // DEV  
+
     }
-    //echo '<pre>lit: ' ; print_r($_SESSION) ; echo '</pre>'; // exit() ; // DEV  
+    return $this->literales;
 
   }
-  return $this->literales;
 
-}
-
- /**
-  * Modificar literal
-  *
-  * $_GET Parametros recogidos mediante GET
-  *   - elemento: clave del array a modificar
-  *   - valor:    Valor a añadir
-  *   - file:     Archivo con array, de formato especifico
-  *               En caso de no haberlo cogemos el del idioma actual
-  *
-  * @see GcmConfig
-  */
+  /**
+   * Modificar literal
+   *
+   * $_GET Parametros recogidos mediante GET
+   *   - elemento: clave del array a modificar
+   *   - valor:    Valor a añadir
+   *   - file:     Archivo con array, de formato especifico
+   *               En caso de no haberlo cogemos el del idioma actual
+   *
+   * @see GcmConfig
+   */
 
   function modificarLiteral() {
 
@@ -336,7 +336,7 @@ function recoger_literales($proyecto=TRUE) {
     $arr->guardar_variables();
 
     registrar(__FILE__,__LINE__,"Literal (".$_GET['elemento'].") modifcado con [".$_GET['valor']."]",'AVISO');
-    
+
     print json_encode(
       array(
         'accion' => 'modificado',
@@ -384,8 +384,8 @@ function recoger_literales($proyecto=TRUE) {
    * @return TRUE/FALSE
    *
    */
- 
- function administrar($e,$args=NULL) {
+
+  function administrar($e,$args=NULL) {
 
     global $gcm;
 
@@ -403,42 +403,42 @@ function recoger_literales($proyecto=TRUE) {
     $this->lista('panel_admin_gcm',FALSE);
 
     return; // DEV
- 
-    }
+
+  }
 
 
- /**
-  * Eliminar literal
-  *
-  * Eliminamos literal especifico
-  */
+  /**
+   * Eliminar literal
+   *
+   * Eliminamos literal especifico
+   */
 
- function eliminar_literal() {
+  function eliminar_literal() {
 
     global $gcm, $LG, $GCM_LG;
 
     $elemento = $_GET['elemento'];
     $proyecto = ( isset($_GET['proyecto']) ) ? $proyecto : 1 ;
-    
+
     if ( $proyecto == 1 ) {
-       $dir   = GCM_DIR."DATOS/idiomas/";
-       $array = "GCM_LG_";
-       $literal_de = 'aplicación';
+      $dir   = GCM_DIR."DATOS/idiomas/";
+      $array = "GCM_LG_";
+      $literal_de = 'aplicación';
     } else {
-       $dir   = $gcm->config('idiomas','Directorio idiomas');
-       $array = "LG_";
-       $literal_de = 'proyecto';
-       }
+      $dir   = $gcm->config('idiomas','Directorio idiomas');
+      $array = "LG_";
+      $literal_de = 'proyecto';
+    }
 
     foreach ( Router::$idiomas as $idioma ) {
-       $file=$dir.$array.$idioma.".php";
-       $arr = GcmConfigFactory::GetGcmConfig($file);
-       $arr->del($elemento);
-       unset($arr);
-       }
+      $file=$dir.$array.$idioma.".php";
+      $arr = GcmConfigFactory::GetGcmConfig($file);
+      $arr->del($elemento);
+      unset($arr);
+    }
 
     registrar(__FILE__,__LINE__,"Literal de $literal_de [$elemento] eliminado",'AVISO');
-    
+
     print json_encode(
       array(
         'accion' => 'borrado',
@@ -447,7 +447,7 @@ function recoger_literales($proyecto=TRUE) {
       )
     );
     exit();
-    }
+  }
 }
 
 
