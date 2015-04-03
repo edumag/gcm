@@ -27,5 +27,12 @@ if ( $tripadvisor_enlace_perfil ) {
   </a>
 <?php
 }
+if ( $enlace_pagina_google ) {
+?>
+  <a target="_blank" href="<?php echo $enlace_pagina_google ?>">
+     <img alt="g+" src="<?php echo Router::$base.$gcm->event->instancias['temas']->ruta('redes_sociales','iconos','google.png') ?>" />
+  </a>
+<?php
+}
 ?>
 
