@@ -117,13 +117,16 @@ class Redes_sociales extends Modulos {
       <span class="botones_redes_sociales">
       <?php
 
-     // Botón de facebook
+     // Contenido generico
 
      if ( ! $this->contenido_general_incluido ) {
        $this->contenido_general_incluido = TRUE;
 
        $idioma = conversion_idioma(Router::$i);
       ?>
+      <script src="https://apis.google.com/js/platform.js" async defer>
+        {lang: '<?php echo Router::$i ?>'}
+      </script>
       <div id="fb-root"></div>
       <script type="text/javascript">
       (function() {
@@ -139,6 +142,8 @@ class Redes_sociales extends Modulos {
       <?php
 
      }
+
+     // Botón de facebook
 
       ?>
         <div class="fb-like" 
@@ -173,9 +178,6 @@ class Redes_sociales extends Modulos {
      // Botón de google+
      if ( $this->config('usuario_google') ) {
      ?>
-       <script src="https://apis.google.com/js/platform.js" async defer>
-         {lang: '<?php echo Router::$i ?>'}
-       </script>
        <div class="g-plusone" data-size="medium" data-annotation="none" data-href="<?php echo $url ?>"></div>
        <?php
      }
