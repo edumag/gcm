@@ -6,3 +6,7 @@
     position: relative;
     top: -4px;
 }
+
+.botones_redes_sociales > div {
+    vertical-align: top !important;
+}

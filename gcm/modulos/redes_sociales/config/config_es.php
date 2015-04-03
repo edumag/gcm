@@ -13,6 +13,8 @@
 
 $config_DESC['usuario_facebook'] = 'Usuario de facebook';
 $config_DESC['usuario_twitter'] = 'Usuario de twitter';
+$config_DESC['usuario_google'] = 'Usuario de Google';
+$config_DESC['enlace_pagina_google'] = 'Enlace a la página de G+';
 $config_DESC['usuario_tripadvisor'] = 'Usuario de tripadvisor';
 $config_DESC['tripadvisor_enlace_perfil'] = 'Enlace al perfil de tripadvisor';
 $config_DESC['tripadvisor_enlace_compartir'] = 'Enlace a la pagina de compartir de tripadvisor';

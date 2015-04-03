@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Apr 2 7:38:57 CEST 2015
+// Archivo generado automáticamente por GcmConfig Fri Apr 3 6:27:16 CEST 2015
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Anyadir javascript desde un modulo';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';

@@ -49,6 +49,8 @@ class Redes_sociales extends Modulos {
       $gcm->config('redes_sociales','usuario_facebook');
     $this->config['usuario_twitter']     =
       $gcm->config('redes_sociales','usuario_twitter');
+    $this->config['usuario_google']     =
+      $gcm->config('redes_sociales','usuario_google');
     $this->config['usuario_tripadvisor'] =
       $gcm->config('redes_sociales','usuario_tripadvisor');
     $this->config['tripadvisor_enlace_perfil'] =
@@ -64,9 +66,10 @@ class Redes_sociales extends Modulos {
       
       global $gcm;
 
-      $usuario_facebook          = $this->config['usuario_facebook'];
-      $usuario_twitter           = $this->config['usuario_twitter'];
-      $tripadvisor_enlace_perfil = $this->config['tripadvisor_enlace_perfil'];
+      $usuario_facebook          = $this->config('usuario_facebook');
+      $usuario_twitter           = $this->config('usuario_twitter');
+      $enlace_pagina_google      = $this->config('enlace_pagina_google');
+      $tripadvisor_enlace_perfil = $this->config('tripadvisor_enlace_perfil');
 
       include ($gcm->event->instancias['temas']->ruta('redes_sociales','html','redes_sociales.phtml'));
       }
@@ -166,6 +169,16 @@ class Redes_sociales extends Modulos {
         </style>
         <?php 
       } 
+
+     // Botón de google+
+     if ( $this->config('usuario_google') ) {
+     ?>
+       <script src="https://apis.google.com/js/platform.js" async defer>
+         {lang: '<?php echo Router::$i ?>'}
+       </script>
+       <div class="g-plusone" data-size="medium" data-annotation="none" data-href="<?php echo $url ?>"></div>
+       <?php
+     }
 
      // Botón de twitter
       ?>
