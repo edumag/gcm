@@ -18,6 +18,9 @@
  *
  * @brief     Lectura y edición de archivos de configuración
  *
+ * @bug Si solo hay un elemento en el archivo no lo borra.
+ * @bug Guarda archivos sin haber cambios.
+ *
  * Esta clase nos permite leer archivos de configuración nativos de php y
  * a la vez la edición de su contenido con formularios php.
  *
