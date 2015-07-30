@@ -150,7 +150,5 @@ function initListadoContenido_boton(contexto) {
    }
 
 $(document).ready(function() { 
-      if ( !(jQuery.browser.msie && jQuery.browser.version < 7)) { // take away IE6
-         initListadoContenido("#listado_de_contenido");
-         }
-      });
+  initListadoContenido("#listado_de_contenido");
+  });

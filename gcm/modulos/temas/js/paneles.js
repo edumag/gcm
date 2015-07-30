@@ -97,9 +97,7 @@ function paneles() {
       });
    }
 $(document).ready(function() { 
-      $(".subpanel_oculto").hide(3000);
-      if ( !(jQuery.browser.msie && jQuery.browser.version < 7)) { // take away IE6
-         paneles();
-         }
-      });
+  $(".subpanel_oculto").hide(3000);
+  paneles();
+  });
 

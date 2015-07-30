@@ -397,7 +397,8 @@ class Temas extends Modulos {
 
       $this->javascripts('general.js');
       $this->javascripts('paneles.js');
-      $this->add_ext_lib('js',Router::$base.GCM_DIR.'lib/ext/jquery/jquery.js');
+      $this->add_ext_lib('js',Router::$base.GCM_DIR.'lib/ext/jquery/jquery.min.js');
+      $this->add_ext_lib('js',Router::$base.GCM_DIR.'lib/ext/jquery/jquery-ui/jquery-ui.min.js');
 
       if ( Router::$c == 'proyectos.css' ) {
          header('Content-Type: text/css');

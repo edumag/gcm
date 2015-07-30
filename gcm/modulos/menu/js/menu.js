@@ -53,7 +53,5 @@ function initMenu(contexto) {
 }
 
 $(document).ready(function() { 
-      if ( !(jQuery.browser.msie && jQuery.browser.version < 7)) { // take away IE6
-         initMenu("#barraNavegacion");
-         }
-      });
+  initMenu("#barraNavegacion");
+  });
