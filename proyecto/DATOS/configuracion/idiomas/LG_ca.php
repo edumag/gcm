@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Wed Apr 15 9:48:37 CEST 2015
+// Archivo generado automáticamente por GcmConfig Fri Jan 29 17:12:18 CET 2016
 $LG_ca['Anyadir_javascript_desde_un_modulo']='Anyadir javascript desde un modulo';
 $LG_ca['April']='Abril';
 $LG_ca['Augost']='Agosto';
@@ -14,7 +14,7 @@ $LG_ca['Descargar']='Baixar';
 $LG_ca['Documentacion']='Documentació';
 $LG_ca['Documentación para Gcm']='Documentació de Gcm';
 $LG_ca['Editando_contenido']='Editando';
-$LG_ca['Ejemplo_de_uso_de_GcmConfig']='';
+$LG_ca['Ejemplo_de_uso_de_GcmConfig']='Exempla de us de GcmConfig';
 $LG_ca['Ejemplo_de_uso_del_editor_web_tiny_mce']='';
 $LG_ca['Eventos']='esdeveniments';
 $LG_ca['Forzar_eventos_por_omision']='Forzar eventos por omisión';

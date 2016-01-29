@@ -65,15 +65,15 @@ function literal($literal, $nivel=2, $valor=NULL, $admin=TRUE) {
       case 1:
 
          if ( !$valor && isset($LG[$literal]) && $LG[$literal] != "" ) {
-           if ( permiso('administrar','literales') 
-             && isset($_SESSION['literales_faltantes'])
-             && in_array($literal,$_SESSION['literales_faltantes'])
-             && ( $admin )
-           ) {
-               return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$LG[$literal].'</span>';
-             }
+           // if ( permiso('administrar','literales') 
+           //   && isset($_SESSION['literales_faltantes'])
+           //   && in_array($literal,$_SESSION['literales_faltantes'])
+           //   && ( $admin )
+           // ) {
+           //     return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$LG[$literal].'</span>';
+           //   }
             return $LG[$literal];
-            }
+           }
 
          if ( $valor ) {
 
@@ -87,17 +87,19 @@ function literal($literal, $nivel=2, $valor=NULL, $admin=TRUE) {
 
             $mens = 'Nuevo literal de proyecto ['.$literal.']';
             $valor = '';
-             if ( permiso('administrar','literales') && ( $admin )) {
-               $_SESSION['literales_faltantes'][] = $literal;
-               return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
-             }
+            // if ( permiso('administrar','literales') && ( $admin )) {
+            //   $_SESSION['literales_faltantes'][] = $literal;
+            //   return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
+            // } else {
+               return $literal;
+            // }
          } else {
             // Si no tenemos literal devolvemos la clave cambiando los
             // guiones bajos por espacios.
-             if ( permiso('administrar','literales') && $admin ) {
-               $_SESSION['literales_faltantes'][] = $literal;
-               return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
-             }
+            // if ( permiso('administrar','literales') && $admin ) {
+            //   $_SESSION['literales_faltantes'][] = $literal;
+            //   return '<span class="literal_faltante literal_faltante_'.GUtil::textoplano($literal).'">'.$literal.'</span>';
+            // }
             return str_replace('_', ' ', $literal);
             }
 

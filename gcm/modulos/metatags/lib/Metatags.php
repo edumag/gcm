@@ -65,7 +65,7 @@ class Metatags extends Modulos {
 
       $this->metatags['keyworks'] = 
         ( isset($this->metatags['url:'.Router::$s.Router::$c][0]['keyworks']) )
-        ? $this->metatags['url:'.Router::$s.Router::$c][0]['keyworks']
+        ? implode(',',$this->metatags['url:'.Router::$s.Router::$c][0]['keyworks'])
         : $this->metatags['keyworks'];
 
       if ( ! $this->metatags['titulo'] ) {
@@ -133,12 +133,18 @@ class Metatags extends Modulos {
       // Literalizamos los metatags que sea necesario.
       $metatags['subject'] = literal($metatags['subject'],1,NULL,FALSE);
       $metatags['description'] = literal($metatags['description'],1,NULL,FALSE);
-      $keys_array = explode(',',$metatags['keywords']);
-      $keywords = array();
-      foreach ($keys_array as $m) {
-        $keywords[] = literal($m,1);
+      if ( isset($metatags['keywords']) ) {
+        if ( ! is_array($metatags['keywords']) ) {
+          $keys_array = explode(',',$metatags['keywords']);
+        } else {
+          $keys_array = $metatags['keywords'];
+        }
+        $keywords = array();
+        foreach ($keys_array as $m) {
+          $keywords[] = literal($m,1);
+        }
+        $metatags['keywords'] = implode(',',$keywords);
       }
-      $metatags['keywords'] = implode(',',$keywords);
       include ($gcm->event->instancias['temas']->ruta('metatags','html','heads.phtml'));
 
       }

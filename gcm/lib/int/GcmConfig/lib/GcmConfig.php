@@ -620,6 +620,12 @@ class GcmConfig {
 
          $archivo = ( file_exists($archivo) ) ? $archivo : $this->directorio_actual.'/'.$archivo ;
 
+         // Creamos copia de seguridad por si ocurre un accidente.
+         // $archivo_copia = $archivo_copia . '-' . date('l');
+         // copy($archivo, $archivo_copia);
+         // registrar(__FILE__,__LINE__,"Copia de seguridad " . $archivo_copia . 'realizada','ADMIN');
+         
+
          if ( ! $file = @fopen($archivo, "w",TRUE) ) {
             $error = error_get_last();
             $msg = "No se pudo abrir archivo $archivo para incluir en [$nombre_array] ";
@@ -627,7 +633,11 @@ class GcmConfig {
             if ( $error ) $msg .= "\nError: ".$error['message'];
             throw new Exception($msg);
          } else {
-
+            /* Activar la opción LOCK_NB sobre una operación LOCK_EX */
+            if(!flock($file, LOCK_EX | LOCK_NB)) {
+                echo 'No se puede obtener el bloqueo';
+                exit(-1);
+            }
             fputs($file, "<?php\n");
             fputs($file, "// Archivo generado automáticamente por ".__CLASS__." ".date("D M j G:i:s T Y")."\n");
 
