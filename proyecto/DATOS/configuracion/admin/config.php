@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Sep 6 10:26:13 CEST 2013
+// Archivo generado automáticamente por GcmConfig Fri Jan 29 14:12:13 CET 2016
 $config['Idioma por defecto']='es';
 $config['Módulos activados'][0]='cache_http';
 $config['Módulos activados'][1]='comentarios';
@@ -9,7 +9,6 @@ $config['Módulos activados'][4]='referencias';
 $config['Módulos activados'][5]='widgets';
 $config['Módulos activados'][6]='aplicar_SEO';
 $config['Módulos activados'][7]='literales';
-$config['Módulos activados'][8]='roles';
 $config['Módulos activados'][8]='mapas';
 $config['Módulos activados'][9]='sitemap';
 $config['Palabra secreta para depurar']='debug';

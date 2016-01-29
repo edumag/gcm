@@ -1,8 +1,8 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Fri Sep 6 10:26:13 CEST 2013
+// Archivo generado automáticamente por GcmConfig Fri Jan 29 14:12:13 CET 2016
 $config_DESC['Conexión con base de datos (PDO)']='En caso de tener un servidor de base de datos, añadir el driver a utlizar para PDO';
 $config_DESC['Contraseña base de datos']='Contraseña para servidor de base de datos';
-$config_DESC['Idioma por defecto']='Idioma predeterminado';
+$config_DESC['Idioma por defecto']='Idioma por defecto';
 $config_DESC['Módulos activados']='Desactivación de módulos';
 $config_DESC['Palabra secreta para depurar']='Añadiendo la palabra seleccionada a la url (?<palabra_secreta>=1), se inicia sesión de depuración, con un cero se termina';
 $config_DESC['Proyecto']='Dominio del proyecto';

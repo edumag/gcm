@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Wed Mar 11 9:25:50 CET 2015
+// Archivo generado automáticamente por GcmConfig Fri Jan 29 17:05:16 CET 2016
 $config['name']='GCM';
 $config['subject']='Framework y gestor de contenido realizado en PHP';
 $config['description']='Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario';

@@ -1,5 +1,5 @@
 <?php
-// Archivo generado automáticamente por GcmConfig Thu Jul 30 7:05:01 CEST 2015
+// Archivo generado automáticamente por GcmConfig Fri Jan 29 13:57:33 CET 2016
 $LG_es['Anyadir_javascript_desde_un_modulo']='Añadir javascript desde un módulo';
 $LG_es['April']='Abril';
 $LG_es['Augost']='Agosto';
@@ -7,14 +7,9 @@ $LG_es['Caja_con_informacion_de_los_modulos']='Caja con información de los mód
 $LG_es['Cambio_de_tema_al_vuelo']='Cambio de tema al vuelo';
 $LG_es['Conexion_entre_modulos']='Conexión entre módulos';
 $LG_es['December']='Diciembre';
-$LG_es['Desarrollo']='Desarrollo';
-$LG_es['Descargar']='Descargar';
 $LG_es['Documentacion']='Documentación';
 $LG_es['Editando_contenido']='Editando contenido';
 $LG_es['Ejemplo_de_uso_de_GcmConfig']='Ejemplo de uso de GcmConfig';
-$LG_es['Eventos']='Eventos';
-$LG_es['GCM']='GCM';
-$LG_es['Gcm']='Gcm';
 $LG_es['Gestor de Contenido Mamedu']='Gestor de Contenido';
 $LG_es['Guia_usuario']='Guia usuario';
 $LG_es['Instalacion']='Instalación';
@@ -29,7 +24,6 @@ $LG_es['Permisos borrador']='Permisos borrador';
 $LG_es['Presentacion']='Presentación';
 $LG_es['Probando_contenido']='Probando contenido';
 $LG_es['Referencias']='Referencias';
-$LG_es['SEO']='SEO';
 $LG_es['Seccion']='Sección';
 $LG_es['Seccions']='Secciones';
 $LG_es['Sistema_de_plantillas']='Sistema de plantillas';
@@ -49,10 +43,9 @@ $LG_es['crud']='crud';
 $LG_es['documento_nuevo']='Documento nuevo';
 $LG_es['eliminar']='eliminar';
 $LG_es['es']='Castellano';
-$LG_es['gcm']='';
 $LG_es['inicio']='inicio';
 $LG_es['iniciot']='Pagina de inicio';
-$LG_es['literales']='';
+$LG_es['literales']='literales';
 $LG_es['probando']='';
 $LG_es['probando nuevo']='';
 $LG_es['proyecto']='';
@@ -83,12 +76,6 @@ $LG_es['Framework y gestor de contenido realizado en PHP']='Framework y gestor d
 $LG_es['Framework y gestor de contenido realizado en PHP, Como caracterisricas: separación de código de usuario con administración que mejora el rendimineto, sistema de módulos solo se utiliza lo necesario']='';
 $LG_es['programación']='';
 $LG_es['informática']='';
-$LG_es['linux']='';
-$LG_es['php']='';
-$LG_es['bash']='';
-$LG_es['javascript']='';
-$LG_es['css']='';
-$LG_es['ajax']='';
 $LG_es['Como_crear_un_modulo']='Como crear un modulo';
 $LG_es['Conceptos_generales']='Conceptos generales';
 ?>
