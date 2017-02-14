@@ -84,7 +84,7 @@ class Metatags extends Modulos {
    function limpiar_cadena($cadena) {
      $cadena = trim($cadena);
      $cadena = strip_tags($cadena);
-     $cadena = eregi_replace("[\n|\r|\n\r]",'',$cadena);
+     $cadena = preg_replace("[\n|\r|\n\r]",'',$cadena);
      while ( strpos($cadena,'  ') !== FALSE ) {
        $cadena = str_replace('  ',' ',$cadena);
      }
@@ -112,7 +112,7 @@ class Metatags extends Modulos {
       $titulo_pagina = ( $gcm->titulo ) ? trim($gcm->titulo) : trim($titulo);
       $titulo_pagina = $this->limpiar_cadena($titulo_pagina);
 
-      $titulo = eregi_replace("[\n|\r|\n\r]",'',strip_tags(trim($this->Titulo).' :: '.trim($titulo_pagina)));
+      $titulo = preg_replace("[\n|\r|\n\r]",'',strip_tags(trim($this->Titulo).' :: '.trim($titulo_pagina)));
 
       // Recogemos archivo de configuración
       include(dirname(__FILE__).'/../config/config.php');
